@@ -20,7 +20,11 @@ static void checksum_ok(int n) {
 }
 static int request(uint8_t id, uint8_t a0) {
     uint8_t r[11] = {0xf0,11,0,2,0x40,0,0,0,0,0,0x55}; int before = sent_n;
-    r[5] = id; r[6] = a0; host_body_frame(r, sizeof(r)); em_poll();
+    uint16_t sum = 0; unsigned i;
+    r[5] = id; r[6] = a0;
+    for (i = 1; i <= sizeof(r)-4u; ++i) sum += r[i];
+    r[sizeof(r)-3u] = (uint8_t)sum; r[sizeof(r)-2u] = (uint8_t)(sum >> 8);
+    host_body_frame(r, sizeof(r)); em_poll();
     assert(sent_n == before+1); assert(sent[before][5] == id); checksum_ok(before);
     return before;
 }

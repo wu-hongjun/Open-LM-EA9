@@ -63,3 +63,19 @@ The thread confirmed that it is actively continuing this work.
 The second pass remains entirely offline and does not alter production sources,
 the adapter, updater, user state or distribution builds. A patch feasibility plan
 does not establish camera compatibility or authorize an unreviewed flash image.
+
+## October 11 correctness and reproducibility pass
+
+An independent firmware lane audited the current source against the pinned upstream
+implementation and REA dossiers, then reproduced and corrected frame admission,
+interrupt handoff, Stop/retarget ownership, telemetry cadence and bounded startup
+faults. See [the concrete findings and finite evidence](firmware-correctness-2026-10-11.md)
+and [retained compile/run results](../evidence/firmware-correctness-tests-2026-10-11.json).
+These fixes form offline AF 2.3; the installed and USB-verified adapter remains 2.2.
+
+A separate offline lane promoted the application reconstruction's authored model
+and validators into [tracked research sources](../../research/stock-1.8/README.md)
+and reran 24,991 instruction comparisons and ten input/output guards. The
+[whole-firmware ledger](../reverse-engineering/whole-firmware-reconstruction.md)
+separates this reproducible application subset from the other local models and
+remaining peripheral, scheduling, data and replacement-image work.

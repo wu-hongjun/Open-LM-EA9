@@ -49,6 +49,9 @@ static void em_uart_sync(void)
 void em_uart_init(void)
 {
 	clock_enable_peripheral(GCLK_CLKCTRL_ID_SERCOM1_CORE_Val, PM_APBCMASK_SERCOM1);
+#ifdef EA9_AF_BUILD
+	if (ea9_io_faults()) return;
+#endif
 
 	/* PA00 = PAD[0] = TX, PA01 = PAD[1] = RX, both mux D.  PA01 needs its
 	 * input buffer enabled or the receiver sees a constant high. */
@@ -65,12 +68,19 @@ void em_uart_init(void)
 	        PORT_PMUX_PMUXE(EM_MUX_UART) | PORT_PMUX_PMUXO(EM_MUX_UART);
 
 	EMSERCOM->USART.CTRLA.reg = SERCOM_USART_CTRLA_SWRST;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT(!(EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST), EA9_IO_UART)) return;
+#else
 	while (EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST) {
 	}
+#endif
 
 	EMSERCOM->USART.CTRLA.reg = EM_CTRLA;      /* recovered verbatim */
 	EMSERCOM->USART.CTRLB.reg = EM_CTRLB;
 	em_uart_sync();
+#ifdef EA9_AF_BUILD
+	if (ea9_io_faults()) return;
+#endif
 	EMSERCOM->USART.BAUD.reg  = EM_BAUD;
 
 	EMSERCOM->USART.INTENSET.reg = SERCOM_USART_INTENSET_RXC;

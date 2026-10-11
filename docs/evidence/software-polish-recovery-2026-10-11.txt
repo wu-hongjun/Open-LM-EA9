@@ -1,0 +1,12 @@
+test_authenticated_tampering_publishes_nothing (__main__.RecoveryTests.test_authenticated_tampering_publishes_nothing) ... ok
+test_committed_products_match_pins (__main__.RecoveryTests.test_committed_products_match_pins) ... ok
+test_duplicate_entries_are_rejected_before_publication (__main__.RecoveryTests.test_duplicate_entries_are_rejected_before_publication) ... ok
+test_existing_destination_is_preserved (__main__.RecoveryTests.test_existing_destination_is_preserved) ... ok
+test_original_backup_round_trip_and_private_permissions (__main__.RecoveryTests.test_original_backup_round_trip_and_private_permissions) ... ok
+test_path_traversal_is_rejected_before_publication (__main__.RecoveryTests.test_path_traversal_is_rejected_before_publication) ... ok
+test_wrong_key_publishes_nothing (__main__.RecoveryTests.test_wrong_key_publishes_nothing) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.023s
+
+OK

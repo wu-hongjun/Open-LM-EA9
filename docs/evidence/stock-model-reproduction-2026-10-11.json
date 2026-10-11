@@ -1,0 +1,164 @@
+{
+  "stage": "passed-finite-stock-model-reproduction",
+  "date_local": "2026-10-11",
+  "timezone": "America/New_York",
+  "scope": "Tracked-source promotion of the existing authored stock 1.8.0 application host model; no new flashable firmware",
+  "original_instruction_run": {
+    "stage": "passed-finite-original-instruction-comparison",
+    "started_at_utc": "2026-10-11T13:27:43.232268+00:00",
+    "completed_at_utc": "2026-10-11T13:27:47.123280+00:00",
+    "input_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "input_size_bytes": 20172,
+    "input_unchanged": true,
+    "routine_entries": 38,
+    "core_cases_steps": 8882,
+    "protocol_metadata_cases": 5900,
+    "application_cases_steps": 10209,
+    "total_cases_steps": 24991,
+    "negative_controls": {
+      "sensor_wrap": "16383\u219216384 unwrap mutation detected",
+      "metadata_immediate": {
+        "immediate_address": "0x8aa6",
+        "host_only_change": "0x18 to 0x10",
+        "unchanged_model": "mismatch detected",
+        "dependency_preserving_model": "matches patched-in-memory original instructions",
+        "changed_RAM_offsets": [
+          "0x18",
+          "0x20",
+          "0x23",
+          "0x1da",
+          "0x1e1",
+          "0x1e2"
+        ]
+      }
+    },
+    "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "unicorn": "2.1.4",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "library_flags": [
+      "-dynamiclib"
+    ],
+    "source_sha256": {
+      "config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+      "oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+      "run.py": "2d0ad3a3ce8a5620896885bf9af764a4946218f744f8fe5836b830829478af17",
+      "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+      "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+      "validate.py": "92864a5002c25dfa44bece7c113a8f3d84421f49987909aa2b149e4320a8328a",
+      "validate_application.py": "1e18f75d069e156e451dfeef7609c60a9211fdebe8b0c13bb1499637b3c7b495",
+      "validate_protocol.py": "c704751a3f35d1be5f41bf7f069e59e2aaaf33e20bd587bafa59a3658014a700"
+    },
+    "report_sha256": {
+      "validation.json": "76e4c44c7992234f375b8f4db76d76a2487642fe130d9aae9c2b0df724ef8749",
+      "protocol-validation.json": "b49a62a395808dd82ad2c7fe6fba898f4c80e03ce696b8bd3b5405ff319fd485",
+      "application-validation.json": "9a03267eeca3173fce30222b8c9d1b38485e09daa945b6089d0fe160de366f7c"
+    },
+    "hardware_access": false,
+    "flashable_firmware": false,
+    "claims": "Finite instruction comparisons only; declared dummy registers and stubs, no timing or whole-firmware equivalence."
+  },
+  "routine_entries_checked_from_suite_results": [
+    "0x5120",
+    "0x5188",
+    "0x51ac",
+    "0x51d4",
+    "0x5238",
+    "0x5260",
+    "0x5274",
+    "0x5280",
+    "0x52e8",
+    "0x5308",
+    "0x53a4",
+    "0x54b8",
+    "0x54d8",
+    "0x5510",
+    "0x567c",
+    "0x56cc",
+    "0x58a4",
+    "0x5a2c",
+    "0x5a94",
+    "0x5b98",
+    "0x5c08",
+    "0x5cc8",
+    "0x5d2c",
+    "0x5d68",
+    "0x5da8",
+    "0x5dd4",
+    "0x5e00",
+    "0x66b8",
+    "0x8a2c",
+    "0x8a8c",
+    "0x8ae4",
+    "0x8bfc",
+    "0x8cc0",
+    "0x8d20",
+    "0x8d94",
+    "0x8dd4",
+    "0x8e28",
+    "0x8fc8"
+  ],
+  "guard_regression_tests": {
+    "command": "tools/rea-analysis/venv/bin/python tools/test-stock-model.py",
+    "test_count": 10,
+    "exit_code": 0,
+    "result": "pass",
+    "scope": "Pinned oracle identity, altered/truncated image rejection before outputs, existing evidence preservation, missing parent/compiler rejection, one-time configuration, assertion-optimization rejection, unchanged C/header identities"
+  },
+  "retained_public_reports": {
+    "research/stock-1.8/evidence/2026-10-11/application-validation.json": "9a03267eeca3173fce30222b8c9d1b38485e09daa945b6089d0fe160de366f7c",
+    "research/stock-1.8/evidence/2026-10-11/protocol-validation.json": "b49a62a395808dd82ad2c7fe6fba898f4c80e03ce696b8bd3b5405ff319fd485",
+    "research/stock-1.8/evidence/2026-10-11/reproduction.json": "d02631095947ed33f19ea8dbebd9882aaf4f2fd30f81e5946bf47e1c7863b874",
+    "research/stock-1.8/evidence/2026-10-11/validation.json": "76e4c44c7992234f375b8f4db76d76a2487642fe130d9aae9c2b0df724ef8749"
+  },
+  "bundle_source_sha256": {
+    "research/stock-1.8/README.md": "e8712ac2b15c2f9f7e1a8a98cfed868f3236c60cb6b37ead801fa969e48d7b0c",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/provenance.json": "2ac3c1e5fbcd0ef8b8009a3b4fa425ff312cac7744c063c47cdf375da51261b6",
+    "research/stock-1.8/requirements.txt": "56bce36af734e3b9aeff2be4301bbc2a2c2b58ea1ea1e6ee6e792db84f96fbd4",
+    "research/stock-1.8/run.py": "2d0ad3a3ce8a5620896885bf9af764a4946218f744f8fe5836b830829478af17",
+    "research/stock-1.8/stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "research/stock-1.8/stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "research/stock-1.8/validate.py": "92864a5002c25dfa44bece7c113a8f3d84421f49987909aa2b149e4320a8328a",
+    "research/stock-1.8/validate_application.py": "1e18f75d069e156e451dfeef7609c60a9211fdebe8b0c13bb1499637b3c7b495",
+    "research/stock-1.8/validate_protocol.py": "c704751a3f35d1be5f41bf7f069e59e2aaaf33e20bd587bafa59a3658014a700",
+    "tools/test-stock-model.py": "644e3de0a00b46209fc830086874ca231094fdad49d779a436fdb370b3a8f781"
+  },
+  "preservation": {
+    "authored_c_and_header_byte_identical": true,
+    "application_suite_byte_identical": true,
+    "earlier_ignored_sources_unmodified": true,
+    "prior_evidence_not_overwritten": true,
+    "input_vendor_file_unchanged": true
+  },
+  "external_contract": [
+    "Timer/DMA/NVM/delay/UART helpers are recorded stubs; NVM helpers return -7, ignored by caller",
+    "Critical-section helpers stubbed; no concurrency claim",
+    "Sensor fixed within each invocation; PA3 low at both shutdown samples",
+    "WFI explicitly skipped after recording event, representing a supplied wake",
+    "Original register pin reads use dummy RAM, no hardware",
+    "Settings restore uses independent synthetic44byte records"
+  ],
+  "additional_limits": [
+    "Finite synthetic input cases, not formal or whole-firmware equivalence",
+    "No physical sensor, motor, camera, USB, HID, updater, flash write or canonical app-state access",
+    "No reset/startup/bootloader/DMA/real-time scheduler or arbitrary ISR interleavings",
+    "Frame lengths 4..255 and valid modeled-RAM pointers; out-of-domain inputs excluded",
+    "PID denominator fixed 200; factory division-by-zero behavior not reconstructed",
+    "Earlier Unicorn Cortex-M0 selection accepted MOVW; these results do not establish ISA legality",
+    "Linux build flags implemented but this validation ran only on macOS arm64",
+    "Research-source license currently unstated; official Techart oracle not covered by firmware MIT license"
+  ],
+  "hardware_reports_sent": 0,
+  "firmware_uploaded": false,
+  "management_protocol_changed": false,
+  "flashable_firmware": false,
+  "optical_autofocus_qualified": false,
+  "reproduce": [
+    "python3 -m venv /tmp/ea9-stock-model-venv",
+    "/tmp/ea9-stock-model-venv/bin/python -m pip install -r research/stock-1.8/requirements.txt",
+    "/tmp/ea9-stock-model-venv/bin/python tools/test-stock-model.py",
+    "/tmp/ea9-stock-model-venv/bin/python research/stock-1.8/run.py"
+  ]
+}

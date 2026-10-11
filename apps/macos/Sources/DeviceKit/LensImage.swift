@@ -2,20 +2,20 @@ import Foundation
 import LensCore
 
 public enum FirmwareVariant: String, CaseIterable, Sendable {
-    case metadataOnly, autofocusExperimental, autofocusReconciled
+    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened
     var version: [UInt8] {
-        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0] }
+        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0] }
     }
     public var versionString: String { version.map(String.init).joined(separator: ".") }
     var resource: String {
-        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template" }
+        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template" }
     }
     var sha256: String {
-        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256 }
+        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256 }
     }
     public var enablesAutofocus: Bool { self != .metadataOnly }
-    // 2.2 stops before the retained factory prefix/copy. Legacy pins retain their layout.
-    var profileAddress: Int { self == .autofocusReconciled ? 0x9f00 : 0xa000 }
+    // 2.2 and later stop before the retained factory prefix/copy. Legacy pins retain their layout.
+    var profileAddress: Int { [.autofocusReconciled, .autofocusHardened].contains(self) ? 0x9f00 : 0xa000 }
     var profileOffset: Int { profileAddress - ApplicationImage.base }
     var applicationBytes: Int { profileOffset + 256 }
     var applicationEnd: Int { profileAddress + 256 }
@@ -146,6 +146,20 @@ struct ApplicationImage: Sendable {
         var data = try template(variant); let setting = try AdapterLensSetting(profile: profile)
         data.replaceSubrange(variant.profileOffset..<variant.applicationBytes, with: try setting.encoded())
         return Self(data: data, version: variant.version, setting: setting)
+    }
+    /// The main profile action preserves firmware based on its fresh backup,
+    /// not just a cached version. Explicit install/restore actions choose a variant.
+    static func requirePreservedFirmware(_ variant: FirmwareVariant, in backup: VerifiedBackup) throws {
+        if variant == .metadataOnly && backup.result.manifest.reportedFirmwareVersion == "1.8.0",
+           backup.flash[0x4000..<0x4003] == Data([1,8,0]),
+           digest(Data(backup.flash[base..<(base + 20172)])) == "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564" {
+            return // The reviewed initial stock-to-metadata setup.
+        }
+        guard backup.result.manifest.reportedFirmwareVersion == variant.versionString,
+              try installedVariant(backup.flash) == variant,
+              try installedSetting(backup.flash) != nil else {
+            throw DeviceError.failure("Current firmware does not match your last verified setting. No update was started. Review the adapter’s settings and try again.")
+        }
     }
     static func stockRestoration(_ backup: VerifiedBackup) throws -> Self {
         guard backup.result.manifest.reportedFirmwareVersion == "1.8.0",

@@ -1,5 +1,17 @@
 # AF 2.2: reference, timing and completion reconciliation
 
+This document records the 2.2 design and historical commands. Current source
+builds the separate [2.3 hardening candidate](evidence/software-polish-2026-10-11.md)
+with `--variant hardened-af`; `--variant reconciled-af` verifies the frozen 2.2
+resource. Current native `prepare-af`/`apply-af` select 2.3, while normal profile
+changes preserve the verified installed firmware. To reproduce a historical
+2.2 personalized image offline, use `scripts/prepare-af.py --variant reconciled-af`
+with a metadata-2.0 profile input and a new output path. To rebuild its source,
+use the recorded pre-hardening commit `458be6b0f78cefed80cd4650894f600be71a8135`
+and the dated 2.2 manifest. The installed 2.2 unit has not been changed by this
+hardening pass.
+
+
 The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 is installed and
 byte-verified after owner-confirmed physical USB-cap reconnect. It passed the
 [software checks](evidence/af-reconciliation-2026-10-10.md); see the separate

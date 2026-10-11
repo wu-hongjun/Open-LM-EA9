@@ -1,0 +1,44 @@
+{
+  "scope": "independently authored finite stock 1.8.0 application host reconstruction",
+  "promotion_date_local": "2026-10-11",
+  "timezone": "America/New_York",
+  "input": {
+    "repository_path": "firmware/recovery/stock-1.8.0/application.bin",
+    "origin": "Techart official 1.8.0 application retained in the recovery bundle",
+    "size_bytes": 20172,
+    "original_load_address": "0x5000",
+    "sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564"
+  },
+  "earlier_authored_sources": {
+    "origin_directory": "tools/rea-analysis/reconstruction/",
+    "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "validate.py": "dab48b113874beb88ec1dea472d7c8bfa50b3ee81c831044f7144130970cf558",
+    "validate_protocol.py": "663fc97fae082edf724e6b85014b5dd40d6f9121784f56e074016b177dc065c0",
+    "validate_application.py": "1e18f75d069e156e451dfeef7609c60a9211fdebe8b0c13bb1499637b3c7b495"
+  },
+  "earlier_instruction_helper": {
+    "repository_local_path": "tools/rea-analysis/phase2_emulate.py",
+    "sha256": "70e44d4b9b83b346d59b10b6308e09974a19e8dc584c97568ff0c36fb151381d",
+    "promotion": "Only original-instruction Machine/u32/s32/s16/div helper copied; private input and unrelated standalone experiment removed"
+  },
+  "preservation": {
+    "stock_model_c_byte_identical": true,
+    "stock_model_h_byte_identical": true,
+    "validate_application_py_byte_identical": true,
+    "scenario_logic_preserved": true,
+    "old_ignored_sources_modified": false,
+    "old_evidence_overwritten": false
+  },
+  "harness_changes": [
+    "Default oracle is the committed recovery application with fixed size/SHA-256 guard",
+    "Unique temporary output or explicitly new output directory, never prior evidence",
+    "Compiler selection and macOS/Linux shared-library flags",
+    "Pinned Unicorn dependency, Python assertion-optimization guard, final input hash check",
+    "Aggregate results/environment/source/report digests and offline input/output guard regression tests"
+  ],
+  "hardware_access": false,
+  "private_settings_embedded": false,
+  "flashable_firmware": false,
+  "license_attribution": "Authored analysis implementations; no separate research-source license grant currently stated. Techart oracle is not covered by firmware/ea9 MIT license."
+}

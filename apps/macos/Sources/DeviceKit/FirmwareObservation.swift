@@ -43,7 +43,7 @@ public struct FirmwareObservationStore: Sendable {
         try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: fileURL.path)
     }
     private func validate(_ observation: FirmwareObservation) throws {
-        guard ["1.8.0", "2.0.0", "2.1.0", "2.2.0"].contains(observation.version), observation.device.qualifiedDescriptor,
+        guard observation.version == "1.8.0" || FirmwareVariant.allCases.contains(where: { $0.versionString == observation.version }), observation.device.qualifiedDescriptor,
               observation.device.product == "LM-EA9", observation.device.manufacturer == "TECHART",
               observation.readAt > Date(timeIntervalSince1970: 0), observation.readAt <= Date().addingTimeInterval(60) else {
             throw DeviceError.failure("Invalid firmware history.")

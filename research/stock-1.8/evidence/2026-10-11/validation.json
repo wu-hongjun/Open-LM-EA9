@@ -1,0 +1,137 @@
+{
+  "negative_control": "16383\u219216384 unwrap mutation detected",
+  "input_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "seed": 1572912,
+  "results": [
+    {
+      "entry": "0x8cc0",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8dd4",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8d20",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8bfc",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8d94",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8e28",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8fc8",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8a2c",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5308",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5a94",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5b98",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5c08",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5cc8",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5a2c",
+      "random_boundary_cases": 600,
+      "result": "pass"
+    },
+    {
+      "sequence": "explicit thresholds, sensor seams and PID overflow",
+      "cases": 174,
+      "result": "pass"
+    },
+    {
+      "sequence": "retarget + 302 timer callbacks",
+      "steps": 303,
+      "result": "pass"
+    },
+    {
+      "sequence": "scan state progression with injected completion",
+      "steps": 5,
+      "result": "pass"
+    }
+  ],
+  "fixtures": [
+    {
+      "scan_step": 0,
+      "state": 1,
+      "target_counts": -1447,
+      "progress": 16
+    },
+    {
+      "scan_step": 1,
+      "state": 2,
+      "target_counts": 192,
+      "progress": 16
+    },
+    {
+      "scan_step": 2,
+      "state": 4,
+      "target_counts": 7616,
+      "progress": 32
+    },
+    {
+      "scan_step": 3,
+      "state": 5,
+      "target_counts": 7616,
+      "progress": 48
+    },
+    {
+      "scan_step": 4,
+      "state": 10,
+      "target_counts": 7616,
+      "progress": 0
+    }
+  ],
+  "total_cases_steps": 8882,
+  "oracle": "Original Thumb instructions, all 2048 modeled RAM bytes and driver events compared",
+  "limitations": [
+    "Unicorn Cortex-M0 selection accepts MOVW: no architecture legality proof",
+    "Motor drivers stubbed at final four entry points; stop register stores execute against dummy RAM pages",
+    "Synthetic random RAM, no per-unit calibration and no hardware timing",
+    "PID denominator fixed 200; zero denominator unsupported in C model"
+  ],
+  "source_sha256": {
+    "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "validate.py": "92864a5002c25dfa44bece7c113a8f3d84421f49987909aa2b149e4320a8328a"
+  }
+}

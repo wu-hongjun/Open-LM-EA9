@@ -139,6 +139,16 @@ struct UpdateStore: Sendable {
         try saveJSON(record, to: file)
     }
     func saveApplied(_ record: AppliedLens) throws { try saveJSON(record, to: appliedFile) }
+    func archiveAppliedBeforeInspection() throws {
+        guard FileManager.default.fileExists(atPath: appliedFile.path) else { return }
+        let history = directory.appendingPathComponent("InspectionHistory", isDirectory: true)
+        try FileManager.default.createDirectory(at: history, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
+        let archived = history.appendingPathComponent("\(UUID().uuidString)-applied-lens.json")
+        try FileManager.default.moveItem(at: appliedFile, to: archived)
+        try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: archived.path)
+        try DurableFile.synchronizeExisting(archived)
+        try DurableFile.synchronizeDirectories(from: history)
+    }
     func preserveBeforeRecovery() throws {
         for source in [file, appliedFile, qualificationFile] where FileManager.default.fileExists(atPath: source.path) {
             let url = directory.appendingPathComponent("recovery-source-\(UUID().uuidString)-\(source.lastPathComponent)")
@@ -185,7 +195,7 @@ struct VerifiedBackup {
         guard manifest.schemaVersion == 1, manifest.flashReadPasses == 2, manifest.auxiliaryReadPasses == 2,
               manifest.flashBytes == 0x20000, manifest.bootCodeSHA256 == expectedBootHash,
               manifest.device.qualifiedDescriptor, !device.serial.isEmpty, manifest.device.serial == device.serial,
-              allowRecoveryVersion || ["1.8.0", "2.0.0", "2.1.0", "2.2.0"].contains(manifest.reportedFirmwareVersion),
+              allowRecoveryVersion || manifest.reportedFirmwareVersion == "1.8.0" || FirmwareVariant.allCases.contains(where: { $0.versionString == manifest.reportedFirmwareVersion }),
               Set(manifest.files.keys) == names else { throw DeviceError.failure("Backup format, loader or adapter identity does not match.") }
         for name in names {
             let expected = manifest.files[name]!

@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.5.0, build 8
+# Device workflow: prototype 0.6.0, build 9
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -8,7 +8,8 @@ The secondary **Lens Library** tab retains the photographs and metadata editor.
 
 1. Connect the adapter through its USB cap with TECHART Update closed.
 2. Choose a lens in the **Lens profile** dropdown on Device. All eight requested
-   lenses are included, with the corrected Biotar 58mm f/2.
+   lenses are included, with the corrected Biotar 58mm f/2. The selected-on-Mac
+   preview shows the focal length and reported aperture that will be applied.
 3. Confirm **Updater closed · USB cap reconnected**, then click **Apply profile**.
 4. After upload, physically unplug and reconnect the cap. The app detects the
    new connection; confirm the prerequisite again and click **Verify lens**.
@@ -18,8 +19,18 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 2.2 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` now selects 2.2; plain `apply` selects metadata-only 2.0.
+new AF 2.3 is a separate **USB tools → Experimental autofocus** action.
+The CLI `apply-af` now selects 2.3; plain `apply` selects metadata-only 2.0.
+
+The status panel explains the next action: connection, one-time setup, reading
+unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,
+verification or a completed profile match. If an AF version is known but its
+verified lens history is missing, **Read lens settings** identifies the image
+before the main profile action becomes available. It cannot silently fall back to
+metadata-only firmware. A newer stock-version observation hides older AF history;
+a successful stock-image read archives the old lens record and clears that setting.
+An unfinished update from another adapter points to USB tools rather than offering
+an unavailable verification action.
 
 If this is a new unit, **Set up adapter** performs the existing backed-up stock
 upload/reconnect qualification before custom application uploads are allowed.
@@ -55,3 +66,5 @@ See [the test and hardware-boundary evidence](evidence/af-reconciliation-2026-10
 After the AF 2.2 reconnect/readback on Oct 11, the same app loaded the completed
 2.2.0/50mm f/1.4 history and displayed **USB verified** and **Up to date** without
 a rebuild or explicit HID read. See the [completed installation record](evidence/af-22-upload-2026-10-11.md).
+
+The 0.6 workflow and firmware hardening were tested offline; see [the Oct 11 polish record](evidence/software-polish-2026-10-11.md). The installed adapter remains 2.2 until a separately requested 2.3 upload and reconnect verification.

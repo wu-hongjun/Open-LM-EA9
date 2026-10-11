@@ -22,6 +22,7 @@ extern int      sent_overflow;
 extern int      host_pad_to;
 extern uint32_t host_millis;
 void host_body_frame(const uint8_t *frame, uint16_t len);
+static void body_frame(uint8_t *frame, uint16_t supplied);
 void host_frame_sync(void);
 int  host_cs_released(void);
 
@@ -49,7 +50,7 @@ static void fake_park(void)
 		uint16_t n2 = make_request(r2, 0x02, 0x99, EM_ID_SHUTDOWN, 0, 0);
 
 		park_inject_0x16 = 0;
-		host_body_frame(r2, n2);
+		body_frame(r2, n2);
 	}
 	while (park_pumps--) {
 		em_poll();               /* must NOT re-enter the reply path */
@@ -77,13 +78,29 @@ static uint16_t checksum(const uint8_t *f, uint16_t len)
 	return s;
 }
 
+/* Old fixtures omitted checksums. Seal complete synthetic frames before
+ * delivery; deliberately incomplete windows remain unsealed and rejected.
+ * Corrupt-frame regressions use host_body_frame directly in test_af_hardening. */
+static void body_frame(uint8_t *frame, uint16_t supplied)
+{
+	if (supplied >= 9 && frame[0] == 0xF0) {
+		uint16_t declared = (uint16_t)frame[1] | ((uint16_t)frame[2] << 8);
+		if (declared >= 9 && declared <= supplied) {
+			uint16_t sum = checksum(frame, declared);
+			frame[declared - 3] = (uint8_t)sum;
+			frame[declared - 2] = (uint8_t)(sum >> 8);
+		}
+	}
+	host_body_frame(frame, supplied);
+}
+
 /* Build an init-class request for one message id, the shape a body sends.
  * a0/a1 land at payload[0]/payload[1] -- frame offsets 6 and 7, which are the
  * bytes the 0x1b and 0x34 handlers echo back. */
 static uint16_t make_request(uint8_t *buf, uint8_t cls, uint8_t seq, uint8_t id,
                              uint8_t a0, uint8_t a1)
 {
-	uint16_t len = 10;
+	uint16_t len = 11;
 	memset(buf, 0, len);
 	buf[0] = 0xF0;
 	buf[1] = (uint8_t)len;
@@ -98,7 +115,7 @@ static uint16_t make_request(uint8_t *buf, uint8_t cls, uint8_t seq, uint8_t id,
 }
 
 /* A message 0x1B focus command.  Built by hand rather than with
- * make_request(), which emits 10-byte frames: 0x1B needs TWO payload bytes, so
+ * make_request(), which emits 11-byte frames: 0x1B needs TWO payload bytes, so
  * 6 header + 2 + 3 trailer = 11.  In a 10-byte frame, byte 7 is a checksum
  * byte, and reading it as the target's high byte is exactly the bug the length
  * guard exists to stop. */
@@ -117,7 +134,7 @@ static int aperture_cmd(uint8_t seq, uint16_t av)
 	f[6] = (uint8_t)(av & 0xFF);
 	f[7] = (uint8_t)(av >> 8);
 	f[n - 1] = 0x55;
-	host_body_frame(f, n);
+	body_frame(f, n);
 	em_poll();
 	return (sent_n == before + 1) ? before : -1;
 }
@@ -129,7 +146,7 @@ static int request(uint8_t id, uint8_t seq, uint8_t a0, uint8_t a1)
 	int before = sent_n;
 	uint16_t len = make_request(req, 0x02, seq, id, a0, a1);
 
-	host_body_frame(req, len);
+	body_frame(req, len);
 	em_poll();
 	return (sent_n == before + 1) ? before : -1;
 }
@@ -191,7 +208,7 @@ int main(void)
 		int before = sent_n;
 
 		len = make_request(req, 0x02, (uint8_t)(0x40 + i), id, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 
 		if (sent_n != before + 1) {
@@ -230,7 +247,7 @@ int main(void)
 		int before = sent_n;
 
 		len = make_request(req, 0x01, 0x7E, 0x04, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (sent_n != before) {
 			fail("a normal-class frame drew %d replies",
@@ -525,7 +542,7 @@ int main(void)
 		/* Two kinds, repeated: the frame clock and a focus command. */
 		for (k = 0; k < 5; k++) {
 			uint16_t len = make_request(req, 0x01, (uint8_t)k, 0x04, 0, 0);
-			host_body_frame(req, len);
+			body_frame(req, len);
 			em_poll();
 		}
 		/* A 27-byte frame: the length the stock firmware treats as a
@@ -535,16 +552,16 @@ int main(void)
 			memset(cmd, 0, sizeof(cmd));
 			cmd[0] = 0xF0; cmd[1] = 27; cmd[3] = 0x01;
 			cmd[4] = 0x33; cmd[5] = 0x03; cmd[26] = 0x55;
-			host_body_frame(cmd, sizeof(cmd));
+			body_frame(cmd, sizeof(cmd));
 			em_poll();
 		}
 
 		for (k = 0; k < em_norm_used; k++) {
-			if (em_norm_len[k] == 10) seen22 = (int)k;
+			if (em_norm_len[k] == 11) seen22 = (int)k;
 			if (em_norm_len[k] == 27) seen27 = (int)k;
 		}
 		if (seen22 < 0 || em_norm_count[seen22] != 6) {
-			fail("normal-class tally: 10-byte frames counted %d, expected 6",
+			fail("normal-class tally: 11-byte frames counted %d, expected 6",
 			     seen22 < 0 ? -1 : em_norm_count[seen22]);
 		}
 		if (seen27 < 0 || em_norm_count[seen27] != 1) {
@@ -561,11 +578,11 @@ int main(void)
 		 * counters took this as far as they could, and the focus
 		 * command's contents are what the motor path needs. */
 		if (em_cap_used != 3) {
-			fail("captured %u windows, expected 3 (two 10-byte, "
+			fail("captured %u windows, expected 3 (two 11-byte, "
 			     "one 27-byte)", em_cap_used);
 		} else {
-			if (em_cap[0].declared != 10 || em_cap[0].got != 10) {
-				fail("capture 0: declared %u got %u, expected 10/10",
+			if (em_cap[0].declared != 11 || em_cap[0].got != 11) {
+				fail("capture 0: declared %u got %u, expected 11/11",
 				     em_cap[0].declared, em_cap[0].got);
 			}
 			if (em_cap[2].declared != 27 || em_cap[2].id != 0x03) {
@@ -583,7 +600,7 @@ int main(void)
 			uint8_t trunc[12];
 			memset(trunc, 0, sizeof(trunc));
 			trunc[0] = 0xF0; trunc[1] = 40; trunc[3] = 0x01; trunc[5] = 0x03;
-			host_body_frame(trunc, sizeof(trunc));
+			body_frame(trunc, sizeof(trunc));
 			em_poll();
 			if (em_truncated != 1) {
 				fail("a frame declaring 40 bytes but delivering 12 "
@@ -596,13 +613,14 @@ int main(void)
 	{
 		int before = sent_n;
 		uint8_t junk[8] = { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88 };
+		uint8_t before_bad = em_bad_frames;
 
-		host_body_frame(junk, sizeof(junk));
+		body_frame(junk, sizeof(junk));
 		em_poll();
 		if (sent_n != before) {
 			fail("a frame with no 0xF0 drew a reply");
 		}
-		if (em_bad_frames != 1) {
+		if (em_bad_frames != (uint8_t)(before_bad + 1u)) {
 			fail("bad frame not counted (%u)", (unsigned)em_bad_frames);
 		}
 	}
@@ -612,7 +630,7 @@ int main(void)
 		int before = sent_n;
 
 		len = make_request(req, 0x02, 0x11, 0x44, 0, 0); /* nothing at all */
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (sent_n != before) {
 			fail("an unknown id drew a reply");
@@ -631,7 +649,7 @@ int main(void)
 		park_pumps = 3;
 		park_inject_0x16 = 1;
 		len = make_request(req, 0x02, 0x50, EM_ID_SHUTDOWN, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 
 		if (park_calls != 1) {
@@ -648,7 +666,7 @@ int main(void)
 		em_set_park_handler(0);
 		/* revive for the tests below -- only a session opener does it */
 		len = make_request(req, 0x02, 0x51, EM_ID_SESSION, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 	}
 
@@ -660,14 +678,14 @@ int main(void)
 		park_calls = 0;
 		park_pumps = 0;
 		len = make_request(req, 0x02, 0x52, EM_ID_SHUTDOWN, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (sent_n != before + 1) {
 			fail("no acknowledgement after the park");
 		}
 		em_set_park_handler(0);
 		len = make_request(req, 0x02, 0x53, EM_ID_SESSION, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 	}
 
@@ -679,7 +697,7 @@ int main(void)
 		int before = sent_n;
 
 		len = make_request(req, 0x02, 0x55, EM_ID_SHUTDOWN, 0xAB, 0xCD);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 
 		if (sent_n != before + 1) {
@@ -696,11 +714,9 @@ int main(void)
 				fail("0x16 echo is not the request: class %#04x "
 				     "seq %#04x id %#04x", e[3], e[4], e[5]);
 			}
-			/* A 10-byte frame has exactly ONE payload byte: [6].
-			 * [7] and [8] are the checksum, which em_transmit
-			 * recomputes -- as the stock's own echo does. */
-			if (e[6] != 0xAB) {
-				fail("0x16 echo lost the payload byte: %#04x", e[6]);
+			/* Two payload bytes precede the checksummed trailer. */
+			if (e[6] != 0xAB || e[7] != 0xCD) {
+				fail("0x16 echo lost the payload bytes: %#04x/%#04x", e[6], e[7]);
 			}
 			check_frame(before, EM_ID_SHUTDOWN, "0x16 echo");
 		}
@@ -722,7 +738,7 @@ int main(void)
 		 * conversation is what the stock's switched-off bus prevents. */
 		before = sent_n;
 		len = make_request(req, 0x02, 0x56, 0x07, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (sent_n != before) {
 			fail("id 0x07 drew a reply after shutdown was acknowledged");
@@ -740,7 +756,7 @@ int main(void)
 		park_calls = 0;
 		em_set_park_handler(fake_park);
 		len = make_request(req, 0x02, 0x57, EM_ID_SHUTDOWN, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (sent_n != before + 1) {
 			fail("a repeated 0x16 drew %d replies, expected 1",
@@ -753,7 +769,7 @@ int main(void)
 
 		/* only the session opener brings us back */
 		len = make_request(req, 0x02, 0x60, EM_ID_SESSION, 0, 0);
-		host_body_frame(req, len);
+		body_frame(req, len);
 		em_poll();
 		if (em_shutdown_acked) {
 			fail("a session opener did not clear the shutdown flag");
@@ -803,7 +819,9 @@ int main(void)
 		/* A 10-byte 0x1B carries no payload[0..1] at all; it must not
 		 * even be counted as one that could. */
 		em_focus_n = 0;
-		request(EM_ID_APERTURE, 0x7A, 0xC0, 0x12);
+		uint8_t short_aperture[10] = {0xF0, 10, 0, 2, 0x7A, EM_ID_APERTURE, 0xC0};
+		short_aperture[9] = 0x55;
+		body_frame(short_aperture, sizeof(short_aperture)); em_poll();
 		if (em_focus_n != 0) {
 			fail("a 10-byte 0x1B was counted as carrying a target");
 		}
@@ -1115,7 +1133,7 @@ int main(void)
 			f[5] = 0x04;                                          \
 			for (q = 0; q < sizeof(R); q++) { f[19 + q] = R[q]; } \
 			f[n - 1] = 0x55;                                      \
-			host_body_frame(f, n); em_poll();                     \
+			body_frame(f, n); em_poll();                     \
 		} while (0)
 
 		(void)em_take_focus_cmd(&cmd);
@@ -1296,7 +1314,7 @@ int main(void)
 			memset(f, 0, sizeof(f));
 			f[0] = 0xF0; f[1] = (uint8_t)n; f[3] = 0x01; f[5] = 0x04;
 			f[n - 1] = 0x55;
-			host_body_frame(f, n); em_poll();
+			body_frame(f, n); em_poll();
 			if (em_take_focus_cmd(&cmd)) {
 				fail("the bare 22-byte 0x04 queued an instruction");
 			}
@@ -1332,7 +1350,7 @@ int main(void)
 			f[0] = 0xF0; f[1] = (uint8_t)n; f[3] = 0x01; f[5] = 0x04;
 			f[19] = 0x1D; f[20] = 0xEC;
 			f[n - 1] = 0x55;
-			host_body_frame(f, n); em_poll();
+			body_frame(f, n); em_poll();
 			if (em_take_focus_cmd(&cmd)) {
 				fail("a truncated Move was acted on");
 			}
@@ -1364,7 +1382,7 @@ int main(void)
 			memset(f, 0, sizeof(f));
 			f[0] = 0xF0; f[1] = 27; f[3] = 0x01; f[5] = 0x04;
 			f[19] = 0x1D; f[20] = 0xEC; f[21] = 0x12;
-			host_body_frame(f, 22);          /* 27 declared, 22 sent */
+			body_frame(f, 22);          /* 27 declared, 22 sent */
 			em_poll();
 			/* The Move's operand bytes never arrived, so there is
 			 * no Move -- reading one would mean reading two bytes
@@ -1765,7 +1783,7 @@ int main(void)
 		f[0] = 0xF0; f[1] = (uint8_t)n; f[3] = 0x02; f[5] = 0x08;
 		f[6] = 0xC2; f[7] = 0xE1;                    /* pl[1] bit 7 set */
 		f[n - 1] = 0x55;
-		host_body_frame(f, n);
+		body_frame(f, n);
 		em_poll();
 
 		if (em_m08_n != (uint16_t)(before_n + 1)) {
@@ -1784,7 +1802,7 @@ int main(void)
 		 * which nothing else ever does. */
 		f[4] = 0x01;
 		f[7] = 0x61;                                 /* pl[1] bit 7 clear */
-		host_body_frame(f, n);
+		body_frame(f, n);
 		em_poll();
 
 		if (!em_m08_aperture_on) {
@@ -1809,12 +1827,12 @@ int main(void)
 
 		/* THE FIRST REQUEST IS THE ONE CAPTURED.  The body sends 0x08
 		 * once per session, so the capture must be the handshake's --
-		 * a 10-byte frame with pl[1] = 0 -- and neither of the two
+		 * an 11-byte frame with pl[1] = 0 -- and neither of the two
 		 * 17-byte ones sent just now may have overwritten it. */
 		if (em_m08[0] != 0xF0 || em_m08[5] != 0x08) {
 			fail("the captured bytes are not a 0x08 frame");
 		}
-		if (em_m08_len != 10 || em_m08[7] != 0x00) {
+		if (em_m08_len != 11 || em_m08[7] != 0x00) {
 			fail("a later 0x08 overwrote the first: %u bytes, "
 			     "pl[1] = %#04x", em_m08_len,
 			     em_m08_len >= 8 ? em_m08[7] : 0);
@@ -1829,7 +1847,7 @@ int main(void)
 		/* Put it back the way the rest of the suite expects. */
 		f[4] = 0x02;
 		f[7] = 0xE1;
-		host_body_frame(f, n);
+		body_frame(f, n);
 		em_poll();
 		em_set_aperture(EM_APERTURE_NOW);
 	}
@@ -1858,13 +1876,13 @@ int main(void)
 			shortf[0] = 0xF0; shortf[1] = (uint8_t)ns; shortf[3] = 0x02;
 			shortf[5] = EM_ID_SESSION;
 			shortf[6] = 0xAA; shortf[ns - 1] = 0x55;
-			host_body_frame(shortf, ns);
+			body_frame(shortf, ns);
 			em_poll();
 			if (em_body_offer[0] == 0xAA) {
 				fail("a 14-byte 0x01 was read as an 8-byte offer");
 			}
 		}
-		host_body_frame(req2, n2);
+		body_frame(req2, n2);
 		em_poll();
 
 		if (em_body_offer[0] != 0xFF || em_body_offer[7] != 0x1F) {

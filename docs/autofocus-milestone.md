@@ -1,6 +1,12 @@
 # Autofocus implementation milestone
 
-Current follow-up: [AF 2.2 reconciliation](af-reconciliation.md) separates position
+Current source/app follow-up: [AF 2.3 hardening](evidence/software-polish-2026-10-11.md)
+adds frame validation, coherent handoff, Stop ownership, telemetry cadence and
+bounded startup waits. It is offline; the adapter remains on byte-verified 2.2.
+The installation action now selects 2.3 explicitly; main profile changes preserve
+the verified installed variant.
+
+Previous follow-up: [AF 2.2 reconciliation](af-reconciliation.md) separates position
 origin, reference state, timing and completion policies using the REA findings.
 It is host-tested, installed and byte-verified after physical USB-cap reconnect.
 See the [2.2 installation record](evidence/af-22-upload-2026-10-11.md)
@@ -24,7 +30,7 @@ not establish accurate autofocus across the image.
 The first 2.1 release built a separate C candidate from upstream `main.c`,
 `servo.c`, encoder, distance mapping and prediction modules. It shares the
 CRC-protected lens profile at `0xa000` with the verified metadata build. The
-app now packages metadata 2.0, frozen AF 2.1 and new AF 2.2 with separate digest pins. The default remains
+app now packages frozen metadata 2.0, AF 2.1 and AF 2.2 plus new AF 2.3 with separate digest pins. The default remains
 metadata-only; AF installation is explicit. Neither build writes hardware or user
 update state. See [the current AF-S runbook](af-s-test.md).
 
@@ -107,12 +113,12 @@ silently replacing one with the other. A stock metadata patch remains a separate
 From the project root, after the native prototype CLI is built:
 
 ```sh
-python3 scripts/build-firmware.py --variant reconciled-af
+python3 scripts/build-firmware.py --variant hardened-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-This builds the current 2.2 zero-profile template and checks seven personalized prime/macro
+This builds the current 2.3 zero-profile template and checks seven personalized prime/macro
 fixtures. The 50mm fixture is
 `artifacts/firmware-milestone/hosttests/contax-zeiss-50-f1-4-af.bin` with an adjacent
 manifest. To prepare a new local candidate using a Mac-generated metadata image:

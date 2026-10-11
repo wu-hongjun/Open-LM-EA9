@@ -1,0 +1,55 @@
+{
+  "stage": "passed-finite-original-instruction-comparison",
+  "started_at_utc": "2026-10-11T13:27:43.232268+00:00",
+  "completed_at_utc": "2026-10-11T13:27:47.123280+00:00",
+  "input_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "input_size_bytes": 20172,
+  "input_unchanged": true,
+  "routine_entries": 38,
+  "core_cases_steps": 8882,
+  "protocol_metadata_cases": 5900,
+  "application_cases_steps": 10209,
+  "total_cases_steps": 24991,
+  "negative_controls": {
+    "sensor_wrap": "16383\u219216384 unwrap mutation detected",
+    "metadata_immediate": {
+      "immediate_address": "0x8aa6",
+      "host_only_change": "0x18 to 0x10",
+      "unchanged_model": "mismatch detected",
+      "dependency_preserving_model": "matches patched-in-memory original instructions",
+      "changed_RAM_offsets": [
+        "0x18",
+        "0x20",
+        "0x23",
+        "0x1da",
+        "0x1e1",
+        "0x1e2"
+      ]
+    }
+  },
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "unicorn": "2.1.4",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "library_flags": [
+    "-dynamiclib"
+  ],
+  "source_sha256": {
+    "config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+    "oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "run.py": "2d0ad3a3ce8a5620896885bf9af764a4946218f744f8fe5836b830829478af17",
+    "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "validate.py": "92864a5002c25dfa44bece7c113a8f3d84421f49987909aa2b149e4320a8328a",
+    "validate_application.py": "1e18f75d069e156e451dfeef7609c60a9211fdebe8b0c13bb1499637b3c7b495",
+    "validate_protocol.py": "c704751a3f35d1be5f41bf7f069e59e2aaaf33e20bd587bafa59a3658014a700"
+  },
+  "report_sha256": {
+    "validation.json": "76e4c44c7992234f375b8f4db76d76a2487642fe130d9aae9c2b0df724ef8749",
+    "protocol-validation.json": "b49a62a395808dd82ad2c7fe6fba898f4c80e03ce696b8bd3b5405ff319fd485",
+    "application-validation.json": "9a03267eeca3173fce30222b8c9d1b38485e09daa945b6089d0fe160de366f7c"
+  },
+  "hardware_access": false,
+  "flashable_firmware": false,
+  "claims": "Finite instruction comparisons only; declared dummy registers and stubs, no timing or whole-firmware equivalence."
+}

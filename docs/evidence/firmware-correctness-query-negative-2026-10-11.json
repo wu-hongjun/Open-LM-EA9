@@ -1,0 +1,49 @@
+{
+  "compilation": {
+    "cmd": [
+      "cc",
+      "-std=gnu99",
+      "-Wall",
+      "-Wextra",
+      "-O1",
+      "-Ihosttest",
+      "-Isrc",
+      "-DEA9_HOST_IRQ_TEST",
+      "-DEA9_SIM_MOTOR",
+      "-DEA9_NO_LOG",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wl,-dead_strip",
+      "$OUTPUT/query-unbounded-test.c",
+      "hosttest/sim_motor.c",
+      "hosttest/shim.c",
+      "src/emount.c",
+      "src/emount_packets.c",
+      "src/lens_profile.c",
+      "src/servo.c",
+      "src/af_control.c",
+      "src/af_reference.c",
+      "src/af_completion.c",
+      "src/io_guard.c",
+      "src/focus_map.c",
+      "src/focus_dist.c",
+      "src/focus_pred.c",
+      "-o",
+      "$OUTPUT/query-unbounded-negative"
+    ],
+    "cwd": "$REPOSITORY/firmware/ea9",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+  },
+  "run": {
+    "cmd": [
+      "$OUTPUT/query-unbounded-negative",
+      "17"
+    ],
+    "cwd": "$REPOSITORY/firmware/ea9",
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (query_refills < EM_QUERY_Q), function refill_queries, file query-unbounded-test.c, line 84.\n"
+  }
+}

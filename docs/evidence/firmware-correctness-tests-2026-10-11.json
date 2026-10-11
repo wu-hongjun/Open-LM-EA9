@@ -1,0 +1,3008 @@
+{
+  "scope": "Independent current-source driver tests, synthetic registers and simulated motor; no USB or physical hardware",
+  "commandWorkingDirectory": "firmware/ea9",
+  "pathPlaceholders": {
+    "$OUTPUT": "a new temporary output directory",
+    "$REPOSITORY": "the repository root"
+  },
+  "ordinaryInvocations": 83,
+  "sanitizerInvocations": 57,
+  "results": {
+    "scope": "Final offline host tests including bounded query fairness; seven metadata and seven hardened AF 2.3 profiles read from parent-generated fixtures.",
+    "compilation": [
+      {
+        "name": "emount",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_emount.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/emount_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "servo",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_servo.c",
+          "hosttest/sim_motor.c",
+          "src/servo.c",
+          "src/io_guard.c",
+          "-o",
+          "$OUTPUT/servo_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "nobody",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_nobody.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/nobody_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "init",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_init.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/init_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "focus",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_focus.c",
+          "src/focus_map.c",
+          "-o",
+          "$OUTPUT/focus_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "focus_dist",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_focus_dist.c",
+          "src/focus_dist.c",
+          "-lm",
+          "-o",
+          "$OUTPUT/focus_dist_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "focus_pred",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_focus_pred.c",
+          "src/focus_pred.c",
+          "-o",
+          "$OUTPUT/focus_pred_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "af_control",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "../tests/test_af_control.c",
+          "src/af_control.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "-o",
+          "$OUTPUT/af_control_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "io_guard",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "hosttest/test_io_guard.c",
+          "src/io_guard.c",
+          "-o",
+          "$OUTPUT/io_guard_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "af_reconciliation",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "../tests/test_af_reconciliation.c",
+          "src/af_reference.c",
+          "src/af_completion.c",
+          "src/af_control.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "-o",
+          "$OUTPUT/af_reconciliation_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-DEA9_SIM_MOTOR",
+          "-DEA9_NO_LOG",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "hosttest/test_af_lifecycle.c",
+          "hosttest/sim_motor.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "src/servo.c",
+          "src/af_control.c",
+          "src/af_reference.c",
+          "src/af_completion.c",
+          "src/io_guard.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "src/focus_pred.c",
+          "-o",
+          "$OUTPUT/af_lifecycle_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-DEA9_HOST_IRQ_TEST",
+          "-DEA9_SIM_MOTOR",
+          "-DEA9_NO_LOG",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "hosttest/test_af_hardening.c",
+          "hosttest/sim_motor.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "src/servo.c",
+          "src/af_control.c",
+          "src/af_reference.c",
+          "src/af_completion.c",
+          "src/io_guard.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "src/focus_pred.c",
+          "-o",
+          "$OUTPUT/af_hardening_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-O1",
+          "-Wall",
+          "-Wextra",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "-DEA9_AF_BUILD",
+          "-D__SAMD21E17A__",
+          "-Isrc",
+          "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include",
+          "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include",
+          "-include",
+          "hosttest/mmio/registers.h",
+          "hosttest/mmio/test_faults.c",
+          "src/io_guard.c",
+          "src/motor.c",
+          "src/abs_encoder.c",
+          "src/vdd.c",
+          "src/em_uart.c",
+          "-o",
+          "$OUTPUT/mmio_faults_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_delays",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-O1",
+          "-Wall",
+          "-Wextra",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "-DEA9_AF_BUILD",
+          "-D__SAMD21E17A__",
+          "-Isrc",
+          "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include",
+          "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include",
+          "-include",
+          "hosttest/mmio/registers.h",
+          "hosttest/mmio/test_delays.c",
+          "src/io_guard.c",
+          "src/motor.c",
+          "src/delay.c",
+          "-o",
+          "$OUTPUT/mmio_delays_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-O1",
+          "-Wall",
+          "-Wextra",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "-DEA9_AF_BUILD",
+          "-D__SAMD21E17A__",
+          "-Isrc",
+          "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include",
+          "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include",
+          "-include",
+          "hosttest/mmio/registers.h",
+          "hosttest/mmio/test_startup.c",
+          "src/io_guard.c",
+          "src/motor.c",
+          "src/clock.c",
+          "src/em_eic.c",
+          "src/em_uart.c",
+          "-o",
+          "$OUTPUT/mmio_startup_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "emount",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "hosttest/test_emount.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/emount_sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "-DEA9_SIM_MOTOR",
+          "-DEA9_NO_LOG",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "hosttest/test_af_lifecycle.c",
+          "hosttest/sim_motor.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "src/servo.c",
+          "src/af_control.c",
+          "src/af_reference.c",
+          "src/af_completion.c",
+          "src/io_guard.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "src/focus_pred.c",
+          "-o",
+          "$OUTPUT/af_lifecycle_sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "-DEA9_HOST_IRQ_TEST",
+          "-DEA9_SIM_MOTOR",
+          "-DEA9_NO_LOG",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "hosttest/test_af_hardening.c",
+          "hosttest/sim_motor.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "src/servo.c",
+          "src/af_control.c",
+          "src/af_reference.c",
+          "src/af_completion.c",
+          "src/io_guard.c",
+          "src/focus_map.c",
+          "src/focus_dist.c",
+          "src/focus_pred.c",
+          "-o",
+          "$OUTPUT/af_hardening_sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-O1",
+          "-Wall",
+          "-Wextra",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wl,-dead_strip",
+          "-DEA9_AF_BUILD",
+          "-D__SAMD21E17A__",
+          "-Isrc",
+          "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include",
+          "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include",
+          "-include",
+          "hosttest/mmio/registers.h",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "hosttest/mmio/test_startup.c",
+          "src/io_guard.c",
+          "src/motor.c",
+          "src/clock.c",
+          "src/em_eic.c",
+          "src/em_uart.c",
+          "-o",
+          "$OUTPUT/mmio_startup_sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "../tests/test_profile.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/profile-final-query-metadata-ordinary"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "../tests/test_profile.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/profile-final-query-metadata-sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-DEM_FW_VERSION_BCD=0x23u",
+          "-DEA9_PROFILE_ADDRESS=0x9f00u",
+          "../tests/test_profile.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/profile-final-query-hardened-23-ordinary"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "cc",
+          "-std=gnu99",
+          "-Wall",
+          "-Wextra",
+          "-O1",
+          "-Ihosttest",
+          "-Isrc",
+          "-fsanitize=address,undefined",
+          "-fno-sanitize-recover=all",
+          "-DEM_FW_VERSION_BCD=0x23u",
+          "-DEA9_PROFILE_ADDRESS=0x9f00u",
+          "../tests/test_profile.c",
+          "hosttest/shim.c",
+          "src/emount.c",
+          "src/emount_packets.c",
+          "src/lens_profile.c",
+          "-o",
+          "$OUTPUT/profile-final-query-hardened-23-sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment\n"
+      }
+    ],
+    "runs": [
+      {
+        "name": "emount",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/emount_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "72 frames sent, 60 received, 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "servo",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/servo_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "  arrival: worst error 11 counts, worst overshoot 11, mean bias +2, 1529 ms over 12 moves\n  stiff:   worst error 25 counts, 5283 ms over 12 moves\nservo: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "nobody",
+        "sanitized": false,
+        "args": [
+          "nobody"
+        ],
+        "cmd": [
+          "$OUTPUT/nobody_final",
+          "nobody"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "no-camera: 1 mark(s) after 3052 ms\nnobody: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "nobody",
+        "sanitized": false,
+        "args": [
+          "slowbody"
+        ],
+        "cmd": [
+          "$OUTPUT/nobody_final",
+          "slowbody"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "slow-camera: waited 7052 ms, 1750 VD edges, 0 mark(s)\nslowbody: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "init",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/init_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "init rescue: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "focus",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/focus_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "focus map: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "focus_dist",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/focus_dist_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "  distance round trip: worst 63 code unit(s), at code 1043\nfocus distance: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "focus_pred",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/focus_pred_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "test_focus_pred: 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_control",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/af_control_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF command/fault checks passed: 65927 bounded target cases, sentinel and sticky fault policy.\n",
+        "stderr": ""
+      },
+      {
+        "name": "io_guard",
+        "sanitized": false,
+        "args": [
+          "ready"
+        ],
+        "cmd": [
+          "$OUTPUT/io_guard_final",
+          "ready"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "bounded peripheral wait case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "io_guard",
+        "sanitized": false,
+        "args": [
+          "timeout"
+        ],
+        "cmd": [
+          "$OUTPUT/io_guard_final",
+          "timeout"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "bounded peripheral wait case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "io_guard",
+        "sanitized": false,
+        "args": [
+          "wrap"
+        ],
+        "cmd": [
+          "$OUTPUT/io_guard_final",
+          "wrap"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "bounded peripheral wait case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "io_guard",
+        "sanitized": false,
+        "args": [
+          "frozen"
+        ],
+        "cmd": [
+          "$OUTPUT/io_guard_final",
+          "frozen"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "bounded peripheral wait case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_reconciliation",
+        "sanitized": false,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/af_reconciliation_final"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF origin, reference, timing and completion counterexamples passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "11"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "11"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": false,
+        "args": [
+          "12"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_final",
+          "12"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 0 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 1 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 2 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 3 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 4 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 5 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 6 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 7 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 8 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 9 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 10 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "11"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "11"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 11 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "12"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "12"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 12 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "13"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "13"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 13 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "14"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "14"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 14 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "15"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "15"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 15 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "16"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "16"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 16 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": false,
+        "args": [
+          "17"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_final",
+          "17"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 17 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "encoder"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "encoder"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "encoder-reset"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "encoder-reset"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "adc"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "adc"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "burst-frozen"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "burst-frozen"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "uart"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "uart"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "uart-rx"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "uart-rx"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "pwm"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "pwm"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "release"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "release"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "no-wait release and shutdown inhibition passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "irq"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "irq"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "irq-masked"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "irq-masked"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_faults",
+        "sanitized": false,
+        "args": [
+          "frozen"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_faults_final",
+          "frozen"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual hardware-driver fault/rearm case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_delays",
+        "sanitized": false,
+        "args": [
+          "us"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_delays_final",
+          "us"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual delay with frozen SysTick released motor and returned\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_delays",
+        "sanitized": false,
+        "args": [
+          "ms"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_delays_final",
+          "ms"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual delay with frozen SysTick released motor and returned\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 0 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 1 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 2 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 3 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 4 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 5 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 6 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 7 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 8 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization successful register sequence passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": false,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_final",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 10 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "emount",
+        "sanitized": true,
+        "args": [],
+        "cmd": [
+          "$OUTPUT/emount_sanitized"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "72 frames sent, 60 received, 0 failure(s)\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "11"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "11"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_lifecycle",
+        "sanitized": true,
+        "args": [
+          "12"
+        ],
+        "cmd": [
+          "$OUTPUT/af_lifecycle_sanitized",
+          "12"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "actual main homing/focus/shutdown case passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 0 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 1 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 2 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 3 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 4 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 5 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 6 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 7 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 8 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 9 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 10 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "11"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "11"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 11 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "12"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "12"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 12 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "13"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "13"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 13 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "14"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "14"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 14 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "15"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "15"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 15 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "16"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "16"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 16 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "af_hardening",
+        "sanitized": true,
+        "args": [
+          "17"
+        ],
+        "cmd": [
+          "$OUTPUT/af_hardening_sanitized",
+          "17"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "AF hardening scenario 17 passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "0"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "0"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 0 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "1"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "1"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 1 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "2"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "2"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 2 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "3"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "3"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 3 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "4"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "4"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 4 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "5"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "5"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 5 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "6"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "6"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 6 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "7"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "7"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 7 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "8"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "8"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 8 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "9"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "9"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization successful register sequence passed\n",
+        "stderr": ""
+      },
+      {
+        "name": "mmio_startup",
+        "sanitized": true,
+        "args": [
+          "10"
+        ],
+        "cmd": [
+          "$OUTPUT/mmio_startup_sanitized",
+          "10"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "returncode": 0,
+        "stdout": "real initialization fault scenario 10 returned with drive inhibited\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-100-f2-8-macro.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "16e31876ccf0e29fc9fe6a10d7253c4a43d5d57c4dc8fa5f979f6488d7a4f0c2",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-135-f2-8.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "7188e1b22306c452db43ad0a985124b048b9df2c043b389933cb4722e687a243",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-28-f2.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "f114a642cd87a4eaa44cf7da4f2e075c09ebc8e28d3b097d8e4a85ef1391852f",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-35-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "a75e93cade20916dc6ff533dbf9e527d91990a948090bc272ba5e3b9bb8ca07b",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-50-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "2b4c06eccce389aa580177d81d28c3aca4c581ccc59f2a194a5e2814bfdfe61c",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-85-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "aee7dc64b25e00cc094f7d28b0914599b399fe26fb362980d8f23868c3172a44",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/zeiss-jena-biotar-55-f2.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "b1620ae588baa5d9b6f57ce8b0c2a0269d85b8083295e2cb33017e2c101ef511",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-100-f2-8-macro.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "16e31876ccf0e29fc9fe6a10d7253c4a43d5d57c4dc8fa5f979f6488d7a4f0c2",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-135-f2-8.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "7188e1b22306c452db43ad0a985124b048b9df2c043b389933cb4722e687a243",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-28-f2.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "f114a642cd87a4eaa44cf7da4f2e075c09ebc8e28d3b097d8e4a85ef1391852f",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-35-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "a75e93cade20916dc6ff533dbf9e527d91990a948090bc272ba5e3b9bb8ca07b",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-50-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "2b4c06eccce389aa580177d81d28c3aca4c581ccc59f2a194a5e2814bfdfe61c",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-85-f1-4.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "aee7dc64b25e00cc094f7d28b0914599b399fe26fb362980d8f23868c3172a44",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "metadata",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-metadata-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/zeiss-jena-biotar-55-f2.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "b1620ae588baa5d9b6f57ce8b0c2a0269d85b8083295e2cb33017e2c101ef511",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": ""
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-100-f2-8-macro-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "082cefcb378fc8f05cf3d06bfd9bbefe8394b4ae2d5bfddb9ee224af298db049",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "082cefcb378fc8f05cf3d06bfd9bbefe8394b4ae2d5bfddb9ee224af298db049",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "5494f316d871faa32845b6551c127ce44d6430d147393356d08b66c08a7ad858",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-100-f2-8-macro",
+          "lensName": "Contax Zeiss 100mm f/2.8 Macro",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-135-f2-8-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "1d384d530628bd8be41bf9ed1a2078305387926330bc77efa86235e7aa850ce5",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "1d384d530628bd8be41bf9ed1a2078305387926330bc77efa86235e7aa850ce5",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "691c08c0c4d0f5170ebe643db7004c6e02ed394cb035fd82badb4ca8a257d26e",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-135-f2-8",
+          "lensName": "Contax Zeiss 135mm f/2.8",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-28-f2-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "64623f50ad9ee73067806d6d171c51189e6a2f06ec69bc5a5ff064527ffa9415",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "64623f50ad9ee73067806d6d171c51189e6a2f06ec69bc5a5ff064527ffa9415",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "b4884821d9adb9e70da8686d5e0c8751b8b2ed606fc561420ff8d3a174241788",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-28-f2",
+          "lensName": "Contax Zeiss 28mm f/2",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-35-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "6815c56eba9d79b59034d19bc11fef4d6fca27617e7352c16657e9d798928771",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "6815c56eba9d79b59034d19bc11fef4d6fca27617e7352c16657e9d798928771",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "a0986ea77e208afbf4fc46af91c4e9352398ae76f2bff66ce30fcaf7b064e3f9",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-35-f1-4",
+          "lensName": "Contax Zeiss 35mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-50-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-50-f1-4",
+          "lensName": "Contax Zeiss 50mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-85-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "9e3262bf8e9cfd502c2be4e9c24ba423fd0a25841f89434ba1d27a081224bd0a",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "9e3262bf8e9cfd502c2be4e9c24ba423fd0a25841f89434ba1d27a081224bd0a",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "1f1943acf67463d9cc96c4684473b2dd003e3346eba74ceb888f686188c8f088",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-85-f1-4",
+          "lensName": "Contax Zeiss 85mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": false,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-ordinary",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/zeiss-jena-biotar-55-f2-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "50ee0c5da1c20af242fce208bd2fd0196d6269f7c8935d6b73fd03a9de3c48d9",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "50ee0c5da1c20af242fce208bd2fd0196d6269f7c8935d6b73fd03a9de3c48d9",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "0826dff122ce69e208de0ddc1746bd2180f025e4304e18bf8e56ff0f58f65571",
+          "bytes": 20480,
+          "profileID": "zeiss-jena-biotar-55-f2",
+          "lensName": "Zeiss Jena Biotar 58mm f/2",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-100-f2-8-macro-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "082cefcb378fc8f05cf3d06bfd9bbefe8394b4ae2d5bfddb9ee224af298db049",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "082cefcb378fc8f05cf3d06bfd9bbefe8394b4ae2d5bfddb9ee224af298db049",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "5494f316d871faa32845b6551c127ce44d6430d147393356d08b66c08a7ad858",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-100-f2-8-macro",
+          "lensName": "Contax Zeiss 100mm f/2.8 Macro",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-135-f2-8-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "1d384d530628bd8be41bf9ed1a2078305387926330bc77efa86235e7aa850ce5",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "1d384d530628bd8be41bf9ed1a2078305387926330bc77efa86235e7aa850ce5",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "691c08c0c4d0f5170ebe643db7004c6e02ed394cb035fd82badb4ca8a257d26e",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-135-f2-8",
+          "lensName": "Contax Zeiss 135mm f/2.8",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-28-f2-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "64623f50ad9ee73067806d6d171c51189e6a2f06ec69bc5a5ff064527ffa9415",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "64623f50ad9ee73067806d6d171c51189e6a2f06ec69bc5a5ff064527ffa9415",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "b4884821d9adb9e70da8686d5e0c8751b8b2ed606fc561420ff8d3a174241788",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-28-f2",
+          "lensName": "Contax Zeiss 28mm f/2",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-35-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "6815c56eba9d79b59034d19bc11fef4d6fca27617e7352c16657e9d798928771",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "6815c56eba9d79b59034d19bc11fef4d6fca27617e7352c16657e9d798928771",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "a0986ea77e208afbf4fc46af91c4e9352398ae76f2bff66ce30fcaf7b064e3f9",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-35-f1-4",
+          "lensName": "Contax Zeiss 35mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-50-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-50-f1-4",
+          "lensName": "Contax Zeiss 50mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/contax-zeiss-85-f1-4-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "9e3262bf8e9cfd502c2be4e9c24ba423fd0a25841f89434ba1d27a081224bd0a",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "9e3262bf8e9cfd502c2be4e9c24ba423fd0a25841f89434ba1d27a081224bd0a",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "1f1943acf67463d9cc96c4684473b2dd003e3346eba74ceb888f686188c8f088",
+          "bytes": 20480,
+          "profileID": "contax-zeiss-85-f1-4",
+          "lensName": "Contax Zeiss 85mm f/1.4",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      },
+      {
+        "name": "hardened-23",
+        "sanitized": true,
+        "cmd": [
+          "$OUTPUT/profile-final-query-hardened-23-sanitized",
+          "$REPOSITORY/artifacts/firmware-milestone/hosttests/zeiss-jena-biotar-55-f2-af.bin"
+        ],
+        "cwd": "$REPOSITORY/firmware/ea9",
+        "fixtureSHA256": "50ee0c5da1c20af242fce208bd2fd0196d6269f7c8935d6b73fd03a9de3c48d9",
+        "returncode": 0,
+        "stdout": "profile corruption checks and transmitted focal/aperture/name/checksums: PASS\n",
+        "stderr": "",
+        "fixtureManifest": {
+          "variant": "hardened-af",
+          "status": "offline-personalized-candidate",
+          "imageSHA256": "50ee0c5da1c20af242fce208bd2fd0196d6269f7c8935d6b73fd03a9de3c48d9",
+          "templateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+          "profileSHA256": "0826dff122ce69e208de0ddc1746bd2180f025e4304e18bf8e56ff0f58f65571",
+          "bytes": 20480,
+          "profileID": "zeiss-jena-biotar-55-f2",
+          "lensName": "Zeiss Jena Biotar 58mm f/2",
+          "proposedLoaderVersion": [
+            2,
+            3,
+            0
+          ],
+          "motorMotionEnabled": true,
+          "cameraQualified": false,
+          "usbReportsSent": 0
+        }
+      }
+    ],
+    "afTemplateSHA256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88"
+  },
+  "sourceSHA256": {
+    "firmware/ea9/src/abs_encoder.c": "57ed95c82e680c0505ad02e3f53314b88669c0c5a5008b49b286a2f00084b244",
+    "firmware/ea9/src/abs_encoder.h": "ab00553ac0d6df9aaf8bf2e96eecee4a04b219313a8507de996e9c058e83de1c",
+    "firmware/ea9/src/af_completion.c": "c244b75deb97cddfa5078ed127be26745f891324d1f9112fa9f20db286ab18bd",
+    "firmware/ea9/src/af_completion.h": "4da24284b3dec4fa2caeabefc3dd58796e8340826f23cdf3b6c7c111e1af96da",
+    "firmware/ea9/src/af_control.c": "77a9c02538933e24d2f3820e3eded350fda6849ac38b9d6ddc9214f6093b68e4",
+    "firmware/ea9/src/af_control.h": "ef7a6bab55b0847ea7c5df2e1ffabbc9bf87c02642f8e8b6eb27f1aff579f990",
+    "firmware/ea9/src/af_reference.c": "c082919c8281e1eadbf739b5d8d8244aba41c96b45d14ae0989b8eb63c110e18",
+    "firmware/ea9/src/af_reference.h": "56d9daa2715c269b80332dceac33b1b2f04a04552abdc697f1d9dd81c4c3cd8c",
+    "firmware/ea9/src/af_timing.h": "b542fffbfe85d209e2ffc36e02d20e827488973b0dc5bade4d2abea8309280a0",
+    "firmware/ea9/src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "firmware/ea9/src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "firmware/ea9/src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "firmware/ea9/src/clock.c": "0baa2ab70a1c55fb11558ce04d7ba51752697a95147a7ba5dd13c6ad2c0bd6b3",
+    "firmware/ea9/src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "firmware/ea9/src/config/recovered_config.h": "2ce55157c5777261b1565bda3a9c2cb0bb0d7c76391a64dde261cb6ea61a9c90",
+    "firmware/ea9/src/delay.c": "96166bd6a174c8c21d077c2b2f95a104a3c4501c2667c8cdc7ffb40377aeee33",
+    "firmware/ea9/src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "firmware/ea9/src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "firmware/ea9/src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "firmware/ea9/src/ea9.ld": "4cfff7d72b513e5c27316ea6b6fb7fc358b79a97aae8711d71b523aedbe27398",
+    "firmware/ea9/src/em_eic.c": "e758f8101d0bcd7bd033ac0ae2944479ba96d4c30559ace393d473910c9719e6",
+    "firmware/ea9/src/em_eic.h": "0565076b6e7e16cd90ea6701f63fcd3a0a091fe53ad77511bf83c7c6f430630f",
+    "firmware/ea9/src/em_uart.c": "de5688d7ececc206505fcc8fa23b3ec95d35615cae7b1463edae0ec684d86a78",
+    "firmware/ea9/src/em_uart.h": "fc35b5be53c20a8214eac4260fa874ef68ab2b4953eef4bbc7f018f468e3b5b3",
+    "firmware/ea9/src/emount.c": "e838afec1a3c37d555d479c6909f8d0954931992e5ba1c4ef3e0a69a026f826b",
+    "firmware/ea9/src/emount.h": "afc59f376cabcac400f5509870abc1ef7887df88a5a6c940b58f134a9a9ee699",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "firmware/ea9/src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/focus_map.h": "ea7bda264c0dd0b8cfab080349d48dec6aea10b448ead1abcf235a7a5646d7a4",
+    "firmware/ea9/src/focus_pred.c": "8043c0ae7b8c44e60c318bc95510bef72933795210aa903d681e693d84788f6d",
+    "firmware/ea9/src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "firmware/ea9/src/io_guard.c": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9",
+    "firmware/ea9/src/io_guard.h": "c783880bb371f36e1289d5a962b4755a68a9a7ecfa6e2acc75b1e6bb5f21ddab",
+    "firmware/ea9/src/lens_profile.c": "38fc124c3c88fada08357c3a04a7a7d11b94ef96bdc80454afad080dcb1bbc6c",
+    "firmware/ea9/src/lens_profile.h": "ccffa5fccf288564cccb642148706f9d2388cd8bbdae0accccf1c18a19dcba8a",
+    "firmware/ea9/src/main.c": "c5b430613e5b79f84c36226a184167a5f547d90458086fde09a033cf9abe4bc0",
+    "firmware/ea9/src/metadata_main.c": "2c589a800b1ffc1d94423a6fd417776cb4fe39ea44c2fff15397800586197302",
+    "firmware/ea9/src/motor.c": "a8a6630aaa42274b5b5f8916d10924a278a8a1e475fa8304f49c9a679c7f5066",
+    "firmware/ea9/src/motor.h": "5abd2171da992dc055675734111686055f24f330afca726424e76178f2d50f2b",
+    "firmware/ea9/src/servo.c": "11582654e518f9eb64dc01dfd4a6ecfff312f47cdc4e9f48f3e8af81e88fa5b9",
+    "firmware/ea9/src/servo.h": "e4be13336482896b2b3de63baf67459a2706f20b61ee8a8f8b58ae728ecc50d7",
+    "firmware/ea9/src/startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "firmware/ea9/src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "firmware/ea9/src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "firmware/ea9/src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "firmware/ea9/src/vdd.c": "254bcf952da4bef5c8e44a18841405dfdc7d71f59e17f07c386e611e7e5a3c9f",
+    "firmware/ea9/src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f",
+    "firmware/ea9/hosttest/mmio/registers.h": "d6bae27d2eee25607b71d3720c8d498d3de16c39a19fc1738f17544edc2f050f",
+    "firmware/ea9/hosttest/mmio/test_delays.c": "9343c698c76321a0af8650ddb3fb38c9149021dbccf74a46a2fdbe3f141685b5",
+    "firmware/ea9/hosttest/mmio/test_faults.c": "c522e5ec59774dd2aade8be34429caa84d27586d6f614ba7a42de2a8b377fe8b",
+    "firmware/ea9/hosttest/mmio/test_startup.c": "2db2bbb2b4d426bb084b39915a233289f1657085f42434cdca8d885cefd6f1c8",
+    "firmware/ea9/hosttest/sam.h": "c6bd91802928b350f1c844ca2a3e2cc2c9ac1928405c23c4a3230ef2de61fb4d",
+    "firmware/ea9/hosttest/sam_servo.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "firmware/ea9/hosttest/shim.c": "4f6b2bac4d6af3a55c3be645fae1601e43551575c13163632d583d2278e0603a",
+    "firmware/ea9/hosttest/sim_motor.c": "919f6474babddf02a4bf155e423d1fce7e3e122c7acc8920a058f0f146c78e3a",
+    "firmware/ea9/hosttest/test_af_hardening.c": "ad041e295e3767013fa9024c764797c53ba667e8c06b52e889c40325cf869315",
+    "firmware/ea9/hosttest/test_af_lifecycle.c": "78fafccee660003664d639aff894a37740d25c89715037332f15b27d71daf12a",
+    "firmware/ea9/hosttest/test_emount.c": "82cf97bb033c9eab768787067911bdf0a2fa5da51bd351a31347c10d69a99752",
+    "firmware/ea9/hosttest/test_focus.c": "8c4fe4a660bee35c6dc4a8fd6e48984829077376bd35763639fc98593d56f3e9",
+    "firmware/ea9/hosttest/test_focus_dist.c": "582ab5ab8a87bfc3f03db233b49cdfdeb96c6d0d72cd0460c907019290346610",
+    "firmware/ea9/hosttest/test_focus_pred.c": "c57ea4e651a79f567dfbf6a23347fd45e3f56262d27a454f14e3327b34fa670b",
+    "firmware/ea9/hosttest/test_init.c": "44a6fc94a93648cf4e438cfd723f3121f6648ce6f3283271babc57a18bd52677",
+    "firmware/ea9/hosttest/test_io_guard.c": "0c6b3a4263e88d150564668560d3515e33b65c3c1c7f438172aa190c9cdb40e8",
+    "firmware/ea9/hosttest/test_nobody.c": "f6f627b8272bd7a4535789544c3e0d97e6123d4712f8b49dc17532abac377618",
+    "firmware/ea9/hosttest/test_servo.c": "a7a84aed75e23e864cdcc602dc8bd03d80a388f6ff9f2f6def6f4bd4ebc79226",
+    "firmware/tests/test_af_control.c": "7e9a9d9f8ff4818b5fc4742ac0d8179df3fc954f15b563d45f9060c30745ff16",
+    "firmware/tests/test_af_reconciliation.c": "d953142b0e2b237aa5a847018839dc335ea2dc704c6d2dc99ce6bc8f17ab79c6",
+    "firmware/tests/test_profile.c": "00ba2e27f7435a7f1901beac5ad2a7830f87ecd4200eec37fd4ac4ca1cc95c9b"
+  }
+}

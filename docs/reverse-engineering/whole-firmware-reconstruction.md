@@ -109,7 +109,7 @@ The corrected boot analysis ELF is `6ce9bb156694b18724515d34438927e1fe3868dfea6b
 | Row merge/write | `0x78c8` | `ev_a0d11894aab950d8935f7ba6890a09db95590950d4aad18ced1c8c5ea39bffe6` |
 | Boot update callback | `0x257c` | `ev_c24707b0cec8c8a3b9720bfbddd65829f56193ffcfdd6a3b3fe612c9cdea46c2` |
 
-Raw dossiers, pseudocode, source hashes, fixture results, full-flash classification checks and review findings remain under `references/private/rea-analysis/phase3/`. Public tables disclose addresses and interpretations, not per-unit calibration or binary payloads. Local analysis tools and host-model sources remain under the intentionally ignored `tools/rea-analysis/` directory.
+Raw dossiers, pseudocode, source hashes, fixture results, full-flash classification checks and review findings remain under `references/private/rea-analysis/phase3/`. Public tables disclose addresses and interpretations, not per-unit calibration or binary payloads. The application C/header and finite validators are now tracked under [`research/stock-1.8/`](../../research/stock-1.8/README.md); [the Oct 11 public reproduction](../evidence/stock-model-reproduction-2026-10-11.md) reran 24,991 comparisons across 38 routine entries and ten input/output guard tests. Earlier ignored sources and the separate boot/NVM/USB model tools remain preserved under `tools/rea-analysis/`; those other suites have not been promoted by this change. A public application model does not close the remaining whole-firmware boundaries.
 
 ## Required work before claiming an entire reconstruction
 

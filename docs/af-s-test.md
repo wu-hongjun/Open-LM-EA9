@@ -3,12 +3,14 @@
 Current installation: **AF 2.2.0 is installed and byte-verified after the
 owner's physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
 the exact candidate; protected flash, upper flash and factory checks passed.
-See the [completed upload record](evidence/af-22-upload-2026-10-11.md).
+See the [completed upload record](evidence/af-22-upload-2026-10-11.md) and
+[the later owner-reported 2.2 startup/idle/motor-shutdown observations](evidence/af-22-camera-lifecycle-2026-10-11.md).
+Loaded AF-S remains untested while the owner awaits the C/Y-to-M converter.
 It remains **experimental and not camera-qualified**. The camera procedure below
 is the next step; loaded AF-S focus lock/sharpness await the C/Y-to-M converter.
 
 The owner reported motor movement and proper A7C II shutdown with the earlier
-byte-verified 2.1 image. These observations do not qualify 2.2 startup, shutdown,
+byte-verified 2.1 image. Those earlier observations do not qualify 2.2 startup, shutdown,
 motor behavior or focus. The historical installation remains in
 [the 2.1 record](evidence/af-50-upload-2026-10-10.md), and the
 [software evidence](evidence/af-reconciliation-2026-10-10.md) records its later
@@ -46,7 +48,10 @@ The original 1.8.0 restore source is also saved in the
 [committed recovery bundle](../firmware/recovery/stock-1.8.0/README.md), with an
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
-The current app/CLI AF installation action selects **2.2.0**. This adapter
+App 0.6 / the current CLI AF installation action selects the offline **2.3.0**
+hardening candidate. The installed 2.2 image and its byte-verification record
+remain unchanged. See [the 2.3 source/build/test record](evidence/software-polish-2026-10-11.md)
+and [the prepared 50mm candidate](../firmware/candidates/2.3.0/README.md). This adapter
 has completed the upload/reconnect/byte-verification sequence; the steps below
 remain the procedure for future changes. The primary Device dropdown changes
 lens settings while preserving the verified installed variant.
@@ -56,7 +61,7 @@ lens settings while preserving the verified installed variant.
    the USB update cap; a camera connected by USB is a different device. Unplug and
    reconnect the cap before the first operation. Check `dist/ea9ctl inventory`.
 2. In the app choose the 50mm f/1.4 profile in the Device dropdown. Open
-   **USB tools → Experimental autofocus → Install Experimental AF 2.2.0**. The confirmation names the enabled motion and unqualified camera state.
+   **USB tools → Experimental autofocus → Install Experimental AF 2.3.0**. The confirmation names the enabled motion and unqualified camera state.
    The existing unit-specific stock-upload qualification is required. Installation
    saves and synchronizes a fresh two-pass recovery backup and journal before START.
 3. After the upload, **physically unplug and reconnect the cap**. The app detects the new connection automatically; confirm the prerequisite and
@@ -146,7 +151,7 @@ dist/ea9ctl restore-stock /absolute/path/to/original.ea9backup --idle
 dist/ea9ctl verify --idle
 ```
 
-Recovery admits a readable 2.1.0, 2.2.0 or unknown current version only with the qualified
+Recovery admits a readable 2.1.0, 2.2.0, 2.3.0 or unknown current version only with the qualified
 loader and matching unit. An AF backup cannot substitute for the original stock
 source. Restoration writes the saved application slot `[0x5000,0x20000)` and stock
 metadata; it does not restore or write bootloader code. Stock upload/readback was

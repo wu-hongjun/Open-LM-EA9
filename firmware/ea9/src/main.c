@@ -698,6 +698,7 @@ static uint8_t  g_abort_by_stop;
 /* The last position reported, so the velocity history is a difference rather
  * than a level. */
 static int32_t             g_last_reported;
+static uint32_t            g_last_velocity_vd;
 
 struct focus_rec {
 	int32_t  delta;
@@ -740,8 +741,12 @@ static void focus_report_at(int32_t counts)
 
 	/* The velocity history the body follows a move with: one frame-to-frame
 	 * difference per frame, newest last. */
-	em_push_velocity((counts - g_last_reported) / FOCUS_COUNTS_PER_UNIT);
-	g_last_reported = counts;
+	uint32_t frame = em_vd_edges;
+	if (frame != g_last_velocity_vd) {
+		em_push_velocity((counts - g_last_reported) / FOCUS_COUNTS_PER_UNIT);
+		g_last_reported = counts;
+		g_last_velocity_vd = frame;
+	}
 
 	/* And the same state in message 0x05, in units the body can use without
 	 * knowing this lens: the subject distance, and the in-motion flag. */
@@ -759,8 +764,11 @@ static void focus_answer_queries(void)
     if (!g_homed || ea9_io_faults()) return;
 	uint8_t  tag;
 	uint16_t operand;
+	uint8_t budget;
 
-	while (em_take_query(&tag, &operand)) {
+	/* An ISR may refill the queue after every pop.  Answer at most one
+	 * queue's capacity per foreground pass so focus/Stop dispatch runs. */
+	for (budget = 0; budget < EM_QUERY_Q && em_take_query(&tag, &operand); budget++) {
 		if (tag == EM_REC_Q_POS2D) {
 			em_post_query_answer(tag,
 			        focus_distance_code(focus_em06_to_counts(operand),
@@ -800,7 +808,17 @@ static uint8_t focus_cmd_target(const struct em_focus_cmd *c, int32_t *out)
  * Consumed here, once.  Leaving it set would abort the next move as well. */
 static uint8_t focus_abort(void)
 {
-	return g_abort_pending || g_af_state.shutdown;
+	if (g_abort_pending || g_af_state.shutdown) return 1;
+	/* Retargeting is bounded and is suspended during reversal braking.
+	 * A command that cannot be consumed by that hook still interrupts this
+	 * owner; in particular a Stop must not wait for a multi-second timeout. */
+	struct em_focus_cmd c;
+	if (!em_take_focus_cmd(&c)) return 0;
+	g_abort_pending = 1;
+	g_abort_by_stop = c.op == EM_OP_STOP;
+	if (g_abort_by_stop) g_next_pending = 0;
+	else { g_next = c; g_next_pending = 1; }
+	return 1;
 }
 
 /* The servo's hook: has the body asked for somewhere else while we were on our
@@ -830,20 +848,39 @@ static uint8_t focus_retarget(int32_t *target)
 	 * shape of motion that has to start from rest.  A Stop is reported by
 	 * the leg it stopped; a Scan or a Drive is handed forward through
 	 * g_next so the main loop can run it. */
-	if (!focus_cmd_target(&c, &want)) {
+	if (g_last_op == EM_OP_SCAN || g_last_op == EM_OP_DRIVE
+	    || !focus_cmd_target(&c, &want)) {
 		g_abort_pending = 1;
 		g_abort_by_stop = (c.op == EM_OP_STOP);
-		if (!g_abort_by_stop) {
+		if (g_abort_by_stop) g_next_pending = 0;
+		else {
 			g_next         = c;
 			g_next_pending = 1;
 		}
 		return 0;
 	}
 
+	g_last_op = c.op;
 	g_last_target = c.target;
 	focus_pred_retarget(&g_pred, want);
 	*target = want;
 	return 1;
+}
+
+/* One production dispatch boundary, also exercised by offline regressions.
+ * Stop is acknowledged after a motion fault; it never clears that fault. */
+static void focus_service(void)
+{
+	struct em_focus_cmd cmd;
+	/* A newer received command supersedes a command handed forward by the
+	 * previous owner. In particular, do not restart stale work before Stop. */
+	if (em_take_focus_cmd(&cmd)) {
+		g_next_pending = 0;
+		focus_exec(&cmd);
+	} else if (g_next_pending) {
+		g_next_pending = 0;
+		focus_exec(&g_next);
+	}
 }
 
 /* Run one leg of motion and report it.  Everything that moves goes through
@@ -1192,6 +1229,9 @@ int main(void)
 	board_init_pins();
 
 	clock_init();
+	/* A failed core-clock transition has no trustworthy SysTick timing.
+	 * Leave GPIO-released coils inhibited; do not start protocol or homing. */
+	if (ea9_io_faults()) { motor_inhibit(); for (;;) { __WFI(); } }
 	delay_init();
 
 	{
@@ -1368,23 +1408,16 @@ int main(void)
 		if (step == 1) {
 			/* Report first: the body is told where we are on every
 			 * frame, whether or not it ever commands a move. */
-			struct em_focus_cmd cmd;
-
 			focus_report();
 			focus_answer_queries();
 
 			/* An instruction the retarget hook handed forward
 			 * because it could not be applied to a running leg. */
-			if (g_next_pending) {
-				g_next_pending = 0;
-				if (!g_af_state.shutdown && !ea9_af_faulted(&g_af_state)) {
-					focus_exec(&g_next);
-				}
-			}
-
-			if (em_take_focus_cmd(&cmd) && !g_af_state.shutdown && !ea9_af_faulted(&g_af_state)) {
-				focus_exec(&cmd);
-			}
+			focus_service();
+		} else if (ea9_af_faulted(&g_af_state)) {
+			/* Initialization faults can inhibit homing before step 1.
+			 * Stop remains an idle acknowledgement in that state too. */
+			focus_service();
 		}
 	}
 }

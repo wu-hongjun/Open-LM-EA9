@@ -39,6 +39,9 @@ void vdd_track_sample(void) {
     if (samples == 4 && scenario == 9) {
         uint8_t stop[23] = {0xF0, 23, 0, 1, 0, 4};
         stop[19] = EM_REC_STOP; stop[22] = 0x55;
+        uint16_t sum = 0;
+        for (unsigned i = 1; i <= sizeof(stop) - 4; ++i) sum += stop[i];
+        stop[20] = (uint8_t)sum; stop[21] = (uint8_t)(sum >> 8);
         host_body_frame(stop, sizeof stop);
     }
     if (samples == 4 && scenario == 10) host_millis += 100;

@@ -34,7 +34,16 @@ struct host_pm { struct host_reg8 RCAUSE; };
 extern struct host_pm host_pm;
 #define PM (&host_pm)
 #define __WFI() ((void)0)
+#ifdef EA9_HOST_IRQ_TEST
+uint32_t host_get_primask(void);
+void host_disable_irq(void);
+void host_set_primask(uint32_t value);
+#define __get_PRIMASK host_get_primask
+#define __disable_irq host_disable_irq
+#define __set_PRIMASK host_set_primask
+#else
 static inline uint32_t __get_PRIMASK(void) { return 0; }
 static inline void __disable_irq(void) {}
 static inline void __set_PRIMASK(uint32_t value) { (void)value; }
+#endif
 #endif

@@ -56,12 +56,16 @@ conversion helpers avoid relying on host signed overflow or implementation-defin
 narrowing. No original per-unit settings are embedded. Zero initialization is a
 synthetic harness convenience, not a claim about stock startup.
 
-The implementation and test harness are local analysis artifacts under
-`tools/rea-analysis/reconstruction/` (intentionally ignored by repository policy):
-`stock_model.c`, `stock_model.h`, `validate.py`, `validate_protocol.py`, `validate_application.py`, and `README.md`. The model exposes
-an event sink for stop and final motor-driver calls; it contains no MMIO or
-hardware access. Build products, source hashes and detailed results stay under
-`references/private/rea-analysis/phase3/host-model/`.
+The authored C/header and finite validators are now tracked in
+[`research/stock-1.8/`](../../research/stock-1.8/README.md), with a pinned public
+application oracle, portable host build and a runner that rejects modified inputs
+and existing output directories. The C/header are byte-identical to the original
+local study; promoted harness changes concern input/output and build plumbing.
+The [Oct 11 reproduction record](../evidence/stock-model-reproduction-2026-10-11.md)
+retains source/result hashes and 24,991 passing comparisons, plus ten guard tests.
+The model exposes an event sink for stop and final motor-driver calls; dummy
+register memory belongs to the instruction oracle and has no hardware behavior.
+Earlier ignored sources and private raw evidence remain preserved locally.
 
 ## Differential evidence
 
@@ -112,7 +116,10 @@ smoke run completed 380,000 routine calls without diagnostics; that run checks
 host language behavior, not firmware equivalence. Validation is reproducible via:
 
 ```sh
-tools/rea-analysis/venv/bin/python tools/rea-analysis/reconstruction/validate_application.py
+python3 -m venv /tmp/ea9-stock-model-venv
+/tmp/ea9-stock-model-venv/bin/python -m pip install -r research/stock-1.8/requirements.txt
+/tmp/ea9-stock-model-venv/bin/python tools/test-stock-model.py
+/tmp/ea9-stock-model-venv/bin/python research/stock-1.8/run.py
 ```
 
 The oracle executes the original stop register instructions against two dummy

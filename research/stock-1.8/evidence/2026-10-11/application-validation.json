@@ -1,0 +1,106 @@
+{
+  "input_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "prior_cases_steps": 14782,
+  "app_cases_steps": 10209,
+  "combined_cases_steps": 24991,
+  "results": [
+    {
+      "entry": "0x5120",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5188",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x51ac",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5238",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5260",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5274",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5280",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x52e8",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x53a4",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x54b8",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x54d8",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5dd4",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5d68",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5da8",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8ae4",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5e00 bounded sensor/PA3-low/wake scenarios",
+      "cases": 1200,
+      "result": "pass"
+    },
+    {
+      "sequence": "two RX edges, frame sync, status05, delayed status06",
+      "steps": 9,
+      "result": "pass"
+    }
+  ],
+  "external_contract": [
+    "Timer/DMA/NVM/delay/UART helpers are recorded stubs; NVM helpers return -7, ignored by caller",
+    "Critical-section helpers stubbed; no concurrency claim",
+    "Sensor fixed within each invocation; PA3 low at both shutdown samples",
+    "WFI explicitly skipped after recording event, representing a supplied wake",
+    "Original register pin reads use dummy RAM, no hardware",
+    "Settings restore uses independent synthetic44byte records"
+  ],
+  "sources_sha256": {
+    "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "validate_application.py": "1e18f75d069e156e451dfeef7609c60a9211fdebe8b0c13bb1499637b3c7b495"
+  }
+}

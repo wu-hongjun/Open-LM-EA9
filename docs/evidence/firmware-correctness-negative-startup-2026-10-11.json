@@ -1,0 +1,42 @@
+[
+  {
+    "scenario": 0,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 1,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 2,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 3,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 5,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 7,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 8,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  },
+  {
+    "scenario": 10,
+    "budgetExceeded": true,
+    "budgetSeconds": 0.3
+  }
+]

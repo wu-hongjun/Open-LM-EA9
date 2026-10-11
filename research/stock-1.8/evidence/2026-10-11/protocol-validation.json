@@ -1,0 +1,75 @@
+{
+  "input_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "core_cases_steps": 8882,
+  "protocol_metadata_cases": 5900,
+  "combined_cases_steps": 14782,
+  "results": [
+    {
+      "entry": "0x66b8",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x567c",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x56cc",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8a8c",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5d2c",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x5510",
+      "cases": 600,
+      "result": "pass"
+    },
+    {
+      "entry": "0x58a4",
+      "cases": 1024,
+      "result": "pass"
+    },
+    {
+      "entry": "0x56cc full high-byte menu selectors",
+      "cases": 1024,
+      "result": "pass"
+    },
+    {
+      "entry": "0x51d4",
+      "cases": 252,
+      "result": "pass"
+    }
+  ],
+  "metadata_mutation": {
+    "immediate_address": "0x8aa6",
+    "host_only_change": "0x18 to 0x10",
+    "unchanged_model": "mismatch detected",
+    "dependency_preserving_model": "matches patched-in-memory original instructions",
+    "changed_RAM_offsets": [
+      "0x18",
+      "0x20",
+      "0x23",
+      "0x1da",
+      "0x1e1",
+      "0x1e2"
+    ]
+  },
+  "sources_sha256": {
+    "stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "validate.py": "92864a5002c25dfa44bece7c113a8f3d84421f49987909aa2b149e4320a8328a",
+    "validate_protocol.py": "c704751a3f35d1be5f41bf7f069e59e2aaaf33e20bd587bafa59a3658014a700"
+  },
+  "bounds": "Frame lengths4..255, valid SRAM pointers; host bounds failures are not stock validation",
+  "hardware": "No hardware; checksum pin/send helpers stubbed"
+}

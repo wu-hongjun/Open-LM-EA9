@@ -1,0 +1,155 @@
+Building for debugging...
+[Using on-disk description]
+[3 / 30] LensCore
+[5 / 31] LensCore
+[9 / 31] DeviceKit
+[11 / 32] DeviceKit
+[15 / 24] OpenLMEA9-product
+[21 / 30] OpenLMEA9-product
+[25 / 35] OpenLMEA9
+[29 / 37] OpenLMEA9
+[29 / 37] OpenLMEA9-product
+[32 / 37] AppWorkflowTests-product
+[34 / 39] AppWorkflowTests-product
+[38 / 41] AppWorkflowTests-product
+[40 / 41] AppWorkflowTests-product
+Build complete! (3.70 sec)
+Test Suite 'All tests' started at 2026-10-11 10:08:35.912.
+Test Suite 'All tests' passed at 2026-10-11 10:08:35.913.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'All tests' started at 2026-10-11 10:08:36.002.
+Test Suite 'All tests' passed at 2026-10-11 10:08:36.003.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'All tests' started at 2026-10-11 10:08:36.135.
+Test Suite 'All tests' passed at 2026-10-11 10:08:36.137.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test savingAndImportingPreserveRevisionAndOriginalData() started.
+◇ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() started.
+◇ Test requestedInventoryKeepsUnknownsAndDesignations() started.
+◇ Test corruptLibraryIsNeverReseededOverTheOriginal() started.
+◇ Test preparedLensIsLocalAndResolvesOnlyWithinCurrentLibrary() started.
+◇ Test metadataValidationRejectsImpossibleValues() started.
+◇ Test preparedLensRejectsUnsupportedAndOversizedHistory() started.
+✔ Test corruptLibraryIsNeverReseededOverTheOriginal() passed after 0.003 seconds.
+✔ Test requestedInventoryKeepsUnknownsAndDesignations() passed after 0.005 seconds.
+✔ Test metadataValidationRejectsImpossibleValues() passed after 0.005 seconds.
+✔ Test preparedLensRejectsUnsupportedAndOversizedHistory() passed after 0.005 seconds.
+✔ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() passed after 0.005 seconds.
+✔ Test preparedLensIsLocalAndResolvesOnlyWithinCurrentLibrary() passed after 0.006 seconds.
+✔ Test savingAndImportingPreserveRevisionAndOriginalData() passed after 0.008 seconds.
+✔ Test run with 7 tests in 0 suites passed after 0.008 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test afVersionCannotMasqueradeAsMetadataAndHistoryRetainsVersion() started.
+◇ Test recoveryCanReadUnknownVersionOnlyWithPinnedLoader() started.
+◇ Test afBackupIsReadableButCannotBeUsedAsOriginalStockSource() started.
+◇ Test safetyRecordCorruptionFailsClosedAndDurableReplacementIsPrivate() started.
+◇ Test sessionRejectsReadsAndRepeatedStartOnceArmed() started.
+◇ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() started.
+◇ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() started.
+◇ Test profileRejectsCorruptionUnsupportedStringsZoomAndPrecision() started.
+◇ Test stockSizedUploadEndsAtLastFlashByteWithoutExtraPadding() started.
+◇ Test verifiedBackupPublishesCompleteHashedPrivateFiles() started.
+◇ Test commandWhitelistAndGoldenBytes() started.
+◇ Test inspectionReplacesStaleCustomHistoryWithStockOrUnsupportedReadback() started.
+◇ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() started.
+◇ Test stockRecoveryPreservesCorruptJournalAndOptionalHistory() started.
+◇ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) started.
+◇ Test alternateLibraryDoesNotRelocateHardwareSafety() started.
+◇ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test blockedConnectionStopsAlternateClientBeforeNativeAccess() started.
+◇ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test qualificationFailsBeforeRegisterOrFurtherReads() started.
+◇ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() started.
+◇ Test uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test mismatchingSecondPassNeverPublishes() started.
+◇ Test sharedLockRejectsSecondClientAndReloadsArmedStateAfterRelease() started.
+◇ Test firstStockProfileChangeRequiresThePinnedStockImage() started.
+◇ Test stockUploadQualificationIsBoundToUnitAndLoader() started.
+◇ Test profilesEncodeKnownAperturesFocalLengthsAndRoundTrip() started.
+◇ Test reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant:) started.
+◇ Test timeoutCancellationAndShortReportStopWithoutRetry() started.
+◇ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() started.
+◇ Test unqualifiedApplyAndSameConnectionVerificationStopBeforeNativeAccess() started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant:) started.
+✔ Test sessionRejectsReadsAndRepeatedStartOnceArmed() passed after 0.128 seconds.
+✔ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() passed after 0.128 seconds.
+✔ Test commandWhitelistAndGoldenBytes() passed after 0.128 seconds.
+✔ Test stockSizedUploadEndsAtLastFlashByteWithoutExtraPadding() passed after 0.128 seconds.
+✔ Test alternateLibraryDoesNotRelocateHardwareSafety() passed after 0.128 seconds.
+✔ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() passed after 0.128 seconds.
+✔ Test profileRejectsCorruptionUnsupportedStringsZoomAndPrecision() passed after 0.128 seconds.
+✔ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) with 4 test cases passed after 0.128 seconds.
+✔ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() passed after 0.128 seconds.
+✔ Test recoveryCanReadUnknownVersionOnlyWithPinnedLoader() passed after 0.128 seconds.
+✔ Test afVersionCannotMasqueradeAsMetadataAndHistoryRetainsVersion() passed after 0.128 seconds.
+✔ Test stockRecoveryPreservesCorruptJournalAndOptionalHistory() passed after 0.128 seconds.
+✔ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() passed after 0.128 seconds.
+✔ Test uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) with 4 test cases passed after 0.128 seconds.
+✔ Test safetyRecordCorruptionFailsClosedAndDurableReplacementIsPrivate() passed after 0.128 seconds.
+✔ Test mismatchingSecondPassNeverPublishes() passed after 0.128 seconds.
+✔ Test verifiedBackupPublishesCompleteHashedPrivateFiles() passed after 0.128 seconds.
+✔ Test stockUploadQualificationIsBoundToUnitAndLoader() passed after 0.128 seconds.
+✔ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) with 4 test cases passed after 0.128 seconds.
+✔ Test profilesEncodeKnownAperturesFocalLengthsAndRoundTrip() passed after 0.128 seconds.
+✔ Test reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant:) with 2 test cases passed after 0.128 seconds.
+✔ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() passed after 0.128 seconds.
+✔ Test blockedConnectionStopsAlternateClientBeforeNativeAccess() passed after 0.130 seconds.
+✔ Test firstStockProfileChangeRequiresThePinnedStockImage() passed after 0.130 seconds.
+✔ Test sharedLockRejectsSecondClientAndReloadsArmedStateAfterRelease() passed after 0.145 seconds.
+✔ Test timeoutCancellationAndShortReportStopWithoutRetry() passed after 0.147 seconds.
+✔ Test qualificationFailsBeforeRegisterOrFurtherReads() passed after 0.153 seconds.
+✔ Test afBackupIsReadableButCannotBeUsedAsOriginalStockSource() passed after 0.154 seconds.
+✔ Test profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant:) with 4 test cases passed after 0.154 seconds.
+✔ Test unqualifiedApplyAndSameConnectionVerificationStopBeforeNativeAccess() passed after 0.161 seconds.
+✔ Test inspectionReplacesStaleCustomHistoryWithStockOrUnsupportedReadback() passed after 0.164 seconds.
+✔ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) with 4 test cases passed after 0.172 seconds.
+✔ Test run with 32 tests in 0 suites passed after 0.172 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test hotplugRefreshResetsUSBConsentAndNeverRunsWhileBusy() started.
+◇ Test newerStockObservationHidesOldAFProfile() started.
+◇ Test sameSecondVersionHistoryCannotLeaveAStaleLensVisible() started.
+◇ Test refreshSeesLocalVerificationAndKeepsTheInstalledAFVariant() started.
+◇ Test unfinishedOtherUnitUpdateExplainsTheDisabledVerification() started.
+◇ Test workflowExplainsZoomEditsAndReconnect() started.
+◇ Test dropdownPreparesLocallyWithoutApplyingOrDiscardingEdits() started.
+◇ Test monitoringRefreshesAndCancelsWithoutUSBOperations() started.
+◇ Test missingLensHistoryCannotSilentlyDowngradeKnownAF() started.
+✔ Test dropdownPreparesLocallyWithoutApplyingOrDiscardingEdits() passed after 0.009 seconds.
+✔ Test unfinishedOtherUnitUpdateExplainsTheDisabledVerification() passed after 0.061 seconds.
+✔ Test newerStockObservationHidesOldAFProfile() passed after 0.069 seconds.
+✔ Test workflowExplainsZoomEditsAndReconnect() passed after 0.070 seconds.
+✔ Test missingLensHistoryCannotSilentlyDowngradeKnownAF() passed after 0.070 seconds.
+✔ Test sameSecondVersionHistoryCannotLeaveAStaleLensVisible() passed after 0.071 seconds.
+✔ Test refreshSeesLocalVerificationAndKeepsTheInstalledAFVariant() passed after 0.081 seconds.
+✔ Test hotplugRefreshResetsUSBConsentAndNeverRunsWhileBusy() passed after 0.081 seconds.
+✔ Test monitoringRefreshesAndCancelsWithoutUSBOperations() passed after 4.135 seconds.
+✔ Test run with 9 tests in 0 suites passed after 4.135 seconds.

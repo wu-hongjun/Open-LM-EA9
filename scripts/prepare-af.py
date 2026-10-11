@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline only: combine the AF template with a validated Mac-prepared profile.
 
-This uses the current reconciled 2.2 template and performs no USB operations.
+This uses the hardened 2.3 template (or the frozen 2.2 release) and performs no USB operations.
 The native app independently admits only its bundled digest-pinned templates.
 """
 import argparse
@@ -15,9 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("profile_image", type=Path, help="Metadata image made by ea9ctl prepare")
 parser.add_argument("output", type=Path, help="New AF image; never overwritten")
+parser.add_argument("--variant", choices=("hardened-af", "reconciled-af"), default="hardened-af")
 args = parser.parse_args()
-af = ROOT / "firmware/ea9/build/reconciled/ea9-af-reconciled-template.bin"
-manifest = json.loads(af.with_suffix(".manifest.json").read_text())
+if args.variant == "hardened-af":
+    af = ROOT / "firmware/ea9/build/hardened/ea9-af-hardened-template.bin"
+    manifest_path = af.with_suffix(".manifest.json")
+else:
+    af = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-reconciled-template.bin"
+    manifest_path = ROOT / "docs/evidence/af-reconcile-build-manifest-2026-10-10.json"
+manifest = json.loads(manifest_path.read_text())
 template = af.read_bytes()
 metadata = (ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-profile-template.bin").read_bytes()
 source = args.profile_image.read_bytes()
@@ -40,7 +46,7 @@ args.output.parent.mkdir(parents=True, exist_ok=True)
 with args.output.open("xb") as stream:
     stream.write(image)
 evidence = {
-    "variant": "reconciled-af", "status": "offline-personalized-candidate",
+    "variant": args.variant, "status": "offline-personalized-candidate",
     "imageSHA256": hashlib.sha256(image).hexdigest(), "templateSHA256": manifest["templateSHA256"],
     "profileSHA256": hashlib.sha256(profile).hexdigest(), "bytes": len(image),
     "profileID": profile[24:104].split(b"\0", 1)[0].decode("ascii"),

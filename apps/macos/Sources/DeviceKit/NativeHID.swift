@@ -187,11 +187,13 @@ public final class DeviceService: @unchecked Sendable {
     public func appliedLens() throws -> AppliedLens? { try UpdateStore(directory: stateDirectory).loadApplied() }
 
     public func apply(profile: LensProfile, variant: FirmwareVariant = .metadataOnly, device: DeviceIdentity, idleAcknowledged: Bool,
+                      preserveInstalledFirmware: Bool = false,
                       cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
         let image = try ApplicationImage.personalized(profile, variant: variant)
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
-                                cancellation: cancellation, recovering: false, progress: progress)
+                                cancellation: cancellation, recovering: false,
+                                preserving: preserveInstalledFirmware ? variant : nil, progress: progress)
     }
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
@@ -210,6 +212,7 @@ public final class DeviceService: @unchecked Sendable {
     }
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
+                        preserving variant: FirmwareVariant? = nil,
                         progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         let store = UpdateStore(directory: stateDirectory)
         if !recovering, let pending = try store.load(), pending.needsVerification {
@@ -223,6 +226,15 @@ public final class DeviceService: @unchecked Sendable {
             _ = try BackupEngine(allowRecoveryVersion: recovering).run(transport: transport, identity: device, destination: backupURL, cancellation: cancellation, progress: progress)
             let backup = try VerifiedBackup(url: backupURL, device: device, allowRecoveryVersion: recovering)
             try backup.synchronizeRecoveryEvidence()
+            if let variant {
+                do { try ApplicationImage.requirePreservedFirmware(variant, in: backup) }
+                catch {
+                    // Refresh local evidence from the read already completed; retain
+                    // unsupported-image backups and never send START on this path.
+                    _ = try? LensInspection.publish(backup, to: store)
+                    throw error
+                }
+            }
             // The loader copies four bytes of this READ address beyond START's payload.
             // Set the address scratch to zero and verify the response before arming it.
             guard try transport.exchange(.flashBlock(0)) == backup.flash.prefix(64) else { throw DeviceError.failure("Final idle preflight read did not match.") }
@@ -276,13 +288,8 @@ public final class DeviceService: @unchecked Sendable {
             let folder = store.directory.appendingPathComponent("USBBackups", isDirectory: true)
             try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
             let url = folder.appendingPathComponent("inspect-\(UUID().uuidString).ea9backup")
-            let result = try BackupEngine().run(transport: transport, identity: device, destination: url, cancellation: cancellation, progress: progress)
-            let flash = try VerifiedBackup(url: url, device: device).flash
-            guard let variant = try ApplicationImage.installedVariant(flash),
-                  let setting = try ApplicationImage.installedSetting(flash), result.manifest.reportedFirmwareVersion == variant.versionString else { return nil }
-            let applied = AppliedLens(device: device, setting: setting, firmwareVersion: variant.versionString,
-                                      imageSHA256: digest(Data(flash[ApplicationImage.base..<variant.applicationEnd])), verifiedAt: Date())
-            try store.saveApplied(applied); return applied
+            _ = try BackupEngine().run(transport: transport, identity: device, destination: url, cancellation: cancellation, progress: progress)
+            return try LensInspection.publish(VerifiedBackup(url: url, device: device), to: store)
         }
     }
 

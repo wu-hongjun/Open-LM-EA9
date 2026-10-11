@@ -9,27 +9,33 @@ motion disabled**. It uses C for the inspected SAMD21 register and E-mount paths
 it is not the production autofocus firmware or a decision against a later Rust
 implementation. The macOS app and USB loader transport use native Swift.
 
-The opt-in **AF 2.2 candidate** reconciles REA findings with the upstream
-controller and is installed for Contax Zeiss 50mm f/1.4:
+The installed **AF 2.2 candidate** reconciles REA findings with the upstream
+controller for Contax Zeiss 50mm f/1.4. The new **AF 2.3 candidate** adds received-
+frame admission, coherent ISR snapshots, faulted Stop handling, operation
+ownership, frame-paced telemetry and bounded initialization. It remains offline
+and requires USB verification and camera qualification before use:
 
 ```sh
-python3 scripts/build-firmware.py --variant reconciled-af
+python3 scripts/build-firmware.py --variant hardened-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-Build products are separate under `ea9/build/reconciled`; the metadata 2.0 and
-legacy AF 2.1 templates/pins remain unchanged. The native app admits all three
-versions for backed-up upload, reconnect verification and stock restoration.
-`--variant upstream-af` now verifies the frozen 2.1 template rather than compiling
-current source under that version. A source snapshot/manifest was preserved
-locally before the new changes.
+Current source builds separately under `ea9/build/hardened`, as camera BCD 0x23
+and loader 2.3.0. Templates/pins for 2.0, 2.1 and 2.2 remain frozen; the corresponding
+build-script variants verify their committed size/digest rather than compiling
+changed source under an older version. All four versions remain admitted for
+backed-up upload, reconnect verification and stock restoration. The reserved
+profile row for 2.2/2.3 is `0x9f00`; application writes stop at `0xa000`.
+See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
+[offline build/test record](../docs/evidence/software-polish-2026-10-11.md).
 
 The 50mm 2.2 image is installed and **USB byte-verified after physical reconnect**.
 See the [installation record](../docs/evidence/af-22-upload-2026-10-11.md).
 The owner reported motor movement and proper A7C II shutdown with the earlier
-byte-verified 2.1 image. No 2.2 camera behavior is qualified; actual focus
-lock/sharpness await the C/Y-to-M converter.
+byte-verified 2.1 image. For 2.2 the owner also reported normal startup, quiet idle and normal motor
+shutdown. Loaded AF-S focus lock/sharpness still await the C/Y-to-M converter.
+These observations do not qualify homing, measured timing or all focus commands.
 See the [reference/timing/completion design](../docs/af-reconciliation.md),
 [session evidence](../docs/evidence/af-reconciliation-2026-10-10.md),
 [AF-S runbook](../docs/af-s-test.md) and
@@ -51,13 +57,13 @@ python3 scripts/test-firmware.py
 ```
 
 Dependency versions, official source URLs and digests are pinned in
-`dependencies.json`. The local cache is ignored. The installed Mac app includes
-the generated firmware template and a digest pin; it personalizes only the
+`dependencies.json`. The local cache is ignored. The packaged Mac app includes
+the pinned released templates and the new candidate and a digest pin; it personalizes only the
 reserved profile row. A template with its zeroed profile is intentionally invalid.
 
 Changes from the reference:
 
-- A dedicated `metadata_main.c` entry point; the motion implementation is not
+- The frozen metadata release uses a dedicated `metadata_main.c` entry point; the motion implementation is not
   linked. The inherited motion files remain available for a subsequent audited
   autofocus milestone. No flash logging is linked.
 - `lens_profile.c` validates the versioned CRC-protected profile and applies

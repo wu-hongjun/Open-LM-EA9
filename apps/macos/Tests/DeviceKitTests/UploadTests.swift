@@ -123,19 +123,20 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
     #expect(unopened.reports == 0)
 }
 
-@Test func reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile() throws {
+@Test(arguments: [FirmwareVariant.autofocusReconciled, .autofocusHardened])
+func reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant: FirmwareVariant) throws {
     let loader = Loader()
     // Synthetic retained header/copy bytes, deliberately non-FF. Never embed unit data.
     let retained = Data((0..<0x5080).map { UInt8(truncatingIfNeeded: $0 * 17 + 3) })
     loader.flash.replaceSubrange(0xa000..<0xf080, with: retained)
-    let image = try ApplicationImage.personalized(profile("contax-zeiss-85-f1-4"), variant: .autofocusReconciled)
-    #expect(image.data.count == 20480 && FirmwareVariant.autofocusReconciled.profileAddress == 0x9f00)
+    let image = try ApplicationImage.personalized(profile("contax-zeiss-85-f1-4"), variant: variant)
+    #expect(image.data.count == 20480 && variant.profileAddress == 0x9f00)
     try UploadEngine().run(transport: loader, image: image, metadata: Data(loader.flash[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
     #expect(loader.pointer == 0xa000 && loader.reports == 321 && loader.readsWhileArmed == 0)
     #expect(loader.flash[0xa000..<0xf080] == retained)
-    #expect(try ApplicationImage.installedVariant(loader.flash) == .autofocusReconciled)
+    #expect(try ApplicationImage.installedVariant(loader.flash) == variant)
     #expect(try ApplicationImage.installedSetting(loader.flash)?.id == "contax-zeiss-85-f1-4")
-    // An older installation may leave its different lens at a000. 2.2 decodes 9f00.
+    // An older installation may leave its different lens at a000. Newer variants decode 9f00.
     let legacy = try ApplicationImage.personalized(profile(), variant: .autofocusExperimental)
     loader.flash.replaceSubrange(0xa000..<0xa100, with: legacy.data.suffix(256))
     #expect(try ApplicationImage.installedSetting(loader.flash)?.id == "contax-zeiss-85-f1-4")
@@ -194,6 +195,79 @@ private func fixture(_ loader: Loader, _ directory: URL, _ name: String, id: UIn
     _ = try BackupEngine(expectedBootHash: hash).run(transport: loader, identity: device(id), destination: url, cancellation: CancellationToken(), progress: { _ in })
     return try VerifiedBackup(url: url, device: device(id), expectedBootHash: hash)
 }
+
+@Test func inspectionReplacesStaleCustomHistoryWithStockOrUnsupportedReadback() throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader(), store = UpdateStore(directory: directory)
+    let image = try ApplicationImage.personalized(profile(), variant: .autofocusReconciled)
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    loader.flash.replaceSubrange(ApplicationImage.base..<FirmwareVariant.autofocusReconciled.applicationEnd, with: image.data)
+    let custom = try fixture(loader, directory, "custom", id: 51)
+    #expect(try LensInspection.publish(custom, to: store)?.firmwareVersion == "2.2.0")
+    let originalHistory = try Data(contentsOf: store.appliedFile)
+    // The committed official application is the same pinned oracle used by REA.
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let stock = try Data(contentsOf: root.appendingPathComponent("firmware/recovery/stock-1.8.0/application.bin"))
+    loader.flash.replaceSubrange(ApplicationImage.base..<(ApplicationImage.base + stock.count), with: stock)
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [1,8,0])
+    let stockRead = try fixture(loader, directory, "stock", id: 52)
+    #expect(try LensInspection.publish(stockRead, to: store) == nil)
+    #expect(try store.loadApplied() == nil)
+    #expect(try FirmwareObservationStore(directory: directory).load()?.version == "1.8.0")
+    let archived = try FileManager.default.contentsOfDirectory(at: directory.appendingPathComponent("InspectionHistory"), includingPropertiesForKeys: nil)
+    try #require(archived.count == 1)
+    let archivedBytes = try Data(contentsOf: archived[0])
+    #expect(archivedBytes == originalHistory)
+    _ = try #require(try LensInspection.publish(custom, to: store))
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    loader.flash[0x6000] ^= 1
+    let unsupported = try fixture(loader, directory, "unsupported", id: 53)
+    #expect(throws: DeviceError.self) { try LensInspection.publish(unsupported, to: store) }
+    #expect(try store.loadApplied() == nil)
+    #expect(try FirmwareObservationStore(directory: directory).load()?.version == "2.2.0")
+}
+@Test(arguments: FirmwareVariant.allCases)
+func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVariant) throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader(), image = try ApplicationImage.personalized(profile(), variant: variant)
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    loader.flash.replaceSubrange(ApplicationImage.base..<variant.applicationEnd, with: image.data)
+    let current = try fixture(loader, directory, "supported", id: 61)
+    try ApplicationImage.requirePreservedFirmware(variant, in: current)
+    let other = try #require(FirmwareVariant.allCases.first { $0 != variant })
+    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(other, in: current) }
+    loader.flash[0x6000] ^= 1 // A version string cannot admit altered code.
+    let altered = try fixture(loader, directory, "altered-code", id: 62)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: altered) }
+    loader.flash[0x6000] ^= 1; loader.flash[variant.profileAddress + 12] ^= 1
+    let damaged = try fixture(loader, directory, "damaged-profile", id: 63)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: damaged) }
+    #expect(loader.reports == 0 && !loader.armed)
+}
+
+@Test func firstStockProfileChangeRequiresThePinnedStockImage() throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader()
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let stock = try Data(contentsOf: root.appendingPathComponent("firmware/recovery/stock-1.8.0/application.bin"))
+    loader.flash.replaceSubrange(ApplicationImage.base..<(ApplicationImage.base + stock.count), with: stock)
+    let current = try fixture(loader, directory, "stock", id: 64)
+    try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: current)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.autofocusHardened, in: current) }
+    loader.flash[0x6000] ^= 1
+    let altered = try fixture(loader, directory, "altered-stock", id: 65)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: altered) }
+    #expect(loader.reports == 0 && !loader.armed)
+}
+
 @Test(arguments: FirmwareVariant.allCases) func reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant: FirmwareVariant) throws {
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -264,6 +338,9 @@ private func fixture(_ loader: Loader, _ directory: URL, _ name: String, id: UIn
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,0,0])
     #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,3,0])
+    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.3.0")
+    #expect(try ApplicationImage.installedSetting(loader.flash) == nil) // Version alone cannot admit another image.
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,4,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: directory) }

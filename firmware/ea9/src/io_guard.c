@@ -22,3 +22,9 @@ uint8_t ea9_io_wait_pending(struct ea9_io_wait *wait, uint8_t reason)
     }
     return 1;
 }
+uint8_t ea9_io_startup_pending(uint32_t *polls, uint8_t reason)
+{
+    if (faults) return 0;
+    if (++*polls >= EA9_IO_POLL_LIMIT) { ea9_io_trip(reason); return 0; }
+    return 1;
+}

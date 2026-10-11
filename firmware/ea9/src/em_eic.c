@@ -6,6 +6,9 @@
  */
 #include "board.h"
 #include "em_eic.h"
+#ifdef EA9_AF_BUILD
+#include "io_guard.h"
+#endif
 
 #define EIC_CONFIG_BOTH_FILT  0xbu    /* FILTEN | SENSE = BOTH */
 #define EIC_CONFIG_RISE_FILT  0x9u    /* FILTEN | SENSE = RISE */
@@ -33,8 +36,12 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 	PM->APBAMASK.reg |= PM_APBAMASK_EIC;
 	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(GCLK_CLKCTRL_ID_EIC_Val)
 	                    | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_CLKEN;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT(!GCLK->STATUS.bit.SYNCBUSY, EA9_IO_EIC)) return;
+#else
 	while (GCLK->STATUS.bit.SYNCBUSY) {
 	}
+#endif
 
 	PORT->Group[0].PINCFG[EM_PIN_BODY_CS].reg = PORT_PINCFG_PMUXEN | PORT_PINCFG_INEN;
 	PORT->Group[0].PINCFG[EM_PIN_BODY_VD].reg = PORT_PINCFG_PMUXEN | PORT_PINCFG_INEN;
@@ -42,8 +49,12 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 	        PORT_PMUX_PMUXE(MUX_PA02A_EIC_EXTINT2) | PORT_PMUX_PMUXO(MUX_PA03A_EIC_EXTINT3);
 
 	EIC->CTRL.reg = EIC_CTRL_SWRST;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT(!(EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY), EA9_IO_EIC)) return;
+#else
 	while (EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY) {
 	}
+#endif
 
 	EIC->CONFIG[0].reg = (EIC_CONFIG_BOTH_FILT << (4 * EM_EXTINT_BODY_CS))
 	                     | (EIC_CONFIG_RISE_FILT << (4 * EM_EXTINT_BODY_VD));
@@ -53,8 +64,12 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 	EIC->INTENSET.reg = (1u << EM_EXTINT_BODY_CS) | (1u << EM_EXTINT_BODY_VD);
 
 	EIC->CTRL.reg = EIC_CTRL_ENABLE;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT(!EIC->STATUS.bit.SYNCBUSY, EA9_IO_EIC)) return;
+#else
 	while (EIC->STATUS.bit.SYNCBUSY) {
 	}
+#endif
 
 	NVIC_SetPriority(EIC_IRQn, 1);     /* stock: NVIC IPR1 byte for IRQ4 = 0x40 */
 	NVIC_EnableIRQ(EIC_IRQn);

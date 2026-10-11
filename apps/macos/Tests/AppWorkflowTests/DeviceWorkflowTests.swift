@@ -82,7 +82,7 @@ private actor DiscoveryFixture {
     let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
     let setting = try AdapterLensSetting(profile: profile)
     let journal = UpdateStore(directory: folder)
-    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled] {
+    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled, .autofocusHardened] {
         let image = try ApplicationImage.personalized(profile, variant: variant)
         try journal.saveApplied(AppliedLens(device: device, setting: setting, firmwareVersion: variant.versionString,
                                            imageSHA256: digest(image.data), verifiedAt: Date()))
@@ -122,4 +122,104 @@ private actor DiscoveryFixture {
     try await Task.sleep(for: .milliseconds(2100))
     #expect(await fixture.calls == calls)
     #expect(!model.idleAcknowledged && model.pendingUpdate == nil && model.appliedLens == nil)
+}
+
+@Test @MainActor func missingLensHistoryCannotSilentlyDowngradeKnownAF() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([41])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    try UpdateStore(directory: folder).saveQualification(device: device, transactionID: UUID())
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "2.2.0"))
+    await model.refreshDevices(silent: true)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4"); model.idleAcknowledged = true
+    #expect(model.canReadDevice && model.stockUploadQualified)
+    #expect(model.primaryLensAction == .read && model.variantForLensChanges == nil)
+    #expect(!model.canApplyLens && model.currentAppliedLens == nil)
+    model.applyLens() // Must stop before presenting an upload or reaching native HID.
+    #expect(!model.busy && model.pendingUpdate == nil)
+    let image = try ApplicationImage.personalized(try #require(model.preparedLens), variant: .autofocusReconciled)
+    try UpdateStore(directory: folder).saveApplied(AppliedLens(device: device, setting: try #require(image.setting),
+        firmwareVersion: "2.2.0", imageSHA256: digest(image.data), verifiedAt: Date()))
+    await model.refreshDevices(silent: true)
+    #expect(model.variantForLensChanges == .autofocusReconciled)
+    #expect(model.primaryLensAction == .upToDate)
+}
+
+@Test @MainActor func newerStockObservationHidesOldAFProfile() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([42])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
+    let image = try ApplicationImage.personalized(profile, variant: .autofocusReconciled)
+    try UpdateStore(directory: folder).saveApplied(AppliedLens(device: device, setting: try #require(image.setting),
+        firmwareVersion: "2.2.0", imageSHA256: digest(image.data), verifiedAt: Date().addingTimeInterval(-60)))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "1.8.0"))
+    await model.refreshDevices(silent: true)
+    #expect(model.appliedLens != nil && model.currentAppliedLens == nil)
+    #expect(model.variantForLensChanges == .metadataOnly && !model.usesExperimentalAF)
+}
+
+@Test @MainActor func sameSecondVersionHistoryCannotLeaveAStaleLensVisible() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([45])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
+    let image = try ApplicationImage.personalized(profile, variant: .autofocusReconciled)
+    let verified = Date(timeIntervalSince1970: floor(Date().timeIntervalSince1970) - 5 + 0.75)
+    try UpdateStore(directory: folder).saveApplied(AppliedLens(device: device, setting: try #require(image.setting),
+        firmwareVersion: "2.2.0", imageSHA256: digest(image.data), verifiedAt: verified))
+    let history = FirmwareObservationStore(directory: folder)
+    try history.save(FirmwareObservation(device: device, version: "1.8.0", readAt: verified.addingTimeInterval(0.1)))
+    await model.refreshDevices(silent: true)
+    #expect(model.currentAppliedLens == nil)
+    // Clearly older observations do not supersede a newer verified image.
+    try history.save(FirmwareObservation(device: device, version: "1.8.0", readAt: verified.addingTimeInterval(-2)))
+    await model.refreshDevices(silent: true)
+    #expect(model.currentAppliedLens?.firmwareVersion == "2.2.0")
+    #expect(model.variantForLensChanges == .autofocusReconciled)
+}
+
+@Test @MainActor func unfinishedOtherUnitUpdateExplainsTheDisabledVerification() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([43])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    var other = try #require(model.devices.first); other.serial = "OTHER-WORKFLOW-TEST"
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
+    let image = try ApplicationImage.personalized(profile, variant: .autofocusReconciled)
+    var metadata = Data(repeating: 0, count: 58); metadata.replaceSubrange(0..<3, with: image.version)
+    try UpdateStore(directory: folder).save(PendingUpdate(transactionID: UUID(), device: other,
+        backupURL: folder.appendingPathComponent("synthetic-unused.ea9backup"), image: image.data, version: image.version,
+        setting: image.setting, createdAt: Date(), uploadedAt: Date(), verifiedAt: nil,
+        imageSHA256: digest(image.data), expectedMetadata: metadata))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.waitingForVerification && !model.canVerifyUpdate && !model.pendingBelongsToConnectedAdapter)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Another adapter has an unfinished update")
+    model.performPrimaryLensAction()
+    #expect(model.showDeviceTools && !model.busy)
+}
+
+@Test @MainActor func workflowExplainsZoomEditsAndReconnect() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([44])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    model.chooseDeviceLens(try #require(model.library.profiles.first { $0.kind == .zoom }).id)
+    #expect(model.workflowTitle == "Finish this lens profile" && !model.canApplyLens)
+    model.draft?.name = "Unsaved lens edit"
+    #expect(model.workflowTitle == "Save your lens edits")
+    model.revert(); await fixture.set([44], blocked: true)
+    await model.refreshDevices(silent: true)
+    #expect(model.workflowTitle == "Reconnect the USB cap" && !model.canPerformPrimaryLensAction)
 }

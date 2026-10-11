@@ -10,11 +10,13 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.5.0, build 8) refreshes
+upload/read-back path for lens metadata. The current app (0.6.0, build 9) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The modular AF 2.2 candidate is installed and byte-verified after physical
+The offline AF 2.3 candidate hardens received frames, command snapshots, Stop
+handling, bounded query processing and startup waits. It is not installed or camera-qualified. The modular
+AF 2.2 candidate is installed and byte-verified after physical
 USB-cap reconnect. AF 2.1 was previously byte-verified, with owner reports of
 motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
@@ -25,13 +27,17 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant reconciled-af
+python3 scripts/build-firmware.py --variant hardened-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [App 0.6 polish, firmware 2.3 hardening and offline validation](docs/evidence/software-polish-2026-10-11.md)
+- [Independent firmware correctness audit](docs/audits/firmware-correctness-2026-10-11.md)
+- [Reproducible stock 1.8 application model and finite comparison harness](research/stock-1.8/README.md)
+- [Whole-firmware REA coverage and remaining boundaries](docs/reverse-engineering/whole-firmware-reconstruction.md)
 - [Current Device dropdown, automatic refresh and lens-change guide](docs/macos-device-workflow.md)
 - [AF 2.2 upload and reconnect verification record](docs/evidence/af-22-upload-2026-10-11.md)
 - [AF 2.2 bare-adapter camera lifecycle procedure and owner observation record](docs/evidence/af-22-camera-lifecycle-2026-10-11.md)

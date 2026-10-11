@@ -32,6 +32,9 @@ int main(void)
 	memset(req, 0, sizeof(req));
 	req[0] = 0xF0; req[1] = 10; req[3] = 0x02; req[4] = 0x11; req[5] = 0x01;
 	req[9] = 0x55;
+	uint16_t checksum = 0;
+	for (unsigned i = 1; i <= sizeof(req) - 4; ++i) checksum += req[i];
+	req[7] = (uint8_t)checksum; req[8] = (uint8_t)(checksum >> 8);
 	/* Junk on the idle line BEFORE the window opens.  The receiver is now
 	 * enabled from the start of em_init, so it picks this up; clearing the
 	 * buffer as the window opens is what keeps it out of the frame.  Without

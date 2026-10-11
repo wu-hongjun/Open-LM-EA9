@@ -9,15 +9,25 @@
  * At 48 MHz the flash needs one wait state.
  */
 #include "board.h"
+#ifdef EA9_AF_BUILD
+#include "io_guard.h"
+#endif
 
+#ifndef NVM_CAL_WORD1
 #define NVM_CAL_WORD1           (*(volatile uint32_t *)0x00806024u)
+#endif
 #define NVM_DFLL_COARSE_POS     26
 #define NVM_DFLL_COARSE_MASK    0x3fu
 
-static void gclk_sync(void)
+static uint8_t gclk_sync(void)
 {
+#ifdef EA9_AF_BUILD
+	return EA9_IO_WAIT_STARTUP(!GCLK->STATUS.bit.SYNCBUSY, EA9_IO_CLOCK);
+#else
 	while (GCLK->STATUS.bit.SYNCBUSY) {
 	}
+	return 1;
+#endif
 }
 
 void clock_init(void)
@@ -27,8 +37,12 @@ void clock_init(void)
 
 	/* --- DFLL48M, open loop ------------------------------------------- */
 	SYSCTRL->DFLLCTRL.reg = SYSCTRL_DFLLCTRL_ENABLE;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT_STARTUP(SYSCTRL->PCLKSR.bit.DFLLRDY, EA9_IO_CLOCK)) return;
+#else
 	while (!SYSCTRL->PCLKSR.bit.DFLLRDY) {
 	}
+#endif
 
 	SYSCTRL->DFLLMUL.reg = SYSCTRL_DFLLMUL_CSTEP(1) | SYSCTRL_DFLLMUL_FSTEP(1);
 
@@ -39,15 +53,19 @@ void clock_init(void)
 	SYSCTRL->DFLLVAL.reg = SYSCTRL_DFLLVAL_COARSE(coarse) | SYSCTRL_DFLLVAL_FINE(512);
 
 	SYSCTRL->DFLLCTRL.reg = SYSCTRL_DFLLCTRL_ENABLE;
+#ifdef EA9_AF_BUILD
+	if (!EA9_IO_WAIT_STARTUP(SYSCTRL->PCLKSR.bit.DFLLRDY, EA9_IO_CLOCK)) return;
+#else
 	while (!SYSCTRL->PCLKSR.bit.DFLLRDY) {
 	}
+#endif
 
 	/* --- generator 0 = DFLL48M, no division ---------------------------- */
 	GCLK->GENDIV.reg = GCLK_GENDIV_ID(0) | GCLK_GENDIV_DIV(1);
-	gclk_sync();
+	if (!gclk_sync()) return;
 	GCLK->GENCTRL.reg = GCLK_GENCTRL_ID(0) | GCLK_GENCTRL_SRC_DFLL48M
 	                    | GCLK_GENCTRL_GENEN;
-	gclk_sync();
+	(void)gclk_sync();
 }
 
 /* Route generator 0 to one peripheral channel and turn on its APBC clock. */
@@ -56,5 +74,5 @@ void clock_enable_peripheral(uint8_t gclk_id, uint32_t apbc_mask)
 	PM->APBCMASK.reg |= apbc_mask;
 	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(gclk_id) | GCLK_CLKCTRL_GEN_GCLK0
 	                    | GCLK_CLKCTRL_CLKEN;
-	gclk_sync();
+	(void)gclk_sync();
 }

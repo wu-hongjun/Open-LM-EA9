@@ -5,23 +5,20 @@ import DeviceKit
 
 struct DeviceView: View {
     @ObservedObject var model: AppModel
-    private var connected: Bool { model.devices.count == 1 && !model.discoveryError }
+    private var connected: Bool { model.devices.count == 1 && model.devices.first?.qualifiedDescriptor == true && !model.discoveryError }
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Eyebrow("Your adapter")
-                        Text("Vintage glass. A simple connection.").font(.system(size: 28, weight: .medium, design: .serif))
-                    }
+                    Text("Your adapter").font(.system(size: 24, weight: .medium, design: .serif))
                     Spacer()
                     Button { Task { await model.refreshDevices() } } label: { Image(systemName: "arrow.clockwise").padding(8) }
                         .buttonStyle(.plain).foregroundStyle(Palette.muted).disabled(model.busy)
                         .help("Refresh USB connection").accessibilityLabel("Refresh Connection")
                 }
                 HStack(spacing: 28) {
-                    ProductPhoto(id: "lm-ea9", height: 145).frame(width: 250).padding(14)
-                    VStack(alignment: .leading, spacing: 9) {
+                    ProductPhoto(id: "lm-ea9", height: 115).frame(width: 210).padding(14)
+                    VStack(alignment: .leading, spacing: 7) {
                         StatusPill(text: model.connectionLabel, connected: connected)
                         Text("TECHART").font(.system(size: 11, weight: .semibold)).tracking(2).foregroundStyle(Palette.muted)
                         Text("LM-EA9").font(.system(size: 32, weight: .medium, design: .rounded))
@@ -29,10 +26,8 @@ struct DeviceView: View {
                         if model.reconnectRequired || model.discoveryError {
                             Text(model.reconnectRequired ? "Reconnect the USB cap before another read." : model.deviceMessage)
                                 .font(.caption).foregroundStyle(.orange)
-                        } else if !connected {
-                            Text("Connect the USB cap. This view updates automatically.").font(.caption).foregroundStyle(Palette.muted)
                         }
-                    }.padding(.vertical, 18).frame(maxWidth: .infinity, alignment: .leading)
+                    }.padding(.vertical, 10).frame(maxWidth: .infinity, alignment: .leading)
                     VStack(alignment: .leading, spacing: 8) {
                         Eyebrow("Firmware")
                         Text(model.currentFirmwareObservation?.version ?? "Not read")
@@ -44,6 +39,18 @@ struct DeviceView: View {
                         Button("Read version…") { model.showDeviceTools = true }.font(.system(size: 11)).padding(.top, 4)
                     }.frame(width: 190, alignment: .leading).padding(.trailing, 24)
                 }.modifier(Surface())
+                HStack(alignment: .center, spacing: 14) {
+                    if model.busy { ProgressView().controlSize(.small).frame(width: 28) }
+                    else { Image(systemName: model.workflowSymbol).font(.system(size: 23)).frame(width: 28) }
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(model.workflowTitle).font(.system(size: 14, weight: .semibold))
+                        Text(model.workflowDetail).font(.system(size: 12)).foregroundStyle(Palette.muted)
+                        if model.busy, let progress = model.progress {
+                            ProgressView(value: progress.fraction).accessibilityLabel(progress.phase)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                }.padding(14).background(Palette.softAccent, in: RoundedRectangle(cornerRadius: 14))
+                    .accessibilityElement(children: .combine)
                 lensInformation
                 HStack(spacing: 10) {
                     Image(systemName: "lock.shield").font(.system(size: 12))
@@ -52,13 +59,13 @@ struct DeviceView: View {
                     Spacer()
                     Button("USB tools…") { model.showDeviceTools = true }.font(.system(size: 11))
                 }.foregroundStyle(Palette.muted)
-            }.padding(24).frame(maxWidth: 1060).frame(maxWidth: .infinity)
+            }.padding(20).frame(maxWidth: 1060).frame(maxWidth: .infinity)
         }
     }
     private var lensInformation: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Eyebrow("Lens on adapter")
+                Eyebrow("Adapter lens setting")
                 Spacer()
                 if model.waitingForVerification {
                     StatusPill(text: "Verification needed")
@@ -68,14 +75,14 @@ struct DeviceView: View {
                 }
             }
             HStack(spacing: 28) {
-                ProductPhoto(id: model.currentAppliedLens?.setting.id ?? model.preparedLens?.id ?? "contax-zeiss-50-f1-4", height: 100)
-                    .frame(width: 170)
+                ProductPhoto(id: model.currentAppliedLens?.setting.id ?? model.preparedLens?.id ?? "contax-zeiss-50-f1-4", height: 82)
+                    .frame(width: 150)
                 VStack(alignment: .leading, spacing: 8) {
                     if let applied = model.currentAppliedLens {
                         Text(applied.setting.name).font(.system(size: 23, weight: .medium, design: .serif)).lineLimit(2)
                         Text("\(applied.setting.focalLengthMM.formatted()) mm · reported f/\(applied.setting.apertureLabel)")
                             .font(.system(size: 13)).foregroundStyle(Palette.muted)
-                        StatusPill(text: "On adapter · USB verified", connected: true)
+                        StatusPill(text: "Last USB-verified setting", connected: true)
                     } else {
                         Text(model.waitingForVerification ? "Finish your lens change" : connected ? "Lens settings not read" : "Ready for your next lens")
                             .font(.system(size: 23, weight: .medium, design: .serif))
@@ -102,19 +109,23 @@ struct DeviceView: View {
                     .accessibilityLabel("Lens Profile")
                     .disabled(model.busy || model.isDirty || model.loadError != nil || model.waitingForVerification)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    if model.waitingForVerification {
-                        Button("Verify lens", action: model.verifyLensUpdate).buttonStyle(PrimaryButtonStyle()).disabled(!model.canVerifyUpdate)
-                    } else if model.stockUploadQualified {
-                        Button(model.preparedMatchesApplied ? "Up to date" : "Apply profile", action: model.applyLens)
-                            .buttonStyle(PrimaryButtonStyle()).disabled(!model.canApplyLens)
-                    } else {
-                        Button("Set up adapter", action: model.prepareAdapter).buttonStyle(PrimaryButtonStyle())
-                            .disabled(!model.canReadDevice || model.updateStateError != nil || model.waitingForVerification)
-                    }
+                    Button(model.primaryLensAction.title, action: model.performPrimaryLensAction)
+                        .buttonStyle(PrimaryButtonStyle()).disabled(!model.canPerformPrimaryLensAction)
+                        .help(model.workflowDetail)
                 }
                 if let profile = model.preparedLens {
-                    Text(profile.focalSummary + (model.preparedMatchesApplied ? " · Matches adapter settings" : " · Ready to apply"))
-                        .font(.callout).foregroundStyle(Palette.muted)
+                    HStack(spacing: 12) {
+                        if model.currentAppliedLens != nil && !model.preparedMatchesApplied {
+                            ProductPhoto(id: profile.id, height: 44).frame(width: 64)
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            if let setting = try? AdapterLensSetting(profile: profile) {
+                                Text("\(setting.focalLengthMM.formatted()) mm · reported f/\(setting.apertureLabel)").font(.callout)
+                            } else { Text(profile.focalSummary).font(.callout) }
+                            Text(model.preparedMatchesApplied ? "Matches the verified adapter setting" : "Selected on this Mac")
+                                .font(.caption).foregroundStyle(Palette.muted)
+                        }
+                    }
                 }
                 if let issue = model.preparedLensIssue, let profile = model.preparedLens {
                     HStack {
@@ -127,7 +138,7 @@ struct DeviceView: View {
                     Text(error).font(.caption).foregroundStyle(.orange)
                 }
                 if model.waitingForVerification {
-                    Text(model.reconnectRequired || model.pendingUpdate?.device.id == model.devices.first?.id ?
+                    Text(!model.pendingBelongsToConnectedAdapter ? "Connect the adapter used for the unfinished update." : model.reconnectRequired || model.pendingUpdate?.device.id == model.devices.first?.id ?
                          "Unplug and reconnect the USB cap. The app will detect the new connection automatically." :
                          "New connection detected. Confirm the updater is closed below, then verify your lens.")
                         .font(.callout).foregroundStyle(Palette.muted)
@@ -142,11 +153,7 @@ struct DeviceView: View {
                     Toggle("Updater closed · USB cap reconnected", isOn: $model.idleAcknowledged).font(.caption)
                 }
             }
-            if model.busy, let progress = model.progress {
-                Text(progress.phase).font(.callout)
-                ProgressView(value: progress.fraction)
-            }
-            Text("Choose a profile, apply it, then reconnect to verify. Aperture settings are reported metadata; the adapter cannot read a passive lens’s rings.")
+            Text("Lens and aperture values are saved metadata. The adapter cannot identify a passive lens or read its rings.")
                 .font(.caption).foregroundStyle(Palette.muted)
         }.padding(22).modifier(Surface())
     }
@@ -170,7 +177,7 @@ struct DeviceToolsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     HStack {
-                        StatusPill(text: model.connectionLabel, connected: model.devices.count == 1 && !model.discoveryError)
+                        StatusPill(text: model.connectionLabel, connected: model.devices.count == 1 && model.devices.first?.qualifiedDescriptor == true && !model.discoveryError)
                         Spacer()
                         Button("Refresh Connection") { Task { await model.refreshDevices() } }.disabled(model.busy)
                     }
@@ -226,8 +233,8 @@ struct DeviceToolsView: View {
                     Button("Restore Stock from Backup…", action: model.chooseStockRestore).disabled(!model.canReadDevice)
                     DisclosureGroup("Experimental autofocus") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("The new AF 2.2.0 candidate reconciles reference, homing, timing and completion policy. It enables motor movement and still needs camera qualification. Choose a lens on Device, install, then reconnect to verify.").font(.callout)
-                            Button("Install Experimental AF 2.2.0", action: model.installAutofocus).disabled(!model.canChangeFirmware)
+                            Text("AF 2.3.0 enables autofocus motor control. Focus accuracy with your mounted lens still needs a camera test. Choose a lens on Device, install, then reconnect to verify.").font(.callout)
+                            Button("Install Experimental AF 2.3.0", action: model.installAutofocus).disabled(!model.canChangeFirmware)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

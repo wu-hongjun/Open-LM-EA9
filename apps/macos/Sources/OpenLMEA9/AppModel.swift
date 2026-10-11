@@ -169,7 +169,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         if isDiscovering { return "Checking connection…" }
         if discoveryError { return "Unable to check connection" }
         if devices.isEmpty { return "Not connected" }
-        return devices.count == 1 ? "Connected" : "Multiple adapters connected"
+        return devices.count == 1 ? (devices.first?.qualifiedDescriptor == true ? "Connected" : "Unrecognized adapter") : "Multiple adapters connected"
     }
     func binding(_ keyPath: WritableKeyPath<LensDraft, String>) -> Binding<String> {
         Binding(get: { self.draft?[keyPath: keyPath] ?? "" }, set: { self.draft?[keyPath: keyPath] = $0 })
@@ -291,6 +291,12 @@ enum AppTab: Hashable { case device, lensLibrary }
     var currentAppliedLens: AppliedLens? {
         guard updateStateError == nil, !waitingForVerification, !discoveryError, devices.count == 1, let device = devices.first,
               let appliedLens, appliedLens.belongs(to: device) else { return nil }
+        // Firmware history uses second-resolution ISO dates; applied history
+        // retains fractions. Treat a differing observation in that same second
+        // conservatively rather than displaying a stale lens setting.
+        if let observation = currentFirmwareObservation,
+           observation.readAt.timeIntervalSince1970 >= floor(appliedLens.verifiedAt.timeIntervalSince1970),
+           observation.version != appliedLens.firmwareVersion { return nil }
         return appliedLens
     }
     var waitingForVerification: Bool { pendingUpdate?.needsVerification == true }
@@ -298,7 +304,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard let preparedLens, let currentAppliedLens else { return false }
         return (try? AdapterLensSetting(profile: preparedLens)) == currentAppliedLens.setting
     }
-    var canApplyLens: Bool { canReadDevice && updateStateError == nil && stockUploadQualified && preparedLens != nil && preparedLensIssue == nil && !preparedMatchesApplied && !waitingForVerification && !isDirty }
+    var canApplyLens: Bool { canChangeFirmware && variantForLensChanges != nil && !preparedMatchesApplied }
     var canVerifyUpdate: Bool {
         canReadDevice && pendingUpdateError == nil && waitingForVerification && pendingUpdate?.device.id != devices.first?.id
             && pendingUpdate?.device.serial == devices.first?.serial
@@ -335,20 +341,28 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var firmwareBehaviorNote: String {
         switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0": return "Verified AF firmware enables motor movement. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.1.0", "2.2.0", "2.3.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
         default: return "Installed firmware and motor behavior have not been verified for this connection."
         }
     }
-    var variantForLensChanges: FirmwareVariant {
-        FirmwareVariant.allCases.first { $0.versionString == currentAppliedLens?.firmwareVersion } ?? .metadataOnly
+    var variantForLensChanges: FirmwareVariant? {
+        if let applied = currentAppliedLens {
+            return FirmwareVariant.allCases.first { $0.versionString == applied.firmwareVersion }
+        }
+        // An unknown custom image must never silently become a metadata-only upload.
+        // Stock has no profile row; its separately qualified version permits initial setup.
+        return currentFirmwareObservation?.version == "1.8.0" ? .metadataOnly : nil
     }
-    var usesExperimentalAF: Bool { variantForLensChanges.enablesAutofocus }
+    var usesExperimentalAF: Bool { variantForLensChanges?.enablesAutofocus == true }
     var canChangeFirmware: Bool { canReadDevice && updateStateError == nil && stockUploadQualified && preparedLens != nil && preparedLensIssue == nil && !waitingForVerification && !isDirty }
-    func applyLens() { applyLens(variant: variantForLensChanges) }
-    func installAutofocus() { applyLens(variant: .autofocusReconciled) }
+    func applyLens() {
+        guard canApplyLens, let variant = variantForLensChanges else { return }
+        applyLens(variant: variant, preservingFirmware: true)
+    }
+    func installAutofocus() { applyLens(variant: .autofocusHardened) }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
-    private func applyLens(variant: FirmwareVariant) {
+    private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }
         do { _ = try FirmwareImageBuilder.prepare(profile: profile, variant: variant) }
         catch { errorMessage = error.localizedDescription; return }
@@ -359,6 +373,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         runLensOperation(writing: true) { device, token in
             _ = try await self.deviceService.apply(profile: profile, variant: variant, device: device, idleAcknowledged: self.idleAcknowledged,
+                    preserveInstalledFirmware: preservingFirmware,
                     cancellation: token, progress: { update in Task { @MainActor in self.progress = update } })
             self.pendingUpdate = try self.deviceService.pendingUpdate()
             self.deviceMessage = "Uploaded. Unplug and reconnect the USB cap, then verify."

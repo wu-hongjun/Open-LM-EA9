@@ -52,6 +52,25 @@
 #define EM_FRAME_START    0xF0u
 #define EM_FRAME_END      0x55u
 #define EM_HEADER_LEN     6        /* start, u16 length, class, seq, id */
+#define EM_TRAILER_LEN    3        /* u16 additive checksum, terminator */
+
+/* A chip-select window may pad a shorter complete frame. Validate only the
+ * declared frame, and reject partial frames rather than treating their prefix
+ * as a motor command. This is candidate policy, not stock consumer behavior. */
+static uint16_t em_valid_frame_length(const uint8_t *rx, uint16_t received)
+{
+	if (received < EM_HEADER_LEN + EM_TRAILER_LEN || rx[0] != EM_FRAME_START)
+		return 0;
+	uint16_t length = (uint16_t)rx[1] | ((uint16_t)rx[2] << 8);
+	if (length < EM_HEADER_LEN + EM_TRAILER_LEN || length > received
+	    || rx[length - 1] != EM_FRAME_END
+	    || (rx[3] != EM_CLASS_INIT && rx[3] != EM_CLASS_NORMAL)) return 0;
+	uint16_t sum = 0;
+	for (uint16_t i = 1; i <= length - 4u; ++i) sum += rx[i];
+	if (rx[length - 3] != (uint8_t)sum || rx[length - 2] != (uint8_t)(sum >> 8))
+		return 0;
+	return length;
+}
 
 /* Recovered timings.  EM_CS_HOLD_US is 0x5188's defer(100, 0x5281): the
  * transmit-complete callback waits 100 us before 0x5280 drops the line.
@@ -351,20 +370,21 @@ void em_set_shutdown_enabled(uint8_t on)
 	g_shutdown_enabled = on;
 }
 
-static void em_shutdown_ack(void)
+static void em_shutdown_ack(const uint8_t *request)
 {
 	uint8_t echo[EM_REQ_SNAP];
-	uint16_t n = g_req[1];
+	uint16_t n = request[1];
 	uint16_t i;
 	uint8_t already = em_shutdown_acked;
+	/* The bounded echo snapshot must contain the entire declared frame before
+	 * a park is attempted; an unsupported long request cannot move the motor. */
+	if (request[2] || n < EM_HEADER_LEN + EM_TRAILER_LEN || n > EM_REQ_SNAP) return;
 
 	/* Park first, acknowledge second -- the order the stock uses.  Snapshot
 	 * the request before parking: the park takes long enough for the body
 	 * to open another receive window and overwrite g_req. */
-	if (n >= EM_HEADER_LEN && n <= EM_REQ_SNAP) {
-		for (i = 0; i < n; i++) {
-			echo[i] = g_req[i];
-		}
+	for (i = 0; i < n; i++) {
+		echo[i] = request[i];
 	}
 
 	/* A repeated 0x16 gets its echo -- the body may simply not have heard
@@ -376,9 +396,6 @@ static void em_shutdown_ack(void)
 	/* Unconditionally, even if the park stalled: the echo is what releases
 	 * the body, and a lens stuck mid-travel is a far smaller problem than a
 	 * camera that will not switch off. */
-	if (n < EM_HEADER_LEN || n > EM_REQ_SNAP) {
-		return;
-	}
 	em_transmit(echo, n);
 
 	em_shutdown_acked = 1;
@@ -389,7 +406,7 @@ static void em_shutdown_ack(void)
 	}
 }
 
-static void em_send_id(uint8_t id)
+static void em_send_id(uint8_t id, const uint8_t *request)
 {
 	const struct ea9_packet *p = find_packet(id);
 	uint8_t *frame;
@@ -397,7 +414,7 @@ static void em_send_id(uint8_t id)
 
 	if (id == EM_ID_SHUTDOWN) {
 		if (g_shutdown_enabled) {
-			em_shutdown_ack();
+				em_shutdown_ack(request);
 		}
 		return;
 	}
@@ -434,6 +451,9 @@ static void em_send_id(uint8_t id)
 		return;
 	}
 	frame = &ea9_data[p->offset];
+	/* Publish the 0x08 aperture option from the main owner, never from the
+	 * receive ISR while a status packet checksum/transmit is in progress. */
+	if (id == 0x08u) em_set_aperture(g_aperture);
 
 	/* Apply whatever the stock handler for this id writes into its frame
 	 * before sending.  NOT optional: the stored message 0x0c frame carries
@@ -464,7 +484,7 @@ static void em_send_id(uint8_t id)
 			continue;
 		}
 		frame[f->off] = (f->kind == EA9_FIXUP_RX)
-		                ? (f->val < EM_REQ_SNAP ? g_req[f->val] : 0)
+		                ? (f->val < EM_REQ_SNAP ? request[f->val] : 0)
 		                : f->val;
 	}
 
@@ -665,7 +685,10 @@ static void on_cs_edge(int level)
 
 	rx = em_uart_rx_buf();
 	n  = em_uart_rx_len();
-	if (n < EM_HEADER_LEN || rx[0] != EM_FRAME_START) {
+	uint16_t frame_length = em_valid_frame_length(rx, n);
+	if (!frame_length) {
+		if (n >= EM_HEADER_LEN && rx[0] == EM_FRAME_START
+		    && ((uint16_t)rx[1] | ((uint16_t)rx[2] << 8)) > n) em_truncated++;
 		if (n) {
 			em_bad_frames++;
 		}
@@ -691,9 +714,6 @@ static void on_cs_edge(int level)
 		em_pre_used++;
 	}
 
-	for (uint16_t i = 0; i < EM_REQ_SNAP; i++) {
-		g_req[i] = (i < n) ? rx[i] : 0;
-	}
 	if (!em_t_first_frame) {
 		em_t_first_frame = millis();
 	}
@@ -706,10 +726,6 @@ static void on_cs_edge(int level)
 	 * a checksum and sending the byte it covers. */
 	g_reply_seq = (uint8_t)(rx[4] + 1);
 
-	/* Genuine truncation only -- a window shorter than the frame in it. */
-	if ((n & 0xFF) < rx[1]) {
-		em_truncated++;
-	}
 	{
 		uint8_t j;
 
@@ -784,23 +800,22 @@ static void on_cs_edge(int level)
 	 *
 	 * The aperture is re-applied on the spot so the decision takes effect
 	 * without waiting for the next thing that happens to set it. */
-	if (rx[3] == EM_CLASS_INIT && rx[5] == 0x08u && n >= 8) {
+	if (rx[3] == EM_CLASS_INIT && rx[5] == 0x08u && frame_length >= 11) {
 		uint16_t k;
 
 		if (em_m08_n != 0xFFFFu) {
 			em_m08_n++;
 		}
 		if (em_m08_len == 0) {
-			for (k = 0; k < EM_M08_LEN && k < n; k++) {
+			for (k = 0; k < EM_M08_LEN && k < frame_length; k++) {
 				em_m08[k] = rx[k];
 			}
 			em_m08_len = (uint8_t)k;
 		}
 		em_m08_aperture_on = ((rx[7] & 0x80u) == 0u);
-		em_set_aperture(g_aperture);
 	}
 
-	if (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_APERTURE && n >= 11) {
+	if (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_APERTURE && frame_length >= 11) {
 		if (em_focus_n != 0xFFFFu) {
 			em_focus_n++;
 		}
@@ -819,7 +834,7 @@ static void on_cs_edge(int level)
 	 * cannot detect a change of state.
 	 *
 	 * 11 payload bytes need 6 header + 11 + 3 trailer = 20. */
-	if (rx[3] != EM_CLASS_INIT && rx[5] == 0x04u && n >= 20) {
+	if (rx[3] == EM_CLASS_NORMAL && rx[5] == 0x04u && frame_length >= 20) {
 		uint8_t k;
 
 		for (k = 0; k < em_mode_used; k++) {
@@ -847,7 +862,7 @@ static void on_cs_edge(int level)
 	 * as message 0x1B's is.
 	 *
 	 * 6 header + 7 payload bytes needs 6 + 7 + 3 = 16. */
-	if (rx[3] != EM_CLASS_INIT && rx[5] == 0x03u && n >= 16) {
+	if (rx[3] == EM_CLASS_NORMAL && rx[5] == 0x03u && frame_length >= 16) {
 		em_m03_aperture = (uint16_t)rx[11] | ((uint16_t)rx[12] << 8);
 		if (em_m03_n != 0xFFFFu) {
 			em_m03_n++;
@@ -867,16 +882,10 @@ static void on_cs_edge(int level)
 	 * padding as records, and the terminator 0x55 is a perfectly good
 	 * operand byte (NOTES.md 82).
 	 *
-	 * Clamped to what actually arrived as well: a window shorter than the
-	 * frame it declares cannot be trusted past its own end either. */
-	if (rx[3] != EM_CLASS_INIT && rx[5] == 0x04u && !em_shutdown_acked) {
-		uint16_t end = (uint16_t)rx[1] | ((uint16_t)rx[2] << 8);
-
-		if (end > n) {
-			end = n;
-		}
-		if (end >= EM04_REC_START + 3u) {
-			em_parse_records(rx, (uint16_t)(end - 3u));
+	 * A partial declared frame is rejected by the admission check above. */
+	if (rx[3] == EM_CLASS_NORMAL && rx[5] == 0x04u && !em_shutdown_acked) {
+		if (frame_length >= EM04_REC_START + EM_TRAILER_LEN) {
+			em_parse_records(rx, (uint16_t)(frame_length - EM_TRAILER_LEN));
 		}
 	}
 
@@ -889,7 +898,7 @@ static void on_cs_edge(int level)
 	/* 6 header + 8 payload + 2 checksum + 1 terminator = 17.  A shorter
 	 * guard (n >= 14) reads the terminator as offer[7]; the host test
 	 * caught exactly that. */
-	if (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_SESSION && n >= 17) {
+	if (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_SESSION && frame_length >= 17) {
 		uint8_t k;
 
 		for (k = 0; k < 8; k++) {
@@ -898,6 +907,8 @@ static void on_cs_edge(int level)
 	}
 
 	if (rx[3] == EM_CLASS_INIT) {
+		for (uint16_t i = 0; i < EM_REQ_SNAP; i++)
+			g_req[i] = (i < frame_length) ? rx[i] : 0;
 		em_last_id      = rx[5];
 		g_reply_id      = rx[5];
 		g_reply_pending = 1;
@@ -1241,22 +1252,29 @@ void em_set_optical_rows(const uint8_t *slot_a, const uint8_t *slot_b_type0,
 uint8_t em_take_focus_cmd(struct em_focus_cmd *out)
 {
 	uint8_t k;
+	uint32_t irq_state = __get_PRIMASK();
+	__disable_irq();
 
 	if (!em_focus_pending) {
+		__set_PRIMASK(irq_state);
 		return 0;
 	}
-	em_focus_pending = 0;
 	for (k = 0; k < sizeof(*out); k++) {
 		((uint8_t *)out)[k] = ((const volatile uint8_t *)&g_cmd)[k];
 	}
+	em_focus_pending = 0;
+	__set_PRIMASK(irq_state);
 	return 1;
 }
 
 uint8_t em_take_query(uint8_t *tag, uint16_t *operand)
 {
 	uint8_t k;
+	uint32_t irq_state = __get_PRIMASK();
+	__disable_irq();
 
 	if (!g_query_n) {
+		__set_PRIMASK(irq_state);
 		return 0;
 	}
 	*tag     = g_query_tag[0];
@@ -1266,6 +1284,7 @@ uint8_t em_take_query(uint8_t *tag, uint16_t *operand)
 		g_query_op[k - 1]  = g_query_op[k];
 	}
 	g_query_n--;
+	__set_PRIMASK(irq_state);
 	return 1;
 }
 
@@ -1438,8 +1457,9 @@ void em_pump_status(void)
 	}
 	g_status_due = 0;
 
-	ea9_data[EA9_OFF_05 + 4] = g_reply_seq;
-	ea9_data[EA9_OFF_06 + 4] = g_reply_seq;
+	uint8_t sequence = g_reply_seq;
+	ea9_data[EA9_OFF_05 + 4] = sequence;
+	ea9_data[EA9_OFF_06 + 4] = sequence;
 
 	delay_us(EM_LEAD_US);
 	em_transmit(&ea9_data[EA9_OFF_05], EA9_LEN_05);
@@ -1521,11 +1541,20 @@ void em_poll(void)
 	}
 	g_in_poll = 1;
 
-	if (g_reply_pending) {
-		uint8_t id = g_reply_id;
-
+	/* Atomically consume the ID and its request bytes. The next received
+	 * window may publish another reply while this one parks or transmits. */
+	uint8_t request[EM_REQ_SNAP], id, have_reply;
+	uint32_t irq_state = __get_PRIMASK();
+	__disable_irq();
+	have_reply = g_reply_pending;
+	id = g_reply_id;
+	if (have_reply) {
+		for (uint8_t i = 0; i < EM_REQ_SNAP; ++i) request[i] = g_req[i];
 		g_reply_pending = 0;
-		em_send_id(id);
+	}
+	__set_PRIMASK(irq_state);
+	if (have_reply) {
+		em_send_id(id, request);
 
 		/* Message 0x0a is the last of the handshake in every capture
 		 * (0x01 -> 0x07 -> 0x0b -> 0x08 -> 0x09 -> 0x0d -> 0x10 ->

@@ -1,0 +1,104 @@
+[
+  {
+    "scenario": 0,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!em_take_focus_cmd(&result)), function main, file negative_hardening.c, line 105.\n"
+  },
+  {
+    "scenario": 1,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!em_take_focus_cmd(&result)), function main, file negative_hardening.c, line 105.\n"
+  },
+  {
+    "scenario": 2,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!em_take_focus_cmd(&result)), function main, file negative_hardening.c, line 105.\n"
+  },
+  {
+    "scenario": 3,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!em_take_focus_cmd(&result)), function main, file negative_hardening.c, line 105.\n"
+  },
+  {
+    "scenario": 4,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!em_take_focus_cmd(&result)), function main, file negative_hardening.c, line 105.\n"
+  },
+  {
+    "scenario": 5,
+    "returncode": 0,
+    "stdout": "AF hardening scenario 5 passed\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 6,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (first.op == EM_OP_MOVE && first.target == 4400 && irq_entries), function main, file negative_hardening.c, line 112.\n"
+  },
+  {
+    "scenario": 7,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (sent_n == before + 2 && sent_len[before + 1] == 50), function main, file negative_hardening.c, line 124.\n"
+  },
+  {
+    "scenario": 8,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (injected && g_next_pending && g_next.op == EM_OP_MOVE), function main, file negative_hardening.c, line 132.\n"
+  },
+  {
+    "scenario": 9,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (injected && g_next_pending && g_next.op == EM_OP_MOVE), function main, file negative_hardening.c, line 132.\n"
+  },
+  {
+    "scenario": 10,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (focus_run(1500, focus_counts_to_em06(1500), &capped) == SERVO_ABORTED), function main, file negative_hardening.c, line 142.\n"
+  },
+  {
+    "scenario": 11,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (first.op == EM_OP_MOVE && first.target == 4400 && irq_entries), function main, file negative_hardening.c, line 112.\n"
+  },
+  {
+    "scenario": 12,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (injected && em_take_query(&tag, &operand) && tag == EM_REC_Q_D2POS && operand == 0xABCD), function main, file negative_hardening.c, line 151.\n"
+  },
+  {
+    "scenario": 13,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (sent[before][7] == 0xA5 && sent[before][8] == 0x5A), function main, file negative_hardening.c, line 159.\n"
+  },
+  {
+    "scenario": 14,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!g_next_pending && g_focus_moves == 0 && g_stops_idle == 1), function main, file negative_hardening.c, line 165.\n"
+  },
+  {
+    "scenario": 15,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!memcmp(first, &ea9_data[EA9_OFF_06 + 0x26], sizeof first)), function main, file negative_hardening.c, line 171.\n"
+  },
+  {
+    "scenario": 16,
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "Assertion failed: (!injected && sent_n == before && !em_shutdown_acked), function main, file negative_hardening.c, line 178.\n"
+  }
+]
