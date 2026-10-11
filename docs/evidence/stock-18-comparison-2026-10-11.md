@@ -153,3 +153,15 @@ These conditions establish a reproducible stock baseline. Both existing owner
 reports lack matched settings, so they cannot support a quantitative A/B claim.
 A future AF 2.3 comparison should use the same conditions. AF-C, video and
 factory parity remain unqualified.
+
+## Later reviewed resolution
+
+The owner subsequently requested resolution and AF 2.4 installation. After a
+new physical reconnect, a fresh two-pass stock backup matched this earlier
+post-camera readback in full. The explicit reviewed-motion policy accepted only
+the same 13 known motion bytes, archived the failed journal with a separate
+receipt and removed the active pending pointer. It did not mark this original
+strict verification passed, alter the saved record or clear the old blocked
+connection. See [the policy](../stock-restore-resolution.md) and [later hardware
+record](af-24-upload-2026-10-11.md). The body of this record and its JSON retain
+the original failed-verification observation.

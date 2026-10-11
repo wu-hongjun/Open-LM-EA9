@@ -1,7 +1,8 @@
 # AF 2.4.0 — Contax Zeiss 50mm f/1.4 factory baseline
 
-This is a **prepared offline candidate**, not an installed or camera-qualified
-firmware. It uses independently implemented factory 1.8 target/speed/PID/Stop/
+This is an **experimental candidate**. Its authorized USB upload completed
+on October 11; physical reconnect and strict byte verification are pending. It
+is not camera-qualified. See [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md). It uses independently implemented factory 1.8 target/speed/PID/Stop/
 completion/callback semantics behind bounded hardware and protocol policies.
 The [design](../../../docs/reverse-engineering/factory-af-baseline.md) records
 all known differences; the [validation record](../../../docs/evidence/factory-af-baseline-2026-10-11.md)
@@ -38,13 +39,14 @@ Alternatively prepare a metadata image using `ea9ctl prepare`, then run
 adjacent manifest. Output paths must be new. The packaged uploader admits its
 own digest-pinned template and a validated profile, not arbitrary external files.
 
-Original stock 1.8 currently remains on the owner's adapter. Its full application
-slot matches the original backup, while strict native restoration verification
-remains flagged for the saved-motion-record change after camera use. No guard
-has been waived and no 2.4 upload occurred. Resolve that transaction and physically
-reconnect before a further device operation. Follow the [AF-S runbook](../../../docs/af-s-test.md)
-for separately requested upload, immediate USB reconnect/readback, matched stock
-comparison, lifecycle observations and stop conditions.
+The preceding stock restoration was closed through a reviewed saved-motion
+resolution on a new connection: a fresh two-pass backup matched the retained
+stock audit exactly. Its original strict failure remains archived, not relabeled
+as a pass. AF 2.4 was then uploaded through the normal backed-up native path.
+**Do not use it on the camera until physical reconnect and strict verification
+complete.** Follow [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md)
+and [the AF-S comparison plan](../../../docs/evidence/af-24-camera-comparison-2026-10-11.md)
+for current state, observations and stop conditions.
 
 The fixed camera f-number does not operate or lock the iris. Manual stopping
 down remains possible; the report/EXIF can differ from the physical setting.

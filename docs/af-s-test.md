@@ -1,13 +1,12 @@
 # First A7C II AF-S test: Contax Zeiss 50mm f/1.4
 
-Current hardware state: **original stock 1.8.0 is restored, and its entire
-application slot matches the original backup**. The owner reports much less
-hunting. Camera use before host readback changed 13 bytes in the recovered
-stock settings record, so strict native verification remains flagged and any
-further USB operation requires physical reconnect. See the
-[stock restoration/baseline record](evidence/stock-18-comparison-2026-10-11.md).
-
-**Next prepared candidate: AF 2.4.0**, using the [factory-derived controller](reverse-engineering/factory-af-baseline.md). It has passed offline checks and has not been uploaded or camera-tested. The original stock application remains installed; its flagged saved-record verification has not been waived.
+Current installation/readback state is recorded in the [AF 2.4 hardware
+record](evidence/af-24-upload-2026-10-11.md). The preceding stock restoration was
+resolved through an explicit reviewed-motion policy: a new two-pass read matched
+the retained stock audit exactly. Its original strict failure remains archived,
+not retroactively passed. The current [loaded-lens lifecycle and matched AF-S
+comparison plan](evidence/af-24-camera-comparison-2026-10-11.md) separates planned
+steps from actual observations.
 
 The preceding **AF 2.3.0 installation was byte-verified after the owner's
 physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
@@ -68,10 +67,11 @@ The original 1.8.0 restore source is also saved in the
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
 App 0.7 / the current CLI explicit AF installation selects **2.4.0**. It is
-prepared offline, not installed. The 2.3 upload/reconnect evidence remains
-historical and unchanged. Before another upload, resolve the flagged stock
-transaction and physically reconnect; a successful stock byte audit alone does
-not clear the native journal. See [the 2.4 source/build/test record](evidence/factory-af-baseline-2026-10-11.md)
+the current installation stages are in the hardware record. The 2.3
+upload/reconnect evidence remains historical and unchanged. The stock transaction
+was closed only through the explicit reviewed resolution, with its failed
+journal retained. Every new upload still requires physical reconnect and strict
+verification before camera use. See [the 2.4 source/build/test record](evidence/factory-af-baseline-2026-10-11.md)
 and [the new 50mm candidate](../firmware/candidates/2.4.0/README.md).
 The Device dropdown preserves the verified installed variant when changing
 profiles; it does not silently upgrade 2.3 to 2.4.

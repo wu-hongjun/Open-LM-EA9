@@ -293,6 +293,37 @@ public final class DeviceService: @unchecked Sendable {
         }
     }
 
+    /// Explicitly requested review of stock camera-use changes. Strict
+    /// VerificationEngine and reconnect markers are never altered by this path.
+    public func resolveStockAfterCamera(reviewedBackupURL: URL, device: DeviceIdentity,
+        idleAcknowledged: Bool, cancellation: CancellationToken,
+        progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> StockRestoreResolution {
+        let store = UpdateStore(directory: stateDirectory)
+        guard let pending = try store.load(), pending.needsVerification,
+              pending.version == [1,8,0], pending.uploadedAt != nil else {
+            throw DeviceError.failure("No uploaded stock restoration is waiting for reviewed resolution.")
+        }
+        let original = try VerifiedBackup(url: pending.backupURL, device: device, allowRecoveryVersion: true)
+        let reviewed = try VerifiedBackup(url: reviewedBackupURL, device: device)
+        guard device.id != pending.device.id, device.id != reviewed.result.manifest.device.id else {
+            throw DeviceError.failure("Physically reconnect after the reviewed readback before resolving stock. No reports were sent.")
+        }
+        return try await withIdleDevice(device: device, idleAcknowledged: idleAcknowledged, cancellation: cancellation) { transport in
+            let folder = store.directory.appendingPathComponent("USBBackups", isDirectory: true)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true,
+                                                   attributes: [.posixPermissions: 0o700])
+            let destination = folder.appendingPathComponent("stock-review-\(UUID().uuidString).ea9backup")
+            _ = try BackupEngine().run(transport: transport, identity: device, destination: destination,
+                                      cancellation: cancellation, progress: progress)
+            let fresh = try VerifiedBackup(url: destination, device: device)
+            let resolution = try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: fresh)
+            try fresh.synchronizeRecoveryEvidence()
+            _ = try LensInspection.publish(fresh, to: store)
+            try store.closeReviewedStockRestore(pending, resolution: resolution)
+            return resolution
+        }
+    }
+
     private func withIdleDevice<T: Sendable>(device: DeviceIdentity, idleAcknowledged: Bool,
         cancellation: CancellationToken, operation: @escaping @Sendable (NativeTransport) throws -> T) async throws -> T {
         guard idleAcknowledged else { throw DeviceError.failure("Close the official updater and physically reconnect the USB cap first.") }

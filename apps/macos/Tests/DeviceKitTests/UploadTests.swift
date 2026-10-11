@@ -208,6 +208,66 @@ private func fixture(_ loader: Loader, _ directory: URL, _ name: String, id: UIn
     return try VerifiedBackup(url: url, device: device(id), expectedBootHash: hash)
 }
 
+@Test func reviewedStockResolutionAcceptsOnlyKnownMotionBytesAndStableFreshEvidence() throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader(), store = UpdateStore(directory: directory)
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let stock = try Data(contentsOf: root.appendingPathComponent("firmware/recovery/stock-1.8.0/application.bin"))
+    loader.flash.replaceSubrange(0x5000..<(0x5000 + stock.count), with: stock)
+    let original = try fixture(loader, directory, "original", id: 10)
+    let image = try ApplicationImage.stockRestoration(original)
+    let pending = PendingUpdate(transactionID: UUID(), device: device(), backupURL: original.result.url,
+        image: image.data, version: image.version, setting: nil, createdAt: Date.distantPast,
+        uploadedAt: Date.distantPast, verifiedAt: nil, imageSHA256: digest(image.data),
+        expectedMetadata: Data(original.flash[0x4000..<0x403a]))
+    try store.save(pending)
+    // Each record byte is classified independently; padding/origin/config/flags
+    // cannot become a blanket exception for the whole 44-byte record.
+    for address in 0x4100..<0x412c {
+        loader.flash = original.flash; loader.flash[address] ^= 1
+        let reviewed = try fixture(loader, directory, "review-\(address)", id: 11)
+        let fresh = try fixture(loader, directory, "fresh-\(address)", id: 12)
+        #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: fresh, original: original) }
+        if StockRestoreReview.motionRanges.contains(where: { $0.contains(address) }) {
+            let resolution = try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: fresh)
+            #expect(resolution.changedMotionAddresses == [address] && !resolution.strictVerificationPassed)
+        } else {
+            #expect(throws: DeviceError.self) { try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: fresh) }
+        }
+    }
+    loader.flash = original.flash; loader.flash[0x4100] ^= 1
+    let reviewed = try fixture(loader, directory, "reviewed", id: 11)
+    let same = try fixture(loader, directory, "same-connection", id: 11)
+    #expect(throws: DeviceError.self) { try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: same) }
+    loader.flash[0x4106] ^= 1
+    let changedAgain = try fixture(loader, directory, "changed-again", id: 12)
+    #expect(throws: DeviceError.self) { try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: changedAgain) }
+    for address in [0x4030,0x4040,0x40ff,0x412c,0x4fff,0x6000,0xa000,0x1ffff] {
+        loader.flash = original.flash; loader.flash[0x4100] ^= 1; loader.flash[address] ^= 1
+        let bad = try fixture(loader, directory, "outside-review-\(address)", id: 11)
+        let fresh = try fixture(loader, directory, "outside-fresh-\(address)", id: 12)
+        #expect(throws: DeviceError.self) { try StockRestoreReview.assess(pending: pending, original: original, reviewed: bad, fresh: fresh) }
+    }
+    loader.flash = reviewed.flash; loader.userRowChanged = true
+    let factoryChanged = try fixture(loader, directory, "changed-factory", id: 12)
+    #expect(throws: DeviceError.self) { try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: factoryChanged) }
+    loader.userRowChanged = false
+    let fresh = try fixture(loader, directory, "accepted-fresh", id: 12)
+    let resolution = try StockRestoreReview.assess(pending: pending, original: original, reviewed: reviewed, fresh: fresh)
+    try store.closeReviewedStockRestore(pending, resolution: resolution)
+    #expect(try store.load() == nil)
+    let history = directory.appendingPathComponent("UpdateHistory/\(pending.transactionID).json")
+    let retained = try JSONDecoder().decode(PendingUpdate.self, from: Data(contentsOf: history))
+    #expect(retained.verifiedAt == nil && retained.image == pending.image && retained.needsVerification)
+    let receipts = try FileManager.default.contentsOfDirectory(at: directory.appendingPathComponent("RestoreResolutions"), includingPropertiesForKeys: nil)
+    #expect(receipts.count == 1)
+    #expect((try FileManager.default.attributesOfItem(atPath: receipts[0].path)[.posixPermissions] as? NSNumber)?.intValue == 0o600)
+    #expect(!loader.armed && loader.reports == 0)
+}
+
 @Test func inspectionReplacesStaleCustomHistoryWithStockOrUnsupportedReadback() throws {
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)

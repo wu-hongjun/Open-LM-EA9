@@ -240,3 +240,17 @@ The existing optional library `currentAperture` key is retained for compatibilit
 and labeled Fixed camera aperture in the editor. Device labels the two facts
 separately. New backups identify the app as `0.7.0-prototype`; schema 1 remains.
 The pending stock saved-motion-record verification failure is not relaxed.
+
+## Explicit stock camera-use resolution
+
+The CLI `resolve-stock-after-camera REVIEWED.ea9backup --idle` is a separate
+review path, not an exception inside strict `VerificationEngine`. It requires
+pinned stock code and complete fresh-versus-reviewed flash equality on a new
+same-unit connection, with only specified known motion fields changed versus
+the pre-restore backup. Origin/configuration/padding and factory data stay exact.
+A private `RestoreResolutions` receipt retains the original pending journal and
+proof paths/digests with `strictVerificationPassed: false`; only the active
+pending pointer is removed afterward. Original history keeps `verifiedAt: nil`.
+No backup or pending-journal schema changes, bootloader/record writes or new
+upload qualification are introduced. The prior strict qualification is retained.
+See [the policy](stock-restore-resolution.md) and [hardware outcome](evidence/af-24-upload-2026-10-11.md).

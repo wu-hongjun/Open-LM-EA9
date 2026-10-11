@@ -18,17 +18,21 @@ The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The new **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
 stock speed/PID/callback/completion semantics. Its pure controller passes 7,323
-original-instruction comparisons; it is prepared offline and has not been uploaded
-or camera-qualified. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
+original-instruction comparisons; its authorized upload has completed and awaits reconnect verification;
+it is not camera-qualified. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
 AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
 processing and startup waits. It was byte-verified after physical USB-cap
 reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
 focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
-remain unverified. Original same-unit stock **1.8.0 is restored; its full
-application slot matches the original backup**, and the owner reports much less
-hunting. The strict native transaction remains flagged because camera use before
-readback changed 13 bytes in the stock saved-motion record. Bootloader code and
-factory calibration still match; the comparison settings remain unknown.
+remain unverified. Original same-unit stock **1.8.0 was restored for comparison** and its full
+application slot matched the original backup; the owner reported much less
+hunting. The authorized AF 2.4 upload has now completed and awaits physical
+USB reconnect and strict byte verification before camera use. Camera use before readback changed 13 stock saved-motion bytes, causing strict
+verification to fail. A later explicit reviewed resolution matched a fresh
+backup to that audit and archived the failure without relabeling it a strict
+pass; bootloader and factory data remain exact. [AF 2.4 installation and
+reconnect progress](docs/evidence/af-24-upload-2026-10-11.md) is recorded separately;
+comparison settings from the earlier stock report remain unknown.
 AF 2.1 and 2.2 were previously byte-verified, with 2.1 owner reports of
 motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
@@ -46,6 +50,9 @@ python3 scripts/test-firmware.py --af
 open "dist/Open LM-EA9.app"
 ```
 
+- [AF 2.4 upload/reconnect and reviewed stock resolution](docs/evidence/af-24-upload-2026-10-11.md)
+- [Loaded A7C II AF-S comparison procedure and observations](docs/evidence/af-24-camera-comparison-2026-10-11.md)
+- [Explicit reviewed stock camera-use resolution policy](docs/stock-restore-resolution.md)
 - [App 0.7, AF 2.4 factory baseline and validation](docs/evidence/factory-af-baseline-2026-10-11.md)
 - [Prepared Contax Zeiss 50mm f/1.4 AF 2.4 candidate](firmware/candidates/2.4.0/README.md)
 - [App 0.6 polish, firmware 2.3 hardening and offline validation](docs/evidence/software-polish-2026-10-11.md)

@@ -70,4 +70,4 @@ After the AF 2.2 reconnect/readback on Oct 11, the same app loaded the completed
 2.2.0/50mm f/1.4 history and displayed **USB verified** and **Up to date** without
 a rebuild or explicit HID read. See the [completed installation record](evidence/af-22-upload-2026-10-11.md).
 
-App 0.7 and the AF 2.4 baseline were validated offline; see [the current evidence](evidence/factory-af-baseline-2026-10-11.md). The adapter currently has stock 1.8; its application bytes match the original backup, while the native restore journal remains flagged for the saved-record change after camera use. No 2.4 upload has occurred.
+App 0.7 and the AF 2.4 baseline were validated offline; see [the current evidence](evidence/factory-af-baseline-2026-10-11.md). The stock restore was subsequently resolved by an explicit reviewed-motion policy retaining its strict failure. The authorized AF 2.4 upload completed and awaits physical reconnect/strict byte verification. See [the current hardware record](evidence/af-24-upload-2026-10-11.md).

@@ -16,7 +16,8 @@ import LensCore
             let usage = "Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin"
             guard args == ["inventory"] || (args.count == 3 && ["backup","apply","apply-af","restore-stock"].contains(args[0]) && args[2] == "--idle")
                 || (args.count == 2 && ["verify","inspect","qualify-stock"].contains(args[0]) && args[1] == "--idle")
-                || (args.count == 3 && ["prepare","prepare-af"].contains(args[0])) else { throw DeviceError.failure(usage) }
+                || (args.count == 3 && ["prepare","prepare-af"].contains(args[0]))
+                || (args.count == 3 && args[0] == "resolve-stock-after-camera" && args[2] == "--idle") else { throw DeviceError.failure(usage + " | resolve-stock-after-camera REVIEWED.ea9backup --idle") }
             if ["prepare","prepare-af"].contains(args[0]) {
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
@@ -40,6 +41,10 @@ import LensCore
                 }
             }
             switch args[0] {
+            case "resolve-stock-after-camera":
+                let result = try await service.resolveStockAfterCamera(reviewedBackupURL: URL(fileURLWithPath: args[1]),
+                    device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
+                print("Stock restoration resolved by explicit reviewed motion-record policy.\nStrict verification remains recorded as failed; \(result.changedMotionAddresses.count) motion bytes accepted against the retained review.\nFresh flash SHA-256: \(result.freshFlashSHA256)\nApplication slot SHA-256: \(result.applicationSlotSHA256)\nFresh backup: \(result.freshBackupURL.path)\nNo writes were sent.")
             case "qualify-stock":
                 let pending = try await service.qualifyStockUpload(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
                 print("Stock application re-uploaded: \(pending.image.count) bytes.\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect, then run verify --idle. This does not qualify bootloader restoration or power-loss recovery.")
