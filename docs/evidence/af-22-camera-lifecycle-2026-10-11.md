@@ -1,10 +1,13 @@
 # AF 2.2 / A7C II unloaded lifecycle test — 2026-10-11
 
-Status: **procedure issued; awaiting the owner's first-cycle observations**.
-No camera outcome is assumed. This is a bare-adapter startup, idle and shutdown
-test while the C/Y-to-M converter is unavailable. The planned first cycle uses
-no optical lens or shutter/focus-button command; focus lock and sharpness are
-not tested.
+Status: **partial owner report received; awaiting a complete observed cycle**.
+The owner described the motor sound as normal, then clarified that the ten-second
+idle observation was not performed and the adapter had returned to the computer.
+Startup status, visible movement, stopping and normal shutdown remain unconfirmed.
+This is a bare-adapter startup, idle and shutdown test while the C/Y-to-M converter
+is unavailable. The planned configuration uses no optical lens or
+shutter/focus-button command; focus lock and sharpness are not tested. The actual
+configuration of the initial attempt has not been explicitly confirmed.
 
 The owner explicitly requested testing AF 2.2 startup, motor movement and
 shutdown on the A7C II. The installed candidate is the USB-byte-verified
@@ -38,6 +41,11 @@ additional USB report, upload, rebuild or stock restoration was performed.
    the display and camera shut down normally. If the mechanism is already at
    its reference position, no visible shutdown park movement may occur.
 
+The ten seconds is an observation period for the owner to wait after startup
+movement stops. It is not a delay or idle transition that the firmware should
+produce. The next requested cycle repeats the procedure once from camera off,
+including that wait and the shutdown observation; it has not yet been reported.
+
 Abort this cycle for grinding, repeated hard-stop pushing or continuous drive
 lasting about two seconds. Switch off; if motion continues, remove the battery.
 Do not perform repeated retries or a second cycle after an abnormal result.
@@ -65,19 +73,34 @@ Sony sources checked for this procedure:
 
 | Observation | Owner result |
 | --- | --- |
-| Bare adapter / lens / converter actually mounted | Awaiting report |
+| Bare adapter / lens / converter actually mounted | Owner said they put it on; lens/converter configuration unconfirmed |
 | Camera firmware / battery | Unverified |
 | Initial still-photo exposure mode / focus mode / Pre-AF | Unverified |
 | Settings changed after startup | Unverified |
 | Startup normal / error text | Awaiting report |
-| Motor sound / visible motion / direction / approximate duration | Awaiting report |
-| Movement stopped / ten-second idle behavior | Awaiting report |
+| Motor sound | Owner described it as normal |
+| Visible motion / direction / approximate duration / stopping | Unverified |
+| Ten-second idle behavior | Not observed; owner clarified they did not wait |
 | Displayed aperture / other metadata if visible | Unverified |
 | Shutdown park movement / duration / normal power-off | Awaiting report |
 | Grinding / sustained drive / battery removal / other fault | Awaiting report |
 | Video / timing evidence supplied | None supplied |
 
-Actual responses will be retained verbatim and separated from interpretation.
+Owner responses, in order:
+
+> I put it on, the motor sounded normal, I don't observe a 10sec idle
+
+> I did not wait, it ic connected to the computer now, what should we do now?
+
+An OS HID descriptor inventory at **2026-10-11 08:55:26 America/New_York**
+detected one matching adapter with the qualified descriptor (command exit 0).
+It sent **zero HID reports** and did not read a fresh firmware version or flash
+image. AF 2.2 installation verification remains the earlier, separately recorded
+USB read-back. No upload or stock restoration was needed for this observation.
+One complete camera cycle was requested; its result is pending. The initial
+partial report is not evidence of homing accuracy or a passing lifecycle test.
+
+Responses are retained verbatim and separated from interpretation.
 Owner-estimated durations are not measured latency. No E-mount trace, electrical
 measurement, encoder reference or travel calibration is available in this test.
 The [machine-readable record](af-22-camera-lifecycle-2026-10-11.json) retains

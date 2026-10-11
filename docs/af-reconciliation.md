@@ -3,8 +3,10 @@
 The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 is installed and
 byte-verified after owner-confirmed physical USB-cap reconnect. It passed the
 [software checks](evidence/af-reconciliation-2026-10-10.md); see the separate
-[current installation record](evidence/af-22-upload-2026-10-11.md). No 2.2 camera
-behavior is verified yet. The owner reported motor movement and proper A7C II
+[current installation record](evidence/af-22-upload-2026-10-11.md). The initial
+[2.2 camera observation](evidence/af-22-camera-lifecycle-2026-10-11.md) reports
+normal motor sound but omits the idle wait; startup, stopping and shutdown remain
+unconfirmed. The owner reported motor movement and proper A7C II
 shutdown with the earlier byte-verified 2.1 image; focus acquisition and sharpness
 remain pending the C/Y-to-M converter.
 

@@ -1,5 +1,5 @@
 {
-  "stage": "procedure-issued-awaiting-owner-observations",
+  "stage": "partial-owner-report-awaiting-complete-observed-cycle",
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
   "cameraBody": "Sony A7C II",
@@ -21,9 +21,12 @@
     "firstCycleCount": 1,
     "continuousDriveOperatorCutoffSecondsApproximate": 2
   },
-  "cameraTestPerformed": false,
-  "ownerObservationsReceived": false,
-  "ownerStatementsVerbatim": [],
+  "cameraTestPerformed": true,
+  "ownerObservationsReceived": true,
+  "ownerStatementsVerbatim": [
+    "I put it on, the motor sounded normal, I don't observe a 10sec idle",
+    "I did not wait, it ic connected to the computer now, what should we do now?"
+  ],
   "observations": {
     "actualMountedConfiguration": null,
     "cameraFirmwareVersion": null,
@@ -34,7 +37,7 @@
     "settingsChangedAfterStartup": null,
     "startupNormal": null,
     "startupErrorText": null,
-    "motorSound": null,
+    "motorSound": "Owner described as normal; duration and stopping unconfirmed",
     "visibleMotorMovement": null,
     "motorDirectionRelativeToCamera": null,
     "motorDurationOwnerEstimate": null,
@@ -46,7 +49,9 @@
     "shutdownDurationOwnerEstimate": null,
     "continuedNoiseOrMotion": null,
     "batteryRemovalRequired": null,
-    "otherAbnormalBehavior": null
+    "otherAbnormalBehavior": null,
+    "idleObservationPerformed": false,
+    "returnedToComputer": true
   },
   "loadedLensAFSTestPerformed": false,
   "focusLockVerified": false,
@@ -58,5 +63,18 @@
   "hostUSBReportsSentForThisCameraTest": 0,
   "firmwareUploadPerformedForThisCameraTest": false,
   "stockRestorationPerformedForThisCameraTest": false,
-  "repeatCyclePerformed": false
+  "repeatCyclePerformed": false,
+  "cameraLifecycleTestComplete": false,
+  "nextCompleteCycleRequested": true,
+  "nextCompleteCycleResultReceived": false,
+  "idleObservationExplanation": "Owner waits approximately ten seconds after startup motion stops; not a firmware delay or automatic idle transition.",
+  "usbDescriptorInventoryAfterOwnerReturn": {
+    "checkedAt": "2026-10-11T08:55:26.506491-04:00",
+    "command": "dist/ea9ctl inventory",
+    "exitCode": 0,
+    "matchingAdapterCount": 1,
+    "qualifiedDescriptorCount": 1,
+    "hostHIDReportsSent": 0,
+    "scope": "OS HID descriptors only; no fresh firmware version or flash verification"
+  }
 }
