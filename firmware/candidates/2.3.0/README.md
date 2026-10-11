@@ -1,10 +1,11 @@
-# AF 2.3.0 — offline candidate
+# AF 2.3.0 — 50mm test candidate
 
 This candidate is prepared for **Contax Zeiss 50mm f/1.4**. It enables the
 upstream-derived AF controller with the modular reference/completion policies and
-October 11 correctness fixes. It is **not installed or camera-qualified**.
-The adapter remains on USB-verified 2.2.0. Do not substitute this image for
-original stock recovery.
+October 11 correctness fixes. Its upload was acknowledged on October 11;
+**physical-reconnect byte verification is pending, and it is not camera-qualified**.
+See the [current hardware record](../../../docs/evidence/af-23-upload-2026-10-11.md).
+Do not substitute this image for original stock recovery.
 
 | Property | Value |
 |---|---|
@@ -16,8 +17,9 @@ original stock recovery.
 | Template SHA-256 | `8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88` |
 | Hardware reports during preparation | 0 |
 
-The [adjacent manifest](contax-zeiss-50-f1-4.manifest.json) identifies the exact
-image/profile/template. The [build manifest](../../../docs/evidence/af-hardening-build-manifest-2026-10-11.json)
+The [adjacent manifest](contax-zeiss-50-f1-4.manifest.json) preserves the original
+offline preparation state and identifies the exact image/profile/template;
+later installation results are in the hardware record. The [build manifest](../../../docs/evidence/af-hardening-build-manifest-2026-10-11.json)
 pins production sources and toolchain dependencies. The [correctness audit](../../../docs/audits/firmware-correctness-2026-10-11.md)
 records counterexamples, fixes and finite test limits. The [polish record](../../../docs/evidence/software-polish-2026-10-11.md)
 connects the app, native admission, image and tests.

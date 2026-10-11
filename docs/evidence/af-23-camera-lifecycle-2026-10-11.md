@@ -60,7 +60,7 @@ not a measured firmware deadline or travel calibration.
 
 | Observation | Result |
 |---|---|
-| Upload / physical-reconnect byte verification | Pending |
+| Upload / physical-reconnect byte verification | Upload acknowledged; byte verification pending |
 | Empty adapter, no converter, camera USB disconnected | Unconfirmed |
 | Initial still-photo exposure mode / MF / Pre-AF | Unconfirmed |
 | Camera startup / errors | Unconfirmed |

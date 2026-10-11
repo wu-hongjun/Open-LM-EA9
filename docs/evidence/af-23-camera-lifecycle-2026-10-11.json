@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "planned-awaiting-upload-and-USB-verification",
+  "stage": "planned-upload-acknowledged-awaiting-USB-verification",
   "cameraBody": "Sony A7C II",
   "firmwareVersion": "2.3.0",
   "imageSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
@@ -53,5 +53,7 @@
   "hardwareTimingMeasured": false,
   "protocolTrafficCaptured": false,
   "opticalAFQualified": false,
-  "hostUSBReportsSentForCameraTest": 0
+  "hostUSBReportsSentForCameraTest": 0,
+  "verifiedUSBTransactionID": null,
+  "uploadedUSBTransactionID": "65889BD7-5B15-4BDC-963C-17040F5CD461"
 }
