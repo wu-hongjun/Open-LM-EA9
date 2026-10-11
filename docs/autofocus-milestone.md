@@ -2,8 +2,8 @@
 
 Current follow-up: [AF 2.2 reconciliation](af-reconciliation.md) separates position
 origin, reference state, timing and completion policies using the REA findings.
-It is host-tested and uploaded; physical reconnect and byte verification are
-pending. See the [2.2 installation record](evidence/af-22-upload-2026-10-11.md)
+It is host-tested, installed and byte-verified after physical USB-cap reconnect.
+See the [2.2 installation record](evidence/af-22-upload-2026-10-11.md)
 and [software evidence](evidence/af-reconciliation-2026-10-10.md). The owner
 confirmed motor movement and proper shutdown with 2.1; these observations do not
 qualify 2.2. Focus tests await the C/Y-to-M converter.
@@ -62,8 +62,8 @@ Changes made while enabling this path:
   target must contain `servo_move_rel` and `motor_drive`; the metadata target
   must contain neither.
 
-The camera version byte is `0x21` (2.1); 2.1.0 is the admitted experimental loader version.
-The 50mm 2.1.0 image is now installed and byte-verified after physical USB-cap
+The first AF release encodes camera version `0x21` (2.1) and loader version 2.1.0.
+The 50mm 2.1.0 image was installed and byte-verified after physical USB-cap
 reconnect. The owner subsequently confirmed motor movement and proper shutdown;
 startup details and AF-S focus acquisition remain unverified.
 See [the upload record](evidence/af-50-upload-2026-10-10.md). An all-zero template profile

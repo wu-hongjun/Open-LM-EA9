@@ -1,21 +1,18 @@
 # First A7C II AF-S test: Contax Zeiss 50mm f/1.4
 
-Current installation: **AF 2.2.0 has been uploaded; physical reconnect and byte
-verification are pending**. Keep the adapter off the camera until verification
-passes. See the [current upload record](evidence/af-22-upload-2026-10-11.md).
+Current installation: **AF 2.2.0 is installed and byte-verified after the
+owner's physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
+the exact candidate; protected flash, upper flash and factory checks passed.
+See the [completed upload record](evidence/af-22-upload-2026-10-11.md).
+It remains **experimental and not camera-qualified**. The camera procedure below
+is the next step; loaded AF-S focus lock/sharpness await the C/Y-to-M converter.
 
-The earlier 50mm f/1.4 candidate was installed and **byte-verified as firmware 2.1.0**
-after the owner's physical USB-cap reconnect. Two full flash reads matched the
-exact image; protected flash and factory data checks passed. It remains
-**experimental and not camera-qualified**. See
-[the completed upload/verification record](evidence/af-50-upload-2026-10-10.md).
-The owner has since confirmed motor movement and proper shutdown. Focus lock
-and sharpness cannot yet be tested because the C/Y-to-M converter has not arrived.
-The new **2.2.0** candidate has now been uploaded but is not yet byte-verified; see the
-[reconciliation design](af-reconciliation.md) and
-[current evidence](evidence/af-reconciliation-2026-10-10.md).
-The camera procedure below also applies to 2.2 after its reconnect/byte
-verification completes. Earlier 2.1 motor/shutdown observations do not qualify 2.2.
+The owner reported motor movement and proper A7C II shutdown with the earlier
+byte-verified 2.1 image. These observations do not qualify 2.2 startup, shutdown,
+motor behavior or focus. The historical installation remains in
+[the 2.1 record](evidence/af-50-upload-2026-10-10.md), and the
+[software evidence](evidence/af-reconciliation-2026-10-10.md) records its later
+owner observations and 2.2 host checks.
 The later REA ledger identified a retained factory copy overlapping the legacy
 profile row. The final 2.2 candidate moves its profile to `0x9f00` and stops before
 that region. See [the layout assessment](af-reconciliation.md); upgrading from
@@ -25,18 +22,18 @@ that region. See [the layout assessment](af-reconciliation.md); upgrading from
 
 - App: `dist/Open LM-EA9.app`, version 0.5.0, build 8.
 - CLI: `dist/ea9ctl` (signed locally, same DeviceKit transport).
-- Candidate: `artifacts/firmware-milestone/af-ready-2026-10-10/contax-zeiss-50-f1-4.bin`.
+- Historical 2.1 candidate: `artifacts/firmware-milestone/af-ready-2026-10-10/contax-zeiss-50-f1-4.bin`.
 - Historical 2.1 evidence: [AF readiness record](evidence/autofocus-ready-2026-10-10.md).
-- Prepared 2.2: `artifacts/firmware-milestone/af-reconcile-2026-10-10/contax-zeiss-50-f1-4.bin`,
+- Installed 2.2: `artifacts/firmware-milestone/af-reconcile-2026-10-10/contax-zeiss-50-f1-4.bin`,
   adjacent manifest. This final 2.2 image is 20,480 bytes with profile at `0x9f00`. Image SHA-256
   `c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98`.
 
-The installed 2.1 candidate is 20,736 bytes. It reports 50 mm, nominal f/1.4, lens name
-`Contax Zeiss 50mm f/1.4`, camera version 2.1 and loader version 2.1.0.
-AF template SHA-256:
-`6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552`.
-Personalized image SHA-256:
-`dc21166cdd87727188d20738581eb911b387714660d5de263fa7dac8b3b2a131`.
+The installed 2.2 candidate is 20,480 bytes, with its profile at `0x9f00`.
+It reports 50 mm, nominal f/1.4, lens name `Contax Zeiss 50mm f/1.4`, camera
+version 2.2 and loader version 2.2.0. Its template SHA-256 is
+`e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36`;
+its personalized image SHA-256 is
+`c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98`.
 
 The stored aperture is reported metadata, not a measurement of the aperture
 ring. Changing the optical aperture later requires a matching profile setting
@@ -49,10 +46,10 @@ The original 1.8.0 restore source is also saved in the
 [committed recovery bundle](../firmware/recovery/stock-1.8.0/README.md), with an
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
-The current app/CLI AF installation action selects **2.2.0**. The original 2.1
-installation is already complete; do not interpret the following sequence as
-something performed in this reconciliation session. The primary Device dropdown
-changes lens settings while preserving the verified installed variant.
+The current app/CLI AF installation action selects **2.2.0**. This adapter
+has completed the upload/reconnect/byte-verification sequence; the steps below
+remain the procedure for future changes. The primary Device dropdown changes
+lens settings while preserving the verified installed variant.
 
 
 1. Close TECHART Update and other USB clients. Connect the adapter itself through

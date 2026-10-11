@@ -35,5 +35,6 @@ Verification performed entirely offline:
 No USB report, stock upload, bootloader write or camera test was performed for
 this archival work. The earlier stock upload/readback result remains valid;
 AF-to-stock, arbitrary interrupted-transfer/power-loss and bootloader restoration
-remain physically unqualified. AF 2.2 is still awaiting physical reconnect and
-readback, as recorded in [its separate upload evidence](af-22-upload-2026-10-11.md).
+remain physically unqualified. At this archival checkpoint, AF 2.2 awaited
+physical reconnect and readback. Its subsequent completed verification is recorded
+in [the separate upload evidence](af-22-upload-2026-10-11.md).

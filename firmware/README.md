@@ -9,8 +9,8 @@ motion disabled**. It uses C for the inspected SAMD21 register and E-mount paths
 it is not the production autofocus firmware or a decision against a later Rust
 implementation. The macOS app and USB loader transport use native Swift.
 
-The next opt-in **AF 2.2 candidate** reconciles REA findings with the upstream
-controller and is prepared for Contax Zeiss 50mm f/1.4:
+The opt-in **AF 2.2 candidate** reconciles REA findings with the upstream
+controller and is installed for Contax Zeiss 50mm f/1.4:
 
 ```sh
 python3 scripts/build-firmware.py --variant reconciled-af
@@ -19,14 +19,14 @@ python3 scripts/test-firmware.py --af
 ```
 
 Build products are separate under `ea9/build/reconciled`; the metadata 2.0 and
-installed AF 2.1 templates/pins remain unchanged. The native app admits all three
+legacy AF 2.1 templates/pins remain unchanged. The native app admits all three
 versions for backed-up upload, reconnect verification and stock restoration.
 `--variant upstream-af` now verifies the frozen 2.1 template rather than compiling
 current source under that version. A source snapshot/manifest was preserved
 locally before the new changes.
 
-The 50mm 2.2 image has been uploaded; **physical reconnect and USB byte
-verification are pending**. See the [installation record](../docs/evidence/af-22-upload-2026-10-11.md).
+The 50mm 2.2 image is installed and **USB byte-verified after physical reconnect**.
+See the [installation record](../docs/evidence/af-22-upload-2026-10-11.md).
 The owner reported motor movement and proper A7C II shutdown with the earlier
 byte-verified 2.1 image. No 2.2 camera behavior is qualified; actual focus
 lock/sharpness await the C/Y-to-M converter.

@@ -14,10 +14,10 @@ upload/read-back path for lens metadata. The current app (0.5.0, build 8) refres
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The modular AF 2.2 candidate has been uploaded; physical USB-cap reconnect and
-byte verification are pending. AF 2.1 was previously byte-verified, with owner
-reports of motor movement and proper shutdown. Camera behavior remains unverified
-for 2.2; focus lock/sharpness await the owner's C/Y-to-M converter.
+The modular AF 2.2 candidate is installed and byte-verified after physical
+USB-cap reconnect. AF 2.1 was previously byte-verified, with owner reports of
+motor movement and proper shutdown. Camera behavior remains unverified for 2.2;
+focus lock/sharpness await the owner's C/Y-to-M converter.
 The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 
 ```sh
@@ -77,13 +77,14 @@ An A7C II photograph confirms 50mm, f/1.4 and the Contax Zeiss lens name in save
 EXIF. Focus mode, the camera display and clean shutdown remain unconfirmed
 for that metadata-only session. A separate upstream-AF
 candidate now has bounded peripheral waits, native AF upload/restoration support
-and passes host and lifecycle checks. Its 50mm f/1.4 image is now installed and
-byte-verified as firmware 2.1.0 after physical reconnect. The owner has since
+and passes host and lifecycle checks. Its earlier 50mm f/1.4 image was installed
+and byte-verified as firmware 2.1.0 after physical reconnect. The owner subsequently
 confirmed motor movement and proper shutdown on the
-A7C II; focus qualification remains pending the C/Y-to-M converter. The next
+A7C II; focus qualification remains pending the C/Y-to-M converter. The current
 2.2.0 candidate makes the reference/timing/completion policies explicit, passes
-host checks and is packaged separately. It has now been uploaded; reconnect and
-byte verification are pending. See the [current installation record](docs/evidence/af-22-upload-2026-10-11.md).
+host checks and is packaged separately. It is now installed and byte-verified as
+2.2.0 after owner-confirmed physical reconnect, with protected flash and factory
+data checks passed. See the [current installation record](docs/evidence/af-22-upload-2026-10-11.md).
 Application USB management and broader camera qualification remain pending.
 Backup uses the qualified stock loader's CHECK/READ operations; follow
 the user guide's closed-updater and physical-reconnect prerequisite.

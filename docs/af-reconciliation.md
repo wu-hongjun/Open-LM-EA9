@@ -1,7 +1,7 @@
 # AF 2.2: reference, timing and completion reconciliation
 
-The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 has been uploaded;
-physical USB-cap reconnect and byte verification are pending. It passed the
+The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 is installed and
+byte-verified after owner-confirmed physical USB-cap reconnect. It passed the
 [software checks](evidence/af-reconciliation-2026-10-10.md); see the separate
 [current installation record](evidence/af-22-upload-2026-10-11.md). No 2.2 camera
 behavior is verified yet. The owner reported motor movement and proper A7C II

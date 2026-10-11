@@ -51,3 +51,7 @@ runtime network requests were added. The release was built and inspected with
 the connected adapter. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;
 the 85mm dropdown selection was exercised and restored to 50mm without an upload.
 See [the test and hardware-boundary evidence](evidence/af-reconciliation-2026-10-10.md).
+
+After the AF 2.2 reconnect/readback on Oct 11, the same app loaded the completed
+2.2.0/50mm f/1.4 history and displayed **USB verified** and **Up to date** without
+a rebuild or explicit HID read. See the [completed installation record](evidence/af-22-upload-2026-10-11.md).
