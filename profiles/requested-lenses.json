@@ -1,0 +1,97 @@
+{
+  "inventory_schema_version": 1,
+  "source": "User-supplied inventory, 2026-10-10",
+  "target_camera": "Sony A7C II",
+  "adaptation": "Contax C/Y to Leica M passive adapter, then Techart LM-EA9 to Sony E",
+  "status": "Metadata inventory only; not an implemented firmware configuration format",
+  "lenses": [
+    {
+      "id": "contax-zeiss-28-f2",
+      "display_name": "Contax Zeiss 28mm f/2",
+      "kind": "prime",
+      "focal_length_mm": 28,
+      "nominal_maximum_aperture": 2.0,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null
+    },
+    {
+      "id": "contax-zeiss-35-f1-4",
+      "display_name": "Contax Zeiss 35mm f/1.4",
+      "kind": "prime",
+      "focal_length_mm": 35,
+      "nominal_maximum_aperture": 1.4,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null
+    },
+    {
+      "id": "contax-zeiss-50-f1-4",
+      "display_name": "Contax Zeiss 50mm f/1.4",
+      "kind": "prime",
+      "focal_length_mm": 50,
+      "nominal_maximum_aperture": 1.4,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null
+    },
+    {
+      "id": "contax-zeiss-85-f1-4",
+      "display_name": "Contax Zeiss 85mm f/1.4",
+      "kind": "prime",
+      "focal_length_mm": 85,
+      "nominal_maximum_aperture": 1.4,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null
+    },
+    {
+      "id": "contax-zeiss-100-f2-8-macro",
+      "display_name": "Contax Zeiss 100mm f/2.8 Macro",
+      "kind": "macro-prime",
+      "focal_length_mm": 100,
+      "nominal_maximum_aperture": 2.8,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null,
+      "notes": "Manual focus reference and macro distance mapping need calibration."
+    },
+    {
+      "id": "contax-zeiss-135-f2-8",
+      "display_name": "Contax Zeiss 135mm f/2.8",
+      "kind": "prime",
+      "focal_length_mm": 135,
+      "nominal_maximum_aperture": 2.8,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null
+    },
+    {
+      "id": "contax-zeiss-28-70-f3-5",
+      "display_name": "Contax Zeiss 28-70mm f/3.5 (user-supplied designation)",
+      "kind": "zoom",
+      "focal_length_range_mm": [
+        28,
+        70
+      ],
+      "active_focal_length_mm": null,
+      "reported_nominal_maximum_aperture": 3.5,
+      "maximum_aperture_by_focal_length": null,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null,
+      "notes": "Current zoom setting must be supplied manually; verify the exact model and aperture variation."
+    },
+    {
+      "id": "zeiss-jena-biotar-55-f2",
+      "display_name": "Zeiss Jena Biotar 58mm f/2",
+      "kind": "prime",
+      "focal_length_mm": 58,
+      "nominal_maximum_aperture": 2.0,
+      "physical_current_aperture": null,
+      "optical_calibration": null,
+      "focus_reference": null,
+      "notes": "User confirmed the engraved focal length is 58mm on 2026-10-10. Optical calibration and focus reference remain unmeasured."
+    }
+  ]
+}

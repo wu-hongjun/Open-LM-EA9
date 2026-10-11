@@ -1,0 +1,1 @@
+AF origin, reference, timing and completion counterexamples passed

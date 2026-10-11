@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "verification": "passed",
+  "scope": "CHECK and qualified memory READ only; no programming/reset/debug attachment",
+  "identity_matches_previous": true,
+  "CHECK_version": "1.8.0",
+  "request_reply_counts": {
+    "CHECK": 12,
+    "READ": 4108
+  },
+  "total_exchanges": 4120,
+  "sessions": [
+    {
+      "name": "device-id-read1",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "device-id-read2",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "nvm-status-read1",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "nvm-status-read2",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "user-row-read1",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "user-row-read2",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "calibration-read1",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "calibration-read2",
+      "CHECK": 1,
+      "READ": 1
+    },
+    {
+      "name": "port-a-read1",
+      "CHECK": 1,
+      "READ": 2
+    },
+    {
+      "name": "port-a-read2",
+      "CHECK": 1,
+      "READ": 2
+    },
+    {
+      "name": "full-flash-read1",
+      "CHECK": 1,
+      "READ": 2048
+    },
+    {
+      "name": "full-flash-read2",
+      "CHECK": 1,
+      "READ": 2048
+    }
+  ],
+  "repeated_dumps": {
+    "device-id": {
+      "address": "0x41002018",
+      "length": 64,
+      "identical": true,
+      "sha256_read1": "78059eb5b6d03e970447802141d36cc659e0639dcada5de1a914c79fc703b262",
+      "sha256_read2": "78059eb5b6d03e970447802141d36cc659e0639dcada5de1a914c79fc703b262"
+    },
+    "nvm-status": {
+      "address": "0x41004000",
+      "length": 64,
+      "identical": true,
+      "sha256_read1": "5e453ed1281b319c244307ed533f43c4ed2f228904945a27e6850733feebd7e8",
+      "sha256_read2": "5e453ed1281b319c244307ed533f43c4ed2f228904945a27e6850733feebd7e8"
+    },
+    "user-row": {
+      "address": "0x00804000",
+      "length": 64,
+      "identical": true,
+      "sha256_read1": "a5ad5939f6b7333747cf22f5ef5643224a76eee8340a2620cbba1d29b2ebde79",
+      "sha256_read2": "a5ad5939f6b7333747cf22f5ef5643224a76eee8340a2620cbba1d29b2ebde79"
+    },
+    "calibration": {
+      "address": "0x00806000",
+      "length": 64,
+      "identical": true,
+      "sha256_read1": "65f56ee43ed45e5711c19d4363e06cce200d490b344101e745815b00076d67e8",
+      "sha256_read2": "65f56ee43ed45e5711c19d4363e06cce200d490b344101e745815b00076d67e8"
+    },
+    "port-a": {
+      "address": "0x41004400",
+      "length": 128,
+      "identical": true,
+      "sha256_read1": "8d595b1a1a40e1ee38b9b01351998ab724102ceeb4f8776918ad35f128dbb5a5",
+      "sha256_read2": "8d595b1a1a40e1ee38b9b01351998ab724102ceeb4f8776918ad35f128dbb5a5"
+    },
+    "full-flash": {
+      "address": "0x00000000",
+      "length": 131072,
+      "identical": true,
+      "sha256_read1": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+      "sha256_read2": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01"
+    }
+  },
+  "chip": {
+    "DID": "0x1001030B",
+    "part": "ATSAMD21E17A",
+    "die_revision": "D",
+    "NVM_PARAM": "0x00030800",
+    "page_bytes": 64,
+    "pages": 2048,
+    "main_flash_bytes": 131072,
+    "RWWEE_pages": 0
+  },
+  "protection": {
+    "BOOTPROT": 7,
+    "boot_protected_bytes": 0,
+    "EEPROM": 7,
+    "emulation_bytes": 0,
+    "security_bit_active": false,
+    "live_lock_bits": "0xFFFF",
+    "user_lock_bits": "0xFFFF",
+    "NVM_MANW": true,
+    "NVM_error_flags": 0
+  },
+  "PA23_samples": [
+    {
+      "direction_output": false,
+      "output_latch_high": false,
+      "input_high": true,
+      "pincfg": "0x06",
+      "mux_function": 0
+    },
+    {
+      "direction_output": false,
+      "output_latch_high": false,
+      "input_high": true,
+      "pincfg": "0x06",
+      "mux_function": 0
+    }
+  ],
+  "calibration": {
+    "USB_TRANSN": 5,
+    "USB_TRANSP": 29,
+    "USB_TRIM": 3,
+    "DFLL48M_COARSE": 23
+  },
+  "flash_layout": {
+    "installed_image_matches_cache": true,
+    "installed_image_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "previous_boot_and_application_match": true,
+    "additional_image_address": "0xA080",
+    "additional_image_matches_cache": true,
+    "command_shaped_blocks": {
+      "0xA000": "CHECK",
+      "0xA040": "START"
+    },
+    "all_ff_from_0xF080": true
+  },
+  "limitations": [
+    "Cold boot not confirmed by a physical reconnect in this run",
+    "No voltage, continuity, chip marking or SWD pad measurement",
+    "No independent restoration or custom service execution",
+    "User-row backup is a 64-byte window including all documented 64 fuse bits; not all auxiliary/lockbit/serial rows",
+    "PA23 is a digital register sample, not a voltage measurement; register byte reads are not atomic",
+    "Second image origin/function is unknown; not a proven recovery slot"
+  ]
+}

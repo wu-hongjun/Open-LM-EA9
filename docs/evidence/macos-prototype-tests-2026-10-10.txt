@@ -1,0 +1,46 @@
+Building for debugging...
+[5 / 35] DeviceKit
+[9 / 38] LensCore
+[14 / 24] LensCore
+[18 / 24] LensCoreTests-product
+[20 / 26] LensCoreTests-product
+[23 / 27] OpenLMEA9-product
+[25 / 28] LensCoreTests-product
+[27 / 28] LensCoreTests-product
+Build complete! (2.16 sec)
+Test Suite 'All tests' started at 2026-10-10 19:33:27.345.
+Test Suite 'All tests' passed at 2026-10-10 19:33:27.346.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'All tests' started at 2026-10-10 19:33:27.442.
+Test Suite 'All tests' passed at 2026-10-10 19:33:27.443.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test savingAndImportingPreserveRevisionAndOriginalData() started.
+◇ Test requestedInventoryKeepsUnknownsAndDesignations() started.
+◇ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() started.
+◇ Test corruptLibraryIsNeverReseededOverTheOriginal() started.
+◇ Test metadataValidationRejectsImpossibleValues() started.
+✔ Test corruptLibraryIsNeverReseededOverTheOriginal() passed after 0.004 seconds.
+✔ Test requestedInventoryKeepsUnknownsAndDesignations() passed after 0.008 seconds.
+✔ Test metadataValidationRejectsImpossibleValues() passed after 0.008 seconds.
+✔ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() passed after 0.008 seconds.
+✔ Test savingAndImportingPreserveRevisionAndOriginalData() passed after 0.015 seconds.
+✔ Test run with 5 tests in 0 suites passed after 0.015 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test timeoutCancellationAndShortReportStopWithoutRetry() started.
+◇ Test verifiedBackupPublishesCompleteHashedPrivateFiles() started.
+◇ Test mismatchingSecondPassNeverPublishes() started.
+◇ Test commandWhitelistAndGoldenBytes() started.
+◇ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() started.
+◇ Test qualificationFailsBeforeRegisterOrFurtherReads() started.
+✔ Test commandWhitelistAndGoldenBytes() passed after 0.001 seconds.
+✔ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() passed after 0.014 seconds.
+✔ Test mismatchingSecondPassNeverPublishes() passed after 0.019 seconds.
+✔ Test verifiedBackupPublishesCompleteHashedPrivateFiles() passed after 0.022 seconds.
+✔ Test qualificationFailsBeforeRegisterOrFurtherReads() passed after 0.037 seconds.
+✔ Test timeoutCancellationAndShortReportStopWithoutRetry() passed after 0.038 seconds.
+✔ Test run with 6 tests in 0 suites passed after 0.038 seconds.

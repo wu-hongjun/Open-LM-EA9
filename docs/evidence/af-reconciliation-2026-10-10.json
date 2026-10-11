@@ -1,0 +1,143 @@
+{
+  "sessionDate": "2026-10-10",
+  "recordedAt": "2026-10-11T04:01:30.928882+00:00",
+  "status": "af-2.2-prepared-app-0.5-built-2.1-remains-installed",
+  "firmwareCandidate": {
+    "variant": "reconciled-af",
+    "version": "2.2.0",
+    "status": "prepared-not-installed",
+    "bytes": 20480,
+    "imageSHA256": "c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98",
+    "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+    "templateSHA256": "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36",
+    "profileAddress": "0x9f00",
+    "applicationEnd": "0xa000",
+    "profileID": "contax-zeiss-50-f1-4",
+    "lensName": "Contax Zeiss 50mm f/1.4",
+    "usbReportsSent": 0,
+    "cameraQualified": false
+  },
+  "firmwareTemplateSHA256": {
+    "2.0.0": "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293",
+    "2.1.0": "6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552",
+    "2.2.0": "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36"
+  },
+  "firmwareSourceManifest": "docs/evidence/af-reconcile-build-manifest-2026-10-10.json",
+  "baselineSourceManifestSHA256": "49abfd21abc6f804ffc3d02805916ad8d3c91aba873dd073115fa19469bed07f",
+  "legacyOfflineHistoryCheck": {
+    "passed": true,
+    "source": "existing completed journal and applied history; no fresh device read",
+    "firmwareVersion": "2.1.0",
+    "imageSHA256": "dc21166cdd87727188d20738581eb911b387714660d5de263fa7dac8b3b2a131",
+    "legacyTemplatePreserved": true,
+    "completedJournalPreserved": true,
+    "profileUnchanged": true,
+    "usbReportsSent": 0
+  },
+  "app": {
+    "version": "0.5.0",
+    "build": "8",
+    "executableSHA256": "e8cb1a943b2562661e942046d985ca3c28de01274bab42f09cf2bd85464deb94",
+    "cliSHA256": "a469dd00383882d1ae09b0d0f7b3a00bb556ab57c5809f7077138edda0c07cfd",
+    "adHocSignatureVerified": true,
+    "autoRefreshSeconds": 2,
+    "autoRefreshSendsHIDFeatureReports": false,
+    "deviceDropdownProfiles": 8,
+    "UIInspectedWithConnectedUnit": true,
+    "displayedCachedFirmware": "2.1.0",
+    "displayedVerifiedLens": "Contax Zeiss 50mm f/1.4",
+    "localDropdownTest": "85mm selected; installed 50mm unchanged; local selection restored to 50mm",
+    "AF22UpgradeInspected": "separate explicit action in USB tools; never clicked",
+    "finalLayoutBuildInspectedWithConnectedUnit": true
+  },
+  "checks": {
+    "nativeNamedTests": 40,
+    "lensCoreNamedTests": 7,
+    "deviceKitNamedTests": 29,
+    "appWorkflowNamedTests": 4,
+    "nativeUploadVariantCases": [
+      "2.0.0",
+      "2.1.0",
+      "2.2.0"
+    ],
+    "actualMainLifecycleCases": 13,
+    "crossLanguagePrimeProfileCases": 14,
+    "pureReconciliationAddressAndUndefinedBehaviorSanitizersPassed": true,
+    "firmwareLinkBoundsAndNoFlashLoggingPassed": true,
+    "metadataRebuildPreservedOriginalHash": true,
+    "OSInventoryQualifiedAdapters": 1,
+    "newLayoutRetainsSyntheticFactoryUpperRegion": true,
+    "linkerProfileSymbolAddress": "0x9f00"
+  },
+  "hardwareOperationsThisMilestone": {
+    "OSDescriptorInventory": true,
+    "explicitHIDFeatureReportsSent": 0,
+    "newFirmwareUpload": false,
+    "freshDeviceVersionRead": false,
+    "freshFlashReadback": false,
+    "cameraTestPerformedByAgent": false
+  },
+  "ownerCameraObservation": {
+    "imageVersion": "2.1.0",
+    "evidenceType": "owner report, no timing trace or new photo",
+    "verbatim": "Shutdown is proper. I can't test actual focus right now because I am waiting for C/Y to M converter, but the motor does move.",
+    "motorMovement": "reported",
+    "cleanShutdown": "reported",
+    "startupDetails": "unverified",
+    "AFSFocusLock": "unverified",
+    "sharpness": "unverified",
+    "loadedCYLensQualification": "pending converter"
+  },
+  "logs": {
+    "firmware-build": {
+      "path": "docs/evidence/af-reconcile-firmware-build-2026-10-10.txt",
+      "sha256": "f3195dbe0e3ed1a37c669fd6d40116ef572178a72acb9ca98f54c7961b47c5de"
+    },
+    "firmware-tests": {
+      "path": "docs/evidence/af-reconcile-firmware-tests-2026-10-10.txt",
+      "sha256": "2a3820cfbe1de6ed056b8f7b7b9e479ceb5462282b8381c0d5e8875ead88aef1"
+    },
+    "app-tests": {
+      "path": "docs/evidence/af-reconcile-app-tests-2026-10-10.txt",
+      "sha256": "d031c4214e807b49389acd8d787b998687f04e565a045e614e0f6cf05539749d"
+    },
+    "app-build": {
+      "path": "docs/evidence/af-reconcile-app-build-2026-10-10.txt",
+      "sha256": "5b74d06b558425837f57e11cf076d721e121a3ef7c6cc528be3cdbe0e47209df"
+    },
+    "metadata-preservation-build": {
+      "path": "docs/evidence/af-reconcile-metadata-preservation-build-2026-10-10.txt",
+      "sha256": "f53e325a0a28d3c6f3e9d468b71e6cd55c1e611ef6abea4cb94be34d6fd039a1"
+    },
+    "sanitizers": {
+      "path": "docs/evidence/af-reconcile-sanitizers-2026-10-10.txt",
+      "sha256": "40989a36cf272df410c900d14f348eb08ed26543f11405e638d0e4778689bfad"
+    }
+  },
+  "remaining": [
+    "2.2 hardware installation/reconnect verification",
+    "mechanical origin and loaded-lens AF-S qualification",
+    "measured control/bus timing",
+    "AF-to-stock restoration round trip",
+    "AF-C/video/other-lens qualification",
+    "factory upper-copy use/recovery behavior; restoration of prior legacy upper-row changes if desired"
+  ],
+  "broaderREAReview": {
+    "ledger": "docs/reverse-engineering/whole-firmware-reconstruction.md",
+    "ledgerSHA256": "a23043a40e27465a25cf03aed58a8ae78fc95edff54bc759f9fdba381ca905c5",
+    "recoveredInstructionBearingFunctions": 380,
+    "applicationModelRoutines": 38,
+    "applicationModelCasesStepsReported": 24991,
+    "timingNominalOpenLoop": true,
+    "ordinaryHomingGateStillUnresolved": true,
+    "originalRetainedFactoryPrefix": "0xa000..0xa07f",
+    "originalDuplicateApplication": "0xa080..0xef4b",
+    "currentProfileOverlap": "none for final 2.2; legacy 2.0/2.1 overlap original prefix and first 128 duplicate bytes",
+    "legacyImagesAlreadyUseThisProfileRow": true,
+    "layoutReviewBeforeNextRecommendedUpload": false,
+    "wholeFactoryRecoveryImagePreservationNotEstablished": true,
+    "overlapMitigation": "2.2 profile at 9f00; all uploads end a000; original upper copy purpose still unresolved",
+    "upgradeDoesNotRepairEarlierLegacyUpperRow": true
+  },
+  "finalizedLocalDate": "2026-10-11"
+}

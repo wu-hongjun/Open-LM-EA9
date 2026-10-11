@@ -1,0 +1,19 @@
+Verified 9 original photos and 9 app resources.
+Building for production...
+[Using on-disk description]
+[4 / 13] LensCore
+[6 / 14] LensCore
+[11 / 18] DeviceKit
+[13 / 19] DeviceKit
+[19 / 23] ea9ctl-product
+[21 / 25] ea9ctl-product
+[23 / 25] ea9ctl-product
+[23 / 25] OpenLMEA9-product
+[25 / 25] OpenLMEA9-product
+[27 / 28] OpenLMEA9-product
+[29 / 29] ea9ctl-product
+Build complete! (11.20 sec)
+/Users/hongjunwu/Git/Open-LM-EA9/dist/.ea9ctl-next: replacing existing signature
+/Users/hongjunwu/Git/Open-LM-EA9/dist/Open LM-EA9.app: replacing existing signature
+Built /Users/hongjunwu/Git/Open-LM-EA9/dist/Open LM-EA9.app
+CLI: /Users/hongjunwu/Git/Open-LM-EA9/dist/ea9ctl

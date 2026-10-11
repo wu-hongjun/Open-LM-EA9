@@ -1,0 +1,76 @@
+# Firmware prototype
+
+The [committed original stock 1.8.0 recovery bundle](recovery/stock-1.8.0/README.md)
+includes the vendor application and an encrypted exact same-unit backup. Its
+offline unpack/verification tool sends no USB reports; the key stays outside Git.
+
+The first installable candidate is a **metadata qualification build with motor
+motion disabled**. It uses C for the inspected SAMD21 register and E-mount paths;
+it is not the production autofocus firmware or a decision against a later Rust
+implementation. The macOS app and USB loader transport use native Swift.
+
+The next opt-in **AF 2.2 candidate** reconciles REA findings with the upstream
+controller and is prepared for Contax Zeiss 50mm f/1.4:
+
+```sh
+python3 scripts/build-firmware.py --variant reconciled-af
+./scripts/swift-local.sh test
+python3 scripts/test-firmware.py --af
+```
+
+Build products are separate under `ea9/build/reconciled`; the metadata 2.0 and
+installed AF 2.1 templates/pins remain unchanged. The native app admits all three
+versions for backed-up upload, reconnect verification and stock restoration.
+`--variant upstream-af` now verifies the frozen 2.1 template rather than compiling
+current source under that version. A source snapshot/manifest was preserved
+locally before the new changes.
+
+The 50mm 2.2 image has been uploaded; **physical reconnect and USB byte
+verification are pending**. See the [installation record](../docs/evidence/af-22-upload-2026-10-11.md).
+The owner reported motor movement and proper A7C II shutdown with the earlier
+byte-verified 2.1 image. No 2.2 camera behavior is qualified; actual focus
+lock/sharpness await the C/Y-to-M converter.
+See the [reference/timing/completion design](../docs/af-reconciliation.md),
+[session evidence](../docs/evidence/af-reconciliation-2026-10-10.md),
+[AF-S runbook](../docs/af-s-test.md) and
+[factory REA reconstruction](../docs/reverse-engineering/stock-phase2.md).
+
+The fork is based on [weiziqian/E-mount-impl-on-Techart-EA9](https://github.com/weiziqian/E-mount-impl-on-Techart-EA9)
+at commit `d52ed06cc449918f938e0695fbf29a0c4141f2b2`. The source snapshot in
+`references/upstream` remains immutable. MIT and Microchip Apache notices are
+retained in `ea9`; new profile and metadata-entry code uses MIT. Device headers,
+CMSIS and compiler notices remain in their downloaded dependency archives.
+
+Build from the repository root on Apple Silicon macOS with Python 3.12+:
+
+```sh
+python3 scripts/build-firmware.py
+./scripts/swift-local.sh test
+python3 scripts/test-firmware.py
+./scripts/build-macos-app.sh
+```
+
+Dependency versions, official source URLs and digests are pinned in
+`dependencies.json`. The local cache is ignored. The installed Mac app includes
+the generated firmware template and a digest pin; it personalizes only the
+reserved profile row. A template with its zeroed profile is intentionally invalid.
+
+Changes from the reference:
+
+- A dedicated `metadata_main.c` entry point; the motion implementation is not
+  linked. The inherited motion files remain available for a subsequent audited
+  autofocus milestone. No flash logging is linked.
+- `lens_profile.c` validates the versioned CRC-protected profile and applies
+  focal length, manually reported aperture and lens name through the existing
+  frame setters. No measured geometry from another lens is reused.
+- Legacy adapter ID 234 and camera-reported custom firmware 2.0 are used. USB
+  metadata declares 2.0.0; CHECK still runs in the original bootloader.
+- Linker bounds reserve one row at `0xa000`. Startup headers/vector field names
+  are adapted to DFP 2.0.4 without changing the interrupt-vector ordering.
+- The inherited optical-row test now invokes the row setter explicitly; the
+  new profile test proves startup retains the stock optical rows.
+
+Use the [USB milestone procedure](../docs/usb-metadata-milestone.md) and its
+[evidence record](../docs/evidence/usb-metadata-milestone-2026-10-10.md).
+An actual Sony A7C II test is required to qualify displayed metadata, EXIF,
+startup/shutdown and timing. No autofocus claim follows from these host tests.

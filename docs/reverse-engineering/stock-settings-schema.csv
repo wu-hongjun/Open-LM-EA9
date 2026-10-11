@@ -1,0 +1,26 @@
+offset,flash_address,ram_address,width_bytes,interpretation,role,source_or_rule,semantic_writers,semantic_readers,scale,persistence
+0x00,0x4100,0x20000494,2,u16,latest raw encoder sample,89a4 top14 bits,8c80;8cc0,5da8;5e00,raw counts,all44 bytes load8ae4 / write5d68
+0x02,0x4102,0x20000496,2,unknown,unassigned bytes,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x04,0x4104,0x20000498,2,u16,initial raw sample copy,8c80 zero-extended word store overlaps next field,8c80,no semantic reader found,raw counts,all44 bytes load8ae4 / write5d68
+0x06,0x4106,0x2000049a,2,u16,reported protocol position,8cc0 arithmetic,8c80;8cc0;5e00,5120;5e00,relative>>2 plus4096,all44 bytes load8ae4 / write5d68
+0x08,0x4108,0x2000049c,2,u16,encoder origin/reference,restore or explicit reference capture,8c80;5da8;5e00,8cc0,raw counts,all44 bytes load8ae4 / write5d68
+0x0a,0x410a,0x2000049e,2,unknown,unassigned bytes,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x0c,0x410c,0x200004a0,4,s32,relative position,8cc0 asymmetric wrap,8c80;8cc0,8a2c;8d94;8dd4;8fc8,encoder counts,all44 bytes load8ae4 / write5d68
+0x10,0x4110,0x200004a4,2,s16,velocity delta,narrowed difference,8c80;8a2c;8fc8,8fc8,counts per PID invocation,all44 bytes load8ae4 / write5d68
+0x12,0x4112,0x200004a6,2,unknown,unassigned bytes,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x14,0x4114,0x200004a8,2,s16,motion target,8dd4 signed16 narrowing,8dd4,8d94;8fc8,(protocol-4096)*4,all44 bytes load8ae4 / write5d68
+0x16,0x4116,0x200004aa,2,unknown,unassigned bytes,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x18,0x4118,0x200004ac,4,s32?,initialized zero; purpose unresolved,8c80 zero,8c80,no semantic reader found,unknown,all44 bytes load8ae4 / write5d68
+0x1c,0x411c,0x200004b0,1,u8,latched direction,1 below;2 above;3 equal,8c80;8dd4,8d20;8d94,enum,all44 bytes load8ae4 / write5d68
+0x1d,0x411d,0x200004b1,1,u8,timeout enable,nonzero enabled,8c80;8dd4;8e28,8a2c,boolean,all44 bytes load8ae4 / write5d68
+0x1e,0x411e,0x200004b2,1,u8,PID enable,nonzero enabled,8dd4;8e28,8fc8,boolean,all44 bytes load8ae4 / write5d68
+0x1f,0x411f,0x200004b3,1,unknown,unassigned byte,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x20,0x4120,0x200004b4,2,u16,timeout count,reset0;stop when already300,8dd4;8a2c,8a2c,TCC1 callbacks,all44 bytes load8ae4 / write5d68
+0x22,0x4122,0x200004b6,2,u16?,reset counter; purpose unresolved,8dd4 zero,8dd4,no semantic reader found,unknown,all44 bytes load8ae4 / write5d68
+0x24,0x4124,0x200004b8,1,u8,completion flag,nonzero complete incl timeout,8dd4;8e28;5e00,8d94;5e00;5a94;5c08,boolean/latch,all44 bytes load8ae4 / write5d68
+0x25,0x4125,0x200004b9,1,unknown,unassigned byte,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68
+0x26,0x4126,0x200004ba,2,u16,persisted focal length,active focal RAM20000680,5e00,8ae4,whole mm,all44 bytes load8ae4 / write5d68
+0x28,0x4128,0x200004bc,1,u8,shutdown park enable,aperture menu toggle,56cc,5e00,nonzero enabled,all44 bytes load8ae4 / write5d68
+0x29,0x4129,0x200004bd,1,u8,menu option; purpose unresolved,menu low55 clears;aa sets,56cc,no semantic reader found,0/1,all44 bytes load8ae4 / write5d68
+0x2a,0x412a,0x200004be,1,u8,target equals advertised limit,caller target comparison,5a94;5c08;8e28;5e00,no semantic reader found,boolean,all44 bytes load8ae4 / write5d68
+0x2b,0x412b,0x200004bf,1,unknown,unassigned byte,restore/initializer,bulk only,bulk only,unknown,all44 bytes load8ae4 / write5d68

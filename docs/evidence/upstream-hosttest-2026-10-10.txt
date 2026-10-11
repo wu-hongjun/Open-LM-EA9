@@ -1,0 +1,36 @@
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_emount.c tools/hosttest/shim.c \
+	  src/emount.c src/emount_packets.c -o build/hosttest/test_emount
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+72 frames sent, 62 received, 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_servo.c tools/hosttest/sim_motor.c \
+	  src/servo.c -o build/hosttest/test_servo
+  arrival: worst error 11 counts, worst overshoot 11, mean bias +2, 1529 ms over 12 moves
+  stiff:   worst error 25 counts, 5283 ms over 12 moves
+servo: 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_nobody.c tools/hosttest/shim.c \
+	  src/emount.c src/emount_packets.c -o build/hosttest/test_nobody
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+no-camera: 1 mark(s) after 3052 ms
+nobody: 0 failure(s)
+slow-camera: waited 7052 ms, 1750 VD edges, 0 mark(s)
+slowbody: 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_init.c tools/hosttest/shim.c \
+	  src/emount.c src/emount_packets.c -o build/hosttest/test_init
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+init rescue: 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_focus.c src/focus_map.c -o build/hosttest/test_focus
+focus map: 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_focus_dist.c src/focus_dist.c -lm \
+	  -o build/hosttest/test_focus_dist
+  distance round trip: worst 63 code unit(s), at code 1043
+focus distance: 0 failure(s)
+gcc -std=gnu99 -Wall -Wextra -O1 -Itools/hosttest -Isrc \
+	  tools/hosttest/test_focus_pred.c src/focus_pred.c \
+	  -o build/hosttest/test_focus_pred
+test_focus_pred: 0 failure(s)

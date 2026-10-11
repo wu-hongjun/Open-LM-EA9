@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "collection_date": "2026-10-10",
+  "sources": [
+    {
+      "id": "weiziqian/E-mount-impl-on-Techart-EA9",
+      "kind": "git-snapshot",
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9",
+      "branch_at_retrieval": "main",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/archive/d52ed06cc449918f938e0695fbf29a0c4141f2b2.tar.gz",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [
+        {
+          "path": "docs/E-mount-protocol-RE",
+          "commit": "3a94a8d2e6a7786ab3e05b1319b421e76744b4c0",
+          "included": true,
+          "materialization": "Relative symlink to separately archived protocol repository",
+          "target_local_path": "upstream/weiziqian/E-mount-protocol-RE"
+        }
+      ],
+      "license_note": "MIT; Microchip startup/linker files carry Apache-2.0 notices",
+      "file_count": 60,
+      "total_file_bytes": 634347,
+      "symlinks": [
+        {
+          "path": "docs/E-mount-protocol-RE",
+          "target": "../../E-mount-protocol-RE"
+        }
+      ]
+    },
+    {
+      "id": "weiziqian/E-mount-protocol-RE",
+      "kind": "git-snapshot",
+      "url": "https://github.com/weiziqian/E-mount-protocol-RE",
+      "branch_at_retrieval": "main",
+      "commit": "3a94a8d2e6a7786ab3e05b1319b421e76744b4c0",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/weiziqian/E-mount-protocol-RE/archive/3a94a8d2e6a7786ab3e05b1319b421e76744b4c0.tar.gz",
+      "local_path": "upstream/weiziqian/E-mount-protocol-RE",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [],
+      "license_note": "MIT",
+      "file_count": 33,
+      "total_file_bytes": 225873
+    },
+    {
+      "id": "morluto/rea",
+      "kind": "git-snapshot",
+      "url": "https://github.com/morluto/rea",
+      "branch_at_retrieval": "main",
+      "commit": "5100a1a1a56b810c8246b8c7ed19ff42c4d9dbe1",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/morluto/rea/archive/5100a1a1a56b810c8246b8c7ed19ff42c4d9dbe1.tar.gz",
+      "local_path": "upstream/morluto/rea",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [
+        {
+          "path": "third_party/binwalk",
+          "commit": "4fdab3d464d97b68e0af9088df3f9e2e1545b21c",
+          "included": false
+        },
+        {
+          "path": "third_party/ghidra-nativeaot",
+          "commit": "effeb734fc570c32650f88b159608979dc7b423e",
+          "included": false
+        },
+        {
+          "path": "third_party/jadx-headless-mcp",
+          "commit": "5844800a486d2248fa949b74c9896285f5b54de2",
+          "included": false
+        },
+        {
+          "path": "third_party/unblob",
+          "commit": "1fcc7a0a584a70a96c31f5a276c20944d199a089",
+          "included": false
+        },
+        {
+          "path": "third_party/wakaru",
+          "commit": "8219bf5016a063d7fb215101a8c45d5959ec733f",
+          "included": false
+        }
+      ],
+      "license_note": "MIT; see retained third_party notices",
+      "file_count": 2560,
+      "total_file_bytes": 18894268
+    },
+    {
+      "id": "Entropy512/sigrok-dumps",
+      "kind": "git-snapshot",
+      "url": "https://github.com/Entropy512/sigrok-dumps",
+      "branch_at_retrieval": "emount",
+      "commit": "fdc2bdec17a44f2ef45a6a5e1f6664093dd4adec",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/Entropy512/sigrok-dumps/archive/fdc2bdec17a44f2ef45a6a5e1f6664093dd4adec.tar.gz",
+      "local_path": "upstream/Entropy512/sigrok-dumps",
+      "included_paths": [
+        "README",
+        "lens_mounts/sony_emount"
+      ],
+      "submodules": [],
+      "license_note": "Public-domain dedication for dumps unless otherwise noted, per root README",
+      "file_count": 7,
+      "total_file_bytes": 687728
+    },
+    {
+      "id": "Entropy512/libsigrokdecode",
+      "kind": "git-snapshot",
+      "url": "https://github.com/Entropy512/libsigrokdecode",
+      "branch_at_retrieval": "emount",
+      "commit": "3dcd252dc62aa68cbfd64d8db1f620002e195326",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/Entropy512/libsigrokdecode/archive/3dcd252dc62aa68cbfd64d8db1f620002e195326.tar.gz",
+      "local_path": "upstream/Entropy512/libsigrokdecode",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [],
+      "license_note": "GPL-3.0-or-later for library; sony_emount source headers GPL-2.0-or-later",
+      "file_count": 264,
+      "total_file_bytes": 1771027
+    },
+    {
+      "id": "LexOptical/E-Mount",
+      "kind": "git-snapshot",
+      "url": "https://github.com/LexOptical/E-Mount",
+      "branch_at_retrieval": "master",
+      "commit": "60f206403c31f5a8c531a35c031658f9f34679cb",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/LexOptical/E-Mount/archive/60f206403c31f5a8c531a35c031658f9f34679cb.tar.gz",
+      "local_path": "upstream/LexOptical/E-Mount",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [],
+      "license_note": "No repository license file found in this snapshot",
+      "file_count": 14,
+      "total_file_bytes": 520072
+    },
+    {
+      "id": "LexOptical/E-Mount-Traffic-Samples",
+      "kind": "git-snapshot",
+      "url": "https://github.com/LexOptical/E-Mount-Traffic-Samples",
+      "branch_at_retrieval": "master",
+      "commit": "3516e4a3d1ac13fdf7b15cf15dc21d59db1a1c31",
+      "retrieved_date": "2026-10-10",
+      "archive_url": "https://github.com/LexOptical/E-Mount-Traffic-Samples/archive/3516e4a3d1ac13fdf7b15cf15dc21d59db1a1c31.tar.gz",
+      "local_path": "upstream/LexOptical/E-Mount-Traffic-Samples",
+      "included_paths": [
+        "all tracked files; gitlink contents excluded"
+      ],
+      "submodules": [],
+      "license_note": "No repository license file found in this snapshot",
+      "file_count": 22,
+      "total_file_bytes": 1697542
+    },
+    {
+      "id": "techart-stock-1.8.0",
+      "kind": "local-cache-recovery",
+      "local_path": "private/techart/stock-1.8.0",
+      "provenance_file": "private/techart/stock-1.8.0/provenance.json",
+      "license_note": "Proprietary official application image; local evidence only",
+      "file_count": 4,
+      "total_file_bytes": 35940
+    },
+    {
+      "id": "techart-macos-updater",
+      "kind": "local-application-copy",
+      "source_path": "/Users/hongjunwu/Downloads/TECHART_Update.app",
+      "local_path": "private/techart/TECHART_Update.app",
+      "license_note": "Proprietary updater; copied without execution",
+      "bundle_identifier": "TECHART.USB-Update",
+      "bundle_version": "1.0",
+      "executable": "Contents/MacOS/USB_Update",
+      "file_count": 25,
+      "total_file_bytes": 12012051
+    },
+    {
+      "id": "rea-website",
+      "kind": "web-document",
+      "url": "https://morluto.github.io/rea/",
+      "resolved_url": "https://morluto.github.io/rea/",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/rea-home.html",
+      "size_bytes": 46739,
+      "sha256": "b9570e4de0dbe7a570d3f34f0766e700f3a2670870cd7ede8d1ebafc5ef59331",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "techart-product",
+      "kind": "web-document",
+      "url": "https://techartpro.com/?product=lmea9",
+      "retrieved_date": "2026-10-10",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden",
+      "web_research_accessible": true,
+      "local_notes": "analysis/techart-official-documents.md"
+    },
+    {
+      "id": "techart-user-manual",
+      "kind": "web-document",
+      "url": "https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf",
+      "retrieved_date": "2026-10-10",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden",
+      "web_research_accessible": true,
+      "local_notes": "analysis/techart-official-documents.md"
+    },
+    {
+      "id": "atsamd-rust-support",
+      "kind": "web-document",
+      "url": "https://github.com/atsamd-rs/atsamd",
+      "resolved_url": "https://github.com/atsamd-rs/atsamd",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/atsamd-rs-repository.html",
+      "size_bytes": 372119,
+      "sha256": "8416c2443e757516f2145b4751f58d2deef36cd56b0fc841554d9cc56cd7c5bc",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "atsamd-hal-docs",
+      "kind": "web-document",
+      "url": "https://docs.rs/atsamd-hal/latest/atsamd_hal/",
+      "resolved_url": "https://docs.rs/atsamd-hal/latest/atsamd_hal/",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/atsamd-hal-docs.html",
+      "size_bytes": 41829,
+      "sha256": "bd4bb242a11d1de8ad83802e2dee406dd12fb3fe4feaea3abcc087febd247441",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "rust-embedded-installation",
+      "kind": "web-document",
+      "url": "https://docs.rust-embedded.org/book/intro/install.html",
+      "resolved_url": "https://docs.rust-embedded.org/book/intro/install.html",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/rust-embedded-installation.html",
+      "size_bytes": 25540,
+      "sha256": "99e0dbef9c778ac558efeb493d652b1f9d5e1c8a5ac04b0e66c56096bff555fd",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "eframe-docs",
+      "kind": "web-document",
+      "url": "https://docs.rs/eframe/latest/eframe/",
+      "resolved_url": "https://docs.rs/eframe/latest/eframe/",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/eframe-docs.html",
+      "size_bytes": 103281,
+      "sha256": "34c985c218288ea68a277340c3e516352dc690060032b7090bcc675d7a37d604",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "hidapi-docs",
+      "kind": "web-document",
+      "url": "https://docs.rs/hidapi/latest/hidapi/",
+      "resolved_url": "https://docs.rs/hidapi/latest/hidapi/",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/hidapi-docs.html",
+      "size_bytes": 27135,
+      "sha256": "3383616ccb5efa273766093a81ed425538f977fbdfef3a19776df45d67c42e23",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "egui-repository",
+      "kind": "web-document",
+      "url": "https://github.com/emilk/egui",
+      "resolved_url": "https://github.com/emilk/egui",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/egui-repository.html",
+      "size_bytes": 507104,
+      "sha256": "7e65e511071b729036d8822f929eb9c43a3ae0b1991196962bfe61f52bfd3df6",
+      "content_type": "text/html; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "lexoptical-protocol-document",
+      "kind": "web-document",
+      "url": "https://docs.google.com/document/d/1iw54nzrF0bzQgLINpcP9F8Odd0N5cd7LjlwCDPTNZK0/export?format=txt",
+      "resolved_url": "https://doc-0c-00-docstext.googleusercontent.com/export/s8v029du74rmth76t5k6ldhbqs/a41k1t8342e1qa586uvo12j7ac/1791661715000/106848096963264980276/*/1iw54nzrF0bzQgLINpcP9F8Odd0N5cd7LjlwCDPTNZK0?format=txt",
+      "retrieved_date": "2026-10-10",
+      "local_path": "documents/lexoptical-protocol-document.txt",
+      "size_bytes": 7440,
+      "sha256": "237841e68b6ca8f3d69cce5bf4279e03f51110fc08748371f9f0a920ac4d87d8",
+      "content_type": "text/plain; charset=utf-8",
+      "note": "Offline research snapshot; URL content may change; external assets not downloaded"
+    },
+    {
+      "id": "techart-connected-device-readonly-2026-10-10",
+      "kind": "local-device-read",
+      "local_path": "private/connected-device-2026-10-10",
+      "provenance_file": "private/connected-device-2026-10-10/provenance.json",
+      "retrieved_date": "2026-10-10",
+      "operations": [
+        "USB/HID identification",
+        "CHECK",
+        "bounded flash READ"
+      ],
+      "confirmed_check_version": "1.8.0",
+      "note": "Two equal bootloader-region reads and two equal application-span reads; all 20,172 cached official image bytes match the device. Not a complete flash/fuse recovery backup. Physical serial and raw transcripts are private.",
+      "license_note": "Private device and proprietary firmware evidence; no redistribution license assigned.",
+      "file_count": 16,
+      "total_file_bytes": 1052039
+    },
+    {
+      "id": "techart-official-updater-static-analysis-2026-10-10",
+      "kind": "derived-local-analysis",
+      "local_path": "private/techart/updater-analysis",
+      "source_id": "techart-macos-updater",
+      "retrieved_date": "2026-10-10",
+      "note": "nm/otool symbol, string and disassembly extracts; analysis-only stock application ELF/Thumb decode. Official executable and firmware were not run.",
+      "license_note": "Derived proprietary-binary evidence; local research only.",
+      "file_count": 7,
+      "total_file_bytes": 1899975
+    },
+    {
+      "id": "techart-usb-cap-followup-2026-10-10",
+      "kind": "local-device-read",
+      "local_path": "private/usb-cap-followup-2026-10-10",
+      "provenance_file": "private/usb-cap-followup-2026-10-10/provenance.json",
+      "retrieved_date": "2026-10-10",
+      "operations": [
+        "USB/HID inventory",
+        "CHECK",
+        "qualified ROM/register READ",
+        "complete 128 KiB main-flash READ"
+      ],
+      "confirmed_chip": "ATSAMD21E17A revision D",
+      "confirmed_check_version": "1.8.0",
+      "note": "Two equal complete main-flash reads plus repeated chip/NVM/user-fuse/calibration/Port A snapshots. Security clear, BOOTPROT 7, all region locks clear. Physical cold boot/electrical/SWD/restoration pending. No programming or reset performed.",
+      "license_note": "Private device/proprietary firmware evidence; local research only.",
+      "file_count": 42,
+      "total_file_bytes": 2064011
+    },
+    {
+      "id": "techart-usb-cap-reconnect-2026-10-10",
+      "kind": "local-device-read",
+      "local_path": "private/usb-cap-reconnect-2026-10-10",
+      "provenance_file": "private/usb-cap-reconnect-2026-10-10/provenance.json",
+      "retrieved_date": "2026-10-10",
+      "operations": [
+        "USB/HID re-enumeration",
+        "CHECK",
+        "previously qualified ROM/register READ",
+        "complete main-flash READ"
+      ],
+      "note": "User reported unplug and USB-only equipment. Same device identity with new registry entry; full flash and qualified immutable snapshots match prior baseline. No instrumented power/reset, electrical, SWD or restoration test.",
+      "confirmed_check_version": "1.8.0",
+      "license_note": "Private device/proprietary firmware evidence; local research only.",
+      "file_count": 29,
+      "total_file_bytes": 951107
+    },
+    {
+      "id": "metadata-firmware-build-dependencies",
+      "kind": "dependency-provenance-index",
+      "local_path": "build-dependencies.json",
+      "retrieved_date": "2026-10-10",
+      "included_paths": [
+        "build-dependencies.json"
+      ],
+      "license_note": "Official ARM GNU, ARM CMSIS and Microchip DFP archives; licenses retained in the downloaded cache."
+    }
+  ]
+}

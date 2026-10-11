@@ -1,0 +1,58 @@
+[
+  {
+    "array": "init0B",
+    "bytes": 11,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init09",
+    "bytes": 20,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init0D",
+    "bytes": 10,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init10",
+    "bytes": 10,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init0A",
+    "bytes": 25,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init01",
+    "bytes": 41,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init08",
+    "bytes": 210,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  },
+  {
+    "array": "init07",
+    "bytes": 43,
+    "length_valid": true,
+    "terminator_valid": true,
+    "checksum_valid": true
+  }
+]

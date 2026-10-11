@@ -1,0 +1,21 @@
+{
+  "stage": "stock-upload-byte-verified",
+  "stockApplicationBytes": 20172,
+  "uploadedApplicationRegionBytes": 110592,
+  "reportExchangesBeforeUpload": 4359,
+  "uploadReports": 1729,
+  "backupFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+  "uploadedImageSHA256": "265f93797db99f2dbba5b649bf5b12bc19efadeaa8e9fe77ade5fca128d17173",
+  "preflightMatchesPreservedBaseline": true,
+  "postUploadReadbackPerformed": true,
+  "bootloaderCodeWritesPlanned": false,
+  "cameraQualified": false,
+  "postUploadFullFlashReadPasses": 2,
+  "postUploadReportExchanges": 4359,
+  "postUploadFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+  "readbackImageSHA256": "265f93797db99f2dbba5b649bf5b12bc19efadeaa8e9fe77ade5fca128d17173",
+  "protectedFlashAndFactoryDataVerified": true,
+  "knownMetadataBytesVerified": 58,
+  "qualificationRecorded": true,
+  "verifiedAt": "2026-10-11T02:03:57.460825+00:00"
+}

@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "test_scope": "Native macOS identification, CHECK and bounded flash READ only; no START/DATA, guessed commands, reset or firmware execution.",
+  "device": {
+    "product": "LM-EA9",
+    "manufacturer": "TECHART",
+    "transport": "USB",
+    "vid": 1155,
+    "pid": 22362,
+    "version": 512,
+    "usage_page": 65535,
+    "usage": 1,
+    "max_input": 64,
+    "max_output": 64,
+    "max_feature": 4,
+    "report_descriptor": "06ffff0901a10109020903150026ff0075089540810209040905150026ff0075089540910209060907150026ff0075089504b102c0"
+  },
+  "serial_present": true,
+  "usb_link_speed_bps": 12000000,
+  "check_version": "1.8.0",
+  "sessions": {
+    "app-vectors-session.jsonl": {
+      "CHECK": 1,
+      "READ": 1,
+      "requests": 2,
+      "replies": 2,
+      "versions": [
+        "1.8.0"
+      ]
+    },
+    "application-read1-session.jsonl": {
+      "CHECK": 1,
+      "READ": 316,
+      "requests": 317,
+      "replies": 317,
+      "versions": [
+        "1.8.0"
+      ]
+    },
+    "application-read2-session.jsonl": {
+      "CHECK": 1,
+      "READ": 316,
+      "requests": 317,
+      "replies": 317,
+      "versions": [
+        "1.8.0"
+      ]
+    },
+    "bootloader-read1-session.jsonl": {
+      "CHECK": 1,
+      "READ": 320,
+      "requests": 321,
+      "replies": 321,
+      "versions": [
+        "1.8.0"
+      ]
+    },
+    "bootloader-read2-session.jsonl": {
+      "CHECK": 1,
+      "READ": 320,
+      "requests": 321,
+      "replies": 321,
+      "versions": [
+        "1.8.0"
+      ]
+    },
+    "check-session.jsonl": {
+      "CHECK": 1,
+      "READ": 0,
+      "requests": 1,
+      "replies": 1,
+      "versions": [
+        "1.8.0"
+      ]
+    }
+  },
+  "total_requests": 1279,
+  "total_check": 6,
+  "total_read": 1273,
+  "bootloader": {
+    "address": 0,
+    "size": 20480,
+    "sha256": "e745faafe7f4896f0c86ddd30f6a1032131710566e3e3c223fa0768cb48d1e5c",
+    "repeat_equal": true,
+    "initial_sp": "0x20001690",
+    "reset_vector": "0x12d",
+    "usb_irq_vector": "0x2505",
+    "version_record_address": "0x4000"
+  },
+  "application": {
+    "address": "0x5000",
+    "read_size": 20224,
+    "read_sha256": "aae03efdb5606f73ded421a4d6cae5936a87d7726c5a3db0a5752c26ff3edb1f",
+    "repeat_equal": true,
+    "cached_size": 20172,
+    "cached_sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "all_cached_bytes_match": true,
+    "extra_bytes": 52,
+    "extra_bytes_all_zero": true,
+    "usb_irq_vector": "0x6141"
+  },
+  "limitations": [
+    "Not a complete 128 KiB flash/fuse backup.",
+    "Physical MCU revision, fuses, cap continuity, voltage levels and SWD recovery remain unmeasured.",
+    "No custom application USB service was executed.",
+    "Boot dispatch conclusions are static control-flow analysis, not an exhaustive proof about undocumented faults or electrical behavior."
+  ],
+  "probe_validation": {
+    "compiler": "Installed Apple clang, C11, -Wall -Wextra -Werror",
+    "build_passed": true,
+    "negative_cases_rejected_before_hardware_enumeration": [
+      "unknown start operation",
+      "read beyond reference flash bound",
+      "unaligned address",
+      "non-multiple-of-64 length"
+    ]
+  }
+}

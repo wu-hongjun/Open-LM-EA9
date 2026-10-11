@@ -1,0 +1,22 @@
+{
+  "purpose": "Pinned official dependencies used for the C metadata firmware qualification build",
+  "retrieved_date": "2026-10-10",
+  "local_cache": "../tools/firmware-deps",
+  "dependencies": {
+    "arm": {
+      "url": "https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi.tar.xz",
+      "sha256": "c7c78ffab9bebfce91d99d3c24da6bf4b81c01e16cf551eb2ff9f25b9e0a3818",
+      "bytes": 134812148
+    },
+    "dfp": {
+      "url": "https://packs.download.microchip.com/Microchip.SAMD21_DFP.2.0.4.atpack",
+      "sha256": "b5ced8676be12cf34d60b3c31c9d12420be1869438b51d44119ba0a5917d4196",
+      "bytes": 8284221
+    },
+    "cmsis": {
+      "url": "https://codeload.github.com/ARM-software/CMSIS_5/tar.gz/refs/tags/5.9.0",
+      "sha256": "9ce693dd15c41f02506adda79323c077912b3211303ca0d9b28b8ebe735a7031",
+      "bytes": 40658690
+    }
+  }
+}

@@ -1,0 +1,12 @@
+routine,input_error,previous_error,previous_previous_error,input_accumulator,expected_output,expected_accumulator,original_instruction_output,result
+0x8bfc,0,0,0,0,0,0,0,pass
+0x8bfc,1,0,0,0,200,950,200,pass
+0x8bfc,-1,0,0,0,-200,-950,-200,pass
+0x8bfc,250,0,0,0,1187,237500,1187,pass
+0x8bfc,250,250,0,237500,1000,200000,1000,pass
+0x8bfc,0,250,250,275000,375,75000,375,pass
+0x8bfc,0,0,0,199,0,199,0,pass
+0x8bfc,0,0,0,200,200,200,200,pass
+0x8bfc,0,0,0,-199,0,-199,0,pass
+0x8bfc,0,0,0,-200,-200,-200,-200,pass
+0x8bfc,2147483647,-2147483648,1,2147483647,1280,2147482997,1280,pass

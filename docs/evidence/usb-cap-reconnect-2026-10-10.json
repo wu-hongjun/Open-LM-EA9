@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "verification": "passed",
+  "user_report": "it was unplugged, and the usb connection is all we have",
+  "equipment_available": [
+    "USB connection only"
+  ],
+  "identity_matches_previous": true,
+  "registry_entry_changed": true,
+  "currently_present": true,
+  "CHECK_version": "1.8.0",
+  "request_reply_counts": {
+    "CHECK": 7,
+    "READ": 2055
+  },
+  "total_exchanges": 2062,
+  "scope": "HID enumeration, CHECK and previously qualified memory READ; no programming or reset",
+  "samples": {
+    "app-vectors": {
+      "address": "0x00005000",
+      "length": 64,
+      "matches_previous": true,
+      "sha256": "d1b2384fd475d286f8970a8a87e3140e067b9ff8d202926baf0f51e84b7f5fd3"
+    },
+    "device-id": {
+      "address": "0x41002018",
+      "length": 64,
+      "matches_previous": true,
+      "sha256": "78059eb5b6d03e970447802141d36cc659e0639dcada5de1a914c79fc703b262"
+    },
+    "nvm-status": {
+      "address": "0x41004000",
+      "length": 64,
+      "matches_previous": true,
+      "sha256": "5e453ed1281b319c244307ed533f43c4ed2f228904945a27e6850733feebd7e8"
+    },
+    "user-row": {
+      "address": "0x00804000",
+      "length": 64,
+      "matches_previous": true,
+      "sha256": "a5ad5939f6b7333747cf22f5ef5643224a76eee8340a2620cbba1d29b2ebde79"
+    },
+    "calibration": {
+      "address": "0x00806000",
+      "length": 64,
+      "matches_previous": true,
+      "sha256": "65f56ee43ed45e5711c19d4363e06cce200d490b344101e745815b00076d67e8"
+    },
+    "port-a": {
+      "address": "0x41004400",
+      "length": 128,
+      "matches_previous": true,
+      "sha256": "8d595b1a1a40e1ee38b9b01351998ab724102ceeb4f8776918ad35f128dbb5a5"
+    },
+    "full-flash": {
+      "address": "0x00000000",
+      "length": 131072,
+      "matches_previous": true,
+      "sha256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01"
+    }
+  },
+  "main_flash_bytes": 131072,
+  "protection_unchanged": true,
+  "security_bit_active": false,
+  "live_lock_bits": "0xFFFF",
+  "PA23": {
+    "input_high": true,
+    "direction_output": false,
+    "output_latch_high": false,
+    "pincfg": "0x06"
+  },
+  "restart_evidence": "User reports unplug; matching device re-enumerated with a new registry entry; firmware and qualified snapshots match.",
+  "limitations": [
+    "Power/reset timing and pin voltages were not instrumented",
+    "USB is the only available access; no continuity, electrical, SWD or independent restoration test",
+    "The stock cap still supplies no demonstrated application launch or custom management service"
+  ]
+}

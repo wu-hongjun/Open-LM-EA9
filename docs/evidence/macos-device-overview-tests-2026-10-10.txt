@@ -1,0 +1,53 @@
+Building for debugging...
+[Using on-disk description]
+[5 / 34] LensCore
+[9 / 36] LensCore
+[14 / 18] OpenLMEA9-product
+[16 / 20] OpenLMEA9-product
+[17 / 20] OpenLMEA9-product
+[19 / 20] OpenLMEA9-product
+Build complete! (3.54 sec)
+Test Suite 'All tests' started at 2026-10-10 20:14:31.206.
+Test Suite 'All tests' passed at 2026-10-10 20:14:31.207.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'All tests' started at 2026-10-10 20:14:31.311.
+Test Suite 'All tests' passed at 2026-10-10 20:14:31.312.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() started.
+◇ Test requestedInventoryKeepsUnknownsAndDesignations() started.
+◇ Test savingAndImportingPreserveRevisionAndOriginalData() started.
+◇ Test metadataValidationRejectsImpossibleValues() started.
+◇ Test corruptLibraryIsNeverReseededOverTheOriginal() started.
+✔ Test corruptLibraryIsNeverReseededOverTheOriginal() passed after 0.004 seconds.
+✔ Test requestedInventoryKeepsUnknownsAndDesignations() passed after 0.012 seconds.
+✔ Test metadataValidationRejectsImpossibleValues() passed after 0.012 seconds.
+✔ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() passed after 0.013 seconds.
+✔ Test savingAndImportingPreserveRevisionAndOriginalData() passed after 0.019 seconds.
+✔ Test run with 5 tests in 0 suites passed after 0.019 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test mismatchingSecondPassNeverPublishes() started.
+◇ Test timeoutCancellationAndShortReportStopWithoutRetry() started.
+◇ Test verifiedBackupPublishesCompleteHashedPrivateFiles() started.
+◇ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() started.
+◇ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() started.
+◇ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() started.
+◇ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() started.
+◇ Test commandWhitelistAndGoldenBytes() started.
+◇ Test qualificationFailsBeforeRegisterOrFurtherReads() started.
+◇ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() started.
+✔ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() passed after 0.001 seconds.
+✔ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() passed after 0.001 seconds.
+✔ Test commandWhitelistAndGoldenBytes() passed after 0.001 seconds.
+✔ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() passed after 0.003 seconds.
+✔ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() passed after 0.011 seconds.
+✔ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() passed after 0.016 seconds.
+✔ Test mismatchingSecondPassNeverPublishes() passed after 0.017 seconds.
+✔ Test verifiedBackupPublishesCompleteHashedPrivateFiles() passed after 0.021 seconds.
+✔ Test qualificationFailsBeforeRegisterOrFurtherReads() passed after 0.041 seconds.
+✔ Test timeoutCancellationAndShortReportStopWithoutRetry() passed after 0.041 seconds.
+✔ Test run with 10 tests in 0 suites passed after 0.042 seconds.

@@ -1,0 +1,769 @@
+{
+  "schema_version": 1,
+  "collection_date": "2026-10-10",
+  "scope": "Primary citations in option audits, synthesis and USB-cap research. Paths are relative to references/.",
+  "notes": [
+    "Sources are research material, not project dependencies. JavaScript shells and failed downloads are labeled explicitly.",
+    "Mutable URLs preserve dated snapshots; only entries with an explicit commit are Git-pinned."
+  ],
+  "sources": [
+    {
+      "url": "https://developer.apple.com/documentation/appkit/accessibility-for-appkit",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/8db71fc1c5e0031c.html",
+      "size_bytes": 18545,
+      "sha256": "aa2f148b6eec4362ccf42b1f8235c9f104db2f6d03dd416402cc9b02169347e3",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/appkit/accessibility-for-appkit",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.security.device.usb",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md",
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/530bdfac9393c063.html",
+      "size_bytes": 18980,
+      "sha256": "a2eabf468b429969355cac98dd927a6d4c8a8388e0159c0baa1e28673327cb1c",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.security.device.usb",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/iokit/1588656-iohiddevicesetreport",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/834407d9d8ff5f21.html",
+      "size_bytes": 18482,
+      "sha256": "6d0c26b42eae13e10e2908ab0ba852eddf8c140d193d9e8889188b518d5f6e74",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/iokit/1588656-iohiddevicesetreport",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/iokit/1588662-iohiddevicegetreportwithcallback",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/fac3d4597c792092.html",
+      "size_bytes": 18698,
+      "sha256": "60a02c8a43768807ce7b79cf8c7e0691bf0e910ea32e064732491696fb0ae5b8",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/iokit/1588662-iohiddevicegetreportwithcallback",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/73686ea7e2f7ae10.html",
+      "size_bytes": 19044,
+      "sha256": "23c3f1f726aa5f3120bb9286b7fd6abd044184ecc2d00e9f68b1ad2699f140b4",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/swiftui/nsviewrepresentable",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/83d5b30fd23276b2.html",
+      "size_bytes": 18546,
+      "sha256": "6bf0523ce9278b45b57780bbfea6994cb8a35efe68c38d21923438c0180685bf",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/swiftui/nsviewrepresentable",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.apple.com/documentation/xcode/configuring-the-macos-app-sandbox",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded-javascript-shell",
+      "local_path": "documents/audit/715c96753426ac33.html",
+      "size_bytes": 18903,
+      "sha256": "6b604584537de21fc770590e167185f68d425a44f79efbd0d66dca3146a90d6f",
+      "content_type": "text/html",
+      "resolved_url": "https://developer.apple.com/documentation/xcode/configuring-the-macos-app-sandbox",
+      "note": "HTML shell only; article content requires JavaScript. Audit also cites installed SDK headers where applicable."
+    },
+    {
+      "url": "https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/32bit-mcu/sam/samd21-mcu-overview/peripherals/nvmctrl/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "unavailable",
+      "error": "The read operation timed out"
+    },
+    {
+      "url": "https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/32bit-mcu/sam/samd21-mcu-overview/peripherals/usb-overview/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "unavailable",
+      "error": "The read operation timed out"
+    },
+    {
+      "url": "https://doc.qt.io/qt-6.8/macos-issues.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/bd477f938b675edc.html",
+      "size_bytes": 57657,
+      "sha256": "295ea16ecf3e870b16b21572c4fa99ca5fad137ff62e42a29880f3ab2e3a9aa6",
+      "content_type": "text/html",
+      "resolved_url": "https://doc.qt.io/qt-6.8/macos-issues.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://doc.qt.io/qt-6/licensing.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/f7a3031d33e3e99a.html",
+      "size_bytes": 24587,
+      "sha256": "4e44ffea2f2a76d6a80d8d223b97fae88defcffa1c40e1a78ae418763c61a9f3",
+      "content_type": "text/html",
+      "resolved_url": "https://doc.qt.io/qt-6/licensing.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://doc.qt.io/qt-6/macos-deployment.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/7eee16f4dd7c352b.html",
+      "size_bytes": 83928,
+      "sha256": "d27aa40c27ee929e750d022d40b2edc6195c946a1c3c3dcfa29c39e4e52b2165",
+      "content_type": "text/html",
+      "resolved_url": "https://doc.qt.io/qt-6/macos-deployment.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://doc.rust-lang.org/rustc/platform-support/thumbv6m-none-eabi.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/63771c1d22f86da4.html",
+      "size_bytes": 26353,
+      "sha256": "ab2a05ba9fa4449c298a0c4c69e0d9ee87a1ec7a3daa6f208ef49be438ec24f0",
+      "content_type": "text/html",
+      "resolved_url": "https://doc.rust-lang.org/rustc/platform-support/thumbv6m-none-eabi.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.embassy.dev/embassy-executor/git/cortex-m/index.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/e07d1edf2bbc9ced.html",
+      "size_bytes": 34207,
+      "sha256": "bec1fa8856e6aeb6705cea216183b3da12ff4302abd5bdd8b8c498b3a1142535",
+      "content_type": "text/html",
+      "resolved_url": "https://docs.embassy.dev/embassy-executor/git/cortex-m/index.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.rs/atsamd-hal/latest/atsamd_hal/usb/index.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/c049d80699b0e05e.html",
+      "size_bytes": 34099,
+      "sha256": "cbad0a0652f1c801a285eb76e7e66cfd2f94c105c518c97039a8b2315eaa1cec",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://docs.rs/atsamd-hal/latest/atsamd_hal/usb/index.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.rs/eframe/latest/eframe/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "existing-snapshot",
+      "local_path": "documents/eframe-docs.html",
+      "size_bytes": 103281,
+      "sha256": "34c985c218288ea68a277340c3e516352dc690060032b7090bcc675d7a37d604",
+      "resolved_url": "https://docs.rs/eframe/latest/eframe/"
+    },
+    {
+      "url": "https://docs.rs/minicbor/latest/minicbor/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/640ab6e387f2015f.html",
+      "size_bytes": 32337,
+      "sha256": "6c21b6950dc8418d5438608cb7350c756f3c64039ebabd88d389cdbf45016aba",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://docs.rs/minicbor/latest/minicbor/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.rs/postcard/latest/postcard/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/0cd3fc92e8c9fd3e.html",
+      "size_bytes": 41905,
+      "sha256": "37250b820ad253f9fea64aabdc7cac4a3abedee292102298bb5f3572a255e34d",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://docs.rs/postcard/latest/postcard/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.zephyrproject.org/latest/boards/arduino/zero/doc/index.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/db104883963e2164.html",
+      "size_bytes": 72922,
+      "sha256": "3674c132b50e61bf3e8d7d9d0ce7bda995c9d35bc1f813b2fa27e5bdcd5ebb42",
+      "content_type": "text/html",
+      "resolved_url": "https://docs.zephyrproject.org/latest/boards/arduino/zero/doc/index.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://docs.zephyrproject.org/latest/develop/optimizations/footprint.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/94e1ebf14d74fc9c.html",
+      "size_bytes": 24639,
+      "sha256": "1948dba6486758ea1106e1bdc090010de0e319b0815185881c0628cec03bafde",
+      "content_type": "text/html",
+      "resolved_url": "https://docs.zephyrproject.org/latest/develop/optimizations/footprint.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/apple/swift-protobuf",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/b2969a7a04ac0207.html",
+      "size_bytes": 387504,
+      "sha256": "d18e87a3a0a603122fb030a5331f33e10e27617cc5e5ab418bbbcc6c163d75c1",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://github.com/apple/swift-protobuf",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/atsamd-rs/atsamd",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "status": "existing-snapshot",
+      "local_path": "documents/atsamd-rs-repository.html",
+      "size_bytes": 372119,
+      "sha256": "8416c2443e757516f2145b4751f58d2deef36cd56b0fc841554d9cc56cd7c5bc",
+      "resolved_url": "https://github.com/atsamd-rs/atsamd"
+    },
+    {
+      "url": "https://github.com/atsamd-rs/atsamd/tree/master/hal",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/e442e64999a7fac3.html",
+      "size_bytes": 247193,
+      "sha256": "3461587049973a9f0547390a6833bf2d71cc097b537deb124e96cdc6d07d26c6",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://github.com/atsamd-rs/atsamd/tree/master/hal",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/hathach/tinyusb",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/3ec78e1f5bccffa7.html",
+      "size_bytes": 412729,
+      "sha256": "a47879f40aa792407416bc50eac8457d00eae8676187ce38701549570a7ffd17",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://github.com/hathach/tinyusb",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/hathach/tinyusb/blob/master/README.rst",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "fetch_url": "https://raw.githubusercontent.com/hathach/tinyusb/master/README.rst",
+      "status": "downloaded",
+      "local_path": "documents/audit/0a5db9403edf3ce1.txt",
+      "size_bytes": 26992,
+      "sha256": "1f135b2e2194302d8ce7616f2dd0dafd3c79908f8868efeaa3ebcca77150d2e2",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/hathach/tinyusb/master/README.rst",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/libusb/hidapi",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/fb367bc381f7f5c1.html",
+      "size_bytes": 408371,
+      "sha256": "6be823fd20d928f7b718c253bef3246fa19e9e96bf365e1c9f15183e2a35c6cb",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://github.com/libusb/hidapi",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/libusb/hidapi/blob/master/hidapi/hidapi.h",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "fetch_url": "https://raw.githubusercontent.com/libusb/hidapi/master/hidapi/hidapi.h",
+      "status": "downloaded",
+      "local_path": "documents/audit/937e0c30db4aa9df.txt",
+      "size_bytes": 24117,
+      "sha256": "b52a10a173067259e56096eb4075474c02d34418bcbd831e7375e751ef40bac4",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/libusb/hidapi/master/hidapi/hidapi.h",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/libusb/hidapi/blob/master/mac/hid.c",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "fetch_url": "https://raw.githubusercontent.com/libusb/hidapi/master/mac/hid.c",
+      "status": "downloaded",
+      "local_path": "documents/audit/a9fd020c846a7c1e.txt",
+      "size_bytes": 44753,
+      "sha256": "5a764c1dc5bbec926c2d88877c01f452469e6b9eb9414d2f366091727a23b499",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/libusb/hidapi/master/mac/hid.c",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/nanopb/nanopb/blob/master/docs/reference.md",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "fetch_url": "https://raw.githubusercontent.com/nanopb/nanopb/master/docs/reference.md",
+      "status": "downloaded",
+      "local_path": "documents/audit/529ed3ac88d676d6.txt",
+      "size_bytes": 53523,
+      "sha256": "ad2dbbc2ce931bde58a53928b09a873b8ab898c8345419888a2984adaec24a44",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/nanopb/nanopb/master/docs/reference.md",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/nordicsemi/zcbor",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/ba502131b3a2f7a1.html",
+      "size_bytes": 499279,
+      "sha256": "49e7658920e2f7f5ce5ebb9b0e6edd7fa90bc73f65d419bbf428f2596972f438",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://github.com/nordicsemi/zcbor",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/swiftlang/swift-evolution/blob/main/proposals/0306-actors.md",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "fetch_url": "https://raw.githubusercontent.com/swiftlang/swift-evolution/main/proposals/0306-actors.md",
+      "status": "downloaded",
+      "local_path": "documents/audit/f455096b0f666171.txt",
+      "size_bytes": 62853,
+      "sha256": "a8bf41b8807e14805ff5d4f53cabcb41f57166a51251eaf589132e106b37c8bd",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/swiftlang/swift-evolution/main/proposals/0306-actors.md",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/README.md",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/README.md",
+      "size_bytes": 22009,
+      "sha256": "ef7bdbee5b55d74fc9f2319c1ae639bc86021431795e729230ecc5c2b6ddaddb",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/src/delay.c",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/delay.c",
+      "size_bytes": 1455,
+      "sha256": "f00b94353f5281d386d736def7053c61645c16878be9b45702f851613eb5e6e1",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/src/diag.c",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md",
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/diag.c",
+      "size_bytes": 4427,
+      "sha256": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/src/ea9.ld",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md",
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/ea9.ld",
+      "size_bytes": 3620,
+      "sha256": "73abe46cf5104766abe3b611a22e2de03b37c55ebf042283f44e2489c64e77a0",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/src/em_uart.c",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/em_uart.c",
+      "size_bytes": 5433,
+      "sha256": "6ac0f14c8e1409f35e3f643ce62fdb5d031504df288ddc9ffdf6a5c48909676b",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/src/emount.c",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/emount.c",
+      "size_bytes": 52688,
+      "sha256": "eb4a24fd7b63fa53a92f534642e3284f3bc339c155d7e2bdbe5e9fb704bdca2e",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/blob/d52ed06cc449918f938e0695fbf29a0c4141f2b2/tools/ea9flash.py",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "existing-pinned-source",
+      "local_path": "upstream/weiziqian/E-mount-impl-on-Techart-EA9/tools/ea9flash.py",
+      "size_bytes": 17724,
+      "sha256": "a488afae61447a4456ae469d8bc319410e139872a9246b33b3957f479eb818bb",
+      "commit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2"
+    },
+    {
+      "url": "https://learn.arm.com/install-guides/llvm-embedded/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/0ac25c197053d6e1.html",
+      "size_bytes": 23927,
+      "sha256": "add37fe9be85e15c965987b594cb5ead11d6338e7046cc7e3888a8e66b65a953",
+      "content_type": "text/html",
+      "resolved_url": "https://learn.arm.com/install-guides/llvm-embedded/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://mozilla.github.io/uniffi-rs/latest/swift/overview.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/0a2a074a0400ba8b.html",
+      "size_bytes": 44872,
+      "sha256": "c3c20823057031add6fcfa2edc156569d6164fa97989f5959f011b216ff7a586",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://mozilla.github.io/uniffi-rs/latest/swift/overview.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://onlinedocs.microchip.com/oxy/GUID-22527069-B4D6-49B9-BACC-3AF1C52EB48C-en-US-21/GUID-BFF407FF-FE62-4CC6-B902-8DFA87AA8826.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://onlinedocs.microchip.com/oxy/GUID-2A8AADED-413E-4021-AF0C-D99E61B8160D-en-US-4/GUID-E1A10519-71AD-44B7-BD52-FD0CD8EB5077.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://onlinedocs.microchip.com/oxy/GUID-450989FA-38E4-4D68-AB61-15ADB29AD718-en-US-6/GUID-959B9108-7325-499B-AA9A-387A164FAA7A.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://onlinedocs.microchip.com/oxy/GUID-DDF2C9BC-07FB-4ABF-938A-774B157B4519-en-US-10/GUID-0A57A35A-4CD7-45F3-8D90-4E81614DDF28.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/atsamd-rs/atsamd/master/hal/Cargo.toml",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/27f656f78e06768b.txt",
+      "size_bytes": 9440,
+      "sha256": "4bcac9d809b4b00d1b7628d9d0899cb367873310775e8459acdd1823835b327e",
+      "content_type": "text/plain; charset=utf-8",
+      "resolved_url": "https://raw.githubusercontent.com/atsamd-rs/atsamd/master/hal/Cargo.toml",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://rtic.rs/2/book/en/internals/targets.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/034d7117f669848d.html",
+      "size_bytes": 30495,
+      "sha256": "c7fb0b5c7abbb3e2a43eddba5e6ce2400a2d1a925d6130051f11855ed0e60d69",
+      "content_type": "text/html; charset=utf-8",
+      "resolved_url": "https://rtic.rs/2/book/en/internals/targets.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://v2.tauri.app/reference/webview-versions/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/7cad1bba6d2c41aa.html",
+      "size_bytes": 81209,
+      "sha256": "d6d7bb547dae87c9f45bf388549b21386ae41045c339c769e81786012691f093",
+      "content_type": "text/html; charset=UTF-8",
+      "resolved_url": "https://v2.tauri.app/reference/webview-versions/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://v2.tauri.app/security/runtime-authority/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/macos-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/67eced35ca2a0b94.html",
+      "size_bytes": 74889,
+      "sha256": "dcb184cb995590f7a5141ff1922b29cc19a2f3e47554d157461e119b6be06e6c",
+      "content_type": "text/html; charset=UTF-8",
+      "resolved_url": "https://v2.tauri.app/security/runtime-authority/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42261-SAM-D21-USB_Application-Note_AT06475.pdf",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md",
+        "docs/usb-cap-investigation.md",
+        "docs/usb-cap-followup.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/dabe5ce181d0d953.pdf",
+      "size_bytes": 395638,
+      "sha256": "694f63f97be809b7940a9a77a29a63a0fef46e272f372d6e77ba59a69c8941a0",
+      "content_type": "application/pdf",
+      "resolved_url": "https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42261-SAM-D21-USB_Application-Note_AT06475.pdf",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://ww1.microchip.com/downloads/en/DeviceDoc/SAM-D21DA1-Family-Data-Sheet-DS40001882G.pdf",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md",
+        "docs/usb-cap-investigation.md",
+        "docs/usb-cap-followup.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/4234f7887c2d6a9c.pdf",
+      "size_bytes": 8891514,
+      "sha256": "18ca1ccab5aa330f16dfb0b24f5acf9e817998f61734ccad9f56657d409a708b",
+      "content_type": "application/pdf",
+      "resolved_url": "https://ww1.microchip.com/downloads/en/DeviceDoc/SAM-D21DA1-Family-Data-Sheet-DS40001882G.pdf",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/09-Memory-management/03-Static-vs-Dynamic-memory-allocation",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/dcad4a469516bcdf.html",
+      "size_bytes": 1188010,
+      "sha256": "738c4a3f0a296421f39b54014443d61e58a997ea595f8557d69fae228fb0bfb4",
+      "content_type": "text/html",
+      "resolved_url": "https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/09-Memory-management/03-Static-vs-Dynamic-memory-allocation",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://www.freertos.org/libraries/license.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/b064b194779df1b7.html",
+      "size_bytes": 1187584,
+      "sha256": "675e8899d29ebdbbb693bbf8167ffccf7bc8941e38960dd8286a133d2a5bc396",
+      "content_type": "text/html",
+      "resolved_url": "https://www.freertos.org/Documentation/03-Libraries/01-Library-overview/04-Licensing",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://www.microchip.com/en-us/product/ATSAMD21E17",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/firmware-options.md"
+      ],
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.rfc-editor.org/info/rfc8610/",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/528e8d8c2ee8e718.html",
+      "size_bytes": 580823,
+      "sha256": "21a273a9312f9f5454a33139cad0f55108807ce5c6233775ec6ed69efe2a2809",
+      "content_type": "text/html;charset=utf-8",
+      "resolved_url": "https://www.rfc-editor.org/info/rfc8610/",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc8949.html",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/audits/host-protocol-options.md",
+        "docs/system-design-recommendation.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/21808959bbd5f2ba.html",
+      "size_bytes": 338064,
+      "sha256": "6ac12612df1382746ff194ddeef0ce70a6c4f95d9071844c10a9092b0016eeba",
+      "content_type": "text/html",
+      "resolved_url": "https://www.rfc-editor.org/rfc/rfc8949.html",
+      "note": "Offline snapshot of response/source; external assets and linked dependencies are not downloaded."
+    },
+    {
+      "url": "https://ww1.microchip.com/downloads/en/DeviceDoc/SAM-D21DA1-Family-Silicon-Errata-and-Data-Sheet-Clarification-DS80000760G.pdf",
+      "retrieved_date": "2026-10-10",
+      "cited_by": [
+        "docs/usb-cap-followup.md"
+      ],
+      "status": "downloaded",
+      "local_path": "documents/audit/5af491e5d749eb38.pdf",
+      "size_bytes": 394592,
+      "sha256": "3d0b4ed329f20236a7044852f426e536d6179ce843554043e1701af37ec9a7b1",
+      "content_type": "application/pdf",
+      "resolved_url": "https://ww1.microchip.com/downloads/en/DeviceDoc/SAM-D21DA1-Family-Silicon-Errata-and-Data-Sheet-Clarification-DS80000760G.pdf",
+      "note": "Primary identification and revision table plus silicon errata. Used to interpret the measured DID."
+    }
+  ]
+}

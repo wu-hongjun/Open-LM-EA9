@@ -1,0 +1,66 @@
+[
+  {
+    "id": "lm-ea9",
+    "sourcePage": "https://techartpro.com/?product=lmea9",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "contax-zeiss-28-f2",
+    "sourcePage": "https://kamerastore.com/products/carl-zeiss-28mm-f2-distagon-t-contax-yashica",
+    "title": "Carl Zeiss 28mm f2 Distagon T* (AE) - Lens",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/1_20-_20KP6489-1.jpg?v=1731658907"
+    ]
+  },
+  {
+    "id": "contax-zeiss-35-f1-4",
+    "sourcePage": "https://kamerastore.com/products/carl-zeiss-35mm-f1-4-distagon-t-ae-contax-yashica",
+    "title": "Carl Zeiss 35mm f1.4 Distagon T* (AE) - Lens",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/8_20-_20KW7366-1.jpg?v=1765807685"
+    ]
+  },
+  {
+    "id": "contax-zeiss-50-f1-4",
+    "sourcePage": "https://kamerastore.com/products/carl-zeiss-50mm-f1-4-planar-t-contax-yashica-t99266",
+    "title": "Carl Zeiss 50mm f1.4 Planar T* (AE)",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-1.jpg?v=1742914076",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-2.jpg?v=1742914076",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-3.jpg?v=1742914076",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-4.jpg?v=1742914075",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-5.jpg?v=1742914076",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-6.jpg?v=1742914076",
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/44-KQ5782-7.jpg?v=1742914076"
+    ]
+  },
+  {
+    "id": "contax-zeiss-85-f1-4",
+    "sourcePage": "https://kamerastore.com/products/carl-zeiss-85mm-f1-4-planar-t",
+    "title": "Carl Zeiss 85mm f1.4 Planar T* (AE) - Lens",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/16-05-24-42416.jpg?v=1722515796"
+    ]
+  },
+  {
+    "id": "contax-zeiss-100-f2-8-macro",
+    "sourcePage": "https://kamerastore.com/products/contax-100mm-f2-8-makro-planar-t-1",
+    "title": "Carl Zeiss 100mm f2.8 Makro-Planar T* (AE) - Lens",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/13_20-_20LE8914-1.jpg?v=1788164737"
+    ]
+  },
+  {
+    "id": "contax-zeiss-135-f2-8",
+    "sourcePage": "https://kamerastore.com/products/contax-135mm-f2-8-sonnar-t-c-y-mount-lens",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "contax-zeiss-28-70-f3-5",
+    "sourcePage": "https://kamerastore.com/products/carl-zeiss-28-70mm-f3-5-4-5-vario-sonnar-t-contax-yashica",
+    "title": "Carl Zeiss 28-70mm f3.5-4.5 Vario-Sonnar T* (MM) - Lens",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0521/9496/7750/files/02-01-25-87424_a74a9642-9c1a-4fce-95b3-f73b855131be.jpg?v=1764339207"
+    ]
+  }
+]

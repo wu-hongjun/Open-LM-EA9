@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "stockLoaderVersion": "1.8.0",
+  "createdAt": "2026-10-11T04:26:34.980051+00:00",
+  "applicationOrigin": "0x5000",
+  "applicationBytes": 20172,
+  "originalFullFlashBytes": 131072,
+  "originalFullFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+  "originalBootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+  "source": "Official updater cache image matched byte-for-byte to a two-pass original same-unit flash backup",
+  "applicationSourceURL": "http://www.techart-logic.com/product/firmware/LM-EA9/EA9-VER-1-8-0.bin",
+  "encryption": "AES-256-GCM",
+  "keyBytes": 32,
+  "archiveFormat": "ZIP; six exact original .ea9backup files",
+  "archiveSHA256": "d3b34f6c597fa62ce594061ca7ab5d10e6abfec8b923df27a7d979dea9fc438c",
+  "encryptedHeader": "EA9REC01 (8 bytes), nonce (12 bytes), AES-GCM ciphertext and tag",
+  "keyCommitted": false,
+  "restorationHardwareQualified": false,
+  "bootloaderRestorationQualified": false,
+  "files": {
+    "application.bin": {
+      "bytes": 20172,
+      "sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564"
+    },
+    "original-unit-backup.aesgcm": {
+      "bytes": 22306,
+      "sha256": "96f920e711580a94dffacc9f0a29bfe2ddd472a9dd88b1732021ea800f1ef0bf"
+    }
+  },
+  "ownerReportedOfficialRelease": "0.1.8",
+  "cameraVersionBCD": "0x18"
+}

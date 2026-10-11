@@ -1,0 +1,22 @@
+{
+  "stage": "offline-recovery-bundle-verified-for-git",
+  "stockLoaderVersion": "1.8.0",
+  "officialApplicationBytes": 20172,
+  "officialApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "originalFullFlashBytes": 131072,
+  "originalFullFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+  "encryptedBackupBytes": 22306,
+  "encryptedBackupSHA256": "96f920e711580a94dffacc9f0a29bfe2ddd472a9dd88b1732021ea800f1ef0bf",
+  "encryption": "AES-256-GCM",
+  "keyCommitted": false,
+  "originalBackupRecheckedOffline": true,
+  "cachedOfficialApplicationMatchesOriginalDump": true,
+  "decryptedFilesByteIdenticalToOriginalBackup": true,
+  "offlineRecoveryTestsPassed": 7,
+  "offlineRecoveryTestLogSHA256": "38c3c1cc4173a4f7e95f2872eaecc735c363621284989537a44ee7ea74960813",
+  "hardwareReportsSent": 0,
+  "stockUploadPreviouslyByteVerified": true,
+  "afToStockHardwareRoundTripQualified": false,
+  "bootloaderRestorationQualified": false,
+  "powerLossRecoveryQualified": false
+}

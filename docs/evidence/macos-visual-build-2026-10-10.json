@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "build": "3",
+  "date": "2026-10-10",
+  "platform": {
+    "os": "macOS 27.0.1",
+    "architecture": "arm64",
+    "xcode": "27.0",
+    "swift": "6.4"
+  },
+  "testCounts": {
+    "LensCore": 7,
+    "DeviceKit": 10,
+    "total": 17
+  },
+  "photos": {
+    "count": 9,
+    "bytes": 1622165,
+    "allBundledDigestsMatch": true,
+    "runtimeSource": "local NSImage resource bundle"
+  },
+  "defaultLibrary": {
+    "profileCount": 8,
+    "otherSevenProfilesUnchanged": true,
+    "correctedProfileID": "zeiss-jena-biotar-55-f2",
+    "changedFields": [
+      "displayName",
+      "maximumFocalLengthMM",
+      "minimumFocalLengthMM",
+      "notes",
+      "revision",
+      "savedAt"
+    ],
+    "focalLengthMM": 58,
+    "maximumAperture": 2,
+    "revision": 2,
+    "sha256": "f9619f1edbeca78c44cded59a533149140f93604f886ed932aa7dbc6c986faad",
+    "preparedLensSelected": false
+  },
+  "firmwareHistory": {
+    "unchanged": true,
+    "version": "1.8.0",
+    "readAt": "2026-10-11T00:13:35Z"
+  },
+  "reconnectHistoryUnchanged": true,
+  "newHardwareReportOperations": 0,
+  "hardwareWrites": 0,
+  "referenceCollection": {
+    "schema_version": 1,
+    "checked_files": 3156,
+    "failure_count": 0,
+    "failures": []
+  },
+  "executableSHA256": "1c9b123e3ac2712f367bb79e3772a09281c9cb3fa930817e545c6229791f01b5",
+  "sourceSHA256": {
+    "apps/macos/Sources/DeviceKit/Backup.swift": "11d56d596ccaff603f38e6dadd8a13d4d0142a593c24000f510c7b53122c7184",
+    "apps/macos/Sources/DeviceKit/FirmwareObservation.swift": "7760ad6987f18487375fd4e87641d0088bc7f02ab2937f9d46821093d2a8e54d",
+    "apps/macos/Sources/DeviceKit/NativeHID.swift": "15048d08300864bf43e5ebc5abddce0206bea48ba189a6504d7156298a3d4663",
+    "apps/macos/Sources/EA9CLI/main.swift": "e96bd01a38a3140c5f6705857c7e499e502d5fb914bdafabd24fef538ea28400",
+    "apps/macos/Sources/LensCore/LensLibrary.swift": "2781ff1101b36c58ada026582641695f2a86e7780d48f5db8a08625d2ee85a57",
+    "apps/macos/Sources/LensCore/PreparedLensStore.swift": "43e61d97dcc7b051b856270ca13e6f2bb4661a9a486af655d7cd8e9ddf6f7949",
+    "apps/macos/Sources/OpenLMEA9/AppModel.swift": "dc653b97413f1233dffa5df3578ab95cebc7b8c08b2ee5b2365cf104534d0c37",
+    "apps/macos/Sources/OpenLMEA9/DeviceOverview.swift": "f9bc3d86d366e130446d854db23992deb872b2bff76a12839aa68b45fe18defa",
+    "apps/macos/Sources/OpenLMEA9/LensGallery.swift": "46731a09d10b0e1f716ee7ffafdb3a2dac670b7b612f1ed312a986a056ef237f",
+    "apps/macos/Sources/OpenLMEA9/OpenLMEA9App.swift": "33e65623697e00cb9f0a947b8f7704da7c8f9420eedf4991fbb416937730b662",
+    "apps/macos/Sources/OpenLMEA9/VisualDesign.swift": "742413d6d0efd0cf650acb646c1d114dbfa697d1eba85929fae7060bb566353c",
+    "apps/macos/Tests/DeviceKitTests/BackupTests.swift": "38a2d55bfa9bc4d804f888e4e1830654ce37657aa6c0b754c58ce7c82e079a24",
+    "apps/macos/Tests/DeviceKitTests/FirmwareObservationTests.swift": "561432743de81fa28b93e5072cf857a4082d41daf255b1daa278aee4dc45da23",
+    "apps/macos/Tests/LensCoreTests/LensLibraryTests.swift": "60fa9281e7a210183d4c428b27303061f36fd484eceb1b845d1f5a67a60f5093",
+    "apps/macos/Tests/LensCoreTests/PreparedLensTests.swift": "c18801abd4b7b186f4d8614de49ee207f7da30171d56db21f92b9ccc55c8ccd8",
+    "profiles/requested-lenses.json": "2a4ea0d4f3e68099bf5be241d1f2035e1feb1b25146395c69c9984195abc675d",
+    "references/visuals/assets.json": "ae6c4644fc12e45ab0fc7b7d4be150ceb99df816e375111f9825c2bfca3e953b",
+    "references/visuals/fetch_assets.py": "0d4fe67d4246b45547f1503c8e3a25bbad7e33f1a6f9bd4f6b06ed1bd86eda33",
+    "scripts/build-macos-app.sh": "9db9dd0542df2e4d70bd120c2bb4ee9b9971ebc85b8fa1464d1d8c2c78c955d8",
+    "apps/macos/Package.swift": "310707c09b105bfd22989726b4b732521802c739a471fd5d558771083e35bf01",
+    "apps/macos/Info.plist": "3ce80441b0e2006ea7f50a875e891dd0c0714b2a1148fd2a7b2c9347afcb430b"
+  }
+}

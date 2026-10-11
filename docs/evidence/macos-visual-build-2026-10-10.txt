@@ -1,0 +1,12 @@
+Verified 9 original photos and 9 app resources.
+Building for production...
+[Computing dependencies]
+[1 / 2]
+[2 / 3] OpenLMEA9-product
+[3 / 4] OpenLMEA9-product
+[5 / 5] OpenLMEA9-product
+[7 / 8] OpenLMEA9-product
+Build complete! (12.66 sec)
+/Users/hongjunwu/Git/Open-LM-EA9/dist/Open LM-EA9.app: replacing existing signature
+Built /Users/hongjunwu/Git/Open-LM-EA9/dist/Open LM-EA9.app
+CLI: /Users/hongjunwu/Git/Open-LM-EA9/dist/ea9ctl

@@ -1,0 +1,32 @@
+# Original local evidence retained for links from the initial investigation.
+/artifacts/private/
+
+# Downloaded reference snapshots and web documents; provenance/index are tracked.
+/references/upstream/
+/references/documents/
+
+# Proprietary stock firmware and updater, preserved for local analysis.
+/references/private/
+
+# Reproducible Mac build products and local verification artifacts.
+/apps/macos/.build/
+/dist/
+/artifacts/macos-prototype/
+.DS_Store
+__pycache__/
+/tools/firmware-deps/
+# Tool installs and binary-analysis scratch for the separate REA research thread.
+# Reproducible commands and provenance are documented separately.
+/tools/rea-analysis/
+/firmware/ea9/build/
+/artifacts/firmware-milestone/
+
+# Downloaded reference photos remain local; their sources and digests are tracked.
+/references/visuals/photos/
+/references/visuals/*.html
+/apps/macos/Sources/OpenLMEA9/Resources/Photos/*.jpg
+
+# Recovery keys and decrypted same-unit backups never belong in public Git.
+/.venv-recovery/
+/firmware/recovery/**/*.key
+/firmware/recovery/**/*.ea9backup/

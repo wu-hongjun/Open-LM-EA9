@@ -1,0 +1,17 @@
+/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/stock/EA9-VER-1-8-0.bin: 20172 bytes, loads at 0x5000-0x09ecc
+  initial SP     0x20002ab0
+  reset vector   0x00006145
+  all 34 populated vectors land inside the image
+  default handler 0x00006141; 7 vectors differ from it:
+    [20] 0x00007651  IRQ4
+    [21] 0x00007a41  IRQ5 NVMCTRL
+    [22] 0x00007505  IRQ6 DMAC
+    [26] 0x00007df9  IRQ10 SERCOM1
+    [31] 0x000086cd  IRQ15 TCC0
+    [32] 0x000086e1  IRQ16 TCC1
+    [35] 0x00008991  IRQ19 TC4
+
+RESULT: PASS
+
+Regenerating emount_packets.c from the recovered image produced a byte-for-byte identical file to upstream commit d52ed06cc449918f938e0695fbf29a0c4141f2b2.
+Generated header differs from checked-in header; see research report.

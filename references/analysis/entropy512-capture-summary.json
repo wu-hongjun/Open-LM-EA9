@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "method": "Independent CS-gated 8N1 UART sampling; not a sigrok runtime replay",
+  "checksum_rule": "sum(frame[1:declared_length-3]) modulo 65536, little-endian footer",
+  "captures": [
+    {
+      "capture": "a6000_ef50_viltrox_init.sr",
+      "sha256": "962247e6463eef222f3cbdde46b9f91005fb976da2d638b97b5dce3bb8db33da",
+      "zip_crc_valid": true,
+      "sample_rate_hz": 6000000,
+      "samples": 22435105,
+      "probes_zero_based": {
+        "BODY_VD_LENS": 0,
+        "VCC": 1,
+        "LENS_CS_BODY": 2,
+        "RXD": 3,
+        "TXD": 4,
+        "BODY_CS_LENS": 5
+      },
+      "counts": {
+        "complete_cs_windows": 839,
+        "extraction_errors": 1,
+        "partial_windows": 1,
+        "validated_frames": 834,
+        "windows_without_start_edge": 4
+      },
+      "baud_counts": {
+        "750000": 6,
+        "1500000": 828
+      },
+      "message_types": [
+        "0x01",
+        "0x03",
+        "0x04",
+        "0x05",
+        "0x06",
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0A",
+        "0x0B",
+        "0x0C",
+        "0x0D",
+        "0x10"
+      ]
+    },
+    {
+      "capture": "a6000_efs24_viltrox_init.sr",
+      "sha256": "8e428d7f1bf2c7da7aa6df928f19a5c5bfd92a824c7fef39d2c3d6e671b091ae",
+      "zip_crc_valid": true,
+      "sample_rate_hz": 6000000,
+      "samples": 16970947,
+      "probes_zero_based": {
+        "BODY_VD_LENS": 0,
+        "VCC": 1,
+        "LENS_CS_BODY": 2,
+        "RXD": 3,
+        "TXD": 4,
+        "BODY_CS_LENS": 5
+      },
+      "counts": {
+        "complete_cs_windows": 625,
+        "extraction_errors": 1,
+        "partial_windows": 1,
+        "validated_frames": 620,
+        "windows_without_start_edge": 4
+      },
+      "baud_counts": {
+        "750000": 6,
+        "1500000": 614
+      },
+      "message_types": [
+        "0x01",
+        "0x03",
+        "0x04",
+        "0x05",
+        "0x06",
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0A",
+        "0x0B",
+        "0x0C",
+        "0x0D",
+        "0x10"
+      ]
+    },
+    {
+      "capture": "a6000_sel55210_init_210.sr",
+      "sha256": "3a0036f4f4441eb4e1fd769dcb29a0847220ecda8180f800cbde2cb16e39a887",
+      "zip_crc_valid": true,
+      "sample_rate_hz": 6000000,
+      "samples": 23918145,
+      "probes_zero_based": {
+        "BODY_VD_LENS": 0,
+        "VCC": 1,
+        "LENS_CS_BODY": 2,
+        "RXD": 3,
+        "TXD": 4,
+        "BODY_CS_LENS": 5
+      },
+      "counts": {
+        "complete_cs_windows": 729,
+        "validated_frames": 724,
+        "windows_without_start_edge": 5
+      },
+      "baud_counts": {
+        "750000": 6,
+        "1500000": 718
+      },
+      "message_types": [
+        "0x01",
+        "0x03",
+        "0x04",
+        "0x05",
+        "0x06",
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0A",
+        "0x0B",
+        "0x0C",
+        "0x0D",
+        "0x10"
+      ]
+    },
+    {
+      "capture": "a6000_sel55210_init_55.sr",
+      "sha256": "1869e8ef27f0a5fcf6f462964aafc2df7389a0f67e330383f73d92c08dc62f5d",
+      "zip_crc_valid": true,
+      "sample_rate_hz": 6000000,
+      "samples": 15768289,
+      "probes_zero_based": {
+        "BODY_VD_LENS": 0,
+        "VCC": 1,
+        "LENS_CS_BODY": 2,
+        "RXD": 3,
+        "TXD": 4,
+        "BODY_CS_LENS": 5
+      },
+      "counts": {
+        "complete_cs_windows": 403,
+        "validated_frames": 398,
+        "windows_without_start_edge": 5
+      },
+      "baud_counts": {
+        "750000": 6,
+        "1500000": 392
+      },
+      "message_types": [
+        "0x01",
+        "0x03",
+        "0x04",
+        "0x05",
+        "0x06",
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0A",
+        "0x0B",
+        "0x0C",
+        "0x0D",
+        "0x10"
+      ]
+    },
+    {
+      "capture": "a6000_selp1650_init.sr",
+      "sha256": "9d9b8cbc2de9428e98bd14f767646dc7505c7c3f4feadd038030f6725976162a",
+      "zip_crc_valid": true,
+      "sample_rate_hz": 6000000,
+      "samples": 30641011,
+      "probes_zero_based": {
+        "BODY_VD_LENS": 0,
+        "VCC": 1,
+        "LENS_CS_BODY": 2,
+        "RXD": 3,
+        "TXD": 4,
+        "BODY_CS_LENS": 5
+      },
+      "counts": {
+        "complete_cs_windows": 884,
+        "validated_frames": 880,
+        "windows_without_start_edge": 4
+      },
+      "baud_counts": {
+        "750000": 6,
+        "1500000": 874
+      },
+      "message_types": [
+        "0x01",
+        "0x03",
+        "0x04",
+        "0x05",
+        "0x06",
+        "0x07",
+        "0x08",
+        "0x09",
+        "0x0A",
+        "0x0B",
+        "0x0C",
+        "0x0D",
+        "0x10"
+      ]
+    }
+  ]
+}

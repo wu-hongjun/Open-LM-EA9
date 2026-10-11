@@ -1,0 +1,12 @@
+{
+  "templateBytes": 20736,
+  "templateSHA256": "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293",
+  "stackPointer": "0x20002a58",
+  "resetVector": "0x5151",
+  "profileFlashAddress": "0xa000",
+  "profileBytes": 256,
+  "motorMotionLinked": false,
+  "applicationFlashLoggingLinked": false,
+  "swiftTests": 28,
+  "hostPrimeProfileImages": 7
+}

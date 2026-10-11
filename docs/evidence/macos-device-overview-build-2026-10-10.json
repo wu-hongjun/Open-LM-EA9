@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "applicationVersion": "0.1.1",
+  "bundleBuild": "2",
+  "automatedTests": {
+    "LensCore": 5,
+    "DeviceKit": 10,
+    "allPassed": true
+  },
+  "sourceSHA256": {
+    "apps/macos/Sources/OpenLMEA9/OpenLMEA9App.swift": "5170bb947bdc496b9147b1358f24121b32322a897194de19ce49e2270974365d",
+    "apps/macos/Sources/OpenLMEA9/AppModel.swift": "c53d6dc5b785e7b472e903cfe3746bd2326cbdc96a09d4eacb1e0a6f53b9ce4c",
+    "apps/macos/Sources/DeviceKit/FirmwareObservation.swift": "7760ad6987f18487375fd4e87641d0088bc7f02ab2937f9d46821093d2a8e54d",
+    "apps/macos/Sources/DeviceKit/NativeHID.swift": "15048d08300864bf43e5ebc5abddce0206bea48ba189a6504d7156298a3d4663",
+    "apps/macos/Sources/DeviceKit/Backup.swift": "e469e0fe67ca2e02a1210b9c784097629969ac7074cff1a1d3e39657b1575c53",
+    "apps/macos/Tests/DeviceKitTests/FirmwareObservationTests.swift": "561432743de81fa28b93e5072cf857a4082d41daf255b1daa278aee4dc45da23",
+    "apps/macos/Info.plist": "be2ee47879e6e4171a80c9b97dd8102e93e6d215d2ae540ac155c96c221bd495"
+  },
+  "finalApplicationExecutableSHA256": "3a107c46a0af7d6d97b098a76f2adc2a89df2954b32b23469849a899aae8fe24",
+  "versionReadExecutableSHA256": "328c1e3e4fa3e43c18e15b8c52b16ad3098a117c31d52383e16e231c59b45b0e",
+  "finalCLISHA256": "40e7cde740bc772daa2f06ceaeef0d98c829dc15310c1e99981116648bce029d",
+  "hardwareQuery": {
+    "operation": "Explicit GUI Read Version",
+    "checkRequests": 1,
+    "memoryReadRequests": 0,
+    "reportedVersion": "1.8.0",
+    "readAt": "2026-10-11T00:13:35Z",
+    "qualifiedDescriptor": true,
+    "reconnectMarkerCleared": true,
+    "qualification": "Reported loader version, not installed-image verification; DeviceKit unchanged by final toolbar correction"
+  },
+  "uiChecks": {
+    "deviceDefaultAtInitialLaunchAndRelaunch": true,
+    "lensInformationOpensSecondTab": true,
+    "eightProfilesShown": true,
+    "unsavedCancelAndDiscardVerified": true,
+    "deviceToolbarClearsAfterLibrary": true,
+    "backupDestinationPanelOpenedThenCancelled": true,
+    "relaunchAndNavigationPreservedFirmwareReadTimestamp": true,
+    "savedProfileFileUnchanged": true,
+    "finalView": "Device"
+  },
+  "nativeUIInspection": "Actual packaged SwiftUI app, accessibility and rendered window",
+  "signatureVerification": "codesign --verify --deep --strict succeeded",
+  "scope": "One explicit CHECK; no further hardware backup, upload, restore, reset, feature, metadata or motor operation"
+}

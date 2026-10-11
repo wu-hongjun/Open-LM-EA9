@@ -1,0 +1,141 @@
+Building for debugging...
+[Computing dependencies]
+[3 / 33]
+[4 / 34] LensCore
+[6 / 35] LensCore
+[9 / 34] DeviceKit
+[15 / 40] DeviceKit
+[24 / 43] DeviceKit
+[25 / 45] ea9ctl-product
+[27 / 46] ea9ctl-product
+[27 / 46] DeviceKit
+[31 / 48] OpenLMEA9-product
+[40 / 56] OpenLMEA9_OpenLMEA9
+[41 / 53] DeviceKitTests-product
+[46 / 58] ea9ctl-product
+[47 / 59] OpenLMEA9-product
+[50 / 61] OpenLMEA9
+[51 / 64] DeviceKitTests-product
+[51 / 64] OpenLMEA9
+[55 / 66] DeviceKitTests-product
+[62 / 71] OpenLMEA9-product
+[64 / 71] DeviceKitTests-product
+[66 / 71] AppWorkflowTests-product
+[68 / 73] AppWorkflowTests-product
+[70 / 73] AppWorkflowTests-product
+[72 / 73] AppWorkflowTests-product
+[76 / 76] AppWorkflowTests-product
+Build complete! (10.09 sec)
+Test Suite 'All tests' started at 2026-10-10 23:58:05.258.
+Test Suite 'All tests' passed at 2026-10-10 23:58:05.261.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.003) seconds
+Test Suite 'All tests' started at 2026-10-10 23:58:05.496.
+Test Suite 'All tests' passed at 2026-10-10 23:58:05.500.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.003) seconds
+Test Suite 'All tests' started at 2026-10-10 23:58:05.727.
+Test Suite 'All tests' passed at 2026-10-10 23:58:05.729.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.002) seconds
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() started.
+◇ Test savingAndImportingPreserveRevisionAndOriginalData() started.
+◇ Test corruptLibraryIsNeverReseededOverTheOriginal() started.
+◇ Test preparedLensIsLocalAndResolvesOnlyWithinCurrentLibrary() started.
+◇ Test preparedLensRejectsUnsupportedAndOversizedHistory() started.
+◇ Test requestedInventoryKeepsUnknownsAndDesignations() started.
+◇ Test metadataValidationRejectsImpossibleValues() started.
+✔ Test corruptLibraryIsNeverReseededOverTheOriginal() passed after 0.006 seconds.
+✔ Test requestedInventoryKeepsUnknownsAndDesignations() passed after 0.013 seconds.
+✔ Test metadataValidationRejectsImpossibleValues() passed after 0.014 seconds.
+✔ Test preparedLensRejectsUnsupportedAndOversizedHistory() passed after 0.014 seconds.
+✔ Test unsupportedSchemaDuplicatesAndOversizedFilesFail() passed after 0.014 seconds.
+✔ Test preparedLensIsLocalAndResolvesOnlyWithinCurrentLibrary() passed after 0.014 seconds.
+✔ Test savingAndImportingPreserveRevisionAndOriginalData() passed after 0.020 seconds.
+✔ Test run with 7 tests in 0 suites passed after 0.020 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test safetyRecordCorruptionFailsClosedAndDurableReplacementIsPrivate() started.
+◇ Test sessionRejectsReadsAndRepeatedStartOnceArmed() started.
+◇ Test afBackupIsReadableButCannotBeUsedAsOriginalStockSource() started.
+◇ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() started.
+◇ Test stockSizedUploadEndsAtLastFlashByteWithoutExtraPadding() started.
+◇ Test timeoutCancellationAndShortReportStopWithoutRetry() started.
+◇ Test reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile() started.
+◇ Test verifiedBackupPublishesCompleteHashedPrivateFiles() started.
+◇ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() started.
+◇ Test alternateLibraryDoesNotRelocateHardwareSafety() started.
+◇ Test afVersionCannotMasqueradeAsMetadataAndHistoryRetainsVersion() started.
+◇ Test blockedConnectionStopsAlternateClientBeforeNativeAccess() started.
+◇ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() started.
+◇ Test unqualifiedApplyAndSameConnectionVerificationStopBeforeNativeAccess() started.
+◇ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test commandWhitelistAndGoldenBytes() started.
+◇ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() started.
+◇ Test sharedLockRejectsSecondClientAndReloadsArmedStateAfterRelease() started.
+◇ Test stockRecoveryPreservesCorruptJournalAndOptionalHistory() started.
+◇ Test recoveryCanReadUnknownVersionOnlyWithPinnedLoader() started.
+◇ Test uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test stockUploadQualificationIsBoundToUnitAndLoader() started.
+◇ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() started.
+◇ Test profilesEncodeKnownAperturesFocalLengthsAndRoundTrip() started.
+◇ Test profileRejectsCorruptionUnsupportedStringsZoomAndPrecision() started.
+◇ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test qualificationFailsBeforeRegisterOrFurtherReads() started.
+◇ Test mismatchingSecondPassNeverPublishes() started.
+◇ Test case passing 1 argument variant → .metadataOnly to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+✔ Test firmwareCheckRejectsEchoShortAndUnqualifiedVersion() passed after 0.092 seconds.
+✔ Test stockSizedUploadEndsAtLastFlashByteWithoutExtraPadding() passed after 0.094 seconds.
+✔ Test cachedFirmwareFollowsSerialAcrossReconnectAndNeverAnonymousDevices() passed after 0.094 seconds.
+✔ Test alternateLibraryDoesNotRelocateHardwareSafety() passed after 0.094 seconds.
+✔ Test commandWhitelistAndGoldenBytes() passed after 0.095 seconds.
+✔ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) with 3 test cases passed after 0.095 seconds.
+✔ Test reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile() passed after 0.095 seconds.
+✔ Test uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant:) with 3 test cases passed after 0.095 seconds.
+✔ Test existingBackupIsNeverOverwrittenOrAccessedByUSB() passed after 0.095 seconds.
+✔ Test unacknowledgedFirmwareReadStopsBeforeNativeAccessOrStateMutation() passed after 0.095 seconds.
+✔ Test profileRejectsCorruptionUnsupportedStringsZoomAndPrecision() passed after 0.095 seconds.
+✔ Test profilesEncodeKnownAperturesFocalLengthsAndRoundTrip() passed after 0.095 seconds.
+✔ Test firmwareHistoryRoundTripsAndRejectsInvalidOrOversizedRecords() passed after 0.095 seconds.
+✔ Test safetyRecordCorruptionFailsClosedAndDurableReplacementIsPrivate() passed after 0.095 seconds.
+✔ Test sessionRejectsReadsAndRepeatedStartOnceArmed() passed after 0.092 seconds.
+✔ Test stockUploadQualificationIsBoundToUnitAndLoader() passed after 0.096 seconds.
+✔ Test afVersionCannotMasqueradeAsMetadataAndHistoryRetainsVersion() passed after 0.096 seconds.
+✔ Test recoveryCanReadUnknownVersionOnlyWithPinnedLoader() passed after 0.096 seconds.
+✔ Test blockedConnectionStopsAlternateClientBeforeNativeAccess() passed after 0.112 seconds.
+✔ Test timeoutCancellationAndShortReportStopWithoutRetry() passed after 0.113 seconds.
+✔ Test stockRecoveryPreservesCorruptJournalAndOptionalHistory() passed after 0.113 seconds.
+✔ Test mismatchingSecondPassNeverPublishes() passed after 0.113 seconds.
+✔ Test sharedLockRejectsSecondClientAndReloadsArmedStateAfterRelease() passed after 0.115 seconds.
+✔ Test verifiedBackupPublishesCompleteHashedPrivateFiles() passed after 0.120 seconds.
+✔ Test unqualifiedApplyAndSameConnectionVerificationStopBeforeNativeAccess() passed after 0.122 seconds.
+✔ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) with 3 test cases passed after 0.129 seconds.
+✔ Test afBackupIsReadableButCannotBeUsedAsOriginalStockSource() passed after 0.153 seconds.
+✔ Test qualificationFailsBeforeRegisterOrFurtherReads() passed after 0.153 seconds.
+✔ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) with 3 test cases passed after 0.194 seconds.
+✔ Test run with 29 tests in 0 suites passed after 0.196 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test monitoringRefreshesAndCancelsWithoutUSBOperations() started.
+◇ Test dropdownPreparesLocallyWithoutApplyingOrDiscardingEdits() started.
+◇ Test refreshSeesLocalVerificationAndKeepsTheInstalledAFVariant() started.
+◇ Test hotplugRefreshResetsUSBConsentAndNeverRunsWhileBusy() started.
+✔ Test dropdownPreparesLocallyWithoutApplyingOrDiscardingEdits() passed after 0.024 seconds.
+✔ Test refreshSeesLocalVerificationAndKeepsTheInstalledAFVariant() passed after 0.059 seconds.
+✔ Test hotplugRefreshResetsUSBConsentAndNeverRunsWhileBusy() passed after 0.062 seconds.
+✔ Test monitoringRefreshesAndCancelsWithoutUSBOperations() passed after 4.145 seconds.
+✔ Test run with 4 tests in 0 suites passed after 4.145 seconds.

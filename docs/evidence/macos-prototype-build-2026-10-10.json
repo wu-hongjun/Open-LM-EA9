@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "ad_hoc_signature_verified": true,
+    "app_executable_sha256": "e8d4435cd499b44e6fe2aad15ca48c6f7cf4bf273f48ec8f5ab3047b345240d8",
+    "cli_sha256": "b4c629faf2a87c5f3484559c64fef53a3da832b6b846f0dfaad04ee6c734830c",
+    "final_cli_matches_hardware_tested_binary": true
+  },
+  "evidence_schema_version": 1,
+  "generated_at_utc": "2026-10-11T00:02:19.225411+00:00",
+  "hardware_backup": {
+    "boot_code_sha256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+    "created_at_utc": "2026-10-10T23:34:05Z",
+    "exchanges": 4359,
+    "exclusive_second_client_iokit_error": "0xe00002c5",
+    "flash_bytes": 131072,
+    "flash_sha256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+    "installed_application_matches_recovered_stock": true,
+    "matches_prior_full_backups": true,
+    "matching_flash_passes": 2,
+    "private_path": "artifacts/macos-prototype/backups/LM-EA9-prototype-2026-10-10.ea9backup",
+    "restoration_qualified": false
+  },
+  "host": {
+    "architecture": "arm64",
+    "declared_minimum_macos": "14.0",
+    "macos": "27.0.1",
+    "swift": "6.4",
+    "xcode": "27.0 (27A266a)"
+  },
+  "source_sha256": {
+    "apps/macos/Info.plist": "60f14f7f753b05fed33a60ace5d6e191c5b98d508ddd28aa6b6c708141bf04cc",
+    "apps/macos/Package.swift": "599a81e244c5fdf4685d736126fdbb7b9af66ce01f27f6f42b06b68d21152641",
+    "apps/macos/Sources/DeviceKit/Backup.swift": "9cccdde1128901d3eb567603c788259292b91cf24deb1bb9e1687f02e41599bd",
+    "apps/macos/Sources/DeviceKit/NativeHID.swift": "1b83228b3346b124ad3158cbcd7500e88ad948a427aca49b7b7d74f06d9b1052",
+    "apps/macos/Sources/EA9CLI/main.swift": "e96bd01a38a3140c5f6705857c7e499e502d5fb914bdafabd24fef538ea28400",
+    "apps/macos/Sources/LensCore/LensLibrary.swift": "2781ff1101b36c58ada026582641695f2a86e7780d48f5db8a08625d2ee85a57",
+    "apps/macos/Sources/LensCore/Resources/requested-lenses.json": "1c013a00174f585d51214e79e598d0604b275a1fbe2aa48abd3b08b31b740f28",
+    "apps/macos/Sources/OpenLMEA9/AppModel.swift": "e962071b0e84ba35b08b2aaa800546a6248d73ea09776330381dfec97ca5e56f",
+    "apps/macos/Sources/OpenLMEA9/OpenLMEA9App.swift": "a54e98b21d7e21939daac13ade28c208b50e42e2c6d239e73f7158a2112fb249",
+    "apps/macos/Tests/DeviceKitTests/BackupTests.swift": "38a2d55bfa9bc4d804f888e4e1830654ce37657aa6c0b754c58ce7c82e079a24",
+    "apps/macos/Tests/LensCoreTests/LensLibraryTests.swift": "51c6e341034dfae5de3a1c98cb2ec84e1e782b49817a223ce180d7c5d08ec46b",
+    "profiles/requested-lenses.json": "1c013a00174f585d51214e79e598d0604b275a1fbe2aa48abd3b08b31b740f28",
+    "scripts/build-macos-app.sh": "62d9ffaf7b6f212cac3a36b9403e2a0659a97fd40ab4cea6beebff3202f9e066",
+    "scripts/create-app-icon.swift": "08c928ab7af3b572966d396c3bd7014b024ddec5d105287ef161322257cf67bb",
+    "scripts/swift-local.sh": "5b858556152d2cf225e917f47a234ae5273ff2fba01a4e9ab4a16128ae2d4627",
+    "tools/verify_macos_backup.py": "05363ac8b07394ce2919d8f3de3ccb848c0c5d19e1abeb657272446c49ac71d2"
+  },
+  "tests": {
+    "device_kit": 6,
+    "failures": 0,
+    "lens_core": 5,
+    "output": "docs/evidence/macos-prototype-tests-2026-10-10.txt"
+  },
+  "ui": {
+    "export_import_roundtrip_matched": true,
+    "final_default_library_profiles": 8,
+    "final_default_manual_settings_unknown": true,
+    "isolated_library_used": true,
+    "prior_import_copy_count": 1,
+    "valid_local_save_revision": 2
+  }
+}

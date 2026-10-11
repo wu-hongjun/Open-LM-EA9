@@ -1,0 +1,79 @@
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+72 frames sent, 62 received, 0 failure(s)
+  arrival: worst error 11 counts, worst overshoot 11, mean bias +2, 1529 ms over 12 moves
+  stiff:   worst error 25 counts, 5283 ms over 12 moves
+servo: 0 failure(s)
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+no-camera: 1 mark(s) after 3052 ms
+nobody: 0 failure(s)
+slow-camera: waited 7052 ms, 1750 VD edges, 0 mark(s)
+slowbody: 0 failure(s)
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+init rescue: 0 failure(s)
+focus map: 0 failure(s)
+  distance round trip: worst 63 code unit(s), at code 1043
+focus distance: 0 failure(s)
+test_focus_pred: 0 failure(s)
+AF command/fault checks passed: 65927 bounded target cases, sentinel and sticky fault policy.
+bounded peripheral wait case passed
+bounded peripheral wait case passed
+bounded peripheral wait case passed
+bounded peripheral wait case passed
+AF origin, reference, timing and completion counterexamples passed
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+actual main homing/focus/shutdown case passed
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+no-wait release and shutdown inhibition passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual hardware-driver fault/rearm case passed
+actual delay with frozen SysTick released motor and returned
+actual delay with frozen SysTick released motor and returned
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 28mm f/2 AF candidate, SHA-256 1734d75dbf284291e35c0cd65993cea77b3bf95f15e3f5cf27325ed238efba16; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 35mm f/1.4 AF candidate, SHA-256 04c65f9c6040ce81c24b081896062e8fcf22f0676a64cf55caf7f3cbda56f2f3; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 50mm f/1.4 AF candidate, SHA-256 c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 85mm f/1.4 AF candidate, SHA-256 3a0ccb2038e3591b1b6720f94e169ed6f40888e22757ddb3c9f9d155516d3d4d; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 100mm f/2.8 Macro AF candidate, SHA-256 c97032fc1c702beb21b5251d9b22c4f4341a063e58c9400288956db4875e448a; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Contax Zeiss 135mm f/2.8 AF candidate, SHA-256 00ab2b0a606507a0bf4c05c7643f4be1cbdae810d9902a325e13542ef5e39b27; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared application image: 20736 bytes. No USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
+Prepared Zeiss Jena Biotar 58mm f/2 AF candidate, SHA-256 a8bf9064858e2529239992e8f46e9e7e87143ce207bc1dbe30c56414af7272c7; no USB reports sent.
+profile corruption checks and transmitted focal/aperture/name/checksums: PASS
