@@ -2,9 +2,12 @@
 
 This candidate is prepared for **Contax Zeiss 50mm f/1.4**. It enables the
 upstream-derived AF controller with the modular reference/completion policies and
-October 11 correctness fixes. Its upload was acknowledged on October 11;
-**physical-reconnect byte verification is pending, and it is not camera-qualified**.
-See the [current hardware record](../../../docs/evidence/af-23-upload-2026-10-11.md).
+October 11 correctness fixes. It was installed and byte-verified on October 11 after the
+owner's physical USB-cap reconnect. The owner subsequently reported eventual
+loaded 50mm focus with substantial hunting. **It is not camera-qualified**.
+Original stock 1.8.0 has since been uploaded for comparison, with reconnect
+verification pending. See the [2.3 hardware record](../../../docs/evidence/af-23-upload-2026-10-11.md)
+and [stock comparison record](../../../docs/evidence/stock-18-comparison-2026-10-11.md).
 Do not substitute this image for original stock recovery.
 
 | Property | Value |

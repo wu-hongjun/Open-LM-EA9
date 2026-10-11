@@ -1,12 +1,16 @@
-# AF 2.3 / A7C II bare-adapter test plan and result record
+# AF 2.3 / A7C II loaded-lens observation and lifecycle test plan
 
-October 11, 2026, America/New_York. **Planned; not yet started.** The adapter must
-first complete [2.3 upload and physical-reconnect byte verification](af-23-upload-2026-10-11.md).
+October 11, 2026, America/New_York. **AF 2.3 was USB-byte-verified. The owner then
+tested it with the Contax Zeiss 50mm f/1.4 and C/Y-to-M converter and reported
+eventual focus with substantial hunting.** The adapter completed
+[2.3 upload and physical-reconnect byte verification](af-23-upload-2026-10-11.md).
 Earlier 2.1/2.2 observations are separate historical records and do not qualify
 this image.
 
-This test uses an empty LM-EA9, with no optical lens or C/Y-to-M converter.
-It checks camera startup, visible/sounded motor response, idle and shutdown.
+The requested procedure below used an empty LM-EA9, with no optical lens or
+C/Y-to-M converter. The owner instead confirmed a loaded-lens test; execution
+of the requested bare-adapter stages is unconfirmed. The planned lifecycle
+procedure checks camera startup, visible/sounded motor response, idle and shutdown.
 It cannot establish optical autofocus, lens-load behavior, encoder zero or
 mechanical travel calibration. No persistent event trace is enabled.
 
@@ -60,8 +64,8 @@ not a measured firmware deadline or travel calibration.
 
 | Observation | Result |
 |---|---|
-| Upload / physical-reconnect byte verification | Upload acknowledged; byte verification pending |
-| Empty adapter, no converter, camera USB disconnected | Unconfirmed |
+| Upload / physical-reconnect byte verification | Passed: two complete flash/auxiliary passes; independent offline audit passed |
+| Actual optical configuration | Owner confirmed Contax Zeiss 50mm f/1.4 with C/Y-to-M converter; camera USB state unreported |
 | Initial still-photo exposure mode / MF / Pre-AF | Unconfirmed |
 | Camera startup / errors | Unconfirmed |
 | Startup movement / sound / direction / approximate duration | Unconfirmed |
@@ -69,12 +73,28 @@ not a measured firmware deadline or travel calibration.
 | Displayed aperture | Unconfirmed |
 | Shutdown motor / park / display off | Unconfirmed |
 | Stage B eligibility to proceed / actual settings | Not assessed |
-| Half-press motor response / release / shutdown | Not tested |
+| Half-press motor response / release / shutdown | Trigger, release and shutdown unreported |
 | Grinding, continued motion, battery removal or other fault | Unconfirmed |
+| Optical focus acquisition | Owner reports eventual focus; lock and photograph sharpness unverified |
+| Hunting / focus indicator | Owner reports substantial hunting and frequent purple focus indicator; indicator meaning unestablished |
+| Return to USB cap / updater closed | Owner confirmed both for stock comparison |
 
-Actual observations and owner statements will be appended separately from
-interpretation. No optical lens, focus accuracy, measured timing or reference
-calibration is qualified by this procedure.
+Owner statements:
+
+> It sort of works, but it hunts a lot for getting focus. SHould we flash the stock 1.8.0 firmware so I can have a comparison?
+
+> with the 50mm lens and C/Y-to-M converter, it eventually achieves focus, but I see the purple focus indicator a lot and it hunts a lot
+
+> Back on USB cap; updater closed
+
+The converter is now available. Focus mode, Pre-AF, focus-button trigger, target,
+lighting and lens-ring settings were not supplied. Eventual acquisition is an
+owner observation, not verified sharpness, green-lock evidence or calibration.
+The purple indicator is not interpreted as an adapter fault or a particular
+Sony focus state without more evidence. Earlier 2.2 bare-adapter shutdown
+observations do not qualify 2.3 loaded shutdown. The requested
+[same-unit stock 1.8 comparison](stock-18-comparison-2026-10-11.md) provides the
+next baseline; this initial report is qualitative and lacks matched conditions.
 
 Sony sources checked October 11, 2026:
 [A7C II Focus Mode](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html)

@@ -1,16 +1,25 @@
 # First A7C II AF-S test: Contax Zeiss 50mm f/1.4
 
-Current installation: **AF 2.2.0 is installed and byte-verified after the
-owner's physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
+Current hardware operation: **original stock 1.8.0 has been uploaded for
+comparison; physical reconnect and full byte verification are pending**. Keep
+the adapter off the camera until verification passes. See the
+[stock restoration/baseline record](evidence/stock-18-comparison-2026-10-11.md).
+
+The preceding **AF 2.3.0 installation was byte-verified after the owner's
+physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
 the exact candidate; protected flash, upper flash and factory checks passed.
-See the [completed upload record](evidence/af-22-upload-2026-10-11.md) and
-[the later owner-reported 2.2 startup/idle/motor-shutdown observations](evidence/af-22-camera-lifecycle-2026-10-11.md).
-Loaded AF-S remains untested while the owner awaits the C/Y-to-M converter.
-It remains **experimental and not camera-qualified**. The camera procedure below
-is the next step; loaded AF-S focus lock/sharpness await the C/Y-to-M converter.
+The independent offline before/after audit also passed. See the
+[completed 2.3 upload record](evidence/af-23-upload-2026-10-11.md) and
+[the 2.3 loaded-lens report and planned bare procedure](evidence/af-23-camera-lifecycle-2026-10-11.md).
+The owner now has the converter and reports eventual focus with substantial
+hunting and frequent purple focus indication. AF mode, Pre-AF and sharpness
+remain unverified. AF 2.3 remains **experimental and not camera-qualified**.
+The controlled stock baseline is the next camera step after restoration is
+verified; the custom-firmware procedure below applies to later AF installations.
 
 The owner reported motor movement and proper A7C II shutdown with the earlier
-byte-verified 2.1 image. Those earlier observations do not qualify 2.2 startup, shutdown,
+byte-verified 2.1 image; later 2.2 reports cover normal startup, quiet idle and motor
+shutdown. Those earlier observations do not qualify 2.3 startup, shutdown,
 motor behavior or focus. The historical installation remains in
 [the 2.1 record](evidence/af-50-upload-2026-10-10.md), and the
 [software evidence](evidence/af-reconciliation-2026-10-10.md) records its later
@@ -22,20 +31,22 @@ that region. See [the layout assessment](af-reconciliation.md); upgrading from
 
 ## Prepared products
 
-- App: `dist/Open LM-EA9.app`, version 0.5.0, build 8.
+- App: `dist/Open LM-EA9.app`, version 0.6.0, build 9.
 - CLI: `dist/ea9ctl` (signed locally, same DeviceKit transport).
 - Historical 2.1 candidate: `artifacts/firmware-milestone/af-ready-2026-10-10/contax-zeiss-50-f1-4.bin`.
 - Historical 2.1 evidence: [AF readiness record](evidence/autofocus-ready-2026-10-10.md).
-- Installed 2.2: `artifacts/firmware-milestone/af-reconcile-2026-10-10/contax-zeiss-50-f1-4.bin`,
-  adjacent manifest. This final 2.2 image is 20,480 bytes with profile at `0x9f00`. Image SHA-256
-  `c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98`.
+- Previously installed 2.3: `firmware/candidates/2.3.0/contax-zeiss-50-f1-4.bin`,
+  adjacent preparation manifest. This image is 20,480 bytes with profile at `0x9f00`. Image SHA-256
+  `39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4`.
+- Historical 2.2 installation: [upload/readback record](evidence/af-22-upload-2026-10-11.md)
+  and [owner camera observations](evidence/af-22-camera-lifecycle-2026-10-11.md).
 
-The installed 2.2 candidate is 20,480 bytes, with its profile at `0x9f00`.
+The 2.3 candidate is 20,480 bytes, with its profile at `0x9f00`.
 It reports 50 mm, nominal f/1.4, lens name `Contax Zeiss 50mm f/1.4`, camera
-version 2.2 and loader version 2.2.0. Its template SHA-256 is
-`e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36`;
+version 2.3 and loader version 2.3.0. Its template SHA-256 is
+`8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88`;
 its personalized image SHA-256 is
-`c963e7970f7b69aaa1115afb6a1aee95644f5a243352299689452d7c1f0c6d98`.
+`39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4`.
 
 The stored aperture is reported metadata, not a measurement of the aperture
 ring. Changing the optical aperture later requires a matching profile setting
@@ -48,9 +59,11 @@ The original 1.8.0 restore source is also saved in the
 [committed recovery bundle](../firmware/recovery/stock-1.8.0/README.md), with an
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
-App 0.6 / the current CLI AF installation action selects the offline **2.3.0**
-hardening candidate. The installed 2.2 image and its byte-verification record
-remain unchanged. See [the 2.3 source/build/test record](evidence/software-polish-2026-10-11.md)
+App 0.6 / the current CLI AF installation action selects **2.3.0**.
+The owner-requested installation and physical-reconnect verification passed.
+The later stock comparison temporarily replaces that application; do not perform
+another AF upload during the pending stock reconnect. Historical 2.2 evidence remains
+preserved. See [the 2.3 source/build/test record](evidence/software-polish-2026-10-11.md)
 and [the prepared 50mm candidate](../firmware/candidates/2.3.0/README.md). This adapter
 has completed the upload/reconnect/byte-verification sequence; the steps below
 remain the procedure for future changes. The primary Device dropdown changes
@@ -89,7 +102,7 @@ uploading and verifying this candidate.
 ## Camera procedure
 
 Before the C/Y-to-M converter arrives, use the separate
-[bare-adapter startup/idle/shutdown procedure and result record](evidence/af-22-camera-lifecycle-2026-10-11.md).
+[bare-adapter startup/idle/shutdown procedure and result record](evidence/af-23-camera-lifecycle-2026-10-11.md).
 That first cycle uses no focus-button input and does not qualify optical AF.
 The following procedure is for the loaded 50mm lens once the converter is available.
 
@@ -103,7 +116,9 @@ Keep continuous/pre-focusing disabled where configured so acquisition is deliber
 
 1. Switch on without pressing the shutter. Observe startup/homing: whether the
    body starts normally, the adapter moves briefly, then stops, and the displayed
-   focal length/aperture. Homing happens on camera startup even if MF is selected.
+   focal length/aperture. The firmware attempts bounded startup reference acquisition
+   after a completed fault-free handshake, including in MF; movement alone does
+   not establish a valid reference.
 2. Switch off once before repeated AF testing. Record whether it shuts down
    normally, any park motion, and whether movement ends. Turn on again only after
    a normal shutdown. This establishes the basic lifecycle observations.

@@ -14,14 +14,18 @@ upload/read-back path for lens metadata. The current app (0.6.0, build 9) refres
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The offline AF 2.3 candidate hardens received frames, command snapshots, Stop
-handling, bounded query processing and startup waits. It is not installed or camera-qualified. The modular
-AF 2.2 candidate is installed and byte-verified after physical
-USB-cap reconnect. AF 2.1 was previously byte-verified, with owner reports of
+AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
+processing and startup waits. It was byte-verified after physical USB-cap
+reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
+focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
+remain unverified. The original same-unit stock **1.8.0 application has now been
+uploaded for comparison; physical reconnect and byte verification are pending**.
+Keep the adapter off the camera until that check passes.
+AF 2.1 and 2.2 were previously byte-verified, with 2.1 owner reports of
 motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
-shutdown. Homing, display power-off and focus-command movement remain unverified;
-loaded focus lock/sharpness await the owner's C/Y-to-M converter.
+shutdown. Homing and measured timing remain unverified. The converter is now
+available for a controlled loaded-lens baseline.
 The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 
 ```sh
@@ -39,6 +43,9 @@ open "dist/Open LM-EA9.app"
 - [Reproducible stock 1.8 application model and finite comparison harness](research/stock-1.8/README.md)
 - [Whole-firmware REA coverage and remaining boundaries](docs/reverse-engineering/whole-firmware-reconstruction.md)
 - [Current Device dropdown, automatic refresh and lens-change guide](docs/macos-device-workflow.md)
+- [AF 2.3 upload and reconnect byte-verification record](docs/evidence/af-23-upload-2026-10-11.md)
+- [AF 2.3 loaded-lens hunting observation and lifecycle test plan](docs/evidence/af-23-camera-lifecycle-2026-10-11.md)
+- [Stock 1.8 restoration and controlled loaded-lens comparison](docs/evidence/stock-18-comparison-2026-10-11.md)
 - [AF 2.2 upload and reconnect verification record](docs/evidence/af-22-upload-2026-10-11.md)
 - [AF 2.2 bare-adapter camera lifecycle procedure and owner observation record](docs/evidence/af-22-camera-lifecycle-2026-10-11.md)
 - [Committed original 1.8.0 application and encrypted same-unit recovery backup](firmware/recovery/stock-1.8.0/README.md)
@@ -89,11 +96,16 @@ candidate now has bounded peripheral waits, native AF upload/restoration support
 and passes host and lifecycle checks. Its earlier 50mm f/1.4 image was installed
 and byte-verified as firmware 2.1.0 after physical reconnect. The owner subsequently
 confirmed motor movement and proper shutdown on the
-A7C II; focus qualification remains pending the C/Y-to-M converter. The current
+A7C II; optical qualification was pending at that milestone. The previous
 2.2.0 candidate makes the reference/timing/completion policies explicit, passes
-host checks and is packaged separately. It is now installed and byte-verified as
+host checks and is packaged separately. It was installed and byte-verified as
 2.2.0 after owner-confirmed physical reconnect, with protected flash and factory
-data checks passed. See the [current installation record](docs/evidence/af-22-upload-2026-10-11.md).
+data checks passed. AF 2.3 subsequently added frame/command/Stop/startup hardening
+and passed native two-pass USB verification plus an independent offline audit.
+The owner then reported loaded-lens focus with hunting and requested a factory
+baseline. The [stock restoration record](docs/evidence/stock-18-comparison-2026-10-11.md)
+tracks the current pending reconnect/verification; the
+[AF 2.3 installation record](docs/evidence/af-23-upload-2026-10-11.md) is historical.
 Application USB management and broader camera qualification remain pending.
 Backup uses the qualified stock loader's CHECK/READ operations; follow
 the user guide's closed-updater and physical-reconnect prerequisite.

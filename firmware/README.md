@@ -9,11 +9,17 @@ motion disabled**. It uses C for the inspected SAMD21 register and E-mount paths
 it is not the production autofocus firmware or a decision against a later Rust
 implementation. The macOS app and USB loader transport use native Swift.
 
-The installed **AF 2.2 candidate** reconciles REA findings with the upstream
+The previous **AF 2.2 candidate** reconciles REA findings with the upstream
 controller for Contax Zeiss 50mm f/1.4. The new **AF 2.3 candidate** adds received-
 frame admission, coherent ISR snapshots, faulted Stop handling, operation
-ownership, frame-paced telemetry and bounded initialization. It remains offline
-and requires USB verification and camera qualification before use:
+ownership, frame-paced telemetry and bounded initialization. It was installed and
+USB-byte-verified after physical reconnect. The owner reports eventual loaded
+50mm focus with substantial hunting; sharpness and camera qualification remain
+unverified. Original stock 1.8.0 has subsequently been uploaded for comparison;
+its physical reconnect and byte verification are pending. See the
+[2.3 hardware record](../docs/evidence/af-23-upload-2026-10-11.md) and
+[current stock comparison record](../docs/evidence/stock-18-comparison-2026-10-11.md).
+Offline build and checks:
 
 ```sh
 python3 scripts/build-firmware.py --variant hardened-af
@@ -30,11 +36,12 @@ profile row for 2.2/2.3 is `0x9f00`; application writes stop at `0xa000`.
 See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
 [offline build/test record](../docs/evidence/software-polish-2026-10-11.md).
 
-The 50mm 2.2 image is installed and **USB byte-verified after physical reconnect**.
+The 50mm 2.2 image was installed and **USB byte-verified after physical reconnect**.
 See the [installation record](../docs/evidence/af-22-upload-2026-10-11.md).
 The owner reported motor movement and proper A7C II shutdown with the earlier
 byte-verified 2.1 image. For 2.2 the owner also reported normal startup, quiet idle and normal motor
-shutdown. Loaded AF-S focus lock/sharpness still await the C/Y-to-M converter.
+shutdown. Those historical tests preceded arrival of the C/Y-to-M converter;
+the later 2.3 loaded-lens report does not verify optical sharpness or AF-S settings.
 These observations do not qualify homing, measured timing or all focus commands.
 See the [reference/timing/completion design](../docs/af-reconciliation.md),
 [session evidence](../docs/evidence/af-reconciliation-2026-10-10.md),

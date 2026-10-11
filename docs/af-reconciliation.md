@@ -8,14 +8,15 @@ changes preserve the verified installed firmware. To reproduce a historical
 2.2 personalized image offline, use `scripts/prepare-af.py --variant reconciled-af`
 with a metadata-2.0 profile input and a new output path. To rebuild its source,
 use the recorded pre-hardening commit `458be6b0f78cefed80cd4650894f600be71a8135`
-and the dated 2.2 manifest. The installed 2.2 unit has not been changed by this
-hardening pass.
+and the dated 2.2 manifest. The offline hardening pass did not change the installed
+unit. The subsequent [2.3 installation and reconnect verification](evidence/af-23-upload-2026-10-11.md)
+upgraded it; this document retains the historical 2.2 design and observations.
 
 
-The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 is installed and
+The modular **2.2.0** candidate for Contax Zeiss 50mm f/1.4 was installed and
 byte-verified after owner-confirmed physical USB-cap reconnect. It passed the
 [software checks](evidence/af-reconciliation-2026-10-10.md); see the separate
-[current installation record](evidence/af-22-upload-2026-10-11.md). The initial
+[historical installation record](evidence/af-22-upload-2026-10-11.md). The initial
 [2.2 camera observation](evidence/af-22-camera-lifecycle-2026-10-11.md) now reports
 normal camera startup, no observed startup movement without input, quiet idle
 and normal motor shutdown. Display power-off, reference acquisition and

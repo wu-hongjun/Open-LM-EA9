@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "planned-upload-acknowledged-awaiting-USB-verification",
+  "stage": "loaded-lens-owner-reports-eventual-focus-and-hunting-stock-comparison-requested",
   "cameraBody": "Sony A7C II",
   "firmwareVersion": "2.3.0",
   "imageSHA256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
@@ -18,14 +18,14 @@
     "continuousDriveOperatorCutoffSecondsApproximate": 2,
     "stageB": "One brief AF-S half-press only after normal Stage A observations"
   },
-  "uploadByteVerified": false,
-  "cameraTestPerformed": false,
-  "ownerObservationsReceived": false,
+  "uploadByteVerified": true,
+  "cameraTestPerformed": true,
+  "ownerObservationsReceived": true,
   "stageAComplete": false,
   "stageBEligible": false,
   "stageBPerformed": false,
   "observations": {
-    "actualMountedConfiguration": null,
+    "actualMountedConfiguration": "Contax Zeiss 50mm f/1.4 with C/Y-to-Leica-M converter on LM-EA9",
     "actualExposureMode": null,
     "initialFocusMode": null,
     "initialPreAF": null,
@@ -41,12 +41,16 @@
     "shutdownMotorNormal": null,
     "shutdownDisplayOff": null,
     "shutdownParkMovement": null,
-    "abnormalBehavior": null,
+    "abnormalBehavior": "Owner reports substantial focus hunting and frequent purple focus indicator; eventually achieves focus. Trigger, focus mode and Pre-AF are unreported.",
     "stageBActualFocusMode": null,
     "focusButtonMotorResponse": null,
     "motorStoppedAfterRelease": null
   },
-  "ownerStatementsVerbatim": [],
+  "ownerStatementsVerbatim": [
+    "It sort of works, but it hunts a lot for getting focus. SHould we flash the stock 1.8.0 firmware so I can have a comparison?",
+    "with the 50mm lens and C/Y-to-M converter, it eventually achieves focus, but I see the purple focus indicator a lot and it hunts a lot",
+    "Back on USB cap; updater closed"
+  ],
   "focusLockVerified": false,
   "sharpnessVerified": false,
   "physicalReferenceVerified": false,
@@ -54,6 +58,18 @@
   "protocolTrafficCaptured": false,
   "opticalAFQualified": false,
   "hostUSBReportsSentForCameraTest": 0,
-  "verifiedUSBTransactionID": null,
-  "uploadedUSBTransactionID": "65889BD7-5B15-4BDC-963C-17040F5CD461"
+  "verifiedUSBTransactionID": "65889BD7-5B15-4BDC-963C-17040F5CD461",
+  "uploadedUSBTransactionID": "65889BD7-5B15-4BDC-963C-17040F5CD461",
+  "USBVerifiedAt": "2026-10-11T19:28:35.997311+00:00",
+  "stageAInstructionsIssued": true,
+  "stageAInstructionIssuedAtUTC": "2026-10-11T19:31:03.537166+00:00",
+  "nativeUSBVerificationPassed": true,
+  "independentOfflineVerificationPassed": true,
+  "plannedBareAdapterCycleConfirmed": false,
+  "ownerReportedEventualFocus": true,
+  "ownerReportedFrequentPurpleIndicator": true,
+  "purpleIndicatorMeaningEstablished": false,
+  "stockComparisonRequested": true,
+  "adapterReturnedToUSBcap": true,
+  "officialUpdaterClosedOwnerConfirmed": true
 }

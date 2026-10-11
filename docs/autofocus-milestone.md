@@ -2,17 +2,22 @@
 
 Current source/app follow-up: [AF 2.3 hardening](evidence/software-polish-2026-10-11.md)
 adds frame validation, coherent handoff, Stop ownership, telemetry cadence and
-bounded startup waits. It is offline; the adapter remains on byte-verified 2.2.
+bounded startup waits. It was installed and byte-verified after physical reconnect;
+the [2.3 hardware record](evidence/af-23-upload-2026-10-11.md) and
+[owner loaded-lens observation](evidence/af-23-camera-lifecycle-2026-10-11.md)
+record eventual focus with substantial hunting; settings and sharpness remain
+unverified. Original stock 1.8.0 was subsequently uploaded for a baseline;
+[stock reconnect/verification](evidence/stock-18-comparison-2026-10-11.md) is pending.
 The installation action now selects 2.3 explicitly; main profile changes preserve
 the verified installed variant.
 
 Previous follow-up: [AF 2.2 reconciliation](af-reconciliation.md) separates position
 origin, reference state, timing and completion policies using the REA findings.
-It is host-tested, installed and byte-verified after physical USB-cap reconnect.
+It was host-tested, installed and byte-verified after physical USB-cap reconnect.
 See the [2.2 installation record](evidence/af-22-upload-2026-10-11.md)
 and [software evidence](evidence/af-reconciliation-2026-10-10.md). The owner
 confirmed motor movement and proper shutdown with 2.1; these observations do not
-qualify 2.2. Focus tests await the C/Y-to-M converter.
+qualify 2.2. Those tests preceded arrival of the C/Y-to-M converter.
 
 The metadata path has now passed an A7C II photograph check. Autofocus development
 can proceed using the pinned upstream implementation and the independently
