@@ -18,16 +18,17 @@ The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The new **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
 stock speed/PID/callback/completion semantics. Its pure controller passes 7,323
-original-instruction comparisons; its authorized upload has completed and awaits reconnect verification;
-it is not camera-qualified. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
+original-instruction comparisons. Its authorized upload and strict two-pass
+USB verification have passed, including an independent audit. Camera
+qualification and reduced-hunting measurements remain pending. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
 AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
 processing and startup waits. It was byte-verified after physical USB-cap
 reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
 focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
 remain unverified. Original same-unit stock **1.8.0 was restored for comparison** and its full
 application slot matched the original backup; the owner reported much less
-hunting. The authorized AF 2.4 upload has now completed and awaits physical
-USB reconnect and strict byte verification before camera use. Camera use before readback changed 13 stock saved-motion bytes, causing strict
+hunting. AF 2.4 is now installed and strict USB-byte-verified after physical reconnect.
+Its first loaded-lens lifecycle and controlled AF-S comparison are pending. Camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict
 pass; bootloader and factory data remain exact. [AF 2.4 installation and

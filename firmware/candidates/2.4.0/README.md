@@ -1,8 +1,8 @@
 # AF 2.4.0 — Contax Zeiss 50mm f/1.4 factory baseline
 
 This is an **experimental candidate**. Its authorized USB upload completed
-on October 11; physical reconnect and strict byte verification are pending. It
-is not camera-qualified. See [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md). It uses independently implemented factory 1.8 target/speed/PID/Stop/
+on October 11; native strict two-pass verification and an independent audit
+passed after physical reconnect. It is not camera-qualified. See [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md). It uses independently implemented factory 1.8 target/speed/PID/Stop/
 completion/callback semantics behind bounded hardware and protocol policies.
 The [design](../../../docs/reverse-engineering/factory-af-baseline.md) records
 all known differences; the [validation record](../../../docs/evidence/factory-af-baseline-2026-10-11.md)
@@ -43,8 +43,8 @@ The preceding stock restoration was closed through a reviewed saved-motion
 resolution on a new connection: a fresh two-pass backup matched the retained
 stock audit exactly. Its original strict failure remains archived, not relabeled
 as a pass. AF 2.4 was then uploaded through the normal backed-up native path.
-**Do not use it on the camera until physical reconnect and strict verification
-complete.** Follow [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md)
+Native strict reconnect verification and the independent readback audit have
+now passed. The first loaded-lens lifecycle cycle and AF-S acquisition are pending. Follow [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md)
 and [the AF-S comparison plan](../../../docs/evidence/af-24-camera-comparison-2026-10-11.md)
 for current state, observations and stop conditions.
 

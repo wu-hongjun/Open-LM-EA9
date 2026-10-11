@@ -1,0 +1,52 @@
+{
+  "dateLocal": "2026-10-11",
+  "timezone": "America/New_York",
+  "stage": "byte-verified-first-loaded-lifecycle-requested",
+  "firmwareVersion": "2.4.0",
+  "profileID": "contax-zeiss-50-f1-4",
+  "imageSHA256": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df",
+  "nativeUSBVerificationPassed": true,
+  "independentUSBReadbackAuditPassed": true,
+  "cameraTestPerformed": false,
+  "ownerObservations": [],
+  "plannedFirstCycle": {
+    "lens": "Contax Zeiss 50mm f/1.4",
+    "converter": "C/Y-to-Leica-M",
+    "exposureMode": "still-photo P",
+    "focusMode": "MF",
+    "preAF": "Off if available; record actual setting",
+    "lensFocusRing": "infinity",
+    "physicalAperture": "f/1.4",
+    "buttonInput": "none",
+    "idleSeconds": 10,
+    "finish": "switch off once; leave off"
+  },
+  "plannedAFSAfterNormalLifecycle": {
+    "focusMode": "Single-shot AF",
+    "preAF": "Off",
+    "focusArea": "central Spot",
+    "target": "well-lit static textured subject, initially 3\u20135 m",
+    "trigger": "one half-press or AF-ON, record choice",
+    "firstAttemptMaximumSeconds": 2,
+    "releaseBetweenAttempts": true,
+    "photoSharpnessAndEXIF": "retain original and inspect; not inferred from focus indicator",
+    "nearFarPairsAfterFirstNormalAttempt": 3
+  },
+  "actualFocusMode": null,
+  "actualPreAF": null,
+  "actualPhysicalAperture": null,
+  "startupNormal": null,
+  "motorStopped": null,
+  "quietIdle": null,
+  "shutdownNormal": null,
+  "AFSLock": null,
+  "hunting": null,
+  "opticalSharpnessVerified": false,
+  "matchedStockControlPerformed": false,
+  "cameraQualified": false,
+  "reducedHuntingDemonstrated": false,
+  "sonySources": {
+    "focusMode": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html",
+    "preAF": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html"
+  }
+}

@@ -33,8 +33,8 @@ python3 scripts/test-firmware.py --af
 
 Current source builds **AF 2.4** under `ea9/build/factory`, as camera BCD 0x24
 and loader 2.4.0. It uses a modular factory-derived controller, tested directly
-against the original instructions. Its authorized upload completed and awaits physical reconnect/strict byte
-verification; it remains camera-unqualified. See [the hardware record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
+against the original instructions. Its authorized upload and strict byte verification passed after physical
+reconnect, including an independent audit; camera qualification remains pending. See [the hardware record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
 Templates/pins for 2.0–2.3 remain frozen; those build-script variants verify
 committed size/digest instead of compiling changed source under old versions.

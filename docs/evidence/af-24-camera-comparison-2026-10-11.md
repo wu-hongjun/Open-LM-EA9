@@ -1,6 +1,8 @@
 # A7C II / Contax Zeiss 50mm f/1.4: AF 2.4 comparison
 
-October 11, 2026. **Procedure only; AF 2.4 camera results are not yet recorded.**
+October 11, 2026. **AF 2.4 passed native and independent USB byte verification. Camera results
+are not yet recorded.** The owner was asked for the first loaded-lens lifecycle
+cycle; AF-S acquisition remains the next step after a normal cycle.
 Use this only after successful [USB installation and physical-reconnect byte
 verification](af-24-upload-2026-10-11.md). A running/uploaded application is
 not sufficient. The earlier stock-versus-2.3 result is qualitative: the owner
@@ -69,7 +71,7 @@ separate observation to collect, not a promise that Sony hides every control.
 
 | Observation | AF 2.4 | Stock 1.8 matched control |
 | --- | --- | --- |
-| USB exact bytes verified before camera | Pending | Prior stock code audited; pending restore resolved by reviewed motion-record policy |
+| USB exact bytes verified before camera | Passed, two full matching reads and independent audit | Prior stock code audited; pending restore resolved by reviewed motion-record policy |
 | Still/Movie switch; exposure mode | Unreported | Unreported |
 | Actual AF mode; Pre-AF; focus area; trigger | Unreported | Unreported |
 | Lens ring focus; physical iris; reported f-number | Unreported | Unreported |
