@@ -6,8 +6,11 @@ bounded startup waits. It was installed and byte-verified after physical reconne
 the [2.3 hardware record](evidence/af-23-upload-2026-10-11.md) and
 [owner loaded-lens observation](evidence/af-23-camera-lifecycle-2026-10-11.md)
 record eventual focus with substantial hunting; settings and sharpness remain
-unverified. Original stock 1.8.0 was subsequently uploaded for a baseline;
-[stock reconnect/verification](evidence/stock-18-comparison-2026-10-11.md) is pending.
+unverified. Original stock 1.8.0 is restored and the owner reports less hunting.
+Its full application slot matches the original backup; the strict native
+transaction remains flagged for changed saved-motion bytes following camera
+use before readback. See the [stock comparison](evidence/stock-18-comparison-2026-10-11.md)
+and [manual aperture policy](manual-aperture-policy.md).
 The installation action now selects 2.3 explicitly; main profile changes preserve
 the verified installed variant.
 

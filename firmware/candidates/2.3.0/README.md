@@ -5,8 +5,10 @@ upstream-derived AF controller with the modular reference/completion policies an
 October 11 correctness fixes. It was installed and byte-verified on October 11 after the
 owner's physical USB-cap reconnect. The owner subsequently reported eventual
 loaded 50mm focus with substantial hunting. **It is not camera-qualified**.
-Original stock 1.8.0 has since been uploaded for comparison, with reconnect
-verification pending. See the [2.3 hardware record](../../../docs/evidence/af-23-upload-2026-10-11.md)
+Original stock 1.8.0 has since been restored for comparison; its complete
+application matches the original backup. Strict native verification remains
+flagged because stock camera use before readback changed saved-motion settings.
+The owner reports much less hunting with stock. See the [2.3 hardware record](../../../docs/evidence/af-23-upload-2026-10-11.md)
 and [stock comparison record](../../../docs/evidence/stock-18-comparison-2026-10-11.md).
 Do not substitute this image for original stock recovery.
 

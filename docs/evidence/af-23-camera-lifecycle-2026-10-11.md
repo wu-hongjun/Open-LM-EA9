@@ -93,8 +93,12 @@ owner observation, not verified sharpness, green-lock evidence or calibration.
 The purple indicator is not interpreted as an adapter fault or a particular
 Sony focus state without more evidence. Earlier 2.2 bare-adapter shutdown
 observations do not qualify 2.3 loaded shutdown. The requested
-[same-unit stock 1.8 comparison](stock-18-comparison-2026-10-11.md) provides the
-next baseline; this initial report is qualitative and lacks matched conditions.
+[same-unit stock 1.8 comparison](stock-18-comparison-2026-10-11.md) subsequently
+produced the owner's report that stock hunts much less. Its original application
+slot matches the post-camera USB readback, while strict native verification
+remains flagged for changed saved-motion settings. Both camera reports are
+qualitative and lack recorded matched conditions. The owner's requested unknown
+aperture behavior is assessed in [manual aperture policy](../manual-aperture-policy.md).
 
 Sony sources checked October 11, 2026:
 [A7C II Focus Mode](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html)

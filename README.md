@@ -18,9 +18,11 @@ AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
 processing and startup waits. It was byte-verified after physical USB-cap
 reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
 focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
-remain unverified. The original same-unit stock **1.8.0 application has now been
-uploaded for comparison; physical reconnect and byte verification are pending**.
-Keep the adapter off the camera until that check passes.
+remain unverified. Original same-unit stock **1.8.0 is restored; its full
+application slot matches the original backup**, and the owner reports much less
+hunting. The strict native transaction remains flagged because camera use before
+readback changed 13 bytes in the stock saved-motion record. Bootloader code and
+factory calibration still match; the comparison settings remain unknown.
 AF 2.1 and 2.2 were previously byte-verified, with 2.1 owner reports of
 motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
@@ -46,6 +48,7 @@ open "dist/Open LM-EA9.app"
 - [AF 2.3 upload and reconnect byte-verification record](docs/evidence/af-23-upload-2026-10-11.md)
 - [AF 2.3 loaded-lens hunting observation and lifecycle test plan](docs/evidence/af-23-camera-lifecycle-2026-10-11.md)
 - [Stock 1.8 restoration and controlled loaded-lens comparison](docs/evidence/stock-18-comparison-2026-10-11.md)
+- [Manual aperture, fixed camera reporting and unknown-aperture research](docs/manual-aperture-policy.md)
 - [AF 2.2 upload and reconnect verification record](docs/evidence/af-22-upload-2026-10-11.md)
 - [AF 2.2 bare-adapter camera lifecycle procedure and owner observation record](docs/evidence/af-22-camera-lifecycle-2026-10-11.md)
 - [Committed original 1.8.0 application and encrypted same-unit recovery backup](firmware/recovery/stock-1.8.0/README.md)
@@ -104,7 +107,7 @@ data checks passed. AF 2.3 subsequently added frame/command/Stop/startup hardeni
 and passed native two-pass USB verification plus an independent offline audit.
 The owner then reported loaded-lens focus with hunting and requested a factory
 baseline. The [stock restoration record](docs/evidence/stock-18-comparison-2026-10-11.md)
-tracks the current pending reconnect/verification; the
+records exact application equality and the post-camera saved-settings mismatch; the
 [AF 2.3 installation record](docs/evidence/af-23-upload-2026-10-11.md) is historical.
 Application USB management and broader camera qualification remain pending.
 Backup uses the qualified stock loader's CHECK/READ operations; follow

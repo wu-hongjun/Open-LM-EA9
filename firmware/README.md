@@ -15,10 +15,14 @@ frame admission, coherent ISR snapshots, faulted Stop handling, operation
 ownership, frame-paced telemetry and bounded initialization. It was installed and
 USB-byte-verified after physical reconnect. The owner reports eventual loaded
 50mm focus with substantial hunting; sharpness and camera qualification remain
-unverified. Original stock 1.8.0 has subsequently been uploaded for comparison;
-its physical reconnect and byte verification are pending. See the
+unverified. Original stock 1.8.0 is now restored and its full application slot
+matches the original backup. The owner reports much less hunting. Strict native
+verification remains flagged because post-upload camera use changed the stock
+saved-settings record; no verification guard was relaxed. See the
 [2.3 hardware record](../docs/evidence/af-23-upload-2026-10-11.md) and
 [current stock comparison record](../docs/evidence/stock-18-comparison-2026-10-11.md).
+The requested unknown-aperture behavior and current fixed-range declaration are
+assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
 Offline build and checks:
 
 ```sh

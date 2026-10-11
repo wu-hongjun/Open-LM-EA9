@@ -1,8 +1,9 @@
 # Original stock 1.8 restoration for a loaded-lens comparison
 
-October 11, 2026, America/New_York. **Original stock 1.8.0 upload completed;
-physical reconnect and byte verification are pending. Keep the adapter off
-the camera until verification succeeds.**
+October 11, 2026, America/New_York. **Original stock 1.8.0 is restored, and its
+entire application slot matches the original backup. The owner used it on the
+camera before host readback and reports much less hunting. The strict native
+transaction remains unverified because saved motion settings changed.**
 
 The owner confirmed that AF 2.3 was tested with the Contax Zeiss 50mm f/1.4 and
 C/Y-to-M converter. They report eventual focus, substantial hunting and frequent
@@ -29,8 +30,10 @@ unchanged. Its private key and plaintext unit backup stay outside Git.
 | Release CLI SHA-256 | `614767d8e7c4f754c88c8b342d89614af837162abc282578df999619468e861e` |
 
 This restores the entire original application slot, including the upper area
-left unchanged by the recent 20 KiB AF updates. It retains the bootloader code,
-the `0x4040..<0x5000` gap, factory user row, calibration and device ID. START
+left unchanged by the recent 20 KiB AF updates. The host writes retain the
+bootloader code and `0x4040..<0x5000` gap, factory user row, calibration and
+device ID. The gap includes a stock application-owned saved-settings record
+at `0x4100..<0x412c`; later camera use can change it. START
 sets the 58 known loader metadata bytes from the original backup with version
 1.8.0; six adjacent loader RAM-derived bytes are excluded from the comparison.
 NVM controller status is diagnostic data and is not promised identical.
@@ -69,7 +72,68 @@ transaction records. Upload acknowledgement alone is not byte verification.
 Current results and report counts are recorded in
 [the machine-readable evidence](stock-18-comparison-2026-10-11.json).
 
-## Planned camera baseline after successful byte verification
+## Reconnect readback after the owner used stock on the camera
+
+The owner responded to the reconnect request with:
+
+> The stock firmware hunts way less, however the stock firmware seems to tell the camera it can vary the aperture but in reality it can't stop down, can we perhaps build it such that aperture is unknown?
+
+They then confirmed “Back on USB cap; updater closed.” A new unblocked USB
+registry connection was observed, with both the prototype and official updater
+absent. Native `verify --idle` completed and published two matching full-flash
+and auxiliary read passes in **4,359 CHECK/READ exchanges**. The loader reports
+**1.8.0**. The invariant comparison then exited **1** with “Unexpected flash
+changes outside the planned application and loader metadata.” No additional
+reports, upload or automatic retry followed.
+
+An independent offline audit established:
+
+- The complete `0x5000..<0x20000` application slot, including the original upper
+  application area, exactly matches the original same-unit stock backup and
+  the journaled upload. Original 20,172-byte application code also matches its pin.
+- Bootloader code, all 58 known START metadata bytes, user row, calibration and
+  device ID match the original backup and pre-upload evidence.
+- **Thirteen bytes differ from the original full-flash backup**, all within
+  the recovered **44-byte saved-settings record `0x4100..<0x412c`**. Every flash
+  byte outside that record matches the original backup; surrounding row bytes
+  were preserved. No raw unit settings are published.
+- Affected fields are encoder sample, protocol/relative position, velocity,
+  target, direction and timeout count. They agree with the recovered save path
+  [`0x5d68`](../reverse-engineering/stock-nvm-drivers.md) and
+  [settings schema](../reverse-engineering/stock-settings-schema.csv). This is
+  consistent with factory settings persistence during the owner's intervening
+  camera use; the actual save call was not traced, so causal attribution remains
+  an inference.
+
+Post-camera full-flash SHA-256:
+`6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b`.
+Private logs, two-pass backups, journal snapshots and the independent audit are
+retained. Public script/log hashes and affected-field names are in the JSON.
+
+**Application byte equality passed; strict native restoration invariants did
+not pass.** The pending journal is not marked verified, the old local applied
+record is not promoted as stock metadata, and the failed connection's reconnect
+marker remains. The native verification guard was not relaxed. Any further USB
+operation requires physical reconnect and an explicit workflow for the remaining
+transaction; do not treat these offline findings as a native all-checks pass.
+No additional firmware was uploaded to force the mutable settings back to their
+old values. This case reinforces why upload verification precedes camera use.
+
+## Owner comparison and aperture investigation
+
+The owner reports much less hunting with stock than AF 2.3. The comparison lens
+is understood from session context to be the same 50mm/converter setup; actual
+focus mode, Pre-AF, target, lighting, ring settings, timings, startup/shutdown
+and photograph sharpness remain unreported. This is useful qualitative evidence
+of a performance gap, not a measured matched-conditions result.
+
+Stock's camera aperture dial also selects focal/options settings while its
+working iris remains manual. The requested unknown aperture behavior, current
+fixed-range implementation and unresolved F-- encoding are documented in
+[manual aperture policy](../manual-aperture-policy.md). There was no aperture
+experiment or new custom firmware upload during this readback.
+
+## Controlled camera baseline procedure for a future matched comparison
 
 Use the loaded 50mm lens and converter, still-photo P or A mode, **AF-S**,
 **Pre-AF Off**, a central focus area, lens aperture f/1.4 and the lens focus ring
@@ -85,7 +149,7 @@ once; record display and motor shutdown. Stop for grinding, repeated hard-stop
 pushing or continuous drive for roughly two seconds; switch off and remove the
 battery if driving continues. Do not retry an abnormal cycle.
 
-These conditions establish a reproducible stock baseline. The earlier AF 2.3
-report lacks matched settings, so it cannot yet support a quantitative A/B
-claim. An AF 2.3 comparison under the same conditions follows separately after
-the stock result is recorded. AF-C, video and factory parity remain unqualified.
+These conditions establish a reproducible stock baseline. Both existing owner
+reports lack matched settings, so they cannot support a quantitative A/B claim.
+A future AF 2.3 comparison should use the same conditions. AF-C, video and
+factory parity remain unqualified.

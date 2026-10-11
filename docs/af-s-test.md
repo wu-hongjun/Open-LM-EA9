@@ -1,8 +1,10 @@
 # First A7C II AF-S test: Contax Zeiss 50mm f/1.4
 
-Current hardware operation: **original stock 1.8.0 has been uploaded for
-comparison; physical reconnect and full byte verification are pending**. Keep
-the adapter off the camera until verification passes. See the
+Current hardware state: **original stock 1.8.0 is restored, and its entire
+application slot matches the original backup**. The owner reports much less
+hunting. Camera use before host readback changed 13 bytes in the recovered
+stock settings record, so strict native verification remains flagged and any
+further USB operation requires physical reconnect. See the
 [stock restoration/baseline record](evidence/stock-18-comparison-2026-10-11.md).
 
 The preceding **AF 2.3.0 installation was byte-verified after the owner's
@@ -14,8 +16,10 @@ The independent offline before/after audit also passed. See the
 The owner now has the converter and reports eventual focus with substantial
 hunting and frequent purple focus indication. AF mode, Pre-AF and sharpness
 remain unverified. AF 2.3 remains **experimental and not camera-qualified**.
-The controlled stock baseline is the next camera step after restoration is
-verified; the custom-firmware procedure below applies to later AF installations.
+A controlled stock baseline under recorded settings is still needed for a
+matched comparison; the custom-firmware procedure below applies to later AF
+installations. The [aperture policy](manual-aperture-policy.md) distinguishes
+unknown physical aperture from a fixed numeric camera-facing declaration.
 
 The owner reported motor movement and proper A7C II shutdown with the earlier
 byte-verified 2.1 image; later 2.2 reports cover normal startup, quiet idle and motor
@@ -62,7 +66,8 @@ encrypted complete backup and an offline unpack tool. Retain its separate key.
 App 0.6 / the current CLI AF installation action selects **2.3.0**.
 The owner-requested installation and physical-reconnect verification passed.
 The later stock comparison temporarily replaces that application; do not perform
-another AF upload during the pending stock reconnect. Historical 2.2 evidence remains
+another AF upload without resolving the flagged stock transaction and physically
+reconnecting first. Historical 2.2 evidence remains
 preserved. See [the 2.3 source/build/test record](evidence/software-polish-2026-10-11.md)
 and [the prepared 50mm candidate](../firmware/candidates/2.3.0/README.md). This adapter
 has completed the upload/reconnect/byte-verification sequence; the steps below

@@ -71,5 +71,9 @@
   "purpleIndicatorMeaningEstablished": false,
   "stockComparisonRequested": true,
   "adapterReturnedToUSBcap": true,
-  "officialUpdaterClosedOwnerConfirmed": true
+  "officialUpdaterClosedOwnerConfirmed": true,
+  "stockComparisonOwnerReported": true,
+  "ownerReportedStockHuntsMuchLess": true,
+  "matchedComparisonConditionsVerified": false,
+  "apertureResearchRecord": "../manual-aperture-policy.md"
 }

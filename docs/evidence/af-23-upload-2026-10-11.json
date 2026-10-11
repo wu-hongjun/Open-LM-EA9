@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "historical-af-23-byte-verification-complete-loaded-hunting-reported-stock-restoration-uploaded",
+  "stage": "historical-af-23-byte-verification-complete-stock-application-restored-after-loaded-hunting-comparison",
   "profileID": "contax-zeiss-50-f1-4",
   "lensName": "Contax Zeiss 50mm f/1.4",
   "focalLengthMM": 50,
@@ -36,7 +36,7 @@
   "cameraTestPerformed": true,
   "releaseCLISHA256": "614767d8e7c4f754c88c8b342d89614af837162abc282578df999619468e861e",
   "offlinePreflightScriptSHA256": "d5dd396882facecdd559fdfae538df0ab6a076de9fa0e060ad6a5392cd8816c4",
-  "pendingPhysicalAction": "Original stock upload now requires physical cap reconnect and verification; see stock comparison record",
+  "pendingPhysicalAction": "Stock application equality and saved-settings mismatch are recorded in the successor stock comparison evidence",
   "lastConnectionRecheckAtUTC": "2026-10-11T14:58:15Z",
   "lastNativeMatchingAdapterCount": 0,
   "connectionRecheckSentHIDReports": 0,

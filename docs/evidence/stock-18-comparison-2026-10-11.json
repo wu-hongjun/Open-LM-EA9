@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-upload-acknowledged-awaiting-physical-reconnect-and-byte-verification",
+  "stage": "stock-application-byte-verified-after-camera-use-native-transaction-remains-unverified-because-saved-settings-changed",
   "purpose": "Restore original same-unit stock 1.8.0 for a loaded-lens comparison with AF 2.3",
   "originalStockBackupVerifiedOffline": true,
   "originalStockFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
@@ -28,7 +28,7 @@
   "uploadStarted": true,
   "nativeUploadExitedSuccessfully": true,
   "reconnectVerificationComplete": false,
-  "cameraComparisonPerformed": false,
+  "cameraComparisonPerformed": true,
   "nativeCommandStarted": true,
   "nativeCommandStartedAtUTC": "2026-10-11T19:39:20.096799+00:00",
   "transactionID": "79DEC204-74E8-4BB4-B392-4EB8AE7D4AE3",
@@ -51,7 +51,104 @@
   "uploadLogSHA256": "6dbc9fb01edd9c2b926ce3e5f257e4a862e2129c8c8e582eb4c152c70fe6a6a0",
   "recordUploadScriptSHA256": "23b7e053d796b06f771c9fdfe2eb2e8b5584aa55edca8ba987f896d9efd2e320",
   "hidReportsSentAfterUploadBeforeReconnect": 0,
-  "pendingPhysicalAction": "Physically unplug/reconnect same adapter through USB cap; keep updater closed and adapter off camera",
+  "pendingPhysicalAction": "No further reports on current connection; physically reconnect before any subsequent USB operation. Native journal remains unverified; do not reinterpret it as a full invariant pass.",
   "physicalReconnectRequested": true,
-  "physicalReconnectOwnerConfirmed": false
+  "physicalReconnectOwnerConfirmed": true,
+  "physicalReconnectConfirmationBasis": "Owner reports stock camera use and return to USB cap with updater closed; OS registry connection is new and unblocked",
+  "ownerStockCameraTestBeforeHostByteVerification": true,
+  "ownerReportedStockHuntsLess": true,
+  "ownerReportedStockVariableApertureDespiteManualIris": true,
+  "actualFocusMode": null,
+  "actualPreAF": null,
+  "postUploadReadbackStarted": true,
+  "postUploadReadbackPerformed": true,
+  "nativeVerificationPassed": false,
+  "nativeVerificationExitCode": 1,
+  "nativeVerificationFailure": "Unexpected flash changes outside the planned application and loader metadata.",
+  "independentOfflineApplicationAndSettingsAuditPassed": true,
+  "stockApplicationByteVerified": true,
+  "restoredApplicationSlotMatchesOriginalBackup": true,
+  "restoredApplicationSlotSHA256": "265f93797db99f2dbba5b649bf5b12bc19efadeaa8e9fe77ade5fca128d17173",
+  "originalFactoryUpperApplicationAreaRestored": true,
+  "upperApplicationFromA000MatchesOriginalBackup": true,
+  "postUploadReportedFirmwareVersion": "1.8.0",
+  "postUploadFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
+  "postUploadFlashBytes": 131072,
+  "postUploadFlashReadPasses": 2,
+  "postUploadAuxiliaryReadPasses": 2,
+  "postUploadReportExchanges": 4359,
+  "knownSTARTMetadataBytesMatched": 58,
+  "bootloaderCodeUnchanged": true,
+  "factoryUserRowUnchanged": true,
+  "factoryCalibrationUnchanged": true,
+  "factoryDeviceIDUnchanged": true,
+  "flashGapUnchanged": false,
+  "gapOutsideStock44ByteSettingsRecordUnchanged": true,
+  "changedBytesVsOriginalStockBackup": 13,
+  "allChangesConfinedToStockSettingsRecord": true,
+  "stockSettingsRecordStart": "0x4100",
+  "stockSettingsRecordEndExclusive": "0x412c",
+  "stockSettingsAffectedFields": [
+    {
+      "recordOffset": "0x00",
+      "flashAddress": "0x4100",
+      "widthBytes": 2,
+      "role": "latest raw encoder sample"
+    },
+    {
+      "recordOffset": "0x06",
+      "flashAddress": "0x4106",
+      "widthBytes": 2,
+      "role": "reported protocol position"
+    },
+    {
+      "recordOffset": "0x0c",
+      "flashAddress": "0x410c",
+      "widthBytes": 4,
+      "role": "relative position"
+    },
+    {
+      "recordOffset": "0x10",
+      "flashAddress": "0x4110",
+      "widthBytes": 2,
+      "role": "velocity delta"
+    },
+    {
+      "recordOffset": "0x14",
+      "flashAddress": "0x4114",
+      "widthBytes": 2,
+      "role": "motion target"
+    },
+    {
+      "recordOffset": "0x1c",
+      "flashAddress": "0x411c",
+      "widthBytes": 1,
+      "role": "latched direction"
+    },
+    {
+      "recordOffset": "0x20",
+      "flashAddress": "0x4120",
+      "widthBytes": 2,
+      "role": "timeout count"
+    }
+  ],
+  "settingsChangesConsistentWithRecoveredFactorySaveRoutine": true,
+  "causalFactoryWriteRoutineObserved": false,
+  "samePhysicalAdapter": true,
+  "newUSBConnectionSinceUpload": true,
+  "nativeJournalMarkedVerified": false,
+  "nativeReconnectMarkerRetained": true,
+  "nativeVerificationGuardRelaxed": false,
+  "currentConnectionRequiresPhysicalReconnectBeforeFurtherHID": true,
+  "verifyLogSHA256": "6075cb61f4ef4b7b583db860cc82c49ac8d6fe0a1fa71f14316245477b68e39b",
+  "offlineAuditScriptSHA256": "6617650cf179490856e158d6e20e21bb95d4dc9033960e0d74a040f5d383c691",
+  "offlineAuditSentHIDReports": 0,
+  "cameraComparisonConditionsMatched": false,
+  "ownerStatementsVerbatim": [
+    "The stock firmware hunts way less, however the stock firmware seems to tell the camera it can vary the aperture but in reality it can't stop down, can we perhaps build it such that aperture is unknown?",
+    "Back on USB cap; updater closed"
+  ],
+  "apertureResearchRecord": "../manual-aperture-policy.md",
+  "cameraUnknownApertureEncodingProven": false,
+  "newCustomFirmwareUploadedAfterStockComparison": false
 }
