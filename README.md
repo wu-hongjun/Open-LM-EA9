@@ -32,6 +32,7 @@ open "dist/Open LM-EA9.app"
 
 - [Current Device dropdown, automatic refresh and lens-change guide](docs/macos-device-workflow.md)
 - [AF 2.2 upload and reconnect verification record](docs/evidence/af-22-upload-2026-10-11.md)
+- [AF 2.2 bare-adapter camera lifecycle procedure and owner observation record](docs/evidence/af-22-camera-lifecycle-2026-10-11.md)
 - [Committed original 1.8.0 application and encrypted same-unit recovery backup](firmware/recovery/stock-1.8.0/README.md)
 - [AF 2.2 reference, timing, homing and completion design](docs/af-reconciliation.md)
 - [AF 2.2/app 0.5 build, test and owner observation record](docs/evidence/af-reconciliation-2026-10-10.md)

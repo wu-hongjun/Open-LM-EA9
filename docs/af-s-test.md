@@ -83,6 +83,11 @@ uploading and verifying this candidate.
 
 ## Camera procedure
 
+Before the C/Y-to-M converter arrives, use the separate
+[bare-adapter startup/idle/shutdown procedure and result record](evidence/af-22-camera-lifecycle-2026-10-11.md).
+That first cycle uses no focus-button input and does not qualify optical AF.
+The following procedure is for the loaded 50mm lens once the converter is available.
+
 Our initial test configuration is still photography in P or A exposure mode,
 with the mechanical lens focus ring at infinity and aperture ring at f/1.4.
 Choose **MENU → Focus → AF/MF → Focus Mode → Single-shot AF**, which Sony describes
