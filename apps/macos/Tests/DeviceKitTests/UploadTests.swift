@@ -81,6 +81,18 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
     #expect(try AdapterLensSetting(profile: p).reportedAV == 5376)
 }
 
+@Test func savedCameraApertureNeverBecomesPhysicalAperture() throws {
+    var p = try profile()
+    let open = try AdapterLensSetting(profile: p)
+    #expect(open.apertureLabel == "1.4" && open.actualAperture == nil)
+    p.currentAperture = 4
+    let stoppedDownMetadata = try AdapterLensSetting(profile: p)
+    #expect(stoppedDownMetadata.apertureLabel == "4")
+    let readBack = try AdapterLensSetting.decode(stoppedDownMetadata.encoded())
+    #expect(readBack.actualAperture == nil && readBack.actualApertureLabel == "Unknown")
+    #expect(readBack.maximumAV == open.maximumAV && readBack.reportedAV != open.reportedAV)
+}
+
 @Test func sessionRejectsReadsAndRepeatedStartOnceArmed() throws {
     var phase = USBSessionPhase()
     #expect(throws: DeviceError.self) { try phase.prepare(.page(Data(repeating: 0, count: 64))) }
@@ -340,7 +352,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,3,0])
     #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.3.0")
     #expect(try ApplicationImage.installedSetting(loader.flash) == nil) // Version alone cannot admit another image.
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,4,0])
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,5,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: directory) }

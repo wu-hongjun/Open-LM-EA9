@@ -47,3 +47,6 @@ void test_irq_restore(uint32_t state);
 extern SysTick_Type test_systick;
 #undef SysTick
 #define SysTick (&test_systick)
+extern SCB_Type test_scb;
+#undef SCB
+#define SCB (&test_scb)

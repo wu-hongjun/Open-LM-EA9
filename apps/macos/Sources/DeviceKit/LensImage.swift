@@ -2,20 +2,20 @@ import Foundation
 import LensCore
 
 public enum FirmwareVariant: String, CaseIterable, Sendable {
-    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened
+    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened, autofocusFactoryBaseline
     var version: [UInt8] {
-        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0] }
+        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0]; case .autofocusFactoryBaseline: [2,4,0] }
     }
     public var versionString: String { version.map(String.init).joined(separator: ".") }
     var resource: String {
-        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template" }
+        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template"; case .autofocusFactoryBaseline: "ea9-af-factory-template" }
     }
     var sha256: String {
-        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256 }
+        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256; case .autofocusFactoryBaseline: TrustedFactoryAFTemplate.sha256 }
     }
     public var enablesAutofocus: Bool { self != .metadataOnly }
     // 2.2 and later stop before the retained factory prefix/copy. Legacy pins retain their layout.
-    var profileAddress: Int { [.autofocusReconciled, .autofocusHardened].contains(self) ? 0x9f00 : 0xa000 }
+    var profileAddress: Int { [.autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline].contains(self) ? 0x9f00 : 0xa000 }
     var profileOffset: Int { profileAddress - ApplicationImage.base }
     var applicationBytes: Int { profileOffset + 256 }
     var applicationEnd: Int { profileAddress + 256 }
@@ -36,6 +36,9 @@ public struct AdapterLensSetting: Codable, Equatable, Sendable {
     public let revision: UInt32
     public var focalLengthMM: Double { Double(focalMM10) / 10 }
     public var reportedAperture: Double { pow(2, Double(Int(reportedAV) - 4096) / 512) }
+    /// A saved f-number never proves the current position of a passive iris.
+    public var actualAperture: Double? { nil }
+    public var actualApertureLabel: String { "Unknown" }
     public var apertureLabel: String {
         let stops: [Double] = [1,1.2,1.4,1.8,2,2.5,2.8,3.2,3.5,4,4.5,5,5.6,6.3,7.1,8,9,10,11,13,14,16,18,20,22,25,28,32,36,40,45,51,57,64,72,80,90,102,114,128]
         let nearest = stops.min { abs(log2($0 / reportedAperture)) < abs(log2($1 / reportedAperture)) }!

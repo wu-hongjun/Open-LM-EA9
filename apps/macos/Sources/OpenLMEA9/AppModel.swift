@@ -36,7 +36,7 @@ struct LensDraft: Equatable {
         result.maximumFocalLengthMM = base.kind == .zoom ? try number(maximum, "maximum focal length") : result.minimumFocalLengthMM
         result.activeFocalLengthMM = base.kind == .zoom ? try optional(active, "current zoom setting") : nil
         result.maximumAperture = try number(aperture, "maximum aperture")
-        result.currentAperture = try optional(currentAperture, "aperture-ring setting")
+        result.currentAperture = try optional(currentAperture, "fixed camera aperture")
         result.notes = notes
         try result.validate()
         return result
@@ -341,7 +341,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var firmwareBehaviorNote: String {
         switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0", "2.3.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.1.0", "2.2.0", "2.3.0", "2.4.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
         default: return "Installed firmware and motor behavior have not been verified for this connection."
         }
@@ -360,7 +360,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canApplyLens, let variant = variantForLensChanges else { return }
         applyLens(variant: variant, preservingFirmware: true)
     }
-    func installAutofocus() { applyLens(variant: .autofocusHardened) }
+    func installAutofocus() { applyLens(variant: .autofocusFactoryBaseline) }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }

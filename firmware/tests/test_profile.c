@@ -55,6 +55,18 @@ int main(int argc, char **argv) {
     n = request(0x28,0); assert(u16(sent[n]+10)==focal && u16(sent[n]+12)==focal);
     assert(u16(sent[n]+15)==aperture); /* message 0x08 explicitly enabled this copy */
     n = request(0x1b,0xff); assert(u16(sent[n]+6)==aperture && u16(sent[n]+8)==aperture);
+    /* Ask for a real different AV (f/8). Preserve the fixed reply and range. */
+    {
+        uint8_t iris[11] = {0xf0,11,0,2,0x40,0x1b,0x00,0x16,0,0,0x55};
+        uint16_t sum = 0;
+        for (i = 1; i <= sizeof(iris)-4u; ++i) sum += iris[i];
+        iris[8] = (uint8_t)sum; iris[9] = (uint8_t)(sum >> 8);
+        before = sent_n; host_body_frame(iris, sizeof iris); em_poll();
+        assert(sent_n == before+1 && em_aperture_req == 0x1600);
+        checksum_ok(before);
+        assert(u16(sent[before]+6)==aperture && u16(sent[before]+8)==aperture);
+        assert(u16(ea9_data+EA9_OFF_05+6)==aperture && u16(ea9_data+EA9_OFF_05+8)==aperture);
+    }
     before = sent_n; host_frame_sync(); em_poll(); assert(sent_n == before+2);
     checksum_ok(before); checksum_ok(before+1);
     assert(sent[before][5]==5 && u16(sent[before]+6)==aperture && u16(sent[before]+30)==focal);

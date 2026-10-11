@@ -1,8 +1,8 @@
-> Current app: **0.6.0, build 9** adds a compact next-step status panel, selected
-> metadata preview and read-first firmware preservation when lens history is
-> unknown. Automatic OS/local-history refresh and the Device dropdown remain.
-> See the [current workflow](macos-device-workflow.md) and
-> [polish/hardening evidence](evidence/software-polish-2026-10-11.md).
+> Current app: **0.7.0, build 10** shows actual aperture as unknown separately
+> from the fixed camera f-number, and packages the experimental AF 2.4 factory
+> baseline. Automatic refresh, the Device dropdown and firmware-preserving lens
+> changes remain. See [the workflow](macos-device-workflow.md) and
+> [current validation](evidence/factory-af-baseline-2026-10-11.md).
 
 # macOS prototype
 
@@ -55,7 +55,7 @@ or backup. Open **Read version…** or **USB tools…** and prepare the connecti
 using the prerequisite checkbox first.
 Read Version uses the same exclusive session, idle acknowledgement and persisted
 reconnect guard as backup, and sends exactly one qualified CHECK, with no memory
-reads. Qualified stock 1.8.0 and pinned custom 2.0.0, 2.1.0, 2.2.0 and 2.3.0 responses are accepted. This is the
+reads. Qualified stock 1.8.0 and pinned custom 2.0.0, 2.1.0, 2.2.0, 2.3.0 and 2.4.0 responses are accepted. This is the
 loader's reported version, not an installed-image or camera-behavior check.
 
 A dated version observation is saved privately in Application Support as

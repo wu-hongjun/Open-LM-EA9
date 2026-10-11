@@ -8,7 +8,7 @@ aperture display. These observations are recorded in the
 
 The adapter cannot sense or operate a passive C/Y lens's iris. The desired
 product behavior is manual aperture control on the lens, with the physical
-working aperture shown as **unknown unless supplied by the owner**. Lens
+working aperture shown as **unknown**, with any owner-supplied numeric camera report kept separate. Lens
 maximum aperture, a manually supplied working aperture, and the values needed
 by Sony's AF protocol are separate facts. A camera display of **F-- while AF
 continues working has not been established** by the current references or our
@@ -38,9 +38,9 @@ Our frozen AF 2.3 already removes the variable-range declaration:
   physical setting in the Mac library therefore **does not send unknown**; it
   assumes the maximum as the fixed camera-facing value.
 - [`LensProfile`](../apps/macos/Sources/LensCore/LensLibrary.swift) already stores
-  the physical ring setting as optional. That value is owner-entered metadata,
-  never a live reading. Leaving it blank preserves physical uncertainty in the
-  library, while the current firmware still needs its numeric declaration.
+  an optional owner-declared camera f-number (legacy `currentAperture` key). That value is owner-entered metadata,
+  never a live reading. The live physical setting is unknown even if this field is filled; leaving it
+  blank makes the numeric report default to the maximum aperture.
 
 The constant report will be inaccurate if the owner stops down without updating
 the saved value. It should always be presented as declared metadata. The body
@@ -92,3 +92,22 @@ position/reference and optical declarations against stock under matched
 loaded-lens conditions before tuning gains or claiming parity. The current
 candidate's optical rows are not calibrated for this actual Contax lens, and
 changing the displayed aperture alone is not a demonstrated hunting fix.
+
+## Implemented in app 0.7 / AF 2.4
+
+Device always displays **Actual aperture: Unknown · set on lens**, including when
+it has a USB-verified fixed f-number. Its numeric preview is labeled **camera
+metadata: fixed f/...**. The library editor calls the optional override **Fixed
+camera aperture** and explains that a blank value reports the maximum. Existing
+libraries keep their `currentAperture` storage key and values; neither these
+values nor USB readback become an actual-aperture measurement.
+
+Firmware profile-v1 already sets identical minimum/maximum/current camera AV
+values and rejects body-requested iris changes. That supported policy remains
+in the new 2.4 candidate. Stop down using the manual ring whenever needed;
+changing metadata is optional and does not control the iris. If a photo must
+carry the manually chosen f-number in EXIF, prepare that fixed numeric report
+before shooting. The numeric report may also affect camera AF assumptions, so
+stopped-down behavior remains part of camera qualification. No F-- sentinel or
+unknown-camera-aperture firmware is introduced. The [factory-derived AF
+baseline](reverse-engineering/factory-af-baseline.md) is a separate motion change.

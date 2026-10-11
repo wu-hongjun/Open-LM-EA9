@@ -76,7 +76,7 @@ The confirmed Biotar uses 58mm in the seed and editor; its legacy identifier
 lens library and backup manifest. Top level: `schemaVersion: 1`, `observation`.
 The observation contains `device` (the same identity fields as a backup),
 `version` and `readAt` (ISO 8601 UTC). The read is capped at 64 KiB, accepted
-versions are `1.8.0`, `2.0.0`, `2.1.0`, `2.2.0` and `2.3.0`; identity must carry the qualified descriptor and
+versions are `1.8.0`, `2.0.0`, `2.1.0`, `2.2.0`, `2.3.0` and `2.4.0`; identity must carry the qualified descriptor and
 TECHART/LM-EA9 names, and dates must be positive and no more than 60 seconds
 in the future. Saves are atomic and the file is set to mode `0600`. It includes
 the serial number; keep it private.
@@ -224,3 +224,19 @@ against its selected variant before START/journal creation. It requires matching
 code and a valid profile; the initial stock-to-metadata path additionally requires
 the pinned stock application. Explicit install/restore and CLI variant selections
 retain their reviewed variant-choice behavior.
+
+## App 0.7 / AF 2.4 and aperture presentation
+
+`autofocusFactoryBaseline` admits camera BCD 0x24 / loader 2.4.0 through a separate
+20,480-byte resource and generated digest pin. Its profile remains the same
+256-byte version-1 row at 0x9f00; no USB packet, backup or journal schema changes.
+Explicit AF installation and CLI `prepare-af`/`apply-af` now select 2.4. Normal
+profile changes preserve the freshly verified installed variant, including 2.3.
+Resources/pins for 2.0–2.3 and the stock recovery source remain frozen.
+
+`AdapterLensSetting.actualAperture` is computed unknown, never decoded from AV
+or a local ring entry. `reportedAV` remains a fixed numeric camera declaration.
+The existing optional library `currentAperture` key is retained for compatibility
+and labeled Fixed camera aperture in the editor. Device labels the two facts
+separately. New backups identify the app as `0.7.0-prototype`; schema 1 remains.
+The pending stock saved-motion-record verification failure is not relaxed.

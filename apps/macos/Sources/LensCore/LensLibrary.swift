@@ -16,6 +16,8 @@ public struct LensProfile: Codable, Equatable, Identifiable, Sendable {
     public var maximumFocalLengthMM: Double
     public var activeFocalLengthMM: Double?
     public var maximumAperture: Double
+    // Persisted key retained for existing libraries: an optional owner-declared
+    // fixed camera f-number, never a measurement of the current iris position.
     public var currentAperture: Double?
     public var notes: String
     public var revision: Int
@@ -47,7 +49,7 @@ public struct LensProfile: Codable, Equatable, Identifiable, Sendable {
             throw LibraryError.invalid("Maximum aperture must be an f-number between 0.5 and 64.")
         }
         if let currentAperture, !currentAperture.isFinite || !(maximumAperture...128).contains(currentAperture) {
-            throw LibraryError.invalid("The aperture-ring f-number must be at least the maximum-aperture f-number and no greater than 128.")
+            throw LibraryError.invalid("The fixed camera aperture must be at least the maximum-aperture f-number and no greater than 128.")
         }
         guard notes.count <= 2000, (1...1_000_000).contains(revision) else {
             throw LibraryError.invalid("Notes are limited to 2,000 characters; profile revision is out of range.")

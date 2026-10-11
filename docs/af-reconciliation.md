@@ -1,3 +1,5 @@
+> Current source/app follow-up: [AF 2.4 factory-derived baseline](reverse-engineering/factory-af-baseline.md), built with `--variant factory-af`. Explicit AF install selects 2.4; 2.0–2.3 artifacts are frozen. The material below records earlier milestones.
+
 # AF 2.2: reference, timing and completion reconciliation
 
 This document records the 2.2 design and historical commands. Current source

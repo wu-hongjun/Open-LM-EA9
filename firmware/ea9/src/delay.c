@@ -30,6 +30,23 @@ uint32_t millis(void)
 	return g_millis;
 }
 
+uint32_t clock_cycles(void)
+{
+    /* Preserve the caller's IRQ mask. A rollover can pend after the first
+     * VAL read but cannot advance the epoch while this snapshot is masked. */
+    uint32_t mask = __get_PRIMASK();
+    __disable_irq();
+    uint32_t epoch = g_millis;
+    uint32_t pending = SCB->ICSR & SCB_ICSR_PENDSTSET_Msk;
+    uint32_t value = SysTick->VAL;
+    uint32_t after = SCB->ICSR & SCB_ICSR_PENDSTSET_Msk;
+    if (after && !pending) value = SysTick->VAL;
+    if (after) ++epoch;
+    uint32_t result = epoch * (F_CPU / 1000u) + SysTick->LOAD - value;
+    __set_PRIMASK(mask);
+    return result;
+}
+
 void delay_ms(uint32_t ms)
 {
 	uint32_t start = g_millis;

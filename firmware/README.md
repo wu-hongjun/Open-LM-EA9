@@ -10,7 +10,7 @@ it is not the production autofocus firmware or a decision against a later Rust
 implementation. The macOS app and USB loader transport use native Swift.
 
 The previous **AF 2.2 candidate** reconciles REA findings with the upstream
-controller for Contax Zeiss 50mm f/1.4. The new **AF 2.3 candidate** adds received-
+controller for Contax Zeiss 50mm f/1.4. The frozen **AF 2.3 candidate** adds received-
 frame admission, coherent ISR snapshots, faulted Stop handling, operation
 ownership, frame-paced telemetry and bounded initialization. It was installed and
 USB-byte-verified after physical reconnect. The owner reports eventual loaded
@@ -26,17 +26,21 @@ assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
 Offline build and checks:
 
 ```sh
-python3 scripts/build-firmware.py --variant hardened-af
+python3 scripts/build-firmware.py --variant factory-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-Current source builds separately under `ea9/build/hardened`, as camera BCD 0x23
-and loader 2.3.0. Templates/pins for 2.0, 2.1 and 2.2 remain frozen; the corresponding
-build-script variants verify their committed size/digest rather than compiling
-changed source under an older version. All four versions remain admitted for
-backed-up upload, reconnect verification and stock restoration. The reserved
-profile row for 2.2/2.3 is `0x9f00`; application writes stop at `0xa000`.
+Current source builds **AF 2.4** under `ea9/build/factory`, as camera BCD 0x24
+and loader 2.4.0. It uses a modular factory-derived controller, tested directly
+against the original instructions. It remains an offline camera-unqualified
+candidate. See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
+and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
+Templates/pins for 2.0–2.3 remain frozen; those build-script variants verify
+committed size/digest instead of compiling changed source under old versions.
+All five custom versions remain admitted for backed-up upload, reconnect
+verification and stock restoration. The 2.2–2.4 profile row is `0x9f00` and
+application writes stop at `0xa000`.
 See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
 [offline build/test record](../docs/evidence/software-polish-2026-10-11.md).
 

@@ -200,6 +200,7 @@ static void tick(void)
 }
 
 uint32_t millis(void) { tick(); return ++host_millis; }
+uint32_t clock_cycles(void) { return host_millis * 48000u; }
 void delay_ms(uint32_t ms) { while (ms--) millis(); }
 
 static int noise(void)

@@ -29,7 +29,7 @@ struct DeviceView: View {
                         }
                     }.padding(.vertical, 10).frame(maxWidth: .infinity, alignment: .leading)
                     VStack(alignment: .leading, spacing: 8) {
-                        Eyebrow("Firmware")
+                        Eyebrow(model.currentFirmwareObservation == nil ? "Firmware" : "Firmware · last read")
                         Text(model.currentFirmwareObservation?.version ?? "Not read")
                             .font(.system(size: 25, weight: .medium, design: .rounded))
                         if let read = model.currentFirmwareObservation {
@@ -80,13 +80,17 @@ struct DeviceView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     if let applied = model.currentAppliedLens {
                         Text(applied.setting.name).font(.system(size: 23, weight: .medium, design: .serif)).lineLimit(2)
-                        Text("\(applied.setting.focalLengthMM.formatted()) mm · reported f/\(applied.setting.apertureLabel)")
+                        Text("\(applied.setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(applied.setting.apertureLabel)")
+                            .font(.system(size: 13)).foregroundStyle(Palette.muted)
+                        Label("Actual aperture: \(applied.setting.actualApertureLabel) · set on lens", systemImage: "camera.aperture")
                             .font(.system(size: 13)).foregroundStyle(Palette.muted)
                         StatusPill(text: "Last USB-verified setting", connected: true)
                     } else {
-                        Text(model.waitingForVerification ? "Finish your lens change" : connected ? "Lens settings not read" : "Ready for your next lens")
+                        Text(model.waitingForVerification ? "Finish your update" : connected ? "Lens settings not read" : "Ready for your next lens")
                             .font(.system(size: 23, weight: .medium, design: .serif))
-                        Text(model.waitingForVerification ? "Reconnect the USB cap, then verify the uploaded settings." : connected ? "Read the adapter’s settings in USB tools, or choose a profile below." : "Connect your adapter to see its saved lens information.")
+                        Text(model.waitingForVerification ? "Reconnect the USB cap, then verify the uploaded firmware and settings." : connected ? "Read the adapter’s settings in USB tools, or choose a profile below." : "Connect your adapter to see its saved lens information.")
+                            .font(.system(size: 13)).foregroundStyle(Palette.muted)
+                        Label("Actual aperture: Unknown · set on lens", systemImage: "camera.aperture")
                             .font(.system(size: 13)).foregroundStyle(Palette.muted)
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading)
@@ -120,7 +124,7 @@ struct DeviceView: View {
                         }
                         VStack(alignment: .leading, spacing: 3) {
                             if let setting = try? AdapterLensSetting(profile: profile) {
-                                Text("\(setting.focalLengthMM.formatted()) mm · reported f/\(setting.apertureLabel)").font(.callout)
+                                Text("\(setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(setting.apertureLabel)").font(.callout)
                             } else { Text(profile.focalSummary).font(.callout) }
                             Text(model.preparedMatchesApplied ? "Matches the verified adapter setting" : "Selected on this Mac")
                                 .font(.caption).foregroundStyle(Palette.muted)
@@ -153,7 +157,7 @@ struct DeviceView: View {
                     Toggle("Updater closed · USB cap reconnected", isOn: $model.idleAcknowledged).font(.caption)
                 }
             }
-            Text("Lens and aperture values are saved metadata. The adapter cannot identify a passive lens or read its rings.")
+            Text("Stop down using the lens ring. The adapter cannot read or move the iris; the fixed camera f-number may differ from the actual aperture.")
                 .font(.caption).foregroundStyle(Palette.muted)
         }.padding(22).modifier(Surface())
     }
@@ -233,8 +237,8 @@ struct DeviceToolsView: View {
                     Button("Restore Stock from Backup…", action: model.chooseStockRestore).disabled(!model.canReadDevice)
                     DisclosureGroup("Experimental autofocus") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("AF 2.3.0 enables autofocus motor control. Focus accuracy with your mounted lens still needs a camera test. Choose a lens on Device, install, then reconnect to verify.").font(.callout)
-                            Button("Install Experimental AF 2.3.0", action: model.installAutofocus).disabled(!model.canChangeFirmware)
+                            Text("AF 2.4.0 uses a controller based on recovered factory behavior. Focus accuracy and hunting with your mounted lens still need a camera comparison. Choose a lens on Device, install, then reconnect to verify.").font(.callout)
+                            Button("Install Experimental AF 2.4.0", action: model.installAutofocus).disabled(!model.canChangeFirmware)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

@@ -15,6 +15,7 @@ OUT = ROOT / "artifacts/firmware-milestone/hosttests"
 OUT.mkdir(parents=True, exist_ok=True)
 COMMON = ["cc", "-std=gnu99", "-Wall", "-Wextra", "-O1", "-Ihosttest", "-Isrc"]
 tests = {
+    "factory_servo": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "hosttest/test_factory_servo.c", "src/factory_servo.c", "src/factory_af.c", "src/io_guard.c", "src/focus_map.c"],
     "emount": ["hosttest/test_emount.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
     "servo": ["hosttest/test_servo.c", "hosttest/sim_motor.c", "src/servo.c", "src/io_guard.c"],
     "nobody": ["hosttest/test_nobody.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
@@ -29,6 +30,11 @@ tests = {
     "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
     "profile": ["../tests/test_profile.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
 }
+# Reuse the production-main lifecycle/dispatch checks with the new backend.
+for old, new in [("af_lifecycle", "factory_lifecycle"), ("af_hardening", "factory_hardening")]:
+    tests[new] = ["-DEA9_FACTORY_AF", "-DUPSTREAM_PROFILE=FACTORY_PROFILE"] + [
+        part if part != "src/servo.c" else "src/factory_servo.c" for part in tests[old]
+    ] + ["src/factory_af.c"]
 for name, files in tests.items():
     binary = OUT / f"test_{name}"
     subprocess.run(COMMON + files + ["-o", str(binary)], cwd=BASE, check=True)
@@ -38,6 +44,11 @@ for name, files in tests.items():
     if name == "io_guard": variants = [[x] for x in ["ready", "timeout", "wrap", "frozen"]]
     if name == "af_lifecycle": variants = [[str(x)] for x in range(13)]
     if name == "af_hardening": variants = [[str(x)] for x in range(18)]
+    if name == "factory_hardening": variants = [[str(x)] for x in range(18)]
+    # Legacy cases 11/12 assert speed/dwell/band arrival, which factory replaces
+    # with crossing; the new scripted wrapper suite tests its arrival guards.
+    if name == "factory_lifecycle": variants = [[str(x)] for x in range(11)]
+    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative"]]
     for args in variants:
         subprocess.run([str(binary)] + args, check=True)
 # Compile actual sensor and PWM drivers against DFP-shaped register memory.
@@ -47,7 +58,7 @@ for case in ["encoder", "encoder-reset", "adc", "burst-frozen", "uart", "uart-rx
     subprocess.run([str(mmio), case], check=True)
 delays = OUT / "test_mmio_delays"
 subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_delays.c", "src/io_guard.c", "src/motor.c", "src/delay.c", "-o", str(delays)], cwd=BASE, check=True)
-for case in ["us", "ms"]:
+for case in ["us", "ms", "cycles"]:
     subprocess.run([str(delays), case], check=True)
 startup = OUT / "test_mmio_startup"
 subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_startup.c", "src/io_guard.c", "src/motor.c", "src/clock.c", "src/em_eic.c", "src/em_uart.c", "-o", str(startup)], cwd=BASE, check=True)
@@ -56,7 +67,7 @@ for case in range(11):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x23u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x24u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 for lens in inventory:
     if lens["kind"] == "zoom":

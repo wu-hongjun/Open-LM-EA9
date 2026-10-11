@@ -10,10 +10,16 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.6.0, build 9) refreshes
+upload/read-back path for lens metadata. The current app (0.7.0, build 10) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
+The app displays **Actual aperture: Unknown** separately from its fixed camera
+f-number; the lens ring still controls the physical iris. The new **AF 2.4
+factory baseline** replaces the upstream controller with independently implemented
+stock speed/PID/callback/completion semantics. Its pure controller passes 7,323
+original-instruction comparisons; it is prepared offline and has not been uploaded
+or camera-qualified. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
 AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
 processing and startup waits. It was byte-verified after physical USB-cap
 reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
@@ -33,13 +39,15 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant hardened-af
+python3 scripts/build-firmware.py --variant factory-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [App 0.7, AF 2.4 factory baseline and validation](docs/evidence/factory-af-baseline-2026-10-11.md)
+- [Prepared Contax Zeiss 50mm f/1.4 AF 2.4 candidate](firmware/candidates/2.4.0/README.md)
 - [App 0.6 polish, firmware 2.3 hardening and offline validation](docs/evidence/software-polish-2026-10-11.md)
 - [Independent firmware correctness audit](docs/audits/firmware-correctness-2026-10-11.md)
 - [Reproducible stock 1.8 application model and finite comparison harness](research/stock-1.8/README.md)

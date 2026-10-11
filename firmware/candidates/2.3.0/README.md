@@ -29,15 +29,17 @@ pins production sources and toolchain dependencies. The [correctness audit](../.
 records counterexamples, fixes and finite test limits. The [polish record](../../../docs/evidence/software-polish-2026-10-11.md)
 connects the app, native admission, image and tests.
 
-The committed image is byte-identical to both current native `ea9ctl prepare-af`
-and Python profile personalization. Reproduce from the repository root after
-building the pinned current template and packaged CLI:
+The committed image matched native AF preparation at the 2.3 milestone.
+Current explicit native AF preparation selects 2.4 instead. Reproduce this
+historical 2.3 image through the frozen Python variant after preparing metadata:
 
 ```sh
 python3 scripts/build-firmware.py --variant hardened-af
 ./scripts/build-macos-app.sh
-dist/ea9ctl --state-directory /new/local/profile-state prepare-af \
-  contax-zeiss-50-f1-4 /new/output/50mm.bin
+dist/ea9ctl --state-directory /new/local/profile-state prepare \
+  contax-zeiss-50-f1-4 /new/output/metadata.bin
+python3 scripts/prepare-af.py /new/output/metadata.bin /new/output/50mm-23.bin \
+  --variant hardened-af
 ```
 
 Preparation is offline and requires a new output file. Upload must be a separately

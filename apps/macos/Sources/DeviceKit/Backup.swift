@@ -152,7 +152,7 @@ struct BackupEngine {
         }
         try cancellation.check()
         progress(.init(phase: "Saving verified backup", completed: 0, total: 1))
-        let manifest = BackupManifest(schemaVersion: 1, applicationVersion: "0.6.0-prototype", createdAt: Date(),
+        let manifest = BackupManifest(schemaVersion: 1, applicationVersion: "0.7.0-prototype", createdAt: Date(),
             device: identity, reportedFirmwareVersion: version, chip: "ATSAMD21E17A revision D", deviceID: "0x1001030B",
             flashBytes: first.count, flashReadPasses: 2, auxiliaryReadPasses: 2, reportExchanges: exchanges,
             bootCodeSHA256: digest(code), files: files.mapValues { FileDigest(bytes: $0.count, sha256: digest($0)) },

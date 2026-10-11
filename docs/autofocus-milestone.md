@@ -1,3 +1,5 @@
+> Current source/app follow-up: [AF 2.4 factory-derived baseline](reverse-engineering/factory-af-baseline.md), built with `--variant factory-af`. Explicit AF install selects 2.4; 2.0–2.3 artifacts are frozen. The material below records earlier milestones.
+
 # Autofocus implementation milestone
 
 Current source/app follow-up: [AF 2.3 hardening](evidence/software-polish-2026-10-11.md)

@@ -1,7 +1,10 @@
-# Device workflow: prototype 0.6.0, build 9
+# Device workflow: prototype 0.7.0, build 10
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
+Actual aperture is **Unknown**; the displayed fixed f-number is camera metadata.
+Use the lens ring to stop down. The library editor lets you override the fixed
+camera f-number while retaining the unknown physical setting.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
 ## Change a lens
@@ -19,8 +22,8 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 2.3 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` now selects 2.3; plain `apply` selects metadata-only 2.0.
+new AF 2.4 is a separate **USB tools → Experimental autofocus** action.
+The CLI `apply-af` now selects 2.4; plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading
 unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,
@@ -67,4 +70,4 @@ After the AF 2.2 reconnect/readback on Oct 11, the same app loaded the completed
 2.2.0/50mm f/1.4 history and displayed **USB verified** and **Up to date** without
 a rebuild or explicit HID read. See the [completed installation record](evidence/af-22-upload-2026-10-11.md).
 
-The 0.6 workflow and firmware hardening were tested offline; see [the Oct 11 polish record](evidence/software-polish-2026-10-11.md). The installed adapter remains 2.2 until a separately requested 2.3 upload and reconnect verification.
+App 0.7 and the AF 2.4 baseline were validated offline; see [the current evidence](evidence/factory-af-baseline-2026-10-11.md). The adapter currently has stock 1.8; its application bytes match the original backup, while the native restore journal remains flagged for the saved-record change after camera use. No 2.4 upload has occurred.

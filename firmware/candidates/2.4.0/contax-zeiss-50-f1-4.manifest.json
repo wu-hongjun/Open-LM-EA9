@@ -1,0 +1,18 @@
+{
+  "variant": "factory-af",
+  "status": "offline-personalized-candidate",
+  "imageSHA256": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df",
+  "templateSHA256": "db9f9f3575ededbd38cc2366eb9efea15d2af6f43df5ee7b6a67a2e500fb6cdf",
+  "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+  "bytes": 20480,
+  "profileID": "contax-zeiss-50-f1-4",
+  "lensName": "Contax Zeiss 50mm f/1.4",
+  "proposedLoaderVersion": [
+    2,
+    4,
+    0
+  ],
+  "motorMotionEnabled": true,
+  "cameraQualified": false,
+  "usbReportsSent": 0
+}

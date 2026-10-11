@@ -7,6 +7,8 @@ stock settings record, so strict native verification remains flagged and any
 further USB operation requires physical reconnect. See the
 [stock restoration/baseline record](evidence/stock-18-comparison-2026-10-11.md).
 
+**Next prepared candidate: AF 2.4.0**, using the [factory-derived controller](reverse-engineering/factory-af-baseline.md). It has passed offline checks and has not been uploaded or camera-tested. The original stock application remains installed; its flagged saved-record verification has not been waived.
+
 The preceding **AF 2.3.0 installation was byte-verified after the owner's
 physical USB-cap reconnect**. Two complete 128 KiB flash reads matched
 the exact candidate; protected flash, upper flash and factory checks passed.
@@ -35,8 +37,9 @@ that region. See [the layout assessment](af-reconciliation.md); upgrading from
 
 ## Prepared products
 
-- App: `dist/Open LM-EA9.app`, version 0.6.0, build 9.
+- App: `dist/Open LM-EA9.app`, version 0.7.0, build 10.
 - CLI: `dist/ea9ctl` (signed locally, same DeviceKit transport).
+- New offline 2.4: [50mm candidate](../firmware/candidates/2.4.0/README.md), 20,480 bytes, image SHA-256 `c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df`.
 - Historical 2.1 candidate: `artifacts/firmware-milestone/af-ready-2026-10-10/contax-zeiss-50-f1-4.bin`.
 - Historical 2.1 evidence: [AF readiness record](evidence/autofocus-ready-2026-10-10.md).
 - Previously installed 2.3: `firmware/candidates/2.3.0/contax-zeiss-50-f1-4.bin`,
@@ -45,7 +48,7 @@ that region. See [the layout assessment](af-reconciliation.md); upgrading from
 - Historical 2.2 installation: [upload/readback record](evidence/af-22-upload-2026-10-11.md)
   and [owner camera observations](evidence/af-22-camera-lifecycle-2026-10-11.md).
 
-The 2.3 candidate is 20,480 bytes, with its profile at `0x9f00`.
+The historical 2.3 candidate is 20,480 bytes, with its profile at `0x9f00`.
 It reports 50 mm, nominal f/1.4, lens name `Contax Zeiss 50mm f/1.4`, camera
 version 2.3 and loader version 2.3.0. Its template SHA-256 is
 `8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88`;
@@ -53,8 +56,9 @@ its personalized image SHA-256 is
 `39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4`.
 
 The stored aperture is reported metadata, not a measurement of the aperture
-ring. Changing the optical aperture later requires a matching profile setting
-if the saved EXIF must agree. The image is reproducible from the pinned template
+ring. Stop down freely using the lens. If the saved EXIF must match that
+manually chosen f-number, prepare a matching fixed camera report; the app
+continues to show the actual iris as unknown. The image is reproducible from the pinned template
 and profile; the uploader accepts built-in templates, not arbitrary image files.
 
 ## USB installation and verification
@@ -63,23 +67,21 @@ The original 1.8.0 restore source is also saved in the
 [committed recovery bundle](../firmware/recovery/stock-1.8.0/README.md), with an
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
-App 0.6 / the current CLI AF installation action selects **2.3.0**.
-The owner-requested installation and physical-reconnect verification passed.
-The later stock comparison temporarily replaces that application; do not perform
-another AF upload without resolving the flagged stock transaction and physically
-reconnecting first. Historical 2.2 evidence remains
-preserved. See [the 2.3 source/build/test record](evidence/software-polish-2026-10-11.md)
-and [the prepared 50mm candidate](../firmware/candidates/2.3.0/README.md). This adapter
-has completed the upload/reconnect/byte-verification sequence; the steps below
-remain the procedure for future changes. The primary Device dropdown changes
-lens settings while preserving the verified installed variant.
+App 0.7 / the current CLI explicit AF installation selects **2.4.0**. It is
+prepared offline, not installed. The 2.3 upload/reconnect evidence remains
+historical and unchanged. Before another upload, resolve the flagged stock
+transaction and physically reconnect; a successful stock byte audit alone does
+not clear the native journal. See [the 2.4 source/build/test record](evidence/factory-af-baseline-2026-10-11.md)
+and [the new 50mm candidate](../firmware/candidates/2.4.0/README.md).
+The Device dropdown preserves the verified installed variant when changing
+profiles; it does not silently upgrade 2.3 to 2.4.
 
 
 1. Close TECHART Update and other USB clients. Connect the adapter itself through
    the USB update cap; a camera connected by USB is a different device. Unplug and
    reconnect the cap before the first operation. Check `dist/ea9ctl inventory`.
 2. In the app choose the 50mm f/1.4 profile in the Device dropdown. Open
-   **USB tools → Experimental autofocus → Install Experimental AF 2.3.0**. The confirmation names the enabled motion and unqualified camera state.
+   **USB tools → Experimental autofocus → Install Experimental AF 2.4.0**. The confirmation names the enabled motion and unqualified camera state.
    The existing unit-specific stock-upload qualification is required. Installation
    saves and synchronizes a fresh two-pass recovery backup and journal before START.
 3. After the upload, **physically unplug and reconnect the cap**. The app detects the new connection automatically; confirm the prerequisite and
@@ -171,7 +173,7 @@ dist/ea9ctl restore-stock /absolute/path/to/original.ea9backup --idle
 dist/ea9ctl verify --idle
 ```
 
-Recovery admits a readable 2.1.0, 2.2.0, 2.3.0 or unknown current version only with the qualified
+Recovery admits a readable 2.1.0, 2.2.0, 2.3.0, 2.4.0 or unknown current version only with the qualified
 loader and matching unit. An AF backup cannot substitute for the original stock
 source. Restoration writes the saved application slot `[0x5000,0x20000)` and stock
 metadata; it does not restore or write bootloader code. Stock upload/readback was

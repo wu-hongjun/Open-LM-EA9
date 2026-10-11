@@ -20,6 +20,7 @@ __pycache__/
 /tools/rea-analysis/
 /firmware/ea9/build/
 /artifacts/firmware-milestone/
+/artifacts/factory-af*/
 
 # Downloaded reference photos remain local; their sources and digests are tracked.
 /references/visuals/photos/

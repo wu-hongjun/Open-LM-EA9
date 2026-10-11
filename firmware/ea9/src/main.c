@@ -1,8 +1,9 @@
 /* main.c -- the E-mount responder plus the closed-loop focus mechanism.
  *
- * This is the opt-in upstream-AF candidate, separate from metadata_main.c.
- * It preserves the upstream servo/homing baseline, adds our validated lens
- * profile, bounded command translation and a session motion-fault latch.
+ * This is the opt-in AF application, separate from metadata_main.c. The 2.4
+ * build selects a stock-derived controller in factory_af/factory_servo; legacy
+ * host tests retain the upstream servo. Bounded homing, command translation,
+ * protocol service and session motion-fault ownership are shared policies.
  * Upstream camera measurements below belong to its a9 II, not our A7C II.
  *
  * REPLACES the open-loop version, which damaged nothing permanently but came
@@ -46,6 +47,12 @@
 #include "motor.h"
 #include "abs_encoder.h"
 #include "servo.h"
+#ifdef EA9_FACTORY_AF
+#include "factory_servo.h"
+#define MOTION_PROFILE FACTORY_PROFILE
+#else
+#define MOTION_PROFILE UPSTREAM_PROFILE
+#endif
 #include "af_control.h"
 #include "af_reference.h"
 #include "af_completion.h"
@@ -265,8 +272,22 @@ static void trace_page(uint32_t page, unsigned k, const struct servo_result *r);
  * special case bolted beside it. */
 #define SCAN_STOP_MS    8
 
-/* Upstream focus tuning; these measurements have not been repeated on the
- * owner's adapter. Keep its 5 ms cadence until lens-mounted qualification. */
+#ifdef EA9_FACTORY_AF
+/* Only wrapper limits/hooks are configurable here. Factory gains, speed
+ * staircase, retained history and callback timeout live in factory_af.c. */
+static const struct servo_cfg FACTORY_PROFILE = {
+    .duty_max = MOVE_DUTY,
+    .stall_ms = 300,
+    .timeout_ms = 380,
+    .total_ms = 5000,
+    .pump = pump,
+    .abort = focus_abort,
+    .retarget = focus_retarget,
+    .retarget_max = 16,
+};
+#else
+/* Legacy upstream tuning uses 5 ms. Its measurements have not been repeated
+ * on the owner's adapter. It is excluded from the new factory baseline. */
 static const struct servo_cfg UPSTREAM_PROFILE = {
 	/* Profile: v = remaining / 42 ms, the worst measured stopping distance
 	 * per count/ms, so friction alone can always stop it. */
@@ -335,6 +356,7 @@ static const struct servo_cfg UPSTREAM_PROFILE = {
 	.reverse_brake_ms    = 20,
 	.reverse_brake_above = 15000,
 };
+#endif
 
 /* Set once homing has run.  Until then abs_encoder_track() is measured from
  * wherever the mechanism happened to be at boot, so zero is not infinity and
@@ -445,7 +467,7 @@ static void motor_home(void)
     if (io_stop_motion()) return;
     ea9_home_begin(&g_reference, initial, millis());
     vdd_track_reset();
-    if (!UPSTREAM_PROFILE.dry) {
+    if (!MOTION_PROFILE.dry) {
         motor_attach_pins();
         motor_drive(-HOME_DUTY);
     }
@@ -468,7 +490,7 @@ static void motor_home(void)
         int32_t sample = abs_encoder_track();
         if (io_stop_motion()) { ea9_home_cancel(&g_reference); return; }
         ea9_home_sample(&g_reference, sample, millis());
-        if (g_reference.phase == EA9_HOME_SETTLING && previous == EA9_HOME_DRIVING && !UPSTREAM_PROFILE.dry) {
+        if (g_reference.phase == EA9_HOME_SETTLING && previous == EA9_HOME_DRIVING && !MOTION_PROFILE.dry) {
             motor_drive(0); motor_brake();
         }
     }
@@ -621,7 +643,11 @@ static void park_to_infinity(void)
 
 	if (!ea9_af_begin_motion(&g_af_state)) return;
 	g_abort_pending = 0;
+#ifdef EA9_FACTORY_AF
+    factory_servo_move_to(0, &PARK, &r);
+#else
 	servo_move_rel(-here, &PARK, &r);
+#endif
 	ea9_af_end_motion(&g_af_state);
 	if (ea9_af_note_result(&g_af_state, r.outcome) || g_af_state.shutdown) motor_release();
 
@@ -719,6 +745,9 @@ static uint16_t         g_focus_ring_n;
  * iteration and hands the value over. */
 static void focus_report_at(int32_t counts)
 {
+#ifdef EA9_FACTORY_AF
+    factory_servo_sample_idle(counts);
+#endif
 	/* Message 0x06 is the only message that carries the focus position.
 	 *
 	 * Anchored at the 4144 we ADVERTISE, not at the raw 4096.  The body
@@ -903,15 +932,19 @@ static uint8_t focus_run(int32_t want, uint16_t target_u,
 	if (io_stop_motion()) return SERVO_IO_FAULT;
 	delta = want - here;
 
-	/* Even an equal-position command passes the servo's speed/dwell checks.
-	 * A coordinate deadband alone cannot establish that the mechanism stopped. */
+	/* Factory baseline uses target crossing, while the legacy backend uses
+	 * speed/dwell checks. Neither is an optical focus-lock measurement. */
 
 	/* The predictor's target is the COMMANDED position, not the servo's
 	 * internal start+delta -- they differ by whatever the encoder moved
 	 * between the two reads, and the field the body sees should be bounded
 	 * by what it asked for. */
 	focus_pred_begin(&g_pred, here, want, millis());
+#ifdef EA9_FACTORY_AF
+    factory_servo_move_to(want, cfg, &r);
+#else
 	servo_move_rel(delta, cfg, &r);
+#endif
 	ea9_af_end_motion(&g_af_state);
 	/* A stalled, timed-out or invalid feedback move cannot be retried by
 	 * each subsequent camera command. Keep serving the bus, release drive. */
@@ -1054,7 +1087,7 @@ static void focus_scan(const struct em_focus_cmd *c)
 	/* Leg 1: get to the run-up point, at whatever speed suits.  Wait until
 	 * it is at rest before the sweep -- focus_run is blocking, so this is
 	 * the ordering by construction. */
-	outcome = focus_run(start, focus_counts_to_em06(start), &UPSTREAM_PROFILE);
+	outcome = focus_run(start, focus_counts_to_em06(start), &MOTION_PROFILE);
 	if (outcome != SERVO_OK || g_next_pending) {
 		em_set_scan_state(EM_SCAN_IDLE);
         if (outcome != SERVO_OK) {
@@ -1069,13 +1102,17 @@ static void focus_scan(const struct em_focus_cmd *c)
 	 * configured velocity range. This mapping remains unqualified. */
 	em_set_scan_state(EM_SCAN_SWEEPING);
 	{
-		struct servo_cfg sweep = UPSTREAM_PROFILE;
+		struct servo_cfg sweep = MOTION_PROFILE;
+#ifndef EA9_FACTORY_AF
 		uint16_t         mag   = c->scan_speed & 0x7Fu;
 
 		sweep.v_cruise = SCAN_V_MIN
 		                 + (int32_t)((uint32_t)mag
 		                             * (SCAN_V_MAX - SCAN_V_MIN) / 0x7Fu);
 		sweep.stop_ms  = SCAN_STOP_MS;
+#endif
+		/* Factory baseline uses its recovered fixed speed staircase. The
+		 * upstream scan-speed mapping is deliberately not mixed into it. */
 		outcome = focus_run(finish, focus_counts_to_em06(finish), &sweep);
 	}
 
@@ -1092,14 +1129,17 @@ static void focus_scan(const struct em_focus_cmd *c)
  */
 static void focus_drive(const struct em_focus_cmd *c)
 {
-	struct servo_cfg drv = UPSTREAM_PROFILE;
+	struct servo_cfg drv = MOTION_PROFILE;
 	int32_t          want;
+#ifndef EA9_FACTORY_AF
 	uint16_t         mag = (c->drive_vel < 0)
 	                       ? (uint16_t)(-c->drive_vel) : (uint16_t)c->drive_vel;
+#endif
 
 	/* Zero or negative runs to the lower limit, positive to the upper. */
 	want = (c->drive_vel > 0) ? FOCUS_TRAVEL_COUNTS : 0;
 
+#ifndef EA9_FACTORY_AF
 	/* "The speed has a floor, so any non-zero request moves at a useful
 	 * rate, and a ceiling at the lens's maximum." */
 	if (mag > 0x7FFFu) {
@@ -1109,6 +1149,7 @@ static void focus_drive(const struct em_focus_cmd *c)
 	               + (int32_t)((uint32_t)mag
 	                           * (SCAN_V_MAX - SCAN_V_MIN) / 0x7FFFu);
 	drv.stop_ms  = SCAN_STOP_MS;
+#endif
 
     uint8_t result = focus_run(want, focus_counts_to_em06(want), &drv);
     uint8_t event = ea9_af_completion_event(&g_af_state, EM_OP_DRIVE, result, g_abort_by_stop);
@@ -1155,7 +1196,7 @@ static void focus_exec(const struct em_focus_cmd *c)
 	if (!focus_cmd_target(c, &want)) {
 		return;
 	}
-	outcome = focus_run(want, c->target, &UPSTREAM_PROFILE);
+	outcome = focus_run(want, c->target, &MOTION_PROFILE);
 
     if (outcome == SERVO_ABORTED) g_focus_aborts++;
     uint8_t event = ea9_af_completion_event(&g_af_state, c->op, outcome, g_abort_by_stop);

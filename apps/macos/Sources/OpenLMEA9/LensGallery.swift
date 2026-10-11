@@ -95,9 +95,9 @@ struct LensEditor: View {
                     }
                     Section {
                         if profile.kind == .zoom { TextField("Current zoom setting (mm)", text: model.binding(\.active), prompt: Text("Unknown")) }
-                        TextField("Aperture-ring setting (f-number)", text: model.binding(\.currentAperture), prompt: Text("Unknown"))
+                        TextField("Fixed camera aperture (f-number)", text: model.binding(\.currentAperture), prompt: Text("Use maximum aperture"))
                     } header: { Text("Manual settings") } footer: {
-                        Text("Optional. These positions cannot be sensed through the passive mount.")
+                        Text("Actual aperture: Unknown. Set the iris on the lens. This optional value changes camera metadata only; leave it blank to report the maximum aperture. Zoom position must also be supplied manually.")
                     }
                     Section("Notes") {
                         TextEditor(text: model.binding(\.notes)).frame(minHeight: 80).accessibilityLabel("Lens notes")
