@@ -16,9 +16,10 @@ photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
 The modular AF 2.2 candidate is installed and byte-verified after physical
 USB-cap reconnect. AF 2.1 was previously byte-verified, with owner reports of
-motor movement and proper shutdown. For 2.2, the owner described normal motor
-sound; the idle observation was not performed, and startup/movement/shutdown
-results remain incomplete. Focus lock/sharpness await the owner's C/Y-to-M converter.
+motor movement and proper shutdown. For 2.2, the owner reports normal camera
+startup, no observed startup movement without input, quiet idle and normal motor
+shutdown. Homing, display power-off and focus-command movement remain unverified;
+loaded focus lock/sharpness await the owner's C/Y-to-M converter.
 The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 
 ```sh

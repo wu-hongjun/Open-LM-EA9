@@ -1,9 +1,12 @@
 # AF 2.2 / A7C II unloaded lifecycle test — 2026-10-11
 
-Status: **partial owner report received; awaiting a complete observed cycle**.
-The owner described the motor sound as normal, then clarified that the ten-second
-idle observation was not performed and the adapter had returned to the computer.
-Startup status, visible movement, stopping and normal shutdown remain unconfirmed.
+Status: **owner reports normal startup, quiet idle and normal motor shutdown**.
+In the latest cycle the owner observed no motor movement without button input,
+said the camera started normally, and reported quiet idle and normal motor
+shutdown in response to the requested wait/power-off check. Display power-off,
+startup motor sound, actual settings and homing remain unconfirmed. The earlier
+attempt's normal motor sound and skipped wait are retained separately below;
+they are not substituted for observations from this cycle.
 This is a bare-adapter startup, idle and shutdown test while the C/Y-to-M converter
 is unavailable. The planned configuration uses no optical lens or
 shutter/focus-button command; focus lock and sharpness are not tested. The actual
@@ -43,8 +46,9 @@ additional USB report, upload, rebuild or stock restoration was performed.
 
 The ten seconds is an observation period for the owner to wait after startup
 movement stops. It is not a delay or idle transition that the firmware should
-produce. The next requested cycle repeats the procedure once from camera off,
-including that wait and the shutdown observation; it has not yet been reported.
+produce. The owner has now reported quiet idle and normal motor shutdown after
+the follow-up check. The actual elapsed wait was not measured. No additional
+empty-adapter cycle is requested on the basis of these reports.
 
 Abort this cycle for grinding, repeated hard-stop pushing or continuous drive
 lasting about two seconds. Switch off; if motion continues, remove the battery.
@@ -77,12 +81,13 @@ Sony sources checked for this procedure:
 | Camera firmware / battery | Unverified |
 | Initial still-photo exposure mode / focus mode / Pre-AF | Unverified |
 | Settings changed after startup | Unverified |
-| Startup normal / error text | Awaiting report |
-| Motor sound | Owner described it as normal |
-| Visible motion / direction / approximate duration / stopping | Unverified |
-| Ten-second idle behavior | Not observed; owner clarified they did not wait |
+| Startup normal / error text | Latest report: camera starts normally; no error text supplied |
+| Motor sound | Earlier attempt: described as normal; latest startup sound unreported |
+| Visible motion / direction / approximate duration / stopping | Latest startup: owner reports no movement without input; direction/duration unverified |
+| Ten-second idle behavior | Latest follow-up: stayed quiet; elapsed duration not measured. Earlier attempt: wait skipped |
 | Displayed aperture / other metadata if visible | Unverified |
-| Shutdown park movement / duration / normal power-off | Awaiting report |
+| Shutdown motor behavior | Latest follow-up: motor shut down normally |
+| Display power-off / shutdown park movement / duration | Unverified |
 | Grinding / sustained drive / battery removal / other fault | Awaiting report |
 | Video / timing evidence supplied | None supplied |
 
@@ -92,13 +97,41 @@ Owner responses, in order:
 
 > I did not wait, it ic connected to the computer now, what should we do now?
 
+> if I don't do anything and turn it on, the motor doesn't move, camera starts up normally
+
+> it stay quiet and motor shut down normally
+
 An OS HID descriptor inventory at **2026-10-11 08:55:26 America/New_York**
 detected one matching adapter with the qualified descriptor (command exit 0).
 It sent **zero HID reports** and did not read a fresh firmware version or flash
 image. AF 2.2 installation verification remains the earlier, separately recorded
 USB read-back. No upload or stock restoration was needed for this observation.
-One complete camera cycle was requested; its result is pending. The initial
-partial report is not evidence of homing accuracy or a passing lifecycle test.
+The later owner reports cover startup, quiet idle and motor shutdown; camera
+display power-off was not explicitly reported. No USB commands or firmware
+changes were performed while collecting those later camera observations.
+
+## Interpretation and source review
+
+Normal startup, quiet idle and normal motor shutdown are owner observations,
+not proof of AF capability or correct reference acquisition. No startup movement
+was observed, and no focus-button command was reported. The source still intends
+to attempt bounded homing after a completed E-mount handshake in a fault-free
+session, independently of a shutter/AF-ON press. Its configured home gate is
+open; sensor/peripheral faults, shutdown and a camera STOP can prevent or cancel
+the attempt. Small or invisible motion at an already retracted stop is also
+possible. These are possible explanations, not a diagnosis of this camera cycle.
+Normal camera startup alone does not establish the internal handshake or home
+state. No change to motor duty, homing policy or protection was justified by the
+report alone.
+
+The reviewed `main.c`, `af_reference.c/.h`, `io_guard.c`, `diag.c` and Makefile
+SHA-256 values match the [frozen AF 2.2 build manifest](af-reconcile-build-manifest-2026-10-10.json).
+The candidate enables motor motion and disables diagnostic flash logging, so
+there is no persistent homing/event trace to recover from this cycle. This was
+an offline source review, without rebuilding or uploading. Full camera power-off,
+physical reference/travel, motor response to a focus command, loaded AF-S lock
+and sharpness remain unverified. Loaded focus testing follows when the converter
+arrives; another bare-adapter cycle is not currently requested.
 
 Responses are retained verbatim and separated from interpretation.
 Owner-estimated durations are not measured latency. No E-mount trace, electrical

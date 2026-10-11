@@ -1,5 +1,5 @@
 {
-  "stage": "partial-owner-report-awaiting-complete-observed-cycle",
+  "stage": "owner-reported-normal-startup-quiet-idle-normal-motor-shutdown",
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
   "cameraBody": "Sony A7C II",
@@ -25,7 +25,9 @@
   "ownerObservationsReceived": true,
   "ownerStatementsVerbatim": [
     "I put it on, the motor sounded normal, I don't observe a 10sec idle",
-    "I did not wait, it ic connected to the computer now, what should we do now?"
+    "I did not wait, it ic connected to the computer now, what should we do now?",
+    "if I don't do anything and turn it on, the motor doesn't move, camera starts up normally",
+    "it stay quiet and motor shut down normally"
   ],
   "observations": {
     "actualMountedConfiguration": null,
@@ -35,14 +37,14 @@
     "initialFocusMode": null,
     "initialPreAF": null,
     "settingsChangedAfterStartup": null,
-    "startupNormal": null,
+    "startupNormal": true,
     "startupErrorText": null,
-    "motorSound": "Owner described as normal; duration and stopping unconfirmed",
-    "visibleMotorMovement": null,
+    "motorSound": "Earlier attempt described as normal; latest startup sound unreported",
+    "visibleMotorMovement": false,
     "motorDirectionRelativeToCamera": null,
     "motorDurationOwnerEstimate": null,
     "motorStopped": null,
-    "idleBehavior": null,
+    "idleBehavior": "Owner reports it stayed quiet in response to the requested ten-second observation; actual duration not measured",
     "displayedAperture": null,
     "shutdownNormal": null,
     "shutdownParkMovement": null,
@@ -50,8 +52,12 @@
     "continuedNoiseOrMotion": null,
     "batteryRemovalRequired": null,
     "otherAbnormalBehavior": null,
-    "idleObservationPerformed": false,
-    "returnedToComputer": true
+    "idleObservationPerformed": true,
+    "returnedToComputer": null,
+    "visibleMotorMovementObservationPhase": "Latest reported startup without input; does not describe response to a focus command",
+    "idleDurationMeasuredSeconds": null,
+    "shutdownMotorNormal": true,
+    "shutdownDisplayOff": null
   },
   "loadedLensAFSTestPerformed": false,
   "focusLockVerified": false,
@@ -63,10 +69,10 @@
   "hostUSBReportsSentForThisCameraTest": 0,
   "firmwareUploadPerformedForThisCameraTest": false,
   "stockRestorationPerformedForThisCameraTest": false,
-  "repeatCyclePerformed": false,
+  "repeatCyclePerformed": true,
   "cameraLifecycleTestComplete": false,
   "nextCompleteCycleRequested": true,
-  "nextCompleteCycleResultReceived": false,
+  "nextCompleteCycleResultReceived": true,
   "idleObservationExplanation": "Owner waits approximately ten seconds after startup motion stops; not a firmware delay or automatic idle transition.",
   "usbDescriptorInventoryAfterOwnerReturn": {
     "checkedAt": "2026-10-11T08:55:26.506491-04:00",
@@ -76,5 +82,69 @@
     "qualifiedDescriptorCount": 1,
     "hostHIDReportsSent": 0,
     "scope": "OS HID descriptors only; no fresh firmware version or flash verification"
+  },
+  "furtherBareAdapterCycleRequested": false,
+  "ownerReportedChecks": {
+    "cameraStartupNormal": true,
+    "noStartupMovementObservedWithoutInput": true,
+    "quietIdle": true,
+    "normalMotorShutdown": true,
+    "cameraDisplayPowerOffConfirmed": false
+  },
+  "attemptObservations": [
+    {
+      "attempt": 1,
+      "ownerStatementIndexesZeroBased": [
+        0,
+        1
+      ],
+      "startupNormal": null,
+      "startupMotorSound": "Owner described as normal",
+      "startupVisibleMovement": null,
+      "idleObservationPerformed": false,
+      "shutdownMotorNormal": null,
+      "shutdownDisplayOff": null,
+      "returnedToComputer": true,
+      "actualMountedConfiguration": null
+    },
+    {
+      "attempt": 2,
+      "ownerStatementIndexesZeroBased": [
+        2,
+        3
+      ],
+      "startupNormal": true,
+      "startupMotorSound": null,
+      "startupVisibleMovement": false,
+      "startupWithoutButtonInput": true,
+      "idleObservationPerformed": true,
+      "idleQuiet": true,
+      "idleDurationMeasuredSeconds": null,
+      "shutdownMotorNormal": true,
+      "shutdownDisplayOff": null,
+      "shutdownParkMovement": null,
+      "returnedToComputer": null,
+      "actualMountedConfiguration": null,
+      "actualFocusMode": null,
+      "actualPreAF": null
+    }
+  ],
+  "offlineSourceReview": {
+    "manifest": "af-reconcile-build-manifest-2026-10-10.json",
+    "reviewedSources": [
+      "firmware/ea9/src/main.c",
+      "firmware/ea9/src/af_reference.c",
+      "firmware/ea9/src/af_reference.h",
+      "firmware/ea9/src/io_guard.c",
+      "firmware/ea9/src/diag.c",
+      "firmware/ea9/Makefile"
+    ],
+    "sourceDigestsMatchManifest": true,
+    "motorMotionEnabled": true,
+    "diagnosticFlashWritesEnabled": false,
+    "homeGateConfiguredOpen": true,
+    "boundedHomingExpectedAfterCompletedFaultFreeHandshake": true,
+    "observedHomingState": null,
+    "rebuildPerformed": false
   }
 }
