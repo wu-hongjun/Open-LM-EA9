@@ -21,11 +21,16 @@ sources = ["firmware/tests/test_factory_camera_limits.c", "firmware/ea9/hosttest
            "firmware/ea9/src/io_guard.c", "firmware/ea9/src/focus_map.c",
            "firmware/ea9/src/af_control.c", "firmware/ea9/src/af_completion.c",
            "firmware/ea9/src/focus_dist.c"]
+frozen = ROOT / "firmware/candidates/2.4.0/counterexample-src"
+manifest = json.loads((frozen / "manifest.json").read_text())
+for name, digest in manifest["files"].items():
+    if hashlib.sha256((frozen / name).read_bytes()).hexdigest() != digest:
+        raise SystemExit("Frozen 2.4 input checksum mismatch: " + name)
 binary = out / "camera_limits"
 subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-Werror",
                 "-fsanitize=undefined,address", "-fno-sanitize-recover=all",
                 "-Ifirmware/ea9/hosttest", "-Ifirmware/ea9/src", *sources,
-                "-o", str(binary)], cwd=ROOT, check=True)
+                "-o", str(binary)], cwd=frozen, check=True)
 rows = []
 for target in [4, 40, 100, 400, 1000, 3000, 5000, 5952]:
     result = subprocess.run([str(binary), str(target)], check=True, capture_output=True, text=True)
@@ -42,6 +47,6 @@ report = {"status": "counterexamples-confirmed-not-fixed", "firmwareUnderStudy":
                           "No frame/ADC pump delay in this isolated probe",
                           "Clock advances on simulator millis calls; elapsed values are simulation results",
                           "Factory callback equivalence was established by a separate finite original-byte oracle"],
-          "sources": {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in sources}}
+          "sources": {path: hashlib.sha256((frozen / path).read_bytes()).hexdigest() for path in sources}}
 (out / "counterexamples.json").write_text(json.dumps(report, indent=2) + "\n")
 print(json.dumps(report, indent=2))

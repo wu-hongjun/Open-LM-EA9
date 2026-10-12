@@ -8,7 +8,9 @@
 
 struct ea9_af_state { uint8_t fault_reason, active, shutdown; };
 
-/* A motion fault stays latched until a new boot; camera Stop is not a fault. */
+/* Unsafe feedback/peripheral faults latch; bounded healthy termination does not. */
+uint8_t ea9_af_outcome_completed(uint8_t outcome);
+uint8_t ea9_af_outcome_arrived(uint8_t outcome);
 uint8_t ea9_af_faulted(const struct ea9_af_state *state);
 uint8_t ea9_af_note_result(struct ea9_af_state *state, uint8_t outcome);
 /* Prevent nested servo ownership when the bus is pumped during a move. */

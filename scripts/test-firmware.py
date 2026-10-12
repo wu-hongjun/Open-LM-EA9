@@ -16,19 +16,19 @@ OUT.mkdir(parents=True, exist_ok=True)
 COMMON = ["cc", "-std=gnu99", "-Wall", "-Wextra", "-O1", "-Ihosttest", "-Isrc"]
 tests = {
     "factory_servo": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "hosttest/test_factory_servo.c", "src/factory_servo.c", "src/factory_af.c", "src/io_guard.c", "src/focus_map.c"],
-    "emount": ["hosttest/test_emount.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
+    "emount": ["hosttest/test_emount.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
     "servo": ["hosttest/test_servo.c", "hosttest/sim_motor.c", "src/servo.c", "src/io_guard.c"],
-    "nobody": ["hosttest/test_nobody.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
-    "init": ["hosttest/test_init.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
+    "nobody": ["hosttest/test_nobody.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
+    "init": ["hosttest/test_init.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
     "focus": ["hosttest/test_focus.c", "src/focus_map.c"],
     "focus_dist": ["hosttest/test_focus_dist.c", "src/focus_dist.c", "-lm"],
     "focus_pred": ["hosttest/test_focus_pred.c", "src/focus_pred.c"],
     "af_control": ["../tests/test_af_control.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
     "io_guard": ["hosttest/test_io_guard.c", "src/io_guard.c"],
     "af_reconciliation": ["../tests/test_af_reconciliation.c", "src/af_reference.c", "src/af_completion.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
-    "af_lifecycle": ["-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_lifecycle.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
-    "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
-    "profile": ["../tests/test_profile.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c"],
+    "af_lifecycle": ["-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_lifecycle.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
+    "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
+    "profile": ["../tests/test_profile.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
 }
 # Reuse the production-main lifecycle/dispatch checks with the new backend.
 for old, new in [("af_lifecycle", "factory_lifecycle"), ("af_hardening", "factory_hardening")]:
@@ -43,12 +43,12 @@ for name, files in tests.items():
     variants = [["nobody"], ["slowbody"]] if name == "nobody" else [[]]
     if name == "io_guard": variants = [[x] for x in ["ready", "timeout", "wrap", "frozen"]]
     if name == "af_lifecycle": variants = [[str(x)] for x in range(13)]
-    if name == "af_hardening": variants = [[str(x)] for x in range(18)]
-    if name == "factory_hardening": variants = [[str(x)] for x in range(18)]
+    if name == "af_hardening": variants = [[str(x)] for x in range(21)]
+    if name == "factory_hardening": variants = [[str(x)] for x in range(21)]
     # Legacy cases 11/12 assert speed/dwell/band arrival, which factory replaces
     # with crossing; the new scripted wrapper suite tests its arrival guards.
     if name == "factory_lifecycle": variants = [[str(x)] for x in range(11)]
-    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative"]]
+    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative", "resolution", "resolution-stop", "progress-timeout", "deadline-stop", "retarget-limit-stop", "runaway-stop", "wrong-way-stop", "mid-invalid", "final-invalid"]]
     for args in variants:
         subprocess.run([str(binary)] + args, check=True)
 # Compile actual sensor and PWM drivers against DFP-shaped register memory.
@@ -67,7 +67,7 @@ for case in range(11):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x24u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x25u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 for lens in inventory:
     if lens["kind"] == "zoom":

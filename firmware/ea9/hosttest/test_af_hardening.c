@@ -21,6 +21,9 @@ extern int host_pad_to, sent_n;
 extern uint8_t sent[][256];
 extern uint16_t sent_len[];
 static int scenario, samples, injected;
+extern void (*sim_read_hook)(void);
+static void fault_after_admission(void) { if (g_af_state.active) ea9_io_trip(EA9_IO_ENCODER); }
+static void invalid_after_admission(void) { if (g_af_state.active) sim_pos = INT32_MIN; }
 static uint32_t irq_mask;
 static unsigned irq_entries;
 static unsigned query_refills;
@@ -192,12 +195,12 @@ int main(int argc, char **argv)
         assert(injected && em_take_query(&tag, &operand) && tag == EM_REC_Q_D2POS && operand == 0xABCD);
         assert(!em_take_query(&tag, &operand));
     } else if (scenario == 13) {
-        uint8_t reply[11] = {0xF0, 0, 0, 2, 5, 0x34, 0xA5, 0x5A};
+        uint8_t reply[11] = {0xF0, 0, 0, 2, 5, 0x08, 0xA5, 0x80};
         seal(reply, sizeof reply); host_body_frame(reply, sizeof reply);
         command(EM_OP_MOVE, 4500); /* a normal frame must not replace the init request bytes */
         int before = sent_n; em_poll();
-        assert(sent_n == before + 1 && sent[before][5] == 0x34);
-        assert(sent[before][7] == 0xA5 && sent[before][8] == 0x5A);
+        assert(sent_n == before + 1 && sent[before][5] == 0x08);
+        assert(!em_m08_aperture_on); /* capability comes from the init snapshot */
     } else if (scenario == 14) {
         g_homed = 1; sim_pos = 0; abs_encoder_track_reset();
         g_next = (struct em_focus_cmd){ .op = EM_OP_MOVE, .target = focus_counts_to_em06(1300) };
@@ -235,6 +238,28 @@ int main(int argc, char **argv)
         expect_query_answers(EM_QUERY_Q);
         uint8_t tag; uint16_t operand;
         assert(!em_take_query(&tag, &operand));
+    } else if (scenario == 18) {
+        g_homed = 1; sim_pos = 0; abs_encoder_track_reset();
+        sim_read_hook = fault_after_admission;
+        struct em_focus_cmd move = { .op = EM_OP_MOVE, .target = 4500 };
+        focus_exec(&move); sim_read_hook = NULL;
+        assert(g_af_state.fault_reason == SERVO_IO_FAULT && !g_af_state.active);
+        assert(sim_current_duty() == 0);
+        struct em_focus_cmd stop = { .op = EM_OP_STOP }; focus_exec(&stop);
+        assert(g_stops_idle == 1);
+    } else if (scenario == 19) {
+        g_homed = 1; sim_pos = 0; abs_encoder_track_reset();
+        sim_read_hook = invalid_after_admission;
+        struct em_focus_cmd move = { .op = EM_OP_MOVE, .target = 4500 };
+        focus_exec(&move); sim_read_hook = NULL;
+        assert(g_af_state.fault_reason == SERVO_IO_FAULT && !g_af_state.active);
+        assert(sim_current_duty() == 0);
+    } else if (scenario == 20) {
+        em_vd_edges = 1;
+        uint8_t before[48]; memcpy(before, &ea9_data[EA9_OFF_06], sizeof before);
+        focus_report_at(INT32_MIN);
+        assert(ea9_io_faults() && g_af_state.fault_reason == SERVO_IO_FAULT);
+        assert(!memcmp(before, &ea9_data[EA9_OFF_06], sizeof before));
     } else return 2;
     printf("AF hardening scenario %d passed\n", scenario); return 0;
 }

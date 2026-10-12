@@ -341,7 +341,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var firmwareBehaviorNote: String {
         switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0", "2.3.0", "2.4.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
         default: return "Installed firmware and motor behavior have not been verified for this connection."
         }
@@ -360,7 +360,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canApplyLens, let variant = variantForLensChanges else { return }
         applyLens(variant: variant, preservingFirmware: true)
     }
-    func installAutofocus() { applyLens(variant: .autofocusFactoryBaseline) }
+    func installAutofocus() { applyLens(variant: .autofocusFactoryRefined) }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }
@@ -368,7 +368,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         catch { errorMessage = error.localizedDescription; return }
         let alert = NSAlert()
         alert.messageText = "Apply \(profile.displayName) to the adapter?"
-        alert.informativeText = (variant.enablesAutofocus ? "Experimental AF \(variant.versionString) enables motor movement and uses bounded homing on camera startup. Focus accuracy with this lens is not yet qualified. A verified backup is saved first. Unplug and reconnect after upload to verify." : "This prototype installs custom firmware and saves a verified backup first. Motor motion is disabled in this metadata test build; use manual focus on the A7C II. It reports the focal length and aperture you choose; it cannot sense the lens’s aperture or zoom rings. Unplug and reconnect afterward to verify the update.")
+        alert.informativeText = (variant.enablesAutofocus ? "Experimental AF \(variant.versionString) enables motor movement and may move the mount during camera startup. Exposure and focus accuracy with this lens are not yet qualified. A verified backup is saved first. Unplug and reconnect after upload to verify." : "This prototype installs custom firmware and saves a verified backup first. Motor motion is disabled in this metadata test build; use manual focus on the A7C II. It reports the focal length and aperture you choose; it cannot sense the lens’s aperture or zoom rings. Unplug and reconnect afterward to verify the update.")
         alert.addButton(withTitle: "Apply"); alert.addButton(withTitle: "Cancel")
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         runLensOperation(writing: true) { device, token in

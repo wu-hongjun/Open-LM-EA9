@@ -205,6 +205,7 @@ static void quiet_idlog_page(void)
  * Upstream measurement comments describe its adapter, not this owner's unit. */
 static void pump(int32_t pos);
 static void focus_report_at(int32_t counts);
+static uint8_t focus_feedback_valid(int32_t counts);
 static uint8_t focus_retarget(int32_t *target);
 static uint8_t focus_abort(void);
 static uint8_t focus_cmd_target(const struct em_focus_cmd *c, int32_t *out);
@@ -436,7 +437,7 @@ static void pump(int32_t pos)
 	 *
 	 * Guarded on g_homed: before homing, zero is not infinity, so the
 	 * mapping has no anchor and the value would be meaningless. */
-	if (g_homed) {
+	if (g_homed && focus_feedback_valid(pos)) {
 		/* Sample BEFORE reporting, so the forecast published this frame
 		 * is built on the position published this frame and not on the
 		 * previous one. */
@@ -455,6 +456,13 @@ static uint8_t io_stop_motion(void)
     motor_emergency_release();
     ea9_af_end_motion(&g_af_state);
     return 1;
+}
+
+static uint8_t focus_feedback_valid(int32_t counts)
+{
+    if (counts < -120 || counts > FOCUS_TRAVEL_COUNTS + 120)
+        ea9_io_trip(EA9_IO_ENCODER);
+    return !io_stop_motion();
 }
 
 static void motor_home(void)
@@ -745,8 +753,10 @@ static uint16_t         g_focus_ring_n;
  * iteration and hands the value over. */
 static void focus_report_at(int32_t counts)
 {
+    if (!focus_feedback_valid(counts)) return;
 #ifdef EA9_FACTORY_AF
     factory_servo_sample_idle(counts);
+    if (io_stop_motion()) return;
 #endif
 	/* Message 0x06 is the only message that carries the focus position.
 	 *
@@ -929,7 +939,7 @@ static uint8_t focus_run(int32_t want, uint16_t target_u,
 	if (!ea9_af_begin_motion(&g_af_state))
 		return ea9_af_faulted(&g_af_state) ? g_af_state.fault_reason : SERVO_ABORTED;
 	here  = abs_encoder_track();
-	if (io_stop_motion()) return SERVO_IO_FAULT;
+	if (!focus_feedback_valid(here)) return SERVO_IO_FAULT;
 	delta = want - here;
 
 	/* Factory baseline uses target crossing, while the legacy backend uses
@@ -946,8 +956,8 @@ static uint8_t focus_run(int32_t want, uint16_t target_u,
 	servo_move_rel(delta, cfg, &r);
 #endif
 	ea9_af_end_motion(&g_af_state);
-	/* A stalled, timed-out or invalid feedback move cannot be retried by
-	 * each subsequent camera command. Keep serving the bus, release drive. */
+	/* Unsafe feedback faults inhibit later drive. A healthy bounded deadline
+	 * or no-drive resolution result is actuator termination, not focus lock. */
 	if (ea9_af_note_result(&g_af_state, r.outcome) || g_af_state.shutdown) motor_release();
 	focus_pred_end(&g_pred);
 	focus_report();
@@ -1088,11 +1098,11 @@ static void focus_scan(const struct em_focus_cmd *c)
 	 * it is at rest before the sweep -- focus_run is blocking, so this is
 	 * the ordering by construction. */
 	outcome = focus_run(start, focus_counts_to_em06(start), &MOTION_PROFILE);
-	if (outcome != SERVO_OK || g_next_pending) {
+	if (!ea9_af_outcome_arrived(outcome) || g_next_pending) {
 		em_set_scan_state(EM_SCAN_IDLE);
         if (outcome != SERVO_OK) {
             uint8_t event = ea9_af_completion_event(&g_af_state, EM_OP_SCAN, outcome, g_abort_by_stop);
-            if (event == EM_REC_STOP) em_post_event(event, 0x01u);
+            if (event) em_post_event(event, event == EM_REC_STOP ? 0x01u : 0x00u);
         }
 		return;                 /* replaced or stopped: no event */
 	}
@@ -1116,7 +1126,7 @@ static void focus_scan(const struct em_focus_cmd *c)
 		outcome = focus_run(finish, focus_counts_to_em06(finish), &sweep);
 	}
 
-	if (outcome == SERVO_OK && !g_next_pending) em_scan_finish();
+	if (ea9_af_outcome_arrived(outcome) && !g_next_pending) em_scan_finish();
     else em_set_scan_state(EM_SCAN_IDLE);
     uint8_t event = ea9_af_completion_event(&g_af_state, EM_OP_SCAN, outcome, g_abort_by_stop);
     if (event) em_post_event(event, event == EM_REC_STOP ? 0x01u : 0x00u);

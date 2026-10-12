@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.7.0, build 10
+# Device workflow: prototype 0.8.0, build 11
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -22,8 +22,8 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 2.4 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` now selects 2.4; plain `apply` selects metadata-only 2.0.
+new AF 2.5 is a separate **USB tools → Experimental autofocus** action.
+The CLI `apply-af` selects 2.5; plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading
 unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,
@@ -71,3 +71,8 @@ After the AF 2.2 reconnect/readback on Oct 11, the same app loaded the completed
 a rebuild or explicit HID read. See the [completed installation record](evidence/af-22-upload-2026-10-11.md).
 
 App 0.7 and the AF 2.4 baseline were validated offline; see [the preparation evidence](evidence/factory-af-baseline-2026-10-11.md). The stock restore was subsequently resolved by an explicit reviewed-motion policy retaining its strict failure. The authorized AF 2.4 upload and strict byte verification passed after physical reconnect, with an independent audit. The later owner focus attempt failed, with a dark view and no shown f-number in P/A; further 2.4 camera trials are suspended. Stock recovery passed normal strict verification after physical reconnect and an independent audit. The new stock display/lifecycle and AF-S baseline remain pending. See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md) and [completed recovery record](evidence/stock-18-af24-recovery-2026-10-11.md).
+
+App 0.8.0/build 11 offers explicit AF 2.5 installation. Normal dropdown lens
+changes preserve the verified installed version, including frozen 2.4. The new
+[candidate record](evidence/af-25-candidate-2026-10-11.md) covers preparation and
+offline checks; exposure and optical AF remain unqualified.

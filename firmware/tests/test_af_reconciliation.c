@@ -86,6 +86,15 @@ static void completion(void)
         assert(ea9_af_completion_event(&s, op, SERVO_OK, 0) == EM_REC_MOVE);
     assert(ea9_af_completion_event(&s, EM_OP_SCAN, SERVO_OK, 0) == EM_REC_SCAN);
     assert(ea9_af_completion_event(&s, EM_OP_DRIVE, SERVO_OK, 0) == EM_REC_DRIVE);
+    for (uint8_t outcome = SERVO_RESOLUTION; outcome <= SERVO_DEADLINE; ++outcome) {
+        assert(!ea9_af_note_result(&s, outcome));
+        assert(ea9_af_outcome_completed(outcome));
+        assert(ea9_af_outcome_arrived(outcome) == (outcome == SERVO_RESOLUTION));
+        assert(ea9_af_completion_event(&s, EM_OP_MOVE, outcome, 0) == EM_REC_MOVE);
+        assert(ea9_af_begin_motion(&s));
+        assert(!ea9_af_completion_event(&s, EM_OP_MOVE, outcome, 0));
+        ea9_af_end_motion(&s);
+    }
     const uint8_t failures[] = {SERVO_TIMEOUT, SERVO_STALL, SERVO_WRONG_WAY, SERVO_RUNAWAY, SERVO_IO_FAULT, SERVO_ABORTED};
     for (unsigned i = 0; i < sizeof failures; ++i) {
         assert(!ea9_af_completion_event(&s, EM_OP_MOVE, failures[i], 0));
@@ -93,7 +102,11 @@ static void completion(void)
         assert(!ea9_af_completion_event(&s, EM_OP_DRIVE, failures[i], 0));
     }
     assert(ea9_af_completion_event(&s, EM_OP_MOVE, SERVO_ABORTED, 1) == EM_REC_STOP);
+    assert(ea9_af_completion_event(&s, EM_OP_MOVE, SERVO_RUNAWAY, 1) == EM_REC_STOP);
     ea9_af_note_result(&s, SERVO_TIMEOUT);
+    assert(ea9_af_note_result(&s, SERVO_DEADLINE)); /* cannot clear a hard fault */
+    assert(ea9_af_completion_event(&s, EM_OP_MOVE, SERVO_TIMEOUT, 1) == EM_REC_STOP);
+    assert(ea9_af_faulted(&s)); /* acknowledgement is not fault recovery */
     assert(!ea9_af_completion_event(&s, EM_OP_MOVE, SERVO_OK, 0));
     assert(ea9_af_completion_event(&s, EM_OP_STOP, SERVO_ABORTED, 1) == EM_REC_STOP);
     s.active = 1; assert(!ea9_af_completion_event(&s, EM_OP_STOP, SERVO_ABORTED, 1));

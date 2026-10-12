@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline only: combine the AF template with a validated Mac-prepared profile.
 
-This uses the factory baseline 2.4 template (or frozen 2.2/2.3 releases) and performs no USB operations.
+This uses the refined 2.5 template (or frozen 2.2–2.4 releases) and performs no USB operations.
 The native app independently admits only its bundled digest-pinned templates.
 """
 import argparse
@@ -15,11 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("profile_image", type=Path, help="Metadata image made by ea9ctl prepare")
 parser.add_argument("output", type=Path, help="New AF image; never overwritten")
-parser.add_argument("--variant", choices=("factory-af", "hardened-af", "reconciled-af"), default="factory-af")
+parser.add_argument("--variant", choices=("refined-af", "factory-af", "hardened-af", "reconciled-af"), default="refined-af")
 args = parser.parse_args()
-if args.variant == "factory-af":
-    af = ROOT / "firmware/ea9/build/factory/ea9-af-factory-template.bin"
+if args.variant == "refined-af":
+    af = ROOT / "firmware/ea9/build/refined/ea9-af-refined-template.bin"
     manifest_path = af.with_suffix(".manifest.json")
+elif args.variant == "factory-af":
+    af = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-factory-template.bin"
+    manifest_path = ROOT / "docs/evidence/af-factory-build-manifest-2026-10-11.json"
 elif args.variant == "hardened-af":
     af = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-hardened-template.bin"
     manifest_path = ROOT / "docs/evidence/af-hardening-build-manifest-2026-10-11.json"

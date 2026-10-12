@@ -82,12 +82,22 @@ void factory_servo_move_to(int32_t target, const struct servo_cfg *cfg,
     for (;;) {
         pos = abs_encoder_track();
         out->end = pos;
+        if (ea9_io_faults()) goto fault;
+        /* Admit feedback before telemetry and retarget origin arithmetic. */
+        if (pos < -120 || pos > FOCUS_TRAVEL_COUNTS + 120) {
+            ea9_io_trip(EA9_IO_ENCODER); goto fault;
+        }
         if (cfg->pump) cfg->pump(pos);
         if (ea9_io_faults()) goto fault;
         /* Retarget precedes completion. Stop/Scan/Drive set the caller's
          * abort latch through this hook; none can become a stale success. */
         int32_t next;
-        if (cfg->retarget && out->retargets < cfg->retarget_max && cfg->retarget(&next)) {
+        if (cfg->retarget && cfg->retarget(&next)) {
+            /* Keep polling Stop/replacement even after the retarget budget.
+             * Another target exhausts the bound, rather than skipping input. */
+            if (out->retargets >= cfg->retarget_max) {
+                out->outcome = SERVO_TIMEOUT; break;
+            }
             desired = admitted_target(next);
             out->target = focus_em06_to_counts(focus_counts_to_em06(desired));
             ea9_factory_target(&controller, focus_counts_to_em06(desired), pos + FOCUS_REFERENCE_OFFSET);
@@ -101,8 +111,7 @@ void factory_servo_move_to(int32_t target, const struct servo_cfg *cfg,
         if (++polls >= EA9_MOTION_POLL_LIMIT) { ea9_io_trip(EA9_IO_TIMEBASE); goto fault; }
         if (cfg->total_ms && (uint32_t)(now - started) >= cfg->total_ms) { out->outcome = SERVO_TIMEOUT; break; }
         /* Do not copy factory signed wrapping into an out-of-range mechanism. */
-        if (pos < -120 || pos > FOCUS_TRAVEL_COUNTS + 120 ||
-            (sign > 0 && pos > out->target + 600) || (sign < 0 && pos < out->target - 600)) {
+        if ((sign > 0 && pos > out->target + 600) || (sign < 0 && pos < out->target - 600)) {
             out->outcome = SERVO_RUNAWAY; break;
         }
         if ((sign > 0 && pos < leg_start - 120) || (sign < 0 && pos > leg_start + 120)) {
@@ -113,8 +122,23 @@ void factory_servo_move_to(int32_t target, const struct servo_cfg *cfg,
         if ((uint32_t)(now - last_motion) >= cfg->stall_ms && sign) { out->outcome = SERVO_STALL; break; }
         uint8_t tick = sample(pos);
         if (ea9_io_faults()) goto fault;
+        /* A whole leg no larger than the wire's four-count resolution ends
+         * without energizing a coil. Report the measured position, not target.
+         * This is not a wider arrival band for ordinary moving corrections. */
+        if (sign && out->target >= leg_start - FOCUS_COUNTS_PER_UNIT &&
+            out->target <= leg_start + FOCUS_COUNTS_PER_UNIT &&
+            pos >= out->target - FOCUS_COUNTS_PER_UNIT &&
+            pos <= out->target + FOCUS_COUNTS_PER_UNIT) {
+            out->outcome = SERVO_RESOLUTION; break;
+        }
         if ((tick & EA9_FACTORY_TICK_TIMEOUT) || (uint32_t)(now - leg_at) >= cfg->timeout_ms) {
-            out->outcome = SERVO_TIMEOUT; break;
+            /* Factory reports actuator completion on its deadline. Retain
+             * that eligibility only with real, direction-consistent progress.
+             * No-progress, I/O, runaway and wrong-way guards remain sticky. */
+            out->outcome = (sign > 0 ? pos > leg_start + 8 :
+                           sign < 0 ? pos < leg_start - 8 : 0)
+                          ? SERVO_DEADLINE : SERVO_TIMEOUT;
+            break;
         }
         /* Factory completion means target crossing, not optical focus lock.
          * The wrapper brakes at completion instead of keeping PID armed
@@ -134,19 +158,42 @@ void factory_servo_move_to(int32_t target, const struct servo_cfg *cfg,
     }
     ea9_factory_stop(&controller);
     if (!cfg->dry) {
-        if (out->outcome == SERVO_OK) { motor_drive(0); motor_brake(); }
+        if (out->outcome == SERVO_OK || out->outcome == SERVO_RESOLUTION ||
+            out->outcome == SERVO_DEADLINE) { motor_drive(0); motor_brake(); }
         else motor_release();
     }
     out->end = abs_encoder_track();
+    if (ea9_io_faults()) goto fault;
+    if (out->end < -120 || out->end > FOCUS_TRAVEL_COUNTS + 120) {
+        ea9_io_trip(EA9_IO_ENCODER); goto fault;
+    }
     if (cfg->pump) cfg->pump(out->end);
     if (ea9_io_faults()) goto fault;
-    if (out->end < -120 || out->end > FOCUS_TRAVEL_COUNTS + 120 ||
-        (sign > 0 && out->end > out->target + 600) || (sign < 0 && out->end < out->target - 600)) {
+    if ((sign > 0 && out->end > out->target + 600) || (sign < 0 && out->end < out->target - 600)) {
         out->outcome = SERVO_RUNAWAY;
         motor_release();
     }
+    if ((sign > 0 && out->end < leg_start - 120) ||
+        (sign < 0 && out->end > leg_start + 120)) {
+        out->outcome = SERVO_WRONG_WAY;
+        motor_release();
+    }
+    /* A final sample can invalidate a previously admissible termination. */
+    if ((out->outcome == SERVO_RESOLUTION &&
+         (out->end < out->target - FOCUS_COUNTS_PER_UNIT ||
+          out->end > out->target + FOCUS_COUNTS_PER_UNIT)) ||
+        (out->outcome == SERVO_DEADLINE &&
+         (sign > 0 ? out->end <= leg_start + 8 : out->end >= leg_start - 8))) {
+        out->outcome = SERVO_TIMEOUT;
+        motor_release();
+    }
     /* A Stop/shutdown received on the final report still cancels completion. */
-    if (cfg->abort && cfg->abort()) { out->outcome = SERVO_ABORTED; motor_release(); }
+    if (cfg->abort && cfg->abort()) {
+        /* Stop cancels completion, but must not erase an observed hard fault. */
+        if (out->outcome == SERVO_OK || out->outcome == SERVO_RESOLUTION ||
+            out->outcome == SERVO_DEADLINE) out->outcome = SERVO_ABORTED;
+        motor_release();
+    }
     out->ms = (uint16_t)(millis() - started);
     return;
 fault:

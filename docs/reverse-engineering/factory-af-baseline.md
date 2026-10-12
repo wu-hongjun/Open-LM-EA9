@@ -13,6 +13,10 @@ reproducible wrapper counterexamples and the limits of the hardware diagnosis;
 [stock recovery](../evidence/stock-18-af24-recovery-2026-10-11.md) passed normal
 strict verification after reconnect and an independent audit.
 
+Current source wrappers have subsequently been refined for [AF 2.5](../evidence/af-25-candidate-2026-10-11.md).
+The 2.4 wrapper policies below are historical; its binary and diagnostic inputs
+remain frozen. The pure factory math is unchanged.
+
 ## Recovered algorithm and provenance
 
 The baseline comes from the retained original

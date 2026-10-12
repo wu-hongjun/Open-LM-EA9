@@ -52,7 +52,7 @@ void ea9_profile_apply(void) {
     unsigned i;
     if (!active) return;
     em_set_focal_length(u16(active+12));
-    /* No electronic iris: the declared range is fixed at the user's physical setting.
+    /* No electronic iris: this is fixed declared metadata, not the physical setting.
      * Maximum-aperture specification remains in the profile for the Mac UI. */
     em_set_aperture_range(u16(active+16), u16(active+16));
     em_set_aperture(u16(active+16));

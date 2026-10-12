@@ -55,6 +55,19 @@ int main(int argc, char **argv) {
     n = request(0x28,0); assert(u16(sent[n]+10)==focal && u16(sent[n]+12)==focal);
     assert(u16(sent[n]+15)==aperture); /* message 0x08 explicitly enabled this copy */
     n = request(0x1b,0xff); assert(u16(sent[n]+6)==aperture && u16(sent[n]+8)==aperture);
+    n = request(0x34,0xa5);
+    assert(sent[n][6] == 0 && u16(sent[n]+7) == aperture);
+    /* A query with no payload puts its checksum at RX[6..7]. It must not
+     * become the reported aperture, unlike the historical 2.4 RX fixup. */
+    {
+        uint8_t query[9] = {0xf0,9,0,2,0x71,0x34,0,0,0x55};
+        uint16_t sum = 0;
+        for (i = 1; i <= 5; ++i) sum += query[i];
+        query[6] = (uint8_t)sum; query[7] = (uint8_t)(sum >> 8);
+        before = sent_n; host_body_frame(query, sizeof query); em_poll();
+        assert(sent_n == before + 1); checksum_ok(before);
+        assert(sent[before][5] == 0x34 && u16(sent[before]+7) == aperture);
+    }
     /* Ask for a real different AV (f/8). Preserve the fixed reply and range. */
     {
         uint8_t iris[11] = {0xf0,11,0,2,0x40,0x1b,0x00,0x16,0,0,0x55};
@@ -72,6 +85,22 @@ int main(int argc, char **argv) {
     assert(sent[before][5]==5 && u16(sent[before]+6)==aperture && u16(sent[before]+30)==focal);
     assert(ea9_data[EA9_OFF_05+0x32] == em_aperture_to_descriptor(aperture));
     assert(ea9_data[EA9_OFF_05+0x3a] == em_aperture_to_descriptor(aperture));
+    assert(ea9_data[EA9_OFF_05+0x34] == em_aperture_to_descriptor(aperture));
+    /* Disable the optional copy, then begin a fresh session. It stays omitted
+     * until the consumed 0x08 explicitly requests it again. */
+    {
+        uint8_t req[11] = {0xf0,11,0,2,0x40,8,0,0x80,0,0,0x55};
+        uint16_t sum = 0;
+        for (i = 1; i <= 7; ++i) sum += req[i];
+        req[8] = (uint8_t)sum; req[9] = (uint8_t)(sum >> 8);
+        host_body_frame(req, sizeof req);
+        assert(em_m08_aperture_on); /* not published in the receive ISR */
+        em_poll(); assert(!em_m08_aperture_on);
+        n = request(0x28,0); assert(u16(sent[n]+15) == 0);
+        request(8,0); n = request(0x28,0); assert(u16(sent[n]+15) == aperture);
+        request(1,0); n = request(0x28,0); assert(u16(sent[n]+15) == 0);
+        request(8,0); n = request(0x28,0); assert(u16(sent[n]+15) == aperture);
+    }
     puts("profile corruption checks and transmitted focal/aperture/name/checksums: PASS");
     return 0;
 }

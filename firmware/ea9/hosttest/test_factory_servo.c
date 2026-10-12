@@ -38,21 +38,28 @@ int32_t abs_encoder_track(void) {
     if (!strcmp(scenario, "invalid-negative")) return INT32_MIN;
     if (powered && (!strcmp(scenario, "success") || !strcmp(scenario, "wrap") ||
                     !strcmp(scenario, "stop-cross") || !strcmp(scenario, "late-stop") ||
-                    !strcmp(scenario, "final-drift") || !strcmp(scenario, "late-fault") ||
-                    !strcmp(scenario, "retarget"))) {
+                    !strcmp(scenario, "final-invalid") || !strcmp(scenario, "final-drift") || !strcmp(scenario, "late-fault") ||
+                    !strcmp(scenario, "retarget") || !strcmp(scenario, "progress-timeout") ||
+                    !strcmp(scenario, "deadline-stop"))) {
         int32_t time = (int32_t)((ticks - first_drive) / 48000u);
-        position = time * 4;
+        position = time * ((!strcmp(scenario, "progress-timeout") || !strcmp(scenario, "deadline-stop")) ? 1 : 4);
         if (retargeted) position = 160 - (time - 40) * 4;
     }
-    if (!strcmp(scenario, "runaway")) position = powered ? 6500 : 0;
-    if (!strcmp(scenario, "wrong-way")) position = powered ? 850 : 1000;
+    if (!strcmp(scenario, "mid-invalid") && powered) return INT32_MAX;
+    if (!strcmp(scenario, "final-invalid") && powered && !duty) return INT32_MIN;
+    if (!strcmp(scenario, "runaway") || !strcmp(scenario, "runaway-stop")) position = powered ? 1100 : 0;
+    if (!strcmp(scenario, "wrong-way") || !strcmp(scenario, "wrong-way-stop")) position = powered ? 850 : 1000;
     if (!strcmp(scenario, "final-drift") && powered && !duty && position >= 400) position += 1000;
     if (!strcmp(scenario, "late-fault") && powered && !duty && position >= 400) ea9_io_trip(EA9_IO_ENCODER);
     last_position = position;
     return position;
 }
 static void pump(int32_t position) {
+    assert(position >= -120 && position <= 6072);
     ++pumps;
+    if (!strcmp(scenario, "resolution-stop")) aborted = 1;
+    if (!strcmp(scenario, "deadline-stop") && powered && !duty) aborted = 1;
+    if ((!strcmp(scenario, "runaway-stop") || !strcmp(scenario, "wrong-way-stop")) && powered) aborted = 1;
     if (!strcmp(scenario, "early-fault") && pumps == 2) ea9_io_trip(EA9_IO_ENCODER);
     if (!strcmp(scenario, "stop") && powered) aborted = 1;
     if (!strcmp(scenario, "stop-cross") && position >= 400) aborted = 1;
@@ -60,6 +67,10 @@ static void pump(int32_t position) {
 }
 static uint8_t abort_motion(void) { return !strcmp(scenario, "gap") ? 0 : aborted; }
 static uint8_t retarget(int32_t *target) {
+    if (!strcmp(scenario, "retarget-limit-stop") && powered) {
+        if (!retargeted) { *target = 500; retargeted = 1; return 1; }
+        aborted = 1; return 0;
+    }
     if (!strcmp(scenario, "retarget") && powered && !retargeted && (ticks-first_drive)/48000u >= 40) {
         *target = 80; retargeted = 1; return 1;
     }
@@ -74,8 +85,10 @@ int main(int argc, char **argv) {
         .retarget = retarget, .retarget_max = 16 };
     if (!strcmp(scenario, "dry")) cfg.dry = 1;
     if (!strcmp(scenario, "stall")) cfg.stall_ms = 100;
+    if (!strcmp(scenario, "retarget-limit-stop")) cfg.retarget_max = 1;
     struct servo_result result;
-    int32_t target = !strcmp(scenario, "wrong-way") ? 1400 : 400;
+    int32_t target = !strncmp(scenario, "wrong-way", 9) ? 1400 : 400;
+    if (!strncmp(scenario, "resolution", 10)) target = 4;
     factory_servo_move_to(target, &cfg, &result);
     if (!strcmp(scenario, "success") || !strcmp(scenario, "wrap") || !strcmp(scenario, "retarget")) {
         assert(result.outcome == SERVO_OK && powered && !duty && !ea9_io_faults());
@@ -83,13 +96,17 @@ int main(int argc, char **argv) {
         assert(first_drive - begun < 11u * 60008u + 10000u);
         if (retargeted) assert(result.retargets == 1 && result.target == 80 && last_position <= 80);
         else assert(last_position >= 400 && result.target == 400);
-    } else if (!strcmp(scenario, "stop") || !strcmp(scenario, "stop-cross") || !strcmp(scenario, "late-stop")) {
+    } else if (!strcmp(scenario, "resolution")) {
+        assert(result.outcome == SERVO_RESOLUTION && !powered && !peak && result.end == 0);
+    } else if (!strcmp(scenario, "progress-timeout")) {
+        assert(result.outcome == SERVO_DEADLINE && result.end > 8 && result.end < 400 && !duty && !ea9_io_faults());
+    } else if (!strcmp(scenario, "retarget-limit-stop") || !strcmp(scenario, "resolution-stop") || !strcmp(scenario, "deadline-stop") || !strcmp(scenario, "stop") || !strcmp(scenario, "stop-cross") || !strcmp(scenario, "late-stop")) {
         assert(result.outcome == SERVO_ABORTED && !duty && released);
-    } else if (!strcmp(scenario, "early-fault") || !strcmp(scenario, "late-fault") || !strcmp(scenario, "gap") || !strcmp(scenario, "frozen") || !strcmp(scenario, "invalid-positive") || !strcmp(scenario, "invalid-negative")) {
+    } else if (!strcmp(scenario, "mid-invalid") || !strcmp(scenario, "final-invalid") || !strcmp(scenario, "early-fault") || !strcmp(scenario, "late-fault") || !strcmp(scenario, "gap") || !strcmp(scenario, "frozen") || !strcmp(scenario, "invalid-positive") || !strcmp(scenario, "invalid-negative")) {
         assert(result.outcome == SERVO_IO_FAULT && !duty && released && ea9_io_faults());
-    } else if (!strcmp(scenario, "runaway") || !strcmp(scenario, "final-drift")) {
+    } else if (!strcmp(scenario, "runaway") || !strcmp(scenario, "runaway-stop") || !strcmp(scenario, "final-drift")) {
         assert(result.outcome == SERVO_RUNAWAY && !duty && released);
-    } else if (!strcmp(scenario, "wrong-way")) {
+    } else if (!strcmp(scenario, "wrong-way") || !strcmp(scenario, "wrong-way-stop")) {
         assert(result.outcome == SERVO_WRONG_WAY && !duty && released);
     } else if (!strcmp(scenario, "stall")) {
         assert(result.outcome == SERVO_STALL && result.ms <= 102 && !duty && released);

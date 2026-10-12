@@ -29,18 +29,23 @@ image digests. The [build manifest](../../../docs/evidence/af-factory-build-mani
 pins source and toolchain inputs. Native `ea9ctl prepare-af` and Python
 personalization produce identical bytes for the seeded profile.
 
-Reproduce offline after restoring the documented photo/dependency caches:
+This release is frozen. Current source builds 2.5; the `factory-af` command
+verifies the retained 2.4 template instead of rebuilding it from changed sources.
+The original build inputs are pinned in its build manifest; the relevant
+counterexample inputs are additionally retained in
+`counterexample-src/manifest.json` from commit `090a176`.
+For historical offline personalization, prepare a metadata image first:
 
 ```sh
 python3 scripts/build-firmware.py --variant factory-af
-./scripts/build-macos-app.sh
-dist/ea9ctl --state-directory /new/local/profile-state prepare-af \
-  contax-zeiss-50-f1-4 /new/output/50mm.bin
+dist/ea9ctl --state-directory /new/local/profile-state prepare \
+  contax-zeiss-50-f1-4 /new/output/metadata.bin
+python3 scripts/prepare-af.py /new/output/metadata.bin /new/output/50mm.bin --variant factory-af
 ```
 
-Alternatively prepare a metadata image using `ea9ctl prepare`, then run
-`scripts/prepare-af.py METADATA_IMAGE NEW_OUTPUT --variant factory-af` to save an
-adjacent manifest. Output paths must be new. The packaged uploader admits its
+The Python command saves an adjacent manifest. Output paths must be new.
+Current native `prepare-af` selects 2.5, not this historical release.
+The packaged uploader admits its
 own digest-pinned template and a validated profile, not arbitrary external files.
 
 The preceding stock restoration was closed through a reviewed saved-motion

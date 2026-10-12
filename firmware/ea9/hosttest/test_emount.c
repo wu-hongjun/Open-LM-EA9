@@ -294,7 +294,7 @@ int main(void)
 			 * its reply carries this device's own aperture, not the
 			 * requester's.  Asserted on its own below, so exempting
 			 * it here hides nothing. */
-			if (f->id == EM_ID_APERTURE && f->kind == EA9_FIXUP_RX) {
+			if ((f->id == EM_ID_APERTURE || f->id == 0x34u) && f->kind == EA9_FIXUP_RX) {
 				continue;
 			}
 			want = (f->kind == EA9_FIXUP_RX)

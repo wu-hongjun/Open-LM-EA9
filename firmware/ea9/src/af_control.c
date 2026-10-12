@@ -10,9 +10,18 @@ uint8_t ea9_af_faulted(const struct ea9_af_state *state)
 
 uint8_t ea9_af_note_result(struct ea9_af_state *state, uint8_t outcome)
 {
-    if (!state->fault_reason && outcome != SERVO_OK && outcome != SERVO_ABORTED)
+    if (!state->fault_reason && !ea9_af_outcome_completed(outcome) && outcome != SERVO_ABORTED)
         state->fault_reason = outcome;
     return ea9_af_faulted(state);
+}
+
+uint8_t ea9_af_outcome_arrived(uint8_t outcome)
+{
+    return outcome == SERVO_OK || outcome == SERVO_RESOLUTION;
+}
+uint8_t ea9_af_outcome_completed(uint8_t outcome)
+{
+    return ea9_af_outcome_arrived(outcome) || outcome == SERVO_DEADLINE;
 }
 
 uint8_t ea9_af_begin_motion(struct ea9_af_state *state)

@@ -1,0 +1,29 @@
+{
+  "result": "pass",
+  "oracle": "retained original Thumb instructions",
+  "inputSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "randomSeed": "0x240180",
+  "cases": {
+    "target": 606,
+    "stop": 602,
+    "speed": 715,
+    "pid": 600,
+    "control": 600,
+    "complete": 2100,
+    "tick": 2100
+  },
+  "totalComparisons": 7323,
+  "negativeControl": "150\u2192151 integral-gain mutation detected",
+  "compared": "13 controller fields; return values where defined; four final motor-driver calls",
+  "sources": {
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/factory_af.h": "97521656884bfe25862a636ebdb151733e7e824de10954c643c88e710b22024e",
+    "scripts/test-factory-af-oracle.py": "c79138f77aadd8772c9697cf1a5a23cc139508384298b634ad8b8b66a5c171a4"
+  },
+  "limitations": [
+    "Synthetic RAM, not physical movement or camera AF",
+    "Final motor drivers stubbed; stop register writes use dummy RAM",
+    "Unicorn is a behavior oracle, not an ARMv6-M legality check",
+    "Does not validate hardware scheduling, homing or protocol state machine"
+  ]
+}

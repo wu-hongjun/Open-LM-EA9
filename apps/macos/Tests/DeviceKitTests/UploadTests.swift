@@ -413,6 +413,9 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.3.0")
     #expect(try ApplicationImage.installedSetting(loader.flash) == nil) // Version alone cannot admit another image.
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,5,0])
+    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.5.0")
+    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,6,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: directory) }

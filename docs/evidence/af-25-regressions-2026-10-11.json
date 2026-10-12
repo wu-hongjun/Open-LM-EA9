@@ -1,0 +1,195 @@
+{
+  "firmware": "2.5.0",
+  "status": "passed-offline-regressions-not-camera-qualified",
+  "hardwareReportsSent": 0,
+  "simulatedTargets": [
+    {
+      "target": 4,
+      "end": 0,
+      "outcome": 7,
+      "ms": 2,
+      "duty_peak": 0,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 42,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 0.0
+    },
+    {
+      "target": 40,
+      "end": 42,
+      "outcome": 0,
+      "ms": 187,
+      "duty_peak": 215,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 1.639
+    },
+    {
+      "target": 100,
+      "end": 100,
+      "outcome": 0,
+      "ms": 78,
+      "duty_peak": 237,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 0.384
+    },
+    {
+      "target": 400,
+      "end": 403,
+      "outcome": 0,
+      "ms": 162,
+      "duty_peak": 475,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 2.214
+    },
+    {
+      "target": 1000,
+      "end": 1002,
+      "outcome": 0,
+      "ms": 154,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 2.454
+    },
+    {
+      "target": 3000,
+      "end": 3007,
+      "outcome": 0,
+      "ms": 253,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 3.989
+    },
+    {
+      "target": 5000,
+      "end": 5006,
+      "outcome": 0,
+      "ms": 364,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 4.685
+    },
+    {
+      "target": 5952,
+      "end": 5762,
+      "outcome": 8,
+      "ms": 378,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 3997,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 6.668
+    }
+  ],
+  "queryRegression": {
+    "2.4.0": {
+      "exitCode": 1,
+      "output": "f/8 request: 0x1b AV=0x1100, 0x34 AV=0x1600, fixed declaration=0x1100",
+      "negativeControl": true
+    },
+    "2.5.0": {
+      "exitCode": 0,
+      "output": "f/8 request: 0x1b AV=0x1100, 0x34 AV=0x1100, fixed declaration=0x1100",
+      "negativeControl": false
+    }
+  },
+  "originalInstructionQueryCases": [
+    {
+      "requestSnapshotAV": 4352,
+      "replyAV": 4352,
+      "passed": true
+    },
+    {
+      "requestSnapshotAV": 4608,
+      "replyAV": 4608,
+      "passed": true
+    },
+    {
+      "requestSnapshotAV": 5632,
+      "replyAV": 5632,
+      "passed": true
+    }
+  ],
+  "factoryApertureBehavior": "parsed-request-word echo, intentionally overridden by fixed passive-iris policy",
+  "oneUnitCorrectionRequiresDrive": false,
+  "healthyDeadlineAllowsNextCommand": true,
+  "cameraExposureQualified": false,
+  "cameraAFQualified": false,
+  "limitations": [
+    "Inherited mechanics, not measured on owner unit",
+    "No lens optics, camera metering or live wire timing modeled",
+    "Original transmitter stubbed; Cortex-M0 emulator is not an ISA legality proof"
+  ],
+  "sources": {
+    "firmware/tests/test_refined_camera_limits.c": "4f0544e00e7080472ae5ce1d362a6165603cf4502e7fe59f42c5b0fd703c0f9c",
+    "firmware/ea9/hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "firmware/ea9/src/factory_servo.c": "3eb3aa0204b3eb9143452b594dfb39bb81079a4a6ab528c522b5ded2b748459e",
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/io_guard.c": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/af_control.c": "7670aa7baa326b588e1ad4e3fba49c52618cd870b1c0cc41860b764936c4ee77",
+    "firmware/ea9/src/af_completion.c": "8e8fd28feeb70515d85aabf07241d37502d96efca839d3ab6886e36cd4b292ae",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b"
+  },
+  "apertureProbeSHA256": "cb76ac843efefe050cddfad5f84a580c02c06e2e082b428e3a6f83b9b3118331",
+  "scriptSHA256": "7aa7da8ac694fa4367a488fb8b088e5c6963287db923169dad5617669cf8ab7e",
+  "apertureSources": {
+    "firmware/ea9/hosttest/shim.c": "4f6b2bac4d6af3a55c3be645fae1601e43551575c13163632d583d2278e0603a",
+    "firmware/ea9/src/emount.c": "79ae5e389832e4b2af5c4cafb88fd73695c8e6cc4d926bc8cf738d9faaefd4ab",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "firmware/ea9/src/lens_aperture.c": "75e6d7c3cc39bbca25abf7a671ccb7b53c9889502594ae14f0feb7b46b78b7b6"
+  },
+  "frozen24ManifestSHA256": "d28ac57ed539e9d1061fb759e3b9905b8dd1d15d1ef4cd3cdd438dc5ee5bb746"
+}

@@ -102,9 +102,10 @@ camera aperture** and explains that a blank value reports the maximum. Existing
 libraries keep their `currentAperture` storage key and values; neither these
 values nor USB readback become an actual-aperture measurement.
 
-Firmware profile-v1 already sets identical minimum/maximum/current camera AV
-values and rejects body-requested iris changes. That supported policy remains
-in the new 2.4 candidate. Stop down using the manual ring whenever needed;
+Firmware profile-v1 sets identical minimum/maximum/current camera AV values
+and overrides body requests in `0x1b`. The later 2.5 audit found that 2.4 still
+echoed requests in `0x34`, contradicting that fixed policy; 2.5 overrides both.
+Stop down using the manual ring whenever needed;
 changing metadata is optional and does not control the iris. If a photo must
 carry the manually chosen f-number in EXIF, prepare that fixed numeric report
 before shooting. The numeric report may also affect camera AF assumptions, so
@@ -159,7 +160,7 @@ USB operation was performed for this observation follow-up.
 ## Next firmware acceptance
 
 The problem is accepted; the exact metering cause remains open. AF 2.4 already
-writes a fixed range/current aperture and rejects conflicting requests, yet its
+writes a fixed range/current aperture and rejects conflicting `0x1b` requests, yet its
 camera test had no shown f-number and failed focus. Repeating those setters or
 subtracting one stop is not an established repair. Audit the complete lens-init
 and aperture request/reply/status sequence against the factory reconstruction
@@ -186,3 +187,8 @@ Quantitative exposure/EXIF or sharpness claims still require the corresponding
 measurement. Hardware acceptance criteria are future checks, not claims that
 the next implementation already passes. No new candidate is built or uploaded
 by this documentation update.
+
+The next pass is now implemented in [AF 2.5](evidence/af-25-candidate-2026-10-11.md):
+coherent `0x34` aperture replies, consumed-snapshot negotiation and separately
+classified motion terminations pass offline regressions. Physical exposure and
+AF acceptance remain pending; no one-stop compensation was applied.

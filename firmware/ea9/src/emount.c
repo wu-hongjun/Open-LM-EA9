@@ -41,6 +41,7 @@
 #include "delay.h"
 #include "emount.h"
 #include "lens_profile.h"
+#include "lens_aperture.h"
 #include "diag.h"
 #include "emount_packets.h"
 #include "em_uart.h"
@@ -233,7 +234,6 @@ volatile uint8_t  em_m08[EM_M08_LEN];
 volatile uint8_t  em_m08_len;
 volatile uint16_t em_m08_n;
 volatile uint8_t  em_m08_aperture_on;
-static volatile uint16_t g_aperture;
 
 /* The pending instruction, and the query queue.  Both are written from the
  * chip-select interrupt and read from the main loop. */
@@ -453,7 +453,9 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 	frame = &ea9_data[p->offset];
 	/* Publish the 0x08 aperture option from the main owner, never from the
 	 * receive ISR while a status packet checksum/transmit is in progress. */
-	if (id == 0x08u) em_set_aperture(g_aperture);
+	if (id == EM_ID_SESSION) em_m08_aperture_on = 0;
+	if (id == 0x08u && request[1] >= 11u)
+		em_m08_aperture_on = ((request[7] & 0x80u) == 0u);
 
 	/* Apply whatever the stock handler for this id writes into its frame
 	 * before sending.  NOT optional: the stored message 0x0c frame carries
@@ -467,20 +469,18 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 			continue;
 		}
 
-		/* MESSAGE 0x1B IS ANSWERED WITH OUR OWN APERTURE, not with the
-		 * requester's.
+		/* Messages 0x1b and 0x34 use the fixed declaration consistently.
 		 *
-		 * The stock's four RX fixups copy the request's bytes back into
-		 * both copies of the reply, and for a lens with a real iris the
-		 * two converge anyway once it has moved.  This one has no iris.
+		 * Stock RX fixups echo the request word. This adapter cannot
+		 * operate the passive lens iris.
 		 * If a body ever commanded something other than the single
 		 * aperture we declare, echoing would confirm an aperture we do
 		 * not have -- while message 0x05 payload[0..1] went on reporting
 		 * the one we do, so the two would contradict each other in the
 		 * same frame pair.
 		 *
-		 * A deviation from the stock, deliberately: see below. */
-		if (id == EM_ID_APERTURE && f->kind == EA9_FIXUP_RX) {
+		 * This deliberately overrides factory request-echo behavior. */
+		if ((id == EM_ID_APERTURE || id == 0x34u) && f->kind == EA9_FIXUP_RX) {
 			continue;
 		}
 		frame[f->off] = (f->kind == EA9_FIXUP_RX)
@@ -488,6 +488,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 		                : f->val;
 	}
 
+	lens_aperture_publish(em_m08_aperture_on);
 	em_transmit(frame, p->len);
 }
 
@@ -812,7 +813,8 @@ static void on_cs_edge(int level)
 			}
 			em_m08_len = (uint8_t)k;
 		}
-		em_m08_aperture_on = ((rx[7] & 0x80u) == 0u);
+		/* Negotiation is committed from the consumed request snapshot in
+		 * em_send_id, so a newer IRQ cannot change the reply's capability. */
 	}
 
 	if (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_APERTURE && frame_length >= 11) {
@@ -1171,19 +1173,8 @@ uint16_t em_defocus_scale(void)
 
 void em_set_aperture(uint16_t av)
 {
-	g_aperture = av;
-
-	put16(EA9_OFF_05 + EM05_AP_NOW_A, av);
-	put16(EA9_OFF_05 + EM05_AP_NOW_B, av);
-	put16(EA9_OFF_1B + EM1B_POS_A,    av);
-	put16(EA9_OFF_1B + EM1B_POS_B,    av);
-
-	/* MESSAGE 0x28's COPY IS OPTIONAL, and the body says whether it wants
-	 * it (emount.h).  Filling it unasked made an a9 II re-meter after every
-	 * exposure; a stock LM-EA9 leaves it zero and its photographs are still
-	 * tagged correctly, so zero is the safe default and this is the only
-	 * thing that turns it on. */
-	put16(EA9_OFF_28 + EM28_AP_NOW, em_m08_aperture_on ? av : 0u);
+	lens_aperture_set(av);
+	lens_aperture_publish(em_m08_aperture_on);
 }
 
 /* The inverse: an aperture value back to a descriptor byte.

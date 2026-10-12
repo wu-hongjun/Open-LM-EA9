@@ -39,6 +39,8 @@ enum servo_outcome {
 	SERVO_WRONG_WAY,     /* moving AWAY from the target -- inverted feedback */
 	SERVO_IO_FAULT,     /* sticky sensor/PWM/timebase failure */
 	SERVO_ABORTED,       /* the caller said stop; the target was not reached */
+	SERVO_RESOLUTION,    /* no-drive termination within one protocol unit */
+	SERVO_DEADLINE,      /* bounded termination with healthy observed progress */
 };
 
 /* THE CONTROL LAW, and where every number in it came from.
