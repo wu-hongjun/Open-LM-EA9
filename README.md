@@ -19,16 +19,24 @@ f-number; the lens ring still controls the physical iris. The new **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
 stock speed/PID/callback/completion semantics. Its pure controller passes 7,323
 original-instruction comparisons. Its authorized upload and strict two-pass
-USB verification have passed, including an independent audit. Camera
-qualification and reduced-hunting measurements remain pending. See [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
+USB verification passed, including an independent audit. **Its first owner
+focus attempt failed**, with motor movement but no focus/photo release, a dark
+view and no shown f-number in P/A. Further 2.4 camera tests are suspended.
+Actual focus mode and exposure settings remain unverified. The unchanged
+controller also reproduces small-correction and full-travel session faults in
+the inherited mechanical simulator; these are readiness gaps, not a proven
+hardware diagnosis. See [the failure investigation](docs/evidence/af-24-camera-failure-2026-10-11.md)
+and [the baseline design](docs/reverse-engineering/factory-af-baseline.md).
 AF 2.3 hardens received frames, command snapshots, Stop handling, bounded query
 processing and startup waits. It was byte-verified after physical USB-cap
 reconnect. With the 50mm lens and C/Y-to-M converter, the owner reports eventual
 focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
 remain unverified. Original same-unit stock **1.8.0 was restored for comparison** and its full
 application slot matched the original backup; the owner reported much less
-hunting. AF 2.4 is now installed and strict USB-byte-verified after physical reconnect.
-Its first loaded-lens lifecycle and controlled AF-S comparison are pending. Camera use before readback changed 13 stock saved-motion bytes, causing strict
+hunting. After the failed AF 2.4 attempt, the original stock 1.8 application
+has been uploaded again for recovery; physical reconnect and strict verification
+are pending before camera use. [Current recovery state](docs/evidence/stock-18-af24-recovery-2026-10-11.json).
+During the earlier stock comparison, camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict
 pass; bootloader and factory data remain exact. [AF 2.4 installation and
@@ -51,7 +59,9 @@ python3 scripts/test-firmware.py --af
 open "dist/Open LM-EA9.app"
 ```
 
-- [AF 2.4 upload/reconnect and reviewed stock resolution](docs/evidence/af-24-upload-2026-10-11.md)
+- [AF 2.4 camera failure, controller counterexamples and stock recovery](docs/evidence/af-24-camera-failure-2026-10-11.md)
+- [Current stock recovery upload and verification state](docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+- [Historical AF 2.4 upload/reconnect and reviewed stock resolution](docs/evidence/af-24-upload-2026-10-11.md)
 - [Loaded A7C II AF-S comparison procedure and observations](docs/evidence/af-24-camera-comparison-2026-10-11.md)
 - [Explicit reviewed stock camera-use resolution policy](docs/stock-restore-resolution.md)
 - [App 0.7, AF 2.4 factory baseline and validation](docs/evidence/factory-af-baseline-2026-10-11.md)

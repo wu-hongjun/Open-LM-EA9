@@ -5,7 +5,12 @@ than custom AF 2.3 on the A7C II, with the Contax Zeiss 50mm f/1.4 and C/Y-to-M
 converter. Camera focus mode, Pre-AF, scene, exposure and image sharpness were
 not recorded in that comparison. This is useful qualitative evidence, not a
 matched measurement. AF 2.4 implements the recovered factory motion law to
-make the next comparison meaningful. It has **not been uploaded or camera-tested**.
+make the next comparison meaningful. Upload and strict USB verification later
+passed, but **the owner's focus attempt failed** with a dark view and no shown
+f-number in P/A. Further 2.4 tests are suspended. The
+[failure investigation](../evidence/af-24-camera-failure-2026-10-11.md) records
+reproducible wrapper counterexamples and the limits of the hardware diagnosis;
+[stock recovery](../evidence/stock-18-af24-recovery-2026-10-11.json) is in progress.
 
 ## Recovered algorithm and provenance
 

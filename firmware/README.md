@@ -15,10 +15,11 @@ frame admission, coherent ISR snapshots, faulted Stop handling, operation
 ownership, frame-paced telemetry and bounded initialization. It was installed and
 USB-byte-verified after physical reconnect. The owner reports eventual loaded
 50mm focus with substantial hunting; sharpness and camera qualification remain
-unverified. Original stock 1.8.0 is now restored and its full application slot
-matches the original backup. The owner reports much less hunting. Strict native
-verification remains flagged because post-upload camera use changed the stock
-saved-settings record; no verification guard was relaxed. See the
+unverified. The earlier stock 1.8.0 comparison matched its full application slot
+to the original backup; the owner reported much less hunting. Camera use before
+strict verification changed its saved-settings record. That historical failure
+was subsequently closed by an explicit reviewed-motion resolution without
+relabeling the strict failure. See the
 [2.3 hardware record](../docs/evidence/af-23-upload-2026-10-11.md) and
 [current stock comparison record](../docs/evidence/stock-18-comparison-2026-10-11.md).
 The requested unknown-aperture behavior and current fixed-range declaration are
@@ -34,7 +35,13 @@ python3 scripts/test-firmware.py --af
 Current source builds **AF 2.4** under `ea9/build/factory`, as camera BCD 0x24
 and loader 2.4.0. It uses a modular factory-derived controller, tested directly
 against the original instructions. Its authorized upload and strict byte verification passed after physical
-reconnect, including an independent audit; camera qualification remains pending. See [the hardware record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
+reconnect, including an independent audit. **Its owner focus attempt failed**:
+motor response without acquisition/photo release, a dark view and no shown
+f-number in P/A. Actual focus mode/exposure remain unknown. Further 2.4 camera
+testing is suspended. Stock 1.8 recovery has been uploaded and awaits physical
+reconnect/strict verification. See [the failure and controller counterexamples](../docs/evidence/af-24-camera-failure-2026-10-11.md),
+[current recovery state](../docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+and [historical USB record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
 Templates/pins for 2.0–2.3 remain frozen; those build-script variants verify
 committed size/digest instead of compiling changed source under old versions.

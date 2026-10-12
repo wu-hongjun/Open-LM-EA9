@@ -2,7 +2,11 @@
 
 This is an **experimental candidate**. Its authorized USB upload completed
 on October 11; native strict two-pass verification and an independent audit
-passed after physical reconnect. It is not camera-qualified. See [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md). It uses independently implemented factory 1.8 target/speed/PID/Stop/
+passed after physical reconnect. **The owner's focus attempt subsequently
+failed**, with no focus/photo release, a dark view and no shown f-number in P/A.
+Further camera testing of this frozen image is suspended. Source, template and
+candidate pins are retained unchanged for diagnosis. See [the failure investigation](../../../docs/evidence/af-24-camera-failure-2026-10-11.md)
+and [historical USB record](../../../docs/evidence/af-24-upload-2026-10-11.md). It uses independently implemented factory 1.8 target/speed/PID/Stop/
 completion/callback semantics behind bounded hardware and protocol policies.
 The [design](../../../docs/reverse-engineering/factory-af-baseline.md) records
 all known differences; the [validation record](../../../docs/evidence/factory-af-baseline-2026-10-11.md)
@@ -44,9 +48,11 @@ resolution on a new connection: a fresh two-pass backup matched the retained
 stock audit exactly. Its original strict failure remains archived, not relabeled
 as a pass. AF 2.4 was then uploaded through the normal backed-up native path.
 Native strict reconnect verification and the independent readback audit have
-now passed. The first loaded-lens lifecycle cycle and AF-S acquisition are pending. Follow [the hardware record](../../../docs/evidence/af-24-upload-2026-10-11.md)
-and [the AF-S comparison plan](../../../docs/evidence/af-24-camera-comparison-2026-10-11.md)
-for current state, observations and stop conditions.
+now passed. The later focus-acquisition attempt failed; actual AF mode and
+exposure conditions were not established. Stock recovery has been uploaded and
+awaits physical reconnect/strict verification before a stock camera comparison.
+Follow [the current recovery state](../../../docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+and [the camera observation record](../../../docs/evidence/af-24-camera-comparison-2026-10-11.md).
 
 The fixed camera f-number does not operate or lock the iris. Manual stopping
 down remains possible; the report/EXIF can differ from the physical setting.

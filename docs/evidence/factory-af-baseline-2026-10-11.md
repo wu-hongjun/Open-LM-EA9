@@ -2,8 +2,12 @@
 
 October 11, 2026. Implemented the owner's request for fixed numeric aperture
 reporting, unknown physical aperture in the app, a modular factory-derived
-motion baseline, documentation and a committed candidate. **No 2.4 hardware
-upload or camera test occurred**. Reduced hunting remains a result to measure.
+motion baseline, documentation and a committed candidate. At this offline
+preparation stage, no 2.4 hardware upload or camera test had occurred. Later
+upload and strict verification passed, followed by an owner-reported focus
+failure, dark view and no shown f-number in P/A. See the
+[separate failure/recovery record](af-24-camera-failure-2026-10-11.md).
+The offline results below remain historical; reduced hunting was not demonstrated.
 
 ## Delivered behavior
 

@@ -1,14 +1,36 @@
 # A7C II / Contax Zeiss 50mm f/1.4: AF 2.4 comparison
 
-October 11, 2026. **AF 2.4 passed native and independent USB byte verification. Camera results
-are not yet recorded.** The owner was asked for the first loaded-lens lifecycle
-cycle; AF-S acquisition remains the next step after a normal cycle.
-Use this only after successful [USB installation and physical-reconnect byte
-verification](af-24-upload-2026-10-11.md). A running/uploaded application is
-not sufficient. The earlier stock-versus-2.3 result is qualitative: the owner
-reported eventual 2.3 focus with more hunting and less hunting on stock, but
-AF mode, Pre-AF, lighting/target and sharpness were not recorded. It is not a
-matched control for 2.4. We need the following recorded settings for both versions.
+October 11, 2026. **AF 2.4 passed USB byte verification but failed the owner's
+focus-acquisition attempt. Further 2.4 camera tests are suspended.** The owner
+reports no movement without shutter input, movement on half-press without focus
+acquisition/photo release, no motor movement on shutdown, a very dark view and
+no displayed f-number after switching to P or A. They returned the adapter to
+the Mac/USB cap. Exposure mode P/A is reported; actual focus mode, Pre-AF, iris,
+shutter/ISO, target, movement duration, release response, display shutdown and
+the exact aperture-display appearance remain unverified. No optical image was
+obtained. We do not interpret missing aperture display as a proven F-- encoding
+or successful unknown-aperture AF.
+
+Owner replies retained verbatim:
+
+> if I don't press shuttor, nothing moves, and IF I HALF PRESS SHUTTER, motor moves but it doesn't every get focus and camera cannot take photo because it cannot reach focus
+
+> motor doesn't move when shut down. somehow the entire scene is super dark. I installed it back to the mount
+
+> yes, it is back to connected to the mac. Note when I switched to P or A mode there is no shown F stop
+
+The [failure investigation](af-24-camera-failure-2026-10-11.md) distinguishes
+confirmed host counterexamples from the untraced hardware cause. Original
+same-unit stock recovery upload has completed; physical reconnect and strict
+verification remain pending. See [the recovery record](stock-18-af24-recovery-2026-10-11.json).
+The procedures below are
+retained as the original test plan, **not instructions to retry AF 2.4 now**.
+The [USB installation record](af-24-upload-2026-10-11.md) still correctly records
+strict image equality; it does not qualify camera behavior.
+
+The earlier stock-versus-2.3 result was qualitative and lacked matched AF mode,
+Pre-AF, lighting/target and sharpness records. The dark view and missing f-number
+make the next controlled stock baseline especially important.
 
 ## One loaded-lens lifecycle cycle first
 
@@ -72,15 +94,15 @@ separate observation to collect, not a promise that Sony hides every control.
 | Observation | AF 2.4 | Stock 1.8 matched control |
 | --- | --- | --- |
 | USB exact bytes verified before camera | Passed, two full matching reads and independent audit | Prior stock code audited; pending restore resolved by reviewed motion-record policy |
-| Still/Movie switch; exposure mode | Unreported | Unreported |
+| Still/Movie switch; exposure mode | P/A reported; Still/Movie switch unknown | Unreported |
 | Actual AF mode; Pre-AF; focus area; trigger | Unreported | Unreported |
-| Lens ring focus; physical iris; reported f-number | Unreported | Unreported |
-| Startup/errors and movement | Unreported | Unreported for this controlled set |
+| Lens ring focus; physical iris; reported f-number | Rings unreported; no shown f-number in P/A; dark view | Unreported |
+| Startup/errors and movement | No movement without shutter input reported; errors unreported | Unreported for this controlled set |
 | Full 10-second quiet idle | Unreported | Unreported |
-| First AF acquisition time/reversals/lock | Unreported | Unreported |
+| First AF acquisition time/reversals/lock | Half-press moves motor; owner reports never achieving focus or releasing photo; timing/mode unknown | Unreported |
 | Three near/far pairs; all failures | Unreported | Unreported |
 | Original photo path; inspected sharpness/EXIF | Unreported | Unreported |
-| Shutdown/display/motor | Unreported | Unreported for this controlled set |
+| Shutdown/display/motor | No shutdown movement reported; display shutdown unverified | Unreported for this controlled set |
 | Manual f/4 trials after stable f/1.4 | Not attempted | Not attempted |
 
 Every owner reply should be retained verbatim with the test conditions. A lock

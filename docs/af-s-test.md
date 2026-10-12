@@ -1,5 +1,14 @@
 # First A7C II AF-S test: Contax Zeiss 50mm f/1.4
 
+**AF 2.4 passed USB byte verification but failed the owner's focus attempt.**
+Further 2.4 camera tests are suspended. The report also includes a dark view and
+no shown f-number in P/A; actual AF/exposure settings are unknown. Stock 1.8
+recovery has been uploaded and awaits physical reconnect and strict verification.
+See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md) and
+[current recovery state](evidence/stock-18-af24-recovery-2026-10-11.json).
+The installation/camera steps below remain a historical runbook, not a request
+to reinstall or retry 2.4. A new candidate requires separate qualification.
+
 Current installation/readback state is recorded in the [AF 2.4 hardware
 record](evidence/af-24-upload-2026-10-11.md). The preceding stock restoration was
 resolved through an explicit reviewed-motion policy: a new two-pass read matched
@@ -66,8 +75,9 @@ The original 1.8.0 restore source is also saved in the
 [committed recovery bundle](../firmware/recovery/stock-1.8.0/README.md), with an
 encrypted complete backup and an offline unpack tool. Retain its separate key.
 
-App 0.7 / the current CLI explicit AF installation selects **2.4.0**. It is
-the current installation stages are in the hardware record. The 2.3
+App 0.7 / the current CLI explicit AF installation selects **2.4.0**, which is
+now suspended from further camera trials. Its historical installation stages are
+in the hardware record. The 2.3
 upload/reconnect evidence remains historical and unchanged. The stock transaction
 was closed only through the explicit reviewed resolution, with its failed
 journal retained. Every new upload still requires physical reconnect and strict

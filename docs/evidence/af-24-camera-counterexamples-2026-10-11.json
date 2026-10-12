@@ -1,0 +1,133 @@
+{
+  "status": "counterexamples-confirmed-not-fixed",
+  "firmwareUnderStudy": "2.4.0",
+  "hardwareReportsSent": 0,
+  "simulatedTargets": [
+    {
+      "target": 4,
+      "end": 0,
+      "outcome": 1,
+      "ms": 301,
+      "duty_peak": 200,
+      "io_fault": 0,
+      "session_fault": 1,
+      "completion_event": 0,
+      "next_motion_allowed": 0,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 0.0
+    },
+    {
+      "target": 40,
+      "end": 42,
+      "outcome": 0,
+      "ms": 187,
+      "duty_peak": 215,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 1.639
+    },
+    {
+      "target": 100,
+      "end": 100,
+      "outcome": 0,
+      "ms": 78,
+      "duty_peak": 237,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 0.384
+    },
+    {
+      "target": 400,
+      "end": 403,
+      "outcome": 0,
+      "ms": 162,
+      "duty_peak": 475,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 2.214
+    },
+    {
+      "target": 1000,
+      "end": 1002,
+      "outcome": 0,
+      "ms": 154,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 2.454
+    },
+    {
+      "target": 3000,
+      "end": 3007,
+      "outcome": 0,
+      "ms": 253,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 3.989
+    },
+    {
+      "target": 5000,
+      "end": 5006,
+      "outcome": 0,
+      "ms": 364,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 4.685
+    },
+    {
+      "target": 5952,
+      "end": 5762,
+      "outcome": 2,
+      "ms": 378,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 2,
+      "completion_event": 0,
+      "next_motion_allowed": 0,
+      "simulated_stop_contacts": 0,
+      "simulated_end_velocity": 6.626
+    }
+  ],
+  "normalShortCorrectionPermanentlyFaults": true,
+  "fullTravelDeadlinePermanentlyFaults": true,
+  "factoryPureCallbackAdmitsNewTargetAfterTimeout": true,
+  "rootCauseOnOwnerHardwareProven": false,
+  "limitations": [
+    "Mechanical coefficients inherited from upstream author's adapter, not measured on owner's unit",
+    "No lens optics, image formation, exposure or camera protocol modeled",
+    "No frame/ADC pump delay in this isolated probe",
+    "Clock advances on simulator millis calls; elapsed values are simulation results",
+    "Factory callback equivalence was established by a separate finite original-byte oracle"
+  ],
+  "sources": {
+    "firmware/tests/test_factory_camera_limits.c": "1b03c292813f43d98c51941150d15d90d21ee2f4f67d0cd4ee90f6e07bab33c2",
+    "firmware/ea9/hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "firmware/ea9/src/factory_servo.c": "66209fcf8e6a0e68a137e1e2cf3cc35913f81493098a2967f5581c4a0253fa5c",
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/io_guard.c": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/af_control.c": "77a9c02538933e24d2f3820e3eded350fda6849ac38b9d6ddc9214f6093b68e4",
+    "firmware/ea9/src/af_completion.c": "c244b75deb97cddfa5078ed127be26745f891324d1f9112fa9f20db286ab18bd",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b"
+  }
+}
