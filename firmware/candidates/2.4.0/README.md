@@ -49,9 +49,10 @@ stock audit exactly. Its original strict failure remains archived, not relabeled
 as a pass. AF 2.4 was then uploaded through the normal backed-up native path.
 Native strict reconnect verification and the independent readback audit have
 now passed. The later focus-acquisition attempt failed; actual AF mode and
-exposure conditions were not established. Stock recovery has been uploaded and
-awaits physical reconnect/strict verification before a stock camera comparison.
-Follow [the current recovery state](../../../docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+exposure conditions were not established. Stock recovery has passed strict
+verification after physical reconnect plus an independent readback audit. The
+stock display/lifecycle and controlled AF-S comparison remain pending.
+Follow [the completed recovery record](../../../docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 and [the camera observation record](../../../docs/evidence/af-24-camera-comparison-2026-10-11.md).
 
 The fixed camera f-number does not operate or lock the iris. Manual stopping

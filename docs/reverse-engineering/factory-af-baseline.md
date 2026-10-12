@@ -10,7 +10,8 @@ passed, but **the owner's focus attempt failed** with a dark view and no shown
 f-number in P/A. Further 2.4 tests are suspended. The
 [failure investigation](../evidence/af-24-camera-failure-2026-10-11.md) records
 reproducible wrapper counterexamples and the limits of the hardware diagnosis;
-[stock recovery](../evidence/stock-18-af24-recovery-2026-10-11.json) is in progress.
+[stock recovery](../evidence/stock-18-af24-recovery-2026-10-11.md) passed normal
+strict verification after reconnect and an independent audit.
 
 ## Recovered algorithm and provenance
 
@@ -96,14 +97,26 @@ command regressions also run with this backend. These checks validate software
 behavior under the injected conditions, not physical motor stability or optics.
 See the [build/validation record](../evidence/factory-af-baseline-2026-10-11.md).
 
-Before a new camera comparison, complete the pending stock-restore transaction
-review and physically reconnect; the current strict saved-record mismatch has
-not been waived. Upload and verify 2.4 on USB before using it on the camera.
-Then record matched stock/2.4 trials: still-photo P, explicitly AF-S, Pre-AF Off,
-same static textured target, lighting, distance, focus area, aperture ring and
-lens starting position. Record acquisition time, reversals, lock failures,
-photograph sharpness, startup and shutdown for each. Try both f/1.4 and a
-manually stopped-down f/4 only after the first stable cycle. Inspect the displayed
-fixed aperture and EXIF separately. Use the [camera runbook](../af-s-test.md)
-for the stop conditions and restoration procedure. No improvement, factory
-parity, AF-C/video capability or unknown-aperture-on-camera claim is established yet.
+The later [mechanical counterexample probe](../../scripts/test-factory-camera-limits.py)
+reproduces permanent session faults for a four-count correction and full travel
+with the unchanged 2.4 wrapper and inherited simulator. Neither test has an I/O
+fault or simulated stop contact. Factory timeout/next-command completion differs
+from this wrapper. Passing the pure oracle did not establish usable control
+across these mechanics. The owner's camera failure is not traced to either path.
+
+Further 2.4 trials are suspended. The latest stock recovery has passed normal
+strict verification after physical reconnect. Start a stock display/lifecycle check to distinguish
+the dark view and missing f-number from autofocus behavior. A new version must
+reconcile small corrections, healthy-progress deadline termination, completion
+and subsequent-command eligibility while retaining inhibition for unsafe sensor,
+PWM, timebase and runaway conditions. Lens-init/status and AF sequencing also
+require investigation. Leave the deployed 2.4 image and pins unchanged.
+
+For a later candidate, record matched stock/custom trials: still-photo P,
+explicitly AF-S, Pre-AF Off, same static textured target, lighting, distance,
+focus area, aperture ring and lens starting position. Record acquisition time,
+reversals, lock failures, photograph sharpness, startup and shutdown for each.
+Manual f/4 trials follow only after stable f/1.4 operation; inspect display and
+EXIF separately. Use the [camera runbook](../af-s-test.md) for stop conditions.
+No improvement, factory parity, AF-C/video capability or usable unknown-aperture
+camera encoding is established.

@@ -96,9 +96,20 @@ success establishes one acknowledged START and 1,728 acknowledged pages.
 No bootloader/record write or verification exception was used. See the
 [redacted recovery evidence](stock-18-af24-recovery-2026-10-11.json).
 
-Physical reconnect and strict stock verification remain pending. Keep the
-adapter off the camera until verification passes. Only then compare stock on the same
-50mm lens, with actual AF-S/Pre-AF, ring and exposure settings recorded. If the
+The owner physically reconnected the cap. Normal native strict verification
+completed with exit 0 at 00:03:54 UTC on October 12 / 20:03:54 local October 11.
+Both full flash and auxiliary read passes matched. Independent offline audit
+confirmed the complete original stock application, all 58 known metadata bytes,
+unchanged boot code/protected gap and unchanged factory user-row/calibration/
+device-ID data. The protected saved-motion record is preserved from the fresh
+pre-recovery backup; full flash is not claimed identical to the untouched
+original backup. No reviewed-motion exception was used for this transaction.
+Native history is verified, stock qualification refreshed, stale custom lens
+history removed and firmware observation published as 1.8.0.
+
+The [stock camera plan](stock-18-af24-recovery-2026-10-11.md) starts with display
+brightness/aperture and lifecycle observations before any AF attempt. Compare
+stock on the same 50mm lens with actual AF-S/Pre-AF, ring and exposure settings recorded. If the
 dark view/missing f-number persists on stock, record that separately before AF
 testing. Do not infer that motor PID explains exposure or lens identification.
 Private backups/serials/calibration contents and recovery keys remain excluded

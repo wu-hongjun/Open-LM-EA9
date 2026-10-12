@@ -3,9 +3,10 @@
 **AF 2.4 passed USB byte verification but failed the owner's focus attempt.**
 Further 2.4 camera tests are suspended. The report also includes a dark view and
 no shown f-number in P/A; actual AF/exposure settings are unknown. Stock 1.8
-recovery has been uploaded and awaits physical reconnect and strict verification.
+recovery passed strict verification after physical reconnect and an independent
+audit. Its new display/lifecycle and controlled AF-S comparison remain pending.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md) and
-[current recovery state](evidence/stock-18-af24-recovery-2026-10-11.json).
+[completed recovery record](evidence/stock-18-af24-recovery-2026-10-11.md).
 The installation/camera steps below remain a historical runbook, not a request
 to reinstall or retry 2.4. A new candidate requires separate qualification.
 

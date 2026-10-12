@@ -38,9 +38,10 @@ against the original instructions. Its authorized upload and strict byte verific
 reconnect, including an independent audit. **Its owner focus attempt failed**:
 motor response without acquisition/photo release, a dark view and no shown
 f-number in P/A. Actual focus mode/exposure remain unknown. Further 2.4 camera
-testing is suspended. Stock 1.8 recovery has been uploaded and awaits physical
-reconnect/strict verification. See [the failure and controller counterexamples](../docs/evidence/af-24-camera-failure-2026-10-11.md),
-[current recovery state](../docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+testing is suspended. Stock 1.8 recovery passed strict byte verification after
+physical reconnect and an independent audit. A stock display/lifecycle and
+matched AF-S baseline remain pending. See [the failure and controller counterexamples](../docs/evidence/af-24-camera-failure-2026-10-11.md),
+[completed recovery record](../docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 and [historical USB record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
 Templates/pins for 2.0–2.3 remain frozen; those build-script variants verify

@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "af24-historical-byte-verification-passed-owner-camera-failure-stock-recovery-uploaded",
+  "stage": "af24-historical-byte-verification-passed-owner-camera-failure-stock-restored-verified",
   "purpose": "Explicitly resolve reviewed stock camera-use record and upload pinned AF 2.4 for Contax Zeiss 50mm f/1.4",
   "profileID": "contax-zeiss-50-f1-4",
   "loaderVersion": [
@@ -29,7 +29,7 @@
   "cameraTestPerformed": true,
   "cameraQualified": false,
   "reducedHuntingDemonstrated": false,
-  "pendingPhysicalAction": "Physically reconnect USB cap to verify the latest stock recovery, not the historical AF 2.4 upload",
+  "pendingPhysicalAction": "Stock loaded-lens display/lifecycle check first; no further AF 2.4 camera trials",
   "stockResolutionPolicy": "reviewed-stock-camera-motion-v1",
   "sourceCommitAtCandidatePreparation": "77cde5f695fadf71f6b9ae750b9449d6ff5c1853",
   "tests": {
@@ -106,5 +106,7 @@
   "cameraDarkViewOwnerReported": true,
   "cameraApertureNotShownInPAOwnerReported": true,
   "laterStockRecoveryStarted": true,
-  "recoveryEvidence": "stock-18-af24-recovery-2026-10-11.json"
+  "recoveryEvidence": "stock-18-af24-recovery-2026-10-11.json",
+  "stockRecoveryStrictUSBVerificationPassed": true,
+  "stockRecoveryIndependentAuditPassed": true
 }

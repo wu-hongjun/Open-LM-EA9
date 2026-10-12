@@ -34,8 +34,9 @@ focus and substantial hunting; sharpness, actual AF settings and loaded shutdown
 remain unverified. Original same-unit stock **1.8.0 was restored for comparison** and its full
 application slot matched the original backup; the owner reported much less
 hunting. After the failed AF 2.4 attempt, the original stock 1.8 application
-has been uploaded again for recovery; physical reconnect and strict verification
-are pending before camera use. [Current recovery state](docs/evidence/stock-18-af24-recovery-2026-10-11.json).
+has been restored again and **strictly byte-verified after physical reconnect**,
+with an independent audit. Its new display/lifecycle and controlled AF-S
+comparison are pending. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
 During the earlier stock comparison, camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict
@@ -60,7 +61,7 @@ open "dist/Open LM-EA9.app"
 ```
 
 - [AF 2.4 camera failure, controller counterexamples and stock recovery](docs/evidence/af-24-camera-failure-2026-10-11.md)
-- [Current stock recovery upload and verification state](docs/evidence/stock-18-af24-recovery-2026-10-11.json)
+- [Completed stock recovery and planned display/AF-S comparison](docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 - [Historical AF 2.4 upload/reconnect and reviewed stock resolution](docs/evidence/af-24-upload-2026-10-11.md)
 - [Loaded A7C II AF-S comparison procedure and observations](docs/evidence/af-24-camera-comparison-2026-10-11.md)
 - [Explicit reviewed stock camera-use resolution policy](docs/stock-restore-resolution.md)

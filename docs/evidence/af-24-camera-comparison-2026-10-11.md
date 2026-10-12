@@ -21,8 +21,9 @@ Owner replies retained verbatim:
 
 The [failure investigation](af-24-camera-failure-2026-10-11.md) distinguishes
 confirmed host counterexamples from the untraced hardware cause. Original
-same-unit stock recovery upload has completed; physical reconnect and strict
-verification remain pending. See [the recovery record](stock-18-af24-recovery-2026-10-11.json).
+same-unit stock recovery passed normal strict verification after physical
+reconnect and an independent audit. The new stock display/lifecycle and AF-S
+comparison remain pending. See [the recovery record](stock-18-af24-recovery-2026-10-11.md).
 The procedures below are
 retained as the original test plan, **not instructions to retry AF 2.4 now**.
 The [USB installation record](af-24-upload-2026-10-11.md) still correctly records
@@ -93,7 +94,7 @@ separate observation to collect, not a promise that Sony hides every control.
 
 | Observation | AF 2.4 | Stock 1.8 matched control |
 | --- | --- | --- |
-| USB exact bytes verified before camera | Passed, two full matching reads and independent audit | Prior stock code audited; pending restore resolved by reviewed motion-record policy |
+| USB exact bytes verified before camera | Passed, two full matching reads and independent audit | Latest recovery passed normal strict verification and independent audit before camera use |
 | Still/Movie switch; exposure mode | P/A reported; Still/Movie switch unknown | Unreported |
 | Actual AF mode; Pre-AF; focus area; trigger | Unreported | Unreported |
 | Lens ring focus; physical iris; reported f-number | Rings unreported; no shown f-number in P/A; dark view | Unreported |

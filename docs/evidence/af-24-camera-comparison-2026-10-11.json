@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "owner-reported-af-acquisition-failure-stock-recovery-uploaded-awaiting-reconnect-verification",
+  "stage": "owner-reported-af-acquisition-failure-stock-recovery-strictly-verified-camera-baseline-pending",
   "firmwareVersion": "2.4.0",
   "profileID": "contax-zeiss-50-f1-4",
   "imageSHA256": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df",
@@ -80,6 +80,8 @@
   "runtimeFaultOnHardwareProven": false,
   "furtherAF24CameraTestingSuspended": true,
   "counterexampleEvidence": "af-24-camera-counterexamples-2026-10-11.json",
-  "recoveryStatus": "Original same-unit stock application upload completed, native exit 0; physical reconnect and strict verification pending",
-  "recoveryEvidence": "stock-18-af24-recovery-2026-10-11.json"
+  "recoveryStatus": "Original same-unit stock application restored and normal strict USB verification plus independent readback audit passed after physical reconnect",
+  "recoveryEvidence": "stock-18-af24-recovery-2026-10-11.json",
+  "stockRecoveryStrictUSBVerificationPassed": true,
+  "stockRecoveryIndependentAuditPassed": true
 }
