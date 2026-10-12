@@ -17,7 +17,10 @@ to choose and apply another profile. Lens Library remains a secondary gallery/ed
 The new **AF 2.8 candidate is uploaded and strictly byte-verified after physical
 reconnect**, but **camera acceptance failed**: the owner reports frozen preview,
 poor focus response, darker exposure and a later shutdown hang requiring battery
-removal. Further 2.8 trials are suspended and stock recovery is being prepared.
+removal. Further 2.8 trials are suspended. **Original stock 1.8 is now restored
+and strictly byte-verified after physical reconnect**, with a separate readback
+audit. All 128 KiB match the stock snapshot immediately before AF 2.8 installation.
+[Current recovery record](docs/evidence/stock-18-af28-recovery-2026-10-12.md).
 See [the camera failure record](docs/evidence/af-28-camera-failure-2026-10-12.md).
 The software milestone was prepared and tested offline. A pure measured-motion
 observer now preserves coast/reversal after command completion, requires a fresh
@@ -58,7 +61,7 @@ with an independent audit. The owner reports stock AUTO overexposure and a
 selectable P-mode aperture, widest f/2, then one-stop overexposure at physical
 f/1.4 / camera f/2. The reported exposure failure is accepted; the photo was
 not retained and does not block firmware investigation. Exact cause, lifecycle
-and controlled AF-S remain unqualified. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
+and controlled AF-S remain unqualified. [Historical stock exposure record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
 During the earlier stock comparison, camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict

@@ -52,8 +52,8 @@
   "telemetryProbeSeedsHandshakeAndHomedState": true,
   "newFirmwareBuiltForThisDiagnosis": false,
   "hardwareReportsSentForThisDiagnosis": 0,
-  "stockRecoveryStatus": "Original same-unit source verified offline; awaiting owner USB-cap and closed-updater confirmation",
-  "stockRestorationStarted": false,
+  "stockRecoveryStatus": "Original stock 1.8 restored; physical reconnect, strict two-pass native verification and independent audit passed",
+  "stockRestorationStarted": true,
   "stockExposureLimitationsResolved": false,
   "nextCandidateRequires": [
     "Integrated startup and initialization reply ownership evidence",
@@ -74,5 +74,8 @@
     "restoreStarted": false,
     "publicRecoveryBundleChecksumValid": true,
     "nativeCLISignatureValid": true
-  }
+  },
+  "stockRecoveryTransactionID": "1D8FBD3A-7229-4C43-9FA8-EA6600679CF8",
+  "stockRecoveryEvidence": "stock-18-af28-recovery-2026-10-12.json",
+  "stockRecoveryStrictVerificationPassed": true
 }

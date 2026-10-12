@@ -45,8 +45,9 @@ and stock recovery remain unchanged. The software preparation was offline; the
 subsequent authorized native upload and reconnect verification have finished.
 The full pinned application/profile, protected flash and checked factory data
 matched. Later owner camera observations failed lifecycle acceptance. Do not
-install or retry this candidate for further camera trials; original stock
-recovery is being prepared. Historical binary pins and evidence are retained.
+install or retry this candidate for further camera trials. Original stock 1.8
+has been restored and [strictly byte-verified after reconnect](../../../docs/evidence/stock-18-af28-recovery-2026-10-12.md).
+Historical binary pins and evidence are retained.
 
 ```sh
 python3 scripts/build-firmware.py --variant observed-af

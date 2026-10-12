@@ -79,8 +79,11 @@ has not been reverse engineered or demonstrated equivalent.
 
 The owner has been asked to keep the camera off, remove the adapter with power
 disconnected, physically reconnect its USB cap to the Mac and keep the updater
-closed. Original same-unit stock 1.8 recovery is prepared and verified offline. No
-restoration has started; USB-cap readiness is pending owner confirmation.
+closed. The owner subsequently confirmed USB-cap readiness and explicitly
+requested restoration. Original same-unit stock 1.8 upload, post-upload physical
+reconnect, strict two-pass verification and the separate offline audit passed. See
+[the separate recovery transaction](stock-18-af28-recovery-2026-10-12.md). Camera
+trials remain suspended.
 
 All original backup files match their manifests; the full source flash hash is
 `1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01`.

@@ -2,8 +2,9 @@
 
 **Do not continue this AF 2.8 camera procedure.** The owner reports frozen
 preview, poor focus response, darker exposure on a restart and a shutdown hang
-requiring battery removal. Keep the camera off and prepare verified stock
-recovery. See [the failure record](evidence/af-28-camera-failure-2026-10-12.md).
+requiring battery removal. Original stock 1.8 has been restored and
+[strictly byte-verified after reconnect](evidence/stock-18-af28-recovery-2026-10-12.md).
+See [the failure record](evidence/af-28-camera-failure-2026-10-12.md).
 The procedure below is retained for a future reviewed replacement; its planned
 settings are not observations from the failed trial.
 
@@ -13,7 +14,7 @@ owner-confirmed physical reconnect and strict two-pass readback passed. The
 subsequent camera check failed.** See [the live transaction record](evidence/af-28-upload-2026-10-12.md).
 This procedure is not a record of passed camera checks.
 The converter is now available. The current byte-verified hardware image is
-AF 2.8; the earlier stock 1.8 owner-reported exposure failure remains accepted.
+original stock 1.8; the earlier owner-reported stock exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
 
 Frozen AF 2.5 remains held because its `0x34` override assumed unproven
@@ -180,8 +181,10 @@ dist/ea9ctl verify --idle
 An AF backup cannot replace the original stock source. Recovery checks the
 qualified loader and matching unit, writes the saved application slot
 `[0x5000,0x20000)` and metadata, and does not write bootloader code. Restoration
-has previously passed strict readback on this unit. A **2.8-to-stock** round
-trip, interrupted-write/power-loss and bootloader recovery remain unqualified.
+has passed strict readback on this unit, including the October 12
+**2.8-to-stock** round trip. The restored full flash matches the stock snapshot
+immediately before 2.8 installation. Interrupted-write/power-loss and bootloader
+recovery remain unqualified.
 
 ## Historical evidence and result record
 

@@ -69,8 +69,11 @@ The native restore writes `[0x5000,0x20000)` and original START metadata, preser
 the retained upper flash content as well as the main application. The short
 `application.bin` alone is insufficient for exact restoration of the legacy
 upper-row changes. Bootloader, fuse and calibration writes are not performed.
-Stock upload/readback passed earlier on this adapter; AF-to-stock and interrupted
-transfer/power-loss recovery remain physically unqualified. See the
+Stock restoration/readback passed on this adapter after the AF 2.4 failure and
+again after the AF 2.8 failure. The latter's full restored flash also matches the
+stock snapshot immediately before AF 2.8 installation. See
+[the strict 2.8-to-stock recovery record](../../../docs/evidence/stock-18-af28-recovery-2026-10-12.md).
+Interrupted transfer/power-loss and bootloader recovery remain unqualified. See the
 [AF installation/restoration runbook](../../../docs/af-s-test.md).
 
 The vendor binary is attributed to Techart and is not covered by the custom
