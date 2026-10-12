@@ -126,7 +126,13 @@ hold that setting fixed and is unsuitable as a controlled stock exposure
 baseline. Use A with the body at f/2 and set the actual working iris on the lens.
 P/Auto may compensate for an electronic stop-down the passive lens never makes;
 that is an inference for the owner report, not a proven cause without the shot
-settings/original image. A/body-f2 exposure and shutdown remain unverified.
+settings/original image. The next reply reports a correct preview but an
+overexposed saved photo after selecting f/4.5; body versus physical lens control
+is still unconfirmed. Correct preview is not saved-photo qualification. The
+stock body must stay at f/2 when the owner changes the physical ring. If the
+body did stay at f/2, the unperformed electronic stop-down explanation alone
+does not resolve that failure. A/body-f2 saved exposure and shutdown remain
+unverified.
 
 The custom design goal remains fixed accepted camera reporting, known lens
 geometry and unknown physical iris in the app. Acceptance must include saved

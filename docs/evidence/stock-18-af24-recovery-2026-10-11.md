@@ -98,7 +98,29 @@ if motor behavior is normal, then switch off and record saved-photo brightness,
 shutter/ISO/aperture/ring, display/motor shutdown and an available local original
 photo path. [Sony's A-mode explanation](https://www.sony.com/electronics/support/e-mount-body-ilce-1-series/ilce-1/articles/00032637)
 describes holding the selected aperture while the body chooses shutter speed.
-No corrected exposure or normal shutdown is assumed before the owner responds.
+No corrected saved exposure or normal shutdown is assumed before a specific
+owner observation or inspected original supports it.
+
+The owner subsequently replied:
+
+> preview looks correct, but when I switch to a slower f stop such as f4.5 the resulted photo is blown out
+
+The preview is reported correct; a saved photo at the reported f/4.5 change is
+reported overexposed. The owner has not yet identified whether f/4.5 was selected
+on the body, physical lens ring or both. The prescribed A/body-f2 setup is not
+assumed to be the actual setup, and a correctly exposed saved photo at body f2
+has not been reported. Shutter, ISO, compensation, ring, EXIF and shutdown remain
+unverified. The clarification asks which control changed, rather than declaring
+this another firmware fault or a completed exposure test.
+
+If the body changed from f/2 to f/4.5 with the iris unchanged, exposure
+compensation for an unperformed stop-down remains consistent with the symptom.
+For scale, the ideal aperture ratio is `(4.5 / 2)^2 = 5.0625`, about 2.34 stops;
+this is a conditional calculation, not a measured camera adjustment or clipped
+image analysis. Keep the stock body at f/2 and make physical stop-down changes
+on the lens. If only the physical ring changed while the body stayed at f/2,
+that explanation is insufficient and the actual shot settings/original are
+needed. Correct preview brightness alone does not establish saved exposure.
 
 This follow-up sent no hardware reports and uploaded no firmware. Stock remains
 the last verified image; AF 2.4 remains suspended. A later custom version must

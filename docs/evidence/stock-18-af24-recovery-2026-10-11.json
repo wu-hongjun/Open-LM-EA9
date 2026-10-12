@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-18-byte-verified-owner-reported-auto-overexposure-controlled-A-f2-check-pending",
+  "stage": "stock-byte-verified-correct-preview-reported-f45-photo-overexposed-control-clarification-pending",
   "reason": "Owner reported AF 2.4 focus-acquisition failure, dark view and no shown f-number in P/A",
   "transactionID": "0FBD0A31-B440-4033-AD5B-7F105B688DF2",
   "firmwareVersion": "1.8.0",
@@ -39,7 +39,7 @@
   "strictUSBVerificationPassed": true,
   "independentReadbackAuditPassed": true,
   "stockCameraComparisonPerformedAfterThisRecovery": true,
-  "nextAction": "One stock A-mode exposure check with body f/2, physical lens f/1.4, EV 0, Auto ISO and MF/Pre-AF Off if available; record saved exposure and shutdown before AF-S",
+  "nextAction": "Confirm whether f/4.5 was changed on body, physical lens ring or both; stock body remains at f/2 for physical stop-down. Actual shot settings and shutdown remain unverified.",
   "nativeVerificationExitCode": 0,
   "verifiedAtUTC": "2026-10-12T00:03:54.197725+00:00",
   "postRecoveryFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
@@ -65,6 +65,10 @@
     {
       "recordedAtUTC": "2026-10-12T00:10:43.666060+00:00",
       "statement": "slightly better, on AUTO mode, it still somehow overrides the aperture and makes super blown out photos, on P mode I can select the aperture but I can only open to F2.0"
+    },
+    {
+      "recordedAtUTC": "2026-10-12T00:14:16.078232+00:00",
+      "statement": "preview looks correct, but when I switch to a slower f stop such as f4.5 the resulted photo is blown out"
     }
   ],
   "ownerReportedExposureModes": [
@@ -112,5 +116,15 @@
   },
   "originalPModeProcedureSupersededForStockExposureBaseline": true,
   "hardwareReportsSentForThisObservationFollowup": 0,
-  "newFirmwareUploadedForThisObservationFollowup": false
+  "newFirmwareUploadedForThisObservationFollowup": false,
+  "ownerReportedPreviewLooksCorrect": true,
+  "ownerReportedPhotoOverexposedAfterF45Change": true,
+  "ownerReportedChangedFNumber": "f/4.5",
+  "controlChangedForReportedF45": null,
+  "bodyStayedAtF2DuringReportedF45Shot": null,
+  "savedPhotoExposureAtBodyF2Confirmed": null,
+  "f45OverexposureCauseProven": false,
+  "conditionalApertureRatioBodyF2ToF45": 5.0625,
+  "conditionalApertureDifferenceStopsBodyF2ToF45": 2.3398500028846247,
+  "conditionalRatioIsMeasuredCameraBehavior": false
 }
