@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-byte-verified-correct-preview-reported-f45-photo-overexposed-control-clarification-pending",
+  "stage": "stock-byte-verified-camera-only-f45-change-confirmed-body-f2-saved-exposure-and-shutdown-pending",
   "reason": "Owner reported AF 2.4 focus-acquisition failure, dark view and no shown f-number in P/A",
   "transactionID": "0FBD0A31-B440-4033-AD5B-7F105B688DF2",
   "firmwareVersion": "1.8.0",
@@ -39,7 +39,7 @@
   "strictUSBVerificationPassed": true,
   "independentReadbackAuditPassed": true,
   "stockCameraComparisonPerformedAfterThisRecovery": true,
-  "nextAction": "Confirm whether f/4.5 was changed on body, physical lens ring or both; stock body remains at f/2 for physical stop-down. Actual shot settings and shutdown remain unverified.",
+  "nextAction": "Keep stock camera at f/2 in A mode and use the physical lens ring for working aperture; establish saved exposure at body f/2 and shutdown before AF-S.",
   "nativeVerificationExitCode": 0,
   "verifiedAtUTC": "2026-10-12T00:03:54.197725+00:00",
   "postRecoveryFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
@@ -69,6 +69,11 @@
     {
       "recordedAtUTC": "2026-10-12T00:14:16.078232+00:00",
       "statement": "preview looks correct, but when I switch to a slower f stop such as f4.5 the resulted photo is blown out"
+    },
+    {
+      "recordedAtUTC": "2026-10-12T00:26:24.706105+00:00",
+      "statement": "Camera aperture only",
+      "clarifies": "Control changed for the reported f/4.5 overexposed photo"
     }
   ],
   "ownerReportedExposureModes": [
@@ -120,11 +125,13 @@
   "ownerReportedPreviewLooksCorrect": true,
   "ownerReportedPhotoOverexposedAfterF45Change": true,
   "ownerReportedChangedFNumber": "f/4.5",
-  "controlChangedForReportedF45": null,
-  "bodyStayedAtF2DuringReportedF45Shot": null,
+  "controlChangedForReportedF45": "Camera aperture only",
+  "bodyStayedAtF2DuringReportedF45Shot": false,
   "savedPhotoExposureAtBodyF2Confirmed": null,
   "f45OverexposureCauseProven": false,
   "conditionalApertureRatioBodyF2ToF45": 5.0625,
   "conditionalApertureDifferenceStopsBodyF2ToF45": 2.3398500028846247,
-  "conditionalRatioIsMeasuredCameraBehavior": false
+  "conditionalRatioIsMeasuredCameraBehavior": false,
+  "physicalLensRingChangedForReportedF45": false,
+  "f45OverexposureConsistentWithUnperformedElectronicStopDown": true
 }

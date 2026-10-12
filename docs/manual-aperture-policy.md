@@ -127,8 +127,11 @@ baseline. Use A with the body at f/2 and set the actual working iris on the lens
 P/Auto may compensate for an electronic stop-down the passive lens never makes;
 that is an inference for the owner report, not a proven cause without the shot
 settings/original image. The next reply reports a correct preview but an
-overexposed saved photo after selecting f/4.5; body versus physical lens control
-is still unconfirmed. Correct preview is not saved-photo qualification. The
+overexposed saved photo after selecting f/4.5; the owner subsequently confirmed
+“Camera aperture only.” The physical iris
+was unchanged during that adjustment, consistent with the unperformed electronic
+stop-down explanation. Exact exposure adjustment and image clipping remain
+unmeasured. Correct preview is not saved-photo qualification. The
 stock body must stay at f/2 when the owner changes the physical ring. If the
 body did stay at f/2, the unperformed electronic stop-down explanation alone
 does not resolve that failure. A/body-f2 saved exposure and shutdown remain
