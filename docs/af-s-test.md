@@ -4,7 +4,10 @@
 Further 2.4 camera tests are suspended. The report also includes a dark view and
 no shown f-number in P/A; actual AF/exposure settings are unknown. Stock 1.8
 recovery passed strict verification after physical reconnect and an independent
-audit. Its new display/lifecycle and controlled AF-S comparison remain pending.
+audit. The owner reports stock AUTO overexposure and a P-mode aperture display,
+widest f/2. Stock exposure checks must use A with the camera held at f/2 and the
+physical iris set on the lens, following Techart's normal setting. Corrected
+exposure, lifecycle and controlled AF-S remain pending.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md) and
 [completed recovery record](evidence/stock-18-af24-recovery-2026-10-11.md).
 The installation/camera steps below remain a historical runbook, not a request

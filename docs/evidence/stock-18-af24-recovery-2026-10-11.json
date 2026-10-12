@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-18-restored-and-strictly-byte-verified-camera-baseline-pending",
+  "stage": "stock-18-byte-verified-owner-reported-auto-overexposure-controlled-A-f2-check-pending",
   "reason": "Owner reported AF 2.4 focus-acquisition failure, dark view and no shown f-number in P/A",
   "transactionID": "0FBD0A31-B440-4033-AD5B-7F105B688DF2",
   "firmwareVersion": "1.8.0",
@@ -38,8 +38,8 @@
   "strictUSBVerificationPerformed": true,
   "strictUSBVerificationPassed": true,
   "independentReadbackAuditPassed": true,
-  "stockCameraComparisonPerformedAfterThisRecovery": false,
-  "nextAction": "Stock loaded-lens lifecycle/display check, then one AF-S attempt after normal observations",
+  "stockCameraComparisonPerformedAfterThisRecovery": true,
+  "nextAction": "One stock A-mode exposure check with body f/2, physical lens f/1.4, EV 0, Auto ISO and MF/Pre-AF Off if available; record saved exposure and shutdown before AF-S",
   "nativeVerificationExitCode": 0,
   "verifiedAtUTC": "2026-10-12T00:03:54.197725+00:00",
   "postRecoveryFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
@@ -60,5 +60,57 @@
   "stockQualificationRefreshed": true,
   "staleCustomAppliedLensRemoved": true,
   "publishedFirmwareVersion": "1.8.0",
-  "verifyLogSHA256": "877dbce50f2deac6339df60a3da02cd3016a04695cea8e4ccb614fc10612aa7e"
+  "verifyLogSHA256": "877dbce50f2deac6339df60a3da02cd3016a04695cea8e4ccb614fc10612aa7e",
+  "ownerObservations": [
+    {
+      "recordedAtUTC": "2026-10-12T00:10:43.666060+00:00",
+      "statement": "slightly better, on AUTO mode, it still somehow overrides the aperture and makes super blown out photos, on P mode I can select the aperture but I can only open to F2.0"
+    }
+  ],
+  "ownerReportedExposureModes": [
+    "AUTO",
+    "P"
+  ],
+  "ownerReportedAUTOPhotosOverexposed": true,
+  "ownerReportedSelectableApertureInP": true,
+  "ownerReportedWidestSelectableCameraApertureInP": "f/2.0",
+  "actualPhysicalApertureDuringReportedShots": null,
+  "actualShutterSpeedDuringReportedShots": null,
+  "actualISODuringReportedShots": null,
+  "actualExposureCompensationDuringReportedShots": null,
+  "actualRequestedApertureInAUTO": null,
+  "actualFocusModeDuringReportedShots": null,
+  "actualPreAFDuringReportedShots": null,
+  "startupNormal": null,
+  "quietTenSecondIdle": null,
+  "shutdownNormal": null,
+  "savedPhotoPath": null,
+  "EXIFInspected": false,
+  "savedPhotoClippingVerified": false,
+  "matchedStockControlPerformed": false,
+  "stockCameraQualified": false,
+  "autoOverexposureCauseProven": false,
+  "manufacturerNormalCameraAperture": "f/2.0",
+  "manufacturerPhysicalApertureControl": "Manual lens ring",
+  "stockF2DisplayIsPhysicalIrisMeasurement": false,
+  "plannedNextCheck": {
+    "firmware": "Verified stock 1.8.0",
+    "exposureMode": "still-photo A",
+    "cameraAperture": "f/2.0",
+    "physicalLensAperture": "f/1.4",
+    "exposureCompensationEV": 0,
+    "ISO": "Auto",
+    "lighting": "ordinary indoor light",
+    "focusMode": "MF if available",
+    "preAF": "Off if available",
+    "photos": 1,
+    "completion": "switch off and record display/motor shutdown"
+  },
+  "sources": {
+    "techartManual": "https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf",
+    "sonyAperturePriority": "https://www.sony.com/electronics/support/e-mount-body-ilce-1-series/ilce-1/articles/00032637"
+  },
+  "originalPModeProcedureSupersededForStockExposureBaseline": true,
+  "hardwareReportsSentForThisObservationFollowup": 0,
+  "newFirmwareUploadedForThisObservationFollowup": false
 }

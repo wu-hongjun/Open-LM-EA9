@@ -83,5 +83,8 @@
   "recoveryStatus": "Original same-unit stock application restored and normal strict USB verification plus independent readback audit passed after physical reconnect",
   "recoveryEvidence": "stock-18-af24-recovery-2026-10-11.json",
   "stockRecoveryStrictUSBVerificationPassed": true,
-  "stockRecoveryIndependentAuditPassed": true
+  "stockRecoveryIndependentAuditPassed": true,
+  "stockComparisonOwnerReportedAUTOOverexposure": true,
+  "stockComparisonOwnerReportedWidestCameraAperture": "f/2.0",
+  "stockExposureCheckAWithBodyF2Pending": true
 }

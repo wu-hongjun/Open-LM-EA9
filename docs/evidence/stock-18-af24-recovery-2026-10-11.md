@@ -3,7 +3,9 @@
 October 11, 2026. Original same-unit stock recovery upload completed normally;
 the owner physically reconnected the USB cap. **Normal native strict verification
 and the independent readback audit passed.** Stock 1.8.0 is restored; the new
-camera display/lifecycle and controlled AF-S comparison remain pending. The
+owner now reports selectable aperture in P with a widest value of f/2.0 and
+blown-out photos in AUTO. A controlled A/f2 exposure check, lifecycle observations
+and AF-S comparison remain pending. The
 [machine-readable record](stock-18-af24-recovery-2026-10-11.json) carries the
 observed transaction state, counts and digests. The
 [AF 2.4 failure investigation](af-24-camera-failure-2026-10-11.md) retains the
@@ -62,14 +64,57 @@ This transaction used normal strict verification, not the earlier reviewed
 saved-motion resolution. Successful USB verification establishes restored bytes;
 it does not substitute for the planned camera baseline below.
 
-## Planned stock camera comparison
+## Owner stock observation and exposure-procedure correction
+
+After the verified recovery, the owner replied:
+
+> slightly better, on AUTO mode, it still somehow overrides the aperture and makes super blown out photos, on P mode I can select the aperture but I can only open to F2.0
+
+This establishes an owner-reported stock aperture display/range and AUTO
+overexposure, not inspected image clipping or measured AF performance. Actual
+physical iris, requested AUTO aperture, shutter/ISO, compensation, focus mode,
+Pre-AF, startup, ten-second idle and shutdown remain unverified. “Slightly better”
+is not converted into an acquisition-time, focus-lock or sharpness result.
+
+The [official Techart manual](https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf)
+says to return the camera to f/2 and set the working iris on the lens. This is
+a virtual camera operating value, not a physical f/2 restriction. The recovered
+stock boot routine `0x8a8c` also declares descriptor `0x18`, converted by `0x66b8`
+to AV `0x1200`, f/2. The aperture-coded menu remains at `0x56cc` in the
+[instruction-validated factory model](../../research/stock-1.8/stock_model.c).
+
+The initial P recommendation was incomplete for this stock exposure comparison.
+P/Auto can select another camera aperture while the passive iris stays unchanged;
+compensation for that unperformed stop-down is a plausible overexposure cause.
+It is not proven for these photos because the selected value and image/settings
+are unavailable. F/2 in the camera does not mean f/2 on the lens or imply that
+the f/1.4 lens is incompatible. The missing aperture in failed AF 2.4 remains a
+separate unresolved communication symptom.
+
+The next check supersedes P for the stock exposure baseline: ordinary indoor
+light, still-photo **A**, body **f/2**, physical lens **f/1.4**, exposure
+compensation **0**, Auto ISO, MF and Pre-AF Off if available. Take one photo only
+if motor behavior is normal, then switch off and record saved-photo brightness,
+shutter/ISO/aperture/ring, display/motor shutdown and an available local original
+photo path. [Sony's A-mode explanation](https://www.sony.com/electronics/support/e-mount-body-ilce-1-series/ilce-1/articles/00032637)
+describes holding the selected aperture while the body chooses shutter speed.
+No corrected exposure or normal shutdown is assumed before the owner responds.
+
+This follow-up sent no hardware reports and uploaded no firmware. Stock remains
+the last verified image; AF 2.4 remains suspended. A later custom version must
+qualify fixed aperture reporting against metering and AF under A, P and Auto,
+including manual stop-down; it cannot rely on the prototype's app label to
+establish camera behavior.
+
+## Initial requested stock cycle, retained as history
 
 Start with a single lifecycle/display observation, after verification:
 
 1. With the camera off and its USB cable disconnected, move the adapter from
    the cap to the A7C II with the C/Y-to-M converter and 50mm f/1.4. Support the
    lens and set its focus ring to infinity and physical iris to f/1.4.
-2. Select still-photo P, MF and Pre-AF Off if available. Switch on without
+2. The original request specified still-photo P, MF and Pre-AF Off if available;
+   P is superseded by A/body f2 for the next stock exposure check. Switch on without
    shutter/AF-ON input. Record startup/errors, motor movement and whether it
    stops, the exact aperture display, view brightness, shutter speed and ISO.
    Unknown/unavailable settings remain unverified; stock lens metadata is not

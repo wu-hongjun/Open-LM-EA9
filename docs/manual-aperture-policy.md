@@ -111,3 +111,25 @@ before shooting. The numeric report may also affect camera AF assumptions, so
 stopped-down behavior remains part of camera qualification. No F-- sentinel or
 unknown-camera-aperture firmware is introduced. The [factory-derived AF
 baseline](reverse-engineering/factory-af-baseline.md) is a separate motion change.
+
+## Stock exposure observation after AF 2.4 rollback
+
+AF 2.4 later failed the owner's focus attempt, with a dark view and no shown
+f-number in P/A; it remains suspended. Original stock 1.8 recovery passed normal
+strict verification and an independent audit before camera use. The owner then
+reported blown-out AUTO photos and selectable camera aperture in P, widest f/2.
+See the [recovery and observation record](evidence/stock-18-af24-recovery-2026-10-11.md).
+
+Stock's f/2 is the manufacturer's normal virtual camera setting. It does not
+limit the physical iris or measure it. The original P/Auto comparison does not
+hold that setting fixed and is unsuitable as a controlled stock exposure
+baseline. Use A with the body at f/2 and set the actual working iris on the lens.
+P/Auto may compensate for an electronic stop-down the passive lens never makes;
+that is an inference for the owner report, not a proven cause without the shot
+settings/original image. A/body-f2 exposure and shutdown remain unverified.
+
+The custom design goal remains fixed accepted camera reporting, known lens
+geometry and unknown physical iris in the app. Acceptance must include saved
+exposure and EXIF in A/P/Auto and physical stop-down, alongside AF. The failed
+2.4 display is not a demonstrated unknown-aperture mode. No new firmware or
+USB operation was performed for this observation follow-up.

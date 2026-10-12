@@ -35,8 +35,9 @@ remain unverified. Original same-unit stock **1.8.0 was restored for comparison*
 application slot matched the original backup; the owner reported much less
 hunting. After the failed AF 2.4 attempt, the original stock 1.8 application
 has been restored again and **strictly byte-verified after physical reconnect**,
-with an independent audit. Its new display/lifecycle and controlled AF-S
-comparison are pending. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
+with an independent audit. The owner reports stock AUTO overexposure and a
+selectable P-mode aperture, widest f/2. A controlled A/body-f2 exposure check,
+lifecycle and AF-S comparison remain pending. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
 During the earlier stock comparison, camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict
