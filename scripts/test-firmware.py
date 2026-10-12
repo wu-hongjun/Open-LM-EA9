@@ -23,12 +23,12 @@ tests = {
     "init": ["hosttest/test_init.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
     "focus": ["hosttest/test_focus.c", "src/focus_map.c"],
     "focus_dist": ["hosttest/test_focus_dist.c", "src/focus_dist.c", "-lm"],
-    "focus_pred": ["hosttest/test_focus_pred.c", "src/focus_pred.c"],
+    "focus_pred": ["hosttest/test_focus_pred.c", "src/focus_pred.c", "src/focus_motion.c"],
     "af_control": ["../tests/test_af_control.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
     "io_guard": ["hosttest/test_io_guard.c", "src/io_guard.c"],
     "af_reconciliation": ["../tests/test_af_reconciliation.c", "src/af_reference.c", "src/af_completion.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
-    "af_lifecycle": ["-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_lifecycle.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
-    "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c"],
+    "af_lifecycle": ["-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_lifecycle.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c", "src/focus_motion.c"],
+    "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c", "src/focus_motion.c"],
     "profile": ["../tests/test_profile.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
 }
 # Reuse the production-main lifecycle/dispatch checks with the new backend.
@@ -44,6 +44,10 @@ tests['event_queue'] = ['-DEA9_NO_LOG', '-fsanitize=address,undefined', '-fno-sa
 tests['factory_retarget'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=all',
                             'hosttest/test_factory_retarget.c', 'src/factory_servo.c',
                             'src/factory_af.c', 'src/io_guard.c', 'src/focus_map.c']
+tests['focus_motion'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=all',
+                         'hosttest/test_focus_motion.c', 'src/focus_motion.c']
+tests['motion_telemetry'] = [part if part != 'hosttest/test_af_lifecycle.c'
+                           else 'hosttest/test_motion_telemetry.c' for part in tests['factory_lifecycle']]
 for name, files in tests.items():
     binary = OUT / f"test_{name}"
     subprocess.run(COMMON + files + ["-o", str(binary)], cwd=BASE, check=True)
@@ -52,6 +56,8 @@ for name, files in tests.items():
     variants = [["nobody"], ["slowbody"]] if name == "nobody" else [[]]
     if name == 'af_queue_retarget': variants = [[x] for x in ['stop-fifo', 'stop-pending', 'stop-coalesce', 'stop-reordered', 'repeat', 'single']]
     if name == 'factory_retarget': variants = [[str(x)] for x in range(4)]
+    if name == 'focus_motion': variants = [[x] for x in ['coast','slow','reversal','stale','vd-gap','no-vd','wrap','limits','reset','burst','resume-history','sub-resolution-jitter','slow-frames']]
+    if name == 'motion_telemetry': variants = [[x] for x in ['coast40','coast5952','reverse-stop','gap-reset']]
     if name == "io_guard": variants = [[x] for x in ["ready", "timeout", "wrap", "frozen"]]
     if name == "af_lifecycle": variants = [[str(x)] for x in range(13)]
     if name == "af_hardening": variants = [[str(x)] for x in range(21)]
@@ -78,7 +84,7 @@ for case in range(11):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x27u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x28u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 # This isolated generated library is never the owner's normal app state.
 # Materialize it offline, then select 50mm for the zoom fixture as well.

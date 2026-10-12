@@ -27,18 +27,20 @@ assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
 Offline build and checks:
 
 ```sh
-python3 scripts/build-firmware.py --variant polished-af
+python3 scripts/build-firmware.py --variant observed-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-Current source builds **AF 2.7** under `ea9/build/polished`, as camera BCD 0x27
-and loader 2.7.0. It preserves the audited 2.6 aperture/opaque-query policy,
-fixes Stop queue overflow/order and repeated-target budgeting, and gates unused
-release diagnostics. It has 524 bytes of flash margin and saves 620 bytes of
-static RAM. See [the candidate](candidates/2.7.0/README.md) and
-[the overnight audits, validation and open telemetry issue](../docs/evidence/overnight-audit-polish-2026-10-12.md).
-No hardware operations occurred. It is an offline candidate, not camera-qualified.
+Current source builds **AF 2.8** under `ea9/build/observed`, with camera BCD 0x28
+and loader 2.8.0. It uses a pure measured-motion observer through completion,
+coast and reversal, invalidates stale history, and copies the same measured
+position to both fields on the factory backend as REA recovers. The controller,
+wrapper, drivers, aperture and completion law are unchanged from 2.7.
+It retains 400 bytes of flash headroom and uses 2,200 bytes static RAM. See
+[the candidate](candidates/2.8.0/README.md) and
+[implementation, original-instruction evidence and limits](../docs/evidence/af-28-motion-telemetry-2026-10-12.md).
+No hardware operation occurred; camera/noise/settling qualification remains open.
 The following 2.4 observations are historical. It uses a modular factory-derived controller, tested directly
 against the original instructions. Its authorized upload and strict byte verification passed after physical
 reconnect, including an independent audit. **Its owner focus attempt failed**:
@@ -50,10 +52,10 @@ matched AF-S baseline remain pending. See [the failure and controller counterexa
 [completed recovery record](../docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 and [historical USB record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
-Templates/pins for 2.0–2.6 remain frozen; those build-script variants verify
+Templates/pins for 2.0–2.7 remain frozen; those build-script variants verify
 committed size/digest instead of compiling changed source under old versions.
-All eight custom versions remain admitted for backed-up upload, reconnect
-verification and stock restoration. The 2.2–2.7 profile row is `0x9f00` and
+All nine custom versions remain admitted for backed-up upload, reconnect
+verification and stock restoration. The 2.2–2.8 profile row is `0x9f00` and
 application writes stop at `0xa000`.
 See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
 [offline build/test record](../docs/evidence/software-polish-2026-10-11.md).

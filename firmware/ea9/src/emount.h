@@ -189,6 +189,9 @@ void em_set_motion(uint8_t moving, uint8_t dir, int32_t pos);
 /* Message 0x06 payload[32..38]: push one frame-to-frame position difference
  * into the seven-deep velocity history, newest last. */
 void em_push_velocity(int32_t delta);
+/* Discard history after a coordinate reset or missing observation; zeros are
+ * an empty history, not fabricated measurements of missed frames. */
+void em_clear_velocity(void);
 
 /* Message 0x05's focus reports: the subject distance as a distance code, the
  * same distance as a coarse signed byte, the coarse position, and whether the

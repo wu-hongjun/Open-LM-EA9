@@ -92,3 +92,13 @@ app correction as AF 2.7/app 0.10.0. The correctness lane performed an
 and confirming correction of an intermediate Stop-ordering issue. See
 [validation and the remaining motion-telemetry/physical qualification limits](../evidence/overnight-audit-polish-2026-10-12.md).
 Frozen releases, stock recovery and private owner state remain preserved.
+
+## AF 2.8 measured-motion follow-up
+
+The correctness lane independently checked REA's frame-sync/completion findings
+and the new pure observer, reproduced and helped correct partial history after
+resume, then reviewed anchored displacement, stale windows, reference reset
+and transmitted event/motion consistency. See
+[the independent review](af28-motion-telemetry-review-2026-10-12.md) and
+[root integration/validation](../evidence/af-28-motion-telemetry-2026-10-12.md).
+All work was offline. Physical noise, settling and camera AF remain unqualified.

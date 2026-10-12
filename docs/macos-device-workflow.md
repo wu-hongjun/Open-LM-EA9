@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.10.0, build 13
+# Device workflow: prototype 0.11.0, build 14
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -22,8 +22,8 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 2.7 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` selects 2.7; plain `apply` selects metadata-only 2.0.
+new AF 2.8 is a separate **USB tools → Experimental autofocus** action.
+The CLI `apply-af` selects 2.8; plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading
 unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,

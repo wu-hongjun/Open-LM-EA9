@@ -37,6 +37,7 @@
 #include "focus_map.h"
 #include "focus_dist.h"
 #include "focus_pred.h"
+#include "focus_motion.h"
 #include "trail.h"
 #include "vdd.h"
 
@@ -191,10 +192,13 @@ static uint8_t focus_cmd_target(const struct em_focus_cmd *c, int32_t *out);
 static void    focus_exec(const struct em_focus_cmd *c);
 static void    focus_answer_queries(void);
 static void focus_hist_page(uint32_t page);
-/* Where focus is heading, and how fast.  Feeds the two forward-looking fields
- * the stock leaves empty: message 0x06's one-frame-ahead position and message
- * 0x05's frames-remaining countdown. */
+/* Upstream predictor retained for the legacy backend. Factory status copies
+ * the measured position to both fields. Neither predictor nor command lifetime
+ * is the measured-motion observer; aperture countdown is unrelated to focus. */
+#ifndef EA9_FACTORY_AF
 static struct focus_pred g_pred;
+#endif
+static struct focus_motion g_motion;
 static void focus_report(void);
 static void build_marker_page(uint32_t page);
 static void trace_page(uint32_t page, unsigned k, const struct servo_result *r);
@@ -420,7 +424,6 @@ static void pump(int32_t pos)
 		/* Sample BEFORE reporting, so the forecast published this frame
 		 * is built on the position published this frame and not on the
 		 * previous one. */
-		focus_pred_sample(&g_pred, pos, millis());
 		focus_report_at(pos);
 	}
 	em_poll();
@@ -488,6 +491,7 @@ static void motor_home(void)
     /* Commit only after both stages and a final fault-free encoder read. */
     abs_encoder_track_reset();
     if (io_stop_motion()) { g_reference.phase = EA9_HOME_FAILED; return; }
+    focus_motion_reset(&g_motion);
     g_homed = 1;
     ea9_af_end_motion(&g_af_state);
 }
@@ -708,11 +712,6 @@ static uint8_t  g_abort_by_stop;
  * a Stop, a Scan, a Drive.  Handed forward so nothing is lost when the leg
  * unwinds. */
 
-/* The last position reported, so the velocity history is a difference rather
- * than a level. */
-static int32_t             g_last_reported;
-static uint32_t            g_last_velocity_vd;
-
 struct focus_rec {
 	int32_t  delta;
 	uint16_t ms;
@@ -743,28 +742,33 @@ static void focus_report_at(int32_t counts)
 	 * issues its message 0x04 targets inside the travel we advertise, so
 	 * reporting from a different floor would put our position and its
 	 * targets 48 units apart. */
+	uint32_t now = millis();
+	int8_t history = focus_motion_sample(&g_motion, counts, now,
+	                                      em_vd_edges, em_frame_period_ms);
+#ifdef EA9_FACTORY_AF
+	/* REA 0x5120 copies the measured position to both fields. A disabled
+	 * target predictor must not stand in for physical rest or direction. */
+	int32_t ahead = counts;
+#else
+	focus_pred_sample(&g_pred, counts, now);
 	int32_t ahead = focus_pred_ahead(&g_pred, counts, em_frame_period_ms);
-	uint8_t moving;
+#endif
+	/* No proven unknown wire encoding. Use the existing moving/just-stopped
+	 * state until a fresh quiet interval establishes resolution-limited rest. */
+	uint8_t moving = !g_motion.known || g_motion.moving;
+	uint8_t direction = g_motion.direction > 0 ? 0x02u :
+	                    g_motion.direction < 0 ? 0x04u : 0;
 
 	em_set_focus_position(focus_counts_to_em06(counts),
 	                      focus_counts_to_em06(ahead));
 
-	/* Moving, or at rest?  The forecast differing from the position is the
-	 * same fact the body reads out of pl[2..3] against pl[20..21], so it is
-	 * the honest source for the status byte -- a flag kept separately could
-	 * contradict the very frame carrying it. */
-	moving = (ahead != counts);
-	em_set_motion(moving, moving ? (ahead > counts ? 0x02u : 0x04u) : 0x00u,
+	em_set_motion(moving, direction,
 	              focus_counts_to_em06(counts));
 
 	/* The velocity history the body follows a move with: one frame-to-frame
 	 * difference per frame, newest last. */
-	uint32_t frame = em_vd_edges;
-	if (frame != g_last_velocity_vd) {
-		em_push_velocity((counts - g_last_reported) / FOCUS_COUNTS_PER_UNIT);
-		g_last_reported = counts;
-		g_last_velocity_vd = frame;
-	}
+	if (history < 0) em_clear_velocity();
+	else if (history > 0) em_push_velocity(g_motion.delta);
 
 	/* And the same state in message 0x05, in units the body can use without
 	 * knowing this lens: the subject distance, and the in-motion flag. */
@@ -880,7 +884,9 @@ static uint8_t focus_retarget(int32_t *target)
 
 	g_last_op = c.op;
 	g_last_target = c.target;
+#ifndef EA9_FACTORY_AF
 	focus_pred_retarget(&g_pred, want);
+#endif
 	*target = want;
 	return 1;
 }
@@ -928,7 +934,9 @@ static uint8_t focus_run(int32_t want, uint16_t target_u,
 	 * internal start+delta -- they differ by whatever the encoder moved
 	 * between the two reads, and the field the body sees should be bounded
 	 * by what it asked for. */
+#ifndef EA9_FACTORY_AF
 	focus_pred_begin(&g_pred, here, want, millis());
+#endif
 #ifdef EA9_FACTORY_AF
     factory_servo_move_to(want, cfg, &r);
 #else
@@ -938,7 +946,9 @@ static uint8_t focus_run(int32_t want, uint16_t target_u,
 	/* Unsafe feedback faults inhibit later drive. A healthy bounded deadline
 	 * or no-drive resolution result is actuator termination, not focus lock. */
 	if (ea9_af_note_result(&g_af_state, r.outcome) || g_af_state.shutdown) motor_release();
+#ifndef EA9_FACTORY_AF
 	focus_pred_end(&g_pred);
+#endif
 	focus_report();
 
 	for (i = 0; i < 16; i++) {
@@ -1301,8 +1311,11 @@ int main(void)
 
 	abs_encoder_set_reference();
 	abs_encoder_track_reset();
+	focus_motion_reset(&g_motion);
 
 	for (;;) {
+		/* Refresh idle feedback before a pending status frame is sent. */
+		focus_report();
 		em_poll();
 
 #ifndef EA9_NO_LOG
@@ -1441,9 +1454,7 @@ int main(void)
 			step = 1;
 		}
 		if (step == 1) {
-			/* Report first: the body is told where we are on every
-			 * frame, whether or not it ever commands a move. */
-			focus_report();
+			/* Feedback was refreshed before em_poll at the top of the loop. */
 			focus_answer_queries();
 
 			/* An instruction the retarget hook handed forward

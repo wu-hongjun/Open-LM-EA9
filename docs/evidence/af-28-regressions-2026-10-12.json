@@ -1,0 +1,302 @@
+{
+  "firmware": "2.8.0",
+  "status": "passed-offline-not-hardware-qualified",
+  "hardwareReportsSent": 0,
+  "frozen26SourceGitCommit": "d023745022e9375c54282221be8d6fee4df2ad61",
+  "opaqueQueryCoverage": "Opaque 0x34: 56 operand/length/sequence cases, 2 missing-payload cases; exact stock response bytes and consumed snapshot preserved.",
+  "originalInstructionFullReplyCases": 32,
+  "originalInstructionImageSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "comparedReplyFramesSHA256": "c85600256e5b4d3cd184073a83a45e2a298fc9bfcd93a1f5166421abd93862fa",
+  "stockInitReplySequencePreserved": true,
+  "originalSenderChecksumExecuted": true,
+  "missingOperandRejected": true,
+  "message34Meaning": "unknown, opaque transport operand",
+  "frozen25NegativeControlDetected": true,
+  "frozen25SourceGitCommit": "7efac6b152f1c9aa9a26e483acfc7fe8cd40e257",
+  "retainedControllerAndApertureSourcesMatch26": true,
+  "queueRetargetRegressions": [
+    {
+      "source": "current",
+      "case": "stop-fifo",
+      "exitCode": 0,
+      "output": "stop-fifo idle_stops=1 transmitted_events=2 transmitted_stop_ack=1",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "stop-pending",
+      "exitCode": 0,
+      "output": "stop-pending idle_stops=1 transmitted_events=2 transmitted_stop_ack=1",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "stop-coalesce",
+      "exitCode": 0,
+      "output": "stop-coalesce idle_stops=3 transmitted_events=2 transmitted_stop_ack=1",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "stop-reordered",
+      "exitCode": 0,
+      "output": "stop-reordered idle_stops=2 transmitted_events=2 transmitted_stop_ack=1",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "repeat",
+      "exitCode": 0,
+      "output": "repeat fault=0 elapsed_ms=436 position=5829.692 retargets=0 outcome=8 stop_contacts=0 duty=0",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "single",
+      "exitCode": 0,
+      "output": "single fault=0 elapsed_ms=437 position=5805.739 retargets=0 outcome=8 stop_contacts=0 duty=0",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen26",
+      "case": "stop-fifo",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "Stop acknowledgement/order lost: event=1 code=0x1d"
+    },
+    {
+      "source": "frozen26",
+      "case": "repeat",
+      "exitCode": 1,
+      "output": "repeat fault=2 elapsed_ms=332 position=4232.627 retargets=16 outcome=2 stop_contacts=0 duty=0",
+      "diagnostic": "Repeated target faulted/restarted"
+    }
+  ],
+  "telemetryRegressions": [
+    {
+      "source": "current",
+      "case": "coast40",
+      "exitCode": 0,
+      "output": "coast40 position=50.945 velocity=1.355 moving=1\ntransmitted motion coast40: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "coast5952",
+      "exitCode": 0,
+      "output": "coast5952 position=5830.215 velocity=6.071 moving=1\ntransmitted motion coast5952: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "reverse-stop",
+      "exitCode": 0,
+      "output": "transmitted motion reverse-stop: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "gap-reset",
+      "exitCode": 0,
+      "output": "transmitted motion gap-reset: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen27",
+      "case": "coast40",
+      "exitCode": 1,
+      "output": "coast40 position=49.590 velocity=1.449 moving=0",
+      "diagnostic": "Coast reported at rest"
+    },
+    {
+      "source": "frozen27",
+      "case": "coast5952",
+      "exitCode": 1,
+      "output": "coast5952 position=5824.144 velocity=6.311 moving=0",
+      "diagnostic": "Coast reported at rest"
+    }
+  ],
+  "frozen27SourceGitCommit": "6d8440750eb3efa1cf24dbce2d4e27c3e937600c",
+  "simulatedTargets": [
+    {
+      "target": 4,
+      "end": 0,
+      "outcome": 7,
+      "ms": 2,
+      "duty_peak": 0,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 42,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 0.0
+    },
+    {
+      "target": 40,
+      "end": 42,
+      "outcome": 0,
+      "ms": 187,
+      "duty_peak": 215,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 1.639
+    },
+    {
+      "target": 100,
+      "end": 100,
+      "outcome": 0,
+      "ms": 78,
+      "duty_peak": 237,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 0.384
+    },
+    {
+      "target": 400,
+      "end": 403,
+      "outcome": 0,
+      "ms": 162,
+      "duty_peak": 475,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 2.214
+    },
+    {
+      "target": 1000,
+      "end": 1002,
+      "outcome": 0,
+      "ms": 154,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 2.454
+    },
+    {
+      "target": 3000,
+      "end": 3007,
+      "outcome": 0,
+      "ms": 253,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 3.989
+    },
+    {
+      "target": 5000,
+      "end": 5006,
+      "outcome": 0,
+      "ms": 364,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 0,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 4.685
+    },
+    {
+      "target": 5952,
+      "end": 5762,
+      "outcome": 8,
+      "ms": 378,
+      "duty_peak": 1187,
+      "io_fault": 0,
+      "session_fault": 0,
+      "completion_event": 29,
+      "next_motion_allowed": 1,
+      "subsequent_outcome": 0,
+      "subsequent_end": 3997,
+      "simulated_stop_contacts": 0,
+      "subsequent_stop_contacts": 0,
+      "simulated_end_velocity": 6.668
+    }
+  ],
+  "cameraExposureQualified": false,
+  "cameraAFQualified": false,
+  "limitations": [
+    "No live USB, camera, optics, metering or electrical timing",
+    "Mechanical model inherited from upstream, not measured on owner unit",
+    "Final I/O helpers stubbed; original handler and sender checksum instructions execute",
+    "Minimum operand bound is not proof of complete 0x34 request grammar",
+    "Unicorn behavior does not prove ARMv6-M instruction legality"
+  ],
+  "sources": {
+    "firmware/ea9/hosttest/shim.c": "4f6b2bac4d6af3a55c3be645fae1601e43551575c13163632d583d2278e0603a",
+    "firmware/ea9/src/emount.c": "1ec2c54ddd22ca0224422990fe55635414885f23b6b69cc571f503e0d94fbf38",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "firmware/ea9/src/lens_aperture.c": "776efa60e52eed74ababed95a0399f3b79baf9125deedc5cc7e8ecd9807428a4",
+    "firmware/tests/test_refined_camera_limits.c": "4f0544e00e7080472ae5ce1d362a6165603cf4502e7fe59f42c5b0fd703c0f9c",
+    "firmware/ea9/hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "firmware/ea9/src/factory_servo.c": "760c6ede751484cc9f234716ca7af0a4839bf6abcfe7373a38656187b0d4e1b6",
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/io_guard.c": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/af_control.c": "7670aa7baa326b588e1ad4e3fba49c52618cd870b1c0cc41860b764936c4ee77",
+    "firmware/ea9/src/af_completion.c": "8e8fd28feeb70515d85aabf07241d37502d96efca839d3ab6886e36cd4b292ae",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b"
+  },
+  "probeSHA256": "e478f3d1cd2ece35ee23858a6175bcda2b7246ee56cbd07413a567d72fc56d40",
+  "motionSources": {
+    "src/main.c": "ce405a9e3b3d80408b6225976c40ff3e9cea0ab1c209c0ce20670d60494dc4a1",
+    "src/focus_motion.c": "e3b210b77aa61698f3c2e6f3e055dac0508d94d230bc204387bc4e1b46b8c920",
+    "src/focus_motion.h": "ce40601bce58b8606d99aa8a3bb979769ab6c13b16c018d0b1e015c4550b3b1e",
+    "hosttest/test_motion_telemetry.c": "ee93ad2f161f030520012c0c3bda0039babd2fcc8d9b63b0d8305d7245255158"
+  },
+  "boundarySources": {
+    "hosttest/test_af_queue_retarget.c": "55bd2ab76bcce607855d85d3ef5cb187534b1e503b83cb2ebb492ca86d5a4561",
+    "hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "hosttest/shim.c": "4f6b2bac4d6af3a55c3be645fae1601e43551575c13163632d583d2278e0603a",
+    "src/emount.c": "1ec2c54ddd22ca0224422990fe55635414885f23b6b69cc571f503e0d94fbf38",
+    "src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "src/lens_aperture.c": "776efa60e52eed74ababed95a0399f3b79baf9125deedc5cc7e8ecd9807428a4",
+    "src/factory_servo.c": "760c6ede751484cc9f234716ca7af0a4839bf6abcfe7373a38656187b0d4e1b6",
+    "src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "src/af_control.c": "7670aa7baa326b588e1ad4e3fba49c52618cd870b1c0cc41860b764936c4ee77",
+    "src/af_reference.c": "c082919c8281e1eadbf739b5d8d8244aba41c96b45d14ae0989b8eb63c110e18",
+    "src/af_completion.c": "8e8fd28feeb70515d85aabf07241d37502d96efca839d3ab6886e36cd4b292ae",
+    "src/io_guard.c": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9",
+    "src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_pred.c": "8043c0ae7b8c44e60c318bc95510bef72933795210aa903d681e693d84788f6d"
+  },
+  "scriptSHA256": "9ad17ea16177362858c18efd5b0422d175610f6f5bed53f2ce14b54e8a2c6f17",
+  "frozen25ManifestSHA256": "635d028520382d8217f882ca897b9cda80e89cdaf5b1686cc7fbd42341cfb8af"
+}

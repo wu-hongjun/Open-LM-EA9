@@ -1,6 +1,9 @@
 # AF 2.7.0 — Contax Zeiss 50mm f/1.4
 
-**Prepared and tested offline; not uploaded or camera-qualified.** This polish
+**Historical frozen candidate; superseded by AF 2.8 for new testing.**
+The [2.8 change](../../../docs/evidence/af-28-motion-telemetry-2026-10-12.md)
+corrects the retained post-completion motion-reporting gap. This original
+candidate was prepared/tested offline and was never uploaded or camera-qualified. This polish
 candidate fixes reproduced queue/retarget faults while preserving the audited
 fixed-aperture policy and stock-derived pure controller. A known simulated
 post-completion motion-telemetry gap remains open. It is not production firmware.
@@ -35,7 +38,9 @@ See [the overnight integration record](../../../docs/evidence/overnight-audit-po
 [finite regressions](../../../docs/evidence/af-27-regressions-2026-10-12.json)
 and [separate installation/camera procedure](../../../docs/af-s-test.md).
 
-App 0.10.0/build 13 and explicit `prepare-af`/`apply-af` select 2.7. The normal
+At that milestone, app 0.10.0/build 13 and explicit AF actions selected 2.7.
+The current app selects 2.8. Historical 2.7 personalization uses explicit Python
+`--variant polished-af`; its binary and original evidence remain unchanged. The normal
 Device dropdown preserves the verified installed variant. Versions 2.0–2.6,
 including 2.6's original binary/pin, and stock recovery remain byte-identical.
 No hardware operation occurred. Upload/reconnect verification and camera testing
@@ -44,17 +49,11 @@ must be coordinated separately; a 2.7-to-stock hardware round trip is untested.
 Reproduce with the documented compiler caches and pinned Unicorn environment:
 
 ```sh
-python3 scripts/build-firmware.py --variant polished-af
-scripts/swift-local.sh test
-python3 scripts/test-firmware.py --af
-tools/rea-analysis/venv/bin/python scripts/test-polished-candidate.py --output /new/af27-results
-tools/rea-analysis/venv/bin/python scripts/test-factory-af-oracle.py --output /new/controller-results
-scripts/build-macos-app.sh
+python3 scripts/build-firmware.py --variant polished-af  # Verify frozen resource.
+tools/rea-analysis/venv/bin/python scripts/test-polished-candidate.py --output /new/frozen27-results
 # Outputs must be new paths; parent directories must exist.
 dist/ea9ctl --state-directory /new/local-state prepare contax-zeiss-50-f1-4 /new/metadata50.bin
-dist/ea9ctl --state-directory /new/local-state prepare-af contax-zeiss-50-f1-4 /new/native50.bin
-python3 scripts/prepare-af.py /new/metadata50.bin /new/python50.bin
-cmp /new/native50.bin /new/python50.bin
+python3 scripts/prepare-af.py /new/metadata50.bin /new/50mm27.bin --variant polished-af
 ```
 
 The regressions require full Git history containing `d023745` and `7efac6b`;

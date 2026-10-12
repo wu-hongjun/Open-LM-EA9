@@ -1021,6 +1021,12 @@ void em_push_velocity(int32_t delta)
 	h[EM06_VEL_HIST_N - 1] = (uint8_t)(int8_t)delta;
 }
 
+void em_clear_velocity(void)
+{
+	for (uint8_t k = 0; k < EM06_VEL_HIST_N; ++k)
+		ea9_data[EA9_OFF_06 + EM06_VEL_HIST + k] = 0;
+}
+
 void em_set_subject_distance(uint16_t code, uint8_t coarse, uint8_t coarse_pos)
 {
 	put16(EA9_OFF_05 + EM05_DISTANCE, code);

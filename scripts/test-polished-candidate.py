@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline AF 2.7 regressions, opaque stock-query oracle and frozen 2.5 control."""
+"""Historical AF 2.7 regressions, opaque stock-query oracle and frozen 2.5 control."""
 import argparse
 import hashlib
 import json
@@ -12,12 +12,20 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path, required=True)
 out = parser.parse_args().output.resolve()
 out.mkdir(mode=0o700, parents=True, exist_ok=False)
-base = ROOT / 'firmware/ea9'
+frozen27 = json.loads((ROOT / 'firmware/candidates/2.7.0/regression-inputs.json').read_text())
+snapshot27 = out / 'frozen27'
+for name, digest in frozen27['files'].items():
+    data = subprocess.run(['git','show',frozen27['sourceGitCommit']+':'+name],cwd=ROOT,capture_output=True,check=True).stdout
+    if hashlib.sha256(data).hexdigest()!=digest: raise RuntimeError('Frozen 2.7 source mismatch: '+name)
+    dest=snapshot27/name
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    dest.write_bytes(data)
+base = snapshot27 / 'firmware/ea9'
 flags = ['cc', '-std=gnu99', '-O1', '-Wall', '-Wextra', '-Werror',
          '-Wno-over-aligned', '-fsanitize=address,undefined', '-fno-sanitize-recover=all']
 transport = ['hosttest/shim.c', 'src/emount.c', 'src/emount_packets.c',
              'src/lens_profile.c', 'src/lens_aperture.c']
-probe = ROOT / 'firmware/tests/test_stock_query.c'
+probe = snapshot27 / 'firmware/tests/test_stock_query.c'
 program = out / 'query27'
 subprocess.run(flags + ['-Ihosttest', '-Isrc', str(probe), *transport, '-o', str(program)],
                cwd=base, check=True)
@@ -89,7 +97,7 @@ retained = ['factory_af.c', 'af_control.c', 'af_completion.c', 'af_reference.c',
             'focus_map.c', 'focus_pred.c', 'focus_dist.c', 'lens_aperture.c', 'emount_packets.c']
 for name in retained:
     path = 'firmware/ea9/src/' + name
-    if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != frozen26['files'][path]:
+    if hashlib.sha256((snapshot27 / path).read_bytes()).hexdigest() != frozen26['files'][path]:
         raise RuntimeError('Retained controller/aperture policy changed: ' + path)
 
 # Execute the production dispatcher, FIFO and wrapper with real frame parsing
@@ -125,8 +133,8 @@ for label, source_base in [('current', base), ('frozen26', snapshot26 / 'firmwar
         boundary_results.append({'source': label, 'case': case, 'exitCode': got.returncode,
                                  'output': got.stdout.strip(), 'diagnostic': got.stderr.strip()})
 
-report = {'firmware': '2.7.0', 'status': 'passed-offline-not-hardware-qualified',
-          'hardwareReportsSent': 0, 'frozen26SourceGitCommit': frozen26['sourceGitCommit'], 'opaqueQueryCoverage': coverage,
+report = {'firmware': '2.7.0', 'status': 'historical-reproduction-passed-not-current-candidate-qualification',
+          'hardwareReportsSent': 0, 'frozen26SourceGitCommit': frozen26['sourceGitCommit'], 'frozen27SourceGitCommit': frozen27['sourceGitCommit'], 'opaqueQueryCoverage': coverage,
           'originalInstructionFullReplyCases': original_cases,
           'originalInstructionImageSHA256': FIRMWARE_SHA256,
           'comparedReplyFramesSHA256': hashlib.sha256(frames).hexdigest(),
@@ -142,7 +150,7 @@ report = {'firmware': '2.7.0', 'status': 'passed-offline-not-hardware-qualified'
                           'Final I/O helpers stubbed; original handler and sender checksum instructions execute',
                           'Minimum operand bound is not proof of complete 0x34 request grammar',
                           'Unicorn behavior does not prove ARMv6-M instruction legality'],
-          'sources': {str((base / name).resolve().relative_to(ROOT)):
+          'sources': {str((base / name).resolve().relative_to(snapshot27)):
                       hashlib.sha256((base / name).read_bytes()).hexdigest()
                       for name in transport + motion_sources},
           'probeSHA256': hashlib.sha256(probe.read_bytes()).hexdigest(),

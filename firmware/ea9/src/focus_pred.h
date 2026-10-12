@@ -9,9 +9,10 @@
  * measured frame period; the result is bounded by the commanded target and
  * equals the position when the mechanism is idle (autofocus.md 4.1, CERTAIN).
  *
- * It also answers "is focus moving", because the forecast differs from the
- * position exactly while something is in flight -- which is what message 0x06
- * pl[0] and message 0x05 pl[22] bit 6 report.
+ * The legacy backend retains this target-bound forecast. Measured movement
+ * and rest belong to focus_motion, independently of forecast/command lifetime.
+ * The factory backend reports the same measured position in both fields,
+ * matching the recovered frame-sync writer rather than predicting movement.
  *
  * A second field used to be derived here, message 0x05 pl[4].  That field is
  * the APERTURE settle countdown and has nothing to do with focus; this adapter

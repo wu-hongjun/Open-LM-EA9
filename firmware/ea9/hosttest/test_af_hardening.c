@@ -211,10 +211,14 @@ int main(int argc, char **argv)
     } else if (scenario == 15) {
         em_vd_edges = 1; focus_report_at(12);
         uint8_t first[7]; memcpy(first, &ea9_data[EA9_OFF_06 + 0x26], sizeof first);
+        for (unsigned i = 0; i < 7; ++i) assert(!first[i]); /* Seed, not a jump from zero. */
         for (int position = 16; position <= 100; position += 4) focus_report_at(position);
         assert(!memcmp(first, &ea9_data[EA9_OFF_06 + 0x26], sizeof first));
         em_vd_edges = 2; focus_report_at(100);
-        assert(ea9_data[EA9_OFF_06 + 0x2B] == 3 && ea9_data[EA9_OFF_06 + 0x2C] == 22);
+        for (unsigned i = 0; i < 7; ++i) assert(!ea9_data[EA9_OFF_06 + 0x26 + i]);
+        for (unsigned i = 0; i < 17; ++i) focus_report_at(100);
+        em_vd_edges = 3; focus_report_at(108);
+        assert(ea9_data[EA9_OFF_06 + 0x2B] == 0 && ea9_data[EA9_OFF_06 + 0x2C] == 2);
     } else if (scenario == 16) {
         uint8_t frame[32] = {0xF0, 0, 0, 2, 0, EM_ID_SHUTDOWN};
         seal(frame, sizeof frame); em_set_park_handler(count_park);

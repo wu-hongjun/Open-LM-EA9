@@ -1,32 +1,33 @@
-# A7C II acceptance: AF 2.7, Contax Zeiss 50mm f/1.4
+# A7C II acceptance: AF 2.8, Contax Zeiss 50mm f/1.4
 
-The [AF 2.7 candidate](../firmware/candidates/2.7.0/README.md) and app
-0.10.0/build 13 are prepared and tested offline. **2.7 has not been uploaded or
+The [AF 2.8 candidate](../firmware/candidates/2.8.0/README.md) and app
+0.11.0/build 14 are prepared and tested offline. **2.8 has not been uploaded or
 camera-qualified.** This procedure is a plan, not a record of passed checks.
 The converter is now available. The last byte-verified hardware image was
 original stock 1.8; its owner-reported exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
 
 Frozen AF 2.5 remains held because its `0x34` override assumed unproven
-aperture semantics. The 2.7 candidate retains 2.6’s stock opaque echo/payload bound and fixes
-Stop FIFO pressure and repeated-target budget faults. Post-completion motion
-telemetry still has a known simulated gap; physical settling is unqualified. See
+aperture semantics. The 2.8 candidate retains the audited aperture/opaque-query policy and 2.7
+queue/retarget fixes. It corrects post-completion motion reporting with a
+measured observer and restores equal factory position fields. Physical settling,
+owner-unit noise and camera consumption remain unqualified. See
 [the aperture audit](audits/aperture-protocol-design-2026-10-11.md) and
-[2.7 implementation/verification](evidence/overnight-audit-polish-2026-10-12.md).
+[2.8 implementation/verification](evidence/af-28-motion-telemetry-2026-10-12.md).
 The adapter is disconnected; flashing will be coordinated separately.
 
 AF 2.4 passed USB verification but failed focus acquisition, with a dark view
 and no shown f-number in P/A. Further trials of that frozen image are suspended.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md),
 [completed stock recovery](evidence/stock-18-af24-recovery-2026-10-11.md), and
-[2.7 implementation and tests](evidence/overnight-audit-polish-2026-10-12.md).
+[2.8 implementation and tests](evidence/af-28-motion-telemetry-2026-10-12.md).
 
 ## Prepared products and aperture policy
 
-- App: `dist/Open LM-EA9.app`, version 0.10.0/build 13.
+- App: `dist/Open LM-EA9.app`, version 0.11.0/build 14.
 - CLI: `dist/ea9ctl`, locally signed, using the same DeviceKit transport.
-- [50mm candidate and pins](../firmware/candidates/2.7.0/README.md): 20,480 bytes,
-  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 2.7.0.
+- [50mm candidate and pins](../firmware/candidates/2.8.0/README.md): 20,480 bytes,
+  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 2.8.0.
 - [Original stock recovery bundle](../firmware/recovery/stock-1.8.0/README.md):
   retain its separate private decryption key and the same-unit original backup.
 
@@ -49,7 +50,7 @@ device. No hardware operation is needed for offline candidate preparation.
 1. Close the updater and other USB clients. Physically reconnect the USB cap,
    then check `dist/ea9ctl inventory`.
 2. Select **Contax Zeiss 50mm f/1.4** on Device. In
-   **USB tools → Experimental autofocus**, choose **Install Experimental AF 2.7.0**.
+   **USB tools → Experimental autofocus**, choose **Install Experimental AF 2.8.0**.
    The same-unit stock-upload qualification is required. The operation saves a
    fresh verified two-pass backup and durable journal before START.
 3. After upload, physically unplug and reconnect the cap. Keep the adapter off
@@ -70,7 +71,7 @@ dist/ea9ctl verify --idle
 
 `--idle` acknowledges prerequisites; it cannot perform a physical reconnect.
 The normal Device dropdown preserves the verified installed variant. Explicit
-AF installation selects 2.7; plain `apply` selects metadata-only 2.0. Do not
+AF installation selects 2.8; plain `apply` selects metadata-only 2.0. Do not
 rebuild a pinned image or change its local profile between upload and readback.
 Do not run extra CHECK/READ/client commands while the stock loader is armed;
 an ordinary read can be interpreted as the next firmware page. Lost
@@ -169,7 +170,7 @@ dist/ea9ctl verify --idle
 An AF backup cannot replace the original stock source. Recovery checks the
 qualified loader and matching unit, writes the saved application slot
 `[0x5000,0x20000)` and metadata, and does not write bootloader code. Restoration
-has previously passed strict readback on this unit. A **2.7-to-stock** round
+has previously passed strict readback on this unit. A **2.8-to-stock** round
 trip, interrupted-write/power-loss and bootloader recovery remain unqualified.
 
 ## Historical evidence and result record
@@ -180,10 +181,26 @@ Preserve the [2.1 upload](evidence/af-50-upload-2026-10-10.md),
 [2.3 upload](evidence/af-23-upload-2026-10-11.md) and
 [loaded-lens report](evidence/af-23-camera-lifecycle-2026-10-11.md), and
 [2.4 upload](evidence/af-24-upload-2026-10-11.md). These observations do not
-qualify 2.7. Historical pins are unchanged.
+qualify 2.8. Historical pins are unchanged.
 
 Use [the result template](evidence/af-s-camera-result-template.md). Keep original
 photos and timing video private; publish only relevant hashes and extracted
 metadata. Homing/origin, loaded braking and live camera timing have not been
 measured on this unit. The simulated mechanical coefficients describe the
 upstream author's adapter and do not establish factory parity here.
+
+## AF 2.8 motion-telemetry acceptance
+
+After separate byte verification, use the initial MF/Pre-AF Off lifecycle check
+before bounded AF-S. The mount should stay physically quiet at idle. The new
+observer cannot measure optical lock and a USB readback cannot observe live
+E-mount motion flags. Record any unexpected focus-busy indication, shutter
+blocking, continued hunt or delayed settling alongside physical movement. Noise
+of four or more encoder counts can keep movement asserted; owner-unit noise is
+unmeasured. A quiet motor alone does not establish correct telemetry.
+
+Keep the first AF-S attempt bounded and preserve all failures. Release the
+half-press and confirm motor shutdown. Completion/Stop now deliberately does
+not clear measured coast: simultaneous completion and movement is possible.
+Camera acceptance, actual settling, sharpness and hunting need the controlled
+comparison; this runbook is not a record of successful hardware tests.

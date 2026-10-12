@@ -47,7 +47,7 @@ void vdd_track_sample(void) {
     if (samples == 4 && scenario == 10) host_millis += 100;
 }
 static void final_read_fault(void) {
-    if (!g_pred.active) { assert(!ea9_af_faulted(&g_af_state)); ea9_io_trip(EA9_IO_ENCODER); }
+    if (!g_af_state.active) { assert(!ea9_af_faulted(&g_af_state)); ea9_io_trip(EA9_IO_ENCODER); }
 }
 int main(int argc, char **argv) {
     assert(argc == 2); scenario = atoi(argv[1]); sim_reset(); sim_noise = 0;

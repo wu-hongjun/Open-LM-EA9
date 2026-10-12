@@ -10,20 +10,21 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.10.0, build 13) refreshes
+upload/read-back path for lens metadata. The current app (0.11.0, build 14) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The new **AF 2.7 polish candidate is prepared offline**, preserving the
-[audited aperture design](docs/audits/aperture-protocol-design-2026-10-11.md)
-and stock opaque `0x34` while fixing reproduced Stop-queue and repeated-target
-faults. It restores 524 bytes of flash margin and saves 620 bytes of static RAM.
-The app surfaces corrupted firmware history as a recovery state.
-See [the overnight audits, RE progress and validation](docs/evidence/overnight-audit-polish-2026-10-12.md).
-No USB or hardware operations occurred. Frozen 2.0–2.6 and stock recovery remain
-byte-identical. Post-completion motion telemetry has an open simulated gap;
-physical exposure and optical AF are unqualified. Factory reconstruction remains
-partial: 41 bounded application routine models, no complete factory replacement.
+The new **AF 2.8 candidate is prepared offline**. A pure measured-motion
+observer now preserves coast/reversal after command completion, requires a fresh
+quiet interval before reporting rest, and discards stale per-frame history.
+It follows REA's factory frame-sync behavior by reporting the same measured
+position in both fields. Fixed aperture/opaque `0x34`, factory control law,
+drivers and completion policy remain unchanged. See
+[implementation, tests and limits](docs/evidence/af-28-motion-telemetry-2026-10-12.md).
+No USB or hardware operation occurred. Older images and stock recovery are
+preserved. Sensor noise, physical settling, exposure and optical AF remain
+unqualified; factory reconstruction remains partial. The candidate has 400 bytes
+of flash headroom and uses 2,200 bytes of static RAM.
 The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The historical **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
@@ -66,13 +67,16 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant polished-af
+python3 scripts/build-firmware.py --variant observed-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [AF 2.8 post-completion motion design and validation](docs/evidence/af-28-motion-telemetry-2026-10-12.md)
+- [Prepared 50mm f/1.4 AF 2.8 candidate](firmware/candidates/2.8.0/README.md)
+- [Independent AF 2.8 telemetry evidence and integration review](docs/audits/af28-motion-telemetry-review-2026-10-12.md)
 - [Tonight's independent audits, integrated fixes and open issues](docs/evidence/overnight-audit-polish-2026-10-12.md)
 - [Prepared 50mm f/1.4 AF 2.7 candidate](firmware/candidates/2.7.0/README.md)
 - [Factory sensor/origin reconstruction and original-instruction tests](research/stock-1.8/extensions/2026-10-12/README.md)
