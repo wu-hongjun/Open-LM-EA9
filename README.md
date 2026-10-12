@@ -14,15 +14,17 @@ upload/read-back path for lens metadata. The current app (0.11.0, build 14) refr
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The new **AF 2.8 candidate is prepared offline**. A pure measured-motion
+The new **AF 2.8 candidate is uploaded and awaiting physical reconnect/strict
+byte verification**. The software milestone was prepared and tested offline. A pure measured-motion
 observer now preserves coast/reversal after command completion, requires a fresh
 quiet interval before reporting rest, and discards stale per-frame history.
 It follows REA's factory frame-sync behavior by reporting the same measured
 position in both fields. Fixed aperture/opaque `0x34`, factory control law,
 drivers and completion policy remain unchanged. See
 [implementation, tests and limits](docs/evidence/af-28-motion-telemetry-2026-10-12.md).
-No USB or hardware operation occurred. Older images and stock recovery are
-preserved. Sensor noise, physical settling, exposure and optical AF remain
+The [October 12 native upload](docs/evidence/af-28-upload-2026-10-12.md)
+completed with a fresh two-pass backup; no post-START read was sent. Camera use
+waits for reconnect/readback. Older images and stock recovery are preserved. Sensor noise, physical settling, exposure and optical AF remain
 unqualified; factory reconstruction remains partial. The candidate has 400 bytes
 of flash headroom and uses 2,200 bytes of static RAM.
 The app displays **Actual aperture: Unknown** separately from its fixed camera

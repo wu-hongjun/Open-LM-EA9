@@ -1,6 +1,7 @@
 # AF 2.8.0 — Contax Zeiss 50mm f/1.4
 
-**Prepared and tested offline; not uploaded or camera-qualified.** This candidate
+**Native upload completed; physical reconnect/strict readback pending. Camera
+testing is not run.** See [the October 12 upload record](../../../docs/evidence/af-28-upload-2026-10-12.md). This candidate
 separates observed movement from command completion, target prediction and Stop.
 It restores the REA factory frame-sync writer's equal current/ahead positions.
 
@@ -37,8 +38,9 @@ factory parity or production firmware.
 
 App 0.11.0/build 14 and explicit AF preparation/install select 2.8. Normal Device
 profile changes preserve the verified installed variant. All older resources
-and stock recovery remain unchanged. No hardware operation occurred; flashing,
-physical reconnect and byte verification will be coordinated separately.
+and stock recovery remain unchanged. The software preparation was offline; the
+subsequent authorized native upload has finished. Physical reconnect and strict
+verification are required before any camera test.
 
 ```sh
 python3 scripts/build-firmware.py --variant observed-af
