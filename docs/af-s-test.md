@@ -1,12 +1,13 @@
 # A7C II acceptance: AF 2.9, Contax Zeiss 50mm f/1.4
 
 The [AF 2.9 candidate](../firmware/candidates/2.9.0/README.md) and app
-0.12.0/build 15 passed offline preparation. **AF 2.9 uploaded successfully;
-physical reconnect and strict byte verification are pending.** Keep the adapter
-off the camera until verification passes. The fresh pre-upload stock backup
+0.12.0/build 15 passed offline preparation. **AF 2.9 is uploaded and strictly
+byte-verified after owner-confirmed physical reconnect**, including a separate
+offline audit. Camera qualification is pending. The fresh pre-upload stock backup
 matches the [strictly verified restoration](evidence/stock-18-af28-recovery-2026-10-12.md).
 See [the installation record](evidence/af-29-upload-2026-10-12.md).
-Camera testing has not started; the procedure below remains the qualification plan.
+The initial loaded-lens lifecycle check has been requested; owner observations
+are pending. The procedure below remains the qualification plan.
 
 AF 2.8 remains held after owner-reported preview freeze, poor focus response,
 darker exposure and a shutdown hang requiring battery removal.
@@ -89,6 +90,9 @@ Start with the camera off and its USB cable disconnected. Mount the verified
 adapter, C/Y-to-M converter and 50mm lens. Set the physical focus ring to
 infinity and iris to f/1.4. Use still-photo A, MF and Pre-AF Off where available,
 EV 0 and Auto ISO. Record actual settings; leave unavailable settings unknown.
+Confirm MF before taking the initial photograph. If MF cannot be selected or
+confirmed, skip that photograph and report the available settings; do not
+half-press to force an autofocus attempt during this lifecycle check.
 
 1. Switch on without shutter or AF-ON input. Record startup/errors, any mount
    movement or motor sound, whether it stops, preview brightness and the actual

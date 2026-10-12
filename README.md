@@ -14,9 +14,10 @@ upload/read-back path for lens metadata. The current app (0.12.0, build 15) refr
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The **AF 2.9 candidate uploaded successfully** after a fresh two-pass stock
-backup. Physical reconnect, strict verification and camera testing are pending;
-keep the adapter off the camera until readback passes.
+The **AF 2.9 candidate is uploaded and strictly byte-verified after physical
+reconnect**, including a separate offline audit. A fresh two-pass stock backup
+was saved before upload. Camera qualification is pending; the initial loaded-lens
+preview, exposure and shutdown check has been requested before AF-S.
 [Installation record](docs/evidence/af-29-upload-2026-10-12.md).
 It keeps healthy camera communication/timing serviceable
 through sticky motion faults, advances handshake/shutdown/event state only after

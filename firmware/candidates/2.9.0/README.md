@@ -1,6 +1,6 @@
 # AF 2.9.0 — Contax Zeiss 50mm f/1.4
 
-**Uploaded successfully; reconnect verification and camera qualification pending.** This candidate
+**Uploaded and strictly byte-verified after physical reconnect; camera qualification pending.** This candidate
 keeps healthy camera communication/timing serviceable through sticky motion
 faults, records transmission success truthfully and resets status admission on
 a new initialization request. A fresh stock backup is saved; AF 2.8 stays held.

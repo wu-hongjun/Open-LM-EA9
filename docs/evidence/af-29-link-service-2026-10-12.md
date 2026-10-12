@@ -7,7 +7,8 @@ pass the adapter was on the [strictly verified stock 1.8 restoration](stock-18-a
 the implementation work sent no hardware reports and changed no owner application state.
 AF 2.8 remains frozen and held after its reported camera failures.
 Subsequently, the separately authorized [AF 2.9 upload](af-29-upload-2026-10-12.md)
-succeeded; physical reconnect verification and camera qualification are pending.
+succeeded and passed strict two-pass reconnect verification plus a separate
+offline audit. Camera qualification remains pending.
 
 ## Demonstrated defects and changes
 

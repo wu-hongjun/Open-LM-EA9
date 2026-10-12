@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "status": "uploaded-awaiting-physical-reconnect-and-strict-verification",
+  "status": "uploaded-and-strictly-verified-camera-qualification-pending",
   "sourceGitCommit": "ae705abdf41543f15a91e82b299a7b5c41dc8275",
   "transactionID": "E7434D17-4224-4EAD-A76F-BF8AE959B30F",
   "appVersion": "0.12.0",
@@ -22,11 +22,11 @@
   "postSTARTReadsSent": 0,
   "retriesSent": 0,
   "uploadPerformed": true,
-  "strictVerificationPassed": false,
+  "strictVerificationPassed": true,
   "cameraTestingPerformed": false,
   "cameraAcceptancePassed": null,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
-  "physicalReconnectConfirmedAfterUpload": false,
+  "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
   "preUploadBackup": {
     "firmwareVersion": "1.8.0",
@@ -53,5 +53,45 @@
     "planned50.bin": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Not started; require physical reconnect and strict byte verification first"
+  "cameraTestStage": "Owner guided through initial loaded-lens A/MF display, saved-exposure and lifecycle check; observations pending; AF-S not yet requested",
+  "verifiedAtUTC": "2026-10-12T23:53:04.681921+00:00",
+  "verifiedAtLocal": "2026-10-12T19:53:04.681921-04:00",
+  "verificationNativeExitCode": 0,
+  "newConnectionAndSameUnitValidated": true,
+  "readback": {
+    "firmwareVersion": "2.9.0",
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "flashSHA256": "cc53f3dd169f2b97f58f80a63e02da9daba666bea8ae87dc553ee606221eea40",
+    "imageSHA256": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3",
+    "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+    "bootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895"
+  },
+  "strictChecks": {
+    "completeApplicationExact": true,
+    "profileExact": true,
+    "knownMetadataExact": true,
+    "bootCodeUnchanged": true,
+    "protectedGapUnchanged": true,
+    "retainedUpperFlashUnchanged": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true
+  },
+  "excludedMetadataRange": {
+    "range": "[0x403a,0x4040)",
+    "bytes": 6,
+    "reason": "Established adjacent loader RAM bytes copied by START; no other exclusion"
+  },
+  "offlineIndependentAuditPassed": true,
+  "canonicalAppliedLensAndFirmwareObservationPublished": true,
+  "armedUploadConnectionMarkerRetained": true,
+  "verifiedReadConnectionMarkerClearedByNativeService": true,
+  "verificationLogSHA256": {
+    "verify.stdout.txt": "c869d27d5c234ba483eb9a3b73031daa80a3ff690dd636cf74abef6da92b2196",
+    "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+  },
+  "postSTARTReadCountScope": "Armed upload connection before physical reconnect; subsequent read-only verification counted separately"
 }
