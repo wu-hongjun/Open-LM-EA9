@@ -288,8 +288,11 @@ void em_scan_finish(void);
  * ONE EVENT PER FRAME (autofocus.md 4.2): several waiting are sent one per
  * frame, in order.  Only the LATEST instruction is answered -- an instruction
  * a newer one replaced before it finished produces no event at all -- so the
- * queue is shallow by design; posting past its depth drops the newcomer
- * rather than losing one already promised.
+ * queue is shallow by design. Ordinary events posted past its depth are
+ * dropped. Stop replaces the newest completion when full, preserving the
+ * oldest completion before Stop; a newer Stop supersedes any pending Stop
+ * and follows intervening completions. Consecutive pending Stops coalesce. This
+ * bounded overflow policy is ours, not a recovered factory queue algorithm.
  *
  * `param` is the event's second byte: 0x00 for Move and Scan, 0x01 for Stop,
  * and for Drive the top six bits of the Drive record's rec[1]. */

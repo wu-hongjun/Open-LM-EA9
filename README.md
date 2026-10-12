@@ -10,16 +10,20 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.9.0, build 12) refreshes
+upload/read-back path for lens metadata. The current app (0.10.0, build 13) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The new **AF 2.6 candidate is ready offline for a separate upload and camera
-comparison**, using the [audited aperture design](docs/audits/aperture-protocol-design-2026-10-11.md).
-It restores stock opaque `0x34` handling, bounds its payload reads and retains
-the AF completion fixes. See [the candidate record](docs/evidence/af-26-candidate-2026-10-11.md).
-The adapter was disconnected; no USB reports or uploads occurred. Frozen 2.5
-remains held and preserved. Actual camera exposure and optical AF are unqualified.
+The new **AF 2.7 polish candidate is prepared offline**, preserving the
+[audited aperture design](docs/audits/aperture-protocol-design-2026-10-11.md)
+and stock opaque `0x34` while fixing reproduced Stop-queue and repeated-target
+faults. It restores 524 bytes of flash margin and saves 620 bytes of static RAM.
+The app surfaces corrupted firmware history as a recovery state.
+See [the overnight audits, RE progress and validation](docs/evidence/overnight-audit-polish-2026-10-12.md).
+No USB or hardware operations occurred. Frozen 2.0–2.6 and stock recovery remain
+byte-identical. Post-completion motion telemetry has an open simulated gap;
+physical exposure and optical AF are unqualified. Factory reconstruction remains
+partial: 41 bounded application routine models, no complete factory replacement.
 The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The historical **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
@@ -62,13 +66,16 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant audited-af
+python3 scripts/build-firmware.py --variant polished-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [Tonight's independent audits, integrated fixes and open issues](docs/evidence/overnight-audit-polish-2026-10-12.md)
+- [Prepared 50mm f/1.4 AF 2.7 candidate](firmware/candidates/2.7.0/README.md)
+- [Factory sensor/origin reconstruction and original-instruction tests](research/stock-1.8/extensions/2026-10-12/README.md)
 - [AF 2.6 implementation and offline validation](docs/evidence/af-26-candidate-2026-10-11.md)
 - [Prepared 50mm f/1.4 AF 2.6 candidate](firmware/candidates/2.6.0/README.md)
 - [AF 2.5 implementation, testing and remaining camera gates](docs/evidence/af-25-candidate-2026-10-11.md)

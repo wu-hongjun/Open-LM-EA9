@@ -36,12 +36,22 @@ for old, new in [("af_lifecycle", "factory_lifecycle"), ("af_hardening", "factor
     tests[new] = ["-DEA9_FACTORY_AF", "-DUPSTREAM_PROFILE=FACTORY_PROFILE"] + [
         part if part != "src/servo.c" else "src/factory_servo.c" for part in tests[old]
     ] + ["src/factory_af.c"]
+tests['af_queue_retarget'] = [part if part != 'hosttest/test_af_lifecycle.c'
+                            else 'hosttest/test_af_queue_retarget.c' for part in tests['factory_lifecycle']]
+tests['event_queue'] = ['-DEA9_NO_LOG', '-fsanitize=address,undefined', '-fno-sanitize-recover=all',
+                        'hosttest/test_event_queue.c', 'hosttest/shim.c', 'src/emount_packets.c',
+                        'src/lens_profile.c', 'src/lens_aperture.c']
+tests['factory_retarget'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=all',
+                            'hosttest/test_factory_retarget.c', 'src/factory_servo.c',
+                            'src/factory_af.c', 'src/io_guard.c', 'src/focus_map.c']
 for name, files in tests.items():
     binary = OUT / f"test_{name}"
     subprocess.run(COMMON + files + ["-o", str(binary)], cwd=BASE, check=True)
     if name == "profile":
         continue
     variants = [["nobody"], ["slowbody"]] if name == "nobody" else [[]]
+    if name == 'af_queue_retarget': variants = [[x] for x in ['stop-fifo', 'stop-pending', 'stop-coalesce', 'stop-reordered', 'repeat', 'single']]
+    if name == 'factory_retarget': variants = [[str(x)] for x in range(4)]
     if name == "io_guard": variants = [[x] for x in ["ready", "timeout", "wrap", "frozen"]]
     if name == "af_lifecycle": variants = [[str(x)] for x in range(13)]
     if name == "af_hardening": variants = [[str(x)] for x in range(21)]
@@ -49,7 +59,7 @@ for name, files in tests.items():
     # Legacy cases 11/12 assert speed/dwell/band arrival, which factory replaces
     # with crossing; the new scripted wrapper suite tests its arrival guards.
     if name == "factory_lifecycle": variants = [[str(x)] for x in range(11)]
-    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative", "resolution", "resolution-stop", "progress-timeout", "deadline-stop", "retarget-limit-stop", "runaway-stop", "wrong-way-stop", "mid-invalid", "final-invalid"]]
+    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative", "resolution", "resolution-stop", "progress-timeout", "deadline-stop", "retarget-limit-stop", "runaway-stop", "wrong-way-stop", "mid-invalid", "final-invalid", "repeat-quantized", "repeat-stop", "retarget-budget"]]
     for args in variants:
         subprocess.run([str(binary)] + args, check=True)
 # Compile actual sensor and PWM drivers against DFP-shaped register memory.
@@ -68,7 +78,7 @@ for case in range(11):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x26u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x27u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 # This isolated generated library is never the owner's normal app state.
 # Materialize it offline, then select 50mm for the zoom fixture as well.

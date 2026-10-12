@@ -1,0 +1,747 @@
+{
+  "researchDate": "2026-10-12",
+  "inputSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "inputSize": 20172,
+  "inputUnchanged": true,
+  "newModeledEntries": [
+    "0x89a4",
+    "0x8c64",
+    "0x8c80"
+  ],
+  "realOriginalInstructionsBelowSensorBoundary": [
+    "0x6be4",
+    "0x6c0c"
+  ],
+  "composedExistingEntries": [
+    "0x8ae4",
+    "0x8cc0",
+    "0x8a8c"
+  ],
+  "boundedStartupPrefix": "0x8b70 until the first 0x5dd4 invocation",
+  "casesSteps": 68648,
+  "results": [
+    {
+      "entry": "0x89a4",
+      "cases": 65536,
+      "scope": "every two-byte response, selector 1, ignored stub statuses -7",
+      "result": "pass"
+    },
+    {
+      "entry": "0x89a4",
+      "cases": 1024,
+      "scope": "selector boundaries, synthetic unrelated RAM, ignored status pairs",
+      "result": "pass"
+    },
+    {
+      "entry": "0x8c64",
+      "cases": 1024,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8c80",
+      "cases": 1024,
+      "scope": "real filter initializer, real sensor reader and valid HAL wrappers",
+      "result": "pass"
+    },
+    {
+      "sequence": "initialize \u2192 same sample \u2192 synthetic restore \u2192 same sample",
+      "sequences": 8,
+      "steps": 32,
+      "result": "pass"
+    },
+    {
+      "entry": "0x8b70 bounded startup prefix",
+      "cases": 8,
+      "scope": "through first foreground poll, explicit board/timer/stop/delay cuts",
+      "result": "pass"
+    }
+  ],
+  "originTraces": [
+    {
+      "initialRawSample": 5000,
+      "savedReference": 4800,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 5000
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 4800,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4146,
+          "relativeCounts": 200
+        }
+      ]
+    },
+    {
+      "initialRawSample": 100,
+      "savedReference": 16000,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 100
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 16000,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4216,
+          "relativeCounts": 483
+        }
+      ]
+    },
+    {
+      "initialRawSample": 16000,
+      "savedReference": 100,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 16000
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 100,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4216,
+          "relativeCounts": 483
+        }
+      ]
+    },
+    {
+      "initialRawSample": 8191,
+      "savedReference": 8192,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 8191
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 8192,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 8191,
+          "relativeCounts": 16382
+        }
+      ]
+    },
+    {
+      "initialRawSample": 0,
+      "savedReference": 16383,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 0
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 16383,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4096,
+          "relativeCounts": 0
+        }
+      ]
+    },
+    {
+      "initialRawSample": 16383,
+      "savedReference": 0,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 16383
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 0,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4096,
+          "relativeCounts": 0
+        }
+      ]
+    },
+    {
+      "initialRawSample": 12000,
+      "savedReference": 12000,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 12000
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 12000,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 4096,
+          "relativeCounts": 0
+        }
+      ]
+    },
+    {
+      "initialRawSample": 8000,
+      "savedReference": 65535,
+      "steps": [
+        {
+          "operation": "encoder initialization",
+          "position": 4096,
+          "reference": 8000
+        },
+        {
+          "operation": "same sample before restore",
+          "position": 4096
+        },
+        {
+          "operation": "synthetic settings restore",
+          "position": 2222,
+          "reference": 65535,
+          "armed": 1,
+          "advertisedLowerBound": 4144
+        },
+        {
+          "operation": "same physical sample after restore",
+          "position": 6096,
+          "relativeCounts": 8001
+        }
+      ]
+    }
+  ],
+  "startupTraces": [
+    {
+      "focalMM": 0,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 52899,
+          "reference": 41697,
+          "position": 59590,
+          "armed": 125
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 31705,
+          "reference": 4800,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 31705,
+          "reference": 4800,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 15,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 63110,
+          "reference": 17610,
+          "position": 62266,
+          "armed": 34
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 13231,
+          "reference": 4801,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 13231,
+          "reference": 4801,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 16,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 22863,
+          "reference": 31042,
+          "position": 34482,
+          "armed": 182
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 23110,
+          "reference": 4802,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 23110,
+          "reference": 4802,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 24,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 20858,
+          "reference": 23,
+          "position": 18047,
+          "armed": 75
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 25801,
+          "reference": 4803,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 25801,
+          "reference": 4803,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 35,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 29795,
+          "reference": 10502,
+          "position": 54440,
+          "armed": 199
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 63391,
+          "reference": 4804,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 63391,
+          "reference": 4804,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 50,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 27466,
+          "reference": 9116,
+          "position": 25400,
+          "armed": 233
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 35406,
+          "reference": 4805,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 35406,
+          "reference": 4805,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 70,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 4050,
+          "reference": 48904,
+          "position": 33111,
+          "armed": 234
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 15678,
+          "reference": 4806,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 15678,
+          "reference": 4806,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    },
+    {
+      "focalMM": 65535,
+      "checkpoints": [
+        {
+          "entry": "0x8c80",
+          "sample": 25417,
+          "reference": 1035,
+          "position": 40504,
+          "armed": 90
+        },
+        {
+          "entry": "0x8e28",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8ae4",
+          "sample": 5000,
+          "reference": 5000,
+          "position": 4096,
+          "armed": 0
+        },
+        {
+          "entry": "0x8a8c",
+          "sample": 45279,
+          "reference": 4807,
+          "position": 2222,
+          "armed": 1
+        },
+        {
+          "entry": "0x5dd4",
+          "sample": 45279,
+          "reference": 4807,
+          "position": 2222,
+          "armed": 1
+        }
+      ],
+      "homingGateAtFirstPoll": 0
+    }
+  ],
+  "originalRoutineProvenance": [
+    {
+      "entry": "0x6be4",
+      "evidenceID": "ev_304ddeaa9fdf850afffce24c7b0963e462e69a0abafe1e14d7a8cb41fe8935ab",
+      "bodyBytes": 26,
+      "ranges": [
+        {
+          "start": "0x6be4",
+          "inclusiveEnd": "0x6bfd",
+          "SHA256": "39848c2d59663f751d8860f15e57898c585af94bd7e16c54de516fed7333393f"
+        }
+      ]
+    },
+    {
+      "entry": "0x6c0c",
+      "evidenceID": "ev_cac27efbf8c0309ca4298d51fa0b49bc3b0e09e99d848631505d69b3a728acb0",
+      "bodyBytes": 60,
+      "ranges": [
+        {
+          "start": "0x6c0c",
+          "inclusiveEnd": "0x6c47",
+          "SHA256": "03532a5828572ac57696c14dab8f87eab175e679afff9c624fe64653ba0c782c"
+        }
+      ]
+    },
+    {
+      "entry": "0x89a4",
+      "evidenceID": "ev_01b06c81fd028cecb6fffcb6df260c2c3d01c21ac610dafe80dd3b4b3d96884c",
+      "bodyBytes": 118,
+      "ranges": [
+        {
+          "start": "0x89a4",
+          "inclusiveEnd": "0x8a19",
+          "SHA256": "c8147291ecd05011c3f3606a1595c5586c7316f8be58df05ad0020957b95a0be"
+        }
+      ]
+    },
+    {
+      "entry": "0x8b70",
+      "evidenceID": "ev_407d75644b8bab5a2077d6cbc09e791989b74d8e9712c50ec40dde18e29d25ee",
+      "bodyBytes": 76,
+      "ranges": [
+        {
+          "start": "0x8b70",
+          "inclusiveEnd": "0x8bbb",
+          "SHA256": "ed1c85b86a6f37f51d00dae8d3522cafe8449266fee9647bee0d0d775cf39a01"
+        }
+      ]
+    },
+    {
+      "entry": "0x8c64",
+      "evidenceID": "ev_fb144e51b87f6b0c7aed060066f00f6ece8bafe8de1a0ce4cf7a2b1444efc2a1",
+      "bodyBytes": 22,
+      "ranges": [
+        {
+          "start": "0x8c64",
+          "inclusiveEnd": "0x8c79",
+          "SHA256": "97d635f0672c2175840cb6283fef5870f61985bf0f1bdf058aa188b3ab64d699"
+        }
+      ]
+    },
+    {
+      "entry": "0x8c80",
+      "evidenceID": "ev_30e1f5c962a02d714962cce9ebd4c7ae4aad6fffcae62dc49a9c612945670331",
+      "bodyBytes": 52,
+      "ranges": [
+        {
+          "start": "0x8c80",
+          "inclusiveEnd": "0x8cb3",
+          "SHA256": "44ad426d8f7fa9e0c259ea00f8ce28d6e7d4df5223c40220da9ec868f9be2177"
+        }
+      ]
+    }
+  ],
+  "originalInventorySHA256": "1e1744c2d28e4551e6c5aca0f75d43d807c79d486b1db6036cc8ec0599623a46",
+  "negativeControl": {
+    "change": "host model reverses the two supplied response bytes before shifting",
+    "responseWord": "0x48d3",
+    "originalReturn": 4660,
+    "incorrectHostReturn": 13522,
+    "mismatchDetected": true,
+    "modifiedSourceSHA256": "58a4663f0b34347158e4f4f1a3893c93c7f6adb42de0f462e365bf070d1d9591"
+  },
+  "comparisonContract": [
+    "All 3,072 persistent SRAM bytes compared after every call/step",
+    "Return values compared for sample and composed position calls; void returns excluded",
+    "Ordered MMIO writes/assertions/enable/delay/transfer events compared",
+    "Caller/callee stack addresses normalized to transfer contents and count",
+    "Other SRAM writes are checked to remain inside declared stack range",
+    "No new IRQ, busy/error/power-loss/peripheral readiness semantics inferred"
+  ],
+  "stubBoundaries": [
+    "0x7174 assertion recorder, condition must be true",
+    "0x8008 SPI enable returns supplied status without peripheral effects",
+    "0x8040 SPI transfer writes exactly two supplied bytes, then returns supplied status",
+    "0x60cc busy-loop recorder; no measured duration",
+    "GPIO writes use dummy memory at 0x60000014/0x60000018; electrical polarity unknown",
+    "Settings restore reads a generated 44-byte record at emulated 0x4100",
+    "Startup-only board/priorities/timer/PWM/handshake registration/delay cuts have no effects",
+    "Startup-only stop cut writes four known software fields, excluding real motor register writes"
+  ],
+  "limitations": [
+    "No real sensor model, peripheral polling, interrupts, timing, camera or optical qualification",
+    "Ignored failure status cases still supply complete response bytes; incomplete transfers unmodeled",
+    "All exhaustive response words share one synthetic RAM state; other states are finite seeded cases",
+    "Selector 1 versus all other values is established; physical sensor/channel identification is unknown",
+    "Startup prefix establishes order only under explicit driver cuts; no reset/IRQ equivalence",
+    "Homing gate stays zero in the bounded prefix; later gate reachability remains unproved",
+    "Unicorn Cortex-M0 selection is not ARMv6-M instruction-legality proof"
+  ],
+  "sourcesSHA256": {
+    "research/stock-1.8/extensions/2026-10-12/sensor_boundary.c": "bf8e92f9b4ead584a5e45a9e5a5508b6f509072cea6f0cf4ff2e2ecb25783b2d",
+    "research/stock-1.8/extensions/2026-10-12/sensor_boundary.h": "fadef1a093b5ee0138bd85f64196e5321ecb9a4831f8bf6edce9f1374f14dd97",
+    "research/stock-1.8/extensions/2026-10-12/validate_sensor_boundary.py": "bf6736730823e35e55c27da4ef367e5304375af9be21735177908118d1955f28",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/stock_model.c": "73857edba47e37670214b269770697cf5b0108ac9bf55638a24489394703f815",
+    "research/stock-1.8/stock_model.h": "ed572052599a89e1c0c3e1597d4548fc25f8f9b3d2a635f632f6a88026f146b2",
+    "research/stock-1.8/requirements.txt": "56bce36af734e3b9aeff2be4301bbc2a2c2b58ea1ea1e6ee6e792db84f96fbd4"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "unicorn": "2.1.4",
+    "platform": "darwin",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "compilerFlags": [
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic"
+    ]
+  },
+  "elapsedSeconds": 9.16,
+  "usbReports": 0,
+  "deviceEnumeration": false,
+  "hardwareOperations": 0,
+  "wholeFirmwareReconstruction": false,
+  "cameraQualification": false
+}

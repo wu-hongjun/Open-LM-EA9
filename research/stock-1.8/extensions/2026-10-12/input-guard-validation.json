@@ -1,0 +1,35 @@
+{
+  "researchDate": "2026-10-12",
+  "cases": 4,
+  "results": [
+    {
+      "case": "existing-output",
+      "result": "rejected as expected",
+      "newFilesOrDirectories": 0
+    },
+    {
+      "case": "optimized-python",
+      "result": "rejected as expected",
+      "newFilesOrDirectories": 0
+    },
+    {
+      "case": "wrong-size",
+      "result": "rejected as expected",
+      "newFilesOrDirectories": 0
+    },
+    {
+      "case": "wrong-digest",
+      "result": "rejected as expected",
+      "newFilesOrDirectories": 0
+    }
+  ],
+  "originalInputSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "originalInputUnchanged": true,
+  "sourcesSHA256": {
+    "research/stock-1.8/extensions/2026-10-12/test_input_guards.py": "df54a0ec313505390cfa5c60a78d68f79f847247365e97bfedb70259eea41dd3",
+    "research/stock-1.8/extensions/2026-10-12/validate_sensor_boundary.py": "bf6736730823e35e55c27da4ef367e5304375af9be21735177908118d1955f28",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597"
+  },
+  "usbReports": 0,
+  "hardwareOperations": 0
+}

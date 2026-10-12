@@ -1,6 +1,10 @@
 # AF 2.6.0 — Contax Zeiss 50mm f/1.4
 
-**Ready offline for a separately coordinated upload and camera test.** The
+**Historical candidate; superseded by AF 2.7 after the overnight audit.**
+The [audit](../../../docs/audits/night-firmware-correctness-2026-10-12.md)
+reproduced Stop-queue overflow and repeated-target budget faults. The original
+binary, pin and evidence remain unchanged; do not select it for new tests.
+It had been prepared offline for a separately coordinated upload and camera test. The
 adapter was disconnected for this milestone. No USB reports or uploads were
 performed; A7C II exposure, aperture display and optical AF remain unqualified.
 
@@ -23,13 +27,15 @@ and is preserved for diagnosis.
 | Personalized image SHA-256 | `1447e37e9bd528c072ace96a23449e7399eb011393e78202de907966d69053d6` |
 | Profile SHA-256 | `5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340` |
 
-Native `ea9ctl prepare-af` and Python personalization produce identical bytes.
+The original 0.9.0 native preparation and Python personalization produced identical bytes.
 See the [image manifest](contax-zeiss-50-f1-4.manifest.json),
 [build inputs](../../../docs/evidence/af-audited-build-manifest-2026-10-11.json),
 [implementation and verification](../../../docs/evidence/af-26-candidate-2026-10-11.md)
 and [camera procedure](../../../docs/af-s-test.md).
 
-App 0.9.0/build 12 and CLI explicit AF installation select 2.6. Normal Device
+At that milestone, app 0.9.0/build 12 and CLI explicit AF installation selected 2.6.
+The current app selects 2.7; historical personalization requires an explicit
+Python `--variant audited-af`. Normal Device
 dropdown changes preserve the verified installed variant. The app displays
 **Actual aperture: Unknown**; its numeric f-number is declared camera metadata.
 Select this lens once and operate the physical ring without editing metadata
@@ -42,16 +48,11 @@ The oracle/negative-control tests also require the retained Git history
 containing original commit `7efac6b`; a full repository clone includes it.
 
 ```sh
-python3 scripts/build-firmware.py --variant audited-af
-./scripts/swift-local.sh test
-python3 scripts/test-firmware.py --af
-tools/rea-analysis/venv/bin/python scripts/test-audited-candidate.py --output /new/regression-directory
-tools/rea-analysis/venv/bin/python scripts/test-factory-af-oracle.py --output /new/oracle-directory
-./scripts/build-macos-app.sh
-# Create the output directory first; outputs must be new.
-dist/ea9ctl --state-directory /new/profile-state prepare contax-zeiss-50-f1-4 /new/output/metadata.bin
-dist/ea9ctl --state-directory /new/profile-state prepare-af contax-zeiss-50-f1-4 /new/output/50mm.bin
-python3 scripts/prepare-af.py /new/output/metadata.bin /new/output/python50mm.bin
+python3 scripts/build-firmware.py --variant audited-af  # Verify the frozen resource.
+tools/rea-analysis/venv/bin/python scripts/test-audited-candidate.py --output /new/frozen26-results
+# Current metadata preparation is still offline; explicit Python selects frozen 2.6.
+dist/ea9ctl --state-directory /new/profile-state prepare contax-zeiss-50-f1-4 /new/metadata.bin
+python3 scripts/prepare-af.py /new/metadata.bin /new/50mm26.bin --variant audited-af
 ```
 
 The build fits the existing application/profile boundary exactly: initialized

@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-12",
+  "result": "passed-offline-known-telemetry-gap-not-camera-qualified",
+  "appVersion": "0.10.0",
+  "appBuild": 13,
+  "firmwareVersion": "2.7.0",
+  "hardwareOperations": 0,
+  "usbReports": 0,
+  "userApplicationSupportChanged": false,
+  "swiftTests": {
+    "LensCore": 7,
+    "DeviceKit": 34,
+    "AppWorkflow": 10,
+    "total": 51
+  },
+  "scriptedFactoryWrapperCases": 30,
+  "additionalQuantizedClampedBudgetCases": 4,
+  "parsedCommandAndQueueCases": 6,
+  "eventSequencePropertyCases": 510,
+  "legacyLifecycleCases": 13,
+  "factoryLifecycleCases": 11,
+  "hardeningCasesPerBackend": 21,
+  "registerDriverDelayStartupCases": 25,
+  "metadataAndAFProfileFixtures": 8,
+  "originalControllerComparisons": 7323,
+  "originalControllerNegativeControlDetected": true,
+  "originalOpaqueQueryReplies": 32,
+  "frozen26BugNegativeControlsDetected": 2,
+  "frozen25UnsupportedQueryOverrideDetected": true,
+  "sensorOriginExtensionCasesSteps": 68648,
+  "sensorByteOrderNegativeControlDetected": true,
+  "sensorInputOutputGuards": 4,
+  "nativePython50mmByteEquality": true,
+  "locallySignedAppAndCLI": true,
+  "templateSHA256": "da4eaa0f41fe9ff5b2c896ee7d5d2526cfc8fa423f581b5f55f9a1ff3c2059bf",
+  "personalized50mmSHA256": "e124d09ad3eb272fab699035ee1ff941417afa3c6dd900484e11ae44c9c890b4",
+  "applicationVectors": [
+    536881296,
+    20817
+  ],
+  "layout": {
+    "initializedFlashEnd": 40180,
+    "flashMarginBytes": 524,
+    "staticRAMBytes": 2192,
+    "reservedStackBytes": 8192,
+    "stackBottom": 536873104,
+    "stackTop": 536881296,
+    "stackHighWaterMeasured": false
+  },
+  "openFindings": [
+    "Motion telemetry is tied to predictor lifetime; post-completion physical movement can be reported at rest in simulation",
+    "Physical homing/origin, braking, settling and interrupt/peripheral timing remain unmeasured",
+    "Camera fixed-aperture acceptance, saved exposure, sharpness and hunting are unqualified",
+    "Factory reconstruction is partial; no buildable factory-equivalent replacement"
+  ],
+  "commands": [
+    "scripts/swift-local.sh test",
+    "python3 scripts/build-firmware.py --variant polished-af",
+    "python3 scripts/test-firmware.py --af",
+    "tools/rea-analysis/venv/bin/python scripts/test-polished-candidate.py --output /new/af27-results",
+    "tools/rea-analysis/venv/bin/python scripts/test-audited-candidate.py --output /new/frozen26-results",
+    "tools/rea-analysis/venv/bin/python scripts/test-factory-af-oracle.py --output /new/controller-results",
+    "tools/rea-analysis/venv/bin/python research/stock-1.8/extensions/2026-10-12/validate_sensor_boundary.py --output /new/sensor-results",
+    "tools/rea-analysis/venv/bin/python research/stock-1.8/extensions/2026-10-12/test_input_guards.py",
+    "scripts/build-macos-app.sh"
+  ],
+  "localTranscriptSHA256": {
+    "artifacts/af27-swift-final.txt": "792f3160908445652c9194a1ede8be2905f9ce6066e48b283f398c59e0d3e8d6",
+    "artifacts/af27-firmware-complete.txt": "073da72f284f27caca65a47ea017b7ea96838e3bf519a41fef09380ef276c8b6",
+    "artifacts/af27-macos-build.txt": "d2fa40189c40b07f51c165887ca5a5bf955ab726b4e04fe01fcbb73bdd568375",
+    "artifacts/af27-build-final.txt": "6f7581ce242fe4a270bfb6276874f9a624c5921f8d1e2d0411d7f38fbf1c5038",
+    "artifacts/af27-sensor-boundary.log": "4fb70e230339299ac4057cf11700ae09a24712a1fd5d42626c6d0084897f7d3c",
+    "artifacts/af27-sensor-guards.log": "0b3b75ece935aa34d435bf4760ac604201c6d135381f54612333cea11c34b14f",
+    "artifacts/af26-night-app-before.txt": "f72106a95966e43043ff65949c71cc411a19d40a5bb23bdcd16fe83816a3130b",
+    "artifacts/af26-night-app-after.txt": "5272837a277ed8793deff87c5e3861ddebc9874f4c30b33d68263489534d9f47",
+    "artifacts/af27-clean-rebuild.txt": "fe4a09f6e432086a42ebce5ea21eb0e99d1e808214ea017a0dfb3c228342484b"
+  },
+  "testSourcesSHA256": {
+    "scripts/test-firmware.py": "85fc8711971d5ed983e5817ce5319c4d70b226cfe625a09cb2fdef5cf10adbb3",
+    "scripts/test-polished-candidate.py": "c8381345a0a2f2b760d36e7adc94a8f2409d83ce013f1daea6428b74e10e3de0",
+    "firmware/ea9/hosttest/test_factory_servo.c": "ce4724ce55905a765eb9fad9a3a03328c0be34c8d0d4bba1a49bc00b69d2b8a8",
+    "firmware/ea9/hosttest/test_factory_retarget.c": "851af26ea4e0b807d19a4b2dec39659a0489def13b24dc6499dbb5a38af31457",
+    "firmware/ea9/hosttest/test_event_queue.c": "3abc1a027dd87177d4768100ed892b53fca24ed3e66f193953ce1090307c8f15",
+    "firmware/ea9/hosttest/test_af_queue_retarget.c": "55bd2ab76bcce607855d85d3ef5cb187534b1e503b83cb2ebb492ca86d5a4561",
+    "apps/macos/Tests/AppWorkflowTests/DeviceWorkflowTests.swift": "7f469d595b8281e112e468ad1c1d155a23a3942e9ff3040397e24c9231f44d4a",
+    "apps/macos/Tests/DeviceKitTests/UploadTests.swift": "39f67565b51212e0f64e4a75ec1e769d39a569b38e2c6f1bf2e6a4f65d3b9847"
+  },
+  "forcedRebuildMatchesBundledTemplate": true
+}

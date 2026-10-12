@@ -34,3 +34,4 @@ __pycache__/
 /firmware/recovery/**/*.ea9backup/
 
 /artifacts/af26-*
+/artifacts/af27-*

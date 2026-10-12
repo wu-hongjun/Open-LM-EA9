@@ -16,6 +16,36 @@ private actor DiscoveryFixture {
     func reconnect(_ id: UInt64) -> Bool { blocked }
 }
 
+@Test @MainActor func corruptFirmwareHistoryHidesOldLensUntilRepaired() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([71])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
+    let image = try ApplicationImage.personalized(profile, variant: .autofocusAuditedAperture)
+    let store = UpdateStore(directory: folder)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(image.setting),
+        firmwareVersion: "2.6.0", imageSHA256: digest(image.data), verifiedAt: Date()))
+    try store.saveQualification(device: device, transactionID: UUID())
+    let firmware = FirmwareObservationStore(directory: folder)
+    try firmware.save(FirmwareObservation(device: device, version: "2.6.0"))
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.currentAppliedLens != nil && model.canApplyLens)
+    let corrupt = Data("{}".utf8)
+    try corrupt.write(to: firmware.fileURL)
+    await model.refreshDevices(silent: true)
+    #expect(model.updateStateError?.contains("Firmware history") == true)
+    #expect(model.currentAppliedLens == nil && !model.canApplyLens)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Review recovery options")
+    #expect(try Data(contentsOf: firmware.fileURL) == corrupt) // Refresh preserves evidence.
+    try firmware.save(FirmwareObservation(device: device, version: "2.6.0"))
+    await model.refreshDevices(silent: true)
+    #expect(model.updateStateError == nil && model.currentAppliedLens != nil && model.canApplyLens)
+}
+
 @Test @MainActor func hotplugRefreshResetsUSBConsentAndNeverRunsWhileBusy() async throws {
     let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: folder) }
@@ -82,7 +112,7 @@ private actor DiscoveryFixture {
     let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
     let setting = try AdapterLensSetting(profile: profile)
     let journal = UpdateStore(directory: folder)
-    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture] {
+    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture, .autofocusPolished] {
         let image = try ApplicationImage.personalized(profile, variant: variant)
         try journal.saveApplied(AppliedLens(device: device, setting: setting, firmwareVersion: variant.versionString,
                                            imageSHA256: digest(image.data), verifiedAt: Date()))

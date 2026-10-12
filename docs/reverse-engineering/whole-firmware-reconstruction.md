@@ -2,6 +2,18 @@
 
 **We have a mapped factory firmware, substantial reconstructed behavior, and executable host models; we do not yet have a complete, buildable replacement firmware.** This ledger distinguishes original-byte preservation, recovered code layout, semantic reconstruction, and finite behavioral validation. Research date: October 10, 2026 (America/New_York). All new work is offline; no device enumeration, USB reports, updater execution, flashing, or motor operation was performed.
 
+## October 12 sensor/origin extension
+
+The [new isolated extension](../../research/stock-1.8/extensions/2026-10-12/README.md)
+adds bounded models of `0x89a4`, `0x8c64` and `0x8c80`, validated by 68,648
+original-instruction cases/steps and a detected byte-order mutation. It executes
+original valid SPI HAL wrappers, cuts lower peripherals explicitly, and traces
+eight original main prefixes through first foreground poll. The application
+semantic-model union is now **41 routine entries**; the original 38-entry suite
+and its results remain intact. This adds sensor byte order and initialization/
+restore-origin evidence, not physical calibration or complete firmware coverage.
+Read [the new findings and precise limits](stock-re-progress-2026-10-12.md).
+
 ## Baseline and complete flash scope
 
 The retained 128 KiB original unit dump has SHA-256 `1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01`. The official 1.8.0 application is exactly 20,172 bytes, linked at `0x5000`, with SHA-256 `f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564`. The first 16 KiB boot region has SHA-256 `8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895`.

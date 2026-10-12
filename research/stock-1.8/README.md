@@ -105,3 +105,11 @@ binary license. The oracle is Techart's official application, retained under the
 [recovery bundle's attribution](../../firmware/recovery/stock-1.8.0/README.md).
 No vendor source license or redistribution rights are inferred from analysis.
 Unicorn is a separately installed dependency under its own license.
+
+## October 12 extension
+
+The independent [sensor/origin extension](extensions/2026-10-12/README.md) adds
+three new bounded entries without changing this 38-entry model. Its 68,648
+cases/steps and four guards use synthetic inputs, original Thumb instructions
+and explicit lower peripheral cuts. The union is 41 application routine models;
+these overlapping finite counts provide no whole-firmware coverage percentage.

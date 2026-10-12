@@ -1,4 +1,4 @@
-/* emount.c -- minimal E-mount responder.
+/* emount.c -- E-mount transport and command/status responder.
  *
  * WHAT THIS REPRODUCES, and what it deliberately does not.
  *
@@ -8,20 +8,18 @@
  * takes focus commands.  On top of that sits a fourteen-state transmit phase
  * machine, a four-value phase interlock, and a deferred-call timer on TC4.
  *
- * This file implements the first path and the status loop, and nothing else:
- *
- *   answered      every init-class request, from the same stored packets
- *   sent          the message 0x05 / 0x06 status pair, on the body's frame sync
- *   NOT handled   focus commands -- the body cannot issue one to this adapter
- *                 on an A6000-class body anyway (EA9.md §2.4), and the motor is
- *                 a separate workstream that is blocked behind this file
+ * This file admits init-class requests and normal focus/query records,
+ * snapshots commands for foreground motion dispatch, and emits the 0x05/0x06
+ * status pair on frame sync. The actuator/controller live in separate modules.
+ * It reproduces bounded observed protocol behavior, not the entire factory
+ * phase scheduler; camera qualification remains necessary.
  *
  * Three simplifications, each chosen with its risk understood:
  *
  * 1. NO PHASE INTERLOCK.  The stock gate at 0x2000051c[3] opens at reset,
  *    closes when message 0x0a is answered, and reopens on later exchanges
  *    (EA9.md §2.5, CORRECTION 2026-08-17).  Here init-class requests are always
- *    answered.  That is strictly more responsive than stock, never less.  The
+ *    answered.  This differs from the factory phase admission policy.  The
  *    camera that §8.2 broke was broken by adding a handler for a message the
  *    body never asked for (0x35), not by answering one it did; no handler is
  *    added here, so that failure mode is not in reach.
@@ -703,6 +701,7 @@ static void on_cs_edge(int level)
 	em_frames_rx++;
 	em_last_class = rx[3];
 
+#ifndef EA9_NO_LOG
 	/* Until the handshake completes, keep every frame.  A boot whose
 	 * handshake never completes is exactly the one whose frames nobody has
 	 * ever seen, and its motor pages stay unused, so there is somewhere to
@@ -719,6 +718,8 @@ static void on_cs_edge(int level)
 		}
 		em_pre_used++;
 	}
+
+#endif
 
 	if (!em_t_first_frame) {
 		em_t_first_frame = millis();
@@ -765,6 +766,7 @@ static void on_cs_edge(int level)
 				em_norm_count[i]++;
 			}
 
+#ifndef EA9_NO_LOG
 			/* Keep the raw bytes of the first two windows of each
 			 * kind.  Two rather than one because a command frame's
 			 * interesting fields are the ones that DIFFER between
@@ -781,6 +783,8 @@ static void on_cs_edge(int level)
 				}
 				em_cap_used++;
 			}
+#endif
+
 		} else {
 			em_norm_overflow = 1;
 		}
@@ -1077,6 +1081,27 @@ static volatile uint8_t g_event_n;
 
 void em_post_event(uint8_t code, uint8_t param)
 {
+	if (code == EM_REC_STOP) {
+		/* Stop must survive a full completion FIFO. Preserve the oldest
+		 * completion (normal killed-command/Stop ordering), replace the
+		 * newer one when full. Supersede an older pending Stop, then
+		 * append this Stop after any intervening completion. */
+		for (uint8_t i = 0; i < g_event_n; ++i) {
+			if (g_event_code[i] == EM_REC_STOP) {
+				for (uint8_t j = i + 1; j < g_event_n; ++j) {
+					g_event_code[j - 1] = g_event_code[j];
+					g_event_param[j - 1] = g_event_param[j];
+				}
+				--g_event_n;
+				break;
+			}
+		}
+		if (g_event_n == EM_EVENT_Q) {
+			g_event_code[EM_EVENT_Q - 1] = code;
+			g_event_param[EM_EVENT_Q - 1] = param;
+			return;
+		}
+	}
 	if (g_event_n < EM_EVENT_Q) {
 		g_event_code[g_event_n]  = code;
 		g_event_param[g_event_n] = param;

@@ -12,7 +12,7 @@
 static const char *scenario;
 static uint64_t ticks, begun, first_drive;
 static int16_t duty;
-static int powered, aborted, retargeted, released, calls, pumps;
+static int powered, aborted, retargeted, released, calls, pumps, repeat_calls;
 static uint16_t peak;
 static int32_t last_position;
 
@@ -40,7 +40,8 @@ int32_t abs_encoder_track(void) {
                     !strcmp(scenario, "stop-cross") || !strcmp(scenario, "late-stop") ||
                     !strcmp(scenario, "final-invalid") || !strcmp(scenario, "final-drift") || !strcmp(scenario, "late-fault") ||
                     !strcmp(scenario, "retarget") || !strcmp(scenario, "progress-timeout") ||
-                    !strcmp(scenario, "deadline-stop"))) {
+                    !strcmp(scenario, "deadline-stop") ||
+                    !strncmp(scenario, "repeat-", 7))) {
         int32_t time = (int32_t)((ticks - first_drive) / 48000u);
         position = time * ((!strcmp(scenario, "progress-timeout") || !strcmp(scenario, "deadline-stop")) ? 1 : 4);
         if (retargeted) position = 160 - (time - 40) * 4;
@@ -63,10 +64,20 @@ static void pump(int32_t position) {
     if (!strcmp(scenario, "early-fault") && pumps == 2) ea9_io_trip(EA9_IO_ENCODER);
     if (!strcmp(scenario, "stop") && powered) aborted = 1;
     if (!strcmp(scenario, "stop-cross") && position >= 400) aborted = 1;
+    if (!strcmp(scenario, "repeat-stop") && position >= 40) aborted = 1;
     if (!strcmp(scenario, "late-stop") && position >= 400 && !duty) aborted = 1;
 }
 static uint8_t abort_motion(void) { return !strcmp(scenario, "gap") ? 0 : aborted; }
 static uint8_t retarget(int32_t *target) {
+    if (!strncmp(scenario, "repeat-", 7)) {
+        /* Unequal counts sharing the same four-count wire target. */
+        *target = (++repeat_calls & 1) ? 401 : 403;
+        return 1;
+    }
+    if (!strcmp(scenario, "retarget-budget")) {
+        *target = (++repeat_calls & 1) ? 800 : 400;
+        return 1;
+    }
     if (!strcmp(scenario, "retarget-limit-stop") && powered) {
         if (!retargeted) { *target = 500; retargeted = 1; return 1; }
         aborted = 1; return 0;
@@ -86,11 +97,21 @@ int main(int argc, char **argv) {
     if (!strcmp(scenario, "dry")) cfg.dry = 1;
     if (!strcmp(scenario, "stall")) cfg.stall_ms = 100;
     if (!strcmp(scenario, "retarget-limit-stop")) cfg.retarget_max = 1;
+    if (!strncmp(scenario, "repeat-", 7)) cfg.retarget_max = 0;
     struct servo_result result;
     int32_t target = !strncmp(scenario, "wrong-way", 9) ? 1400 : 400;
     if (!strncmp(scenario, "resolution", 10)) target = 4;
     factory_servo_move_to(target, &cfg, &result);
-    if (!strcmp(scenario, "success") || !strcmp(scenario, "wrap") || !strcmp(scenario, "retarget")) {
+    if (!strcmp(scenario, "repeat-quantized")) {
+        assert(result.outcome == SERVO_OK && powered && !duty && !ea9_io_faults());
+        assert(repeat_calls > 16 && result.retargets == 0 && result.target == 400);
+    } else if (!strcmp(scenario, "repeat-stop")) {
+        assert(result.outcome == SERVO_ABORTED && !duty && released && !ea9_io_faults());
+        assert(repeat_calls > 16 && result.retargets == 0);
+    } else if (!strcmp(scenario, "retarget-budget")) {
+        assert(result.outcome == SERVO_TIMEOUT && result.retargets == 16 && repeat_calls == 17);
+        assert(!duty && released);
+    } else if (!strcmp(scenario, "success") || !strcmp(scenario, "wrap") || !strcmp(scenario, "retarget")) {
         assert(result.outcome == SERVO_OK && powered && !duty && !ea9_io_faults());
         assert(first_drive - begun >= 11u * 60008u);
         assert(first_drive - begun < 11u * 60008u + 10000u);

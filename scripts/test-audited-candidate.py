@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline AF 2.6 regressions, opaque stock-query oracle and frozen 2.5 control."""
+"""Historical AF 2.6 regressions, opaque stock-query oracle and frozen 2.5 control."""
 import argparse
 import hashlib
 import json
@@ -12,12 +12,23 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path, required=True)
 out = parser.parse_args().output.resolve()
 out.mkdir(mode=0o700, parents=True, exist_ok=False)
-base = ROOT / 'firmware/ea9'
+# Historical 2.6 is immutable even after current motion-wrapper changes.
+frozen26 = json.loads((ROOT / 'firmware/candidates/2.6.0/regression-inputs.json').read_text())
+snapshot26 = out / 'frozen26'
+for name, digest in frozen26['files'].items():
+    data = subprocess.run(['git', 'show', frozen26['sourceGitCommit'] + ':' + name],
+                          cwd=ROOT, capture_output=True, check=True).stdout
+    if hashlib.sha256(data).hexdigest() != digest:
+        raise RuntimeError('Frozen 2.6 source mismatch: ' + name)
+    path = snapshot26 / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+base = snapshot26 / 'firmware/ea9'
 flags = ['cc', '-std=gnu99', '-O1', '-Wall', '-Wextra', '-Werror',
          '-Wno-over-aligned', '-fsanitize=address,undefined', '-fno-sanitize-recover=all']
 transport = ['hosttest/shim.c', 'src/emount.c', 'src/emount_packets.c',
              'src/lens_profile.c', 'src/lens_aperture.c']
-probe = ROOT / 'firmware/tests/test_stock_query.c'
+probe = snapshot26 / 'firmware/tests/test_stock_query.c'
 program = out / 'query26'
 subprocess.run(flags + ['-Ihosttest', '-Isrc', str(probe), *transport, '-o', str(program)],
                cwd=base, check=True)
@@ -88,10 +99,10 @@ for name in retained:
     path = 'firmware/ea9/src/' + name
     old = subprocess.run(['git', 'show', historical['sourceGitCommit'] + ':' + path],
                          cwd=ROOT, check=True, capture_output=True).stdout
-    if old != (ROOT / path).read_bytes(): raise RuntimeError('Retained AF source changed: ' + path)
+    if old != (snapshot26 / path).read_bytes(): raise RuntimeError('Retained AF source changed: ' + path)
 
-report = {'firmware': '2.6.0', 'status': 'passed-offline-ready-for-separate-upload-and-camera-qualification',
-          'hardwareReportsSent': 0, 'opaqueQueryCoverage': coverage,
+report = {'firmware': '2.6.0', 'status': 'historical-reproduction-passed-not-current-candidate-qualification',
+          'hardwareReportsSent': 0, 'frozen26SourceGitCommit': frozen26['sourceGitCommit'], 'opaqueQueryCoverage': coverage,
           'originalInstructionFullReplyCases': original_cases,
           'originalInstructionImageSHA256': FIRMWARE_SHA256,
           'comparedReplyFramesSHA256': hashlib.sha256(frames).hexdigest(),
@@ -107,7 +118,7 @@ report = {'firmware': '2.6.0', 'status': 'passed-offline-ready-for-separate-uplo
                           'Final I/O helpers stubbed; original handler and sender checksum instructions execute',
                           'Minimum operand bound is not proof of complete 0x34 request grammar',
                           'Unicorn behavior does not prove ARMv6-M instruction legality'],
-          'sources': {str((base / name).resolve().relative_to(ROOT)):
+          'sources': {str((base / name).resolve().relative_to(snapshot26)):
                       hashlib.sha256((base / name).read_bytes()).hexdigest()
                       for name in transport + motion_sources},
           'probeSHA256': hashlib.sha256(probe.read_bytes()).hexdigest(),

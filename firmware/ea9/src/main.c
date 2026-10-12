@@ -6,35 +6,11 @@
  * protocol service and session motion-fault ownership are shared policies.
  * Upstream camera measurements below belong to its a9 II, not our A7C II.
  *
- * REPLACES the open-loop version, which damaged nothing permanently but came
- * close.  That one drove a fixed duty for a fixed 200 ms with no feedback: at
- * 50% duty this mechanism covers more than its entire advertised travel in
- * that time, so every pulse ended against an end stop, and the 100% step
- * over-travelled hard enough that the stock firmware needed two power cycles
- * before it would drive the helicoid again.
- *
- * It answered its question -- the motor works, and a measurement run's two candidate
- * explanations were both wrong -- but the parameters were sized against a
- * result that had already been withdrawn, and it had no end-stop protection of
- * any kind.
- *
- * What this one does instead:
- *
- *   - CLOSED LOOP.  Every move has a target and stops there.  A timed pulse
- *     cannot do that; this is the single biggest change.
- *   - SMALL.  +-200 encoder counts = 50 protocol units = 3.4% of the
- *     advertised travel, against the previous version's 130%.
- *   - LOW DUTY, RAMPED.  Starts at 4% and climbs only while the mechanism is
- *     not moving, capped at 16%.  The mechanism never gets more force than it
- *     needed to start, and the duty at which it first moves is the measurement
- *     worth having.
- *   - RETURNS TO WHERE IT STARTED after every excursion, so the sequence is
- *     net-zero and cannot walk toward a stop.
- *   - STOPS THE WHOLE SEQUENCE on the first stall or runaway, instead of
- *     carrying on into the next step.
- *
- * This is still an experimental mechanism test. Guards depend on functioning
- * feedback, I/O and a time base; this fork has not been camera-qualified.
+ * The dispatcher serves Move, Scan, Drive, Stop and shutdown commands.
+ * Legacy scripted-mechanism notes were removed: this is a camera AF candidate,
+ * with shared bounded homing, feedback validation and sticky fault handling.
+ * Guards depend on functioning feedback, I/O and a time base. Neither the
+ * host mechanical model nor the recovered PID proves physical AF equivalence.
  */
 #include "board.h"
 #include "clock.h"
@@ -188,6 +164,7 @@ static void norm_page(void)
  * same flash page several times.  Flash bits only go 1 -> 0, so the page ends
  * up as the AND of every write: focus6 wrote 11 ids and later 20, and the
  * count decoded as 11 & 20 = 0, an empty page where two good ones had been. */
+#ifndef EA9_NO_LOG
 static uint8_t g_qidlog_written;
 
 static void quiet_idlog_page(void)
@@ -198,6 +175,8 @@ static void quiet_idlog_page(void)
 	g_qidlog_written = 1;
 	trail_idlog(QUIET_IDLOG_PAGE);
 }
+
+#endif
 
 /* Motor values and velocity-loop tuning below are inherited upstream policy.
  * REA recovers related factory constants, but not an ordinarily enabled homing
@@ -1255,11 +1234,13 @@ static void focus_hist_page(uint32_t page)
 
 int main(void)
 {
+	unsigned step = 0;
+#ifndef EA9_NO_LOG
 	int      hs_marked = 0;
 	int      caps_flushed = 0;
 	int      caps_written = 0;
-	unsigned step = 0;
 	int      quiet = 0;
+#endif
 
 	/* Pins FIRST, before the clocks.
 	 *
@@ -1324,6 +1305,7 @@ int main(void)
 	for (;;) {
 		em_poll();
 
+#ifndef EA9_NO_LOG
 		/* If the handshake has not completed by two seconds it is not
 		 * going to.  The motor pages are then free -- no motor step can
 		 * run without a handshake -- so the frames the body did send go
@@ -1444,6 +1426,8 @@ int main(void)
 		           && (uint32_t)(millis() - em_t_last_frame) < QUIET_MS) {
 			quiet = 0;      /* it came back; that was a hiccup */
 		}
+
+#endif
 
 		/* Home once, then serve whatever focus targets arrive.
 		 *

@@ -21,7 +21,7 @@ import LensCore
             if ["prepare","prepare-af"].contains(args[0]) {
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: args[0] == "prepare-af" ? .autofocusAuditedAperture : .metadataOnly)
+                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: args[0] == "prepare-af" ? .autofocusPolished : .metadataOnly)
                 try data.write(to: URL(fileURLWithPath: args[2]), options: .withoutOverwriting)
                 print("Prepared application image: \(data.count) bytes. No USB reports sent.")
                 return
@@ -51,7 +51,7 @@ import LensCore
             case "apply", "apply-af":
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let pending = try await service.apply(profile: profile, variant: args[0] == "apply-af" ? .autofocusAuditedAperture : .metadataOnly, device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
+                let pending = try await service.apply(profile: profile, variant: args[0] == "apply-af" ? .autofocusPolished : .metadataOnly, device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
                 print("Firmware: \(pending.version.map(String.init).joined(separator: "."))\nUploaded \(pending.image.count) bytes for \(profile.displayName).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
             case "verify", "inspect":
                 let applied = args[0] == "verify" ?

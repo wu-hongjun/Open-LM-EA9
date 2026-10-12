@@ -6,13 +6,14 @@
  * and a polled transmitter, which is a deliberate simplification:
  *
  *   - RX: one byte every 13.3 us at 750 kbaud is ~640 cycles at 48 MHz, so a
- *     two-instruction ISR has three orders of magnitude of headroom.  The DMA
- *     buys nothing here and costs a channel plus its callback plumbing.
+ *     handler must admit a byte within that budget. It includes buffer/error
+ *     bookkeeping and a bounded drain guard; no worst-case cycle measurement
+ *     or complete hardware scheduling proof has been established here.
  *   - TX: the longest frame is message 0x08 at 210 bytes = 2.8 ms, and it is
  *     sent once during init.  The recurring frames are 105 and 48 bytes, i.e.
- *     1.4 ms and 0.6 ms out of a 16.6 ms body frame.  Blocking is affordable,
- *     and it makes the chip-select release trivially correct: return when TXC
- *     says the last bit has actually left, not when the FIFO drained.
+ *     1.4 ms and 0.6 ms at the nominal upstream 16.6 ms frame period. Blocking
+ *     waits for TXC before releasing chip select; it also delays foreground
+ *     control, and its actual camera timing still needs qualification.
  *
  * If the servo loop later turns out to be starved by the 1.4 ms send, this is
  * the file to put DMA back into -- nothing above it depends on the blocking.

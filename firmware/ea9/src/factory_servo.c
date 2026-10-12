@@ -93,18 +93,24 @@ void factory_servo_move_to(int32_t target, const struct servo_cfg *cfg,
          * abort latch through this hook; none can become a stale success. */
         int32_t next;
         if (cfg->retarget && cfg->retarget(&next)) {
-            /* Keep polling Stop/replacement even after the retarget budget.
-             * Another target exhausts the bound, rather than skipping input. */
-            if (out->retargets >= cfg->retarget_max) {
-                out->outcome = SERVO_TIMEOUT; break;
+            int32_t next_desired = admitted_target(next);
+            int32_t next_target = focus_em06_to_counts(focus_counts_to_em06(next_desired));
+            /* Retransmitting the same admitted wire target is not a new leg.
+             * Consume it without resetting PID/deadline or spending budget.
+             * Relative commands are resolved by the caller before this test. */
+            if (next_target != out->target) {
+                /* Keep polling Stop/replacement even after the budget. */
+                if (out->retargets >= cfg->retarget_max) {
+                    out->outcome = SERVO_TIMEOUT; break;
+                }
+                desired = next_desired;
+                out->target = next_target;
+                ea9_factory_target(&controller, focus_counts_to_em06(desired), pos + FOCUS_REFERENCE_OFFSET);
+                sign = out->target > pos ? 1 : out->target < pos ? -1 : 0;
+                leg_start = moved_at = pos;
+                leg_at = last_motion = millis();
+                ++out->retargets;
             }
-            desired = admitted_target(next);
-            out->target = focus_em06_to_counts(focus_counts_to_em06(desired));
-            ea9_factory_target(&controller, focus_counts_to_em06(desired), pos + FOCUS_REFERENCE_OFFSET);
-            sign = out->target > pos ? 1 : out->target < pos ? -1 : 0;
-            leg_start = moved_at = pos;
-            leg_at = last_motion = millis();
-            ++out->retargets;
         }
         if (cfg->abort && cfg->abort()) { out->outcome = SERVO_ABORTED; break; }
         uint32_t now = millis();

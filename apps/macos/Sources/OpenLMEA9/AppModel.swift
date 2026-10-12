@@ -278,8 +278,9 @@ enum AppTab: Hashable { case device, lensLibrary }
     private func refreshUpdateState(for device: DeviceIdentity?) {
         // CLI verification can publish a new observation while this window is open.
         // Refresh the bounded local cache without sending a CHECK report.
-        firmwareObservation = try? firmwareStore.load()
         var errors: [String] = []
+        do { firmwareObservation = try firmwareStore.load() }
+        catch { firmwareObservation = nil; errors.append("Firmware history: \(error.localizedDescription)") }
         do { pendingUpdate = try deviceService.pendingUpdate(); pendingUpdateError = nil }
         catch { pendingUpdate = nil; pendingUpdateError = error.localizedDescription; errors.append("Update journal: \(error.localizedDescription)") }
         do { appliedLens = try deviceService.appliedLens() }
@@ -341,7 +342,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var firmwareBehaviorNote: String {
         switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
         default: return "Installed firmware and motor behavior have not been verified for this connection."
         }
@@ -360,7 +361,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canApplyLens, let variant = variantForLensChanges else { return }
         applyLens(variant: variant, preservingFirmware: true)
     }
-    func installAutofocus() { applyLens(variant: .autofocusAuditedAperture) }
+    func installAutofocus() { applyLens(variant: .autofocusPolished) }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }

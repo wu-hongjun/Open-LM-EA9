@@ -79,3 +79,16 @@ and reran 24,991 instruction comparisons and ten input/output guards. The
 [whole-firmware ledger](../reverse-engineering/whole-firmware-reconstruction.md)
 separates this reproducible application subset from the other local models and
 remaining peripheral, scheduling, data and replacement-image work.
+
+## October 12 overnight audit and polish
+
+Three independent lanes completed the owner-requested offline pass:
+[firmware correctness](night-firmware-correctness-2026-10-12.md),
+[measured release optimization](night-firmware-optimization-2026-10-12.md), and
+[factory sensor/origin reconstruction](../reverse-engineering/stock-re-progress-2026-10-12.md).
+Root implemented the queue/retarget fixes, diagnostic gating and corrupt-history
+app correction as AF 2.7/app 0.10.0. The correctness lane performed an
+[independent integration review](af27-integration-review-2026-10-12.md), catching
+and confirming correction of an intermediate Stop-ordering issue. See
+[validation and the remaining motion-telemetry/physical qualification limits](../evidence/overnight-audit-polish-2026-10-12.md).
+Frozen releases, stock recovery and private owner state remain preserved.
