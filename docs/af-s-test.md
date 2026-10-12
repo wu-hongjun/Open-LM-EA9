@@ -1,10 +1,12 @@
 # A7C II acceptance: AF 2.9, Contax Zeiss 50mm f/1.4
 
 The [AF 2.9 candidate](../firmware/candidates/2.9.0/README.md) and app
-0.12.0/build 15 passed offline preparation. **It has not been uploaded or tested
-on the camera.** Original stock 1.8 remains installed and
-[strictly byte-verified](evidence/stock-18-af28-recovery-2026-10-12.md).
-Upload is a separate requested step; the procedure below is a plan.
+0.12.0/build 15 passed offline preparation. **AF 2.9 uploaded successfully;
+physical reconnect and strict byte verification are pending.** Keep the adapter
+off the camera until verification passes. The fresh pre-upload stock backup
+matches the [strictly verified restoration](evidence/stock-18-af28-recovery-2026-10-12.md).
+See [the installation record](evidence/af-29-upload-2026-10-12.md).
+Camera testing has not started; the procedure below remains the qualification plan.
 
 AF 2.8 remains held after owner-reported preview freeze, poor focus response,
 darker exposure and a shutdown hang requiring battery removal.

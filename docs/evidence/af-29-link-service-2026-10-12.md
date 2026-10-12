@@ -1,11 +1,13 @@
 # AF 2.9: camera communication through motion faults
 
 October 12, 2026, America/New_York. **AF 2.9 for Contax Zeiss 50mm f/1.4 is
-prepared and tested offline, not uploaded or camera-qualified.** App 0.12.0/build
-15 and the signed CLI prepare/install this separate variant. The adapter remains
-on the [strictly verified stock 1.8 restoration](stock-18-af28-recovery-2026-10-12.md);
-this work sent no hardware reports and changed no owner application state.
+prepared and tested offline in this implementation pass.** App 0.12.0/build
+15 and the signed CLI prepare/install this separate variant. During that offline
+pass the adapter was on the [strictly verified stock 1.8 restoration](stock-18-af28-recovery-2026-10-12.md);
+the implementation work sent no hardware reports and changed no owner application state.
 AF 2.8 remains frozen and held after its reported camera failures.
+Subsequently, the separately authorized [AF 2.9 upload](af-29-upload-2026-10-12.md)
+succeeded; physical reconnect verification and camera qualification are pending.
 
 ## Demonstrated defects and changes
 

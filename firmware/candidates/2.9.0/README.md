@@ -1,9 +1,10 @@
 # AF 2.9.0 — Contax Zeiss 50mm f/1.4
 
-**Prepared and tested offline; not uploaded or camera-qualified.** This candidate
+**Uploaded successfully; reconnect verification and camera qualification pending.** This candidate
 keeps healthy camera communication/timing serviceable through sticky motion
 faults, records transmission success truthfully and resets status admission on
-a new initialization request. Stock 1.8 remains installed; AF 2.8 stays held.
+a new initialization request. A fresh stock backup is saved; AF 2.8 stays held.
+See [the installation record](../../../docs/evidence/af-29-upload-2026-10-12.md).
 
 | Property | Value |
 | --- | --- |
@@ -28,7 +29,8 @@ resolved. Faulted motion remains inhibited; no automatic rearming is introduced.
 
 App 0.12.0/build 15 and explicit `prepare-af`/`apply-af` select 2.9. Normal lens
 changes preserve the verified installed variant. All older templates/images and
-original recovery are preserved. No hardware operation occurred in this pass.
+original recovery are preserved. The implementation/validation pass was offline;
+the separately authorized October 12 installation is recorded above.
 
 ```sh
 python3 scripts/build-firmware.py --variant serviced-af
