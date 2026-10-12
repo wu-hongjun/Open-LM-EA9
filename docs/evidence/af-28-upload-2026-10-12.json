@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "status": "uploaded-awaiting-physical-reconnect-and-strict-verification",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-pending",
   "sourceGitCommit": "1043bad7f233479d198495bbd435a42dbcc0edc9",
   "transactionID": "745859B9-DE2D-4C65-842D-332A79031F08",
   "appVersion": "0.11.0",
@@ -22,10 +22,10 @@
   "postSTARTReadsSent": 0,
   "retriesSent": 0,
   "uploadPerformed": true,
-  "strictVerificationPassed": false,
+  "strictVerificationPassed": true,
   "cameraTestingPerformed": false,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
-  "physicalReconnectConfirmedAfterUpload": false,
+  "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
   "preUploadBackup": {
     "firmwareVersion": "1.8.0",
@@ -49,5 +49,45 @@
     "upload.stdout.txt": "586b7fc02783483f4e5edc221db2de948704830f9f36f77fe0fd662efa52b4b5",
     "upload.progress.txt": "e1aa9ef5201b3b28f72a0a4392745aa980b584adce41375de545c0e2faa04bce",
     "planned50.bin": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834"
-  }
+  },
+  "verifiedAtUTC": "2026-10-12T13:00:11.259585+00:00",
+  "verifiedAtLocal": "2026-10-12T09:00:11.259585-04:00",
+  "verificationNativeExitCode": 0,
+  "newConnectionAndSameUnitValidated": true,
+  "readback": {
+    "firmwareVersion": "2.8.0",
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "flashSHA256": "43c71108aa7a39d28f0d293a28074e0b0b1f35dd5693509fc5154a5d038f8a98",
+    "imageSHA256": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834",
+    "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+    "bootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895"
+  },
+  "strictChecks": {
+    "completeApplicationExact": true,
+    "profileExact": true,
+    "knownMetadataExact": true,
+    "bootCodeUnchanged": true,
+    "protectedGapUnchanged": true,
+    "retainedUpperFlashUnchanged": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true
+  },
+  "excludedMetadataRange": {
+    "range": "[0x403a,0x4040)",
+    "bytes": 6,
+    "reason": "Established adjacent loader RAM bytes copied by START; no other exclusion"
+  },
+  "offlineIndependentAuditPassed": true,
+  "canonicalAppliedLensAndFirmwareObservationPublished": true,
+  "armedUploadConnectionMarkerRetained": true,
+  "verifiedReadConnectionMarkerClearedByNativeService": true,
+  "verificationLogSHA256": {
+    "verify.stdout.txt": "b6c5a40174e9bc81ad8124fffce8fece705f3f6ac0bc6726a2ee5d70e5b33c6c",
+    "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+  },
+  "cameraTestStage": "Initial loaded-lens A/MF display, exposure and lifecycle check requested; awaiting owner observations before AF-S"
 }

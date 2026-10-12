@@ -1,12 +1,12 @@
 # A7C II acceptance: AF 2.8, Contax Zeiss 50mm f/1.4
 
 The [AF 2.8 candidate](../firmware/candidates/2.8.0/README.md) and app
-0.11.0/build 14 passed offline preparation. **The October 12 native upload
-finished; physical reconnect and strict readback are pending. Camera testing
-is not run.** See [the live transaction record](evidence/af-28-upload-2026-10-12.md).
+0.11.0/build 14 passed offline preparation. **The October 12 native upload,
+owner-confirmed physical reconnect and strict two-pass readback passed. Camera
+testing is not run.** See [the live transaction record](evidence/af-28-upload-2026-10-12.md).
 This procedure is a plan, not a record of passed camera checks.
-The converter is now available. The last byte-verified hardware image was
-original stock 1.8; its owner-reported exposure failure remains accepted.
+The converter is now available. The current byte-verified hardware image is
+AF 2.8; the earlier stock 1.8 owner-reported exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
 
 Frozen AF 2.5 remains held because its `0x34` override assumed unproven
@@ -16,8 +16,8 @@ measured observer and restores equal factory position fields. Physical settling,
 owner-unit noise and camera consumption remain unqualified. See
 [the aperture audit](audits/aperture-protocol-design-2026-10-11.md) and
 [2.8 implementation/verification](evidence/af-28-motion-telemetry-2026-10-12.md).
-The adapter is on the USB cap after upload. Keep it off the camera until
-owner-confirmed physical reconnect and strict verification succeed.
+The USB installation gate has passed; begin the initial loaded-lens check below
+with the camera powered off. Camera observations and AF-S remain pending.
 
 AF 2.4 passed USB verification but failed focus acquisition, with a dark view
 and no shown f-number in P/A. Further trials of that frozen image are suspended.
