@@ -3,7 +3,7 @@
   "lens": "Contax Zeiss 50mm f/1.4",
   "appVersion": "0.8.0",
   "appBuild": 11,
-  "status": "prepared-offline-not-uploaded-not-camera-qualified",
+  "status": "frozen-offline-candidate-held-after-semantic-audit",
   "hardwareReportsSent": 0,
   "candidateSHA256": "febfa9ff411af46bff225633984e84d4d5ff6d10580514a5bdf429e76f719522",
   "templateSHA256": "448f827b4766f9ecb96c470d48d706650eb30d2fc41aea620369e22989d714c7",
@@ -103,7 +103,7 @@
   "cameraExposureQualified": false,
   "cameraAFQualified": false,
   "knownLimits": [
-    "Fixed-aperture reply consistency is repaired; physical metering/display behavior is unverified",
+    "Known aperture fields implement the fixed policy; 0x34 aperture classification is unproven. Physical metering/display behavior is unverified.",
     "No one-stop exposure compensation introduced",
     "Factory pure controller equivalence does not qualify complete firmware or physical timing",
     "Mechanical simulation uses upstream coefficients; owner unit homing/origin/braking are unmeasured",
@@ -113,5 +113,12 @@
     "result": "pass-excluding-byte-exact-frozen-snapshot",
     "excludedPath": "firmware/candidates/2.4.0/counterexample-src",
     "reason": "Inherited packet-table trailing whitespace retained for exact source provenance; snapshot SHA256 and original-commit byte equality pass"
+  },
+  "semanticAuditAmendment": {
+    "audit": "docs/audits/aperture-protocol-design-2026-10-11.md",
+    "message34ApertureMeaningEstablished": false,
+    "factoryEchoDependencyProvesApertureMeaning": false,
+    "hardwareRecommendation": "hold frozen 2.5 installation; preserve binaries/tests; next candidate should retain opaque stock behavior unless an evidence-backed experiment justifies deviation",
+    "offlineRegressions": "passing implementation-policy assertions do not prove message34 semantics or exposure repair"
   }
 }

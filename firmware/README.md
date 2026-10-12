@@ -36,6 +36,10 @@ Current source builds **AF 2.5** under `ea9/build/refined`, as camera BCD 0x25
 and loader 2.5.0. It is prepared offline and not uploaded/camera-qualified; see
 [the new candidate](candidates/2.5.0/README.md) and
 [its aperture/completion regressions](../docs/evidence/af-25-candidate-2026-10-11.md).
+The subsequent [aperture audit](../docs/audits/aperture-protocol-design-2026-10-11.md)
+holds frozen 2.5 from hardware installation: its `0x34` override assumes an
+unproven aperture meaning. Keep its image and test evidence; a successor should
+restore bounded opaque stock behavior while retaining the AF completion work.
 The following 2.4 observations are historical. It uses a modular factory-derived controller, tested directly
 against the original instructions. Its authorized upload and strict byte verification passed after physical
 reconnect, including an independent audit. **Its owner focus attempt failed**:

@@ -7,6 +7,13 @@ The converter is now available. The last byte-verified hardware image was
 original stock 1.8; its owner-reported exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
 
+**Audit hold:** do not execute the installation procedure for frozen AF 2.5.
+The [aperture design audit](audits/aperture-protocol-design-2026-10-11.md)
+found that its `0x34` override assumes an unproven aperture meaning. The steps
+below remain planned acceptance criteria; substitute a separately versioned,
+reviewed candidate before coordinating an upload. No test or upload of 2.5 has
+occurred.
+
 AF 2.4 passed USB verification but failed focus acquisition, with a dark view
 and no shown f-number in P/A. Further trials of that frozen image are suspended.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md),

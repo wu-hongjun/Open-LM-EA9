@@ -76,3 +76,7 @@ App 0.8.0/build 11 offers explicit AF 2.5 installation. Normal dropdown lens
 changes preserve the verified installed version, including frozen 2.4. The new
 [candidate record](evidence/af-25-candidate-2026-10-11.md) covers preparation and
 offline checks; exposure and optical AF remain unqualified.
+The later [aperture audit](audits/aperture-protocol-design-2026-10-11.md) holds
+frozen 2.5 from installation because its `0x34` override assumes unproven
+semantics. The existing prototype's install button does not establish readiness;
+use a reviewed successor candidate for the next hardware comparison.

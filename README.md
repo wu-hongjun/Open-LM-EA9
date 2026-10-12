@@ -14,9 +14,13 @@ upload/read-back path for lens metadata. The current app (0.8.0, build 11) refre
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The new **AF 2.5 candidate is prepared and tested offline**, with coherent
-aperture capture-query replies and bounded actuator completion. It remains
+The new **AF 2.5 candidate is prepared and tested offline**, with a proposed
+aperture policy and bounded actuator completion. It remains
 unuploaded and camera-unqualified; see [the candidate record](docs/evidence/af-25-candidate-2026-10-11.md).
+An [independent aperture audit](docs/audits/aperture-protocol-design-2026-10-11.md)
+subsequently found that `0x34` has unknown semantics. Its interpretation as an
+aperture capture query is unproven; **hardware installation of frozen 2.5 is
+on hold**, while the bounded completion work and test evidence are retained.
 The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The historical **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented

@@ -192,3 +192,12 @@ The next pass is now implemented in [AF 2.5](evidence/af-25-candidate-2026-10-11
 coherent `0x34` aperture replies, consumed-snapshot negotiation and separately
 classified motion terminations pass offline regressions. Physical exposure and
 AF acceptance remain pending; no one-stop compensation was applied.
+
+The subsequent [independent aperture audit](audits/aperture-protocol-design-2026-10-11.md)
+corrects that claim for `0x34`: the field's meaning is unknown, and factory
+request echo does not establish aperture semantics. The 2.5 override is an
+unqualified experiment, so hardware installation of that frozen image is on
+hold. Preserve opaque protocol behavior while restricting the fixed policy to
+established aperture channels. Retained stock optical rows remain uncalibrated;
+the SEL5518Z constants in the current header are not installed by production
+`em_init()`. Physical aperture stays unknown in the app.

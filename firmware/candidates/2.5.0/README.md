@@ -1,7 +1,16 @@
 # AF 2.5.0 — Contax Zeiss 50mm f/1.4
 
+**Audit amendment: hold this frozen candidate from hardware installation.**
+Independent documentation review found that message `0x34` has unresolved
+semantics. The original handler proves a request-word echo, not that the word
+is aperture; the 2.5 override is therefore an unqualified protocol experiment.
+The regression establishes the chosen implementation policy, not an exposure
+repair. Preserve these binaries and pins for diagnosis. The
+[aperture design audit](../../../docs/audits/aperture-protocol-design-2026-10-11.md)
+defines the baseline for the next separately versioned candidate.
+
 Prepared and tested offline. **Not uploaded or camera-qualified.** This separate
-candidate corrects fixed-aperture reply consistency and the confirmed 2.4
+candidate implements a proposed fixed-aperture reply policy and repairs the reproduced 2.4
 completion counterexamples. The exact cause of the owner's stock exposure
 failure remains unproven. Camera metering, aperture display and optical AF must
 still pass acceptance; the missing earlier photograph does not block this work.
