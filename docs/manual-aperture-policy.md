@@ -137,6 +137,17 @@ body did stay at f/2, the unperformed electronic stop-down explanation alone
 does not resolve that failure. A/body-f2 saved exposure and shutdown remain
 unverified.
 
+The owner subsequently reports a saved photo at physical f/1.4 and camera f/2
+as one stop overexposed. The stock body-f2 check therefore failed under the
+reported setup; it is not qualified by the manufacturer's recommendation.
+Original image/shutter/ISO, mode, compensation, metering and shutdown remain
+unverified. The displayed-versus-physical f-number difference has a roughly
+one-stop arithmetic ratio, but the camera measures scene light through the
+lens, so that ratio alone does not establish a one-stop metering fault.
+Request the existing photo/settings before another correction or flash. The
+earlier camera-only f/4.5 change remains a separate observation, consistent
+with an unperformed stop-down.
+
 The custom design goal remains fixed accepted camera reporting, known lens
 geometry and unknown physical iris in the app. Acceptance must include saved
 exposure and EXIF in A/P/Auto and physical stop-down, alongside AF. The failed

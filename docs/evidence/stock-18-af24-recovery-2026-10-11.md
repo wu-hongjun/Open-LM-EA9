@@ -3,9 +3,10 @@
 October 11, 2026. Original same-unit stock recovery upload completed normally;
 the owner physically reconnected the USB cap. **Normal native strict verification
 and the independent readback audit passed.** Stock 1.8.0 is restored; the new
-owner now reports selectable aperture in P with a widest value of f/2.0 and
-blown-out photos in AUTO. A controlled A/f2 exposure check, lifecycle observations
-and AF-S comparison remain pending. The
+owner reports selectable aperture in P, AUTO overexposure and a later
+**failed exposure check at physical f/1.4 / displayed f/2**, estimated one stop
+over. Shutter/ISO, exposure mode/compensation, original photo analysis and
+lifecycle remain unverified. AF-S qualification remains pending. The
 [machine-readable record](stock-18-af24-recovery-2026-10-11.json) carries the
 observed transaction state, counts and digests. The
 [AF 2.4 failure investigation](af-24-camera-failure-2026-10-11.md) retains the
@@ -127,6 +128,43 @@ alone does not establish saved exposure. The next useful observations remain a
 saved photo with the body held at f/2 and display/motor shutdown; none is assumed
 from this control clarification. No further firmware transfer or USB report was
 performed.
+
+The owner then answered the body-f2 saved-exposure question:
+
+> no, if my lens is at f1.4 but camera think it is at F2, it is one stop over exposed
+
+Record this as an owner-reported failed stock exposure check at physical f/1.4
+and camera f/2, with approximately one stop excess. That magnitude is an owner
+estimate, not inspected image clipping or measured calibration. The causal
+explanation in the reply is retained as the owner's interpretation. A camera
+f/2 operating setting has not resolved exposure on this setup; the earlier
+body-only f/4.5 change does not explain all reported overexposure.
+
+The ratio `(2 / 1.4)^2` is about 2.04, or 1.03 stops, but that arithmetic alone
+does not prove a metering error. Sony's
+[Metering Mode guide](https://helpguide.sony.net/ilc/2360/v1/en/contents/0406_metering_mode.html)
+describes measuring scene light to determine exposure. The physical aperture
+already affects the light reaching the camera; lens signaling can also affect
+its exposure calculation. Sony's
+[Live View Display guide](https://helpguide.sony.net/ilc/2360/v1/en/contents/0414_live_view_disp_set.html)
+also documents a preview setting that does not reflect shot brightness. The
+owner's live-view setting, actual shutter/ISO, mode, compensation, metering and
+flash settings remain unknown. No one-stop software correction is justified
+by this observation alone.
+
+Static review confirms the factory boot current AV `0x1200` (f/2) and descriptor
+`0x18`, and the runtime `0x1b` response's dependence on camera-request state.
+The custom range setter already keeps the wide and maximum descriptors equal;
+it does not apply an additional one-stop-wider descriptor. This review is not
+a camera wire trace or a new proven firmware bug. No new build/flash was made.
+
+The next evidence is the existing original stock photo and its shutter/ISO,
+mode, compensation and metering fields, with physical iris supplied by the
+owner. The previously referenced photo directory was not mounted on the Mac;
+no current photo/EXIF could be inspected. A path/settings clarification was
+requested without asking for another photo. Display/motor shutdown and AF-S
+remain unqualified. Avoid another gain/aperture correction or candidate upload
+until that evidence distinguishes camera settings, metering and lens signaling.
 
 This follow-up sent no hardware reports and uploaded no firmware. Stock remains
 the last verified image; AF 2.4 remains suspended. A later custom version must

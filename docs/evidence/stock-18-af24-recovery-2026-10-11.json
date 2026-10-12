@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-byte-verified-camera-only-f45-change-confirmed-body-f2-saved-exposure-and-shutdown-pending",
+  "stage": "stock-byte-verified-owner-reported-f14-body-f2-overexposure-photo-settings-investigation-pending",
   "reason": "Owner reported AF 2.4 focus-acquisition failure, dark view and no shown f-number in P/A",
   "transactionID": "0FBD0A31-B440-4033-AD5B-7F105B688DF2",
   "firmwareVersion": "1.8.0",
@@ -39,7 +39,7 @@
   "strictUSBVerificationPassed": true,
   "independentReadbackAuditPassed": true,
   "stockCameraComparisonPerformedAfterThisRecovery": true,
-  "nextAction": "Keep stock camera at f/2 in A mode and use the physical lens ring for working aperture; establish saved exposure at body f/2 and shutdown before AF-S.",
+  "nextAction": "Inspect existing original stock body-f2 shot and actual shutter/ISO, exposure mode/compensation and metering; no new photo requested. Shutdown and AF-S remain unverified.",
   "nativeVerificationExitCode": 0,
   "verifiedAtUTC": "2026-10-12T00:03:54.197725+00:00",
   "postRecoveryFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
@@ -74,6 +74,11 @@
       "recordedAtUTC": "2026-10-12T00:26:24.706105+00:00",
       "statement": "Camera aperture only",
       "clarifies": "Control changed for the reported f/4.5 overexposed photo"
+    },
+    {
+      "recordedAtUTC": "2026-10-12T00:30:57.409184+00:00",
+      "statement": "no, if my lens is at f1.4 but camera think it is at F2, it is one stop over exposed",
+      "clarifies": "Saved-photo exposure question at body f2; causal explanation is owner interpretation"
     }
   ],
   "ownerReportedExposureModes": [
@@ -117,7 +122,9 @@
   },
   "sources": {
     "techartManual": "https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf",
-    "sonyAperturePriority": "https://www.sony.com/electronics/support/e-mount-body-ilce-1-series/ilce-1/articles/00032637"
+    "sonyAperturePriority": "https://www.sony.com/electronics/support/e-mount-body-ilce-1-series/ilce-1/articles/00032637",
+    "sonyMeteringMode": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0406_metering_mode.html",
+    "sonyLiveView": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0414_live_view_disp_set.html"
   },
   "originalPModeProcedureSupersededForStockExposureBaseline": true,
   "hardwareReportsSentForThisObservationFollowup": 0,
@@ -127,11 +134,33 @@
   "ownerReportedChangedFNumber": "f/4.5",
   "controlChangedForReportedF45": "Camera aperture only",
   "bodyStayedAtF2DuringReportedF45Shot": false,
-  "savedPhotoExposureAtBodyF2Confirmed": null,
+  "savedPhotoExposureAtBodyF2Confirmed": false,
   "f45OverexposureCauseProven": false,
   "conditionalApertureRatioBodyF2ToF45": 5.0625,
   "conditionalApertureDifferenceStopsBodyF2ToF45": 2.3398500028846247,
   "conditionalRatioIsMeasuredCameraBehavior": false,
   "physicalLensRingChangedForReportedF45": false,
-  "f45OverexposureConsistentWithUnperformedElectronicStopDown": true
+  "f45OverexposureConsistentWithUnperformedElectronicStopDown": true,
+  "ownerReportedBodyF2Check": {
+    "physicalAperture": 1.4,
+    "cameraDisplayedAperture": 2.0,
+    "savedPhotoNormallyExposed": false,
+    "overexposureStopsOwnerEstimate": 1,
+    "magnitudeMeasuredByPhotoAnalysis": false,
+    "exposureMode": null,
+    "shutterSpeed": null,
+    "ISO": null,
+    "exposureCompensation": null,
+    "meteringMode": null,
+    "flashUsed": null,
+    "liveViewSetting": null,
+    "originalPhotoPath": null
+  },
+  "stockBodyF2ExposureCheckPassed": false,
+  "stockBodyF2OverexposureCauseProven": false,
+  "arithmeticRatioBodyF2ToPhysicalF14": 2.0408163265306123,
+  "arithmeticStopsBodyF2ToPhysicalF14": 1.0291463456595165,
+  "arithmeticDifferenceIsProvenMeteringError": false,
+  "previousPhotoDirectoryMountedDuringThisFollowup": false,
+  "newPhotoInspectedForThisFollowup": false
 }

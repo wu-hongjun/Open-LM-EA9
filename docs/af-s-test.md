@@ -6,8 +6,10 @@ no shown f-number in P/A; actual AF/exposure settings are unknown. Stock 1.8
 recovery passed strict verification after physical reconnect and an independent
 audit. The owner reports stock AUTO overexposure and a P-mode aperture display,
 widest f/2. Stock exposure checks must use A with the camera held at f/2 and the
-physical iris set on the lens, following Techart's normal setting. Corrected
-exposure, lifecycle and controlled AF-S remain pending.
+physical iris set on the lens, following Techart's normal setting. The owner
+subsequently reported one-stop overexposure at physical f/1.4 / camera f/2;
+that stock exposure check failed under the reported setup. Original shot/settings
+and lifecycle need review before controlled AF-S; correct exposure is not assumed.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md) and
 [completed recovery record](evidence/stock-18-af24-recovery-2026-10-11.md).
 The installation/camera steps below remain a historical runbook, not a request
