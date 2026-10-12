@@ -24,7 +24,8 @@ const uint8_t *em_uart_rx_buf(void);
 
 /* Blocking: shifts every byte out and returns once the last one has left the
  * shift register, so the caller can time the chip-select release from it. */
-void     em_uart_send(const uint8_t *buf, uint16_t len);
+/* True only after the complete frame leaves the shift register. */
+uint8_t  em_uart_send(const uint8_t *buf, uint16_t len);
 
 /* Take the bus down, as the stock does in its shutdown tail.
  *

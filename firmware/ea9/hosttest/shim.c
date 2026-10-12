@@ -101,8 +101,11 @@ void host_reset_cs(void)
 	host_port.Group[0].OUTCLR.reg = 0;
 }
 
-void em_uart_send(const uint8_t *buf, uint16_t len)
+/* Tests can reject a specific frame without falsely recording transmission. */
+int host_tx_fail_id = -1;
+uint8_t em_uart_send(const uint8_t *buf, uint16_t len)
 {
+	if (host_tx_fail_id == buf[5]) return 0;
 	if (sent_n < MAX_SENT) {
 		memcpy(sent[sent_n], buf, len);
 		sent_len[sent_n] = len;
@@ -112,6 +115,7 @@ void em_uart_send(const uint8_t *buf, uint16_t len)
 	} else {
 		sent_overflow++;
 	}
+	return 1;
 }
 
 int host_cs_released(void)
@@ -153,8 +157,10 @@ int      host_vd_after_ms = -1;
  * once for the falling -- and polls the frame sync freely in between.  One
  * shared script meant the frame-sync polls ate the chip-select entries and
  * em_init spun forever. */
+int host_vd_reads;
 int em_pin_level(uint8_t pin)
 {
+	if (pin == EM_PIN_BODY_VD) ++host_vd_reads;
 	if (host_wait_mode) {
 		if (pin == EM_PIN_BODY_VD) {
 			if (host_vd_after_ms >= 0

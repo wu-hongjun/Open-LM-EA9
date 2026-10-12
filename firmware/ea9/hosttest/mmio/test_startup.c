@@ -94,8 +94,18 @@ int main(int argc, char **argv)
         printf("real initialization successful register sequence passed\n"); return 0;
     } else if (scenario == 10) {
         *(volatile uint8_t *)&test_gclk.STATUS.reg = GCLK_STATUS_SYNCBUSY;
-        em_uart_init(); assert(ea9_io_faults() == EA9_IO_CLOCK && !millis_reads);
+        em_uart_init(); assert(ea9_io_faults() == EA9_IO_CLOCK && millis_reads);
         assert(!test_uart.USART.CTRLA.reg && !nvic_enables);
+    } else if (scenario >= 11 && scenario <= 13) {
+        uint8_t reason = scenario == 11 ? EA9_IO_ENCODER : scenario == 12 ? EA9_IO_ADC : EA9_IO_PWM;
+        ea9_io_trip(reason);
+        em_eic_init(NULL, NULL); em_uart_init();
+        if (ea9_io_faults() != reason || nvic_enables != 2) {
+            fprintf(stderr,"motion fault blocked link initialization\n"); return 1;
+        }
+        assert(test_eic.CTRL.reg == EIC_CTRL_ENABLE);
+        assert(test_uart.USART.CTRLA.reg == (EM_CTRLA | SERCOM_USART_CTRLA_ENABLE));
+        assert(test_uart.USART.BAUD.reg == EM_BAUD);
     } else return 2;
     assert(detached());
     uint32_t before = millis_reads;

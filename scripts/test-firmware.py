@@ -75,16 +75,16 @@ for case in ["encoder", "encoder-reset", "adc", "burst-frozen", "uart", "uart-rx
     subprocess.run([str(mmio), case], check=True)
 delays = OUT / "test_mmio_delays"
 subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_delays.c", "src/io_guard.c", "src/motor.c", "src/delay.c", "-o", str(delays)], cwd=BASE, check=True)
-for case in ["us", "ms", "cycles"]:
+for case in ["us", "ms", "cycles", "adc-us", "adc-ms"]:
     subprocess.run([str(delays), case], check=True)
 startup = OUT / "test_mmio_startup"
 subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_startup.c", "src/io_guard.c", "src/motor.c", "src/clock.c", "src/em_eic.c", "src/em_uart.c", "-o", str(startup)], cwd=BASE, check=True)
-for case in range(11):
+for case in range(14):
     subprocess.run([str(startup), str(case)], check=True)
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x28u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x29u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 # This isolated generated library is never the owner's normal app state.
 # Materialize it offline, then select 50mm for the zoom fixture as well.

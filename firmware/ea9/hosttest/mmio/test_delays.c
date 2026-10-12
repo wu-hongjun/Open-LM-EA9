@@ -32,8 +32,12 @@ int main(int argc, char **argv) {
         puts("actual SysTick snapshot phase/pending/wrap/IRQ preservation passed");
         return 0;
     }
-    if (!strcmp(argv[1], "us")) delay_us(100); else delay_ms(50);
-    assert(ea9_io_faults() == EA9_IO_TIMEBASE);
+    uint8_t prior = !strncmp(argv[1], "adc-", 4) ? EA9_IO_ADC : 0;
+    if (prior) ea9_io_trip(prior);
+    if (!strcmp(argv[1], "us") || !strcmp(argv[1], "adc-us")) delay_us(100); else delay_ms(50);
+    if (ea9_io_faults() != (prior | EA9_IO_TIMEBASE)) {
+        fprintf(stderr,"motion fault skipped protocol delay\n"); return 1;
+    }
     assert(!test_port.Group[0].PINCFG[8].bit.PMUXEN);
     assert(!test_port.Group[0].PINCFG[9].bit.PMUXEN);
     assert(!test_port.Group[0].PINCFG[18].bit.PMUXEN);

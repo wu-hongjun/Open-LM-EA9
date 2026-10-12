@@ -14,7 +14,11 @@ void ea9_io_trip(uint8_t reason)
 }
 uint8_t ea9_io_wait_pending(struct ea9_io_wait *wait, uint8_t reason)
 {
-    if (faults) return 0;
+    return ea9_io_wait_pending_mask(wait, reason, 0xffu);
+}
+uint8_t ea9_io_wait_pending_mask(struct ea9_io_wait *wait, uint8_t reason, uint8_t blockers)
+{
+    if (faults & blockers) return 0;
     if (++wait->polls >= EA9_IO_POLL_LIMIT ||
         (uint32_t)(millis() - wait->start) >= EA9_IO_DEADLINE_MS) {
         ea9_io_trip(reason);

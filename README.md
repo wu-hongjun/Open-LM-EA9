@@ -10,10 +10,21 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.11.0, build 14) refreshes
+upload/read-back path for lens metadata. The current app (0.12.0, build 15) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
+The **AF 2.9 candidate is prepared and tested offline**, with no new hardware
+reports or upload. It keeps healthy camera communication/timing serviceable
+through sticky motion faults, advances handshake/shutdown/event state only after
+successful sends, and resets status admission on a new initializer.
+38 targeted cases pass and 15 intended defects are detected in frozen 2.8;
+51 Swift tests, the full firmware suite and retained original-instruction
+comparisons pass. The 50mm candidate and signed app/CLI are prepared; stock
+remains installed. [Implementation, validation and limits](docs/evidence/af-29-link-service-2026-10-12.md).
+The owner's hardware failure is not proven resolved and factory parity remains
+unqualified. The new candidate has 276 bytes of flash margin.
+
 The new **AF 2.8 candidate is uploaded and strictly byte-verified after physical
 reconnect**, but **camera acceptance failed**: the owner reports frozen preview,
 poor focus response, darker exposure and a later shutdown hang requiring battery

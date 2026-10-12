@@ -1,0 +1,224 @@
+{
+  "sourceApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "hardwareReportsSent": 0,
+  "frameSyncInstructionCases": [
+    {
+      "sampledProtocolPosition": 4096,
+      "completionFlag": 0,
+      "positionAhead": 4096,
+      "positionNow": 4096,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4096,
+      "completionFlag": 1,
+      "positionAhead": 4096,
+      "positionNow": 4096,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4144,
+      "completionFlag": 0,
+      "positionAhead": 4144,
+      "positionNow": 4144,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4144,
+      "completionFlag": 1,
+      "positionAhead": 4144,
+      "positionNow": 4144,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4200,
+      "completionFlag": 0,
+      "positionAhead": 4200,
+      "positionNow": 4200,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4200,
+      "completionFlag": 1,
+      "positionAhead": 4200,
+      "positionNow": 4200,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4800,
+      "completionFlag": 0,
+      "positionAhead": 4800,
+      "positionNow": 4800,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 4800,
+      "completionFlag": 1,
+      "positionAhead": 4800,
+      "positionNow": 4800,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 5632,
+      "completionFlag": 0,
+      "positionAhead": 5632,
+      "positionNow": 5632,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 5632,
+      "completionFlag": 1,
+      "positionAhead": 5632,
+      "positionNow": 5632,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 65535,
+      "completionFlag": 0,
+      "positionAhead": 65535,
+      "positionNow": 65535,
+      "statusBytesUnchanged": true
+    },
+    {
+      "sampledProtocolPosition": 65535,
+      "completionFlag": 1,
+      "positionAhead": 65535,
+      "positionNow": 65535,
+      "statusBytesUnchanged": true
+    }
+  ],
+  "completionInstructionCases": [
+    {
+      "completionFlag": 0,
+      "position": 399,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 0
+    },
+    {
+      "completionFlag": 0,
+      "position": 399,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 0
+    },
+    {
+      "completionFlag": 0,
+      "position": 399,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 0
+    },
+    {
+      "completionFlag": 0,
+      "position": 400,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 0,
+      "position": 400,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 0,
+      "position": 400,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 0,
+      "position": 401,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 0,
+      "position": 401,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 0,
+      "position": 401,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 399,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 399,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 399,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 400,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 400,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 400,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 401,
+      "target": 400,
+      "velocity": -1000,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 401,
+      "target": 400,
+      "velocity": 0,
+      "returnedComplete": 1
+    },
+    {
+      "completionFlag": 1,
+      "position": 401,
+      "target": 400,
+      "velocity": 1000,
+      "returnedComplete": 1
+    }
+  ],
+  "limits": [
+    "Original frame-sync gate seeded open; only this routine is asserted, not all possible firmware writers",
+    "Position extremes and velocity fields are synthetic fixtures",
+    "Unicorn executes stored instructions; no live UART/motor/camera/interrupt timing or ISA legality claim"
+  ],
+  "scriptSHA256": "25a21bdc5b0fdd6840c1cfad6bf44f88fc1406254d7c56ff0bcd7f43f7f6e0b0"
+}

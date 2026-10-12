@@ -780,9 +780,13 @@ int main(void)
 		before = sent_n;
 		host_frame_sync();
 		em_poll();
-		if (sent_n != before + 2) {
-			fail("the status loop did not resume after revival");
+		if (sent_n != before) {
+			fail("the status loop resumed before the new handshake completed");
 		}
+		len = make_request(req, 0x02, 0x77, 0x0a, 0, 0);
+		body_frame(req, len); em_poll();
+		before = sent_n; host_frame_sync(); em_poll();
+		if (sent_n != before + 2) fail("status did not resume after the final init reply");
 	}
 
 	/* --- the aperture request, message 0x1B --------------------------- */

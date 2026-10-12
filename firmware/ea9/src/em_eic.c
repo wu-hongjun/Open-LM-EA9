@@ -37,7 +37,7 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(GCLK_CLKCTRL_ID_EIC_Val)
 	                    | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_CLKEN;
 #ifdef EA9_AF_BUILD
-	if (!EA9_IO_WAIT(!GCLK->STATUS.bit.SYNCBUSY, EA9_IO_EIC)) return;
+	if (!EA9_IO_WAIT_MASK(!GCLK->STATUS.bit.SYNCBUSY, EA9_IO_EIC, EA9_IO_LINK_FAULTS)) return;
 #else
 	while (GCLK->STATUS.bit.SYNCBUSY) {
 	}
@@ -50,7 +50,7 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 
 	EIC->CTRL.reg = EIC_CTRL_SWRST;
 #ifdef EA9_AF_BUILD
-	if (!EA9_IO_WAIT(!(EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY), EA9_IO_EIC)) return;
+	if (!EA9_IO_WAIT_MASK(!(EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY), EA9_IO_EIC, EA9_IO_LINK_FAULTS)) return;
 #else
 	while (EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY) {
 	}
@@ -65,7 +65,7 @@ void em_eic_init(void (*cs_edge)(int level), void (*vd_edge)(void))
 
 	EIC->CTRL.reg = EIC_CTRL_ENABLE;
 #ifdef EA9_AF_BUILD
-	if (!EA9_IO_WAIT(!EIC->STATUS.bit.SYNCBUSY, EA9_IO_EIC)) return;
+	if (!EA9_IO_WAIT_MASK(!EIC->STATUS.bit.SYNCBUSY, EA9_IO_EIC, EA9_IO_LINK_FAULTS)) return;
 #else
 	while (EIC->STATUS.bit.SYNCBUSY) {
 	}

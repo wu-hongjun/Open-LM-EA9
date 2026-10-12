@@ -43,6 +43,9 @@
 #include "diag.h"
 #include "emount_packets.h"
 #include "em_uart.h"
+#ifdef EA9_AF_BUILD
+#include "io_guard.h"
+#endif
 #include "em_eic.h"
 
 #define EM_CLASS_INIT     0x02u
@@ -311,7 +314,7 @@ static const struct ea9_packet *find_packet(uint8_t id)
  * edited freely -- six of the seventeen stored checksums are stale in every
  * shipped image and the adapter still works (CLAUDE.md, "Checksum -- SOLVED").
  */
-static void em_transmit(uint8_t *frame, uint16_t len)
+static uint8_t em_transmit(uint8_t *frame, uint16_t len)
 {
 	uint16_t sum = 0;
 
@@ -327,12 +330,16 @@ static void em_transmit(uint8_t *frame, uint16_t len)
 	frame[len - 2] = (uint8_t)(sum >> 8);
 
 	PORT->Group[0].OUTSET.reg = (1u << EM_PIN_LENS_CS);
-	em_uart_send(frame, len);
+	uint8_t sent = em_uart_send(frame, len);
 
 	delay_us(EM_CS_HOLD_US);
 	PORT->Group[0].OUTCLR.reg = (1u << EM_PIN_LENS_CS);
 
-	em_frames_tx++;
+#ifdef EA9_AF_BUILD
+	if (ea9_io_faults() & EA9_IO_LINK_FAULTS) sent = 0;
+#endif
+	if (sent) em_frames_tx++;
+	return sent;
 }
 
 /* The shutdown acknowledgement: send the body's own frame straight back.
@@ -394,7 +401,7 @@ static void em_shutdown_ack(const uint8_t *request)
 	/* Unconditionally, even if the park stalled: the echo is what releases
 	 * the body, and a lens stuck mid-travel is a far smaller problem than a
 	 * camera that will not switch off. */
-	em_transmit(echo, n);
+	if (!em_transmit(echo, n)) return;
 
 	em_shutdown_acked = 1;
 	em_t_shutdown     = millis();
@@ -404,7 +411,7 @@ static void em_shutdown_ack(const uint8_t *request)
 	}
 }
 
-static void em_send_id(uint8_t id, const uint8_t *request)
+static uint8_t em_send_id(uint8_t id, const uint8_t *request)
 {
 	const struct ea9_packet *p = find_packet(id);
 	uint8_t *frame;
@@ -414,7 +421,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 		if (g_shutdown_enabled) {
 				em_shutdown_ack(request);
 		}
-		return;
+		return 0;
 	}
 
 	/* After acknowledging a shutdown, stay silent.
@@ -435,7 +442,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 	if (em_shutdown_acked) {
 		if (id != EM_ID_SESSION) {
 			em_ignored_after_shutdown++;
-			return;
+			return 0;
 		}
 		em_shutdown_acked = 0;
 		em_t_revived      = millis();
@@ -446,17 +453,23 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 	 * not ours to answer -- the stock jump table sends 72 of its 91 ids to
 	 * the ignore exit. */
 	if (!p) {
-		return;
+		return 0;
 	}
 	uint16_t request_length = (uint16_t)request[1] | ((uint16_t)request[2] << 8);
 	/* Stock 0x34 echoes payload[0..1], with unknown semantics. Require both
 	 * bytes inside the validated payload, never checksum/terminator. This is
 	 * a minimum operand bound, not an assertion of the complete legal grammar. */
-	if (id == 0x34u && request_length < EM_HEADER_LEN + 2u + EM_TRAILER_LEN) return;
+	if (id == 0x34u && request_length < EM_HEADER_LEN + 2u + EM_TRAILER_LEN) return 0;
 	frame = &ea9_data[p->offset];
 	/* Publish the 0x08 aperture option from the main owner, never from the
 	 * receive ISR while a status packet checksum/transmit is in progress. */
-	if (id == EM_ID_SESSION) em_m08_aperture_on = 0;
+	if (id == EM_ID_SESSION) {
+		/* A new initializer starts a new status handshake. Retaining the old
+		 * armed flag emits status into the new initialization conversation. */
+		em_handshake_done = 0;
+		g_status_due = 0;
+		em_m08_aperture_on = 0;
+	}
 	if (id == 0x08u && request_length >= EM_HEADER_LEN + 2u + EM_TRAILER_LEN)
 		em_m08_aperture_on = ((request[7] & 0x80u) == 0u);
 
@@ -492,7 +505,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 	}
 
 	lens_aperture_publish(em_m08_aperture_on);
-	em_transmit(frame, p->len);
+	return em_transmit(frame, p->len);
 }
 
 /* Where message 0x04's records begin: 6 frame-header bytes + the 13-byte
@@ -1489,7 +1502,7 @@ void em_pump_status(void)
 	ea9_data[EA9_OFF_06 + 4] = sequence;
 
 	delay_us(EM_LEAD_US);
-	em_transmit(&ea9_data[EA9_OFF_05], EA9_LEN_05);
+	if (!em_transmit(&ea9_data[EA9_OFF_05], EA9_LEN_05)) return;
 	delay_us(EM_STATUS_GAP_US);
 
 	/* THE TAIL.  Message 0x06 is a 43-byte core plus zero or more tail
@@ -1525,7 +1538,7 @@ void em_pump_status(void)
 		}
 		sent_ans = k;
 
-		em_transmit(&ea9_data[EA9_OFF_06], len);
+		if (!em_transmit(&ea9_data[EA9_OFF_06], len)) return;
 
 		/* Shift the event queue AFTER the frame has gone: whatever is
 		 * behind it waits for the next one. */
@@ -1581,12 +1594,12 @@ void em_poll(void)
 	}
 	__set_PRIMASK(irq_state);
 	if (have_reply) {
-		em_send_id(id, request);
+		uint8_t replied = em_send_id(id, request);
 
 		/* Message 0x0a is the last of the handshake in every capture
 		 * (0x01 -> 0x07 -> 0x0b -> 0x08 -> 0x09 -> 0x0d -> 0x10 ->
 		 * 0x0a); answering it is what arms the status loop. */
-		if (id == 0x0A) {
+		if (id == 0x0A && replied) {
 			em_handshake_done = 1;
 			em_t_handshake    = millis();
 		}

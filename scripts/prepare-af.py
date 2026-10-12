@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline only: combine the AF template with a validated Mac-prepared profile.
 
-This uses the observed-motion 2.8 template (or frozen 2.2–2.7 releases) and performs no USB operations.
+This uses the fault-service 2.9 template (or frozen 2.2–2.8 releases) and performs no USB operations.
 The native app independently admits only its bundled digest-pinned templates.
 """
 import argparse
@@ -15,11 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("profile_image", type=Path, help="Metadata image made by ea9ctl prepare")
 parser.add_argument("output", type=Path, help="New AF image; never overwritten")
-parser.add_argument("--variant", choices=("observed-af", "polished-af", "audited-af", "refined-af", "factory-af", "hardened-af", "reconciled-af"), default="observed-af")
+parser.add_argument("--variant", choices=("serviced-af", "observed-af", "polished-af", "audited-af", "refined-af", "factory-af", "hardened-af", "reconciled-af"), default="serviced-af")
 args = parser.parse_args()
-if args.variant == "observed-af":
-    af = ROOT / "firmware/ea9/build/observed/ea9-af-observed-template.bin"
+if args.variant == "serviced-af":
+    af = ROOT / "firmware/ea9/build/serviced/ea9-af-serviced-template.bin"
     manifest_path = af.with_suffix(".manifest.json")
+elif args.variant == "observed-af":
+    af = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-observed-template.bin"
+    manifest_path = ROOT / "docs/evidence/af-observed-build-manifest-2026-10-12.json"
 elif args.variant == "polished-af":
     af = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-polished-template.bin"
     manifest_path = ROOT / "docs/evidence/af-polished-build-manifest-2026-10-12.json"

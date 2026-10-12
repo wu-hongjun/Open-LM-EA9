@@ -74,5 +74,11 @@ void clock_enable_peripheral(uint8_t gclk_id, uint32_t apbc_mask)
 	PM->APBCMASK.reg |= apbc_mask;
 	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID(gclk_id) | GCLK_CLKCTRL_GEN_GCLK0
 	                    | GCLK_CLKCTRL_CLKEN;
+#ifdef EA9_AF_BUILD
+	/* Runtime peripheral routing follows delay_init; a motion fault must not
+	 * suppress the clock readiness check for an otherwise healthy UART. */
+	(void)EA9_IO_WAIT_MASK(!GCLK->STATUS.bit.SYNCBUSY, EA9_IO_CLOCK, EA9_IO_TIMING_FAULTS);
+#else
 	(void)gclk_sync();
+#endif
 }

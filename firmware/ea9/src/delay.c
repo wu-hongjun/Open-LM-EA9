@@ -55,7 +55,7 @@ void delay_ms(uint32_t ms)
 #endif
 	while ((uint32_t)(g_millis - start) < ms) {
 #ifdef EA9_AF_BUILD
-		if (ea9_io_faults()) return;
+		if (ea9_io_faults() & EA9_IO_TIMING_FAULTS) return;
 		if (++polls >= EA9_MOTION_POLL_LIMIT) { ea9_io_trip(EA9_IO_TIMEBASE); return; }
 #endif
 	}
@@ -78,7 +78,7 @@ void delay_us(uint32_t us)
 	while (elapsed < target) {
 		uint32_t now = SysTick->VAL;
 #ifdef EA9_AF_BUILD
-		if (!ea9_io_wait_pending(&wait, EA9_IO_TIMEBASE)) return;
+		if (!ea9_io_wait_pending_mask(&wait, EA9_IO_TIMEBASE, EA9_IO_TIMING_FAULTS)) return;
 #endif
 
 		/* SysTick counts DOWN, so a normal step is last - now. */

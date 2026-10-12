@@ -40,7 +40,7 @@ volatile uint32_t em_t_first_byte;
 static void em_uart_sync(void)
 {
 #ifdef EA9_AF_BUILD
-	(void)EA9_IO_WAIT(!EMSERCOM->USART.SYNCBUSY.reg, EA9_IO_UART);
+	(void)EA9_IO_WAIT_MASK(!EMSERCOM->USART.SYNCBUSY.reg, EA9_IO_UART, EA9_IO_LINK_FAULTS);
 #else
 	while (EMSERCOM->USART.SYNCBUSY.reg) {
 	}
@@ -51,7 +51,7 @@ void em_uart_init(void)
 {
 	clock_enable_peripheral(GCLK_CLKCTRL_ID_SERCOM1_CORE_Val, PM_APBCMASK_SERCOM1);
 #ifdef EA9_AF_BUILD
-	if (ea9_io_faults()) return;
+	if (ea9_io_faults() & EA9_IO_LINK_FAULTS) return;
 #endif
 
 	/* PA00 = PAD[0] = TX, PA01 = PAD[1] = RX, both mux D.  PA01 needs its
@@ -70,7 +70,7 @@ void em_uart_init(void)
 
 	EMSERCOM->USART.CTRLA.reg = SERCOM_USART_CTRLA_SWRST;
 #ifdef EA9_AF_BUILD
-	if (!EA9_IO_WAIT(!(EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST), EA9_IO_UART)) return;
+	if (!EA9_IO_WAIT_MASK(!(EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST), EA9_IO_UART, EA9_IO_LINK_FAULTS)) return;
 #else
 	while (EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST) {
 	}
@@ -80,7 +80,7 @@ void em_uart_init(void)
 	EMSERCOM->USART.CTRLB.reg = EM_CTRLB;
 	em_uart_sync();
 #ifdef EA9_AF_BUILD
-	if (ea9_io_faults()) return;
+	if (ea9_io_faults() & EA9_IO_LINK_FAULTS) return;
 #endif
 	EMSERCOM->USART.BAUD.reg  = EM_BAUD;
 
@@ -169,16 +169,16 @@ void em_uart_disable(void)
 	em_uart_sync();
 }
 
-void em_uart_send(const uint8_t *buf, uint16_t len)
+uint8_t em_uart_send(const uint8_t *buf, uint16_t len)
 {
 	if (g_disabled) {
-		return;
+		return 0;
 	}
 	EMSERCOM->USART.INTFLAG.reg = SERCOM_USART_INTFLAG_TXC;
 
 	for (uint16_t i = 0; i < len; i++) {
 #ifdef EA9_AF_BUILD
-		if (!EA9_IO_WAIT(EMSERCOM->USART.INTFLAG.bit.DRE, EA9_IO_UART)) return;
+		if (!EA9_IO_WAIT_MASK(EMSERCOM->USART.INTFLAG.bit.DRE, EA9_IO_UART, EA9_IO_LINK_FAULTS)) return 0;
 #else
 		while (!EMSERCOM->USART.INTFLAG.bit.DRE) {
 		}
@@ -186,9 +186,10 @@ void em_uart_send(const uint8_t *buf, uint16_t len)
 		EMSERCOM->USART.DATA.reg = buf[i];
 	}
 #ifdef EA9_AF_BUILD
-	(void)EA9_IO_WAIT(EMSERCOM->USART.INTFLAG.bit.TXC, EA9_IO_UART);
+	return EA9_IO_WAIT_MASK(EMSERCOM->USART.INTFLAG.bit.TXC, EA9_IO_UART, EA9_IO_LINK_FAULTS);
 #else
 	while (!EMSERCOM->USART.INTFLAG.bit.TXC) {
 	}
+	return 1;
 #endif
 }

@@ -1,9 +1,10 @@
 # Factory-derived autofocus baseline: AF 2.4
 
-The current [2.6 candidate](../../firmware/candidates/2.6.0/README.md) restores
-audited opaque-query handling and retains the 2.5 bounded-wrapper fixes. Its
-pure factory controller remains unchanged; historical 2.4 observations below
-are not qualification of that successor.
+The current [2.9 candidate](../../firmware/candidates/2.9.0/README.md) is prepared
+offline with camera-link fault service and truthful transmission completion. It
+retains the original-instruction-tested controller. The [AF 2.8 camera failure](../evidence/af-28-camera-failure-2026-10-12.md)
+remains unresolved; stock 1.8 is restored. Historical 2.4 policy/observations below
+are not qualification of later candidates. [Current changes and limits](../evidence/af-29-link-service-2026-10-12.md).
 
 October 11, 2026. The owner reports substantially less hunting with stock 1.8
 than custom AF 2.3 on the A7C II, with the Contax Zeiss 50mm f/1.4 and C/Y-to-M

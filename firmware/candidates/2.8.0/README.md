@@ -49,6 +49,13 @@ install or retry this candidate for further camera trials. Original stock 1.8
 has been restored and [strictly byte-verified after reconnect](../../../docs/evidence/stock-18-af28-recovery-2026-10-12.md).
 Historical binary pins and evidence are retained.
 
+Current source and explicit native AF preparation now select 2.9. To reproduce
+2.8 source behavior, use commit `1043bad` and
+[the frozen inputs](regression-inputs.json). Current test scripts exercise the
+successor plus declared frozen controls. `prepare-af.py --variant observed-af`
+still prepares this exact retained template from a validated metadata profile;
+`build-firmware.py --variant observed-af` verifies its pin without rebuilding it.
+
 ```sh
 python3 scripts/build-firmware.py --variant observed-af
 scripts/swift-local.sh test

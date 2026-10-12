@@ -594,7 +594,7 @@ static void powerdown_signal(void)
 	 * low readings 1 ms apart -- but bounded, because a body that keeps
 	 * clocking must not strand us here. */
 	t0 = millis();
-	while (!ea9_io_faults() && (uint32_t)(millis() - t0) < 500u) {
+	while (!(ea9_io_faults() & EA9_IO_LINK_FAULTS) && (uint32_t)(millis() - t0) < 500u) {
 		delay_ms(1);
 		low = em_pin_level(EM_PIN_BODY_VD) ? 0 : low + 1;
 		if (low >= 2) {
