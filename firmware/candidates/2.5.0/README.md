@@ -39,12 +39,10 @@ durable journal and physical reconnect requirement are unchanged.
 
 ```sh
 python3 scripts/build-firmware.py --variant refined-af
-./scripts/swift-local.sh test
-python3 scripts/test-firmware.py --af
 tools/rea-analysis/venv/bin/python scripts/test-refined-candidate.py --output /new/regression-directory
-./scripts/build-macos-app.sh
 # Create the output directory first; the CLI refuses existing output images.
-dist/ea9ctl --state-directory /new/profile-state prepare-af contax-zeiss-50-f1-4 /new/50mm.bin
+dist/ea9ctl --state-directory /new/profile-state prepare contax-zeiss-50-f1-4 /new/metadata.bin
+python3 scripts/prepare-af.py /new/metadata.bin /new/50mm.bin --variant refined-af
 ```
 
 No hardware reports are sent by this preparation sequence. Installation is a
@@ -56,3 +54,12 @@ only after the initial lifecycle is normal. A future saved image helps EXIF and
 quantitative comparisons, but an owner-reported failure is sufficient to fail
 acceptance. Keep the [stock recovery bundle](../../recovery/stock-1.8.0/README.md)
 and its separate private key available.
+
+
+The separately versioned [2.6 successor](../2.6.0/README.md) now restores the
+opaque stock query and retains the AF fixes. This image remains held. For
+historical offline personalization use `scripts/prepare-af.py` with
+`--variant refined-af`; current native `prepare-af` selects 2.6. Historical
+regressions materialize byte-verified sources from immutable commit `7efac6b`
+using [regression-inputs.json](regression-inputs.json), so current source is not
+silently tested as 2.5.

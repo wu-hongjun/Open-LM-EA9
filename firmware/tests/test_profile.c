@@ -56,17 +56,16 @@ int main(int argc, char **argv) {
     assert(u16(sent[n]+15)==aperture); /* message 0x08 explicitly enabled this copy */
     n = request(0x1b,0xff); assert(u16(sent[n]+6)==aperture && u16(sent[n]+8)==aperture);
     n = request(0x34,0xa5);
-    assert(sent[n][6] == 0 && u16(sent[n]+7) == aperture);
-    /* A query with no payload puts its checksum at RX[6..7]. It must not
-     * become the reported aperture, unlike the historical 2.4 RX fixup. */
+    assert(sent[n][6] == 0 && u16(sent[n]+7) == 0xa5); /* opaque stock echo */
+    /* A query with no payload is not an operand-bearing request. Do not
+     * invent a reply from checksum bytes or an aperture declaration. */
     {
         uint8_t query[9] = {0xf0,9,0,2,0x71,0x34,0,0,0x55};
         uint16_t sum = 0;
         for (i = 1; i <= 5; ++i) sum += query[i];
         query[6] = (uint8_t)sum; query[7] = (uint8_t)(sum >> 8);
         before = sent_n; host_body_frame(query, sizeof query); em_poll();
-        assert(sent_n == before + 1); checksum_ok(before);
-        assert(sent[before][5] == 0x34 && u16(sent[before]+7) == aperture);
+        assert(sent_n == before);
     }
     /* Ask for a real different AV (f/8). Preserve the fixed reply and range. */
     {
@@ -79,6 +78,23 @@ int main(int argc, char **argv) {
         checksum_ok(before);
         assert(u16(sent[before]+6)==aperture && u16(sent[before]+8)==aperture);
         assert(u16(ea9_data+EA9_OFF_05+6)==aperture && u16(ea9_data+EA9_OFF_05+8)==aperture);
+    }
+    /* Per-frame 0x03 requests are recorded, never applied to passive iris
+     * policy. 0x35 remains unsupported by this dispatcher. */
+    {
+        uint8_t body[29] = {0xf0,29,0,1,0x61,3};
+        uint16_t sum = 0;
+        body[11] = 0; body[12] = 0x16; body[28] = 0x55;
+        for (i = 1; i <= 25; ++i) sum += body[i];
+        body[26] = (uint8_t)sum; body[27] = (uint8_t)(sum >> 8);
+        before = sent_n; host_body_frame(body, sizeof body); em_poll();
+        assert(sent_n == before && em_m03_aperture == 0x1600);
+        assert(u16(ea9_data+EA9_OFF_05+6)==aperture && u16(ea9_data+EA9_OFF_1B+6)==aperture);
+        assert(u16(ea9_data+EA9_OFF_28+15)==aperture);
+        body[3] = 2; body[5] = 0x35; sum = 0;
+        for (i = 1; i <= 25; ++i) sum += body[i];
+        body[26] = (uint8_t)sum; body[27] = (uint8_t)(sum >> 8);
+        host_body_frame(body, sizeof body); em_poll(); assert(sent_n == before);
     }
     before = sent_n; host_frame_sync(); em_poll(); assert(sent_n == before+2);
     checksum_ok(before); checksum_ok(before+1);

@@ -15,6 +15,7 @@ OUT = ROOT / "artifacts/firmware-milestone/hosttests"
 OUT.mkdir(parents=True, exist_ok=True)
 COMMON = ["cc", "-std=gnu99", "-Wall", "-Wextra", "-O1", "-Ihosttest", "-Isrc"]
 tests = {
+    "stock_query": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "../tests/test_stock_query.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
     "factory_servo": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "hosttest/test_factory_servo.c", "src/factory_servo.c", "src/factory_af.c", "src/io_guard.c", "src/focus_map.c"],
     "emount": ["hosttest/test_emount.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
     "servo": ["hosttest/test_servo.c", "hosttest/sim_motor.c", "src/servo.c", "src/io_guard.c"],
@@ -67,11 +68,20 @@ for case in range(11):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x25u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x26u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
+# This isolated generated library is never the owner's normal app state.
+# Materialize it offline, then select 50mm for the zoom fixture as well.
+state = OUT / 'state'
+seed = OUT / 'seed.bin'
+if seed.exists(): seed.unlink()
+subprocess.run([str(cli), '--state-directory', str(state), 'prepare', 'contax-zeiss-50-f1-4', str(seed)], check=True)
+profile_file = state / 'profiles.json'
+library = json.loads(profile_file.read_text())
+for p in library['profiles']:
+    if p['kind'] == 'zoom': p['activeFocalLengthMM'] = 50
+profile_file.write_text(json.dumps(library, indent=2) + '\n')
 for lens in inventory:
-    if lens["kind"] == "zoom":
-        continue
     image = OUT / f'{lens["id"]}.bin'
     if image.exists():
         image.unlink() # Generated fixture only; never hardware backups.

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""2.5 regressions and frozen 2.4 negative control, entirely offline."""
+"""Historical 2.5 implementation-policy regressions, entirely offline.
+
+The 0x34 expected value is an unproven hypothesis, not stock correctness.
+Inputs are materialized from the pinned original commit, never current source.
+"""
 import argparse
 import hashlib
 import json
@@ -12,7 +16,17 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path, required=True)
 out = parser.parse_args().output.resolve()
 out.mkdir(parents=True, mode=0o700, exist_ok=False)
-base = ROOT / 'firmware/ea9'
+historical = json.loads((ROOT / 'firmware/candidates/2.5.0/regression-inputs.json').read_text())
+snapshot = out / 'frozen25'
+for name, digest in historical['files'].items():
+    data = subprocess.run(['git', 'show', historical['sourceGitCommit'] + ':' + name],
+                          cwd=ROOT, check=True, capture_output=True).stdout
+    if hashlib.sha256(data).hexdigest() != digest:
+        raise RuntimeError('Historical 2.5 source mismatch: ' + name)
+    destination = snapshot / name
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(data)
+base = snapshot / 'firmware/ea9'
 flags = ['cc', '-std=gnu99', '-O1', '-Wall', '-Wextra', '-Werror',
          '-fsanitize=address,undefined', '-fno-sanitize-recover=all']
 sources = ['../tests/test_refined_camera_limits.c', 'hosttest/sim_motor.c',
@@ -31,7 +45,7 @@ manifest = json.loads((frozen / 'manifest.json').read_text())
 for name, digest in manifest['files'].items():
     if hashlib.sha256((frozen / name).read_bytes()).hexdigest() != digest:
         raise RuntimeError('Frozen input changed: ' + name)
-probe = ROOT / 'firmware/tests/test_aperture_query.c'
+probe = snapshot / 'firmware/tests/test_aperture_query.c'
 transport = ['hosttest/shim.c', 'src/emount.c', 'src/emount_packets.c', 'src/lens_profile.c']
 queries = {}
 for name, source_base, extras in [('2.4.0', frozen / 'firmware/ea9', []),
@@ -67,18 +81,19 @@ for av in [0x1100, 0x1200, 0x1600]:
 report = {'firmware': '2.5.0', 'status': 'passed-offline-regressions-not-camera-qualified',
           'hardwareReportsSent': 0, 'simulatedTargets': rows, 'queryRegression': queries,
           'originalInstructionQueryCases': original,
-          'factoryApertureBehavior': 'parsed-request-word echo, intentionally overridden by fixed passive-iris policy',
+          'historicalApertureHypothesis': '0x34 classified as aperture by 2.5; semantics remain unknown and hardware installation is held',
+          'sourceGitCommit': historical['sourceGitCommit'],
           'oneUnitCorrectionRequiresDrive': False,
           'healthyDeadlineAllowsNextCommand': True,
           'cameraExposureQualified': False, 'cameraAFQualified': False,
           'limitations': ['Inherited mechanics, not measured on owner unit',
                           'No lens optics, camera metering or live wire timing modeled',
                           'Original transmitter stubbed; Cortex-M0 emulator is not an ISA legality proof'],
-          'sources': {str((base / name).resolve().relative_to(ROOT)):
+          'sources': {str((base / name).resolve().relative_to(snapshot)):
                       hashlib.sha256((base / name).read_bytes()).hexdigest() for name in sources},
           'apertureProbeSHA256': hashlib.sha256(probe.read_bytes()).hexdigest()}
 report['scriptSHA256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-report['apertureSources'] = {str((base / name).relative_to(ROOT)):
+report['apertureSources'] = {str((base / name).resolve().relative_to(snapshot)):
     hashlib.sha256((base / name).read_bytes()).hexdigest()
     for name in transport + ['src/lens_aperture.c']}
 report['frozen24ManifestSHA256'] = hashlib.sha256((frozen / 'manifest.json').read_bytes()).hexdigest()

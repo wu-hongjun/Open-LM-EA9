@@ -450,11 +450,16 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 	if (!p) {
 		return;
 	}
+	uint16_t request_length = (uint16_t)request[1] | ((uint16_t)request[2] << 8);
+	/* Stock 0x34 echoes payload[0..1], with unknown semantics. Require both
+	 * bytes inside the validated payload, never checksum/terminator. This is
+	 * a minimum operand bound, not an assertion of the complete legal grammar. */
+	if (id == 0x34u && request_length < EM_HEADER_LEN + 2u + EM_TRAILER_LEN) return;
 	frame = &ea9_data[p->offset];
 	/* Publish the 0x08 aperture option from the main owner, never from the
 	 * receive ISR while a status packet checksum/transmit is in progress. */
 	if (id == EM_ID_SESSION) em_m08_aperture_on = 0;
-	if (id == 0x08u && request[1] >= 11u)
+	if (id == 0x08u && request_length >= EM_HEADER_LEN + 2u + EM_TRAILER_LEN)
 		em_m08_aperture_on = ((request[7] & 0x80u) == 0u);
 
 	/* Apply whatever the stock handler for this id writes into its frame
@@ -469,7 +474,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 			continue;
 		}
 
-		/* Messages 0x1b and 0x34 use the fixed declaration consistently.
+		/* Only established aperture channel 0x1b uses the fixed declaration.
 		 *
 		 * Stock RX fixups echo the request word. This adapter cannot
 		 * operate the passive lens iris.
@@ -480,7 +485,7 @@ static void em_send_id(uint8_t id, const uint8_t *request)
 		 * same frame pair.
 		 *
 		 * This deliberately overrides factory request-echo behavior. */
-		if ((id == EM_ID_APERTURE || id == 0x34u) && f->kind == EA9_FIXUP_RX) {
+		if (id == EM_ID_APERTURE && f->kind == EA9_FIXUP_RX) {
 			continue;
 		}
 		frame[f->off] = (f->kind == EA9_FIXUP_RX)
@@ -785,8 +790,8 @@ static void on_cs_edge(int level)
 	 *
 	 * Init-class, so it arrives here rather than on the per-frame path, and
 	 * it carries an aperture in payload[0..1].  This adapter has no iris, so
-	 * there is nothing to obey; the reply echoes the requester's own bytes
-	 * back through the stored fixups.
+	 * there is nothing to obey; foreground aperture policy returns the fixed
+	 * declaration instead of the stock request echo.
 	 *
 	 * Counted because an a9 II sends exactly one per session, inside the
 	 * burst of init-class requests that follows a shutter press
@@ -799,8 +804,8 @@ static void on_cs_edge(int level)
 	 * 7 -- gates message 0x28's payload[9..10], INVERTED: clear means the
 	 * body wants the field.
 	 *
-	 * The aperture is re-applied on the spot so the decision takes effect
-	 * without waiting for the next thing that happens to set it. */
+	 * The foreground reply owner commits this from its consumed snapshot;
+	 * the receive interrupt records diagnostics without publishing state. */
 	if (rx[3] == EM_CLASS_INIT && rx[5] == 0x08u && frame_length >= 11) {
 		uint16_t k;
 

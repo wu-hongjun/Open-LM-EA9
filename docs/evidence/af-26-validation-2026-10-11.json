@@ -1,0 +1,128 @@
+{
+  "firmware": "2.6.0",
+  "profile": "Contax Zeiss 50mm f/1.4",
+  "appVersion": "0.9.0",
+  "appBuild": 12,
+  "status": "ready-offline-for-separate-upload-and-camera-qualification",
+  "hardwareReportsSent": 0,
+  "hardwareUploadPerformed": false,
+  "adapterConnected": false,
+  "candidateSHA256": "1447e37e9bd528c072ace96a23449e7399eb011393e78202de907966d69053d6",
+  "templateSHA256": "276a134db2db04e4ea41e6bfb622e0b4f3c5421a6e3bfb6e40428cfce07fe265",
+  "nativePythonImagesIdentical": true,
+  "appBundledTemplateMatches": true,
+  "initialSP": "0x20002b00",
+  "resetVector": "0x5151",
+  "applicationWriteRange": [
+    "0x5000",
+    "0xa000"
+  ],
+  "profileAddress": "0x9f00",
+  "initializedFlashEnd": "0x9f00",
+  "flashMarginBeforeProfileBytes": 0,
+  "staticRAMEnd": "0x20000afc",
+  "reservedStackBytes": 8192,
+  "reservedStackEnd": "0x20002b00",
+  "stackHighWaterMeasured": false,
+  "diagnosticFlashWritersLinked": false,
+  "legacyServoLinked": false,
+  "validation": [
+    {
+      "command": "python3 scripts/build-firmware.py --variant audited-af",
+      "result": "pass"
+    },
+    {
+      "command": "./scripts/swift-local.sh test",
+      "result": "pass",
+      "tests": 50,
+      "suiteCounts": [
+        7,
+        34,
+        9
+      ]
+    },
+    {
+      "command": "python3 scripts/test-firmware.py --af",
+      "result": "pass",
+      "requestedProfiles": 8,
+      "factoryWrapperScenarios": 27,
+      "hardeningScenariosPerBackend": 21
+    },
+    {
+      "command": "tools/rea-analysis/venv/bin/python scripts/test-audited-candidate.py --output NEW_DIRECTORY",
+      "result": "pass",
+      "opaqueQueryCases": 56,
+      "missingOperandCases": 2,
+      "originalInstructionFullReplyCases": 32,
+      "originalSenderChecksumExecuted": true,
+      "frozen25NegativeControlDetected": true,
+      "mechanicalTargets": 8,
+      "retainedAFSourcesMatch25": true
+    },
+    {
+      "command": "tools/rea-analysis/venv/bin/python scripts/test-factory-af-oracle.py --output NEW_DIRECTORY",
+      "result": "pass",
+      "originalInstructionComparisons": 7323,
+      "alteredGainNegativeControlDetected": true
+    },
+    {
+      "command": "tools/rea-analysis/venv/bin/python scripts/test-refined-candidate.py --output NEW_DIRECTORY",
+      "result": "pass-historical25-implementation-hypothesis-only",
+      "sourceGitCommit": "7efac6b152f1c9aa9a26e483acfc7fe8cd40e257"
+    },
+    {
+      "command": "./scripts/build-macos-app.sh",
+      "result": "pass",
+      "bundleAndCLISignaturesVerified": true
+    }
+  ],
+  "preservedFiles": {
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-factory-template.bin": "db9f9f3575ededbd38cc2366eb9efea15d2af6f43df5ee7b6a67a2e500fb6cdf",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-hardened-template.bin": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-reconciled-template.bin": "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-refined-template.bin": "448f827b4766f9ecb96c470d48d706650eb30d2fc41aea620369e22989d714c7",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-template.bin": "6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-profile-template.bin": "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293",
+    "apps/macos/Sources/DeviceKit/TrustedAFTemplate.swift": "7177caacb0fd8a4a3e83e85eda6891d9a7257ab544b2d76789fbfb206c158c98",
+    "apps/macos/Sources/DeviceKit/TrustedFactoryAFTemplate.swift": "42e72c7e63cb4c9b0d0d5fde29123549ca106063c485d6ac28090e64486cba20",
+    "apps/macos/Sources/DeviceKit/TrustedHardenedAFTemplate.swift": "5f077b6c4ac809d9e3df8d3cd52e56156584ef24d56b42603661f4435156f44e",
+    "apps/macos/Sources/DeviceKit/TrustedReconciledAFTemplate.swift": "f3c3fd02a721c3588b4039c64a15e3f13f9878ad4fe381415a2429c3f39b2c65",
+    "apps/macos/Sources/DeviceKit/TrustedRefinedAFTemplate.swift": "20a85853974dc5c2f6eb9a535e6278a43d5060cb66bcf325845e4204bd9c1e41",
+    "apps/macos/Sources/DeviceKit/TrustedTemplate.swift": "ca7c2567a68d7a548b534e3eec0c25ad6f39cb8848e68aedce33c636859fbb30",
+    "firmware/candidates/2.3.0/contax-zeiss-50-f1-4.bin": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+    "firmware/candidates/2.3.0/contax-zeiss-50-f1-4.manifest.json": "72f0c19f54cc51a30d9b4c829c18810cf69dcbf03e7cd677fb22d314af134a35",
+    "firmware/candidates/2.4.0/contax-zeiss-50-f1-4.bin": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df",
+    "firmware/candidates/2.4.0/contax-zeiss-50-f1-4.manifest.json": "c719ccd09a42e8d11a4eb3d304bf5c8ff62d52015d171dd6953425795e61f471",
+    "firmware/candidates/2.5.0/contax-zeiss-50-f1-4.bin": "febfa9ff411af46bff225633984e84d4d5ff6d10580514a5bdf429e76f719522",
+    "firmware/candidates/2.5.0/contax-zeiss-50-f1-4.manifest.json": "29833c8b952f4331fdbd1e2314e326a45799a4738915feccab3e58acf9ed5a34",
+    "firmware/recovery/stock-1.8.0/README.md": "fddaa2c76db17bfe8a9aef0486c2a2af5af6f77f1c5b7f5a6143b2fab801c53d",
+    "firmware/recovery/stock-1.8.0/application.bin": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "firmware/recovery/stock-1.8.0/original-unit-backup.aesgcm": "96f920e711580a94dffacc9f0a29bfe2ddd472a9dd88b1732021ea800f1ef0bf",
+    "firmware/recovery/stock-1.8.0/recovery.json": "791bef4392160c30de4801e3ea18f6716c6acb3ec910bb9fd2ffedafb45317f7"
+  },
+  "frozen25Inputs": {
+    "files": 44,
+    "sourceGitCommit": "7efac6b152f1c9aa9a26e483acfc7fe8cd40e257",
+    "manifestSHA256": "635d028520382d8217f882ca897b9cda80e89cdaf5b1686cc7fbd42341cfb8af"
+  },
+  "testInputs": {
+    "scripts/test-firmware.py": "f5929b6e03b3aa4be6e605030c6d06ab56088711bfbb5921fd0c55c9d33122d8",
+    "scripts/test-audited-candidate.py": "cf391ec3260146b3e7c3c5d3f45c79783111ffd80aea3e5e4326c951972a86fe",
+    "scripts/test-refined-candidate.py": "5445a577b1ca941693e97f43ebfbbe01aee0d9261dcc680c2b2befb413a197af",
+    "scripts/test-factory-af-oracle.py": "c79138f77aadd8772c9697cf1a5a23cc139508384298b634ad8b8b66a5c171a4",
+    "scripts/prepare-af.py": "f369d54d778d459ff05a8646cc48fff247ac8a96cfe498561a61f3668e9ad17e",
+    "firmware/tests/test_profile.c": "7b0a8d9b4542c72b4b8c7f2a125553946b5bf381aa9c0556cf8924c0f4a153c0",
+    "firmware/tests/test_stock_query.c": "e478f3d1cd2ece35ee23858a6175bcda2b7246ee56cbd07413a567d72fc56d40"
+  },
+  "cameraExposureQualified": false,
+  "cameraAFQualified": false,
+  "knownLimits": [
+    "Opaque 0x34 meaning and complete legal request grammar remain unknown",
+    "Fixed aperture/dial clamp/metering and physical stop-down require A7C II qualification",
+    "pl[46] equality across changed profiles is a compatibility hypothesis",
+    "Stock optical rows are preserved, not calibrated for Contax",
+    "Pure controller equivalence and mechanical simulation do not prove physical timing or factory parity",
+    "Initialized code/data fits exactly below profile; future growth requires size reduction",
+    "Upload, reconnect readback and 2.6-to-stock round trip deferred"
+  ]
+}

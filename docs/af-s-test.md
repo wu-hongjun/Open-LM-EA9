@@ -1,37 +1,39 @@
-# A7C II acceptance: AF 2.5, Contax Zeiss 50mm f/1.4
+# A7C II acceptance: AF 2.6, Contax Zeiss 50mm f/1.4
 
-The [AF 2.5 candidate](../firmware/candidates/2.5.0/README.md) and app
-0.8.0/build 11 are prepared and tested offline. **2.5 has not been uploaded or
+The [AF 2.6 candidate](../firmware/candidates/2.6.0/README.md) and app
+0.9.0/build 12 are prepared and tested offline. **2.6 has not been uploaded or
 camera-qualified.** This procedure is a plan, not a record of passed checks.
 The converter is now available. The last byte-verified hardware image was
 original stock 1.8; its owner-reported exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
 
-**Audit hold:** do not execute the installation procedure for frozen AF 2.5.
-The [aperture design audit](audits/aperture-protocol-design-2026-10-11.md)
-found that its `0x34` override assumes an unproven aperture meaning. The steps
-below remain planned acceptance criteria; substitute a separately versioned,
-reviewed candidate before coordinating an upload. No test or upload of 2.5 has
-occurred.
+Frozen AF 2.5 remains held because its `0x34` override assumed unproven
+aperture semantics. The new 2.6 candidate restores the stock opaque echo with a
+payload bound, retaining the AF completion fixes. See
+[the aperture audit](audits/aperture-protocol-design-2026-10-11.md) and
+[2.6 implementation/verification](evidence/af-26-candidate-2026-10-11.md).
+The adapter is disconnected; flashing will be coordinated separately.
 
 AF 2.4 passed USB verification but failed focus acquisition, with a dark view
 and no shown f-number in P/A. Further trials of that frozen image are suspended.
 See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md),
 [completed stock recovery](evidence/stock-18-af24-recovery-2026-10-11.md), and
-[2.5 implementation and tests](evidence/af-25-candidate-2026-10-11.md).
+[2.6 implementation and tests](evidence/af-26-candidate-2026-10-11.md).
 
 ## Prepared products and aperture policy
 
-- App: `dist/Open LM-EA9.app`, version 0.8.0/build 11.
+- App: `dist/Open LM-EA9.app`, version 0.9.0/build 12.
 - CLI: `dist/ea9ctl`, locally signed, using the same DeviceKit transport.
-- [50mm candidate and pins](../firmware/candidates/2.5.0/README.md): 20,480 bytes,
-  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 2.5.0.
+- [50mm candidate and pins](../firmware/candidates/2.6.0/README.md): 20,480 bytes,
+  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 2.6.0.
 - [Original stock recovery bundle](../firmware/recovery/stock-1.8.0/README.md):
   retain its separate private decryption key and the same-unit original backup.
 
-The candidate declares fixed f/1.4 consistently in the known range/current/
-reply fields, including optional EXIF only when negotiated. It deliberately
-rejects the factory request echoes that would imply an unavailable iris change.
+The candidate declares fixed f/1.4 in known aperture fields, including optional
+EXIF only when negotiated. The known `0x1b` channel returns that declaration;
+opaque `0x34` instead follows its stock operand echo. A fixed declaration is a
+compatibility policy, not a sensed wide-open iris. The unknown `pl[46]` relationship
+remains a controlled compatibility hypothesis.
 The physical aperture is **Unknown** in the app and is operated only by the
 lens ring. Camera acceptance of this fixed policy, saved exposure and physical
 stop-down remain unverified; F-- with working AF is not an established mode.
@@ -46,7 +48,7 @@ device. No hardware operation is needed for offline candidate preparation.
 1. Close the updater and other USB clients. Physically reconnect the USB cap,
    then check `dist/ea9ctl inventory`.
 2. Select **Contax Zeiss 50mm f/1.4** on Device. In
-   **USB tools → Experimental autofocus**, choose **Install Experimental AF 2.5.0**.
+   **USB tools → Experimental autofocus**, choose **Install Experimental AF 2.6.0**.
    The same-unit stock-upload qualification is required. The operation saves a
    fresh verified two-pass backup and durable journal before START.
 3. After upload, physically unplug and reconnect the cap. Keep the adapter off
@@ -67,7 +69,7 @@ dist/ea9ctl verify --idle
 
 `--idle` acknowledges prerequisites; it cannot perform a physical reconnect.
 The normal Device dropdown preserves the verified installed variant. Explicit
-AF installation selects 2.5; plain `apply` selects metadata-only 2.0. Do not
+AF installation selects 2.6; plain `apply` selects metadata-only 2.0. Do not
 rebuild a pinned image or change its local profile between upload and readback.
 Do not run extra CHECK/READ/client commands while the stock loader is armed;
 an ordinary read can be interpreted as the next firmware page. Lost
@@ -97,6 +99,21 @@ image is useful for EXIF/quantitative analysis, but its absence is not a gate.
 Do not infer a universal one-stop correction from the earlier stock observation.
 If the lifecycle or aperture/exposure check fails, investigate before AF trials.
 
+## Physical stop-down and exposure modes
+
+After a normal initial lifecycle and saved A-mode exposure, use the same stable
+scene and EV/ISO/metering setup. Change only the physical iris from f/1.4 to f/4;
+keep the declared camera report at f/1.4 and leave the app unchanged. Take one
+saved A-mode photo and record brightness and shutter/ISO. The body should adjust
+for the reduced light without a fictitious electronic stop-down. Repeat the
+physical f/1.4 and f/4 pair in P, keeping MF/Pre-AF Off where available.
+
+Qualify Auto as well, recording its actual focus/exposure settings. If it does
+not offer MF or forces autofocus, defer its saved-exposure pair until the first
+bounded AF-S check passes; do not repeatedly hunt to obtain a photo. A saved
+exposure failure stops that check and requires investigation. The unavailable
+old stock photo is not a prerequisite and need not be recreated.
+
 ## One bounded AF-S attempt, then matched comparison
 
 After a normal initial lifecycle, use Single-shot AF, Pre-AF Off and a central
@@ -110,6 +127,9 @@ for about two seconds; release the button and switch off if movement continues.
 Take a photo only if focus locks and motion is normal; inspect center sharpness.
 Record shutdown. An actuator termination event is not optical focus lock, and
 USB verification does not establish sharpness.
+Sony defines Single-shot AF as locking after acquisition for a stationary
+subject; select and record the actual mode rather than inferring it from the
+exposure dial. [A7C II Focus Mode guide](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html).
 
 If this first attempt is normal, later comparisons can alternate near/distant
 subjects and repeat across matched lighting, focus area, target, physical iris,
@@ -148,7 +168,7 @@ dist/ea9ctl verify --idle
 An AF backup cannot replace the original stock source. Recovery checks the
 qualified loader and matching unit, writes the saved application slot
 `[0x5000,0x20000)` and metadata, and does not write bootloader code. Restoration
-has previously passed strict readback on this unit. A **2.5-to-stock** round
+has previously passed strict readback on this unit. A **2.6-to-stock** round
 trip, interrupted-write/power-loss and bootloader recovery remain unqualified.
 
 ## Historical evidence and result record
@@ -159,7 +179,7 @@ Preserve the [2.1 upload](evidence/af-50-upload-2026-10-10.md),
 [2.3 upload](evidence/af-23-upload-2026-10-11.md) and
 [loaded-lens report](evidence/af-23-camera-lifecycle-2026-10-11.md), and
 [2.4 upload](evidence/af-24-upload-2026-10-11.md). These observations do not
-qualify 2.5. Historical pins are unchanged.
+qualify 2.6. Historical pins are unchanged.
 
 Use [the result template](evidence/af-s-camera-result-template.md). Keep original
 photos and timing video private; publish only relevant hashes and extracted

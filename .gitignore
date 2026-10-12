@@ -32,3 +32,5 @@ __pycache__/
 /.venv-recovery/
 /firmware/recovery/**/*.key
 /firmware/recovery/**/*.ea9backup/
+
+/artifacts/af26-*

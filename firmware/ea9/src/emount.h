@@ -338,7 +338,8 @@ uint16_t em_defocus_scale(void);
  * right now.  Three constants because the protocol carries three fields; one
  * number because an LM-EA9 has no iris.  It carries a manual Leica M lens whose
  * aperture ring it cannot read and cannot move, so the honest report is a fixed
- * aperture: wide open, permanently, and no range for the body to drive.
+ * compatibility declaration, and no range for the body to drive. The real
+ * iris can stop down manually and its position is unknown to this firmware.
  *
  * ALL THREE ARE APERTURE VALUES -- the u16 `256 * AV + 4096` scale that
  * message 0x05 payload[0..1] and message 0x28 payload[9..10] carry directly
@@ -491,7 +492,10 @@ uint8_t  em_aperture_to_descriptor(uint16_t av);
  * (optical_data.md 6.2), and `value[0] x F` for it is 0.1020, right on the
  * protocol constant -- which means it describes a lens working at **F 1.8**.
  *
- * NOTE, if you change the aperture: this row and EM_APERTURE_* have to agree,
+ * These donor constants are not installed by production em_init(), which
+ * retains the stock packet rows. They are not a calibration for a profile.
+ * NOTE for experiments installing this donor model: its row and aperture
+ * declaration have to agree,
  * because `value[0] x F` is the same number for every lens measured.  They do
  * agree as shipped -- EM_APERTURE_* is 0x11C0, f/1.834, and 0.05664 x 1.834 =
  * 0.1039.  Move the aperture and this row has to be rescaled by the ratio of

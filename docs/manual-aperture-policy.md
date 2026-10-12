@@ -201,3 +201,20 @@ hold. Preserve opaque protocol behavior while restricting the fixed policy to
 established aperture channels. Retained stock optical rows remain uncalibrated;
 the SEL5518Z constants in the current header are not installed by production
 `em_init()`. Physical aperture stays unknown in the app.
+
+
+## AF 2.6 audited implementation
+
+[AF 2.6](evidence/af-26-candidate-2026-10-11.md) removes the unsupported `0x34`
+aperture interpretation and restores its opaque stock operand echo with a
+payload bound. The fixed policy applies only to established aperture fields.
+Requests from `0x03`/`0x1b` do not change the declaration; optional `0x28` remains
+negotiated. The app shows the actual iris as Unknown. The normal workflow is
+select-once metadata and physical stop-down without per-stop edits. Equal
+endpoints and the retained `pl[46]` relationship are policies to qualify, not
+proven A7C II metering behavior. Stock optical rows remain uncalibrated.
+
+All preparation was offline with the adapter disconnected. Frozen 2.5 stays
+held and its binaries/results remain preserved. A separately coordinated upload,
+physical reconnect verification and the [staged camera checks](af-s-test.md)
+are still required; no exposure compensation or F-- sentinel was introduced.

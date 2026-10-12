@@ -18,10 +18,7 @@ void lens_aperture_publish(uint8_t include_exif)
     ea9_data[EA9_OFF_05 + 14] |= 1; /* iris at rest; preserve other flags */
     put(EA9_OFF_1B + 6, declared);
     put(EA9_OFF_1B + 8, declared);
-    /* Factory 0x58a4 echoes the parsed request word in 0x1b and 0x34.
-     * Our passive-iris policy deliberately overrides BOTH echoes: a body
-     * request cannot change the physical iris or its fixed declaration. */
-    ea9_data[EA9_OFF_34 + 6] = 0;
-    put(EA9_OFF_34 + 7, declared);
+    /* 0x34 semantics are unknown: its stock operand echo belongs to transport,
+     * not aperture policy. Physical iris position remains unknown as well. */
     put(EA9_OFF_28 + 15, include_exif ? declared : 0);
 }

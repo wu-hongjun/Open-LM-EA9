@@ -1,4 +1,7 @@
-/* Fixed-policy regression: reject an unavailable f/8 iris change consistently
+/* HISTORICAL 2.5 HYPOTHESIS ONLY; not an assertion for current firmware.
+ * The audited current test is test_stock_query.c. The original bytes of this
+ * probe are materialized from pinned Git by test-refined-candidate.py.
+ * Fixed-policy regression: reject an unavailable f/8 iris change consistently
  * in both 0x1b and 0x34. Stock echoes this request; our fixed policy overrides it.
  * Run against both frozen 2.4 and current transport; frozen 2.4 must fail.
  * SPDX-License-Identifier: MIT */

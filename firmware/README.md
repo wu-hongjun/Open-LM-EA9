@@ -27,19 +27,20 @@ assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
 Offline build and checks:
 
 ```sh
-python3 scripts/build-firmware.py --variant refined-af
+python3 scripts/build-firmware.py --variant audited-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-Current source builds **AF 2.5** under `ea9/build/refined`, as camera BCD 0x25
-and loader 2.5.0. It is prepared offline and not uploaded/camera-qualified; see
-[the new candidate](candidates/2.5.0/README.md) and
-[its aperture/completion regressions](../docs/evidence/af-25-candidate-2026-10-11.md).
-The subsequent [aperture audit](../docs/audits/aperture-protocol-design-2026-10-11.md)
-holds frozen 2.5 from hardware installation: its `0x34` override assumes an
-unproven aperture meaning. Keep its image and test evidence; a successor should
-restore bounded opaque stock behavior while retaining the AF completion work.
+Current source builds **AF 2.6** under `ea9/build/audited`, as camera BCD 0x26
+and loader 2.6.0. It is ready offline for a separate USB upload/camera comparison;
+no hardware reports were sent during preparation. See
+[the candidate](candidates/2.6.0/README.md) and
+[its verification](../docs/evidence/af-26-candidate-2026-10-11.md).
+The [aperture audit](../docs/audits/aperture-protocol-design-2026-10-11.md) holds
+frozen 2.5; 2.6 restores stock opaque `0x34` handling with bounded operand reads
+while retaining the AF fixes and known fixed-aperture policy. Exposure and
+optical AF remain unqualified.
 The following 2.4 observations are historical. It uses a modular factory-derived controller, tested directly
 against the original instructions. Its authorized upload and strict byte verification passed after physical
 reconnect, including an independent audit. **Its owner focus attempt failed**:
@@ -51,10 +52,10 @@ matched AF-S baseline remain pending. See [the failure and controller counterexa
 [completed recovery record](../docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 and [historical USB record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
-Templates/pins for 2.0–2.4 remain frozen; those build-script variants verify
+Templates/pins for 2.0–2.5 remain frozen; those build-script variants verify
 committed size/digest instead of compiling changed source under old versions.
-All six custom versions remain admitted for backed-up upload, reconnect
-verification and stock restoration. The 2.2–2.5 profile row is `0x9f00` and
+All seven custom versions remain admitted for backed-up upload, reconnect
+verification and stock restoration. The 2.2–2.6 profile row is `0x9f00` and
 application writes stop at `0xa000`.
 See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
 [offline build/test record](../docs/evidence/software-polish-2026-10-11.md).

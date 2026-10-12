@@ -1,5 +1,10 @@
 # Factory-derived autofocus baseline: AF 2.4
 
+The current [2.6 candidate](../../firmware/candidates/2.6.0/README.md) restores
+audited opaque-query handling and retains the 2.5 bounded-wrapper fixes. Its
+pure factory controller remains unchanged; historical 2.4 observations below
+are not qualification of that successor.
+
 October 11, 2026. The owner reports substantially less hunting with stock 1.8
 than custom AF 2.3 on the A7C II, with the Contax Zeiss 50mm f/1.4 and C/Y-to-M
 converter. Camera focus mode, Pre-AF, scene, exposure and image sharpness were

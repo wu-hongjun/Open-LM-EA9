@@ -10,17 +10,16 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.8.0, build 11) refreshes
+upload/read-back path for lens metadata. The current app (0.9.0, build 12) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The new **AF 2.5 candidate is prepared and tested offline**, with a proposed
-aperture policy and bounded actuator completion. It remains
-unuploaded and camera-unqualified; see [the candidate record](docs/evidence/af-25-candidate-2026-10-11.md).
-An [independent aperture audit](docs/audits/aperture-protocol-design-2026-10-11.md)
-subsequently found that `0x34` has unknown semantics. Its interpretation as an
-aperture capture query is unproven; **hardware installation of frozen 2.5 is
-on hold**, while the bounded completion work and test evidence are retained.
+The new **AF 2.6 candidate is ready offline for a separate upload and camera
+comparison**, using the [audited aperture design](docs/audits/aperture-protocol-design-2026-10-11.md).
+It restores stock opaque `0x34` handling, bounds its payload reads and retains
+the AF completion fixes. See [the candidate record](docs/evidence/af-26-candidate-2026-10-11.md).
+The adapter was disconnected; no USB reports or uploads occurred. Frozen 2.5
+remains held and preserved. Actual camera exposure and optical AF are unqualified.
 The app displays **Actual aperture: Unknown** separately from its fixed camera
 f-number; the lens ring still controls the physical iris. The historical **AF 2.4
 factory baseline** replaces the upstream controller with independently implemented
@@ -63,13 +62,15 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant refined-af
+python3 scripts/build-firmware.py --variant audited-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [AF 2.6 implementation and offline validation](docs/evidence/af-26-candidate-2026-10-11.md)
+- [Prepared 50mm f/1.4 AF 2.6 candidate](firmware/candidates/2.6.0/README.md)
 - [AF 2.5 implementation, testing and remaining camera gates](docs/evidence/af-25-candidate-2026-10-11.md)
 - [Prepared 50mm f/1.4 AF 2.5 candidate](firmware/candidates/2.5.0/README.md)
 - [AF 2.4 camera failure, controller counterexamples and stock recovery](docs/evidence/af-24-camera-failure-2026-10-11.md)
