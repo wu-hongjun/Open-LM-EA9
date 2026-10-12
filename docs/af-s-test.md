@@ -1,10 +1,17 @@
-# A7C II acceptance: AF 2.8, Contax Zeiss 50mm f/1.4
+# A7C II acceptance: AF 2.8 held after camera failure
+
+**Do not continue this AF 2.8 camera procedure.** The owner reports frozen
+preview, poor focus response, darker exposure on a restart and a shutdown hang
+requiring battery removal. Keep the camera off and prepare verified stock
+recovery. See [the failure record](evidence/af-28-camera-failure-2026-10-12.md).
+The procedure below is retained for a future reviewed replacement; its planned
+settings are not observations from the failed trial.
 
 The [AF 2.8 candidate](../firmware/candidates/2.8.0/README.md) and app
 0.11.0/build 14 passed offline preparation. **The October 12 native upload,
-owner-confirmed physical reconnect and strict two-pass readback passed. Camera
-testing is not run.** See [the live transaction record](evidence/af-28-upload-2026-10-12.md).
-This procedure is a plan, not a record of passed camera checks.
+owner-confirmed physical reconnect and strict two-pass readback passed. The
+subsequent camera check failed.** See [the live transaction record](evidence/af-28-upload-2026-10-12.md).
+This procedure is not a record of passed camera checks.
 The converter is now available. The current byte-verified hardware image is
 AF 2.8; the earlier stock 1.8 owner-reported exposure failure remains accepted.
 An earlier photograph is unavailable and is not required to continue.
@@ -16,8 +23,8 @@ measured observer and restores equal factory position fields. Physical settling,
 owner-unit noise and camera consumption remain unqualified. See
 [the aperture audit](audits/aperture-protocol-design-2026-10-11.md) and
 [2.8 implementation/verification](evidence/af-28-motion-telemetry-2026-10-12.md).
-The USB installation gate has passed; begin the initial loaded-lens check below
-with the camera powered off. Camera observations and AF-S remain pending.
+The USB installation gate passed; the camera lifecycle gate failed. Further
+AF 2.8 use and the controlled AF-S comparison are suspended.
 
 AF 2.4 passed USB verification but failed focus acquisition, with a dark view
 and no shown f-number in P/A. Further trials of that frozen image are suspended.

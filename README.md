@@ -15,7 +15,11 @@ connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
 The new **AF 2.8 candidate is uploaded and strictly byte-verified after physical
-reconnect**. Camera acceptance is pending. The software milestone was prepared and tested offline. A pure measured-motion
+reconnect**, but **camera acceptance failed**: the owner reports frozen preview,
+poor focus response, darker exposure and a later shutdown hang requiring battery
+removal. Further 2.8 trials are suspended and stock recovery is being prepared.
+See [the camera failure record](docs/evidence/af-28-camera-failure-2026-10-12.md).
+The software milestone was prepared and tested offline. A pure measured-motion
 observer now preserves coast/reversal after command completion, requires a fresh
 quiet interval before reporting rest, and discards stale per-frame history.
 It follows REA's factory frame-sync behavior by reporting the same measured
@@ -25,8 +29,8 @@ drivers and completion policy remain unchanged. See
 The [October 12 native upload](docs/evidence/af-28-upload-2026-10-12.md)
 completed with a fresh two-pass backup; no post-START read was sent. Subsequent
 two-pass readback and a separate offline evidence audit matched the complete
-candidate/profile and protected flash/factory data. The first loaded-lens
-display, exposure and lifecycle check is ready. Older images and stock recovery are preserved. Sensor noise, physical settling, exposure and optical AF remain
+candidate/profile and protected flash/factory data. The displayed f/1.4 is an
+owner observation; it does not qualify exposure or AF. Older images and stock recovery are preserved. Sensor noise, physical settling, exposure and optical AF remain
 unqualified; factory reconstruction remains partial. The candidate has 400 bytes
 of flash headroom and uses 2,200 bytes of static RAM.
 The app displays **Actual aperture: Unknown** separately from its fixed camera

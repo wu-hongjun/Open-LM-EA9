@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "status": "uploaded-and-strictly-verified-camera-acceptance-pending",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-failed",
   "sourceGitCommit": "1043bad7f233479d198495bbd435a42dbcc0edc9",
   "transactionID": "745859B9-DE2D-4C65-842D-332A79031F08",
   "appVersion": "0.11.0",
@@ -23,7 +23,7 @@
   "retriesSent": 0,
   "uploadPerformed": true,
   "strictVerificationPassed": true,
-  "cameraTestingPerformed": false,
+  "cameraTestingPerformed": true,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
   "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
@@ -89,5 +89,7 @@
     "verify.stdout.txt": "b6c5a40174e9bc81ad8124fffce8fece705f3f6ac0bc6726a2ee5d70e5b33c6c",
     "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
   },
-  "cameraTestStage": "Initial loaded-lens A/MF display, exposure and lifecycle check requested; awaiting owner observations before AF-S"
+  "cameraTestStage": "Owner reports frozen preview, poor focus response, darker exposure and a later shutdown hang requiring battery removal; AF 2.8 trials suspended",
+  "cameraAcceptancePassed": false,
+  "cameraFailureEvidence": "af-28-camera-failure-2026-10-12.json"
 }

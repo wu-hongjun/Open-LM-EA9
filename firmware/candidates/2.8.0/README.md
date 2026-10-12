@@ -1,7 +1,10 @@
 # AF 2.8.0 — Contax Zeiss 50mm f/1.4
 
-**Native upload, physical reconnect and strict two-pass readback passed. Camera
-testing is not run.** See [the October 12 upload record](../../../docs/evidence/af-28-upload-2026-10-12.md). This candidate
+**Native upload, physical reconnect and strict two-pass readback passed; camera
+acceptance failed. Further trials are suspended.** The owner reports frozen
+preview, poor focus response, darker exposure and a shutdown hang requiring
+battery removal. See [the failure record](../../../docs/evidence/af-28-camera-failure-2026-10-12.md)
+and [the October 12 upload record](../../../docs/evidence/af-28-upload-2026-10-12.md). This frozen candidate
 separates observed movement from command completion, target prediction and Stop.
 It restores the REA factory frame-sync writer's equal current/ahead positions.
 
@@ -41,8 +44,9 @@ profile changes preserve the verified installed variant. All older resources
 and stock recovery remain unchanged. The software preparation was offline; the
 subsequent authorized native upload and reconnect verification have finished.
 The full pinned application/profile, protected flash and checked factory data
-matched. The initial loaded-lens display/exposure/lifecycle check is ready;
-optical AF and camera acceptance remain unqualified.
+matched. Later owner camera observations failed lifecycle acceptance. Do not
+install or retry this candidate for further camera trials; original stock
+recovery is being prepared. Historical binary pins and evidence are retained.
 
 ```sh
 python3 scripts/build-firmware.py --variant observed-af

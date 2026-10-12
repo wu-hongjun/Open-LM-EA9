@@ -1,0 +1,78 @@
+{
+  "dateLocal": "2026-10-12",
+  "timezone": "America/New_York",
+  "status": "camera-acceptance-failed-further-af28-trials-suspended",
+  "firmwareVersion": "2.8.0",
+  "imageSHA256": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834",
+  "verifiedUSBTransactionID": "745859B9-DE2D-4C65-842D-332A79031F08",
+  "strictUSBVerificationPassed": true,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
+  "ownerObservations": [
+    {
+      "order": 1,
+      "statement": "the preview freezes, I can see f1.4, motor doesn't do anything when trying to focus.",
+      "previewFrozenReported": true,
+      "displayedAperture": "f/1.4",
+      "focusAttemptMotorMovementReported": false
+    },
+    {
+      "order": 2,
+      "statement": "it shuts down normally, upon restart the motor starts to sort of focusing but is not very responsive when trying to reach focus",
+      "normalShutdownReported": true,
+      "motorResponseAfterRestartReported": true,
+      "poorFocusResponsivenessReported": true
+    },
+    {
+      "order": 3,
+      "statement": "i restarted again, exposure is off (darker) and the camera is irresponsive to shutdown, i had to take out the battery",
+      "darkerExposureReported": true,
+      "shutdownHangReported": true,
+      "batteryRemovalRequiredReported": true
+    }
+  ],
+  "actualFocusMode": null,
+  "actualPreAF": null,
+  "actualExposureMode": null,
+  "actualPhysicalIris": null,
+  "actualFocusRingPosition": null,
+  "actualShutterSpeed": null,
+  "actualISO": null,
+  "actualExposureCompensation": null,
+  "previewFreezeOnset": null,
+  "opticalFocusLock": null,
+  "savedPhotoExposure": null,
+  "centerSharpness": null,
+  "confirmedAFSComparisonPerformed": false,
+  "causeProven": false,
+  "runtimeFaultRecovered": false,
+  "runtimeFaultUnavailableReason": "Release disables flash diagnostics; battery/cap power cycle loses volatile application state",
+  "sourceInspectionPerformed": true,
+  "fullStartupCameraExchangeCoveredByTelemetryProbe": false,
+  "telemetryProbeSeedsHandshakeAndHomedState": true,
+  "newFirmwareBuiltForThisDiagnosis": false,
+  "hardwareReportsSentForThisDiagnosis": 0,
+  "stockRecoveryStatus": "Original same-unit source verified offline; awaiting owner USB-cap and closed-updater confirmation",
+  "stockRestorationStarted": false,
+  "stockExposureLimitationsResolved": false,
+  "nextCandidateRequires": [
+    "Integrated startup and initialization reply ownership evidence",
+    "Real sensor latency and fault-path protocol service evidence",
+    "Status/query behavior before reference and after sampling gaps",
+    "Shutdown service from unhomed, faulted and active-motion states",
+    "Separate loaded-lens lifecycle, exposure and controlled AF-S acceptance"
+  ],
+  "stockRecoveryPreparation": {
+    "firmwareVersion": "1.8.0",
+    "sourceFlashSHA256": "1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01",
+    "applicationBytes": 110592,
+    "applicationSlotSHA256": "265f93797db99f2dbba5b649bf5b12bc19efadeaa8e9fe77ade5fca128d17173",
+    "stockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "originalSameUnitSourceVerifiedOffline": true,
+    "af28EvidencePreservedPrivately": true,
+    "hardwareReportsSent": 0,
+    "restoreStarted": false,
+    "publicRecoveryBundleChecksumValid": true,
+    "nativeCLISignatureValid": true
+  }
+}
