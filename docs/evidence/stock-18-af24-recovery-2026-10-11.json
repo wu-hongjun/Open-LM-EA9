@@ -1,7 +1,7 @@
 {
   "dateLocal": "2026-10-11",
   "timezone": "America/New_York",
-  "stage": "stock-byte-verified-owner-reported-f14-body-f2-overexposure-photo-settings-investigation-pending",
+  "stage": "stock-byte-verified-exposure-failure-accepted-photo-unavailable-offline-firmware-investigation",
   "reason": "Owner reported AF 2.4 focus-acquisition failure, dark view and no shown f-number in P/A",
   "transactionID": "0FBD0A31-B440-4033-AD5B-7F105B688DF2",
   "firmwareVersion": "1.8.0",
@@ -39,7 +39,7 @@
   "strictUSBVerificationPassed": true,
   "independentReadbackAuditPassed": true,
   "stockCameraComparisonPerformedAfterThisRecovery": true,
-  "nextAction": "Inspect existing original stock body-f2 shot and actual shutter/ISO, exposure mode/compensation and metering; no new photo requested. Shutdown and AF-S remain unverified.",
+  "nextAction": "Continue offline lens-init/aperture request-reply-status audit and AF completion/fault work; owner exposure failure accepted without original photo. Preserve existing frozen images and independently qualify future exposure/AF changes.",
   "nativeVerificationExitCode": 0,
   "verifiedAtUTC": "2026-10-12T00:03:54.197725+00:00",
   "postRecoveryFlashSHA256": "6a89393b01cad5a931e289ee1aaf03c7a3e0b840b7bf5c1c6261d03b51575f6b",
@@ -79,6 +79,11 @@
       "recordedAtUTC": "2026-10-12T00:30:57.409184+00:00",
       "statement": "no, if my lens is at f1.4 but camera think it is at F2, it is one stop over exposed",
       "clarifies": "Saved-photo exposure question at body f2; causal explanation is owner interpretation"
+    },
+    {
+      "recordedAtUTC": "2026-10-12T00:54:32.770358+00:00",
+      "statement": "I did not store it. Does it matyter though? The issue is very clear",
+      "clarifies": "The stock body-f2 photo was not retained"
     }
   ],
   "ownerReportedExposureModes": [
@@ -162,5 +167,12 @@
   "arithmeticStopsBodyF2ToPhysicalF14": 1.0291463456595165,
   "arithmeticDifferenceIsProvenMeteringError": false,
   "previousPhotoDirectoryMountedDuringThisFollowup": false,
-  "newPhotoInspectedForThisFollowup": false
+  "newPhotoInspectedForThisFollowup": false,
+  "originalStockBodyF2PhotoRetained": false,
+  "photoPathRequestClosedBecausePhotoNotRetained": true,
+  "blockedByMissingPhoto": false,
+  "stockExposureFailureAcceptedFromOwnerReport": true,
+  "newPhotoRequiredToContinueFirmwareWork": false,
+  "exactExposureMagnitudeInstrumentallyVerified": false,
+  "nextFirmwareApertureAcceptance": "../manual-aperture-policy.md#next-firmware-acceptance"
 }

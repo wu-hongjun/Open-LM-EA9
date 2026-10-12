@@ -144,12 +144,45 @@ Original image/shutter/ISO, mode, compensation, metering and shutdown remain
 unverified. The displayed-versus-physical f-number difference has a roughly
 one-stop arithmetic ratio, but the camera measures scene light through the
 lens, so that ratio alone does not establish a one-stop metering fault.
-Request the existing photo/settings before another correction or flash. The
-earlier camera-only f/4.5 change remains a separate observation, consistent
-with an unperformed stop-down.
+The owner has confirmed that the original photo was not retained. Accept the
+exposure failure from the owner report and continue firmware investigation;
+the missing file is not a blocker. Original files/settings can support a later
+diagnosis or quantitative comparison. The earlier camera-only f/4.5 change
+remains a separate observation, consistent with an unperformed stop-down.
 
 The custom design goal remains fixed accepted camera reporting, known lens
 geometry and unknown physical iris in the app. Acceptance must include saved
 exposure and EXIF in A/P/Auto and physical stop-down, alongside AF. The failed
 2.4 display is not a demonstrated unknown-aperture mode. No new firmware or
 USB operation was performed for this observation follow-up.
+
+## Next firmware acceptance
+
+The problem is accepted; the exact metering cause remains open. AF 2.4 already
+writes a fixed range/current aperture and rejects conflicting requests, yet its
+camera test had no shown f-number and failed focus. Repeating those setters or
+subtracting one stop is not an established repair. Audit the complete lens-init
+and aperture request/reply/status sequence against the factory reconstruction
+and upstream traffic, separately from the actuator's fault/completion policy.
+
+- Keep lens specification, declared camera aperture and unknown physical iris
+  as distinct model values. The 50mm profile's declared nominal value is f/1.4;
+  only the physical lens ring operates the iris.
+- Make every known current/range/maximum aperture field coherent, including
+  optional EXIF fields only when negotiated. A conflicting body request must
+  not acknowledge that an unavailable physical stop-down occurred. Check the
+  complete response/initialization sequence, not just serialized field values.
+- On the A7C II, verify that the declared aperture appears and that the body
+  accepts the fixed-range policy. Correct captured exposure must hold in A,
+  P and Auto, including physical stop-down, without an invented one-stop bias.
+  EXIF remains declared metadata rather than a sensor reading of the iris.
+- Continue AF controller/completion work independently. Qualify startup,
+  shutdown and AF-S separately from exposure. Pure-model equality, USB image
+  verification and a correct preview are not substitutes for these outcomes.
+
+An owner-reported failure is sufficient to fail a candidate. An original image
+is useful diagnostic evidence, not a prerequisite for further development.
+Quantitative exposure/EXIF or sharpness claims still require the corresponding
+measurement. Hardware acceptance criteria are future checks, not claims that
+the next implementation already passes. No new candidate is built or uploaded
+by this documentation update.

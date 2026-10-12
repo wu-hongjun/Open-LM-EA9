@@ -112,6 +112,13 @@ and subsequent-command eligibility while retaining inhibition for unsafe sensor,
 PWM, timebase and runaway conditions. Lens-init/status and AF sequencing also
 require investigation. Leave the deployed 2.4 image and pins unchanged.
 
+Stock comparison also failed exposure at owner-reported physical f/1.4 / body
+f/2. Accept that failure without requiring an unavailable original photo.
+Follow the [next aperture acceptance criteria](../manual-aperture-policy.md#next-firmware-acceptance)
+for coherent initialization/request/status reporting and saved exposure.
+Exposure investigation and the known AF wrapper counterexamples can proceed
+independently; neither justifies silently changing the frozen 2.4 image.
+
 For a later candidate, record matched stock/custom trials: still-photo P,
 explicitly AF-S, Pre-AF Off, same static textured target, lighting, distance,
 focus area, aperture ring and lens starting position. Record acquisition time,

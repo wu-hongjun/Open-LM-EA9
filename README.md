@@ -37,8 +37,9 @@ hunting. After the failed AF 2.4 attempt, the original stock 1.8 application
 has been restored again and **strictly byte-verified after physical reconnect**,
 with an independent audit. The owner reports stock AUTO overexposure and a
 selectable P-mode aperture, widest f/2, then one-stop overexposure at physical
-f/1.4 / camera f/2. Stock exposure is not qualified; original photo/settings,
-lifecycle and controlled AF-S remain pending. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
+f/1.4 / camera f/2. The reported exposure failure is accepted; the photo was
+not retained and does not block firmware investigation. Exact cause, lifecycle
+and controlled AF-S remain unqualified. [Current recovery record](docs/evidence/stock-18-af24-recovery-2026-10-11.md).
 During the earlier stock comparison, camera use before readback changed 13 stock saved-motion bytes, causing strict
 verification to fail. A later explicit reviewed resolution matched a fresh
 backup to that audit and archived the failure without relabeling it a strict

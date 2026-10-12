@@ -158,13 +158,32 @@ The custom range setter already keeps the wide and maximum descriptors equal;
 it does not apply an additional one-stop-wider descriptor. This review is not
 a camera wire trace or a new proven firmware bug. No new build/flash was made.
 
-The next evidence is the existing original stock photo and its shutter/ISO,
+At that stage, additional evidence was requested from the original stock photo and its shutter/ISO,
 mode, compensation and metering fields, with physical iris supplied by the
 owner. The previously referenced photo directory was not mounted on the Mac;
 no current photo/EXIF could be inspected. A path/settings clarification was
 requested without asking for another photo. Display/motor shutdown and AF-S
-remain unqualified. Avoid another gain/aperture correction or candidate upload
-until that evidence distinguishes camera settings, metering and lens signaling.
+remain unqualified. A measured one-stop correction was not established.
+
+The owner clarified:
+
+> I did not store it. Does it matyter though? The issue is very clear
+
+The original photo is unavailable. This **does not block firmware investigation**
+or acceptance of the owner-reported exposure failure. Requiring that file before
+continuing was unnecessary. Retention would help distinguish precise causes and
+quantify a correction; it is not required to record that the setup failed for
+the owner. The photo-path request is closed, with no replacement photo requested.
+The reported one-stop magnitude and proposed cause remain distinct from an
+instrumentally measured error; neither is used to hard-code a correction.
+
+Continue offline investigation of the coherent lens declaration, aperture
+request/reply/status paths and why 2.4 failed to show its fixed aperture on the
+camera. The next firmware acceptance criteria are in the
+[aperture policy](../manual-aperture-policy.md#next-firmware-acceptance).
+AF completion/session faults remain an independent implementation gap. The
+frozen 2.4 image and stock recovery source remain unchanged; this observation
+follow-up makes no upload or newly qualified hardware claim.
 
 This follow-up sent no hardware reports and uploaded no firmware. Stock remains
 the last verified image; AF 2.4 remains suspended. A later custom version must
