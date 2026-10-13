@@ -31,7 +31,14 @@
       "actualFocusMode": null,
       "motorResetStoppedItself": null,
       "previewUpdating": null,
-      "normalShutdown": null
+      "normalShutdown": true,
+      "shutdownClarifiedByObservation": 4
+    },
+    {
+      "order": 4,
+      "statement": "yes, it worked to shutdown, but I am still confused about why it produced two different behaviors",
+      "normalShutdownOnReportedReboot": true,
+      "clarifiesObservation": 3
     }
   ],
   "actualFocusMode": null,
@@ -74,5 +81,7 @@
   "postRebootAdmissionEvidence": "af-29-reboot-admission-2026-10-12.json",
   "postRebootFocusModeUnverified": true,
   "postRebootFocusNonresponseCauseProven": false,
-  "postRebootSourceFinding": "A cancelled homing reference or latched motion fault blocks later drive in composed production tests; actual camera mode and runtime state are unverified. Startup movement does not prove a reference commit."
+  "postRebootSourceFinding": "A cancelled homing reference or latched motion fault blocks later drive in composed production tests; actual camera mode and runtime state are unverified. Startup movement does not prove a reference commit.",
+  "postRebootNormalShutdownReported": true,
+  "earlierCaptureShutdownFailurePreserved": true
 }

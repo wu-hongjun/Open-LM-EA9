@@ -6,14 +6,16 @@ camera. Switching off did not recover it; battery removal was required. At that
 report the adapter was still on the camera. These observations fail capture and shutdown
 acceptance regardless of the unreported focus/exposure settings.
 The owner subsequently reports reset movement on reboot followed by no focus
-movement. This adds a session-readiness observation; its actual focus mode and
-shutdown outcome are still unverified.
+movement. The owner then confirmed that switching off worked on this reboot.
+This adds a session-readiness observation; its actual focus mode remains
+unverified. Later shutdown success does not override the earlier hang.
 
 ## Owner observations
 
 1. “it achieves focus but immediately freezes the camera when trying to take a photo.”
 2. “I had to remove the battery, it is still on the camera”
 3. “upon reboot, the motor resets to the initial position but refuse to move or focus”
+4. “yes, it worked to shutdown, but I am still confused about why it produced two different behaviors”
 
 Focus achievement is an owner observation. The actual focus mode, focus-lock
 indicator, latency, hunting, saved image and sharpness are unverified; this is
@@ -51,7 +53,8 @@ focus response does not establish that the 2.8 fault cause is resolved.
 Moving back to an initial position does not establish a committed reference,
 valid encoder feedback or admission of subsequent focus commands. Actual MF,
 AF-S/AF-C, Pre-AF, preview state, whether the reset movement stopped by itself
-and shutdown on this reboot remain unknown. MF would itself explain no AF
+remain unknown. Switching off worked on this reboot, as clarified in observation
+4. MF would itself explain no AF
 movement; the earlier capture freeze/battery-required recovery still fail
 acceptance independently.
 
@@ -83,6 +86,34 @@ entry, real IRQ timing, optical autofocus, camera focus mode and physical
 homing are not modeled. This reproduces candidate policy paths that could
 produce the reported symptom, not the physical fault cause. No automatic
 rehoming, fault reset, forced reference or replacement firmware is introduced.
+
+## Why different sessions can behave differently
+
+One firmware image has multiple runtime states and separate protocol stages:
+initialization/reference acquisition, focus commands, capture-time requests,
+recurring status and shutdown. Working focus motion in one stage does not
+establish correct capture or shutdown service. Likewise, initial movement can
+be followed by uncommitted reference/inhibited drive while a healthy link still
+accepts shutdown. The finite admission tests demonstrate the latter combination.
+
+The captured-order probe also demonstrates sensitivity to event ordering: an
+already-open receive window and one opening between status05 and status06
+require different service decisions. The simplified custom scheduler does not
+yet implement the factory interlock, including its inter-frame transition.
+That is a demonstrated protocol gap, not a proven account of the owner's hang.
+
+These observations follow the same verified AF 2.9 upload; the agent sent no
+intervening upload or hardware reports. Actual focus mode, camera requests,
+sensor readiness, reset/power-cut timing and runtime faults remain unavailable.
+Thus the observations are compatible with different session states/orderings,
+but there is not enough evidence to name one physical cause. A real application
+reset starts volatile state afresh; a prior runtime fault must not be described
+as persisting through a verified power cut without evidence.
+
+The successful later shutdown is a useful observation, not proof of reliable
+shutdown across all stages. Keep the earlier capture freeze and battery-required
+recovery as failed acceptance; do not repeat this held image to distinguish
+these possibilities.
 
 ## Capture-time protocol investigation
 

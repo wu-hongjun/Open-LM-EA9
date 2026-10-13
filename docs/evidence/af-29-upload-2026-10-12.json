@@ -53,7 +53,7 @@
     "planned50.bin": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Owner reports focus achievement then immediate capture freeze requiring battery removal; later reboot resets position but subsequent focus movement is absent; actual focus mode and latest shutdown unknown; AF 2.9 trials held",
+  "cameraTestStage": "Owner reports focus achievement then immediate capture freeze requiring battery removal; later reboot resets position but subsequent focus movement is absent; that reboot shut down successfully. Actual focus mode and latest location unknown; earlier failure preserved; AF 2.9 trials held",
   "verifiedAtUTC": "2026-10-12T23:53:04.681921+00:00",
   "verifiedAtLocal": "2026-10-12T19:53:04.681921-04:00",
   "verificationNativeExitCode": 0,

@@ -20,7 +20,8 @@ was saved before upload. **Camera acceptance failed:** the owner reports focus
 achievement followed by immediate freeze when trying to take a photo, requiring
 battery removal. Further AF 2.9 trials are held.
 After reboot the owner reports initial-position movement followed by no focus
-movement; the actual focus mode/reference state remain unverified. Two new
+movement; shutdown worked on that reboot. The actual focus mode/reference state
+remain unverified, and the earlier capture/shutdown failure is preserved. Two new
 composed tests cover cancelled/failed reference admission without clearing
 motion guards; the follow-up suite passes 40 current cases and detects the same
 15 frozen-2.8 defects. No replacement image is prepared by this investigation.

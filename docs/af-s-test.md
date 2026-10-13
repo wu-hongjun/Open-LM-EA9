@@ -7,8 +7,9 @@ offline audit. **Camera acceptance failed:** the owner reports focus achievement
 followed by immediate capture-time freeze and battery-required recovery.
 Further AF 2.9 trials are held. See [the failure and finite protocol investigation](evidence/af-29-camera-failure-2026-10-12.md).
 The owner subsequently reports reset movement on reboot followed by absent
-focus movement; actual focus mode and the latest shutdown outcome remain
-unverified. Do not perform another reboot/focus attempt with this image.
+focus movement, then confirmed switching off worked on that reboot. Actual
+focus mode remains unverified; the earlier shutdown failure is preserved.
+Do not perform another reboot/focus attempt with this image.
 The fresh pre-upload stock backup
 matches the [strictly verified restoration](evidence/stock-18-af28-recovery-2026-10-12.md).
 See [the installation record](evidence/af-29-upload-2026-10-12.md).
