@@ -21,6 +21,17 @@
       "batteryRemovalRequiredReported": true,
       "shutdownFailureReported": true,
       "adapterLocationReported": "camera"
+    },
+    {
+      "order": 3,
+      "statement": "upon reboot, the motor resets to the initial position but refuse to move or focus",
+      "motorResetMovementOnRebootReported": true,
+      "subsequentFocusMovementReported": false,
+      "referenceCommitVerified": false,
+      "actualFocusMode": null,
+      "motorResetStoppedItself": null,
+      "previewUpdating": null,
+      "normalShutdown": null
     }
   ],
   "actualFocusMode": null,
@@ -38,7 +49,6 @@
   "focusLockIndicator": null,
   "confirmedAFSComparisonPerformed": false,
   "stopAndNoRetryInstructionDelivered": true,
-  "adapterOnCameraAtLatestReport": true,
   "causeProven": false,
   "runtimeFaultRecovered": false,
   "runtimeFaultUnavailableReason": "Release disables flash diagnostics; reported battery removal loses volatile state",
@@ -55,7 +65,14 @@
     "Adversarial event-order fixtures for requests during both status frames and their gap",
     "Distinguish final boot initialization from capture-time 0x0a exchanges",
     "Preserve request snapshots, bounded timing, successful-send ownership and shutdown service",
+    "Explicit startup/reference readiness and bounded command/shutdown service after cancelled or failed homing; no driving from unknown reference",
     "Separate upload/reconnect strict readback, loaded lifecycle and saved-exposure acceptance before AF-S/capture"
   ],
-  "entranceOnlyReceiveGuardInsufficient": true
+  "entranceOnlyReceiveGuardInsufficient": true,
+  "adapterOnCameraAtReport2": true,
+  "adapterLocationAfterRebootReport": null,
+  "postRebootAdmissionEvidence": "af-29-reboot-admission-2026-10-12.json",
+  "postRebootFocusModeUnverified": true,
+  "postRebootFocusNonresponseCauseProven": false,
+  "postRebootSourceFinding": "A cancelled homing reference or latched motion fault blocks later drive in composed production tests; actual camera mode and runtime state are unverified. Startup movement does not prove a reference commit."
 }

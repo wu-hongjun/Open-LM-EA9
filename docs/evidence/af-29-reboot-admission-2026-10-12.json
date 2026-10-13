@@ -1,0 +1,525 @@
+{
+  "scope": "Finite register-backed actual drivers and composed production startup/reference/shutdown routines; not physical camera timing or full reset entry",
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "frozenSourceGitCommit": "1043bad7f233479d198495bbd435a42dbcc0edc9",
+  "frozenShimInstrumentation": "Host transmit boundary discards a chosen frame; host VD reads counted. Original production source and headers remain exact",
+  "passingCurrentCases": 40,
+  "detectedFrozenCases": 15,
+  "cases": [
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "encoder",
+      "exitCode": 0,
+      "output": "actual UART fault isolation encoder: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "adc",
+      "exitCode": 0,
+      "output": "actual UART fault isolation adc: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "pwm",
+      "exitCode": 0,
+      "output": "actual UART fault isolation pwm: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "combined",
+      "exitCode": 0,
+      "output": "actual UART fault isolation combined: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "mid-adc",
+      "exitCode": 0,
+      "output": "actual UART fault isolation mid-adc: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "uart",
+      "exitCode": 0,
+      "output": "actual UART fault isolation uart: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "clock",
+      "exitCode": 0,
+      "output": "actual UART fault isolation clock: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "timebase",
+      "exitCode": 0,
+      "output": "actual UART fault isolation timebase: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "eic",
+      "exitCode": 0,
+      "output": "actual UART fault isolation eic: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "stall",
+      "exitCode": 0,
+      "output": "actual UART fault isolation stall: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "frozen",
+      "exitCode": 0,
+      "output": "actual UART fault isolation frozen: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "uart",
+      "case": "healthy",
+      "exitCode": 0,
+      "output": "actual UART fault isolation healthy: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen28",
+      "group": "uart",
+      "case": "encoder",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault suppressed healthy UART"
+    },
+    {
+      "source": "frozen28",
+      "group": "uart",
+      "case": "adc",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault suppressed healthy UART"
+    },
+    {
+      "source": "frozen28",
+      "group": "uart",
+      "case": "pwm",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault suppressed healthy UART"
+    },
+    {
+      "source": "frozen28",
+      "group": "uart",
+      "case": "combined",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault suppressed healthy UART"
+    },
+    {
+      "source": "frozen28",
+      "group": "uart",
+      "case": "mid-adc",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault suppressed healthy UART"
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "0",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 0 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "1",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 1 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "2",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 2 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "3",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 3 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "4",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 4 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "5",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 5 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "6",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 6 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "7",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 7 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "8",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 8 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "9",
+      "exitCode": 0,
+      "output": "real initialization successful register sequence passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "10",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 10 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "11",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 11 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "12",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 12 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "startup",
+      "case": "13",
+      "exitCode": 0,
+      "output": "real initialization fault scenario 13 returned with drive inhibited",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen28",
+      "group": "startup",
+      "case": "11",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault blocked link initialization"
+    },
+    {
+      "source": "frozen28",
+      "group": "startup",
+      "case": "12",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault blocked link initialization"
+    },
+    {
+      "source": "frozen28",
+      "group": "startup",
+      "case": "13",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault blocked link initialization"
+    },
+    {
+      "source": "current",
+      "group": "delay",
+      "case": "us",
+      "exitCode": 0,
+      "output": "actual delay with frozen SysTick released motor and returned",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "delay",
+      "case": "ms",
+      "exitCode": 0,
+      "output": "actual delay with frozen SysTick released motor and returned",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "delay",
+      "case": "cycles",
+      "exitCode": 0,
+      "output": "actual SysTick snapshot phase/pending/wrap/IRQ preservation passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "delay",
+      "case": "adc-us",
+      "exitCode": 0,
+      "output": "actual delay with frozen SysTick released motor and returned",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "delay",
+      "case": "adc-ms",
+      "exitCode": 0,
+      "output": "actual delay with frozen SysTick released motor and returned",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen28",
+      "group": "delay",
+      "case": "adc-us",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault skipped protocol delay"
+    },
+    {
+      "source": "frozen28",
+      "group": "delay",
+      "case": "adc-ms",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault skipped protocol delay"
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "normal",
+      "exitCode": 0,
+      "output": "composed startup/reference/shutdown normal: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fault-home",
+      "exitCode": 0,
+      "output": "composed startup/reference/shutdown fault-home: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fault-idle",
+      "exitCode": 0,
+      "output": "composed startup/reference/shutdown fault-idle: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fail-init",
+      "exitCode": 0,
+      "output": "failed initialization remains unarmed: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fail-tail",
+      "exitCode": 0,
+      "output": "failed status preserves event/query tail: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fail-shutdown",
+      "exitCode": 0,
+      "output": "failed shutdown does not power down bus: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "restart-init",
+      "exitCode": 0,
+      "output": "new initializer gates status until final reply: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "stop-home",
+      "exitCode": 0,
+      "output": "composed startup/reference/shutdown stop-home: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "group": "session",
+      "case": "fault-moving-home",
+      "exitCode": 0,
+      "output": "composed startup/reference/shutdown fault-moving-home: passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen28",
+      "group": "session",
+      "case": "fail-init",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "failed final init armed handshake"
+    },
+    {
+      "source": "frozen28",
+      "group": "session",
+      "case": "fail-tail",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "unsent event tail consumed"
+    },
+    {
+      "source": "frozen28",
+      "group": "session",
+      "case": "fail-shutdown",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "failed shutdown falsely acknowledged"
+    },
+    {
+      "source": "frozen28",
+      "group": "session",
+      "case": "fault-idle",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "motion fault skipped shutdown VD wait"
+    },
+    {
+      "source": "frozen28",
+      "group": "session",
+      "case": "restart-init",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "new initializer retained old status handshake"
+    }
+  ],
+  "profileInput": {
+    "path": "firmware/candidates/2.8.0/contax-zeiss-50-f1-4.bin",
+    "imageSHA256": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834",
+    "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+    "profileBytesRead": 256,
+    "profileByteIdenticalToAF29": true,
+    "scope": "Session probes load only the final 256-byte profile, not candidate machine code"
+  },
+  "sourceSHA256": {
+    "firmware/ea9/hosttest/mmio/registers.h": "c84d1d020d041148e45d5aa85f8822388c0c26908ebcbf2028ae8bbad62947de",
+    "firmware/ea9/hosttest/mmio/test_delays.c": "c0a9753d6357b3cb106d1783c60c758a5fa24c38764a75555664a863c80a19f1",
+    "firmware/ea9/hosttest/mmio/test_link_faults.c": "b567595db81107a181d6fda587ce0693669cb88c5317109b696f906f6ecb59be",
+    "firmware/ea9/hosttest/mmio/test_startup.c": "f6aa432c62aa9a892a6afa2ef0f91eb5eb2f487b05192e437d704b4e2ef7d05e",
+    "firmware/ea9/hosttest/sam.h": "c6bd91802928b350f1c844ca2a3e2cc2c9ac1928405c23c4a3230ef2de61fb4d",
+    "firmware/ea9/hosttest/sam_servo.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "firmware/ea9/hosttest/shim.c": "57b7d545e8939194abba607f1d43c687ee2ffe98fc093808eec6154e5c583d0b",
+    "firmware/ea9/hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "firmware/ea9/hosttest/test_camera_link.c": "9861bcc34d6b728548911f23430f03bcfdaf9410a4cd695cb76a71e03e7a4317",
+    "firmware/ea9/src/abs_encoder.h": "ab00553ac0d6df9aaf8bf2e96eecee4a04b219313a8507de996e9c058e83de1c",
+    "firmware/ea9/src/af_completion.c": "8e8fd28feeb70515d85aabf07241d37502d96efca839d3ab6886e36cd4b292ae",
+    "firmware/ea9/src/af_completion.h": "249ec39f16c3a60e7d199b2cfcede8ec7ac1271cad4c8cf9830eba7bbabf6ae9",
+    "firmware/ea9/src/af_control.c": "7670aa7baa326b588e1ad4e3fba49c52618cd870b1c0cc41860b764936c4ee77",
+    "firmware/ea9/src/af_control.h": "6d20aa8c8fb89656c1ef7fa5ef2f51d113933625e2a3e8868f15cbe6b9c8f7b9",
+    "firmware/ea9/src/af_reference.c": "c082919c8281e1eadbf739b5d8d8244aba41c96b45d14ae0989b8eb63c110e18",
+    "firmware/ea9/src/af_reference.h": "56d9daa2715c269b80332dceac33b1b2f04a04552abdc697f1d9dd81c4c3cd8c",
+    "firmware/ea9/src/af_timing.h": "b542fffbfe85d209e2ffc36e02d20e827488973b0dc5bade4d2abea8309280a0",
+    "firmware/ea9/src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "firmware/ea9/src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "firmware/ea9/src/clock.c": "9ff6566850e57d442c4c59556020d95c786a90094fb6cf79efc87a6076665587",
+    "firmware/ea9/src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "firmware/ea9/src/config/recovered_config.h": "2ce55157c5777261b1565bda3a9c2cb0bb0d7c76391a64dde261cb6ea61a9c90",
+    "firmware/ea9/src/delay.c": "a9507a0a066c3497359787fc509d5475a94c835de1cf7c44651c90fccddd35d8",
+    "firmware/ea9/src/delay.h": "579fb0d795b92dc0b84c2639e7be3af660484b5cfb5b71e2c5db6211d3a5d1ca",
+    "firmware/ea9/src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "firmware/ea9/src/em_eic.c": "9c670541c81c190ae53c3c00c32a452a2befcf75fbfe62228d274362f73c5e86",
+    "firmware/ea9/src/em_eic.h": "0565076b6e7e16cd90ea6701f63fcd3a0a091fe53ad77511bf83c7c6f430630f",
+    "firmware/ea9/src/em_uart.c": "083c55d5da29b42fdc7e05ce96af21ad9ca84f7bd2229d64991dea9ec5c50dc1",
+    "firmware/ea9/src/em_uart.h": "6cc6dc40f916fe6ec68f7c6095bfea7804749f9043543c2260d1550290cbb501",
+    "firmware/ea9/src/emount.c": "dbd30bb3b2e867f33591bb749aa4d1f3edc00ec4cbd652c86b88e5a4f6391c68",
+    "firmware/ea9/src/emount.h": "c84aaff99222cdf4b9b8d2130a083217d909a77a5cd9fc7b485cd04c1e59fad7",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/factory_af.h": "97521656884bfe25862a636ebdb151733e7e824de10954c643c88e710b22024e",
+    "firmware/ea9/src/factory_servo.c": "760c6ede751484cc9f234716ca7af0a4839bf6abcfe7373a38656187b0d4e1b6",
+    "firmware/ea9/src/factory_servo.h": "e9500041dddf4b054fd550685045caad9459e862cceee0927c68287f74f4099a",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "firmware/ea9/src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/focus_map.h": "ea7bda264c0dd0b8cfab080349d48dec6aea10b448ead1abcf235a7a5646d7a4",
+    "firmware/ea9/src/focus_motion.c": "e3b210b77aa61698f3c2e6f3e055dac0508d94d230bc204387bc4e1b46b8c920",
+    "firmware/ea9/src/focus_motion.h": "ce40601bce58b8606d99aa8a3bb979769ab6c13b16c018d0b1e015c4550b3b1e",
+    "firmware/ea9/src/focus_pred.h": "3532aa164f557b5ebe8ec271367d2dac7718b4923b4bb752635d11e8e37256a7",
+    "firmware/ea9/src/io_guard.c": "dcd826c9274f934f608eec669f45fa2d5e052ae60a02f330555b1ad1a8e44ea4",
+    "firmware/ea9/src/io_guard.h": "b28158d77212ddc92945eebd9a114ce82deb638eda6d727818ced88d69d0a3df",
+    "firmware/ea9/src/lens_aperture.c": "776efa60e52eed74ababed95a0399f3b79baf9125deedc5cc7e8ecd9807428a4",
+    "firmware/ea9/src/lens_aperture.h": "b50f57e5022aa241d12aa46690b9bdd7309d7791a0cb5ccc69a88df70bbb25fd",
+    "firmware/ea9/src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "firmware/ea9/src/lens_profile.h": "ccffa5fccf288564cccb642148706f9d2388cd8bbdae0accccf1c18a19dcba8a",
+    "firmware/ea9/src/main.c": "b177522e57d4a0deccd32a3a2bb7cba4d9f2b8afcd7dba57c2b620fdcd181b8b",
+    "firmware/ea9/src/motor.c": "a8a6630aaa42274b5b5f8916d10924a278a8a1e475fa8304f49c9a679c7f5066",
+    "firmware/ea9/src/motor.h": "5abd2171da992dc055675734111686055f24f330afca726424e76178f2d50f2b",
+    "firmware/ea9/src/servo.h": "11bbde3959616cff91ee4efd356f0d831638af8e78e59e3739e601065ec50c36",
+    "firmware/ea9/src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "firmware/ea9/src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f",
+    "scripts/test-camera-link.py": "a7e0556a722a42e575c4ff3a08e8f4bc4401d9823e8119cec0666b1121bc3949"
+  },
+  "investigationRecordDateLocal": "2026-10-12",
+  "postRebootSymptomCauseProven": false,
+  "newScenarios": [
+    "stop-home",
+    "fault-moving-home"
+  ],
+  "newScenarioScope": "Actual parsed Stop or injected ADC fault after modeled startup movement; two later parsed Moves consumed without drive; uncommitted reference; normal shutdown echo/VD wait; host shims, not physical reboot or camera mode"
+}

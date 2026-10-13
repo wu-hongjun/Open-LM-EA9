@@ -7,6 +7,9 @@ a new initialization request. A fresh stock backup is saved; AF 2.8 stays held.
 See [the installation record](../../../docs/evidence/af-29-upload-2026-10-12.md).
 The owner reports focus achievement followed by an immediate capture-time
 freeze, requiring battery removal. See [the failure and protocol investigation](../../../docs/evidence/af-29-camera-failure-2026-10-12.md).
+The owner later reports reset movement on reboot followed by no focus movement;
+the actual focus mode and reference state remain unverified. Do not retry this
+image to obtain additional observations.
 
 | Property | Value |
 | --- | --- |

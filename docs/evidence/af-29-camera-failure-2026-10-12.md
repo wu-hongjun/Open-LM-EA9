@@ -2,14 +2,18 @@
 
 **Camera acceptance failed; further AF 2.9 trials are held.** The owner reports
 that focus is achieved, but trying to take a photograph immediately freezes the
-camera. Switching off did not recover it; battery removal was required. The
-adapter remains on the camera. These observations fail capture and shutdown
+camera. Switching off did not recover it; battery removal was required. At that
+report the adapter was still on the camera. These observations fail capture and shutdown
 acceptance regardless of the unreported focus/exposure settings.
+The owner subsequently reports reset movement on reboot followed by no focus
+movement. This adds a session-readiness observation; its actual focus mode and
+shutdown outcome are still unverified.
 
 ## Owner observations
 
 1. “it achieves focus but immediately freezes the camera when trying to take a photo.”
 2. “I had to remove the battery, it is still on the camera”
+3. “upon reboot, the motor resets to the initial position but refuse to move or focus”
 
 Focus achievement is an owner observation. The actual focus mode, focus-lock
 indicator, latency, hunting, saved image and sharpness are unverified; this is
@@ -23,7 +27,8 @@ The owner was instructed to stop, switch off and remove the battery if
 unresponsive, then not restart or retry. Battery removal was subsequently
 confirmed. Keep power removed while taking the adapter off the camera. No
 further camera attempt, USB operation, restoration or replacement upload was
-performed in this investigation.
+requested or performed by the agent in this investigation. The owner reported
+a subsequent reboot; do not repeat it to obtain missing settings or evidence.
 
 ## Preserved installation evidence
 
@@ -40,6 +45,44 @@ Release diagnostics do not write flash. Battery removal loses volatile runtime
 state, so a later cap backup cannot recover the failed bus exchange, UART error
 or interrupt timing. No live A7C II capture traffic is available. The observed
 focus response does not establish that the 2.8 fault cause is resolved.
+
+## Reboot movement and focus admission
+
+Moving back to an initial position does not establish a committed reference,
+valid encoder feedback or admission of subsequent focus commands. Actual MF,
+AF-S/AF-C, Pre-AF, preview state, whether the reset movement stopped by itself
+and shutdown on this reboot remain unknown. MF would itself explain no AF
+movement; the earlier capture freeze/battery-required recovery still fail
+acceptance independently.
+
+The source commits `g_homed` only after driving, settling and a final fault-free
+encoder read. A Stop during homing cancels the reference, clears handed-forward
+work and acknowledges Stop. The main loop then consumes its one homing attempt;
+later non-Stop commands are consumed without motion while the reference remains
+unknown. A latched sensor/motor fault also prevents subsequent drive. Neither
+condition is proven to have occurred on the owner's reboot; no runtime trace
+survived or was recovered.
+These guards are volatile runtime state. The report does not prove that a fault
+carried over from the earlier capture freeze or that flash was corrupted; the
+adapter's reset/power-cut sequence was not instrumented.
+
+Two new composed production tests complete synthetic initialization, begin
+modeled homing movement, then inject either a checksum-valid normal-class Stop
+or an ADC fault. They verify that two later parsed Move commands are consumed
+without drive, the reference remains uncommitted, and the healthy link can still
+acknowledge shutdown. They preserve motion guards rather than clearing a fault
+or inventing an origin. The normal startup control and prior link regressions
+also pass: **40 current cases and 15 expected frozen-2.8 defects**. See
+[the admission evidence](af-29-reboot-admission-2026-10-12.json) and
+[runner](../../scripts/test-camera-link.py).
+
+These tests use actual factory-backend main/reference/protocol routines with
+host sensor, mechanical, voltage and UART shims. The loaded 256-byte 50mm
+profile is pinned and byte-identical between 2.8 and 2.9. The entire MCU reset
+entry, real IRQ timing, optical autofocus, camera focus mode and physical
+homing are not modeled. This reproduces candidate policy paths that could
+produce the reported symptom, not the physical fault cause. No automatic
+rehoming, fault reset, forced reference or replacement firmware is introduced.
 
 ## Capture-time protocol investigation
 
@@ -95,6 +138,9 @@ transmit interlock. Cover requests arriving during status05, the inter-message
 gap and status06; distinguish final boot initialization from later 0x0a capture
 exchanges; preserve exact request snapshots, bounded timing and successful-send
 ownership. Require the same healthy link to service shutdown from every phase.
+Also make cancelled/failed reference state explicit in the startup/session
+design and its command responses; initial movement must not be treated as AF
+readiness. Preserve the prohibition on driving without a valid reference.
 Use original-instruction phase transitions as the baseline and add adversarial
 event-order fixtures before building another candidate. No gain, aperture/EV
 correction, motor-fault reset or unbounded retry is justified by this report.

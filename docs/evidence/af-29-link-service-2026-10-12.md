@@ -11,6 +11,13 @@ succeeded and passed strict two-pass reconnect verification plus a separate
 offline audit. Subsequent **camera acceptance failed**: the owner reports focus
 achievement followed by capture-time freeze requiring battery removal. Further
 2.9 trials are held; see [the failure and finite protocol investigation](af-29-camera-failure-2026-10-12.md).
+The owner subsequently reports startup/reset movement but no later focus
+movement. Two additional composed admission fixtures cover homing interrupted
+after movement by Stop or ADC fault, parsed subsequent Moves and shutdown.
+[The follow-up suite](af-29-reboot-admission-2026-10-12.json) passes 40 current
+cases with the same 15 frozen controls; production firmware is unchanged and
+the physical cause remains unproven. The implementation evidence below retains
+its original 38-case scope.
 
 ## Demonstrated defects and changes
 

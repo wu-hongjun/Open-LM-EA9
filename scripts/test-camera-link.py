@@ -52,7 +52,7 @@ cases = {
     'uart': ['encoder', 'adc', 'pwm', 'combined', 'mid-adc', 'uart', 'clock', 'timebase', 'eic', 'stall', 'frozen', 'healthy'],
     'startup': [str(i) for i in range(14)],
     'delay': ['us', 'ms', 'cycles', 'adc-us', 'adc-ms'],
-    'session': ['normal', 'fault-home', 'fault-idle', 'fail-init', 'fail-tail', 'fail-shutdown', 'restart-init'],
+    'session': ['normal', 'fault-home', 'fault-idle', 'fail-init', 'fail-tail', 'fail-shutdown', 'restart-init', 'stop-home', 'fault-moving-home'],
 }
 negative = {
     'uart': {case: 'motion fault suppressed healthy UART' for case in ['encoder', 'adc', 'pwm', 'combined', 'mid-adc']},
@@ -61,6 +61,12 @@ negative = {
     'session': {'fail-init': 'failed final init armed handshake', 'fail-tail': 'unsent event tail consumed', 'fail-shutdown': 'failed shutdown falsely acknowledged', 'fault-idle': 'motion fault skipped shutdown VD wait', 'restart-init': 'new initializer retained old status handshake'},
 }
 results = []
+profile_input = ROOT / 'firmware/candidates/2.8.0/contax-zeiss-50-f1-4.bin'
+profile_image = profile_input.read_bytes()
+assert hashlib.sha256(profile_image).hexdigest() == '81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834'
+profile_digest = hashlib.sha256(profile_image[-256:]).hexdigest()
+assert profile_digest == '5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340'
+assert (ROOT / 'firmware/candidates/2.9.0/contax-zeiss-50-f1-4.bin').read_bytes()[-256:] == profile_image[-256:]
 for group, (extra, sources) in groups.items():
     for label, directory in [('current', base), ('frozen28', frozen)]:
         exe = out / (group + '-' + label)
@@ -68,7 +74,7 @@ for group, (extra, sources) in groups.items():
         selected = cases[group] if label == 'current' else negative[group]
         for case in selected:
             args = [str(exe), case]
-            if group == 'session': args.append(str(ROOT / 'firmware/candidates/2.8.0/contax-zeiss-50-f1-4.bin'))
+            if group == 'session': args.append(str(profile_input))
             run = subprocess.run(args, capture_output=True, text=True)
             expected = 0 if label == 'current' else 1
             if run.returncode != expected or (expected and negative[group][case] not in run.stderr):
@@ -85,6 +91,11 @@ evidence = {
     'frozenShimInstrumentation': 'Host transmit boundary discards a chosen frame; host VD reads counted. Original production source and headers remain exact',
     'passingCurrentCases': sum(r['source'] == 'current' for r in results),
     'detectedFrozenCases': sum(r['source'] == 'frozen28' for r in results), 'cases': results,
+    'profileInput': {'path': str(profile_input.relative_to(ROOT)),
+                     'imageSHA256': hashlib.sha256(profile_image).hexdigest(),
+                     'profileSHA256': profile_digest, 'profileBytesRead': 256,
+                     'profileByteIdenticalToAF29': True,
+                     'scope': 'Session probes load only the final 256-byte profile, not candidate machine code'},
     'sourceSHA256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(inputs)},
 }
 (out / 'results.json').write_text(json.dumps(evidence, indent=2) + '\n')

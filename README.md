@@ -19,6 +19,11 @@ reconnect**, including a separate offline audit. A fresh two-pass stock backup
 was saved before upload. **Camera acceptance failed:** the owner reports focus
 achievement followed by immediate freeze when trying to take a photo, requiring
 battery removal. Further AF 2.9 trials are held.
+After reboot the owner reports initial-position movement followed by no focus
+movement; the actual focus mode/reference state remain unverified. Two new
+composed tests cover cancelled/failed reference admission without clearing
+motion guards; the follow-up suite passes 40 current cases and detects the same
+15 frozen-2.8 defects. No replacement image is prepared by this investigation.
 [Failure and capture-time protocol investigation](docs/evidence/af-29-camera-failure-2026-10-12.md).
 [Installation record](docs/evidence/af-29-upload-2026-10-12.md).
 It keeps healthy camera communication/timing serviceable
