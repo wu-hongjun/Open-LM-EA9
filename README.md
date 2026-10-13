@@ -10,34 +10,35 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.12.0, build 15) refreshes
+upload/read-back path for lens metadata. The current app (0.13.0, build 16) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The **AF 2.9 candidate is uploaded and strictly byte-verified after physical
-reconnect**, including a separate offline audit. A fresh two-pass stock backup
-was saved before upload. **Camera acceptance failed:** the owner reports focus
-achievement followed by immediate freeze when trying to take a photo, requiring
-battery removal. Further AF 2.9 trials are held.
-After reboot the owner reports initial-position movement followed by no focus
-movement; shutdown worked on that reboot. The actual focus mode/reference state
-remain unverified, and the earlier capture/shutdown failure is preserved. Two new
-composed tests cover cancelled/failed reference admission without clearing
-motion guards; the follow-up suite passes 40 current cases and detects the same
-15 frozen-2.8 defects. No replacement image is prepared by this investigation.
-[Failure and capture-time protocol investigation](docs/evidence/af-29-camera-failure-2026-10-12.md).
-[Installation record](docs/evidence/af-29-upload-2026-10-12.md).
-It keeps healthy camera communication/timing serviceable
-through sticky motion faults, advances handshake/shutdown/event state only after
-successful sends, and resets status admission on a new initializer.
-38 targeted cases pass and 15 intended defects are detected in frozen 2.8;
-51 Swift tests, the full firmware suite and retained original-instruction
-comparisons pass. The 50mm candidate and signed app/CLI are prepared.
-[Implementation, validation and limits](docs/evidence/af-29-link-service-2026-10-12.md).
-The owner's hardware failure is not proven resolved and factory parity remains
-unqualified. The new candidate has 276 bytes of flash margin.
+The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is prepared offline**,
+with factory-derived capture interlocks/raw opener echo, priority shutdown
+without new motion, and nonblocking bounded reference acquisition. Cancelled
+homing needs a fresh motion command to retry, within a two-attempt per-boot
+budget; faults remain sticky. No USB report, upload or camera test occurred.
+[Implementation, factory evidence and limits](docs/evidence/af-30-candidate-2026-10-13.md).
+[Candidate and exact pins](firmware/candidates/3.0.0/README.md).
+25 new arbitration/readiness cases and 40 retained link cases pass; exact frozen
+controls detect 8 AF 2.9 and 15 AF 2.8 defects. All 51 Swift tests, the full
+firmware suite and retained original-instruction comparisons pass. The signed
+app/CLI produce the same personalized image as Python. It has 392 bytes of
+flash margin, 2,380 bytes static RAM and 8 KiB reserved stack, with high-water
+and physical timing unmeasured. Older images and original recovery stay exact.
 
-The new **AF 2.8 candidate is uploaded and strictly byte-verified after physical
+The last verified hardware image is **AF 2.9; camera acceptance failed and
+further trials are held**. The owner reports focus followed by capture freeze
+requiring battery removal, then reset movement with no later focus movement;
+shutdown worked on the latter reboot. The actual focus mode/reference state
+remain unknown. Software fixes do not prove the physical cause or factory
+parity. Flash AF 3.0 only in a separately coordinated session, verify after
+physical reconnect, then qualify preview/exposure/shutdown before AF-S.
+[AF 2.9 failure record](docs/evidence/af-29-camera-failure-2026-10-12.md).
+[AF 2.9 installation](docs/evidence/af-29-upload-2026-10-12.md).
+
+The historical **AF 2.8 candidate is uploaded and strictly byte-verified after physical
 reconnect**, but **camera acceptance failed**: the owner reports frozen preview,
 poor focus response, darker exposure and a later shutdown hang requiring battery
 removal. Further 2.8 trials are suspended. **Original stock 1.8 was subsequently restored
@@ -101,13 +102,15 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant observed-af
+python3 scripts/build-firmware.py --variant arbitrated-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [AF 3.0 capture/shutdown arbitration and homing readiness](docs/evidence/af-30-candidate-2026-10-13.md)
+- [Prepared 50mm f/1.4 AF 3.0 candidate](firmware/candidates/3.0.0/README.md)
 - [AF 2.8 post-completion motion design and validation](docs/evidence/af-28-motion-telemetry-2026-10-12.md)
 - [Prepared 50mm f/1.4 AF 2.8 candidate](firmware/candidates/2.8.0/README.md)
 - [Independent AF 2.8 telemetry evidence and integration review](docs/audits/af28-motion-telemetry-review-2026-10-12.md)

@@ -22,7 +22,7 @@ static void final_read_drift(void) {
 }
 void em_uart_disable(void) {}
 void vdd_init(void) {}
-uint16_t vdd_read_mv(void) { return 3150; }
+uint16_t vdd_read_mv(void) { if (scenario == 1) ea9_io_trip(EA9_IO_ADC); return 3150; }
 void vdd_read_burst(uint16_t *lo, uint16_t *hi, uint16_t ms) {
     (void)ms; *lo = *hi = 3150;
     if (scenario == 1) ea9_io_trip(EA9_IO_ADC);

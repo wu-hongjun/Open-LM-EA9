@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.11.0, build 14
+# Device workflow: prototype 0.13.0, build 16
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -6,6 +6,10 @@ Actual aperture is **Unknown**; the displayed fixed f-number is camera metadata.
 Use the lens ring to stop down. The library editor lets you override the fixed
 camera f-number while retaining the unknown physical setting.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
+
+AF 3.0 is prepared offline, with upload and camera qualification pending.
+AF 2.9 is explicitly held after capture/shutdown failure. See
+[the current milestone](evidence/af-30-candidate-2026-10-13.md).
 
 ## Change a lens
 
@@ -22,8 +26,8 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 2.8 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` selects 2.8; plain `apply` selects metadata-only 2.0.
+new AF 3.0 is a separate **USB tools → Experimental autofocus** action.
+The CLI `apply-af` selects 3.0; plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading
 unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,
@@ -66,8 +70,8 @@ reconnect guard even though discovery itself is automatic.
 
 The main view uses the existing sourced photos, compact adapter/firmware card,
 verified lens photo and a visible dropdown/apply row. No new remote images or
-runtime network requests were added. The release was built and inspected with
-the connected adapter. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;
+runtime network requests were added. The earlier visual release was built and inspected with
+the connected adapter; 0.13 packaging and tests were offline. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;
 the 85mm dropdown selection was exercised and restored to 50mm without an upload.
 See [the test and hardware-boundary evidence](evidence/af-reconciliation-2026-10-10.md).
 

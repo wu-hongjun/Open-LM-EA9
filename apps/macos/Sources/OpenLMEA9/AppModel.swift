@@ -342,7 +342,8 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var firmwareBehaviorNote: String {
         switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.9.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "3.0.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
+        case "2.9.0": return "AF 2.9 is held after capture freeze and shutdown failure. Use a separately verified replacement before camera testing."
         case "2.8.0": return "AF 2.8 is held after preview and shutdown failures. Restore stock or use a separately reviewed replacement."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
         default: return "Installed firmware and motor behavior have not been verified for this connection."
@@ -362,7 +363,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canApplyLens, let variant = variantForLensChanges else { return }
         applyLens(variant: variant, preservingFirmware: true)
     }
-    func installAutofocus() { applyLens(variant: .autofocusServicedCamera) }
+    func installAutofocus() { applyLens(variant: .autofocusArbitratedCamera) }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }

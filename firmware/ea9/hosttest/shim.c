@@ -238,3 +238,4 @@ void host_body_frame(const uint8_t *frame, uint16_t len)
 
 void host_frame_sync(void) { host_reset_cs(); if (vd_cb) vd_cb(); }
 void host_set_cs_pin(int level) { host_cs_pin = level; }
+int em_receive_busy(void) { return host_cs_pin; }

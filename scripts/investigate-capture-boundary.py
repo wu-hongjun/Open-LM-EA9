@@ -55,14 +55,60 @@ candidate = ROOT / 'firmware/candidates/2.9.0/contax-zeiss-50-f1-4.bin'
 image = candidate.read_bytes()
 assert hashlib.sha256(image).hexdigest() == 'c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3'
 
+echo_cases = []
+for length in [9, 11, 25, 64]:
+    for sequence in [0, 0x71, 0xff]:
+        frame = bytearray(length); frame[:6] = bytes([0xf0,length,0,2,sequence,0x0a])
+        for i in range(6,length-3): frame[i] = i & 255
+        frame[-3:-1] = sum(frame[1:-3]).to_bytes(2,'little');frame[-1] = 0x55
+        machine = Machine({0x51c8:0,0x9180:0})
+        machine.u.mem_write(0x20000694,bytes(frame));machine.set(0x20000695,length,1)
+        machine.run(0x5260)
+        actual = bytes(machine.u.mem_read(0x20000694,length))
+        assert actual == frame
+        echo_cases.append({'length':length,'sequence':sequence,'completeRawEchoExact':True})
+
+# Original connected-mode capture opening: valid complete request, seeded
+# mode 4 / gate open / phase 6, then actual CS edges, VD and deferred callbacks.
+actions=[]
+def schedule(mm):
+    args=mm.calls[-1]['args'];actions.append({'delay':args[0],'callback':hex(args[1])});return 0
+m=Machine({0x91c4:0,0x91ac:0,0x51c8:0,0x9180:0,0x609c:schedule})
+m.u.mem_map(0x41004000,0x1000);m.u.mem_map(0x60000000,0x1000)
+m.u.mem_write(0x20000000,bytes(2048))
+frame=bytearray([0xf0,25,0,2,0x71,0x0a]+list(range(6,22))+[0,0,0x55])
+frame[-3:-1]=sum(frame[1:-3]).to_bytes(2,'little');m.u.mem_write(0x20000694,bytes(frame))
+for off,v in [(0x522,1),(0x51f,4),(0x520,6),(0x51c,1)]:m.set(0x20000000+off,v,1)
+m.set(0x20000660,0x20000000);m.set(0x20000678,0x200001a8)
+m.set(0x41004420,4);m.run(0x53a4,4)
+m.set(0x41004420,0);m.run(0x53a4,0)
+assert m.get(0x2000051e,1)==1
+m.run(0x5120);assert m.get(0x2000051f,1)==5
+m.run(0x5260);assert bytes(m.u.mem_read(0x20000694,25))==frame
+m.run(0x5188);m.run(0x5280)
+assert m.get(0x2000051f,1)==1
+assert actions==[{'delay':10,'callback':'0x5261'},{'delay':100,'callback':'0x5281'}]
+capture_transition={'seededMode':4,'seededPhase':6,'gateOpenSeeded':True,'incomingID':'0x0a',
+                    'csEdgesSetInterlock':True,'vdSelectsMode5':True,'completeRawEchoExact':True,
+                    'scheduledCallbacks':actions,'txReleaseReturnsToInitMode1':True,
+                    'contract':'Original CS/VD/echo/release instructions; synthetic complete frame and seeded connected state. Lower RX/UART/timer operations cut, callbacks explicitly invoked. Not full boot, physical timing or camera traffic.'}
+
+
 custom = {}
-for label in ['current', 'host-only-window-guard']:
+frozen = json.loads((ROOT / 'firmware/candidates/2.9.0/regression-inputs.json').read_text())
+for label in ['current', 'frozen29', 'host-only-window-guard']:
     directory = out / label / 'sources'
     extra = []
-    for path in set(base.rglob('*.h')) | {base / s for s in sources} | {base / 'src/emount.c'}:
+    for path in set(base.rglob('*.h')) | {base / s for s in sources} | {base / 'src/emount.c', base / 'src/em_arbitration.c'}:
         destination = directory / path.relative_to(base)
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes(path.read_bytes())
+        data = path.read_bytes()
+        if label != 'current' and path != base / 'hosttest/test_capture_boundary.c':
+            name = str(path.relative_to(ROOT))
+            if name not in frozen['files']: continue
+            data = subprocess.run(['git','show',frozen['sourceGitCommit']+':'+name],cwd=ROOT,capture_output=True,check=True).stdout
+            assert hashlib.sha256(data).hexdigest() == frozen['files'][name]
+        destination.write_bytes(data)
     # Event injection at the host delay boundary only; production delays and
     # responder are unchanged. Both baseline/control use identical injection.
     shim = directory / 'hosttest/shim.c'
@@ -71,7 +117,7 @@ for label in ['current', 'host-only-window-guard']:
     assert text.count(before) == 1
     shim.write_text(text.replace(before,
         'void host_probe_delay_us(uint32_t us);\nvoid delay_us(uint32_t us) { host_probe_delay_us(us); }'))
-    if label != 'current':
+    if label == 'host-only-window-guard':
         emount = directory / 'src/emount.c'
         text = emount.read_text()
         before = 'void em_pump_status(void)\n{'
@@ -80,25 +126,31 @@ for label in ['current', 'host-only-window-guard']:
         emount.write_text(text)
         extra = ['-DEA9_PROBE_WINDOW_GUARD']
     exe = out / (label + '-probe')
-    subprocess.run(flags + extra + sources + ['-o', str(exe)], cwd=directory, check=True)
+    subprocess.run(flags + extra + (['-DEA9_ARBITRATED', 'src/em_arbitration.c'] if label == 'current' else []) + sources + ['-o', str(exe)], cwd=directory, check=True)
     result = subprocess.run([str(exe), str(candidate)], capture_output=True, text=True, check=True)
     custom[label] = json.loads(result.stdout)
 
-assert custom['current']['statusFramesWhileReceiveWindowOpen'] == 2
+assert custom['current']['statusFramesWhileReceiveWindowOpen'] == 0
+assert custom['frozen29']['statusFramesWhileReceiveWindowOpen'] == 2
 assert custom['host-only-window-guard']['statusFramesWhileReceiveWindowOpen'] == 0
-assert all(case['status06FramesAfterReceiveOpensInGap'] == 1 for case in custom.values())
-inputs = {base / s for s in sources} | set(base.rglob('*.h')) | {base / 'src/emount.c', Path(__file__).resolve()}
+assert custom['current']['status06FramesAfterReceiveOpensInGap'] == 0
+assert custom['frozen29']['status06FramesAfterReceiveOpensInGap'] == 1
+assert custom['host-only-window-guard']['status06FramesAfterReceiveOpensInGap'] == 1
+inputs = {base / s for s in sources} | set(base.rglob('*.h')) | {base / 'src/emount.c', base / 'src/em_arbitration.c', Path(__file__).resolve()}
 inputs |= {ROOT / name for name in ['research/stock-1.8/config.py', 'research/stock-1.8/oracle.py', 'research/stock-1.8/requirements.txt']}
 evidence = {
-    'dateLocal': '2026-10-12', 'timezone': 'America/New_York',
-    'status': 'finite-protocol-scheduling-difference-reproduced-hardware-cause-unproven',
+    'investigationRecordDateLocal': '2026-10-13', 'timezone': 'America/New_York',
+    'status': 'corrected-capture-interlock-matches-finite-original-boundaries-camera-unqualified',
     'sourceApplicationSHA256': FIRMWARE_SHA256,
-    'candidateImageSHA256': hashlib.sha256(image).hexdigest(),
+    'profileInputImageSHA256': hashlib.sha256(image).hexdigest(),
+    'profileBytesRead': 256,
     'factoryOriginalInstructionCases': factory,
+    'factoryCaptureOpenerEchoCases': echo_cases,
+    'factoryCaptureTransition': capture_transition,
     'customResponderCases': custom,
-    'hardwareReportsSent': 0, 'productionFirmwareChanged': False,
+    'hardwareReportsSent': 0, 'productionFirmwareChanged': True,
     'cameraQualified': False, 'ownerFreezeCauseProven': False,
-    'probeExitCodes': {'current': 0, 'host-only-window-guard': 0},
+    'probeExitCodes': {'current': 0, 'frozen29': 0, 'host-only-window-guard': 0},
     'hostTestSanitizers': ['address', 'undefined'],
     'unicornVersion': unicorn.__version__,
     'nativeCompiler': subprocess.run(['clang', '--version'], capture_output=True, text=True, check=True).stdout.splitlines()[0],

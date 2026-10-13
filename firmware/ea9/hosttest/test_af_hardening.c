@@ -220,7 +220,7 @@ int main(int argc, char **argv)
         em_vd_edges = 3; focus_report_at(108);
         assert(ea9_data[EA9_OFF_06 + 0x2B] == 0 && ea9_data[EA9_OFF_06 + 0x2C] == 2);
     } else if (scenario == 16) {
-        uint8_t frame[32] = {0xF0, 0, 0, 2, 0, EM_ID_SHUTDOWN};
+        uint8_t frame[65] = {0xF0, 0, 0, 2, 0, EM_ID_SHUTDOWN};
         seal(frame, sizeof frame); em_set_park_handler(count_park);
         int before = sent_n; host_body_frame(frame, sizeof frame); em_poll();
         assert(!injected && sent_n == before && !em_shutdown_acked);

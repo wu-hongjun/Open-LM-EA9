@@ -15,6 +15,11 @@
 
 static void (*g_cs_edge)(int level);
 static void (*g_vd_edge)(void);
+int em_receive_busy(void)
+{
+    return em_pin_level(EM_PIN_BODY_CS) ||
+           (EIC->INTFLAG.reg & (1u << EM_EXTINT_BODY_CS));
+}
 
 int em_pin_level(uint8_t pin)
 {

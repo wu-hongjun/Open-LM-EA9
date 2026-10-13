@@ -27,20 +27,24 @@ assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
 Offline build and checks:
 
 ```sh
-python3 scripts/build-firmware.py --variant observed-af
+python3 scripts/build-firmware.py --variant arbitrated-af
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ```
 
-Current source builds **AF 2.8** under `ea9/build/observed`, with camera BCD 0x28
-and loader 2.8.0. It uses a pure measured-motion observer through completion,
-coast and reversal, invalidates stale history, and copies the same measured
-position to both fields on the factory backend as REA recovers. The controller,
-wrapper, drivers, aperture and completion law are unchanged from 2.7.
-It retains 400 bytes of flash headroom and uses 2,200 bytes static RAM. See
-[the candidate](candidates/2.8.0/README.md) and
-[implementation, original-instruction evidence and limits](../docs/evidence/af-28-motion-telemetry-2026-10-12.md).
-No hardware operation occurred; camera/noise/settling qualification remains open.
+Current source builds **AF 3.0** under `ea9/build/arbitrated`, with camera BCD
+0x30 and loader 3.0.0. `em_arbitration` separates capture/RX/TX/session/shutdown
+ownership; `af_readiness` admits bounded nonblocking homing. Factory-derived
+capture opener echo and shutdown ordering are tested against original instructions.
+The preceding controller/completion/aperture/observer policies are retained.
+The candidate has 392 bytes flash margin, 2,380 bytes static RAM and 8,192 bytes
+reserved stack. It was prepared offline; no upload or camera test occurred.
+AF 2.9 remains held after capture freeze and battery-required recovery.
+See [the 3.0 candidate](candidates/3.0.0/README.md) and
+[implementation, evidence and limits](../docs/evidence/af-30-candidate-2026-10-13.md).
+Factory phase scheduling, saved-origin policy, physical timing and camera
+qualification remain incomplete.
+
 The following 2.4 observations are historical. It uses a modular factory-derived controller, tested directly
 against the original instructions. Its authorized upload and strict byte verification passed after physical
 reconnect, including an independent audit. **Its owner focus attempt failed**:
@@ -52,11 +56,13 @@ matched AF-S baseline remain pending. See [the failure and controller counterexa
 [completed recovery record](../docs/evidence/stock-18-af24-recovery-2026-10-11.md)
 and [historical USB record](../docs/evidence/af-24-upload-2026-10-11.md). See the [algorithm and explicit differences](../docs/reverse-engineering/factory-af-baseline.md)
 and [validation record](../docs/evidence/factory-af-baseline-2026-10-11.md).
-Templates/pins for 2.0–2.7 remain frozen; those build-script variants verify
+Templates/pins for 2.0–2.9 remain frozen; their build-script variants verify
 committed size/digest instead of compiling changed source under old versions.
-All nine custom versions remain admitted for backed-up upload, reconnect
-verification and stock restoration. The 2.2–2.8 profile row is `0x9f00` and
-application writes stop at `0xa000`.
+Pinned custom versions remain admitted for backed-up upload, strict reconnect
+verification and stock restoration. AF 2.2–2.9 and 3.0 profiles are at `0x9f00`,
+with application writes stopping at `0xa000`. Python preparation defaults to
+3.0; use `--variant serviced-af` for the frozen 2.9 template, or another explicit
+historical variant. Current native `prepare-af` selects 3.0.
 See the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and
 [offline build/test record](../docs/evidence/software-polish-2026-10-11.md).
 

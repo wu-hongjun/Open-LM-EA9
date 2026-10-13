@@ -11,6 +11,7 @@ extern void host_frame_sync(void), host_set_cs_pin(int);
 extern uint8_t sent[][256];
 extern uint16_t sent_len[];
 extern int sent_n, sent_overflow;
+void motor_inhibit(void) {}
 void motor_emergency_release(void) {} /* No actuator is linked to this probe. */
 static uint8_t inject_cs_in_gap;
 void host_probe_delay_us(uint32_t us)
@@ -31,6 +32,9 @@ static void request(uint8_t id, uint8_t sequence, uint16_t operand)
     frame[8] = (uint8_t)sum;
     frame[9] = (uint8_t)(sum >> 8);
     host_body_frame(frame, sizeof frame);
+#ifdef EA9_ARBITRATED
+    host_frame_sync(); /* Factory capture opener is admitted on a later VD. */
+#endif
     em_poll();
 }
 
@@ -56,7 +60,7 @@ int main(int argc, char **argv)
     int before = sent_n;
     em_poll();
     int during_open = sent_n - before;
-#ifdef EA9_PROBE_WINDOW_GUARD
+#if defined(EA9_PROBE_WINDOW_GUARD) || defined(EA9_ARBITRATED)
     assert(during_open == 0); /* Deliberate host-only guard mutation. */
 #else
     assert(during_open == 2 && sent[before][5] == 5 && sent[before + 1][5] == 6);
@@ -76,7 +80,12 @@ int main(int argc, char **argv)
     before = sent_n;
     em_poll();
     assert(!inject_cs_in_gap && em_pin_level(EM_PIN_BODY_CS));
+#ifdef EA9_ARBITRATED
+    assert(sent_n == before + 1 && sent[before][5] == 5);
+#else
     assert(sent_n == before + 2 && sent[before][5] == 5 && sent[before + 1][5] == 6);
+#endif
+    int gap_status06 = sent_n - before - 1;
     host_set_cs_pin(0);
     on_cs_edge(0);
 
@@ -106,8 +115,8 @@ int main(int argc, char **argv)
         assert(frame[length - 1] == 0x55);
     }
     printf("{\"statusFramesWhileReceiveWindowOpen\":%d,\"statusFramesAfterWindowClose\":2,"
-           "\"status06FramesAfterReceiveOpensInGap\":1,"
+           "\"status06FramesAfterReceiveOpensInGap\":%d,"
            "\"syntheticCaptureReplies\":%u,\"allSentFramesChecksumValid\":true}\n",
-           during_open, replies);
+           during_open, gap_status06, replies);
     return 0;
 }

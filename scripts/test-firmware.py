@@ -48,6 +48,9 @@ tests['focus_motion'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=
                          'hosttest/test_focus_motion.c', 'src/focus_motion.c']
 tests['motion_telemetry'] = [part if part != 'hosttest/test_af_lifecycle.c'
                            else 'hosttest/test_motion_telemetry.c' for part in tests['factory_lifecycle']]
+for files in tests.values():
+    if "src/emount.c" in files or "src/lens_aperture.c" in files:
+        files.append("src/em_arbitration.c")
 for name, files in tests.items():
     binary = OUT / f"test_{name}"
     subprocess.run(COMMON + files + ["-o", str(binary)], cwd=BASE, check=True)
@@ -84,7 +87,7 @@ for case in range(14):
 inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
 cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
 if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x29u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
+    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x30u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
                    + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
 # This isolated generated library is never the owner's normal app state.
 # Materialize it offline, then select 50mm for the zoom fixture as well.

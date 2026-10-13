@@ -52,6 +52,11 @@ python3 scripts/prepare-af.py /new/profile.bin /new/python.bin
 cmp /new/native.bin /new/python.bin
 ```
 
+The commands above describe app 0.12 at this historical milestone. Current
+native `prepare-af` selects AF 3.0; use that historical source revision for the
+old native preparation, or Python `--variant serviced-af` to select the exact
+frozen 2.9 template.
+
 Output parents must exist; evidence directories/files must be new. Full Git
 history containing `1043bad` is required for frozen controls. Use the repository's
 pinned Unicorn dependency. Upload and camera testing are separately coordinated.

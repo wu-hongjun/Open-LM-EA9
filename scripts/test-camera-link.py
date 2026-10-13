@@ -70,7 +70,7 @@ assert (ROOT / 'firmware/candidates/2.9.0/contax-zeiss-50-f1-4.bin').read_bytes(
 for group, (extra, sources) in groups.items():
     for label, directory in [('current', base), ('frozen28', frozen)]:
         exe = out / (group + '-' + label)
-        subprocess.run(flags + extra + (['-DEA9_FROZEN28'] if label == 'frozen28' else []) + sources + ['-o', str(exe)], cwd=directory, check=True)
+        subprocess.run(flags + extra + (["src/em_arbitration.c"] if label == "current" and group == "session" else []) + (['-DEA9_FROZEN28'] if label == 'frozen28' else []) + sources + ['-o', str(exe)], cwd=directory, check=True)
         selected = cases[group] if label == 'current' else negative[group]
         for case in selected:
             args = [str(exe), case]
@@ -82,6 +82,7 @@ for group, (extra, sources) in groups.items():
             results.append({'source': label, 'group': group, 'case': case, 'exitCode': run.returncode,
                             'output': run.stdout.strip(), 'diagnostic': run.stderr.strip()})
 inputs = set(base / s for _, sources in groups.values() for s in sources)
+inputs.add(base / 'src/em_arbitration.c')
 inputs.add(base / 'src/main.c')  # Included by the composed session translation unit.
 inputs.update(base.rglob('*.h'))
 inputs.add(Path(__file__).resolve())

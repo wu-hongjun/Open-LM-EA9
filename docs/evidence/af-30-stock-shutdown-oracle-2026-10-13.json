@@ -1,0 +1,1098 @@
+{
+  "sourceApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "entry": "0x5e00",
+  "cases": [
+    {
+      "sample": 0,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 0,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 0,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 0,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4095,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4095,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4095,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4095,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4096,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4096,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4096,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 4096,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 5000,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 5000,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 5000,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 5000,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 16383,
+      "sequence": 0,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000200160000230055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 16383,
+      "sequence": 1,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000201160000240055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 16383,
+      "sequence": 113,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000940055"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 16383,
+      "sequence": 255,
+      "incomingChecksumValid": true,
+      "bypassesReceiverValidation": false,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b0002ff160000220155"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    },
+    {
+      "sample": 0,
+      "sequence": 113,
+      "incomingChecksumValid": false,
+      "bypassesReceiverValidation": true,
+      "actions": [
+        {
+          "kind": "transmit",
+          "frame": "f00b000271160000a5a555"
+        },
+        {
+          "kind": "delay",
+          "argument": 50
+        },
+        {
+          "kind": "uart-disable",
+          "argument": 536873112
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "delay",
+          "argument": 1
+        },
+        {
+          "kind": "pa23-high",
+          "argument": 8388608
+        },
+        {
+          "kind": "delay",
+          "argument": 100
+        },
+        {
+          "kind": "sleep-setup",
+          "argument": 2
+        },
+        {
+          "kind": "wfi-simulated-wake"
+        }
+      ]
+    }
+  ],
+  "passingCases": 25,
+  "validEchoCases": 24,
+  "directStateBadChecksumEchoCases": 1,
+  "hardwareReportsSent": 0,
+  "checksumFinding": "Shutdown echoes the retained request without repairing its checksum at this direct-state boundary. The bad-checksum fixture bypasses RX and is not a legal camera request.",
+  "contract": "Seeded shutdown phase 2; PA3 low; lower UART/timing/GPIO boundaries stubbed, dummy register memory and WFI wake supplied. Not reachability or physical timing.",
+  "scriptSHA256": "aa289348ff16552c5e4907928c238f240b8255bc989f5492db5f2cb8657dc781",
+  "supportSHA256": {
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/requirements.txt": "56bce36af734e3b9aeff2be4301bbc2a2c2b58ea1ea1e6ee6e792db84f96fbd4"
+  },
+  "transmitCut": "0x51c8 final sender stub; retained request buffer observed at that boundary",
+  "dummyRegisterPages": [
+    "0x41004000",
+    "0x60000000"
+  ]
+}

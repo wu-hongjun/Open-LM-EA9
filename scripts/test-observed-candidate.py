@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline AF 2.8 regressions, opaque stock-query oracle and frozen 2.5 control."""
+"""Offline AF 3.0 retained regressions, opaque stock-query oracle and frozen 2.5 control."""
 import argparse
 import hashlib
 import json
@@ -19,7 +19,7 @@ transport = ['hosttest/shim.c', 'src/emount.c', 'src/emount_packets.c',
              'src/lens_profile.c', 'src/lens_aperture.c']
 probe = ROOT / 'firmware/tests/test_stock_query.c'
 program = out / 'query28'
-subprocess.run(flags + ['-Ihosttest', '-Isrc', str(probe), *transport, '-o', str(program)],
+subprocess.run(flags + ['-Ihosttest', '-Isrc', str(probe), *transport, "src/em_arbitration.c", '-o', str(program)],
                cwd=base, check=True)
 coverage = subprocess.run([str(program)], capture_output=True, text=True, check=True).stdout.strip()
 
@@ -114,7 +114,7 @@ boundary_cases = ['stop-fifo', 'stop-pending', 'stop-coalesce', 'stop-reordered'
 boundary_results = []
 for label, source_base in [('current', base), ('frozen26', snapshot26 / 'firmware/ea9')]:
     exe = out / ('boundary-' + label)
-    subprocess.run(boundary_flags + boundary_sources + (['src/focus_motion.c'] if label == 'current' else []) + ['-o', str(exe)], cwd=source_base, check=True)
+    subprocess.run(boundary_flags + boundary_sources + (['src/focus_motion.c', 'src/em_arbitration.c'] if label == 'current' else []) + ['-o', str(exe)], cwd=source_base, check=True)
     for case in (boundary_cases if label == 'current' else ['stop-fifo', 'repeat']):
         got = subprocess.run([str(exe), case], capture_output=True, text=True)
         expected = 0 if label == 'current' else 1
@@ -140,7 +140,7 @@ telemetry_sources = [telemetry if p == 'hosttest/test_af_queue_retarget.c' else 
 telemetry_results = []
 for label, source_base in [('current', base), ('frozen27', snapshot27 / 'firmware/ea9')]:
     exe = out / ('telemetry-' + label)
-    extra = ['src/focus_motion.c'] if label == 'current' else ['-DEA9_FROZEN27']
+    extra = ['src/focus_motion.c', 'src/em_arbitration.c'] if label == 'current' else ['-DEA9_FROZEN27']
     subprocess.run(boundary_flags + extra + telemetry_sources + ['-o', str(exe)], cwd=source_base, check=True)
     for case in (['coast40','coast5952','reverse-stop','gap-reset'] if label == 'current' else ['coast40','coast5952']):
         got = subprocess.run([str(exe),case],capture_output=True,text=True)
@@ -148,7 +148,7 @@ for label, source_base in [('current', base), ('frozen27', snapshot27 / 'firmwar
         if label == 'frozen27' and 'Coast reported at rest' not in got.stderr: raise RuntimeError('Wrong frozen telemetry failure')
         telemetry_results.append({'source':label,'case':case,'exitCode':got.returncode,'output':got.stdout.strip(),'diagnostic':got.stderr.strip()})
 
-report = {'firmware': '2.8.0', 'status': 'passed-offline-not-hardware-qualified',
+report = {'firmware': '3.0.0', 'status': 'passed-offline-not-hardware-qualified',
           'hardwareReportsSent': 0, 'frozen26SourceGitCommit': frozen26['sourceGitCommit'], 'opaqueQueryCoverage': coverage,
           'originalInstructionFullReplyCases': original_cases,
           'originalInstructionImageSHA256': FIRMWARE_SHA256,

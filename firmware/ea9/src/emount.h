@@ -100,6 +100,8 @@ void em_init(void);
  * pair.  Call it from the main loop; it blocks only for as long as a frame
  * takes to shift out. */
 void em_poll(void);
+/* Validated shutdown admission stops motion before the echo can be sent. */
+uint8_t em_shutdown_requested(void);
 
 /* Message 0x16 is the body asking the lens to SHUT DOWN, not an autofocus
  * trigger as an earlier reading of this file guessed.  The stock sequence

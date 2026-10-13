@@ -112,7 +112,7 @@ private actor DiscoveryFixture {
     let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
     let setting = try AdapterLensSetting(profile: profile)
     let journal = UpdateStore(directory: folder)
-    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture, .autofocusPolished, .autofocusObservedMotion, .autofocusServicedCamera] {
+    for variant in [FirmwareVariant.autofocusExperimental, .autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture, .autofocusPolished, .autofocusObservedMotion, .autofocusServicedCamera, .autofocusArbitratedCamera] {
         let image = try ApplicationImage.personalized(profile, variant: variant)
         try journal.saveApplied(AppliedLens(device: device, setting: setting, firmwareVersion: variant.versionString,
                                            imageSHA256: digest(image.data), verifiedAt: Date()))

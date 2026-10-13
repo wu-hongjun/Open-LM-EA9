@@ -1,0 +1,122 @@
+{
+  "passingCurrentCases": 7,
+  "detectedFrozen29Cases": 1,
+  "cases": [
+    {
+      "source": "current",
+      "case": "resume",
+      "exitCode": 0,
+      "output": "home readiness resume passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "budget",
+      "exitCode": 0,
+      "output": "home readiness budget passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "fault",
+      "exitCode": 0,
+      "output": "home readiness fault passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "shutdown",
+      "exitCode": 0,
+      "output": "home readiness shutdown passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "capture",
+      "exitCode": 0,
+      "output": "home readiness capture passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "stop-before-home",
+      "exitCode": 0,
+      "output": "home readiness stop-before-home passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "current",
+      "case": "session-reset",
+      "exitCode": 0,
+      "output": "home readiness session-reset passed",
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen29",
+      "case": "resume",
+      "exitCode": 1,
+      "output": "",
+      "diagnostic": "cancelled reference stayed permanently unready"
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "frozenSourceGitCommit": "8996e3c5f96b57f1c51c0741f27ba6e3f72c725b",
+  "maximumHomeAttemptsPerBoot": 2,
+  "contract": "Actual foreground home/reference/command/shutdown routines, synthetic initialization and parsed commands, inherited mechanical sensor/clock model and UART/voltage shims. No real MCU reset, camera, IRQ latency, optics or physical end-stop proof.",
+  "profileSHA256": "5ba55741d3f45b842e19630621c284ed56a1b4a905c6794b8551993529be9340",
+  "sourceSHA256": {
+    "firmware/ea9/hosttest/mmio/registers.h": "c84d1d020d041148e45d5aa85f8822388c0c26908ebcbf2028ae8bbad62947de",
+    "firmware/ea9/hosttest/sam.h": "c6bd91802928b350f1c844ca2a3e2cc2c9ac1928405c23c4a3230ef2de61fb4d",
+    "firmware/ea9/hosttest/sam_servo.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "firmware/ea9/hosttest/shim.c": "92da9d50470509f0c8735bd7d699f88fc0994289aaa90af84e9422e0fbd05a26",
+    "firmware/ea9/hosttest/sim_motor.c": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36",
+    "firmware/ea9/hosttest/test_home_readiness.c": "0ee68d87315e2c89ff6fc9a8c5708cff3822f4236475119badb0ca4fa0d8ef4a",
+    "firmware/ea9/src/abs_encoder.h": "ab00553ac0d6df9aaf8bf2e96eecee4a04b219313a8507de996e9c058e83de1c",
+    "firmware/ea9/src/af_completion.c": "8e8fd28feeb70515d85aabf07241d37502d96efca839d3ab6886e36cd4b292ae",
+    "firmware/ea9/src/af_completion.h": "249ec39f16c3a60e7d199b2cfcede8ec7ac1271cad4c8cf9830eba7bbabf6ae9",
+    "firmware/ea9/src/af_control.c": "7670aa7baa326b588e1ad4e3fba49c52618cd870b1c0cc41860b764936c4ee77",
+    "firmware/ea9/src/af_control.h": "6d20aa8c8fb89656c1ef7fa5ef2f51d113933625e2a3e8868f15cbe6b9c8f7b9",
+    "firmware/ea9/src/af_readiness.h": "58da2f01c4bb34b751904df795519503c8af2e97b914a5b7994fef2a1f278945",
+    "firmware/ea9/src/af_reference.c": "c082919c8281e1eadbf739b5d8d8244aba41c96b45d14ae0989b8eb63c110e18",
+    "firmware/ea9/src/af_reference.h": "56d9daa2715c269b80332dceac33b1b2f04a04552abdc697f1d9dd81c4c3cd8c",
+    "firmware/ea9/src/af_timing.h": "b542fffbfe85d209e2ffc36e02d20e827488973b0dc5bade4d2abea8309280a0",
+    "firmware/ea9/src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "firmware/ea9/src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "firmware/ea9/src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "firmware/ea9/src/config/recovered_config.h": "2ce55157c5777261b1565bda3a9c2cb0bb0d7c76391a64dde261cb6ea61a9c90",
+    "firmware/ea9/src/delay.h": "579fb0d795b92dc0b84c2639e7be3af660484b5cfb5b71e2c5db6211d3a5d1ca",
+    "firmware/ea9/src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "firmware/ea9/src/em_arbitration.c": "a87288237948fee401010e4b76edab786e0ae1f9ebf564f4eb91d3f430bad129",
+    "firmware/ea9/src/em_arbitration.h": "b101532e1f352f19823cf173f4ab9a5354f1c36ff04db5aeb5c12d9ddf41668d",
+    "firmware/ea9/src/em_eic.h": "8f0608db0d33f4192fea2d54e38c860099f597aebecb0ccf72ca97b05630c38c",
+    "firmware/ea9/src/em_uart.h": "6cc6dc40f916fe6ec68f7c6095bfea7804749f9043543c2260d1550290cbb501",
+    "firmware/ea9/src/emount.c": "7ea794e2569043bad9017d3e20cdceac6be7a91f59066e1ff8202b7829ef362e",
+    "firmware/ea9/src/emount.h": "f3238de076923bab85ea671633722c4c5e5f84a5f22102d11b03af5e8616bf9c",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "firmware/ea9/src/factory_af.c": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc",
+    "firmware/ea9/src/factory_af.h": "97521656884bfe25862a636ebdb151733e7e824de10954c643c88e710b22024e",
+    "firmware/ea9/src/factory_servo.c": "760c6ede751484cc9f234716ca7af0a4839bf6abcfe7373a38656187b0d4e1b6",
+    "firmware/ea9/src/factory_servo.h": "e9500041dddf4b054fd550685045caad9459e862cceee0927c68287f74f4099a",
+    "firmware/ea9/src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "firmware/ea9/src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "firmware/ea9/src/focus_map.c": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415",
+    "firmware/ea9/src/focus_map.h": "ea7bda264c0dd0b8cfab080349d48dec6aea10b448ead1abcf235a7a5646d7a4",
+    "firmware/ea9/src/focus_motion.c": "e3b210b77aa61698f3c2e6f3e055dac0508d94d230bc204387bc4e1b46b8c920",
+    "firmware/ea9/src/focus_motion.h": "ce40601bce58b8606d99aa8a3bb979769ab6c13b16c018d0b1e015c4550b3b1e",
+    "firmware/ea9/src/focus_pred.h": "3532aa164f557b5ebe8ec271367d2dac7718b4923b4bb752635d11e8e37256a7",
+    "firmware/ea9/src/io_guard.c": "dcd826c9274f934f608eec669f45fa2d5e052ae60a02f330555b1ad1a8e44ea4",
+    "firmware/ea9/src/io_guard.h": "b28158d77212ddc92945eebd9a114ce82deb638eda6d727818ced88d69d0a3df",
+    "firmware/ea9/src/lens_aperture.c": "776efa60e52eed74ababed95a0399f3b79baf9125deedc5cc7e8ecd9807428a4",
+    "firmware/ea9/src/lens_aperture.h": "b50f57e5022aa241d12aa46690b9bdd7309d7791a0cb5ccc69a88df70bbb25fd",
+    "firmware/ea9/src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "firmware/ea9/src/lens_profile.h": "ccffa5fccf288564cccb642148706f9d2388cd8bbdae0accccf1c18a19dcba8a",
+    "firmware/ea9/src/main.c": "c1fc50cbac359ade7d2b5785ee14f5a39c5f492f6eb2a474834e69b6af898d64",
+    "firmware/ea9/src/motor.h": "5abd2171da992dc055675734111686055f24f330afca726424e76178f2d50f2b",
+    "firmware/ea9/src/servo.h": "11bbde3959616cff91ee4efd356f0d831638af8e78e59e3739e601065ec50c36",
+    "firmware/ea9/src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "firmware/ea9/src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f",
+    "scripts/test-home-readiness.py": "e139200da78f1fd93c2d7321fa48ddf737b3f40f8c91a176146c1a8e8fde5397"
+  }
+}

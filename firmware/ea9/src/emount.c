@@ -1,38 +1,10 @@
-/* emount.c -- E-mount transport and command/status responder.
- *
- * WHAT THIS REPRODUCES, and what it deliberately does not.
- *
- * The stock firmware runs two inbound paths selected by the frame's class byte
- * (EA9.md §2.5): init-class frames go to an id-keyed jump table that answers
- * with a stored packet, normal-class frames go to a length-keyed table that
- * takes focus commands.  On top of that sits a fourteen-state transmit phase
- * machine, a four-value phase interlock, and a deferred-call timer on TC4.
- *
- * This file admits init-class requests and normal focus/query records,
- * snapshots commands for foreground motion dispatch, and emits the 0x05/0x06
- * status pair on frame sync. The actuator/controller live in separate modules.
- * It reproduces bounded observed protocol behavior, not the entire factory
- * phase scheduler; camera qualification remains necessary.
- *
- * Three simplifications, each chosen with its risk understood:
- *
- * 1. NO PHASE INTERLOCK.  The stock gate at 0x2000051c[3] opens at reset,
- *    closes when message 0x0a is answered, and reopens on later exchanges
- *    (EA9.md §2.5, CORRECTION 2026-08-17).  Here init-class requests are always
- *    answered.  This differs from the factory phase admission policy.  The
- *    camera that §8.2 broke was broken by adding a handler for a message the
- *    body never asked for (0x35), not by answering one it did; no handler is
- *    added here, so that failure mode is not in reach.
- *
- * 2. NO DEFERRED-CALL TIMER.  The stock 10 us / 100 us / 300 us gaps come from
- *    TC4 one-shots.  They are busy waits here, which costs at most 410 us of a
- *    16.6 ms frame and removes a timer, an interrupt and a callback slot.
- *
- * 3. BLOCKING TRANSMIT instead of DMA -- see em_uart.c.
- *
- * The frame gaps ARE reproduced, because they are the part a body can notice:
- * chip select stays asserted for 100 us after the last bit, matching the
- * 0x5188 -> 0x5280 path, and message 0x06 follows 0x05 by 300 us.
+/* E-mount responder: pure arbitration owns RX/TX/status/capture admission.
+ * Factory CS/VD interlocks and mode-5 raw capture-opener echo are recovered
+ * evidence. This bounded foreground implementation does not reproduce the
+ * full fourteen-phase TC4/DMA scheduler. In-flight frames complete boundedly;
+ * an RX edge invalidates an unsent status pair/tail. Shutdown releases drive
+ * on validated admission and prioritizes its echo before the powerdown tail.
+ * Aperture/optical tables and actuator control law remain separate modules.
  */
 #include "board.h"
 #include "clock.h"
@@ -45,8 +17,10 @@
 #include "em_uart.h"
 #ifdef EA9_AF_BUILD
 #include "io_guard.h"
+#include "motor.h"
 #endif
 #include "em_eic.h"
+#include "em_arbitration.h"
 
 #define EM_CLASS_INIT     0x02u
 #define EM_CLASS_NORMAL   0x01u
@@ -287,15 +261,24 @@ volatile uint8_t  em_pre_used;
 
 static volatile uint8_t  g_reply_pending;
 static volatile uint8_t  g_reply_id;
-static volatile uint8_t  g_status_due;
 static volatile uint8_t  g_reply_seq;
+static volatile struct em_arbitration g_link;
+#define EM_SHUT_SNAP 64u
+static volatile uint8_t g_current_pending; /* Also read by the VD ISR. */
+static uint8_t g_current_id, g_current_req[EM_SHUT_SNAP];
+static uint32_t g_current_session;
+static uint8_t g_current_capture;
+static volatile uint8_t g_shutdown_pending, g_shutdown_req[EM_SHUT_SNAP];
+enum { EM_SEND_FAILED, EM_SEND_OK, EM_SEND_DEFERRED };
+uint8_t em_shutdown_requested(void) { return g_link.shutdown; }
 
 /* Three handlers copy bytes out of the request into the reply (ids 0x1b and
  * 0x34; see ea9_fixups).  The reply goes out from em_poll, by which time the
  * body may already have opened another window and reset the receive buffer --
  * so the request is snapshotted here at parse time, in the interrupt. */
-#define EM_REQ_SNAP 16
+#define EM_REQ_SNAP 64
 static volatile uint8_t  g_req[EM_REQ_SNAP];
+static void em_clear_session_work(void);
 
 static const struct ea9_packet *find_packet(uint8_t id)
 {
@@ -328,8 +311,16 @@ static uint8_t em_transmit(uint8_t *frame, uint16_t len)
 	}
 	frame[len - 3] = (uint8_t)(sum & 0xFFu);
 	frame[len - 2] = (uint8_t)(sum >> 8);
-
+	uint8_t kind = frame[5] == EM_ID_SHUTDOWN ? EM_TX_SHUTDOWN : EM_TX_CONTROL;
+	if (frame[3] == EM_CLASS_NORMAL && (frame[5] == 5 || frame[5] == 6)) kind = frame[5];
+	uint32_t irq_state = __get_PRIMASK();
+	__disable_irq();
+	if (!em_arb_begin(&g_link, kind, em_receive_busy(), g_reply_pending || g_current_pending)) {
+		__set_PRIMASK(irq_state);
+		return EM_SEND_DEFERRED; /* No byte or CS assertion occurred. */
+	}
 	PORT->Group[0].OUTSET.reg = (1u << EM_PIN_LENS_CS);
+	__set_PRIMASK(irq_state);
 	uint8_t sent = em_uart_send(frame, len);
 
 	delay_us(EM_CS_HOLD_US);
@@ -338,28 +329,18 @@ static uint8_t em_transmit(uint8_t *frame, uint16_t len)
 #ifdef EA9_AF_BUILD
 	if (ea9_io_faults() & EA9_IO_LINK_FAULTS) sent = 0;
 #endif
+	irq_state = __get_PRIMASK(); __disable_irq();
+	em_arb_end(&g_link, kind, sent);
+	__set_PRIMASK(irq_state);
 	if (sent) em_frames_tx++;
 	return sent;
 }
 
-/* The shutdown acknowledgement: send the body's own frame straight back.
- *
- * That is literally what the stock does -- transmit(rx_buffer, rx[1]) -- so
- * the reply is the request with a recomputed checksum.
- *
- * What is NOT reproduced, and why:
- *   park     the stock moves to a stored position first.  We have no parking
- *            policy yet and inventing one would move the mechanism at shutdown
- *            for no reason we can justify.
- *   PA23     the stock drives it high here.  PA23 is also the bootloader's
- *            stay-in-bootloader input (EA9.md §11.4) and what driving it means
- *            at this point is not understood.  Not replicating an unexplained
- *            pin write on the shutdown path.
- *   halt     the stock disables the bus and sleeps.  Going quiet is enough for
- *            the body, and staying alive means a 0x16 that turns out not to be
- *            a shutdown cannot strand us -- the next init-class request revives
- *            the status loop.
- */
+/* Shutdown echoes its complete validated request (up to 64 bytes).
+ * AF releases drive on admission and starts no new park; the factory's optional
+ * park-before-echo is not reproduced. The foreground powerdown owner performs
+ * echo -> delay -> UART disable -> bounded VD-low wait -> PA23 -> delay.
+ * Legacy non-AF host fixtures retain their reversible park interface. */
 void em_set_park_handler(void (*park)(void))
 {
 	g_park = park;
@@ -375,15 +356,15 @@ void em_set_shutdown_enabled(uint8_t on)
 	g_shutdown_enabled = on;
 }
 
-static void em_shutdown_ack(const uint8_t *request)
+static uint8_t em_shutdown_ack(const uint8_t *request)
 {
-	uint8_t echo[EM_REQ_SNAP];
+	uint8_t echo[EM_SHUT_SNAP];
 	uint16_t n = request[1];
 	uint16_t i;
 	uint8_t already = em_shutdown_acked;
 	/* The bounded echo snapshot must contain the entire declared frame before
 	 * a park is attempted; an unsupported long request cannot move the motor. */
-	if (request[2] || n < EM_HEADER_LEN + EM_TRAILER_LEN || n > EM_REQ_SNAP) return;
+	if (request[2] || n < EM_HEADER_LEN + EM_TRAILER_LEN || n > EM_SHUT_SNAP) return EM_SEND_FAILED;
 
 	/* Park first, acknowledge second -- the order the stock uses.  Snapshot
 	 * the request before parking: the park takes long enough for the body
@@ -394,21 +375,28 @@ static void em_shutdown_ack(const uint8_t *request)
 
 	/* A repeated 0x16 gets its echo -- the body may simply not have heard
 	 * the first -- but the park and the power-down signal happen once. */
+#ifndef EA9_AF_BUILD
 	if (!em_shutdown_acked && g_park) {
 		g_park();
 	}
+#endif
 
 	/* Unconditionally, even if the park stalled: the echo is what releases
 	 * the body, and a lens stuck mid-travel is a far smaller problem than a
 	 * camera that will not switch off. */
-	if (!em_transmit(echo, n)) return;
+	uint8_t sent = em_transmit(echo, n);
+	if (sent != EM_SEND_OK) return sent;
 
 	em_shutdown_acked = 1;
 	em_t_shutdown     = millis();
+#ifdef EA9_AF_BUILD
+	g_link.off = 1;
+#endif
 
 	if (!already && g_powerdown) {
 		g_powerdown();
 	}
+	return EM_SEND_OK;
 }
 
 static uint8_t em_send_id(uint8_t id, const uint8_t *request)
@@ -416,36 +404,40 @@ static uint8_t em_send_id(uint8_t id, const uint8_t *request)
 	const struct ea9_packet *p = find_packet(id);
 	uint8_t *frame;
 	unsigned i;
+	if (id == 0x0a && g_current_capture == 1) {
+		/* Factory mode-5 opener uses the received frame, not its stored
+		 * 0x0a descriptor reply. Snapshot includes the complete request. */
+		uint8_t echo[EM_REQ_SNAP]; uint16_t n = request[1];
+		if (!g_link.capture_clocked) return EM_SEND_DEFERRED;
+		if (request[2] || n < 9 || n > EM_REQ_SNAP) return EM_SEND_FAILED;
+		for (unsigned k = 0; k < n; ++k) echo[k] = request[k];
+		delay_us(EM_LEAD_US);
+		return em_transmit(echo, n);
+	}
 
 	if (id == EM_ID_SHUTDOWN) {
 		if (g_shutdown_enabled) {
-				em_shutdown_ack(request);
+				return em_shutdown_ack(request);
 		}
 		return 0;
 	}
 
-	/* After acknowledging a shutdown, stay silent.
-	 *
-	 * The first version cleared the flag on ANY init-class request, which
-	 * meant the lens could announce "done" and then start sending status
-	 * frames again the moment the body said anything -- something the stock
-	 * cannot do, because its bus is switched off by then.
-	 *
-	 * Only a fresh session opener revives us.  Message 0x01 is the first
-	 * message of every handshake on every body in the corpus, so it is the
-	 * one unambiguous "we are starting over".  Answering anything else
-	 * would be answering the tail of a conversation that has ended.
-	 *
-	 * This is the reversible version of the stock's UART disable: the same
-	 * silence from the body's point of view, but a lens that can still hear
-	 * and can still be woken. */
-	if (em_shutdown_acked) {
-		if (id != EM_ID_SESSION) {
-			em_ignored_after_shutdown++;
-			return 0;
+	/* AF cannot revive after UART disable/inhibition without a power reset.
+	 * Historical non-AF fixtures keep their separate reversible behavior. */
+	if (em_shutdown_acked || g_link.off) {
+#ifndef EA9_AF_BUILD
+		/* Retain the historical metadata-only responder's reversible
+		 * shutdown in host fixtures; the AF release requires power reset. */
+		if (id == EM_ID_SESSION) {
+			em_shutdown_acked = 0; g_link.shutdown = 0;
+			em_t_revived = millis(); em_arb_request(&g_link, id);
+		} else {
+#endif
+		em_ignored_after_shutdown++;
+		return EM_SEND_FAILED;
+#ifndef EA9_AF_BUILD
 		}
-		em_shutdown_acked = 0;
-		em_t_revived      = millis();
+#endif
 	}
 
 	/* Message 0x16 has a handler but no frame: it is a pure state poke that
@@ -467,8 +459,8 @@ static uint8_t em_send_id(uint8_t id, const uint8_t *request)
 		/* A new initializer starts a new status handshake. Retaining the old
 		 * armed flag emits status into the new initialization conversation. */
 		em_handshake_done = 0;
-		g_status_due = 0;
 		em_m08_aperture_on = 0;
+		em_clear_session_work(); /* Foreground only, after any previous TX ends. */
 	}
 	if (id == 0x08u && request_length >= EM_HEADER_LEN + 2u + EM_TRAILER_LEN)
 		em_m08_aperture_on = ((request[7] & 0x80u) == 0u);
@@ -696,9 +688,11 @@ static void on_cs_edge(int level)
 	em_cs_edges++;
 
 	if (level) {
+		em_arb_open(&g_link);
 		em_uart_rx_reset();
 		return;
 	}
+	em_arb_close(&g_link);
 
 	rx = em_uart_rx_buf();
 	n  = em_uart_rx_len();
@@ -931,11 +925,28 @@ static void on_cs_edge(int level)
 	}
 
 	if (rx[3] == EM_CLASS_INIT) {
-		for (uint16_t i = 0; i < EM_REQ_SNAP; i++)
-			g_req[i] = (i < frame_length) ? rx[i] : 0;
+		if (g_link.off) { em_ignored_after_shutdown++; return; }
+#ifdef EA9_AF_BUILD
+		if (g_link.shutdown && rx[5] != EM_ID_SHUTDOWN) { em_ignored_after_shutdown++; return; }
+#endif
+		if (rx[5] == 0x0a && g_link.ready && !g_link.boot_pending && frame_length > EM_REQ_SNAP) return;
+		if (rx[5] == EM_ID_SHUTDOWN && g_shutdown_enabled) {
+			if (frame_length > EM_SHUT_SNAP) return;
+			for (uint16_t i = 0; i < frame_length; ++i) g_shutdown_req[i] = rx[i];
+			g_shutdown_pending = 1;
+#ifdef EA9_AF_BUILD
+			motor_inhibit(); /* GPIO-only, validated shutdown; no ISR transmission. */
+#endif
+		} else {
+		uint16_t snap = frame_length < EM_REQ_SNAP ? frame_length : EM_REQ_SNAP;
+		for (uint16_t i = 0; i < snap; ++i) g_req[i] = rx[i];
+		for (uint16_t i = snap; i < 16; ++i) g_req[i] = 0;
 		em_last_id      = rx[5];
 		g_reply_id      = rx[5];
 		g_reply_pending = 1;
+		}
+		if (rx[5] != EM_ID_SHUTDOWN || g_shutdown_enabled) em_arb_request(&g_link, rx[5]);
+		em_handshake_done = g_link.ready;
 		if (rx[5] < 32) {
 			em_id_mask_lo |= (1u << rx[5]);
 		} else if (rx[5] < 64) {
@@ -973,9 +984,8 @@ static void on_vd_edge(void)
 	}
 	g_t_prev_vd = now;
 
-	if (em_handshake_done) {
-		g_status_due = 1;
-	}
+	g_link.ready = em_handshake_done;
+	em_arb_frame(&g_link, g_reply_seq, g_reply_pending || g_current_pending);
 }
 
 /* Clamp into the travel the adapter advertises in message 0x06.  An
@@ -1132,6 +1142,14 @@ void em_post_event(uint8_t code, uint8_t param)
 static volatile uint8_t  g_ans_tag[EM_QUERY_Q];
 static volatile uint16_t g_ans_val[EM_QUERY_Q];
 static volatile uint8_t  g_ans_n;
+static void em_clear_session_work(void)
+{
+	uint32_t irq_state = __get_PRIMASK(); __disable_irq();
+	em_focus_pending = 0;
+	g_query_n = g_ans_n = g_event_n = g_scan_tail = 0;
+	em_set_scan_state(EM_SCAN_IDLE);
+	__set_PRIMASK(irq_state);
+}
 
 void em_post_query_answer(uint8_t tag, uint16_t value)
 {
@@ -1330,6 +1348,7 @@ uint8_t em_take_query(uint8_t *tag, uint16_t *operand)
 
 void em_init(void)
 {
+	g_link.boot_pending = 1;
 	/* Report our own firmware version rather than the stock 1.8.  No
 	 * checksum fixup: em_transmit recomputes it. */
 	ea9_data[EA9_OFF_07 + EM07_VERSION] = EM_FW_VERSION_BCD;
@@ -1492,18 +1511,17 @@ void em_init(void)
 /* The status half of em_poll, on its own. */
 void em_pump_status(void)
 {
-	if (!g_status_due || em_shutdown_acked) {
+	if (g_link.status != EM_TX_STATUS05 || em_shutdown_acked) {
 		return;
 	}
-	g_status_due = 0;
-
-	uint8_t sequence = g_reply_seq;
+	uint8_t sequence = g_link.sequence;
 	ea9_data[EA9_OFF_05 + 4] = sequence;
 	ea9_data[EA9_OFF_06 + 4] = sequence;
 
 	delay_us(EM_LEAD_US);
-	if (!em_transmit(&ea9_data[EA9_OFF_05], EA9_LEN_05)) return;
+	if (em_transmit(&ea9_data[EA9_OFF_05], EA9_LEN_05) != EM_SEND_OK) return;
 	delay_us(EM_STATUS_GAP_US);
+	if (g_link.status != EM_TX_STATUS06) return;
 
 	/* THE TAIL.  Message 0x06 is a 43-byte core plus zero or more tail
 	 * blocks starting at pl[39] = frame offset 0x2D, and the frame grows to
@@ -1538,7 +1556,7 @@ void em_pump_status(void)
 		}
 		sent_ans = k;
 
-		if (!em_transmit(&ea9_data[EA9_OFF_06], len)) return;
+		if (em_transmit(&ea9_data[EA9_OFF_06], len) != EM_SEND_OK) return;
 
 		/* Shift the event queue AFTER the frame has gone: whatever is
 		 * behind it waits for the next one. */
@@ -1583,26 +1601,44 @@ void em_poll(void)
 
 	/* Atomically consume the ID and its request bytes. The next received
 	 * window may publish another reply while this one parks or transmits. */
-	uint8_t request[EM_REQ_SNAP], id, have_reply;
 	uint32_t irq_state = __get_PRIMASK();
 	__disable_irq();
-	have_reply = g_reply_pending;
-	id = g_reply_id;
-	if (have_reply) {
-		for (uint8_t i = 0; i < EM_REQ_SNAP; ++i) request[i] = g_req[i];
+	if (g_shutdown_pending) {
+		for (uint8_t i = 0; i < g_shutdown_req[1]; ++i) g_current_req[i] = g_shutdown_req[i];
+		g_current_id = EM_ID_SHUTDOWN;
+		g_current_pending = 1;
+		g_shutdown_pending = 0;
+		g_reply_pending = 0;
+	} else if (!g_current_pending && g_reply_pending) {
+		uint8_t snap = g_req[1] < EM_REQ_SNAP ? g_req[1] : EM_REQ_SNAP;
+		if (snap < 16) snap = 16;
+		for (uint8_t i = 0; i < snap; ++i) g_current_req[i] = g_req[i];
+		g_current_id = g_reply_id;
+		g_current_pending = 1;
+		g_current_session = g_link.session_epoch;
+		g_current_capture = g_current_id == 0x0a && !g_link.boot_pending ? g_link.capture : 0;
 		g_reply_pending = 0;
 	}
 	__set_PRIMASK(irq_state);
-	if (have_reply) {
-		uint8_t replied = em_send_id(id, request);
+	if (g_current_pending) {
+		uint8_t replied = em_send_id(g_current_id, g_current_req);
 
 		/* Message 0x0a is the last of the handshake in every capture
 		 * (0x01 -> 0x07 -> 0x0b -> 0x08 -> 0x09 -> 0x0d -> 0x10 ->
 		 * 0x0a); answering it is what arms the status loop. */
-		if (id == 0x0A && replied) {
-			em_handshake_done = 1;
-			em_t_handshake    = millis();
+		if (g_current_id == 0x0A && replied == EM_SEND_OK) {
+			uint8_t was_pending = g_link.boot_pending;
+			irq_state = __get_PRIMASK(); __disable_irq();
+			em_arb_initialized(&g_link, g_current_session);
+			if (g_current_session == g_link.session_epoch && !g_link.shutdown) {
+				if (g_current_capture == 1) g_link.capture = 2;
+				if (g_current_capture == 2) { g_link.capture = 0; g_link.capture_clocked = 0; }
+			}
+			em_handshake_done = g_link.ready;
+			__set_PRIMASK(irq_state);
+			if (was_pending && em_handshake_done) em_t_handshake = millis();
 		}
+		if (replied != EM_SEND_DEFERRED) g_current_pending = 0;
 	}
 
 	em_pump_status();

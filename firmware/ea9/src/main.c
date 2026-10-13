@@ -191,6 +191,7 @@ static uint8_t focus_abort(void);
 static uint8_t focus_cmd_target(const struct em_focus_cmd *c, int32_t *out);
 static void    focus_exec(const struct em_focus_cmd *c);
 static void    focus_answer_queries(void);
+static void    focus_service(void);
 static void focus_hist_page(uint32_t page);
 /* Upstream predictor retained for the legacy backend. Factory status copies
  * the measured position to both fields. Neither predictor nor command lifetime
@@ -433,6 +434,7 @@ static void pump(int32_t pos)
 /* Hardware adapter around the independently tested reference policy. */
 static uint8_t io_stop_motion(void)
 {
+    if (em_shutdown_requested()) { ea9_af_request_shutdown(&g_af_state); motor_inhibit(); }
     if (!ea9_io_faults() && !g_af_state.shutdown) return 0;
     if (ea9_io_faults()) ea9_af_note_result(&g_af_state, SERVO_IO_FAULT);
     motor_emergency_release();
@@ -447,69 +449,89 @@ static uint8_t focus_feedback_valid(int32_t counts)
     return !io_stop_motion();
 }
 
-static void motor_home(void)
+#include "af_readiness.h"
+static uint8_t g_home_attempts;
+/* One foreground step: protocol ownership never waits on the entire home. */
+static void home_service(void)
 {
-    uint16_t idle_lo, idle_hi;
-    int32_t initial;
-    if (io_stop_motion() || !ea9_af_begin_motion(&g_af_state)) return;
-    vdd_read_burst(&idle_lo, &idle_hi, 20);
-    initial = abs_encoder_track();
-    if (io_stop_motion()) return;
-    ea9_home_begin(&g_reference, initial, millis());
-    vdd_track_reset();
-    if (!MOTION_PROFILE.dry) {
-        motor_attach_pins();
-        motor_drive(-HOME_DUTY);
+    struct em_focus_cmd command;
+    uint8_t fresh = 0;
+    if (io_stop_motion()) {
+        ea9_home_cancel(&g_reference);
+        g_next_pending = 0;
+        focus_service(); /* Stop remains acknowledged while drive is inhibited. */
+        return;
     }
-    while (g_reference.phase == EA9_HOME_DRIVING || g_reference.phase == EA9_HOME_SETTLING) {
-        enum ea9_home_phase previous = g_reference.phase;
-        struct em_focus_cmd command;
-        pump(0); /* no reference yet: publish no derived focus position */
-        if (io_stop_motion()) { ea9_home_cancel(&g_reference); return; }
-        if (em_take_focus_cmd(&command)) {
-            if (command.op == EM_OP_STOP) {
-                ea9_home_cancel(&g_reference);
-                motor_release();
-                ea9_af_end_motion(&g_af_state);
-                g_next_pending = 0;
-                em_post_event(EM_REC_STOP, 0x01u);
-                return; /* unknown zero remains unknown until a new boot */
+    if (!em_handshake_done) {
+        if (g_reference.phase == EA9_HOME_DRIVING || g_reference.phase == EA9_HOME_SETTLING) {
+            ea9_home_cancel(&g_reference); motor_release(); ea9_af_end_motion(&g_af_state);
+        }
+        g_next_pending = 0;
+        return;
+    }
+    if (g_homed) return;
+    if (em_take_focus_cmd(&command)) {
+        if (command.op == EM_OP_STOP) {
+            ea9_home_cancel(&g_reference);
+            if (g_reference.phase == EA9_HOME_UNKNOWN) {
+                g_reference.phase = EA9_HOME_CANCELLED;
+                g_reference.outcome = SERVO_ABORTED;
             }
-            g_next = command; g_next_pending = 1; /* latest command waits for reference */
+            motor_release(); ea9_af_end_motion(&g_af_state);
+            g_next_pending = 0;
+            em_post_event(EM_REC_STOP, 0x01u);
+            return;
         }
-        int32_t sample = abs_encoder_track();
-        if (io_stop_motion()) { ea9_home_cancel(&g_reference); return; }
-        ea9_home_sample(&g_reference, sample, millis());
-        if (g_reference.phase == EA9_HOME_SETTLING && previous == EA9_HOME_DRIVING && !MOTION_PROFILE.dry) {
-            motor_drive(0); motor_brake();
-        }
+        g_next = command; g_next_pending = 1; fresh = 1;
     }
-    if (g_reference.phase != EA9_HOME_READY) {
+    if (ea9_reference_admit(g_reference.phase, &g_home_attempts, fresh)) {
+        if (!ea9_af_begin_motion(&g_af_state)) return;
+        (void)vdd_read_mv(); /* One guarded sample; no 20 ms log-only burst. */
+        int32_t initial = abs_encoder_track();
+        if (io_stop_motion()) return;
+        ea9_home_begin(&g_reference, initial, millis());
+        vdd_track_reset();
+        if (!MOTION_PROFILE.dry) { motor_attach_pins(); motor_drive(-HOME_DUTY); }
+    }
+    if (g_reference.phase != EA9_HOME_DRIVING && g_reference.phase != EA9_HOME_SETTLING) return;
+    /* No new absolute position is fabricated before a reference is committed.
+     * Conservative unsettled state uses established moving bits, not a new
+     * undocumented camera capability or fault flag. */
+    em_set_motion(1, 0, FOCUS_EM06_LO); em_set_in_motion(1); em_clear_velocity();
+    enum ea9_home_phase previous = g_reference.phase;
+    vdd_track_sample();
+    int32_t sample = abs_encoder_track();
+    if (io_stop_motion()) { ea9_home_cancel(&g_reference); return; }
+    ea9_home_sample(&g_reference, sample, millis());
+    if (g_reference.phase == EA9_HOME_SETTLING && previous == EA9_HOME_DRIVING && !MOTION_PROFILE.dry) {
+        motor_drive(0); motor_brake();
+    }
+    if (g_reference.phase == EA9_HOME_READY) {
+        abs_encoder_track_reset();
+        if (io_stop_motion()) { g_reference.phase = EA9_HOME_FAILED; return; }
+        focus_motion_reset(&g_motion); g_homed = 1;
+        motor_release(); ea9_af_end_motion(&g_af_state);
+    } else if (g_reference.phase == EA9_HOME_FAILED) {
         ea9_af_note_result(&g_af_state, g_reference.outcome);
-        motor_release(); ea9_af_end_motion(&g_af_state); return;
+        motor_release(); ea9_af_end_motion(&g_af_state); g_next_pending = 0;
     }
-    /* Commit only after both stages and a final fault-free encoder read. */
-    abs_encoder_track_reset();
-    if (io_stop_motion()) { g_reference.phase = EA9_HOME_FAILED; return; }
-    focus_motion_reset(&g_motion);
-    g_homed = 1;
-    ea9_af_end_motion(&g_af_state);
 }
+#ifdef EA9_SIM_MOTOR
+/* Host scheduler for older finite lifecycle fixtures; the release main calls
+ * one home_service per foreground turn. Not linked in the hardware candidate. */
+static void __attribute__((unused)) motor_home(void)
+{
+    em_handshake_done = 1;
+    for (unsigned i = 0; i < EA9_MOTION_POLL_LIMIT; ++i) {
+        em_poll(); home_service();
+        if (g_reference.phase != EA9_HOME_DRIVING && g_reference.phase != EA9_HOME_SETTLING) break;
+    }
+}
+#endif
 
-/* Park to infinity, called from the message 0x16 handler before the
- * acknowledgement goes out (emount.c).  The stock does the same thing with its
- * own stored park position.
- *
- * Bounded on purpose.  The body is waiting for the echo, so this gets one
- * attempt at a short timeout and whatever happens, happens -- emount.c sends
- * the acknowledgement regardless.  A lens left mid-travel is a much smaller
- * problem than a camera that will not switch off.
- *
- * Infinity is track position 0, where homing left the mechanism against the
- * stop.  Moving back to 0 stops `tolerance` counts short of the stop rather
- * than driving into it. */
-/* The park keeps the stock homing duty.  It runs at shutdown, with the body
- * waiting on the acknowledgement, and it is not the thing under test. */
+/* Historical finite park fixtures only. The AF hardware release never starts
+ * another motion at shutdown: it inhibits drive before echoing the request. */
+#ifdef EA9_SIM_MOTOR
 static const struct servo_cfg PARK = {
 	.stop_ms    = 30,
 	.v_cruise   = 25000,
@@ -533,32 +555,13 @@ static const struct servo_cfg PARK = {
 	.pump       = pump,
 	.abort      = focus_abort,
 };
+#endif
 
-/* The tail of the stock shutdown (EA9.md a measurement run), after the acknowledgement.
- *
- * WHY PA23 IS NOW REPLICATED.  I left it out before as "unexplained", and the
- * shutdown still hung.  What is now known: the body does send message 0x16, we
- * do acknowledge it, we do park, and the body still keeps the adapter powered
- * for more than 4 s afterwards without saying anything.  It is waiting for
- * something, and PA23 is the only thing left in the stock sequence that a body
- * could possibly observe -- the other two steps (disabling our own UART, going
- * to sleep) are internal.
- *
- * atmel_start_init makes PA23 an output driven LOW and the stock drives it HIGH
- * here, which is the shape of a signal, not of a mode pin.  It doubles as the
- * bootloader's stay-in-bootloader input before the app configures it, which is
- * why it looked ambiguous; on the app side it is unambiguously an output.
- *
- * NOT reproduced: disabling the UART, and the halt.
- *
- * The UART disable was tried and reverted on the user's objection, which is a
- * good one: a lens that cannot hear anything cannot be woken, and the only way
- * back is a power cycle.  The behaviour it was meant to stop -- talking again
- * after announcing shutdown -- is better fixed in the protocol layer, where it
- * is reversible: after the acknowledgement the responder stays silent to
- * everything except a fresh session opener (emount.c).  Same observable
- * silence, no trap.
- */
+/* Bounded factory-derived shutdown tail after a successful full-request echo:
+ * delay 50 ms -> UART disable -> two VD-low samples -> PA23 high -> 100 ms.
+ * The VD wait is capped at 500 ms; the stock's unbounded wait and sleep are
+ * not reproduced. AF remains inhibited/off until a physical power reset.
+ * Original-instruction ordering is covered by the stock shutdown oracle. */
 static void powerdown_signal(void)
 {
 	uint32_t t0;
@@ -572,22 +575,8 @@ static void powerdown_signal(void)
 	diag_tally_mark(DIAG_MARK_SHUTREQ, 0);
 	delay_ms(50);
 
-	/* The stock's next step, in its order: switch the USART off before
-	 * waiting for the frame sync and before PA23.
-	 *
-	 * Reverted once on the user's objection that a deaf lens cannot be
-	 * woken, and proposed again by them now.  The objection is
-	 * weaker than it was: the body is measured cutting power about 700 ms
-	 * after PA23, so the deaf window ends in power loss.  em_uart_send()
-	 * returns immediately once disabled -- it waits on DRE, which a
-	 * disabled SERCOM never sets, so one send afterwards would hang the
-	 * firmware for good.
-	 *
-	 * 2026-09-20: MEASURED, and it is load-bearing.  This step is the only
-	 * difference between an image that boots normally and one that stalls
-	 * on the next power-on -- a clean single-variable A/B on the a9 II.
-	 * Do not remove it again without a measurement; it was dropped once
-	 * on an argument and cost six hardware runs. */
+	/* Disable the bus before waiting for VD and asserting PA23. No session
+	 * opener may revive this application after the shutdown admission. */
 	em_uart_disable();
 
 	/* Wait for the frame sync to stop, as the stock does -- two consecutive
@@ -608,6 +597,7 @@ static void powerdown_signal(void)
 	delay_ms(100);
 }
 
+#ifdef EA9_SIM_MOTOR
 static void park_to_infinity(void)
 {
 
@@ -670,6 +660,7 @@ static void park_to_infinity(void)
 	}
 	g_park_n++;
 }
+#endif
 
 /* Focus: drive the mechanism to a position the BODY asked for, on message
  * 0x04's 27-byte form, in the units message 0x06 reports.
@@ -830,6 +821,10 @@ static uint8_t focus_cmd_target(const struct em_focus_cmd *c, int32_t *out)
  * Consumed here, once.  Leaving it set would abort the next move as well. */
 static uint8_t focus_abort(void)
 {
+	if (em_shutdown_requested()) { (void)io_stop_motion(); return 1; }
+#ifdef EA9_AF_BUILD
+	if (!em_handshake_done) { g_abort_pending = 1; g_next_pending = 0; return 1; }
+#endif
 	if (g_abort_pending || g_af_state.shutdown) return 1;
 	/* Retargeting is bounded and is suspended during reversal braking.
 	 * A command that cannot be consumed by that hook still interrupts this
@@ -1173,6 +1168,9 @@ static void focus_exec(const struct em_focus_cmd *c)
         return;
     }
     if (!g_homed || g_af_state.shutdown || ea9_af_faulted(&g_af_state)) return;
+#ifdef EA9_AF_BUILD
+    if (!em_handshake_done) return;
+#endif
 
 	g_last_op       = c->op;
 	g_abort_pending = 0;
@@ -1244,7 +1242,6 @@ static void focus_hist_page(uint32_t page)
 
 int main(void)
 {
-	unsigned step = 0;
 #ifndef EA9_NO_LOG
 	int      hs_marked = 0;
 	int      caps_flushed = 0;
@@ -1303,8 +1300,10 @@ int main(void)
 	trail_chk(18);
 	build_marker_page(19);
 
-	em_set_park_handler(park_to_infinity);
 	em_set_powerdown_handler(powerdown_signal);
+#ifdef EA9_SIM_MOTOR
+	em_set_park_handler(park_to_infinity); /* Legacy finite park fixtures only. */
+#endif
 
 	em_init();
 	diag_tally_mark(DIAG_MARK_BUSUP, 0);
@@ -1442,25 +1441,21 @@ int main(void)
 
 #endif
 
-		/* Home once, then serve whatever focus targets arrive.
+		/* Establish a bounded reference, then serve admitted focus targets.
 		 *
 		 * The gate is the completed HANDSHAKE, not a wall
 		 * clock: `millis() >= 4000` held the mechanism still for four
 		 * seconds of every boot and guarded nothing (NOTES.md 112). */
-		if (!g_af_state.shutdown && !ea9_af_faulted(&g_af_state) && em_handshake_done && step == 0
-		    && HOME_GATE_OPEN()) {
-			motor_home();
-			focus_report();
-			step = 1;
-		}
-		if (step == 1) {
+		if (!g_homed) home_service();
+		if (!em_handshake_done) g_next_pending = 0;
+		if (g_homed && em_handshake_done) {
 			/* Feedback was refreshed before em_poll at the top of the loop. */
 			focus_answer_queries();
 
 			/* An instruction the retarget hook handed forward
 			 * because it could not be applied to a running leg. */
 			focus_service();
-		} else if (ea9_af_faulted(&g_af_state)) {
+		} else if (ea9_af_faulted(&g_af_state) || g_af_state.shutdown) {
 			/* Initialization faults can inhibit homing before step 1.
 			 * Stop remains an idle acknowledgement in that state too. */
 			focus_service();

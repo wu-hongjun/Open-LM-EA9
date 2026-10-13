@@ -1,21 +1,18 @@
-# A7C II acceptance: AF 2.9, Contax Zeiss 50mm f/1.4
+# A7C II acceptance: AF 3.0, Contax Zeiss 50mm f/1.4
 
-The [AF 2.9 candidate](../firmware/candidates/2.9.0/README.md) and app
-0.12.0/build 15 passed offline preparation. **AF 2.9 is uploaded and strictly
-byte-verified after owner-confirmed physical reconnect**, including a separate
-offline audit. **Camera acceptance failed:** the owner reports focus achievement
-followed by immediate capture-time freeze and battery-required recovery.
-Further AF 2.9 trials are held. See [the failure and finite protocol investigation](evidence/af-29-camera-failure-2026-10-12.md).
-The owner subsequently reports reset movement on reboot followed by absent
-focus movement, then confirmed switching off worked on that reboot. Actual
-focus mode remains unverified; the earlier shutdown failure is preserved.
-Do not perform another reboot/focus attempt with this image.
-The fresh pre-upload stock backup
-matches the [strictly verified restoration](evidence/stock-18-af28-recovery-2026-10-12.md).
-See [the installation record](evidence/af-29-upload-2026-10-12.md).
-The initial loaded-lens lifecycle check was requested; actual settings and a
-controlled AF-S result remain unverified. Do not repeat this image's test. The
-procedure below is the qualification plan for a separately prepared replacement.
+The [AF 3.0 candidate](../firmware/candidates/3.0.0/README.md) and app
+0.13.0/build 16 passed offline preparation. **No AF 3.0 upload or camera test
+has occurred.** Its capture/shutdown arbitration and nonblocking reference
+changes are documented in [the milestone](evidence/af-30-candidate-2026-10-13.md).
+Flashing is a separate coordinated step; complete strict physical-reconnect
+verification before the camera procedure below.
+
+The last verified hardware image remains **AF 2.9**, held after focus followed
+by capture freeze and battery-required recovery. The later owner-reported reset
+movement/no focus movement and successful shutdown are retained; unknown focus
+mode/reference state and the earlier failure are not relabeled. Do not retry
+AF 2.9. See [the failure record](evidence/af-29-camera-failure-2026-10-12.md) and
+[its installation](evidence/af-29-upload-2026-10-12.md).
 
 AF 2.8 remains held after owner-reported preview freeze, poor focus response,
 darker exposure and a shutdown hang requiring battery removal.
@@ -24,7 +21,7 @@ verification remain recorded. Its f/1.4 display alone did not qualify exposure
 or lifecycle. The original photograph from the older stock comparison was not
 retained and is not required to continue.
 
-AF 2.9 fixes demonstrated fault-service, transmit-completion and new-handshake
+The historical AF 2.9 milestone fixes demonstrated fault-service, transmit-completion and new-handshake
 admission defects. It retains the controller/reference/aperture/motion observer;
 those changes have not proven the owner's physical failures resolved. See
 [implementation, factory basis and limits](evidence/af-29-link-service-2026-10-12.md).
@@ -38,10 +35,10 @@ See [the failure investigation](evidence/af-24-camera-failure-2026-10-11.md),
 
 ## Prepared products and aperture policy
 
-- App: `dist/Open LM-EA9.app`, version 0.12.0/build 15.
+- App: `dist/Open LM-EA9.app`, version 0.13.0/build 16.
 - CLI: `dist/ea9ctl`, locally signed, using the same DeviceKit transport.
-- [50mm candidate and pins](../firmware/candidates/2.9.0/README.md): 20,480 bytes,
-  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 2.9.0.
+- [50mm candidate and pins](../firmware/candidates/3.0.0/README.md): 20,480 bytes,
+  application `0x5000..<0xa000`, profile at `0x9f00`, loader version 3.0.0.
 - [Original stock recovery bundle](../firmware/recovery/stock-1.8.0/README.md):
   retain its separate private decryption key and the same-unit original backup.
 
@@ -64,7 +61,7 @@ device. No hardware operation is needed for offline candidate preparation.
 1. Close the updater and other USB clients. Physically reconnect the USB cap,
    then check `dist/ea9ctl inventory`.
 2. Select **Contax Zeiss 50mm f/1.4** on Device. In
-   **USB tools → Experimental autofocus**, choose **Install Experimental AF 2.9.0**.
+   **USB tools → Experimental autofocus**, choose **Install Experimental AF 3.0.0**.
    The same-unit stock-upload qualification is required. The operation saves a
    fresh verified two-pass backup and durable journal before START.
 3. After upload, physically unplug and reconnect the cap. Keep the adapter off
@@ -85,7 +82,7 @@ dist/ea9ctl verify --idle
 
 `--idle` acknowledges prerequisites; it cannot perform a physical reconnect.
 The normal Device dropdown preserves the verified installed variant. Explicit
-AF installation selects 2.9; plain `apply` selects metadata-only 2.0. Do not
+AF installation selects 3.0; plain `apply` selects metadata-only 2.0. Do not
 rebuild a pinned image or change its local profile between upload and readback.
 Do not run extra CHECK/READ/client commands while the stock loader is armed;
 an ordinary read can be interpreted as the next firmware page. Lost

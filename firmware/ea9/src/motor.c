@@ -4,7 +4,7 @@
 #include "delay.h"
 #ifdef EA9_AF_BUILD
 #include "io_guard.h"
-static uint8_t g_inhibited;
+static volatile uint8_t g_inhibited; /* Shutdown admission may inhibit from EIC. */
 #endif
 
 static void tcc0_sync_cc(void)
