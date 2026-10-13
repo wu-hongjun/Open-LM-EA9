@@ -1,0 +1,61 @@
+{
+  "dateLocal": "2026-10-12",
+  "timezone": "America/New_York",
+  "status": "camera-acceptance-failed-further-af29-trials-held",
+  "firmwareVersion": "2.9.0",
+  "imageSHA256": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3",
+  "verifiedUSBTransactionID": "E7434D17-4224-4EAD-A76F-BF8AE959B30F",
+  "strictUSBVerificationPassed": true,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
+  "ownerObservations": [
+    {
+      "order": 1,
+      "statement": "it achieves focus but immediately freezes the camera when trying to take a photo.",
+      "focusAchievementReported": true,
+      "cameraFreezeDuringPhotoAttemptReported": true
+    },
+    {
+      "order": 2,
+      "statement": "I had to remove the battery, it is still on the camera",
+      "batteryRemovalRequiredReported": true,
+      "shutdownFailureReported": true,
+      "adapterLocationReported": "camera"
+    }
+  ],
+  "actualFocusMode": null,
+  "actualPreAF": null,
+  "actualExposureMode": null,
+  "actualPhysicalIris": null,
+  "actualFocusRingPosition": null,
+  "displayedAperture": null,
+  "halfPressOrFullPressOnset": null,
+  "motorStopped": null,
+  "photoSaved": null,
+  "previewBeforeCapture": null,
+  "savedPhotoExposure": null,
+  "centerSharpness": null,
+  "focusLockIndicator": null,
+  "confirmedAFSComparisonPerformed": false,
+  "stopAndNoRetryInstructionDelivered": true,
+  "adapterOnCameraAtLatestReport": true,
+  "causeProven": false,
+  "runtimeFaultRecovered": false,
+  "runtimeFaultUnavailableReason": "Release disables flash diagnostics; reported battery removal loses volatile state",
+  "hardwareReportsSentForThisInvestigation": 0,
+  "newFirmwareBuiltForThisInvestigation": false,
+  "productionFirmwareChanged": false,
+  "stockRestorationStartedAfterAF29Failure": false,
+  "sourceInspectionPerformed": true,
+  "captureBoundaryProbeEvidence": "af-29-capture-boundary-2026-10-12.json",
+  "captureBoundaryFinding": "Finite original CS-rise interlock suppresses delayed status06. Custom sends status05/06 in an already-open window and status06 after receive opens during the inter-frame gap. A host-only entry guard misses the latter. Physical failure cause remains unproven.",
+  "singletonReplySlotLegalTrafficDefectProven": false,
+  "nextCandidateRequires": [
+    "Modular capture-time receive/transmit arbitration based on recovered factory phases",
+    "Adversarial event-order fixtures for requests during both status frames and their gap",
+    "Distinguish final boot initialization from capture-time 0x0a exchanges",
+    "Preserve request snapshots, bounded timing, successful-send ownership and shutdown service",
+    "Separate upload/reconnect strict readback, loaded lifecycle and saved-exposure acceptance before AF-S/capture"
+  ],
+  "entranceOnlyReceiveGuardInsufficient": true
+}

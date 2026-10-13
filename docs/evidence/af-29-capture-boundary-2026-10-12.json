@@ -1,0 +1,102 @@
+{
+  "dateLocal": "2026-10-12",
+  "timezone": "America/New_York",
+  "status": "finite-protocol-scheduling-difference-reproduced-hardware-cause-unproven",
+  "sourceApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "candidateImageSHA256": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3",
+  "factoryOriginalInstructionCases": [
+    {
+      "bodyReceiveWindowOpen": false,
+      "interlockAfterCallback": 0,
+      "status06Transmits": 1
+    },
+    {
+      "bodyReceiveWindowOpen": true,
+      "interlockAfterCallback": 1,
+      "status06Transmits": 0
+    }
+  ],
+  "customResponderCases": {
+    "current": {
+      "statusFramesWhileReceiveWindowOpen": 2,
+      "statusFramesAfterWindowClose": 2,
+      "status06FramesAfterReceiveOpensInGap": 1,
+      "syntheticCaptureReplies": 9,
+      "allSentFramesChecksumValid": true
+    },
+    "host-only-window-guard": {
+      "statusFramesWhileReceiveWindowOpen": 0,
+      "statusFramesAfterWindowClose": 2,
+      "status06FramesAfterReceiveOpensInGap": 1,
+      "syntheticCaptureReplies": 9,
+      "allSentFramesChecksumValid": true
+    }
+  },
+  "hardwareReportsSent": 0,
+  "productionFirmwareChanged": false,
+  "cameraQualified": false,
+  "ownerFreezeCauseProven": false,
+  "probeExitCodes": {
+    "current": 0,
+    "host-only-window-guard": 0
+  },
+  "hostTestSanitizers": [
+    "address",
+    "undefined"
+  ],
+  "unicornVersion": "2.1.4",
+  "nativeCompiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "factoryContract": "Seeded initialized mode 4 / phase 3 / callbacks enabled; actual 0x53a4 CS-rise callback and 0x54d8 status06 sender, UART driver/RX setup cut, dummy register memory. Not full capture flow or ordinary reachability.",
+  "customContract": "Actual emount responder with completed synthetic initialization, supplied CS-rise/VD callbacks and immediate host transmit; no actual main, motor, concurrent IRQ, UART timing or camera.",
+  "syntheticCaptureContract": "Upstream a9 II documented nine-ID order; synthetic checksum-valid 11-byte frames, each serviced before the next. Not recovered full request payloads or A7C II traffic.",
+  "hostBoundaryInstrumentation": "Both copies inject a supplied CS-rise callback from the host delay shim during the 300us status gap; actual elapsed time and concurrent IRQs are not simulated. Shared shim and production sources remain unchanged.",
+  "guardControl": "One receive-window check inserted only at status-pump entry in an ignored host copy. It suppresses already-open-window sends but fails to suppress status06 when CS rises during the gap. Not a firmware patch or factory phase-machine implementation.",
+  "sourceSHA256": {
+    "firmware/ea9/hosttest/mmio/registers.h": "c84d1d020d041148e45d5aa85f8822388c0c26908ebcbf2028ae8bbad62947de",
+    "firmware/ea9/hosttest/sam.h": "c6bd91802928b350f1c844ca2a3e2cc2c9ac1928405c23c4a3230ef2de61fb4d",
+    "firmware/ea9/hosttest/sam_servo.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "firmware/ea9/hosttest/shim.c": "57b7d545e8939194abba607f1d43c687ee2ffe98fc093808eec6154e5c583d0b",
+    "firmware/ea9/hosttest/test_capture_boundary.c": "6710b9f6a0d2d8077c2675580622843a53e0b37651dff20a944c4843f2896e5d",
+    "firmware/ea9/src/abs_encoder.h": "ab00553ac0d6df9aaf8bf2e96eecee4a04b219313a8507de996e9c058e83de1c",
+    "firmware/ea9/src/af_completion.h": "249ec39f16c3a60e7d199b2cfcede8ec7ac1271cad4c8cf9830eba7bbabf6ae9",
+    "firmware/ea9/src/af_control.h": "6d20aa8c8fb89656c1ef7fa5ef2f51d113933625e2a3e8868f15cbe6b9c8f7b9",
+    "firmware/ea9/src/af_reference.h": "56d9daa2715c269b80332dceac33b1b2f04a04552abdc697f1d9dd81c4c3cd8c",
+    "firmware/ea9/src/af_timing.h": "b542fffbfe85d209e2ffc36e02d20e827488973b0dc5bade4d2abea8309280a0",
+    "firmware/ea9/src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "firmware/ea9/src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "firmware/ea9/src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "firmware/ea9/src/config/recovered_config.h": "2ce55157c5777261b1565bda3a9c2cb0bb0d7c76391a64dde261cb6ea61a9c90",
+    "firmware/ea9/src/delay.h": "579fb0d795b92dc0b84c2639e7be3af660484b5cfb5b71e2c5db6211d3a5d1ca",
+    "firmware/ea9/src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "firmware/ea9/src/em_eic.h": "0565076b6e7e16cd90ea6701f63fcd3a0a091fe53ad77511bf83c7c6f430630f",
+    "firmware/ea9/src/em_uart.h": "6cc6dc40f916fe6ec68f7c6095bfea7804749f9043543c2260d1550290cbb501",
+    "firmware/ea9/src/emount.c": "dbd30bb3b2e867f33591bb749aa4d1f3edc00ec4cbd652c86b88e5a4f6391c68",
+    "firmware/ea9/src/emount.h": "c84aaff99222cdf4b9b8d2130a083217d909a77a5cd9fc7b485cd04c1e59fad7",
+    "firmware/ea9/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/ea9/src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "firmware/ea9/src/factory_af.h": "97521656884bfe25862a636ebdb151733e7e824de10954c643c88e710b22024e",
+    "firmware/ea9/src/factory_servo.h": "e9500041dddf4b054fd550685045caad9459e862cceee0927c68287f74f4099a",
+    "firmware/ea9/src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "firmware/ea9/src/focus_map.h": "ea7bda264c0dd0b8cfab080349d48dec6aea10b448ead1abcf235a7a5646d7a4",
+    "firmware/ea9/src/focus_motion.h": "ce40601bce58b8606d99aa8a3bb979769ab6c13b16c018d0b1e015c4550b3b1e",
+    "firmware/ea9/src/focus_pred.h": "3532aa164f557b5ebe8ec271367d2dac7718b4923b4bb752635d11e8e37256a7",
+    "firmware/ea9/src/io_guard.c": "dcd826c9274f934f608eec669f45fa2d5e052ae60a02f330555b1ad1a8e44ea4",
+    "firmware/ea9/src/io_guard.h": "b28158d77212ddc92945eebd9a114ce82deb638eda6d727818ced88d69d0a3df",
+    "firmware/ea9/src/lens_aperture.c": "776efa60e52eed74ababed95a0399f3b79baf9125deedc5cc7e8ecd9807428a4",
+    "firmware/ea9/src/lens_aperture.h": "b50f57e5022aa241d12aa46690b9bdd7309d7791a0cb5ccc69a88df70bbb25fd",
+    "firmware/ea9/src/lens_profile.c": "4b3e041bfcaa6e4090515d7b525d24f0dedd03fb1e44b7b835272468eee6b6d5",
+    "firmware/ea9/src/lens_profile.h": "ccffa5fccf288564cccb642148706f9d2388cd8bbdae0accccf1c18a19dcba8a",
+    "firmware/ea9/src/motor.h": "5abd2171da992dc055675734111686055f24f330afca726424e76178f2d50f2b",
+    "firmware/ea9/src/servo.h": "11bbde3959616cff91ee4efd356f0d831638af8e78e59e3739e601065ec50c36",
+    "firmware/ea9/src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "firmware/ea9/src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/requirements.txt": "56bce36af734e3b9aeff2be4301bbc2a2c2b58ea1ea1e6ee6e792db84f96fbd4",
+    "scripts/investigate-capture-boundary.py": "e2ebb9ea9496608c373a9a91f702fe6b1d5bf97890dfc797223bcda724626472"
+  },
+  "upstreamBasisSHA256": {
+    "references/upstream/weiziqian/E-mount-protocol-RE/docs/msg_0x1B.md": "9341ca1a0b10f6ba6b6ab1b9c1073aa9e39807b5644619f62b76f61278ca800b",
+    "references/upstream/weiziqian/E-mount-protocol-RE/README.md": "d2b6fbedba851d1f78fdd0df57e8b1d11e33bfecb91fdab15cd18751bdfb2fc2"
+  }
+}

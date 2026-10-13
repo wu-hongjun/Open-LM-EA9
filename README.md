@@ -16,8 +16,10 @@ photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
 The **AF 2.9 candidate is uploaded and strictly byte-verified after physical
 reconnect**, including a separate offline audit. A fresh two-pass stock backup
-was saved before upload. Camera qualification is pending; the initial loaded-lens
-preview, exposure and shutdown check has been requested before AF-S.
+was saved before upload. **Camera acceptance failed:** the owner reports focus
+achievement followed by immediate freeze when trying to take a photo, requiring
+battery removal. Further AF 2.9 trials are held.
+[Failure and capture-time protocol investigation](docs/evidence/af-29-camera-failure-2026-10-12.md).
 [Installation record](docs/evidence/af-29-upload-2026-10-12.md).
 It keeps healthy camera communication/timing serviceable
 through sticky motion faults, advances handshake/shutdown/event state only after

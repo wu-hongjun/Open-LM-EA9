@@ -3,11 +3,15 @@
 The [AF 2.9 candidate](../firmware/candidates/2.9.0/README.md) and app
 0.12.0/build 15 passed offline preparation. **AF 2.9 is uploaded and strictly
 byte-verified after owner-confirmed physical reconnect**, including a separate
-offline audit. Camera qualification is pending. The fresh pre-upload stock backup
+offline audit. **Camera acceptance failed:** the owner reports focus achievement
+followed by immediate capture-time freeze and battery-required recovery.
+Further AF 2.9 trials are held. See [the failure and finite protocol investigation](evidence/af-29-camera-failure-2026-10-12.md).
+The fresh pre-upload stock backup
 matches the [strictly verified restoration](evidence/stock-18-af28-recovery-2026-10-12.md).
 See [the installation record](evidence/af-29-upload-2026-10-12.md).
-The initial loaded-lens lifecycle check has been requested; owner observations
-are pending. The procedure below remains the qualification plan.
+The initial loaded-lens lifecycle check was requested; actual settings and a
+controlled AF-S result remain unverified. Do not repeat this image's test. The
+procedure below is the qualification plan for a separately prepared replacement.
 
 AF 2.8 remains held after owner-reported preview freeze, poor focus response,
 darker exposure and a shutdown hang requiring battery removal.

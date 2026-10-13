@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "status": "uploaded-and-strictly-verified-camera-qualification-pending",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-failed",
   "sourceGitCommit": "ae705abdf41543f15a91e82b299a7b5c41dc8275",
   "transactionID": "E7434D17-4224-4EAD-A76F-BF8AE959B30F",
   "appVersion": "0.12.0",
@@ -23,8 +23,8 @@
   "retriesSent": 0,
   "uploadPerformed": true,
   "strictVerificationPassed": true,
-  "cameraTestingPerformed": false,
-  "cameraAcceptancePassed": null,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
   "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
@@ -53,7 +53,7 @@
     "planned50.bin": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Owner guided through initial loaded-lens A/MF display, saved-exposure and lifecycle check; observations pending; AF-S not yet requested",
+  "cameraTestStage": "Owner reports focus achievement followed by immediate capture-time camera freeze; battery removal required; AF 2.9 trials held",
   "verifiedAtUTC": "2026-10-12T23:53:04.681921+00:00",
   "verifiedAtLocal": "2026-10-12T19:53:04.681921-04:00",
   "verificationNativeExitCode": 0,
@@ -93,5 +93,6 @@
     "verify.stdout.txt": "c869d27d5c234ba483eb9a3b73031daa80a3ff690dd636cf74abef6da92b2196",
     "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
   },
-  "postSTARTReadCountScope": "Armed upload connection before physical reconnect; subsequent read-only verification counted separately"
+  "postSTARTReadCountScope": "Armed upload connection before physical reconnect; subsequent read-only verification counted separately",
+  "cameraFailureEvidence": "af-29-camera-failure-2026-10-12.json"
 }

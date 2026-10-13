@@ -1,10 +1,12 @@
 # AF 2.9.0 — Contax Zeiss 50mm f/1.4
 
-**Uploaded and strictly byte-verified after physical reconnect; camera qualification pending.** This candidate
+**USB upload/readback passed; camera acceptance failed; further trials held.** This candidate
 keeps healthy camera communication/timing serviceable through sticky motion
 faults, records transmission success truthfully and resets status admission on
 a new initialization request. A fresh stock backup is saved; AF 2.8 stays held.
 See [the installation record](../../../docs/evidence/af-29-upload-2026-10-12.md).
+The owner reports focus achievement followed by an immediate capture-time
+freeze, requiring battery removal. See [the failure and protocol investigation](../../../docs/evidence/af-29-camera-failure-2026-10-12.md).
 
 | Property | Value |
 | --- | --- |
@@ -24,8 +26,8 @@ See [implementation and limits](../../../docs/evidence/af-29-link-service-2026-1
 
 38 targeted cases pass and 15 failures are detected in frozen 2.8 controls.
 The pure controller/reference/aperture/observer are retained. The owner's freeze
-and shutdown hang have not been reproduced on physical hardware or proven
-resolved. Faulted motion remains inhibited; no automatic rearming is introduced.
+and shutdown hang were not proven resolved; AF 2.9 also failed capture and
+shutdown acceptance. Faulted motion remains inhibited; no automatic rearming is introduced.
 
 App 0.12.0/build 15 and explicit `prepare-af`/`apply-af` select 2.9. Normal lens
 changes preserve the verified installed variant. All older templates/images and

@@ -8,7 +8,9 @@ the implementation work sent no hardware reports and changed no owner applicatio
 AF 2.8 remains frozen and held after its reported camera failures.
 Subsequently, the separately authorized [AF 2.9 upload](af-29-upload-2026-10-12.md)
 succeeded and passed strict two-pass reconnect verification plus a separate
-offline audit. Camera qualification remains pending.
+offline audit. Subsequent **camera acceptance failed**: the owner reports focus
+achievement followed by capture-time freeze requiring battery removal. Further
+2.9 trials are held; see [the failure and finite protocol investigation](af-29-camera-failure-2026-10-12.md).
 
 ## Demonstrated defects and changes
 
