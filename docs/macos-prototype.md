@@ -1,8 +1,8 @@
 > Current app: **0.13.0, build 16** shows actual aperture as Unknown separately
 > from the fixed camera f-number and packages the experimental AF 3.0 candidate.
 > Automatic refresh, the Device dropdown and firmware-preserving lens changes
-> remain. This candidate is prepared offline; flashing and camera testing are
-> separate. See [the workflow](macos-device-workflow.md),
+> remain. AF 3.0 upload finished on October 14; reconnect verification and camera
+> testing remain pending. See [the installation record](evidence/af-30-upload-2026-10-14.md), [the workflow](macos-device-workflow.md),
 > [current validation](evidence/af-30-validation-2026-10-13.json) and
 > [AF 3.0 milestone](evidence/af-30-candidate-2026-10-13.md).
 

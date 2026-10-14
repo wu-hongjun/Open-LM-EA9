@@ -38,7 +38,9 @@ ownership; `af_readiness` admits bounded nonblocking homing. Factory-derived
 capture opener echo and shutdown ordering are tested against original instructions.
 The preceding controller/completion/aperture/observer policies are retained.
 The candidate has 392 bytes flash margin, 2,380 bytes static RAM and 8,192 bytes
-reserved stack. It was prepared offline; no upload or camera test occurred.
+reserved stack. It was prepared offline; the separately authorized October 14
+upload is complete, with physical reconnect and strict verification pending.
+No camera test has started. See [the installation record](../docs/evidence/af-30-upload-2026-10-14.md).
 AF 2.9 remains held after capture freeze and battery-required recovery.
 See [the 3.0 candidate](candidates/3.0.0/README.md) and
 [implementation, evidence and limits](../docs/evidence/af-30-candidate-2026-10-13.md).

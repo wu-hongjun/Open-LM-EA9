@@ -14,11 +14,16 @@ upload/read-back path for lens metadata. The current app (0.13.0, build 16) refr
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is prepared offline**,
+The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 has finished uploading;
+physical reconnect and strict byte verification are pending**. A fresh two-pass
+backup and offline upload audit passed; no camera test has started.
+[October 14 installation record](docs/evidence/af-30-upload-2026-10-14.md).
+The candidate was prepared offline,
 with factory-derived capture interlocks/raw opener echo, priority shutdown
 without new motion, and nonblocking bounded reference acquisition. Cancelled
 homing needs a fresh motion command to retry, within a two-attempt per-boot
-budget; faults remain sticky. No USB report, upload or camera test occurred.
+budget; faults remain sticky. The October 13 preparation pass used no hardware;
+the separately authorized October 14 upload is recorded above.
 [Implementation, factory evidence and limits](docs/evidence/af-30-candidate-2026-10-13.md).
 [Candidate and exact pins](firmware/candidates/3.0.0/README.md).
 25 new arbitration/readiness cases and 40 retained link cases pass; exact frozen
@@ -33,8 +38,8 @@ further trials are held**. The owner reports focus followed by capture freeze
 requiring battery removal, then reset movement with no later focus movement;
 shutdown worked on the latter reboot. The actual focus mode/reference state
 remain unknown. Software fixes do not prove the physical cause or factory
-parity. Flash AF 3.0 only in a separately coordinated session, verify after
-physical reconnect, then qualify preview/exposure/shutdown before AF-S.
+parity. Keep AF 3.0 off the camera until verification after physical reconnect, then
+qualify preview/exposure/shutdown before AF-S.
 [AF 2.9 failure record](docs/evidence/af-29-camera-failure-2026-10-12.md).
 [AF 2.9 installation](docs/evidence/af-29-upload-2026-10-12.md).
 

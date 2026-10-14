@@ -1,11 +1,15 @@
 # AF 3.0.0 — Contax Zeiss 50mm f/1.4
 
-**Prepared and tested offline; not uploaded or camera-qualified.** This candidate
+**Upload finished; physical reconnect/strict verification pending; camera unqualified.**
+The October 14 [installation record](../../../docs/evidence/af-30-upload-2026-10-14.md)
+retains the fresh backup and successful offline upload audit. This image was
+prepared and tested offline on October 13. This candidate
 adds factory-derived capture interlocks and raw opener echo, prioritizes shutdown
 without starting new motion, and services bounded homing in foreground steps.
 Cancelled acquisition can resume only on a fresh motion request, within a
 per-boot two-attempt budget; faults remain sticky. AF 2.9 remains held after its
-capture/shutdown failure. Flashing will be coordinated separately.
+capture/shutdown failure. Keep this image off the camera until reconnect
+verification succeeds; camera testing is coordinated separately.
 
 | Property | Value |
 | --- | --- |

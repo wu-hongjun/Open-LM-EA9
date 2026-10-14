@@ -1,11 +1,13 @@
 # A7C II acceptance: AF 3.0, Contax Zeiss 50mm f/1.4
 
 The [AF 3.0 candidate](../firmware/candidates/3.0.0/README.md) and app
-0.13.0/build 16 passed offline preparation. **No AF 3.0 upload or camera test
-has occurred.** Its capture/shutdown arbitration and nonblocking reference
-changes are documented in [the milestone](evidence/af-30-candidate-2026-10-13.md).
-Flashing is a separate coordinated step; complete strict physical-reconnect
-verification before the camera procedure below.
+0.13.0/build 16 passed offline preparation. **AF 3.0 upload finished on October
+14; physical reconnect and strict byte verification are pending.** A fresh
+matching two-pass backup, durable journal and offline upload audit passed.
+[Installation record](evidence/af-30-upload-2026-10-14.md). Camera testing has not
+started; keep the adapter off the camera until verification succeeds.
+Its capture/shutdown arbitration and nonblocking reference changes are documented
+in [the milestone](evidence/af-30-candidate-2026-10-13.md).
 
 The last verified hardware image remains **AF 2.9**, held after focus followed
 by capture freeze and battery-required recovery. The later owner-reported reset
@@ -189,7 +191,7 @@ has passed strict readback on this unit, including the October 12
 **2.8-to-stock** round trip. The restored full flash matches the stock snapshot
 immediately before 2.8 installation. Interrupted-write/power-loss and bootloader
 recovery remain unqualified.
-The 2.9-to-stock hardware round trip has not yet run.
+The 2.9-to-stock and 3.0-to-stock hardware round trips have not yet run.
 
 ## Historical evidence and result record
 
@@ -200,7 +202,7 @@ Preserve the [2.1 upload](evidence/af-50-upload-2026-10-10.md),
 [loaded-lens report](evidence/af-23-camera-lifecycle-2026-10-11.md), and
 [2.4 upload](evidence/af-24-upload-2026-10-11.md), and
 [2.8 camera failure](evidence/af-28-camera-failure-2026-10-12.md). These observations do not
-qualify 2.9. Historical pins are unchanged.
+qualify AF 3.0. Historical pins are unchanged.
 
 Use [the result template](evidence/af-s-camera-result-template.md). Keep original
 photos and timing video private; publish only relevant hashes and extracted
@@ -208,7 +210,7 @@ metadata. Homing/origin, loaded braking and live camera timing have not been
 measured on this unit. The simulated mechanical coefficients describe the
 upstream author's adapter and do not establish factory parity here.
 
-## AF 2.9 retained motion-telemetry acceptance
+## AF 3.0 retained motion-telemetry acceptance
 
 After separate byte verification, use the initial MF/Pre-AF Off lifecycle check
 before bounded AF-S. The mount should stay physically quiet at idle. The new
