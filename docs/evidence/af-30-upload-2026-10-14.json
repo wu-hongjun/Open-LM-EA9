@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14",
-  "status": "uploaded-and-strictly-verified-camera-acceptance-pending",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-failed",
   "sourceGitCommit": "62ebd177ad5b7cbc76fbf75ebdfb80db7e59bb85",
   "transactionID": "EE8D08CD-8217-4692-A710-D3B81C1F4273",
   "appVersion": "0.13.0",
@@ -23,8 +23,8 @@
   "retriesSent": 0,
   "uploadPerformed": true,
   "strictVerificationPassed": true,
-  "cameraTestingPerformed": false,
-  "cameraAcceptancePassed": null,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
   "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
@@ -53,7 +53,7 @@
     "planned50.bin": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Initial loaded-lens MF preview/capture/exposure/idle/shutdown check requested; AF-S deferred until its results",
+  "cameraTestStage": "Capture failure; further AF 3.0 trials held. Last reported adapter location camera; stop/no-retry instruction delivered.",
   "verifiedAtUTC": "2026-10-14T20:22:17.745152+00:00",
   "verifiedAtLocal": "2026-10-14T16:22:17.745152-04:00",
   "verificationNativeExitCode": 0,
@@ -95,7 +95,7 @@
   },
   "postSTARTReadCountScope": "Armed upload connection before owner-confirmed physical reconnect; verification reads counted separately",
   "initialCameraCheckRequested": true,
-  "initialCameraCheckResultsReported": false,
+  "initialCameraCheckResultsReported": true,
   "requestedCameraSettings": {
     "camera": "Sony A7C II",
     "exposureMode": "still-photo A",
@@ -112,5 +112,7 @@
   "cameraSettingReferences": {
     "focusMode": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html",
     "preAF": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html"
-  }
+  },
+  "initialCameraCheckOutcome": "Owner reports half-press focusing and full-press freeze requiring battery removal, no photo saved; requested MF and other settings remain unverified",
+  "cameraFailureEvidence": "af-30-camera-failure-2026-10-14.json"
 }

@@ -40,7 +40,9 @@ The preceding controller/completion/aperture/observer policies are retained.
 The candidate has 392 bytes flash margin, 2,380 bytes static RAM and 8,192 bytes
 reserved stack. It was prepared offline; the separately authorized October 14
 upload and strict physical-reconnect readback passed, with separate offline
-audits. Initial camera-check results remain pending. See [the installation record](../docs/evidence/af-30-upload-2026-10-14.md).
+audits. Camera acceptance subsequently failed: half-press focus, full-press
+freeze, no saved photo and battery-required recovery. Further AF 3.0 trials are
+held; see [the failure investigation](../docs/evidence/af-30-camera-failure-2026-10-14.md). See [the installation record](../docs/evidence/af-30-upload-2026-10-14.md).
 AF 2.9 remains held after capture freeze and battery-required recovery.
 See [the 3.0 candidate](candidates/3.0.0/README.md) and
 [implementation, evidence and limits](../docs/evidence/af-30-candidate-2026-10-13.md).

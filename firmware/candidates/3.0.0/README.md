@@ -1,6 +1,9 @@
 # AF 3.0.0 — Contax Zeiss 50mm f/1.4
 
-**Upload and strict physical-reconnect verification passed; camera acceptance pending.**
+**Upload/readback passed; camera acceptance failed; further trials held.**
+The owner reports half-press focusing, full-press freeze, no saved photo and
+battery-required recovery. Do not retry this image. See
+[the failure and finite factory comparison](../../../docs/evidence/af-30-camera-failure-2026-10-14.md).
 The October 14 [installation record](../../../docs/evidence/af-30-upload-2026-10-14.md)
 retains the fresh backup/readback and successful separate offline audits. This image was
 prepared and tested offline on October 13. This candidate
@@ -8,8 +11,8 @@ adds factory-derived capture interlocks and raw opener echo, prioritizes shutdow
 without starting new motion, and services bounded homing in foreground steps.
 Cancelled acquisition can resume only on a fresh motion request, within a
 per-boot two-attempt budget; faults remain sticky. AF 2.9 remains held after its
-capture/shutdown failure. Initial camera qualification checks MF preview, saved
-exposure, quiet idle and shutdown before one bounded AF-S attempt.
+capture/shutdown failure. A separately prepared replacement must qualify MF
+preview, saved exposure, quiet idle and shutdown before bounded AF-S.
 
 | Property | Value |
 | --- | --- |

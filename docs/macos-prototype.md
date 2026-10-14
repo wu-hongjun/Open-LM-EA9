@@ -2,7 +2,9 @@
 > from the fixed camera f-number and packages the experimental AF 3.0 candidate.
 > Automatic refresh, the Device dropdown and firmware-preserving lens changes
 > remain. AF 3.0 upload and strict reconnect verification passed on October 14;
-> camera acceptance remains pending. See [the installation record](evidence/af-30-upload-2026-10-14.md), [the workflow](macos-device-workflow.md),
+> camera acceptance subsequently failed with full-press freeze and battery-
+> required recovery. Further AF 3.0 trials are held. See
+> [the failure record](evidence/af-30-camera-failure-2026-10-14.md) and [the installation record](evidence/af-30-upload-2026-10-14.md), [the workflow](macos-device-workflow.md),
 > [current validation](evidence/af-30-validation-2026-10-13.json) and
 > [AF 3.0 milestone](evidence/af-30-candidate-2026-10-13.md).
 

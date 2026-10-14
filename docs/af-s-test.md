@@ -5,8 +5,12 @@ The [AF 3.0 candidate](../firmware/candidates/3.0.0/README.md) and app
 physical-reconnect verification passed on October 14**, including separate
 offline upload/readback audits. Fresh matching two-pass backups retain the exact
 candidate/profile and protected data. [Installation record](evidence/af-30-upload-2026-10-14.md).
-The first loaded-lens MF preview/capture/idle/shutdown check is requested;
-results and camera acceptance remain pending. AF-S waits for that check.
+**Camera acceptance failed:** the owner reports half-press focusing, full-press
+freeze, no photo saved and battery-required recovery; the adapter was still on
+the camera. Actual focus/exposure settings remain unverified. Further AF 3.0
+trials are held; do not restart or retry it. See
+[the failure and finite factory comparison](evidence/af-30-camera-failure-2026-10-14.md).
+The procedure below is for a separately prepared and strictly verified replacement.
 Its capture/shutdown arbitration and nonblocking reference changes are documented
 in [the milestone](evidence/af-30-candidate-2026-10-13.md).
 

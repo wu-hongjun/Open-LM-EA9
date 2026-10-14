@@ -8,7 +8,9 @@ camera f-number while retaining the unknown physical setting.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
 AF 3.0 was prepared offline. Its October 14 upload and strict physical-reconnect
-verification passed. Initial camera-check results remain pending. See
+verification passed. Camera acceptance subsequently failed with full-press
+freeze requiring battery removal; further AF 3.0 trials are held. See
+[the failure record](evidence/af-30-camera-failure-2026-10-14.md) and
 [the installation record](evidence/af-30-upload-2026-10-14.md).
 AF 2.9 is explicitly held after capture/shutdown failure. See
 [the current milestone](evidence/af-30-candidate-2026-10-13.md).

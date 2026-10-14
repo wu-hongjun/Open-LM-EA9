@@ -16,8 +16,10 @@ photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
 The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is uploaded and strictly
 byte-verified after physical reconnect**. Fresh two-pass backup/readback and
-separate offline audits passed. The first loaded-lens MF preview/capture/idle/
-shutdown check is requested; camera acceptance remains pending.
+separate offline audits passed. **Camera acceptance failed:** the owner reports
+half-press focusing followed by full-press freeze, no saved photo and battery-
+required recovery. Further AF 3.0 trials are held.
+[Failure and new factory comparison](docs/evidence/af-30-camera-failure-2026-10-14.md).
 [October 14 installation record](docs/evidence/af-30-upload-2026-10-14.md).
 The candidate was prepared offline,
 with factory-derived capture interlocks/raw opener echo, priority shutdown
@@ -39,8 +41,10 @@ On that image, the owner reports focus followed by capture freeze
 requiring battery removal, then reset movement with no later focus movement;
 shutdown worked on the latter reboot. The actual focus mode/reference state
 remain unknown. Software fixes do not prove the physical cause or factory
-parity. AF 3.0 now has separate strict readback evidence; qualify its MF preview, saved
-exposure and shutdown before AF-S.
+parity. AF 3.0 also failed capture. New finite original-instruction replay exposes a
+phase-driven interruption/raw-echo divergence for five tested non-`0x0a` IDs;
+the physical cause is not proven. No replacement firmware was built by this
+investigation and no more AF 3.0 camera trials are requested.
 [AF 2.9 failure record](docs/evidence/af-29-camera-failure-2026-10-12.md).
 [AF 2.9 installation](docs/evidence/af-29-upload-2026-10-12.md).
 
