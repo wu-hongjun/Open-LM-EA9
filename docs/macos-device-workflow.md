@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.13.0, build 16
+# Device workflow: prototype 0.14.0, build 17
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -15,6 +15,11 @@ freeze requiring battery removal; further AF 3.0 trials are held. See
 AF 2.9 is explicitly held after capture/shutdown failure. See
 [the current milestone](evidence/af-30-candidate-2026-10-13.md).
 
+The [upstream 3.1 baseline](evidence/upstream-baseline-2026-10-14.md) is prepared
+offline, not yet uploaded. App 0.14 prominently marks installed AF 3.0 as held
+and routes the primary action to USB tools. Its strict USB result remains valid
+while camera capture/shutdown acceptance is failed.
+
 ## Change a lens
 
 1. Connect the adapter through its USB cap with TECHART Update closed.
@@ -30,8 +35,13 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-new AF 3.0 is a separate **USB tools → Experimental autofocus** action.
-The CLI `apply-af` selects 3.0; plain `apply` selects metadata-only 2.0.
+upstream 3.1 baseline is a separate **USB tools → Experimental autofocus** action,
+compiled only for the original Contax Zeiss 50mm f/1.4 profile. It does not use
+a runtime lens-profile row. Other/edited profiles are rejected before USB.
+When that baseline is installed, the dropdown explains its fixed configuration
+and offers USB tools rather than pretending another profile can be applied.
+The CLI `apply-upstream` selects 3.1; historical `apply-af` still selects held 3.0.
+Plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading
 unknown settings, unsaved edits, incomplete zoom data, confirmation, reconnect,
@@ -75,7 +85,7 @@ reconnect guard even though discovery itself is automatic.
 The main view uses the existing sourced photos, compact adapter/firmware card,
 verified lens photo and a visible dropdown/apply row. No new remote images or
 runtime network requests were added. The earlier visual release was built and inspected with
-the connected adapter; 0.13 packaging and tests were offline. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;
+the connected adapter; 0.14 packaging and tests were offline. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;
 the 85mm dropdown selection was exercised and restored to 50mm without an upload.
 See [the test and hardware-boundary evidence](evidence/af-reconciliation-2026-10-10.md).
 

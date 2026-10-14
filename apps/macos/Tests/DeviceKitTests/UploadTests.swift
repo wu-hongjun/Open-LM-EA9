@@ -316,7 +316,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash[0x6000] ^= 1 // A version string cannot admit altered code.
     let altered = try fixture(loader, directory, "altered-code", id: 62)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: altered) }
-    loader.flash[0x6000] ^= 1; loader.flash[variant.profileAddress + 12] ^= 1
+    loader.flash[0x6000] ^= 1; loader.flash[variant.supportsLensProfileChanges ? variant.profileAddress + 12 : variant.applicationEnd - 12] ^= 1
     let damaged = try fixture(loader, directory, "damaged-profile", id: 63)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: damaged) }
     #expect(loader.reports == 0 && !loader.armed)
@@ -431,6 +431,8 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.0.0")
     #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,1,0])
+    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.1.0")
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,2,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,10,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
@@ -466,4 +468,23 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.armed = false
     let after = try fixture(loader, directory, "fallback", id: 12)
     #expect(try VerificationEngine().verify(pending: pending, current: after, original: af)?.firmwareVersion == "2.0.0")
+}
+
+@Test func upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings() throws {
+    let variant = FirmwareVariant.autofocusUpstreamBaseline
+    let image = try ApplicationImage.personalized(profile(), variant: variant)
+    #expect(image.data == (try ApplicationImage.template(variant)))
+    #expect(image.data.count == 20480 && variant.applicationEnd == 0xa000)
+    #expect(!variant.supportsLensProfileChanges)
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile("contax-zeiss-85-f1-4"), variant: variant) }
+    var edited = try profile(); edited.currentAperture = 2
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(edited, variant: variant) }
+    edited = try profile(); edited.displayName = "Renamed"
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(edited, variant: variant) }
+    var flash = Data(repeating: 0xff, count: 0x20000)
+    flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    flash.replaceSubrange(0x5000..<0xa000, with: image.data)
+    #expect(try ApplicationImage.installedSetting(flash) == image.setting)
+    flash[0x9ffc] ^= 1
+    #expect(try ApplicationImage.installedVariant(flash) == nil)
 }

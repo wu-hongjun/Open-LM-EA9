@@ -1,5 +1,11 @@
 # Firmware prototype
 
+The current comparison is a [direct upstream 3.1 baseline](upstream-baseline/README.md),
+prepared offline for the original 50mm f/1.4 profile. Its protocol/controller/
+main/driver C files remain upstream; it uses a separate reproducible builder.
+AF 3.0 remains held after capture/shutdown failure. See [the baseline evidence](../docs/evidence/upstream-baseline-2026-10-14.md).
+
+
 The [committed original stock 1.8.0 recovery bundle](recovery/stock-1.8.0/README.md)
 includes the vendor application and an encrypted exact same-unit backup. Its
 offline unpack/verification tool sends no USB reports; the key stays outside Git.

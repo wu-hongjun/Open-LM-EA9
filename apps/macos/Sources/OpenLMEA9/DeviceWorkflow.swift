@@ -18,6 +18,7 @@ enum DeviceLensAction {
 /// Product guidance derived from the same guards used by explicit USB actions.
 /// Evaluating this state never reads or writes the adapter.
 @MainActor extension AppModel {
+    var installedCameraFailureHold: Bool { currentAppliedLens?.firmwareVersion == "3.0.0" }
     var pendingBelongsToConnectedAdapter: Bool {
         guard let pendingUpdate, let device = devices.first, devices.count == 1 else { return false }
         return !device.serial.isEmpty && pendingUpdate.device.serial == device.serial
@@ -25,8 +26,10 @@ enum DeviceLensAction {
     var primaryLensAction: DeviceLensAction {
         if updateStateError != nil || (waitingForVerification && devices.count == 1 && !pendingBelongsToConnectedAdapter) { return .tools }
         if waitingForVerification { return .verify }
+        if installedCameraFailureHold { return .tools }
         if !stockUploadQualified { return .setup }
         if variantForLensChanges == nil { return .read }
+        if variantForLensChanges?.supportsLensProfileChanges == false && !preparedMatchesApplied { return .tools }
         return preparedMatchesApplied ? .upToDate : .apply
     }
     var canPerformPrimaryLensAction: Bool {
@@ -60,12 +63,14 @@ enum DeviceLensAction {
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Another adapter has an unfinished update" }
         if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Reconnect the USB cap" }
         if waitingForVerification { return "Verify your lens change" }
+        if installedCameraFailureHold { return "AF 3.0 camera testing held" }
         if isDirty { return "Save your lens edits" }
         if loadError != nil { return "Recover your lens library" }
         if preparedLensIssue != nil { return "Finish this lens profile" }
         if primaryLensAction == .read { return "Read the saved lens settings" }
         if !stockUploadQualified { return "Set up this adapter once" }
         if preparedLens == nil { return "Choose your lens" }
+        if variantForLensChanges?.supportsLensProfileChanges == false { return "Fixed 50mm upstream baseline" }
         if preparedMatchesApplied { return "Your lens profile is up to date" }
         if !idleAcknowledged { return "Confirm the USB connection" }
         return "Ready to switch lenses"
@@ -80,18 +85,21 @@ enum DeviceLensAction {
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Connect the adapter used for that update, or review its saved backup in USB tools." }
         if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Physically unplug and reconnect the cap. The app will detect the new connection." }
         if waitingForVerification { return "Confirm the updater is closed, then verify the uploaded settings before using the camera." }
+        if installedCameraFailureHold { return "AF 3.0 failed capture and shutdown testing. Keep it off the camera; USB tools offer the separately prepared upstream baseline." }
         if isDirty { return "Save or discard the changes in the lens editor before applying a profile." }
         if loadError != nil { return "The saved library was preserved. Import a valid library from Lens Library to recover it." }
         if let issue = preparedLensIssue { return issue }
         if primaryLensAction == .read { return "Read the adapter once to identify its installed firmware and lens setting. Profile changes will preserve that firmware." }
         if !stockUploadQualified { return "A verified backup and stock upload check prepare this adapter for profile changes." }
         if preparedLens == nil { return "Choose a profile from the dropdown. The saved adapter setting stays visible above." }
+        if variantForLensChanges?.supportsLensProfileChanges == false { return "This baseline is compiled for Contax Zeiss 50mm f/1.4. Library edits stay local; changing the adapter setting requires another firmware build." }
         if preparedMatchesApplied { return "The selected profile matches the last USB-verified setting. You can disconnect and use it on your camera." }
         if !idleAcknowledged { return "Close TECHART Update, reconnect the cap, then confirm the checkbox below." }
         return "Apply the selected profile, then reconnect to verify. The installed firmware is preserved."
     }
     var workflowSymbol: String {
         if busy { return "arrow.triangle.2.circlepath" }
+        if installedCameraFailureHold { return "exclamationmark.triangle.fill" }
         if preparedMatchesApplied && !waitingForVerification && !reconnectRequired { return "checkmark.circle.fill" }
         return "cable.connector"
     }

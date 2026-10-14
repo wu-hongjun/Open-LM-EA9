@@ -1,0 +1,86 @@
+{
+  "status": "passed-offline-upstream-baseline-camera-unqualified",
+  "dateLocal": "2026-10-14",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "upstreamHeadCheckedViaGitLsRemote": true,
+  "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+  "referenceImageSHA256": "0f864e87917f937affdc001dba19a0826756564d01969f507af8c400b4aec179",
+  "imageBytes": 20480,
+  "fixedProfileID": "contax-zeiss-50-f1-4",
+  "fixedReportedAV": 4352,
+  "runtimeLensProfilesSupported": false,
+  "cameraVersionBCD": "0x31",
+  "loaderVersion": [
+    3,
+    1,
+    0
+  ],
+  "upstreamHostSuitesPerBuild": 8,
+  "asConfiguredUpstreamHostSuitesPassed": true,
+  "configured50mmHostSuitesPassed": true,
+  "swiftTests": {
+    "LensCore": 7,
+    "DeviceKit": 35,
+    "AppWorkflow": 11,
+    "total": 53
+  },
+  "signedAppVersion": "0.14.0",
+  "signedAppBuild": "17",
+  "cliSHA256": "6e5065c4f9b36a5b1da931c1b16d6ad8fd34f1a9aa6a4592ac3df62d51a53fc8",
+  "appAndCLISignaturesVerified": true,
+  "nativeIsolatedAndCanonicalPreparationExact": true,
+  "canonicalStateChangedByOfflinePreparation": false,
+  "olderArtifactCount": 23,
+  "olderArtifactsPreserved": true,
+  "protocolAndMotionCFilesUnchangedFromUpstream": true,
+  "hardwareReportsSentByPreparation": 0,
+  "uploadPerformed": false,
+  "cameraQualified": false,
+  "lastVerifiedHardwareFirmware": "3.0.0",
+  "lastVerifiedHardwareCameraAcceptance": "failed; held",
+  "privateLogSHA256": {
+    "app-final.stderr.txt": "9904fd1526d7376bc003616f63f20b859ad3599b45513d4a5ab69ac3f0ef8881",
+    "app-final.stdout.txt": "6a69f90a39ab4b3ae2f5ec2498e54c6b05462bb183e227c04dcd7a311e6ee9bf",
+    "app-pinned.stderr.txt": "21a4bbb575299fd63145f87e1b7a617f099146f5045d70598d1f433664550f3b",
+    "app-pinned.stdout.txt": "30a6f240358450509b2cf8afd236de65f97bc8d8e4e7e35c51c4178d3812024a",
+    "app-release.stderr.txt": "800d9c6370349e45fd06da49724022e1ccbd5eaa3f632623bb27eb031ba0b13c",
+    "app-release.stdout.txt": "e28ade35012908798b941d5ad6f487a9f972d3533d92a569337417ab3e6765d9",
+    "app.stderr.txt": "b9bed3953915c6f7affb712d1539a53d25ce54a5c1efc647224e00a71d09c56a",
+    "app.stdout.txt": "fee47af02e3ea46b2a94b4cbf74849c4055b9447479f5d98b2f7bccec3f6c36c",
+    "build-final.stderr.txt": "ded628f60c0091645a9a14a46f14f891a72ed90d90745b2a7f82156c6e75c48d",
+    "build-final.stdout.txt": "23afaa3511af898ce2a7d492ca0d600ba85c77ba210c2fe7e3c0e003117f7d5c",
+    "build.stderr.txt": "da2d9e8b857adb9627048d9b3c13358022a487e4db286833357607433d1b2ecc",
+    "build.stdout.txt": "c98b1d77c8cec62404b2f92efc4a87fd70c03e02e896737982e78b44b3d41c17",
+    "swift-final.stderr.txt": "1b14d4b04963d8d86d71b4a6d68d649104a6e0aadb35e6c3ac6c0f13d061017d",
+    "swift-final.stdout.txt": "f8b3fb9db7b8801045491bbfd00e119651ff1c091e7954e685e5974515ed6394",
+    "swift-pinned.stderr.txt": "a6622102b170836bc77429bee9ac888ece8413f03202813eb0b1d22a268634a3",
+    "swift-pinned.stdout.txt": "ba9a248c98be705d4ab6374903b3b20a135c72b4296c50acbd96db432359e8ab",
+    "swift-release.stderr.txt": "84e8748fa1ea083a9fc4494bc79f9bd516fe08463748c6d672ce7833d8fe6f90",
+    "swift-release.stdout.txt": "b3249b850ee8d4bddbcc095b0f8bde39e9500f70c5327e58b1e9fc9cb0790688",
+    "swift.stderr.txt": "1eaa452d039835255f84cb9b904d668e78d32a191c9537417f1bfc3489a32d4a",
+    "swift.stdout.txt": "d94996c36a507015842fc1df8e9d36638f7b5629ad9bc27f604930c904aa9e74"
+  },
+  "sourceGitBase": "010ee31b0bb295998286b6c379c7f4ca6cb98007",
+  "evidenceSHA256": {
+    "upstream-baseline-build-2026-10-14.json": "cf499118894c2fe130eb30ab2cf64f3e77f1f6401c8745d2a9ffda21d9e7fac6",
+    "upstream-baseline-preserved-2026-10-14.json": "de61ac13d27d743d0a30b0127ff808d92f95d3367dde27d9df93360cc6b45a8d"
+  },
+  "firmwareNoticesPackaged": true,
+  "dependencyArchivesVerified": {
+    "arm": {
+      "url": "https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi.tar.xz",
+      "sha256": "c7c78ffab9bebfce91d99d3c24da6bf4b81c01e16cf551eb2ff9f25b9e0a3818",
+      "bytes": 134812148
+    },
+    "dfp": {
+      "url": "https://packs.download.microchip.com/Microchip.SAMD21_DFP.2.0.4.atpack",
+      "sha256": "b5ced8676be12cf34d60b3c31c9d12420be1869438b51d44119ba0a5917d4196",
+      "bytes": 8284221
+    },
+    "cmsis": {
+      "url": "https://codeload.github.com/ARM-software/CMSIS_5/tar.gz/refs/tags/5.9.0",
+      "sha256": "9ce693dd15c41f02506adda79323c077912b3211303ca0d9b28b8ebe735a7031",
+      "bytes": 40658690
+    }
+  }
+}

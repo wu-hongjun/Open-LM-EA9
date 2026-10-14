@@ -1,5 +1,7 @@
-> Current app: **0.13.0, build 16** shows actual aperture as Unknown separately
-> from the fixed camera f-number and packages the experimental AF 3.0 candidate.
+> Current app: **0.14.0, build 17** shows actual aperture as Unknown separately
+> from the fixed camera f-number and packages the direct upstream 3.1 baseline.
+> The baseline is fixed to the original 50mm f/1.4 profile and is prepared offline.
+> See [its provenance and validation](evidence/upstream-baseline-2026-10-14.md).
 > Automatic refresh, the Device dropdown and firmware-preserving lens changes
 > remain. AF 3.0 upload and strict reconnect verification passed on October 14;
 > camera acceptance subsequently failed with full-press freeze and battery-

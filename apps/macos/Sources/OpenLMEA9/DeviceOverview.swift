@@ -237,8 +237,8 @@ struct DeviceToolsView: View {
                     Button("Restore Stock from Backup…", action: model.chooseStockRestore).disabled(!model.canReadDevice)
                     DisclosureGroup("Experimental autofocus") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("AF 3.0.0 is an experimental autofocus update for your selected lens. Startup, shutdown, exposure and focusing still need camera testing. Choose a lens on Device, install, then reconnect to verify.").font(.callout)
-                            Button("Install Experimental AF 3.0.0", action: model.installAutofocus).disabled(!model.canChangeFirmware)
+                            Text("Upstream baseline 3.1.0 uses the reference firmware, compiled for Contax Zeiss 50mm f/1.4. Other profiles require another build. Capture, exposure and shutdown still need camera testing. Select the original 50mm profile, install, then reconnect to verify.").font(.callout)
+                            Button("Install Upstream Baseline 3.1.0", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

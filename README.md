@@ -10,10 +10,25 @@ a candidate, not a requirement.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.13.0, build 16) refreshes
+upload/read-back path for lens metadata. The current app (0.14.0, build 17) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
-to choose and apply another profile. Lens Library remains a secondary gallery/editor.
+to choose and apply another profile on firmware that supports runtime profiles.
+Lens Library remains a secondary gallery/editor.
+The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is prepared and
+tested offline**, awaiting the adapter's return to its USB cap. It builds the
+current pinned upstream commit `d52ed06`, preserving its controller, protocol,
+main loop, homing/park and driver C implementations. Only build compatibility,
+version/lens constants and corresponding pupil-row configuration differ.
+Both upstream host builds pass; all 53 Swift tests pass. App 0.14/build 17 and
+the explicit native `apply-upstream` path retain fresh backup/journal/reconnect/
+strict verification guards. This comparison is fixed to the original 50mm
+f/1.4 profile; runtime lens edits cannot change its compiled firmware. No upload
+or camera pass is claimed.
+[Baseline provenance and limits](docs/evidence/upstream-baseline-2026-10-14.md) ·
+[Candidate](firmware/candidates/3.1.0/README.md) ·
+[Upload/camera procedure](docs/upstream-baseline-test.md).
+
 The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is uploaded and strictly
 byte-verified after physical reconnect**. Fresh two-pass backup/readback and
 separate offline audits passed. **Camera acceptance failed:** the owner reports
@@ -112,13 +127,15 @@ The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
 ```sh
 python3 references/visuals/fetch_assets.py
 python3 scripts/build-firmware.py
-python3 scripts/build-firmware.py --variant arbitrated-af
+python3 scripts/build-upstream-baseline.py
 ./scripts/swift-local.sh test
 python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
 open "dist/Open LM-EA9.app"
 ```
 
+- [Direct upstream baseline and validation](docs/evidence/upstream-baseline-2026-10-14.md)
+- [Fixed 50mm f/1.4 upstream 3.1 candidate](firmware/candidates/3.1.0/README.md)
 - [AF 3.0 capture/shutdown arbitration and homing readiness](docs/evidence/af-30-candidate-2026-10-13.md)
 - [Prepared 50mm f/1.4 AF 3.0 candidate](firmware/candidates/3.0.0/README.md)
 - [AF 2.8 post-completion motion design and validation](docs/evidence/af-28-motion-telemetry-2026-10-12.md)

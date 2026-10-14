@@ -1,0 +1,22 @@
+{
+  "variant": "upstream-baseline",
+  "status": "offline-prepared-not-uploaded",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "loaderVersion": [
+    3,
+    1,
+    0
+  ],
+  "cameraVersionBCD": "0x31",
+  "imageBytes": 20480,
+  "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+  "fixedProfileID": "contax-zeiss-50-f1-4",
+  "fixedFocalMM10": 500,
+  "fixedApertureAV": 4352,
+  "actualAperture": "unknown",
+  "lensID": 50496,
+  "runtimeLensProfiles": false,
+  "nativePreparedImageEqual": true,
+  "cameraQualified": false,
+  "usbReportsSent": 0
+}

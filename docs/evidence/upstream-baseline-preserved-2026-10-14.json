@@ -1,0 +1,29 @@
+{
+  "status": "byte-identical",
+  "artifactCount": 23,
+  "files": {
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-factory-template.bin": "db9f9f3575ededbd38cc2366eb9efea15d2af6f43df5ee7b6a67a2e500fb6cdf",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-audited-template.bin": "276a134db2db04e4ea41e6bfb622e0b4f3c5421a6e3bfb6e40428cfce07fe265",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-serviced-template.bin": "657406719f6f911b49b6430015a7c1f1ffa1ff1a4f8b454ec578fe5bf005fa3c",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-template.bin": "6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-refined-template.bin": "448f827b4766f9ecb96c470d48d706650eb30d2fc41aea620369e22989d714c7",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-profile-template.bin": "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-hardened-template.bin": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-observed-template.bin": "ac9302fd329ab59b0e47efa5bbcf3e3b0b72de4e3e2033febf006c518ba6a0cc",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-polished-template.bin": "da4eaa0f41fe9ff5b2c896ee7d5d2526cfc8fa423f581b5f55f9a1ff3c2059bf",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-reconciled-template.bin": "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36",
+    "firmware/candidates/2.7.0/contax-zeiss-50-f1-4.bin": "e124d09ad3eb272fab699035ee1ff941417afa3c6dd900484e11ae44c9c890b4",
+    "firmware/candidates/2.9.0/contax-zeiss-50-f1-4.bin": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3",
+    "firmware/candidates/2.3.0/contax-zeiss-50-f1-4.bin": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4",
+    "firmware/candidates/2.4.0/contax-zeiss-50-f1-4.bin": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df",
+    "firmware/candidates/2.5.0/contax-zeiss-50-f1-4.bin": "febfa9ff411af46bff225633984e84d4d5ff6d10580514a5bdf429e76f719522",
+    "firmware/candidates/2.6.0/contax-zeiss-50-f1-4.bin": "1447e37e9bd528c072ace96a23449e7399eb011393e78202de907966d69053d6",
+    "firmware/candidates/2.8.0/contax-zeiss-50-f1-4.bin": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834",
+    "firmware/recovery/stock-1.8.0/application.bin": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "firmware/recovery/stock-1.8.0/original-unit-backup.aesgcm": "96f920e711580a94dffacc9f0a29bfe2ddd472a9dd88b1732021ea800f1ef0bf",
+    "firmware/recovery/stock-1.8.0/README.md": "f1094873be871e87213932f54a603e520832aa1ba762a646a5b3e653520a5eb6",
+    "firmware/recovery/stock-1.8.0/recovery.json": "791bef4392160c30de4801e3ea18f6716c6acb3ec910bb9fd2ffedafb45317f7",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-arbitrated-template.bin": "2cc7b512d9d78c3d39eee8d67589a99e8d8ffa97a302819399833f8c5a1da038",
+    "firmware/candidates/3.0.0/contax-zeiss-50-f1-4.bin": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03"
+  }
+}

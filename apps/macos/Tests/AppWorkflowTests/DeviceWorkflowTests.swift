@@ -253,3 +253,36 @@ private actor DiscoveryFixture {
     await model.refreshDevices(silent: true)
     #expect(model.workflowTitle == "Reconnect the USB cap" && !model.canPerformPrimaryLensAction)
 }
+
+@Test @MainActor func upstreamBaselineKeepsCompiledLensAndDoesNotOfferProfileApply() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([81])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-50-f1-4" })
+    let image = try ApplicationImage.personalized(profile, variant: .autofocusUpstreamBaseline)
+    let store = UpdateStore(directory: folder)
+    let failed = try ApplicationImage.personalized(profile, variant: .autofocusArbitratedCamera)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(failed.setting), firmwareVersion: "3.0.0", imageSHA256: digest(failed.data), verifiedAt: Date()))
+    try store.saveQualification(device: device, transactionID: UUID())
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.0.0"))
+    model.chooseDeviceLens(profile.id)
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.installedCameraFailureHold && !model.canApplyLens)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "AF 3.0 camera testing held")
+    #expect(model.canInstallUpstreamBaseline && model.workflowSymbol == "exclamationmark.triangle.fill")
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(image.setting), firmwareVersion: "3.1.0", imageSHA256: digest(image.data), verifiedAt: Date()))
+    try store.saveQualification(device: device, transactionID: UUID())
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.1.0"))
+    model.chooseDeviceLens(profile.id)
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.canInstallUpstreamBaseline && model.preparedMatchesApplied)
+    #expect(!model.canApplyLens && model.primaryLensAction == .upToDate)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(model.variantForLensChanges == .autofocusUpstreamBaseline)
+    #expect(!model.canApplyLens && !model.canInstallUpstreamBaseline)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Fixed 50mm upstream baseline")
+    #expect(model.currentAppliedLens?.setting.id == profile.id && model.pendingUpdate == nil)
+}

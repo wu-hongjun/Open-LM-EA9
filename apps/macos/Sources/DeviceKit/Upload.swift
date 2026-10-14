@@ -121,7 +121,7 @@ struct UpdateStore: Sendable {
         if let variant = FirmwareVariant.from(version: record.version) {
             guard record.image.count == variant.applicationBytes,
                   record.image.prefix(variant.profileOffset) == (try ApplicationImage.template(variant)).prefix(variant.profileOffset),
-                  try AdapterLensSetting.decode(Data(record.image.suffix(256))) == record.setting else {
+                  try ApplicationImage.setting(in: record.image, variant: variant) == record.setting else {
                 throw DeviceError.failure("Update journal contains an unrecognized application.")
             }
         } else {
