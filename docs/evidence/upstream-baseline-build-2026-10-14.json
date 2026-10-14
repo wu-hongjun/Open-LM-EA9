@@ -155,7 +155,7 @@
         "src/startup_samd21.c",
         "src/system_samd21.c"
       ],
-      "patchSHA256": "5a9a129958725c803ac8b6c56ab31f42eea7f5f86eb464e8d8b8dd9545007e61",
+      "patchSHA256": "42609fa7ffb1b91722228e82b9d07e8dba99995796ba3088c20e20d970523128",
       "upstreamHostTestsPassed": true,
       "protocolAndMotionCFilesUnchanged": true,
       "cameraQualified": false,
@@ -217,7 +217,7 @@
         "src/startup_samd21.c",
         "src/system_samd21.c"
       ],
-      "patchSHA256": "b2ea99922a7682cd79648b23fc2d3ccb2812a843538cea42e8ed0deeb2abe623",
+      "patchSHA256": "072e68b1f101bdd1e8e50e4192ebf5e2f557f42c824151ec3579dfdc2b317746",
       "upstreamHostTestsPassed": true,
       "protocolAndMotionCFilesUnchanged": true,
       "cameraQualified": false,
@@ -247,6 +247,6 @@
   "applicationEnd": 40960,
   "hardwareReportsSent": 0,
   "sourceChanges": "DFP header/vector spelling, capped linker ROM; for 50f14 only: version tag, documented aperture constants and correspondingly scaled pupil-size row. No C behavior/controller/protocol changes.",
-  "builderSHA256": "c3a02b13e3e13910f4180bee96b49a7aacec8e3fd1f066bc0ae6b4619d4884f8",
+  "builderSHA256": "5460db42ed55f9f068c6159abb50cebf0628f1bf5a92ad0031cd8ccf1c249854",
   "hostTestFixtureAdjustment": "For 50f14 only, upstream test_emount.c duplicate default descriptor literal 0x16 becomes 0x10, matching the documented configurable aperture. No test is removed; conversion code stays unmodified."
 }

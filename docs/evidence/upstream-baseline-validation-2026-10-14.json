@@ -62,7 +62,7 @@
   },
   "sourceGitBase": "010ee31b0bb295998286b6c379c7f4ca6cb98007",
   "evidenceSHA256": {
-    "upstream-baseline-build-2026-10-14.json": "cf499118894c2fe130eb30ab2cf64f3e77f1f6401c8745d2a9ffda21d9e7fac6",
+    "upstream-baseline-build-2026-10-14.json": "4e0c3e531e731df2755d55fa594bc607d11f355259cca7363904a5967c4b9e76",
     "upstream-baseline-preserved-2026-10-14.json": "de61ac13d27d743d0a30b0127ff808d92f95d3367dde27d9df93360cc6b45a8d"
   },
   "firmwareNoticesPackaged": true,
@@ -82,5 +82,6 @@
       "sha256": "9ce693dd15c41f02506adda79323c077912b3211303ca0d9b28b8ebe735a7031",
       "bytes": 40658690
     }
-  }
+  },
+  "reviewPatchApplyCheckPassed": true
 }

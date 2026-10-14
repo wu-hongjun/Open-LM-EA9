@@ -61,7 +61,7 @@ for label in ['reference','50f14']:
             if old not in after:raise SystemExit('Missing reviewed substitution: '+name+' '+old)
             after=after.replace(old,new)
         path.write_text(after)
-        patches.extend(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile='upstream/'+name,tofile=label+'/'+name))
+        patches.extend(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile='upstream/'+name,tofile=label+'/'+name,n=0))
     (work/'changes.patch').write_text(''.join(patches))
     objects=[]
     flags=['-mthumb','-mcpu=cortex-m0plus','-O2','-DNDEBUG','-DEA9_NO_LOG','-D__SAMD21E17A__',
