@@ -1,15 +1,16 @@
 # A7C II acceptance: AF 3.0, Contax Zeiss 50mm f/1.4
 
 The [AF 3.0 candidate](../firmware/candidates/3.0.0/README.md) and app
-0.13.0/build 16 passed offline preparation. **AF 3.0 upload finished on October
-14; physical reconnect and strict byte verification are pending.** A fresh
-matching two-pass backup, durable journal and offline upload audit passed.
-[Installation record](evidence/af-30-upload-2026-10-14.md). Camera testing has not
-started; keep the adapter off the camera until verification succeeds.
+0.13.0/build 16 passed offline preparation. **AF 3.0 upload and strict
+physical-reconnect verification passed on October 14**, including separate
+offline upload/readback audits. Fresh matching two-pass backups retain the exact
+candidate/profile and protected data. [Installation record](evidence/af-30-upload-2026-10-14.md).
+The first loaded-lens MF preview/capture/idle/shutdown check is requested;
+results and camera acceptance remain pending. AF-S waits for that check.
 Its capture/shutdown arbitration and nonblocking reference changes are documented
 in [the milestone](evidence/af-30-candidate-2026-10-13.md).
 
-The last verified hardware image remains **AF 2.9**, held after focus followed
+The historical **AF 2.9** image remains held after focus followed
 by capture freeze and battery-required recovery. The later owner-reported reset
 movement/no focus movement and successful shutdown are retained; unknown focus
 mode/reference state and the earlier failure are not relabeled. Do not retry
@@ -97,6 +98,12 @@ Start with the camera off and its USB cable disconnected. Mount the verified
 adapter, C/Y-to-M converter and 50mm lens. Set the physical focus ring to
 infinity and iris to f/1.4. Use still-photo A, MF and Pre-AF Off where available,
 EV 0 and Auto ISO. Record actual settings; leave unavailable settings unknown.
+To select MF on the A7C II, use **MENU → Focus → AF/MF → Focus Mode →
+Manual Focus**. Set **MENU → Focus → AF/MF → Pre-AF → Off** where available.
+These are separate from the A exposure-mode dial setting. Sony documents the
+[Focus Mode path](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html)
+and [Pre-AF path](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html).
+
 Confirm MF before taking the initial photograph. If MF cannot be selected or
 confirmed, skip that photograph and report the available settings; do not
 half-press to force an autofocus attempt during this lifecycle check.

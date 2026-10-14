@@ -14,9 +14,10 @@ upload/read-back path for lens metadata. The current app (0.13.0, build 16) refr
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile. Lens Library remains a secondary gallery/editor.
-The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 has finished uploading;
-physical reconnect and strict byte verification are pending**. A fresh two-pass
-backup and offline upload audit passed; no camera test has started.
+The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is uploaded and strictly
+byte-verified after physical reconnect**. Fresh two-pass backup/readback and
+separate offline audits passed. The first loaded-lens MF preview/capture/idle/
+shutdown check is requested; camera acceptance remains pending.
 [October 14 installation record](docs/evidence/af-30-upload-2026-10-14.md).
 The candidate was prepared offline,
 with factory-derived capture interlocks/raw opener echo, priority shutdown
@@ -33,13 +34,13 @@ app/CLI produce the same personalized image as Python. It has 392 bytes of
 flash margin, 2,380 bytes static RAM and 8 KiB reserved stack, with high-water
 and physical timing unmeasured. Older images and original recovery stay exact.
 
-The last verified hardware image is **AF 2.9; camera acceptance failed and
-further trials are held**. The owner reports focus followed by capture freeze
+Historical **AF 2.9 camera acceptance failed and further trials are held**.
+On that image, the owner reports focus followed by capture freeze
 requiring battery removal, then reset movement with no later focus movement;
 shutdown worked on the latter reboot. The actual focus mode/reference state
 remain unknown. Software fixes do not prove the physical cause or factory
-parity. Keep AF 3.0 off the camera until verification after physical reconnect, then
-qualify preview/exposure/shutdown before AF-S.
+parity. AF 3.0 now has separate strict readback evidence; qualify its MF preview, saved
+exposure and shutdown before AF-S.
 [AF 2.9 failure record](docs/evidence/af-29-camera-failure-2026-10-12.md).
 [AF 2.9 installation](docs/evidence/af-29-upload-2026-10-12.md).
 
