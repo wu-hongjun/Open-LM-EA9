@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.14.1, build 18
+# Device workflow: prototype 0.15.0, build 19
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -6,6 +6,17 @@ Actual aperture is **Unknown**; the displayed fixed f-number is camera metadata.
 Use the lens ring to stop down. The library editor lets you override the fixed
 camera f-number while retaining the unknown physical setting.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
+
+Startup diagnostic **3.2.0** is prepared offline for the original 50mm f/1.4
+profile. USB tools provide a separate **Install Startup Diagnostic 3.2.0**
+action; changing the dropdown does not install it. Other/edited profiles are
+rejected. The native CLI equivalents are `prepare-startup` and `apply-startup`.
+Flashing is deferred to a separately coordinated request. Installed 3.2 routes
+the main action to USB tools, labels camera compatibility unqualified and avoids
+repeat installation. After one coordinated camera cycle, save a read-only backup
+and use the offline decoder, as described in [the diagnostic runbook](upstream-startup-diagnostic-test.md).
+Initial full-image verification includes the blank log area. Later log retrieval
+does not relax that check; ordinary image inspection still rejects changed bytes.
 
 AF 3.0 was prepared offline. Its October 14 upload and strict physical-reconnect
 verification passed. Camera acceptance subsequently failed with full-press

@@ -1,0 +1,78 @@
+{
+  "status": "passed-compiled-candidate-instruction-bounds",
+  "cases": [
+    {
+      "case": "first-page",
+      "return": 1,
+      "pageBufferStores": 16,
+      "NVMCommands": [
+        68,
+        4
+      ],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "last-page",
+      "return": 1,
+      "pageBufferStores": 16,
+      "NVMCommands": [
+        68,
+        4
+      ],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "below",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "misaligned",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "upper-bound",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "boot",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "user-row",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "occupied",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    },
+    {
+      "case": "nvm-error",
+      "return": 0,
+      "pageBufferStores": 0,
+      "NVMCommands": [],
+      "outsideDiagnosticRegionUnchanged": true
+    }
+  ],
+  "elfSHA256": "614f5c60ddfb43dc20e3cddeeaeab12e25cf58075085064f84f8b6ff043c24ef",
+  "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "hardwareReportsSent": 0,
+  "limits": "NVM READY and flash-buffer memory are supplied. This checks compiled address/command/erased-page/error guards, not physical programming, voltage, cache coherence or write timing."
+}

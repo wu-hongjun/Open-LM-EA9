@@ -1,0 +1,243 @@
+--- upstream/src/abs_encoder.c
++++ diagnostic/src/abs_encoder.c
+@@ -1,0 +2 @@
++#include "startup_trace.h"
+@@ -13,2 +14 @@
+-	while (ENCSPI->SPI.SYNCBUSY.reg) {
+-	}
++	ST_WAIT_WHILE(ENCSPI->SPI.SYNCBUSY.reg, ST_ENCODER_WAIT);
+@@ -22,2 +22 @@
+-	while (GCLK->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(GCLK->STATUS.bit.SYNCBUSY, ST_ENCODER_WAIT);
+@@ -38,2 +37 @@
+-	while (ENCSPI->SPI.CTRLA.bit.SWRST || ENCSPI->SPI.SYNCBUSY.bit.SWRST) {
+-	}
++	ST_WAIT_WHILE(ENCSPI->SPI.CTRLA.bit.SWRST || ENCSPI->SPI.SYNCBUSY.bit.SWRST, ST_ENCODER_WAIT);
+@@ -52,2 +50 @@
+-	while (!ENCSPI->SPI.INTFLAG.bit.DRE) {
+-	}
++	ST_WAIT_WHILE(!ENCSPI->SPI.INTFLAG.bit.DRE, ST_ENCODER_WAIT);
+@@ -55,2 +52 @@
+-	while (!ENCSPI->SPI.INTFLAG.bit.RXC) {
+-	}
++	ST_WAIT_WHILE(!ENCSPI->SPI.INTFLAG.bit.RXC, ST_ENCODER_WAIT);
+--- upstream/src/clock.c
++++ diagnostic/src/clock.c
+@@ -11,0 +12 @@
++#include "startup_trace.h"
+@@ -19,2 +20 @@
+-	while (GCLK->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(GCLK->STATUS.bit.SYNCBUSY, ST_CLOCK_WAIT);
+@@ -30,2 +30 @@
+-	while (!SYSCTRL->PCLKSR.bit.DFLLRDY) {
+-	}
++	ST_WAIT_WHILE(!SYSCTRL->PCLKSR.bit.DFLLRDY, ST_CLOCK_WAIT);
+@@ -42,2 +41 @@
+-	while (!SYSCTRL->PCLKSR.bit.DFLLRDY) {
+-	}
++	ST_WAIT_WHILE(!SYSCTRL->PCLKSR.bit.DFLLRDY, ST_CLOCK_WAIT);
+--- upstream/src/delay.c
++++ diagnostic/src/delay.c
+@@ -7,0 +8 @@
++#include "startup_trace.h"
+@@ -32,0 +34 @@
++	uint32_t budget=268435456u;
+@@ -33,0 +36 @@
++		if (--budget==0) st_fail(ST_TICK_WAIT);
+@@ -47,0 +51 @@
++	uint32_t budget=4194304u;
+@@ -48,0 +53 @@
++		if (--budget==0) st_fail(ST_TICK_WAIT);
+--- upstream/src/ea9.ld
++++ diagnostic/src/ea9.ld
+@@ -38 +38 @@
+-  rom      (rx)  : ORIGIN = 0x00005000, LENGTH = 0x0001b000
++  rom      (rx)  : ORIGIN = 0x00005000, LENGTH = 0x00004c00
+--- upstream/src/em_eic.c
++++ diagnostic/src/em_eic.c
+@@ -7,0 +8 @@
++#include "startup_trace.h"
+@@ -36,2 +37 @@
+-	while (GCLK->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(GCLK->STATUS.bit.SYNCBUSY, ST_EIC_WAIT);
+@@ -45,2 +45 @@
+-	while (EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(EIC->CTRL.bit.SWRST || EIC->STATUS.bit.SYNCBUSY, ST_EIC_WAIT);
+@@ -56,2 +55 @@
+-	while (EIC->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(EIC->STATUS.bit.SYNCBUSY, ST_EIC_WAIT);
+--- upstream/src/em_uart.c
++++ diagnostic/src/em_uart.c
+@@ -20,0 +21 @@
++#include "startup_trace.h"
+@@ -38,2 +39 @@
+-	while (EMSERCOM->USART.SYNCBUSY.reg) {
+-	}
++	ST_WAIT_WHILE(EMSERCOM->USART.SYNCBUSY.reg, ST_UART_WAIT);
+@@ -61,2 +61 @@
+-	while (EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST) {
+-	}
++	ST_WAIT_WHILE(EMSERCOM->USART.CTRLA.bit.SWRST || EMSERCOM->USART.SYNCBUSY.bit.SWRST, ST_UART_WAIT);
+@@ -153,2 +152 @@
+-		while (!EMSERCOM->USART.INTFLAG.bit.DRE) {
+-		}
++		ST_WAIT_WHILE(!EMSERCOM->USART.INTFLAG.bit.DRE, ST_UART_WAIT);
+@@ -157,2 +155 @@
+-	while (!EMSERCOM->USART.INTFLAG.bit.TXC) {
+-	}
++	ST_WAIT_WHILE(!EMSERCOM->USART.INTFLAG.bit.TXC, ST_UART_WAIT);
+--- upstream/src/emount.c
++++ diagnostic/src/emount.c
+@@ -39,0 +40 @@
++#include "startup_trace.h"
+@@ -317,0 +319 @@
++	st_note(ST_TX,frame[5],frame[3],frame[4],len,0,millis());
+@@ -658,0 +661 @@
++	st_note(ST_CS,(uint8_t)level,0,0,0,0,millis());
+@@ -669,0 +673 @@
++			st_note(ST_BAD_RX,0,0,0,n,0,millis());
+@@ -673,0 +678 @@
++	st_note(ST_RX,rx[5],rx[3],rx[4],n,n>7 ? (uint16_t)(rx[6]|((uint16_t)rx[7]<<8)) : 0,millis());
+@@ -1352,0 +1358,2 @@
++	st_note(ST_STAGE,ST_UART,0,0,0,0,millis());
++	st_note(ST_STAGE,ST_WAIT_RISE,0,0,0,0,millis());
+@@ -1362,0 +1370 @@
++		uint32_t budget=268435456u;
+@@ -1363,0 +1372 @@
++			if (--budget==0 || (uint32_t)(millis()-t0)>=8000u) st_fail(ST_CS_RISE_WAIT);
+@@ -1405,0 +1415 @@
++			st_flush(1,millis(),em_rx_bytes,(uint16_t)em_rx_errors,em_rx_status,(uint8_t)(em_pin_level(EM_PIN_BODY_CS)|(em_pin_level(EM_PIN_BODY_VD)<<1)));
+@@ -1413 +1423,8 @@
+-	em_uart_rx_reset();
++	/* RX IRQ may have delivered the opener before this polling read. */
++	uint32_t rx_key=st_lock();
++	if (st_preserve_first_window(em_uart_rx_buf(),em_uart_rx_len())) {
++		st_note(ST_WINDOW_PRESERVED,0,0,0,em_uart_rx_len(),0,millis());
++	} else {
++		em_uart_rx_reset();
++	}
++	st_unlock(rx_key);
+@@ -1415 +1432,3 @@
+-
++	st_note(ST_STAGE,ST_WAIT_FALL,0,0,0,0,millis());
++
++	uint32_t close_budget=268435456u;
+@@ -1416,0 +1436 @@
++		if (--close_budget==0 || (uint32_t)(millis()-em_t_cs_first_high)>=8000u) st_fail(ST_CS_FALL_WAIT);
+@@ -1421,0 +1442 @@
++	st_note(ST_STAGE,ST_EIC,0,0,0,0,millis());
+@@ -1541,0 +1563 @@
++			st_note(ST_HANDSHAKE,id,0,0,0,0,millis());
+--- upstream/src/emount.h
++++ diagnostic/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x59u
++#define EM_FW_VERSION_BCD   0x32u
+@@ -137 +137 @@
+-#define EM_LENS_ID       50496u
++#define EM_LENS_ID       234u
+@@ -383,3 +383,3 @@
+-#define EM_APERTURE_MAX  0x11C0u        /* f/1.8 -- message 0x05 pl[44], pl[51] */
+-#define EM_APERTURE_MIN  0x11C0u        /* f/1.8 -- message 0x05 pl[52]         */
+-#define EM_APERTURE_NOW  0x11C0u        /* f/1.8 -- 0x05 pl[0..3], 0x28 pl[9..10] */
++#define EM_APERTURE_MAX  0x1100u        /* f/1.8 -- message 0x05 pl[44], pl[51] */
++#define EM_APERTURE_MIN  0x1100u        /* f/1.8 -- message 0x05 pl[52]         */
++#define EM_APERTURE_NOW  0x1100u        /* f/1.8 -- 0x05 pl[0..3], 0x28 pl[9..10] */
+@@ -497 +497 @@
+-#define EM_SLOT_B_TYPE1  { 0xD1, 0xD0, 0xD5, 0xE8, 0xE9, 0xEF }
++#define EM_SLOT_B_TYPE1  { 0xD2, 0x5A, 0xC8, 0xE1, 0xE2, 0xEA }
+--- upstream/src/main.c
++++ diagnostic/src/main.c
+@@ -36,0 +37 @@
++#include "startup_trace.h"
+@@ -738,0 +740,2 @@
++	st_note(ST_SHUTDOWN,0,0,0,0,0,millis());
++	st_flush(1,millis(),em_rx_bytes,(uint16_t)em_rx_errors,em_rx_status,(uint8_t)(em_pin_level(EM_PIN_BODY_CS)|(em_pin_level(EM_PIN_BODY_VD)<<1)));
+@@ -1396,0 +1400,2 @@
++	st_init();
++	st_note(ST_STAGE,ST_MAIN,0,0,0,0,0);
+@@ -1398,0 +1404 @@
++	st_note(ST_STAGE,ST_CLOCK,0,0,0,0,0);
+@@ -1399,0 +1406 @@
++	st_note(ST_STAGE,ST_TICK,0,0,0,0,millis());
+@@ -1417,0 +1425 @@
++	st_note(ST_STAGE,ST_ENCODER,0,0,0,0,millis());
+@@ -1418,0 +1427 @@
++	st_note(ST_STAGE,ST_ADC,0,0,0,0,millis());
+@@ -1419,0 +1429 @@
++	st_note(ST_STAGE,ST_MOTOR,0,0,0,0,millis());
+@@ -1428,0 +1439 @@
++	st_note(ST_STAGE,ST_BUS_READY,0,0,0,0,millis());
+@@ -1432,0 +1444 @@
++	st_note(ST_STAGE,ST_REFERENCE,0,0,0,0,millis());
+@@ -1435,0 +1448,8 @@
++		/* Persist once only after an incomplete handshake goes quiet. */
++		static uint8_t startup_saved;
++		if (!startup_saved && !em_handshake_done && millis()>=2000u
++		    && (uint32_t)(millis()-em_t_last_frame)>=100u
++		    && !em_pin_level(EM_PIN_BODY_CS)) {
++			startup_saved=1;
++			st_flush(1,millis(),em_rx_bytes,(uint16_t)em_rx_errors,em_rx_status,(uint8_t)(em_pin_level(EM_PIN_BODY_CS)|(em_pin_level(EM_PIN_BODY_VD)<<1)));
++		}
+--- upstream/src/motor.c
++++ diagnostic/src/motor.c
+@@ -1,0 +2 @@
++#include "startup_trace.h"
+@@ -9,2 +10 @@
+-	while (TCC0->SYNCBUSY.reg & 0x0f00u) {
+-	}
++	ST_WAIT_WHILE(TCC0->SYNCBUSY.reg & 0x0f00u, ST_MOTOR_WAIT);
+@@ -15,2 +15 @@
+-	while (TCC0->SYNCBUSY.reg) {
+-	}
++	ST_WAIT_WHILE(TCC0->SYNCBUSY.reg, ST_MOTOR_WAIT);
+@@ -56,2 +55 @@
+-	while (GCLK->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(GCLK->STATUS.bit.SYNCBUSY, ST_MOTOR_WAIT);
+@@ -62,2 +60 @@
+-	while (TCC0->CTRLA.bit.SWRST || TCC0->SYNCBUSY.bit.SWRST) {
+-	}
++	ST_WAIT_WHILE(TCC0->CTRLA.bit.SWRST || TCC0->SYNCBUSY.bit.SWRST, ST_MOTOR_WAIT);
+--- upstream/src/startup_samd21.c
++++ diagnostic/src/startup_samd21.c
+@@ -30 +30 @@
+-#include "samd21.h"
++#include "sam.h"
+@@ -114 +114 @@
+-    .pfnNMI_Handler       = (void *)NMI_Handler,
++    .pfnNonMaskableInt_Handler       = (void *)NMI_Handler,
+@@ -123 +123 @@
+-    .pfnSVC_Handler       = (void *)SVC_Handler,
++    .pfnSVCall_Handler       = (void *)SVC_Handler,
+--- upstream/src/system_samd21.c
++++ diagnostic/src/system_samd21.c
+@@ -30 +30 @@
+-#include "samd21.h"
++#include "sam.h"
+--- upstream/src/vdd.c
++++ diagnostic/src/vdd.c
+@@ -18,0 +19 @@
++#include "startup_trace.h"
+@@ -45,2 +46 @@
+-	while (ADC->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(ADC->STATUS.bit.SYNCBUSY, ST_ADC_WAIT);
+@@ -49,2 +49 @@
+-	while (ADC->STATUS.bit.SYNCBUSY) {
+-	}
++	ST_WAIT_WHILE(ADC->STATUS.bit.SYNCBUSY, ST_ADC_WAIT);
+@@ -59,2 +58 @@
+-	while (!ADC->INTFLAG.bit.RESRDY) {
+-	}
++	ST_WAIT_WHILE(!ADC->INTFLAG.bit.RESRDY, ST_ADC_WAIT);
+--- upstream/tools/hosttest/test_emount.c
++++ diagnostic/tools/hosttest/test_emount.c
+@@ -853 +853 @@
+-				{ 0x16, EM_APERTURE_NOW },
++				{ 0x10, EM_APERTURE_NOW },

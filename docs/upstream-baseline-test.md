@@ -1,5 +1,9 @@
 # Direct upstream 3.1 comparison on A7C II
 
+The subsequent [3.2 startup diagnostic](upstream-startup-diagnostic-test.md) is
+prepared offline with a separate later-flash procedure. It does not authorize
+another 3.1 trial or any upload now.
+
 The [fixed 50mm f/1.4 candidate](../firmware/candidates/3.1.0/README.md) is
 uploaded and strictly byte-verified after physical reconnect. **Camera acceptance
 failed; further 3.1 trials are held.** The owner reports aperture `--`, no shutter

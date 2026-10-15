@@ -2,6 +2,11 @@
 
 ## Updated working recommendation — October 14, 2026
 
+The owner subsequently authorized this upstream C direction for the
+[3.2 startup/handshake milestone](evidence/upstream-32-startup-diagnostic-2026-10-15.md),
+with hardware flashing deferred. That offline candidate and the native Swift
+host are now implemented; A7C II acceptance remains unqualified.
+
 Use the pinned upstream **C firmware as the development foundation**, retain the
 native SwiftUI/AppKit application and Swift IOHID/update service, and keep the
 management contract independent of language. Defer a Rust firmware port and a

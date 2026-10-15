@@ -10,11 +10,24 @@ is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.14.1, build 18) refreshes
+upload/read-back path for lens metadata. The current app (0.15.0, build 19) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
+The **upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4 is prepared
+offline; flashing is deferred**. It repairs first-window opener loss reproduced
+in 11 frozen-3.1 cases, restores stock lens ID 234 as a compatibility control and
+adds bounded startup/handshake records in a reserved application tail. It retains
+upstream's AF algorithms and optional aperture-field behavior. All 12 repaired
+arrival cases, eight upstream host outcomes, nine compiled ARM writer checks,
+seven decoder tests and 53 Swift tests pass. It is **not camera-qualified**;
+the A7C II aperture/capture fix remains to be tested after a separately requested
+upload/reconnect verification. No hardware was accessed during this preparation.
+[Candidate](firmware/candidates/3.2.0/README.md) ·
+[Implementation/evidence](docs/evidence/upstream-32-startup-diagnostic-2026-10-15.md) ·
+[Later one-cycle and log-retrieval procedure](docs/upstream-startup-diagnostic-test.md).
+
 The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is uploaded and
 strictly byte-verified after physical reconnect**. **Camera acceptance failed:**
 the owner reports aperture `--`, no shutter release and no motor movement;

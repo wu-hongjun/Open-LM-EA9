@@ -1,0 +1,32 @@
+{
+  "dateLocal": "2026-10-15",
+  "purpose": "Sources consulted for the offline upstream C startup diagnostic.",
+  "sources": [
+    {
+      "url": "https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/32bit-mcu/sam/samd21-mcu-overview/peripherals/nvmctrl/",
+      "title": "Microchip SAM D21 NVMCTRL overview",
+      "retrieval": "Web search excerpt; separate full HTML download timed out.",
+      "summary": "Manual mode requires an explicit program command after filling the page buffer. Physical programming and timing are not established by our host tests."
+    },
+    {
+      "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf",
+      "title": "Microchip SAM D21/DA1 family data sheet, NVM write section",
+      "retrieval": "Web search extracted section; full PDF not archived.",
+      "summary": "Program erased storage using halfword/word page-buffer stores and the manual write command. The hardware can stall AHB during programming; read barriers are described in the current procedure."
+    },
+    {
+      "url": "https://onlinedocs.microchip.com/oxy/GUID-22527069-B4D6-49B9-BACC-3AF1C52EB48C-en-US-21/GUID-9F5EFFE5-D4E0-489F-A367-14F52DB6B944.html",
+      "title": "Microchip SAM D21/DA1 revision history",
+      "retrieval": "Web search extracted section.",
+      "summary": "Revision L notes an added read-memory-barrier item in the manual page-write procedure."
+    },
+    {
+      "local_path": "../build-dependencies.json",
+      "title": "Pinned Microchip SAMD21 DFP 2.0.4",
+      "materialized_header": "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/nvmctrl.h",
+      "sha256": "07d5a14d439b5de802b6ecb06c883545649efbe40e48fb85a3ed542bd17166f0",
+      "summary": "Register offsets, WP/PBC command keys, READY and PROGE/LOCKE/NVME masks come from the pinned device header."
+    }
+  ],
+  "note": "This index records source locations and short authored summaries, not full copies of unavailable vendor documents."
+}

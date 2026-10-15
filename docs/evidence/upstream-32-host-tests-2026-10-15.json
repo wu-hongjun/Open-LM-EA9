@@ -1,0 +1,167 @@
+{
+  "status": "passed-offline-camera-unqualified",
+  "currentFirstWindowCasesPassed": 12,
+  "candidateImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "currentSourceSHA256": {
+    "src/emount.c": "9cd0db65476c109b12cd852e728df8edd1c16509d24b4e62de6c3289152112ad",
+    "src/emount.h": "18559208f5f31aadae4f02f03be440719f48a4d56c0008e5532c09e386760da5",
+    "src/startup_trace.c": "239cd8b4637cd34631c9624dcec6efb709d033a640e547c818359bb5ac05ba94",
+    "src/startup_trace.h": "eeccc74cce337d970e9e579c41ec55c9546024e75d7cf4e44cdb9c4c1c850f9f"
+  },
+  "frozen31EarlyPrefixFailuresDetected": 11,
+  "frozen31NoEarlyBytesControlPassed": true,
+  "upstreamHostOutcomesPassed": 8,
+  "traceStorageAndGuardTestsPassed": true,
+  "sanitizers": [
+    "AddressSanitizer",
+    "UndefinedBehaviorSanitizer"
+  ],
+  "cases": [
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 0,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 1,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 2,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 3,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 4,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 5,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 6,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 7,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 8,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 9,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 10,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "current",
+      "bytesBeforeObservedRise": 11,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 0,
+      "exitCode": 0,
+      "openerAnswered": true
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 1,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 2,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 3,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 4,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 5,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 6,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 7,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 8,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 9,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 10,
+      "exitCode": 1,
+      "openerAnswered": false
+    },
+    {
+      "source": "frozen31",
+      "bytesBeforeObservedRise": 11,
+      "exitCode": 1,
+      "openerAnswered": false
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "limits": "Scripted pins, RX arrival and immediate TX; main, MCU ISR timing, flash electrical programming and A7C II traffic are not executed."
+}

@@ -373,6 +373,14 @@
         "build-dependencies.json"
       ],
       "license_note": "Official ARM GNU, ARM CMSIS and Microchip DFP archives; licenses retained in the downloaded cache."
+    },
+    {
+      "id": "startup-diagnostic-primary-sources-2026-10-15",
+      "kind": "research-index",
+      "local_path": "analysis/startup-diagnostic-primary-sources-2026-10-15.json",
+      "retrieved_date": "2026-10-15",
+      "note": "Authored source index for Microchip NVM guidance and pinned DFP registers; full vendor HTML/PDF downloads unavailable.",
+      "sha256": "ce8b3f92d7d1f3858484ac1ce5d0505260ef225b46ababa8ac2464b60834eedb"
     }
   ]
 }

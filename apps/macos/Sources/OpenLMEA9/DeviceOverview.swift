@@ -239,6 +239,8 @@ struct DeviceToolsView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Upstream baseline 3.1.0 is held after the A7C II showed -- for aperture and would not release the shutter. Shutdown worked. Further installation and camera trials are unavailable pending investigation.").font(.callout)
                             Button("Install Upstream Baseline 3.1.0", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)
+                            Text("Startup diagnostic 3.2.0 tests the first-window receive fix and stock lens identity. It is compiled for the original 50mm f/1.4 profile. Camera compatibility is unqualified; collect a backup after one coordinated camera cycle.").font(.callout)
+                            Button("Install Startup Diagnostic 3.2.0", action: model.installStartupDiagnostic).disabled(!model.canInstallStartupDiagnostic)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

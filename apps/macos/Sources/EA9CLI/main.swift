@@ -3,6 +3,14 @@ import DeviceKit
 import LensCore
 
 @main struct EA9CLI {
+    private static func variant(for command: String) -> FirmwareVariant {
+        switch command {
+        case "prepare-startup", "apply-startup": .autofocusStartupDiagnostic
+        case "prepare-upstream", "apply-upstream": .autofocusUpstreamBaseline
+        case "prepare-af", "apply-af": .autofocusArbitratedCamera
+        default: .metadataOnly
+        }
+    }
     static func main() async {
         do {
             var args = Array(CommandLine.arguments.dropFirst())
@@ -13,15 +21,15 @@ import LensCore
                 args.removeSubrange(index...index + 1)
             }
             let service = DeviceService(stateDirectory: state)
-            let usage = "Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin | prepare-upstream PROFILE-ID NEW.bin | apply-upstream PROFILE-ID --idle"
-            guard args == ["inventory"] || (args.count == 3 && ["backup","apply","apply-af","apply-upstream","restore-stock"].contains(args[0]) && args[2] == "--idle")
+            let usage = "Startup diagnostic: prepare-startup PROFILE-ID NEW.bin | apply-startup PROFILE-ID --idle. Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin | prepare-upstream PROFILE-ID NEW.bin | apply-upstream PROFILE-ID --idle"
+            guard args == ["inventory"] || (args.count == 3 && ["backup","apply","apply-af","apply-upstream","apply-startup","restore-stock"].contains(args[0]) && args[2] == "--idle")
                 || (args.count == 2 && ["verify","inspect","qualify-stock"].contains(args[0]) && args[1] == "--idle")
-                || (args.count == 3 && ["prepare","prepare-af","prepare-upstream"].contains(args[0]))
+                || (args.count == 3 && ["prepare","prepare-af","prepare-upstream","prepare-startup"].contains(args[0]))
                 || (args.count == 3 && args[0] == "resolve-stock-after-camera" && args[2] == "--idle") else { throw DeviceError.failure(usage + " | resolve-stock-after-camera REVIEWED.ea9backup --idle") }
-            if ["prepare","prepare-af","prepare-upstream"].contains(args[0]) {
+            if ["prepare","prepare-af","prepare-upstream","prepare-startup"].contains(args[0]) {
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: args[0] == "prepare-upstream" ? .autofocusUpstreamBaseline : (args[0] == "prepare-af" ? .autofocusArbitratedCamera : .metadataOnly))
+                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: variant(for: args[0]))
                 try data.write(to: URL(fileURLWithPath: args[2]), options: .withoutOverwriting)
                 print("Prepared application image: \(data.count) bytes. No USB reports sent.")
                 return
@@ -48,10 +56,10 @@ import LensCore
             case "qualify-stock":
                 let pending = try await service.qualifyStockUpload(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
                 print("Stock application re-uploaded: \(pending.image.count) bytes.\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect, then run verify --idle. This does not qualify bootloader restoration or power-loss recovery.")
-            case "apply", "apply-af", "apply-upstream":
+            case "apply", "apply-af", "apply-upstream","apply-startup":
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let pending = try await service.apply(profile: profile, variant: args[0] == "apply-upstream" ? .autofocusUpstreamBaseline : (args[0] == "apply-af" ? .autofocusArbitratedCamera : .metadataOnly), device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
+                let pending = try await service.apply(profile: profile, variant: variant(for: args[0]), device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
                 print("Firmware: \(pending.version.map(String.init).joined(separator: "."))\nUploaded \(pending.image.count) bytes for \(profile.displayName).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
             case "verify", "inspect":
                 let applied = args[0] == "verify" ?

@@ -1,0 +1,76 @@
+{
+  "dateLocal": "2026-10-15",
+  "status": "passed-targeted-offline-startup-diagnostic-camera-unqualified",
+  "sourceGitBase": "058a2fb263be43935674d8e471037451ce4cf2b8",
+  "firmwareVersion": "3.2.0",
+  "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "imageBytes": 20480,
+  "initializedROMEnd": 39596,
+  "marginBeforeDiagnosticsBytes": 340,
+  "staticRAMBytes": 3332,
+  "reservedStackBytes": 8192,
+  "stackHighWaterMeasured": false,
+  "appVersion": "0.15.0",
+  "appBuild": 19,
+  "cliSHA256": "8530a9576cd82ef68e52398d5746d8ec7ec0c61a8d683c7f0f9d00ab30853a7d",
+  "appAndCLISignaturesVerified": true,
+  "isolatedAndOwnerProfileNativePreparationExact": true,
+  "canonicalStateChangedByNativeOfflinePreparation": false,
+  "firstWindowCasesPassed": 12,
+  "frozen31RegressionsDetected": 11,
+  "upstreamHostOutcomesPassed": 8,
+  "traceStorageAndGuardTestsPassed": true,
+  "compiledARMWriterCasesPassed": 9,
+  "decoderTestsPassed": 7,
+  "decoderCLIPinnedPrefixAndVersionChecksPassed": true,
+  "swiftTests": {
+    "LensCore": 7,
+    "DeviceKit": 35,
+    "AppWorkflow": 11,
+    "total": 53
+  },
+  "strictInitialVerificationStillIncludesDiagnosticArea": true,
+  "firmwareRebuildMatchesPublishedCandidate": true,
+  "upstreamPatchApplyCheckPassed": true,
+  "stockPacketLensID234Confirmed": true,
+  "upstreamServoMapPredictionAndBoardCFilesUnchanged": true,
+  "olderFirmwareAndRecoveryArtifactsPreserved": 26,
+  "hardwareReportsSent": 0,
+  "uploadPerformed": false,
+  "cameraTestPerformed": false,
+  "cameraAcceptancePassed": null,
+  "physicalCauseOf31FailureProven": false,
+  "physicalApertureAndShutterFixProven": false,
+  "runtimeNVMErases": 0,
+  "maximumRuntimeProgramPages": 16,
+  "diagnosticRange": [
+    39936,
+    40960
+  ],
+  "references": {
+    "newSourceIndexAndCatalogHashesPassed": true,
+    "legacyWholeCollectionVerifierPassed": false,
+    "legacyFailureCount": 6405,
+    "reason": "Existing archived README checksum drift and many later private analysis files outside the original catalog; not a firmware-source checksum failure. Detailed report retained privately; original historical public verification report preserved."
+  },
+  "privateLogSHA256": {
+    "build-deferred.stdout.txt": "b7cb2bb302ce4d754c12b4a9e27f8b6114c5b6e972c4cbd51a08765a68bc7a39",
+    "build-deferred.stderr.txt": "54b60f09c958c60b175c178f65a9cd0908ddda298026f15618f98f683c076d79",
+    "swift-accepted.stdout.txt": "f77124d674f25171f53d63868c8749921f8540e50c8c3e8bfc1e29d6ae4b0b86",
+    "swift-accepted.stderr.txt": "f565092285a9f5be933427d49e05b79e6c8c3cfa7797e89fbef7f49100dc8fa4",
+    "app-accepted.stdout.txt": "bb3f95968096632b6670a5c3d1b959722d1312cea844ad61a69996aa11e3156d",
+    "app-accepted.stderr.txt": "2949c7df610da8834505f5c44b81e205bba243507e87c94655e90788bcea6854",
+    "decoder-accepted.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decoder-accepted.stderr.txt": "fe836cbecd3b6b4f70bec51b58d30c3e45ad72ae7fb3cb63421a0f7337e651ae"
+  },
+  "sourceSHA256": {
+    "firmware/upstream-diagnostic/src/startup_trace.c": "239cd8b4637cd34631c9624dcec6efb709d033a640e547c818359bb5ac05ba94",
+    "firmware/upstream-diagnostic/src/startup_trace.h": "eeccc74cce337d970e9e579c41ec55c9546024e75d7cf4e44cdb9c4c1c850f9f",
+    "firmware/upstream-diagnostic/src/startup_trace_flash.c": "cffa577712febb8b19f0fd7590fbf9feb94c0628deb0d9ece52a8aadc53da322"
+  },
+  "evidenceSHA256": {
+    "upstream-32-preserved-2026-10-15.json": "00008b62bf880090d538a21c6788e3ecd0802dde40e34b2a39dfc274850be5a3",
+    "upstream-32-host-tests-2026-10-15.json": "3eb8a02d1466d4d9c3aac1b38aabf31038345467f60ca6b70ba6a01e97fc8b6e",
+    "upstream-32-flash-arm-2026-10-15.json": "99b6ded0123b681a48b70beba0d40b4c35290a6b420f510a71a6a6ef2f967744"
+  }
+}

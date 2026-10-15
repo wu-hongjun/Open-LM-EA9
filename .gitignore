@@ -20,6 +20,7 @@ __pycache__/
 /tools/rea-analysis/
 /firmware/ea9/build/
 /firmware/upstream-baseline/build/
+/firmware/upstream-diagnostic/build/
 /artifacts/firmware-milestone/
 /artifacts/factory-af*/
 /artifacts/af25-*

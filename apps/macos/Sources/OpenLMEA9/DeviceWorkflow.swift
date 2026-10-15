@@ -36,6 +36,7 @@ enum DeviceLensAction {
         if updateStateError != nil || (waitingForVerification && devices.count == 1 && !pendingBelongsToConnectedAdapter) { return .tools }
         if waitingForVerification { return .verify }
         if installedCameraFailureHold { return .tools }
+        if currentAppliedLens?.firmwareVersion == "3.2.0" { return .tools }
         if !stockUploadQualified { return .setup }
         if variantForLensChanges == nil { return .read }
         if variantForLensChanges?.supportsLensProfileChanges == false && !preparedMatchesApplied { return .tools }
@@ -75,6 +76,7 @@ enum DeviceLensAction {
         if let version = currentAppliedLens?.firmwareVersion, Self.cameraFailureHolds[version] != nil {
             return "AF \(version.split(separator: ".").prefix(2).joined(separator: ".")) camera testing held"
         }
+        if currentAppliedLens?.firmwareVersion == "3.2.0" { return "Startup diagnostic candidate" }
         if isDirty { return "Save your lens edits" }
         if loadError != nil { return "Recover your lens library" }
         if preparedLensIssue != nil { return "Finish this lens profile" }
@@ -99,6 +101,7 @@ enum DeviceLensAction {
         if let reason = Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] {
             return reason + " Keep the camera off; open USB tools to review the verified image and backup."
         }
+        if currentAppliedLens?.firmwareVersion == "3.2.0" { return "Camera compatibility is unqualified. After one coordinated camera cycle, use USB tools to save a read-only backup for diagnostic decoding." }
         if isDirty { return "Save or discard the changes in the lens editor before applying a profile." }
         if loadError != nil { return "The saved library was preserved. Import a valid library from Lens Library to recover it." }
         if let issue = preparedLensIssue { return issue }
@@ -113,6 +116,7 @@ enum DeviceLensAction {
     var workflowSymbol: String {
         if busy { return "arrow.triangle.2.circlepath" }
         if installedCameraFailureHold { return "exclamationmark.triangle.fill" }
+        if currentAppliedLens?.firmwareVersion == "3.2.0" { return "waveform.path.ecg" }
         if preparedMatchesApplied && !waitingForVerification && !reconnectRequired { return "checkmark.circle.fill" }
         return "cable.connector"
     }

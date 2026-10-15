@@ -273,6 +273,7 @@ private actor DiscoveryFixture {
     #expect(model.installedCameraFailureHold && !model.canApplyLens)
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "AF 3.0 camera testing held")
     #expect(!model.canInstallUpstreamBaseline && model.workflowSymbol == "exclamationmark.triangle.fill")
+    #expect(model.canInstallStartupDiagnostic)
     try store.saveApplied(AppliedLens(device: device, setting: try #require(image.setting), firmwareVersion: "3.1.0", imageSHA256: digest(image.data), verifiedAt: Date()))
     try store.saveQualification(device: device, transactionID: UUID())
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.1.0"))
@@ -285,6 +286,15 @@ private actor DiscoveryFixture {
     model.chooseDeviceLens("contax-zeiss-85-f1-4")
     #expect(model.variantForLensChanges == .autofocusUpstreamBaseline)
     #expect(!model.canApplyLens && !model.canInstallUpstreamBaseline)
+    #expect(!model.canInstallStartupDiagnostic)
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "AF 3.1 camera testing held")
     #expect(model.currentAppliedLens?.setting.id == profile.id && model.pendingUpdate == nil)
+    let diagnostic = try ApplicationImage.personalized(profile, variant: .autofocusStartupDiagnostic)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(diagnostic.setting), firmwareVersion: "3.2.0", imageSHA256: digest(diagnostic.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.2.0"))
+    model.chooseDeviceLens(profile.id)
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallStartupDiagnostic)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Startup diagnostic candidate")
+    #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
 }
