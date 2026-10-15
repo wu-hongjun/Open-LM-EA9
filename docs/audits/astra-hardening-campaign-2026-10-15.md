@@ -1,5 +1,12 @@
 # Astra firmware hardening campaign — October 15, 2026
 
+**Closed; heartbeat PAUSED.** The matrix records 32 numbered scopes: 28 completed
+Astra reviews, three interrupted Astra scopes continued by root (12/13/26), and
+one root-only extension (27). The minimum ten Astra lanes was exceeded.
+[Final evidence-based status](../evidence/firmware-hardening-final-2026-10-15.md):
+3.6 passed USB verification but failed camera capture/shutdown; further trials
+are held. No factory-parity or stable-camera release was achieved.
+
 The owner explicitly requested a minimum of ten Astra lanes auditing and fixing
 different concerns, with a new offline candidate, documentation, commits and
 push. The runtime allows four concurrent agents including root, so three Astra
@@ -8,11 +15,14 @@ workbench directory. Root owns shared production/build/app changes and release
 publication; lanes provide bounded reproductions, modules or applicators and
 independent review. Do not count a queued lane as completed.
 
-All lanes use **gpt-6-astra**. The current foundation is frozen upstream C 3.2,
+All Astra invocations used **gpt-6-astra**; root-only/interrupted dispositions
+are distinguished in the matrix. The initial foundation was frozen upstream C 3.2,
 SHA-256 `e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df`.
 No lane may open/enumerate the adapter, send USB reports, flash, run the updater,
-drive hardware or mutate canonical Application Support state. 3.2 remains
-uploaded but awaiting physical reconnect/strict verification. Published images,
+drive hardware or mutate canonical Application Support state. At kickoff 3.2
+awaited physical reconnect/strict verification; later owner-coordinated native
+verification resolved that transaction before separate 3.6 installation/testing.
+The final report supersedes earlier pending-state entries below. Published images,
 original recovery, unit dumps and keys are immutable/private as appropriate.
 
 | Lane | Scope | State | Write ownership |

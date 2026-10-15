@@ -8,8 +8,10 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-An [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
-is running through 08:55 America/New_York on October 15. The first eleven Astra
+The [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
+has closed and its heartbeat is paused. [Final results and remaining gates](docs/evidence/firmware-hardening-final-2026-10-15.md)
+record source improvements and the failed 3.6 camera trial; stable firmware and
+factory parity remain unachieved. The first eleven Astra
 lanes produced frozen [upstream C 3.3](firmware/candidates/3.3.0/README.md).
 Follow-up audits now produce [3.6 offline](firmware/candidates/3.6.0/README.md):
 a scoped startup EIC handoff prevents competing receive producers while keeping

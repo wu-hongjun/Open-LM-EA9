@@ -1,0 +1,106 @@
+{
+  "status": "time-window-closed-stable-firmware-goal-not-achieved",
+  "recordedAtUTC": "2026-10-15T13:06:30.731824+00:00",
+  "sourceCommitBeforeCloseout": "9938b7691ec5906521d339a7253c9c6707b8046f",
+  "authorizedWindow": {
+    "startUTC": "2026-10-15T04:55:51Z",
+    "endUTC": "2026-10-15T12:55:51Z",
+    "timezone": "America/New_York",
+    "startLocal": "2026-10-15T00:55:51-04:00",
+    "endLocal": "2026-10-15T08:55:51-04:00"
+  },
+  "closingHeartbeatReceivedUTC": "2026-10-15T13:01:03.987Z",
+  "automation": {
+    "id": "lm-ea9-overnight-audit-and-polish",
+    "status": "PAUSED",
+    "pausedAtUTC": "2026-10-15T13:02:16.178Z",
+    "nativeToolUpdateAndReadOnlyConfigVerificationPassed": true,
+    "otherFieldsPreserved": true
+  },
+  "auditCampaign": {
+    "numberedScopes": 32,
+    "completedAstraReviewsRecorded": 28,
+    "interruptedAstraScopesContinuedByRoot": [
+      12,
+      13,
+      26
+    ],
+    "rootOnlyScope": [
+      27
+    ],
+    "requestedMinimumAstraLanes": 10,
+    "minimumSatisfied": true,
+    "newAgentsAfterDeadline": 0
+  },
+  "releases": {
+    "newOfflineCandidates": [
+      "3.3.0",
+      "3.4.0",
+      "3.5.0",
+      "3.6.0"
+    ],
+    "latestFirmware": "3.6.0",
+    "latestFirmwareSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+    "latestFirmwareCameraStatus": "capture-and-shutdown-failed-held",
+    "newCandidateAfter36": false,
+    "appVersion": "0.19.1",
+    "appBuild": 24,
+    "swiftTestsPassed": 53,
+    "signedPackagingPassed": true,
+    "nativeCLISHA256": "781231a3e6b6ef29e442cef982f92e4eb158d805ac315d226bf112eeb332d394"
+  },
+  "hardwareFromEarlierOwnerCoordinatedRecords": {
+    "pending32StrictVerificationResolved": true,
+    "firmware36StrictPreCameraVerificationPassed": true,
+    "ownerReportedCaptureFreezeAndShutdownNonresponse": true,
+    "postCameraReadOnlyBackupCompleted": true,
+    "onlyDiagnosticFlashChanged": true,
+    "validDiagnosticPages": 13,
+    "retainedEvents": 48,
+    "evictions": 6429,
+    "stickyFault": "servo-wrong-way",
+    "shutdownUARTDisableBoundaryReached": true,
+    "shutterRootCauseEstablished": false,
+    "physicalShutdownProven": false,
+    "actualCameraSettingsVerified": false,
+    "lastRecordedInstalledVersion": "3.6.0",
+    "lastReportedAdapterLocation": "USB cap",
+    "freshHardwareCheckInCloseout": false
+  },
+  "preservation": {
+    "priorReleaseRecoveryPinArtifactsUnchanged": 60,
+    "latest36ImageManifestResourceUnchanged": true,
+    "originalStockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+    "rawUnitDataFramesAndKeysKeptPrivate": true
+  },
+  "factoryReconstruction": {
+    "status": "partial",
+    "inventoriedApplicationFunctions": 235,
+    "applicationSemanticModelUnionEntries": 41,
+    "factoryParityEstablished": false,
+    "currentController": "pinned upstream C"
+  },
+  "postDeadlineScope": {
+    "newFirmwareChanges": 0,
+    "newTestCampaigns": 0,
+    "hardwareEnumerationsOrReports": 0,
+    "appOrUpdaterLaunches": 0,
+    "canonicalApplicationSupportMutations": 0,
+    "actions": "Read existing evidence, verify preserved artifacts, pause existing heartbeat, publish/commit/push closing documentation"
+  },
+  "nextEvidenceGate": [
+    "Fault-time motion samples and accepted-target/retarget context",
+    "Capture ownership and known camera settings tied to shutter event",
+    "Evidence after UART disable through PA23 and camera power state"
+  ],
+  "evidenceSHA256": {
+    "docs/evidence/upstream-33-hardening-2026-10-15.json": "1ad8445527b6263e30c9f0dd6e1d3e48a8fb528a3769add07e57e91e3f353264",
+    "docs/evidence/upstream-34-bounded-2026-10-15.json": "f4af702b9c780dce62622140230f1e59b7e8abe57e030d77fe0e0d424c339937",
+    "docs/evidence/upstream-35-absolute-2026-10-15.json": "5d0acfb762743d4c6b034cbbe89ea0aaeca38f4a2ce6676c520422099c23ecc7",
+    "docs/evidence/upstream-36-handoff-2026-10-15.json": "2021c97d5014e10ccae7c348bb866c5cb8e6c10d43416ced303b047c2ec37fd1",
+    "docs/evidence/upstream-36-camera-failure-2026-10-15.json": "a601354741f7fea2dad4977ae861ad7939f6228b8021d18cf9c4955f66d5cb02",
+    "docs/evidence/upstream-36-upload-2026-10-15.json": "cf9efbf9f8a080810a3b3137a29440c71012ed06852f12d2cde2eee51641a8eb",
+    "docs/evidence/upstream-36-preserved-2026-10-15.json": "02e54c7d1bd7da8269ccbea6acf1c22620d59e9723febd27396284f64f9788b6",
+    "firmware/upstream-hardening/followup/32-af36-capture-failure/results.json": "ef1f23b1da4fa4aa7e5ce353fcce358a2c94eae2292ca58a8ffb72692422b1c3"
+  }
+}

@@ -1,11 +1,14 @@
 # Eight-hour firmware hardening — October 15, 2026
 
-**In progress.** Authorized window: **04:55:51–12:55:51 UTC**, October 15
-(00:55:51–08:55:51 America/New_York). Hourly continuation is attached to this
-chat, with an explicit end time. This document is the handoff between passes;
-update the ledger below rather than starting another overlapping initiative.
-Document, commit and push each completed, verified batch. At the deadline,
-publish the actual results and unresolved gates, and pause the heartbeat.
+**Time window closed; stable firmware goal not achieved.** Authorized window:
+**04:55:51–12:55:51 UTC**, October 15
+(00:55:51–08:55:51 America/New_York). The closing heartbeat arrived at
+13:01:03 UTC; native pause was confirmed at 13:02:16 UTC. No new substantive
+firmware, hardware or agent work followed the deadline. AF 3.6 remains held
+after the owner's capture/shutdown failure. [Final results and remaining gates](evidence/firmware-hardening-final-2026-10-15.md).
+The chronological ledger below preserves each pass's capture-time status;
+earlier pending-state entries are superseded by the later installation/failure
+records and final report. The heartbeat is **PAUSED**.
 
 The working foundation remains upstream C, with native Swift/IOHID on the Mac.
 Use pinned upstream `d52ed06cc449918f938e0695fbf29a0c4141f2b2`, the archived
@@ -434,3 +437,21 @@ stock recovery remain unchanged. No app launch or hardware write followed the
 failed test. This is a failed physical milestone with useful evidence, not a
 stable release or factory parity. Continue only bounded offline evidence work
 until the authorized deadline; final status must retain this failure.
+
+### Closed at the authorized deadline
+
+The eight-hour window ended at 08:55:51 America/New_York. Its delayed closing
+heartbeat arrived at 09:01:03; the native automation update and read-only
+configuration check confirm **PAUSED at 09:02:16**, with other fields preserved.
+No additional firmware patch, test campaign, hardware access or agent lane was
+started in this closing pass. Existing published artifacts were checked and
+closing documentation prepared for commit/push.
+
+[Final report](evidence/firmware-hardening-final-2026-10-15.md) records 28 completed
+Astra reviews among 32 numbered scopes, modular source hardening, software gates,
+partial factory reconstruction and the failed physical result. All 60 prior
+release/recovery/pin artifacts and frozen 3.6 image/manifest/resource remain exact.
+3.2 verification is resolved; 3.6 is strictly byte-verified but held after capture/
+shutdown failure. App0.19.1/build24 and 53 passing Swift tests are preserved.
+No factory parity, optical AF or shutter-cause claim is made. The next scope is
+discriminating motion/capture/post-flush evidence, not another trial of 3.6.
