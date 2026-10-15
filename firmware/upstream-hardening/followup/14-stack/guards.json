@@ -1,0 +1,32 @@
+[
+  {
+    "case": "insufficient-budget",
+    "status": "rejected",
+    "diagnostic": "FAIL: conditional bound 1560 exceeds budget 1559"
+  },
+  {
+    "case": "unconditional-claim",
+    "status": "rejected",
+    "diagnostic": "FAIL: unconditional safety unavailable: Prior stock reconstruction resolves the intended MSP/vector handoff at 0x2510; CONTROL/PSP selection, PRIMASK and physical execution of that path remain unverified.; SERCOM1 and SysTick priorities, other enabled/pending IRQs and interrupt state during the reconstructed vector transition remain unestablished; only EIC priority 1 is explicitly configured by the app.; No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.; Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  },
+  {
+    "case": "missing-callback",
+    "status": "rejected",
+    "diagnostic": "FAIL: unknown indirect call: servo_move_rel@7236"
+  },
+  {
+    "case": "missing-library-frame",
+    "status": "rejected",
+    "diagnostic": "FAIL: unknown library frame: memcpy"
+  },
+  {
+    "case": "wrong-elf-pin",
+    "status": "rejected",
+    "diagnostic": "FAIL: pin mismatch: hardened.elf"
+  },
+  {
+    "case": "recursive-callback",
+    "status": "rejected",
+    "diagnostic": "FAIL: recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_rel -> servo_move_rel"
+  }
+]

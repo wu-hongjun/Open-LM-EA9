@@ -1,0 +1,136 @@
+{
+  "pins": {
+    "hardened.elf": "0a25fa573d8ea274bd0c50cda7ac743a2c3e2e3695a6093985c8506a3e90ee8a",
+    "hardened.map": "d5d2d39e4aef47ca2bc28abef48a4cac4b110db52c426bfd6b6911c4da6d7565",
+    "manifest.json": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+    "contax-zeiss-50-f1-4.bin": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+    "raw.bin": "6fa34ab403ec8ebc40481963ebae0c97c14ce151556b05bfaa2bbf732f14e2a4"
+  },
+  "libraryFrames": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24
+  },
+  "indirectCalls": {
+    "50c4": {
+      "caller": "deregister_tm_clones",
+      "targets": [],
+      "evidence": "Linked weak callback literal at 0x50d0 is zero; clone endpoints both 0x9568."
+    },
+    "50ec": {
+      "caller": "register_tm_clones",
+      "targets": [],
+      "evidence": "Linked weak callback literal at 0x50f8 is zero; clone endpoints both 0x9568."
+    },
+    "55e6": {
+      "caller": "em_shutdown_ack",
+      "targets": [
+        "powerdown_signal"
+      ],
+      "evidence": "main registers powerdown_signal; emount.c g_powerdown has no other nonzero writer."
+    },
+    "56b0": {
+      "caller": "on_cs_edge",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ],
+      "evidence": "main registers motion_shutdown_inhibit; g_shutdown_inhibit has no other nonzero writer."
+    },
+    "67e4": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_cs_edge"
+      ],
+      "evidence": "em_init is sole em_eic_init caller; installs on_cs_edge."
+    },
+    "67f8": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_vd_edge"
+      ],
+      "evidence": "em_init installs on_vd_edge. CS/VD callbacks are sequential, not nested."
+    },
+    "7094": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_retarget"
+      ],
+      "evidence": "cfg+52 retarget; STOCK and its local copies retain this pointer."
+    },
+    "70be": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort; STOCK and local copies."
+    },
+    "7236": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "cfg+48 pump; STOCK and local copies."
+    },
+    "728e": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort."
+    },
+    "7318": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort."
+    },
+    "7520": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "cfg+48 final pump."
+    },
+    "93c0": {
+      "caller": "__libc_init_array",
+      "targets": [],
+      "evidence": "preinit array endpoints both 0x9554; no calls."
+    },
+    "93ca": {
+      "caller": "__libc_init_array",
+      "targets": [
+        "frame_dummy"
+      ],
+      "evidence": "init array [0x9554,0x9558) holds 0x5129 (Thumb frame_dummy)."
+    }
+  },
+  "unknowns": [
+    "Prior stock reconstruction resolves the intended MSP/vector handoff at 0x2510; CONTROL/PSP selection, PRIMASK and physical execution of that path remain unverified.",
+    "SERCOM1 and SysTick priorities, other enabled/pending IRQs and interrupt state during the reconstructed vector transition remain unestablished; only EIC priority 1 is explicitly configured by the app.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector."
+  }
+}

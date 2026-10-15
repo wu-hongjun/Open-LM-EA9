@@ -1,0 +1,430 @@
+{
+  "status": "tested-future-overlay-not-published",
+  "baseImageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "casesPerSource": 22,
+  "frozenNegativeControls": 18,
+  "proposedPasses": 22,
+  "ordinaryAndCaptureWireUnchanged": true,
+  "oldSessionWireObservations": [
+    {
+      "cut": 1,
+      "reverse": 0,
+      "stdout": "action=1 cut=1 fixed=0 reverse=0 conversions=1 answers=1 pending=0 epoch=1 readiness=0\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a20255\nPASS"
+    },
+    {
+      "cut": 2,
+      "reverse": 0,
+      "stdout": "action=1 cut=2 fixed=0 reverse=0 conversions=1 answers=1 pending=0 epoch=1 readiness=0\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a20255\nPASS"
+    },
+    {
+      "cut": 1,
+      "reverse": 1,
+      "stdout": "action=1 cut=1 fixed=0 reverse=1 conversions=1 answers=1 pending=0 epoch=1 readiness=0\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115b0255\nPASS"
+    },
+    {
+      "cut": 2,
+      "reverse": 1,
+      "stdout": "action=1 cut=2 fixed=0 reverse=1 conversions=1 answers=1 pending=0 epoch=1 readiness=0\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115b0255\nPASS"
+    }
+  ],
+  "results": [
+    {
+      "source": "frozen33",
+      "action": 0,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=0 cut=0 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001730600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a30255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "frozen33",
+      "action": 1,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=1 cut=1 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=1 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 72.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 1,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=1 cut=2 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=1 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 72.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 2,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=2 cut=1 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 2,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=2 cut=2 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 3,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=3 cut=1 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 3,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=3 cut=2 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 4,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=4 cut=1 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 4,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=4 cut=2 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 5,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": -6,
+      "stdout": "action=5 cut=0 fixed=1 reverse=0 conversions=65 answers=4 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (conversions==(fixed?EM_QUERY_Q:65)), function main, file test_query.c, line 74.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 6,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=6 cut=0 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a20255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "frozen33",
+      "action": 0,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=0 cut=0 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001730600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115c0255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "frozen33",
+      "action": 1,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=1 cut=1 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=1 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 72.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 1,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=1 cut=2 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=1 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 72.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 2,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=2 cut=1 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 2,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=2 cut=2 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=0",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 3,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=3 cut=1 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 3,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=3 cut=2 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 4,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=4 cut=1 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 4,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=4 cut=2 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (answers==(fixed?0u:1u)), function main, file test_query.c, line 73.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 5,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": -6,
+      "stdout": "action=5 cut=0 fixed=1 reverse=1 conversions=65 answers=4 pending=0 epoch=0 readiness=1",
+      "stderr": "Assertion failed: (conversions==(fixed?EM_QUERY_Q:65)), function main, file test_query.c, line 74.\n"
+    },
+    {
+      "source": "frozen33",
+      "action": 6,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=6 cut=0 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115b0255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 0,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=0 cut=0 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001730600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a30255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 1,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=1 cut=1 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=1 readiness=0\nwire06=f0300001720600000010003010301000160000080000000000000010000000006c020620000000000000000000fb0155\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 1,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=1 cut=2 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=1 readiness=0\nwire06=f0300001720600000010003010301000160000080000000000000010000000006c020620000000000000000000fb0155\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 2,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=2 cut=1 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=0\nshutdown: stale queue state only, no status wire\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 2,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=2 cut=2 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=0\nshutdown: stale queue state only, no status wire\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 3,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=3 cut=1 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 3,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=3 cut=2 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 4,
+      "cut": 1,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=4 cut=1 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 4,
+      "cut": 2,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=4 cut=2 fixed=1 reverse=0 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 5,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=5 cut=0 fixed=1 reverse=0 conversions=4 answers=4 pending=1 epoch=0 readiness=1\nwire06=f0360001730600000010003010301000160000080000000000000010000000006c0206200000000000000000002281012281014a0355\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 6,
+      "cut": 0,
+      "reverse": 0,
+      "exitCode": 0,
+      "stdout": "action=6 cut=0 fixed=1 reverse=0 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c020620000000000000000000228101a20255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 0,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=0 cut=0 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001730600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115c0255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 1,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=1 cut=1 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=1 readiness=0\nwire06=f0300001720600000010003010301000160000080000000000000010000000006c020620000000000000000000fb0155\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 1,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=1 cut=2 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=1 readiness=0\nwire06=f0300001720600000010003010301000160000080000000000000010000000006c020620000000000000000000fb0155\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 2,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=2 cut=1 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=0\nshutdown: stale queue state only, no status wire\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 2,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=2 cut=2 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=0\nshutdown: stale queue state only, no status wire\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 3,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=3 cut=1 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 3,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=3 cut=2 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 4,
+      "cut": 1,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=4 cut=1 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 4,
+      "cut": 2,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=4 cut=2 fixed=1 reverse=1 conversions=1 answers=0 pending=0 epoch=0 readiness=1\ninhibit/abort: queue state only; production main-loop status schedule not asserted\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 5,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=5 cut=0 fixed=1 reverse=1 conversions=4 answers=4 pending=1 epoch=0 readiness=1\nwire06=f0360001730600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e112e1e11bc0255\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "action": 6,
+      "cut": 0,
+      "reverse": 1,
+      "exitCode": 0,
+      "stdout": "action=6 cut=0 fixed=1 reverse=1 conversions=1 answers=1 pending=0 epoch=0 readiness=1\nwire06=f0330001720600000010003010301000160000080000000000000010000000006c0206200000000000000000002e1e115b0255\nPASS",
+      "stderr": ""
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "cameraQualified": false
+}

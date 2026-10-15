@@ -143,3 +143,49 @@ actual reachable bounds. Do not claim physical timing or optical parity. Keep
 Do not respawn completed lanes just to fill the requested count. Preserve the
 current installation journal and keep camera acceptance separate. At 12:55:51 UTC,
 record actual results and pause the heartbeat as previously instructed.
+
+
+### Follow-up source lifetime, numeric and whole-chain stack audit
+
+Root continued the remaining query/event and numeric-bound scope using new
+follow-up lanes 12–14 rather than respawning completed lanes. Astra 14 completed
+the stack audit; automated content filtering interrupted Astra 12/13, and root
+completed their benign local C tests and proposals. The existing 11 completed
+Astra lanes remain separately recorded. No hardware or canonical state was used.
+
+The [query audit](audits/astra-12-query-2026-10-15.md) reproduces an old-session
+answer emitted in a new handshake's 0x06 tail, plus an unbudgeted replenished
+worker. A staged epoch-owned, four-query-budget worker passes 22 cases, while
+frozen 3.3 fails 18 intended scenario controls. Normal and raw-capture outputs
+remain identical; four additional demonstrations retain the old stale wire bytes.
+Shutdown/abort/inhibit queue facts and synthetic arrival-rate limits are explicit.
+
+The [numeric audit](audits/astra-13-numeric-2026-10-15.md) reproduces four
+signed-overflow cases reached through legal-format but inconsistent raw sensor
+histories. A partial widening proposal passes them and preserves 3,614,554 normal
+checks. The arbitrary predictor probe remains separately unproven reachable and
+unfixed; whole-controller range closure is still required. The combined query/
+arithmetic ARM measurement ends 0x9e84, 644 bytes beyond diagnostic storage; it
+fails the required margin despite a successful text link. **No new image was
+produced, published or installed.** Do not mistake the workbench for a candidate.
+
+The [stack audit](audits/astra-14-stack-2026-10-15.md) establishes a conservative
+conditional 1,560-byte compiled whole-chain envelope against 8,192 reserved bytes.
+Root reran its analyzer and six negative evidence guards. Existing REA evidence
+already resolves the intended stock MSP/VTOR handoff at 0x2510; CONTROL/PSP,
+PRIMASK, inherited IRQ transition/state and physical execution remain unverified.
+This result applies only to frozen 3.3, not the future overlays or measured safety.
+
+[Workbench, tests and results](../firmware/upstream-hardening/followup/README.md)
+retain exact scope, failing controls and proposals. All 52 tracked release/recovery/
+pin artifacts, including 3.3, match the previous committed bytes. The previous
+3.3 qualification stays offline-only; new known source findings should be resolved
+in a separately versioned next candidate before promoting it for camera testing.
+The pending 3.2 installation transaction remains unchanged.
+
+**Next bounded pass:** finish reachable arithmetic closure and replace expensive
+widening with a justified bounded policy or mathematically equivalent calculation;
+recover the required code/data margin without removing fault guards or shrinking
+reserved logs. Compose query ownership and rerun complete source/host/release
+checks only when the proposal is ready. Review the unchanged completion/status
+policies against REA where new evidence is needed. Keep all published pins frozen.

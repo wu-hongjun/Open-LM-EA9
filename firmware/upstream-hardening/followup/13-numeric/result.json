@@ -1,0 +1,93 @@
+{
+  "status": "partial-future-overlay-not-a-candidate",
+  "baseImageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "results": [
+    {
+      "source": "frozen33",
+      "case": "servo-positive",
+      "exitCode": -6,
+      "stdout": "REACHABLE rawReads=525 track=2150400 inhibit=0 target=0",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/servo.c:371:27: runtime error: signed integer overflow: -2150400 * 1000 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/servo.c:371:27 \n"
+    },
+    {
+      "source": "frozen33",
+      "case": "servo-negative",
+      "exitCode": -6,
+      "stdout": "REACHABLE rawReads=525 track=-2150400 inhibit=0 target=5952",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/servo.c:371:27: runtime error: signed integer overflow: 2156352 * 1000 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/servo.c:371:27 \n"
+    },
+    {
+      "source": "frozen33",
+      "case": "relative-positive",
+      "exitCode": -6,
+      "stdout": "REACHABLE rawReads=524287 track=2147479552 inhibit=0 delta=32767",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/target.inc:22:15: runtime error: signed integer overflow: 2147479552 + 131068 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/target.inc:22:15 \n"
+    },
+    {
+      "source": "frozen33",
+      "case": "relative-negative",
+      "exitCode": -6,
+      "stdout": "REACHABLE rawReads=524287 track=-2147479552 inhibit=0 delta=-32768",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/target.inc:22:15: runtime error: signed integer overflow: -2147479552 + -131072 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/harness/target.inc:22:15 \n"
+    },
+    {
+      "source": "frozen33",
+      "case": "normal",
+      "exitCode": 0,
+      "stdout": "PASS normal checks=3614554 hash=6324421738769268570",
+      "stderr": ""
+    },
+    {
+      "source": "frozen33",
+      "case": "predictor-arbitrary",
+      "exitCode": -6,
+      "stdout": "",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/src/focus_pred.c:64:54: runtime error: signed integer overflow: 2147483647 * 256 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/frozen33/src/focus_pred.c:64:54 \n"
+    },
+    {
+      "source": "proposal",
+      "case": "servo-positive",
+      "exitCode": 0,
+      "stdout": "REACHABLE rawReads=525 track=2150400 inhibit=0 target=0\nPASS outcome=5 drives=2",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "case": "servo-negative",
+      "exitCode": 0,
+      "stdout": "REACHABLE rawReads=525 track=-2150400 inhibit=0 target=5952\nPASS outcome=5 drives=2",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "case": "relative-positive",
+      "exitCode": 0,
+      "stdout": "REACHABLE rawReads=524287 track=2147479552 inhibit=0 delta=32767\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "case": "relative-negative",
+      "exitCode": 0,
+      "stdout": "REACHABLE rawReads=524287 track=-2147479552 inhibit=0 delta=-32768\nPASS",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "case": "normal",
+      "exitCode": 0,
+      "stdout": "PASS normal checks=3614554 hash=6324421738769268570",
+      "stderr": ""
+    },
+    {
+      "source": "proposal",
+      "case": "predictor-arbitrary",
+      "exitCode": -6,
+      "stdout": "",
+      "stderr": "/Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/proposal/src/focus_pred.c:64:54: runtime error: signed integer overflow: 2147483647 * 256 cannot be represented in type 'int'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /Users/hongjunwu/Git/Open-LM-EA9/artifacts/private/astra-root-13-numeric-3/proposal/src/focus_pred.c:64:54 \n"
+    }
+  ],
+  "normalOutputsIdentical": true,
+  "hardwareReportsSent": 0,
+  "limits": "Responsive inconsistent raw encoder history is a synthetic fault path; arbitrary predictor INT32 input is separately unproven reachable. No full range closure, physical test, release build or image change."
+}

@@ -28,6 +28,9 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 09 | Footprint and reproducible release gates | Integrated; root 208 regressions passed; final 408-byte margin | `lanes/09-release`, [`report`](astra-09-release-2026-10-15.md) |
 | 10 | Independent adversarial source integration | Five composed failures fixed; exact final 7+65+14 checks passed | `lanes/10-integration`, [`report`](astra-10-integration-2026-10-15.md) |
 | 11 | Extra independent Mac host/upload review | Complete; no verified blocker; targeted cases and prepare-only checks pass | `lanes/11-host`, [`report`](astra-11-host-2026-10-15.md) |
+| 12 | Follow-up query epoch and bounded worker | Root completed tests/proposal after interrupted Astra turn; not published | `followup/12-query`, [report](astra-12-query-2026-10-15.md) |
+| 13 | Follow-up numeric reachability | Root completed partial proposal after interrupted Astra turns; range/size gates open | `followup/13-numeric`, [report](astra-13-numeric-2026-10-15.md) |
+| 14 | Exact 3.3 whole-chain stack/IRQ envelope | Astra complete; root analyzer/six negative guards passed; conditional bounds | `followup/14-stack`, [report](astra-14-stack-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -76,3 +79,12 @@ Uploaded 3.2 is still pending physical reconnect and strict verification.
 Candidate 3.3 remains camera-unqualified, with physical capture/exposure/AF-S and
 shutdown evidence still required. The timed campaign continues with bounded
 offline reviews; it must not change a frozen image under the same version.
+
+
+The later [follow-up workbench](../../firmware/upstream-hardening/followup/README.md)
+is not part of frozen 3.3. It identifies additional source defects and a partial
+proposal that currently exceeds the diagnostic boundary. No new candidate or
+hardware action occurred. Rows 12/13 are root-completed source work, not claims
+that interrupted Astra turns completed successfully. Row 14 is a completed Astra
+audit of the existing compiled image. Published images and the 3.2 pending
+transaction remain untouched. The timed ledger tracks the next bounded work.
