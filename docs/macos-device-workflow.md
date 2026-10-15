@@ -9,8 +9,9 @@ compile the original 50mm f/1.4 profile; library edits stay local on those image
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
 The latest packaged candidate is **upstream AF 3.6.0**, camera-unqualified.
-Its [authorized upload](evidence/upstream-36-upload-2026-10-15.md) is complete;
-owner physical reconnect and strict verification are pending. USB tools provide **Install Upstream AF 3.6.0** as a separate
+Its [authorized upload and strict verification](evidence/upstream-36-upload-2026-10-15.md)
+passed after owner-confirmed physical reconnect; camera results and log review
+are pending. USB tools provide **Install Upstream AF 3.6.0** as a separate
 action; changing the dropdown does not install it. The native CLI equivalents
 are `prepare-handoff-upstream` and `apply-handoff-upstream`. Other/edited profiles
 are rejected. [Build/test evidence](evidence/upstream-36-handoff-2026-10-15.md)

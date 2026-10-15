@@ -9,8 +9,9 @@ after owner-confirmed physical reconnect. The [October 15 hardening campaign](fi
 then prepared separately versioned offline candidates with reproduced software
 fault fixes, most recently [3.6](evidence/upstream-36-handoff-2026-10-15.md).
 App 0.19/build 23 includes its separate explicit installation action.
-Its [owner-authorized 3.6 upload](evidence/upstream-36-upload-2026-10-15.md) is
-complete; its own physical reconnect and strict verification are pending.
+Its [owner-authorized 3.6 installation](evidence/upstream-36-upload-2026-10-15.md)
+passed strict verification after its own physical reconnect. One camera cycle
+and log review are requested; results remain pending.
 They retain the upstream controller and native Swift host;
 A7C II acceptance remains unqualified. This source hardening does not replace
 the outstanding initial camera qualification gate.

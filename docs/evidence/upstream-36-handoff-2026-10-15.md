@@ -8,8 +8,9 @@ the image, sources, tests and host integration. [Campaign](../audits/astra-harde
 
 This record describes the offline preparation milestone. The later
 [owner-authorized installation](upstream-36-upload-2026-10-15.md) is recorded
-separately: 3.2 verification passed, 3.6 upload completed, and 3.6's own physical
-reconnect/strict verification remains pending. No camera result is inferred.
+separately: 3.2 verification passed, followed by 3.6 upload and its own physical
+reconnect/strict verification. One camera cycle and logs are requested; no
+camera result is inferred.
 
 ## Startup finding and accepted design
 

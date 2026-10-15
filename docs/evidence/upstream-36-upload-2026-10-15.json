@@ -1,5 +1,5 @@
 {
-  "status": "uploaded-awaiting-owner-physical-reconnect-and-strict-verification",
+  "status": "uploaded-and-strictly-verified-one-camera-cycle-requested",
   "date": "2026-10-15",
   "sourceGitCommit": "89e6d0dd2142e57c930540faa68632794769622e",
   "appVersion": "0.19.0",
@@ -22,7 +22,7 @@
   "countBasis": "Native successful engine/image evidence, not independent wire capture",
   "postSTARTReadsBeforeReconnect": 0,
   "retriesSent": 0,
-  "strictVerificationPassed": false,
+  "strictVerificationPassed": true,
   "resolved32StrictVerificationBeforeUpload": true,
   "uploadPerformed": true,
   "canonicalArmedConnectionMarkerRetained": true,
@@ -40,11 +40,68 @@
     "durableBeforeSTART": true
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestingPerformed": false,
+  "cameraTestingPerformed": null,
   "cameraAcceptancePassed": null,
   "privateLogSHA256": {
     "upload.stdout.txt": "633a44973b6733d0392d052329edfb31277982c3cb7751f2311efc5c67750dfb",
     "upload.progress.txt": "e1aa9ef5201b3b28f72a0a4392745aa980b584adce41375de545c0e2faa04bce",
     "planned50.bin": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f"
+  },
+  "verifiedAtUTC": "2026-10-15T12:23:54.944275+00:00",
+  "verifiedAtLocal": "2026-10-15T08:23:54.944275-04:00",
+  "verificationNativeExitCode": 0,
+  "physicalReconnectConfirmedAfterUpload": true,
+  "newConnectionAndSameUnitValidated": true,
+  "readback": {
+    "firmwareVersion": "3.6.0",
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "flashSHA256": "7b15614f706b6a937b586d4ab3fed76306a73e7d2ed02df421d529586f93ac7f",
+    "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+    "bootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895"
+  },
+  "strictChecks": {
+    "completeApplicationExact": true,
+    "initialDiagnosticTailBlank": true,
+    "knownMetadataExact": true,
+    "bootCodeUnchanged": true,
+    "protectedGapUnchanged": true,
+    "retainedUpperFlashUnchanged": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true
+  },
+  "excludedMetadataRange": {
+    "range": "[0x403a,0x4040)",
+    "bytes": 6,
+    "reason": "Established adjacent loader RAM bytes copied by START; no other exclusion"
+  },
+  "offlineIndependentAuditPassed": true,
+  "canonicalAppliedLensAndFirmwareObservationPublished": true,
+  "armedUploadConnectionMarkerRetained": true,
+  "verifiedReadConnectionMarkerClearedByNativeService": true,
+  "verificationLogSHA256": {
+    "verify.stdout.txt": "10252dcbd03205f23cb330b9bcd5ccdd6b6e9c41be26694e7255fac13298e326",
+    "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+  },
+  "initialCameraCycleRequested": true,
+  "cameraResultsReported": false,
+  "diagnosticLogRetrievalPending": true,
+  "noRestartOrAFSBeforeLogReview": true,
+  "requestedCameraSettings": {
+    "camera": "Sony A7C II",
+    "lens": "Contax Zeiss 50mm f/1.4 with C/Y-to-M converter",
+    "exposureMode": "still-photo A",
+    "focusMode": "MF separately selected",
+    "preAF": "Off where available",
+    "exposureCompensationEV": 0,
+    "iso": "Auto",
+    "physicalLensFocus": "infinity",
+    "physicalIris": "f/1.4",
+    "idleSeconds": 10,
+    "photoPrerequisites": "Normal updating preview/aperture/motion and confirmed MF; otherwise skip",
+    "actualSettingsVerified": false
   }
 }

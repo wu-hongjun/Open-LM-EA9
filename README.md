@@ -19,12 +19,13 @@ production-path regressions with failing controls, independent composition and
 compiled writer/stack checks, and all 53 Swift tests pass.
 [Evidence and limitations](docs/evidence/upstream-36-handoff-2026-10-15.md).
 The offline decoder also distinguishes inconsistent or partial multi-boot logs.
-**3.6 is uploaded; its separate physical reconnect and strict verification are
-pending.** The owner subsequently authorized the interactive installation after
+**3.6 is uploaded and strictly byte-verified after physical reconnect; one camera
+cycle and log review are requested.** The owner authorized the interactive installation after
 [3.2 strict verification passed](docs/evidence/upstream-32-upload-2026-10-15.md).
 No hardware was accessed during scheduled work; the separate
 [3.6 installation record](docs/evidence/upstream-36-upload-2026-10-15.md)
-tracks the owner-coordinated USB steps. No 3.6 camera qualification is claimed.
+tracks the owner-coordinated USB steps. No 3.6 camera results or qualification
+are claimed yet.
 Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,

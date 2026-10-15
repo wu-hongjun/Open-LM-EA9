@@ -9,8 +9,9 @@ on upstream C; Rust is deferred while qualifying the camera contract.
 The latest packaged candidate is [upstream AF 3.6](evidence/upstream-36-handoff-2026-10-15.md),
 for the original 50mm f/1.4 profile. It has no runtime profile row.
 [3.2 verification passed](evidence/upstream-32-upload-2026-10-15.md) after physical
-reconnect; the separately authorized [3.6 upload](evidence/upstream-36-upload-2026-10-15.md)
-now awaits its own physical reconnect and strict verification.
+reconnect; the separately authorized [3.6 installation](evidence/upstream-36-upload-2026-10-15.md)
+also passed strict verification after its own physical reconnect. Camera results
+and post-cycle logs remain pending.
 No 3.6 camera qualification is claimed. See the [current Device workflow](macos-device-workflow.md)
 and [coordinated 3.6 procedure](upstream-handoff-test.md). The dated
 [initial prototype record](evidence/macos-prototype-2026-10-10.md) preserves the

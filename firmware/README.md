@@ -11,8 +11,8 @@ and commands. App 0.19/build 23 includes a separate explicit 3.6 installation ac
 
 **Hardware gate:** [3.2 strict verification passed](../docs/evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect. The separately authorized
-[3.6 upload is complete](../docs/evidence/upstream-36-upload-2026-10-15.md),
-awaiting its own physical reconnect and strict verification. Follow the
+[3.6 upload and strict verification passed](../docs/evidence/upstream-36-upload-2026-10-15.md)
+after its own physical reconnect. One camera cycle and log review are requested. Follow the
 [coordinated camera and log procedure](../docs/upstream-handoff-test.md).
 No offline test establishes capture, exposure, optical AF or factory parity.
 

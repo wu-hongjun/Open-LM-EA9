@@ -179,3 +179,9 @@ at 12:02:46 UTC; 3.6 upload completed at 12:05:50 UTC. Its own physical reconnec
 and strict verification are now pending in the [live installation record](../evidence/upstream-36-upload-2026-10-15.md).
 Agents and scheduled work remained offline. This interactive authorization does
 not permit a heartbeat to enumerate or operate hardware.
+
+The owner then confirmed the separate 3.6 physical reconnect. Native strict
+verification and an independent offline audit passed at 12:23:54 UTC. One
+loaded-lens MF cycle and post-cycle log review are requested; actual settings
+and camera results remain pending in the installation record. The scheduled
+and agent boundary remains offline.

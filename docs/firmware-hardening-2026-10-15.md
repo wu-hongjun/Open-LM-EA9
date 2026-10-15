@@ -20,12 +20,13 @@ take precedence over proposed explanations.
 window. In a later interactive turn, the owner explicitly requested resolving
 its verification and installing 3.6, and confirmed physical reconnect. **3.2
 strict verification passed at 12:02:46 UTC; the separate 3.6 upload completed
-at 12:05:50 UTC and now awaits its own owner physical reconnect and strict
-verification.** [Installation record](evidence/upstream-36-upload-2026-10-15.md).
-No camera cycle/log retrieval occurred. These hardware steps are separately
+at 12:05:50 UTC and passed its own strict verification at 12:23:54 UTC after
+owner-confirmed physical reconnect.** [Installation record](evidence/upstream-36-upload-2026-10-15.md).
+One camera cycle and post-cycle log review are requested; results remain pending.
+These hardware steps are separately
 owner-coordinated and do not extend the offline scope of scheduled passes.
 Do not infer a reconnect from elapsed time or enumerate the adapter during a
-heartbeat. Keep the pending 3.6 journal and reconnect guard intact.
+heartbeat. Keep native journal and reconnect guards intact.
 
 Scheduled work is offline: no device enumeration/open, HID reports, updater,
 flash, motor operation or canonical Application Support mutation. Preserve raw
@@ -384,3 +385,21 @@ pre-format-as-wire mutation; 16 current-guide checks and 214 relative Markdown
 targets. All 60 prior release/recovery/pin artifacts, frozen 3.6 image/manifest/
 resource and both historical shutdown-oracle JSON files are unchanged.
 [Integration evidence](evidence/release-guidance-and-factory-tail-2026-10-15.json).
+
+### Interactive 3.6 reconnect verification
+
+The owner explicitly confirmed physical reconnect after 3.6 upload. Native
+verification and the independent offline audit passed at **12:23:54 UTC /
+08:23:54 America/New_York**. Both full-flash/auxiliary read passes match; the
+entire 20,480-byte application, including pristine diagnostics, matches its pin.
+Known metadata and all protected flash/user-row/calibration/device-ID checks
+pass, with only the established six metadata scratch bytes excluded. No writes
+or retries occurred during verification. The canonical journal is verified;
+native reconnect safeguards remain intact.
+
+One loaded-lens MF preview/photo/idle/shutdown cycle was requested, with actual
+settings/results still unknown. The owner was asked to return the unpowered
+adapter to its USB cap and explicitly confirm physical reconnect for later
+read-only backup/log retrieval. No further USB report is authorized by elapsed
+time or this ledger; await that confirmation. No AF-S/restart or camera-stability
+claim precedes cycle and log review. [Live record](evidence/upstream-36-upload-2026-10-15.md).
