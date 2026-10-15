@@ -1,0 +1,42 @@
+[
+  {
+    "case": "insufficient-budget",
+    "status": "rejected",
+    "diagnostic": "conditional bound 1560 exceeds budget 1559"
+  },
+  {
+    "case": "missing-pump-callback",
+    "status": "rejected",
+    "diagnostic": "unknown indirect call: servo_move_rel@723a"
+  },
+  {
+    "case": "missing-library-frame",
+    "status": "rejected",
+    "diagnostic": "unknown library frame: memcpy"
+  },
+  {
+    "case": "wrong-elf-pin",
+    "status": "rejected",
+    "diagnostic": "pin mismatch: hardened.elf"
+  },
+  {
+    "case": "recursive-servo-callback",
+    "status": "rejected",
+    "diagnostic": "recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_rel -> servo_move_rel"
+  },
+  {
+    "case": "wrong-callback-caller",
+    "status": "rejected",
+    "diagnostic": "indirect caller mismatch: 723a"
+  },
+  {
+    "case": "unconditional-claim",
+    "status": "rejected",
+    "diagnostic": "unconditional safety unavailable"
+  },
+  {
+    "case": "exact-bound-budget",
+    "status": "accepted",
+    "budgetBytes": 1560
+  }
+]

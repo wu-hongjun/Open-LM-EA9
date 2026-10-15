@@ -1,0 +1,89 @@
+{
+  "sourceHashes": {
+    "src/abs_encoder.c": "0fa218deffe16bdf1ad08c6cf06f34db034742c60f98d27c407960e94cef17c2",
+    "src/abs_encoder.h": "222b4fd167e64def7a9421dfe452c2bddd071c6cd2116c7914c70fab611c31f7",
+    "src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "src/clock.c": "c6885dc2011cc7f288efda5d22228468659a4a319bb310e50dde58f0c8e31e17",
+    "src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "src/delay.c": "1aad5912b7675622b34968a63b9266b59b00ec12ff6018b0b414c0a9648e5d66",
+    "src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "src/ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "src/em_eic.c": "fc0df89898d81d7f40ac11356549379c4db6b11fb6075f806214437db2d5d0fd",
+    "src/em_eic.h": "f5ebf5cd079a67f3afb11917b370b85d07cb541a8c9a432aafb7a40cf6ad7f35",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/em_uart.h": "6353df5d6ab1e5e27c4a60e7824c8019216da9eea7ad805580c69fa463a7d892",
+    "src/emount.c": "f76801a1bd5cf625e5c34af06eb65baf7564bcbe9a0f36c62a44102df40c734b",
+    "src/emount.h": "07dc76d0aa89a0427a8054932d3bcbb2dda52c59e4e69753cb6536f1bd391b7d",
+    "src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "src/focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "src/focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "src/focus_pred.c": "8043c0ae7b8c44e60c318bc95510bef72933795210aa903d681e693d84788f6d",
+    "src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "src/main.c": "7384b4853fa45fe73c5e2978e31b87ba40bff58bed3bd2e1c44f6182c95a20bf",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/motor.h": "6127d9f2d56be4df2decaca735d273b8a2deb85e6edacd81a4b70438907741ee",
+    "src/servo.c": "e86738affa837d9c10fa3988670d377b0b0de5e222851e619a4c20b206078e08",
+    "src/servo.h": "30312c9a62dcac7d7043f5a72717dc1365891f30195c1c932b9829e343a02752",
+    "src/startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "src/startup_trace.c": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd",
+    "src/startup_trace.h": "cf7438a6e439b99b14e70ebe80d314345cb3da33a3457ea411ac62c33513554a",
+    "src/startup_trace_flash.c": "cffa577712febb8b19f0fd7590fbf9feb94c0628deb0d9ece52a8aadc53da322",
+    "src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "src/vdd.c": "1c196552db7546d2b734a5e698fe95f6a6d4b0136f0163ccab9252d1425d56a4",
+    "src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "results": [
+    {
+      "case": "pump-homed-session",
+      "stdout": "PASS pump-homed-session conversions=1 reports=2 pumps=2 answers=0 epoch=1"
+    },
+    {
+      "case": "pump-unhomed-session",
+      "stdout": "PASS pump-unhomed-session conversions=1 reports=0 pumps=2 answers=0 epoch=1"
+    },
+    {
+      "case": "pump-homed-shutdown",
+      "stdout": "PASS pump-homed-shutdown conversions=1 reports=1 pumps=1 answers=0 epoch=0"
+    },
+    {
+      "case": "pump-unhomed-shutdown",
+      "stdout": "PASS pump-unhomed-shutdown conversions=1 reports=0 pumps=1 answers=0 epoch=0"
+    },
+    {
+      "case": "capture",
+      "stdout": "PASS capture conversions=1 reports=0 pumps=3 answers=1 epoch=0"
+    },
+    {
+      "case": "servo-session",
+      "stdout": "servo outcome=5 reads=5 end=0 PASS servo-session conversions=1 reports=3 pumps=3 answers=0 epoch=1"
+    },
+    {
+      "case": "servo-shutdown",
+      "stdout": "servo outcome=5 reads=5 end=0 PASS servo-shutdown conversions=1 reports=3 pumps=3 answers=0 epoch=0"
+    },
+    {
+      "case": "servo-coordinate-loop",
+      "stdout": "servo outcome=5 reads=4 end=65536 PASS servo-coordinate-loop conversions=0 reports=2 pumps=2 answers=0 epoch=0"
+    },
+    {
+      "case": "servo-coordinate-final",
+      "stdout": "servo outcome=5 reads=5 end=65536 PASS servo-coordinate-final conversions=0 reports=3 pumps=3 answers=0 epoch=0"
+    }
+  ],
+  "sourceManifestSHA256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a"
+}

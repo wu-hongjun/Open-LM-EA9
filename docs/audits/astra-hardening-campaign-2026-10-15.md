@@ -28,9 +28,13 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 09 | Footprint and reproducible release gates | Integrated; root 208 regressions passed; final 408-byte margin | `lanes/09-release`, [`report`](astra-09-release-2026-10-15.md) |
 | 10 | Independent adversarial source integration | Five composed failures fixed; exact final 7+65+14 checks passed | `lanes/10-integration`, [`report`](astra-10-integration-2026-10-15.md) |
 | 11 | Extra independent Mac host/upload review | Complete; no verified blocker; targeted cases and prepare-only checks pass | `lanes/11-host`, [`report`](astra-11-host-2026-10-15.md) |
-| 12 | Follow-up query epoch and bounded worker | Root completed tests/proposal after interrupted Astra turn; not published | `followup/12-query`, [report](astra-12-query-2026-10-15.md) |
-| 13 | Follow-up numeric reachability | Root completed partial proposal after interrupted Astra turns; range/size gates open | `followup/13-numeric`, [report](astra-13-numeric-2026-10-15.md) |
+| 12 | Follow-up query epoch and bounded worker | Root completed after interrupted Astra turn; integrated in 3.4 | `followup/12-query`, [report](astra-12-query-2026-10-15.md) |
+| 13 | Follow-up numeric reachability | Root partial widening rejected; range closure supplied by 15/3.4 | `followup/13-numeric`, [report](astra-13-numeric-2026-10-15.md) |
 | 14 | Exact 3.3 whole-chain stack/IRQ envelope | Astra complete; root analyzer/six negative guards passed; conditional bounds | `followup/14-stack`, [report](astra-14-stack-2026-10-15.md) |
+| 15 | Reachable coordinate/servo/predictor contract and scale writers | Astra complete; root boundary and exact composition checks pass; integrated 3.4 | `followup/15-coordinate`, [report](astra-15-coordinate-2026-10-15.md) |
+| 16 | Query answer capacity and motion/homing service | Astra complete; 17 cases and 18 failing controls; integrated 3.4 | `followup/16-query-flow`, [report](astra-16-query-flow-2026-10-15.md) |
+| 17 | New coordinate/query composition and inhibited readiness | Astra complete; false HOME_READY fixed; 6 home/9 composition cases and 5 failing controls | `followup/17-composition`, [report](astra-17-composition-2026-10-15.md) |
+| 18 | Exact 3.4 whole-chain stack and nested query review | Astra complete; root exact/reproduction checks and 7 negative guards pass | `followup/18-stack34`, [report](astra-18-stack34-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -88,3 +92,16 @@ hardware action occurred. Rows 12/13 are root-completed source work, not claims
 that interrupted Astra turns completed successfully. Row 14 is a completed Astra
 audit of the existing compiled image. Published images and the 3.2 pending
 transaction remain untouched. The timed ledger tracks the next bounded work.
+
+
+## Follow-up composition 3.4
+
+Lanes 15–18 continue distinct unresolved scopes; no completed original lane was
+respawned merely to increase the count. Root integrated the bounded epoch/query
+worker from 12, coordinate admission justified by 15, flow/backpressure from 16,
+and the additional false-readiness fix found by 17. The expensive partial 13
+widening remains rejected. Astra18 and root checked the exact final stack and a
+fresh same-image reproduction. [3.4 evidence](../evidence/upstream-34-bounded-2026-10-15.md)
+records source hashes, failing controls, size, host integration and limits.
+All published 3.3 and earlier artifacts remain frozen. Nothing was flashed or
+camera-qualified. The uploaded 3.2 reconnect/verification gate remains pending.

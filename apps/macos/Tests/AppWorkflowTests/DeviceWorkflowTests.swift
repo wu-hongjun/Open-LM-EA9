@@ -309,4 +309,17 @@ private actor DiscoveryFixture {
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "Upstream hardening candidate")
     #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    #expect(model.canInstallBoundedUpstream)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(!model.canInstallBoundedUpstream)
+    model.chooseDeviceLens(profile.id)
+    let bounded = try ApplicationImage.personalized(profile, variant: .autofocusBoundedUpstream)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(bounded.setting), firmwareVersion: "3.4.0", imageSHA256: digest(bounded.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.4.0"))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallBoundedUpstream)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Bounded upstream candidate")
+    #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
+    #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+
 }

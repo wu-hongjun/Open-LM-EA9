@@ -33,3 +33,18 @@ workbench for upload. Remaining work is evidence-driven, bounded arithmetic and
 footprint simplification, not removing established guards or shortening logs to
 hide the size failure. The stack result applies to frozen 3.3 only; changed code
 needs new compiled-call-chain analysis.
+
+
+## Resolved next-candidate disposition
+
+The text above records the rejected partial-widening measurement. Subsequent
+Astra [15 range](../../../docs/audits/astra-15-coordinate-2026-10-15.md),
+[16 query flow](../../../docs/audits/astra-16-query-flow-2026-10-15.md),
+[17 composition](../../../docs/audits/astra-17-composition-2026-10-15.md) and
+[18 exact stack](../../../docs/audits/astra-18-stack34-2026-10-15.md) audits
+support a different, fitting composition in [../next](../next/README.md).
+The separately frozen [3.4 image](../../candidates/3.4.0/README.md) has complete
+offline release/host checks and 276 bytes before logs. The partial 13 overlay
+is not used; reviewed coordinate admission bounds the unchanged control math.
+Physical acceptance remains open, and no original workbench or released image
+has been overwritten.

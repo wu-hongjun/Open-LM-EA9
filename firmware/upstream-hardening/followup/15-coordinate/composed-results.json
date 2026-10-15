@@ -1,0 +1,15 @@
+{
+  "reviewed_composition": "artifacts/private/astra-root-domain-flow-measure",
+  "frozen_sources_verified": 46,
+  "unchanged_source_files": 42,
+  "changed_source_sha256": {
+    "src/abs_encoder.c": "0fa218deffe16bdf1ad08c6cf06f34db034742c60f98d27c407960e94cef17c2",
+    "src/abs_encoder.h": "222b4fd167e64def7a9421dfe452c2bddd071c6cd2116c7914c70fab611c31f7",
+    "src/emount.c": "f76801a1bd5cf625e5c34af06eb65baf7564bcbe9a0f36c62a44102df40c734b",
+    "src/main.c": "bcb017f2f0741d33c9a4514f5640f35451f65a2e8c53b504d4075e951153888b"
+  },
+  "main_numeric_functions": "unchanged byte-for-byte",
+  "servo_predictor_maps_distance_packets": "unchanged byte-for-byte",
+  "worker": "same bounded pure conversions, no coordinate/target/predictor mutation",
+  "result": "PASS: prior numeric invariant proofs apply to exact composition"
+}

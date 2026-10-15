@@ -189,3 +189,53 @@ recover the required code/data margin without removing fault guards or shrinking
 reserved logs. Compose query ownership and rerun complete source/host/release
 checks only when the proposal is ready. Review the unchanged completion/status
 policies against REA where new evidence is needed. Keep all published pins frozen.
+
+
+### Follow-up range closure and query flow: bounded C 3.4
+
+Astra15 finished the production coordinate/servo/predictor certificate and actual
+scale-field writer inventory. Root replaced the oversized partial widening with
+coordinate admission before accumulation, keeping the original target, servo,
+predictor and optical calculations. Astra16 reproduced admitted queries lost
+when answer capacity was exhausted, and queries unserviced during active servo
+or unhomed pumping. The new worker retains requests and services bounded pure
+conversions through the existing foreground pump.
+
+Independent composed review17 then found and reproduced false HOME_READY after
+a coordinate rejection had already inhibited the driver. The final candidate
+marks that home terminally failed, preserves the original fault and reference,
+and clears pending motion. Six home cases and nine composed pump/servo cuts
+pass; five guard-removed readiness controls fail as intended. Astra18 reviewed
+the actual compiled nested paths: conditional 1,560-byte all-vector envelope
+against 8,192 reserved bytes, with seven negative evidence guards. Root reran
+those checks and validated normalized disassembly/symbol/program-header equality
+for the fresh same-image build before rebinding only ELF/map path-container pins.
+
+[3.4](../firmware/candidates/3.4.0/README.md), SHA256
+`fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9`,
+is prepared offline. Two builds reproduce image, manifest and full patch exactly;
+code/data ends 0x9aec with 276 bytes before the unchanged logs. Exact-source
+capture/shutdown, arithmetic, query, home/fault, compiled writer, stack and decoder
+checks pass with failing controls; all 53 Swift tests pass. Signed app 0.17/build21
+adds a separate explicit 3.4 action/commands, preserving earlier command images
+and full pristine-tail verification. The 52 prior release/recovery/pin artifacts
+are unchanged. [Unified evidence](evidence/upstream-34-bounded-2026-10-15.md)
+and [future coordinated procedure](upstream-bounded-test.md) retain all limits.
+
+**Hardware remains untouched:** uploaded 3.2 still awaits owner-confirmed physical
+reconnect and strict verification. No enumeration/open/reports/updater/flash/motor,
+app launch or canonical state mutation occurred. 3.4 is not installed and no
+camera test is requested during scheduled work. Range closure does not calibrate
+physical travel; distinct encoder reads can still shift the internal relative
+target, exceptional timer-gap conversion remains, and exposure/optical/camera
+parity is unverified. REA reverse engineering is partial, not a factory-equivalent
+controller certification.
+
+**Next bounded offline work:** inspect demonstrated remaining distinct-read
+coordinate semantics and elapsed-time/critical-section assumptions without
+changing gains or guessing physical origin. Require a production-path failing
+control before another behavior change and version any future executable.
+Review release/runbook usability and trace observability as needed; avoid
+repeating passed suites without a new concern. Keep all published pins and the
+pending journal intact. Continue only until 12:55:51 UTC, then publish actual final
+status and pause the heartbeat as authorized.

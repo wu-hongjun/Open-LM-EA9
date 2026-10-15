@@ -1,0 +1,287 @@
+{
+  "pins": {
+    "hardened.elf": "745cc863cbcdff6084b544d3b7dc803dc6416e1657800a35cb4f917ceee45113",
+    "hardened.map": "188d49b51085d88982b28a5f8c5db303669edc0a1573ef1414063d17fb38d0e6",
+    "manifest.json": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+    "contax-zeiss-50-f1-4.bin": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+    "raw.bin": "bb9d99aba1f86450e4bc0aea8742ac30c0110be44739b785f207560d2e24b035"
+  },
+  "libraryFrames": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24
+  },
+  "indirectCalls": {
+    "50c4": {
+      "caller": "deregister_tm_clones",
+      "targets": [],
+      "evidence": "Linked weak callback literal at 0x50d0 is zero; clone endpoints both 0x95ec."
+    },
+    "50ec": {
+      "caller": "register_tm_clones",
+      "targets": [],
+      "evidence": "Linked weak callback literal at 0x50f8 is zero; clone endpoints both 0x95ec."
+    },
+    "55e6": {
+      "caller": "em_shutdown_ack",
+      "targets": [
+        "powerdown_signal"
+      ],
+      "evidence": "main registers powerdown_signal; emount.c g_powerdown has no other nonzero writer."
+    },
+    "56b0": {
+      "caller": "on_cs_edge",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ],
+      "evidence": "main registers motion_shutdown_inhibit; g_shutdown_inhibit has no other nonzero writer."
+    },
+    "67f0": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_cs_edge"
+      ],
+      "evidence": "em_init is sole em_eic_init caller; installs on_cs_edge."
+    },
+    "6804": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_vd_edge"
+      ],
+      "evidence": "em_init installs on_vd_edge. CS/VD callbacks are sequential, not nested."
+    },
+    "7098": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_retarget"
+      ],
+      "evidence": "cfg+52 retarget; STOCK and its local copies retain this pointer."
+    },
+    "70c2": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort; STOCK and local copies."
+    },
+    "723a": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "cfg+48 pump; STOCK and local copies."
+    },
+    "7292": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort."
+    },
+    "731c": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "cfg+56 abort."
+    },
+    "7524": {
+      "caller": "servo_move_rel",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "cfg+48 final pump."
+    },
+    "9444": {
+      "caller": "__libc_init_array",
+      "targets": [],
+      "evidence": "preinit array endpoints both 0x95d8; no calls."
+    },
+    "944e": {
+      "caller": "__libc_init_array",
+      "targets": [
+        "frame_dummy"
+      ],
+      "evidence": "init array [0x95d8,0x95dc) holds 0x5129 (Thumb frame_dummy)."
+    }
+  },
+  "unknowns": [
+    "Prior stock reconstruction resolves the intended MSP/vector handoff at 0x2510; CONTROL/PSP selection, PRIMASK and physical execution of that path remain unverified.",
+    "SERCOM1 and SysTick priorities, other enabled/pending IRQs and interrupt state during the reconstructed vector transition remain unestablished; only EIC priority 1 is explicitly configured by the app.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector."
+  },
+  "analyzerSHA256": "5c1eb10415c35cd6cf3e3b06b66a7af648045c8c6af0534be4883012b7b9879b",
+  "libraryFrameEvidence": {
+    "deregister_tm_clones": {
+      "start": "0x000050b4",
+      "localBytes": 8,
+      "stackInstructions": [
+        "50b8:\tb510      \tpush\t{r4, lr}",
+        "50c6:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "register_tm_clones": {
+      "start": "0x000050d4",
+      "localBytes": 8,
+      "stackInstructions": [
+        "50e0:\tb510      \tpush\t{r4, lr}",
+        "50ee:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__do_global_dtors_aux": {
+      "start": "0x000050fc",
+      "localBytes": 8,
+      "stackInstructions": [
+        "50fc:\tb510      \tpush\t{r4, lr}",
+        "511a:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "frame_dummy": {
+      "start": "0x00005128",
+      "localBytes": 8,
+      "stackInstructions": [
+        "512a:\tb510      \tpush\t{r4, lr}",
+        "513c:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__gnu_thumb1_case_sqi": {
+      "start": "0x000090d4",
+      "localBytes": 4,
+      "stackInstructions": [
+        "90d4:\tb402      \tpush\t{r1}",
+        "90e2:\tbc02      \tpop\t{r1}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__gnu_thumb1_case_uqi": {
+      "start": "0x000090e8",
+      "localBytes": 4,
+      "stackInstructions": [
+        "90e8:\tb402      \tpush\t{r1}",
+        "90f6:\tbc02      \tpop\t{r1}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__udivsi3": {
+      "start": "0x000090fc",
+      "localBytes": 8,
+      "stackInstructions": [
+        "91fc:\tb501      \tpush\t{r0, lr}",
+        "9204:\tbd02      \tpop\t{r1, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__aeabi_uidivmod": {
+      "start": "0x00009208",
+      "localBytes": 0,
+      "stackInstructions": [],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__divsi3": {
+      "start": "0x00009210",
+      "localBytes": 8,
+      "stackInstructions": [
+        "93d2:\tb501      \tpush\t{r0, lr}",
+        "93da:\tbd02      \tpop\t{r1, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__aeabi_idivmod": {
+      "start": "0x000093dc",
+      "localBytes": 0,
+      "stackInstructions": [],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__aeabi_idiv0": {
+      "start": "0x000093e4",
+      "localBytes": 0,
+      "stackInstructions": [],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "memmove": {
+      "start": "0x000093e8",
+      "localBytes": 8,
+      "stackInstructions": [
+        "93e8:\tb510      \tpush\t{r4, lr}",
+        "940a:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "memset": {
+      "start": "0x0000940c",
+      "localBytes": 0,
+      "stackInstructions": [],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "__libc_init_array": {
+      "start": "0x0000941c",
+      "localBytes": 16,
+      "stackInstructions": [
+        "941c:\tb570      \tpush\t{r4, r5, r6, lr}",
+        "943e:\tbd70      \tpop\t{r4, r5, r6, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "memcpy": {
+      "start": "0x00009464",
+      "localBytes": 8,
+      "stackInstructions": [
+        "9466:\tb510      \tpush\t{r4, lr}",
+        "946c:\tbd10      \tpop\t{r4, pc}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "_init": {
+      "start": "0x000095cc",
+      "localBytes": 24,
+      "stackInstructions": [
+        "95cc:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+        "95d0:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+        "95d2:\tbc08      \tpop\t{r3}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    },
+    "_fini": {
+      "start": "0x000095dc",
+      "localBytes": 24,
+      "stackInstructions": [
+        "95dc:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+        "95e0:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+        "95e2:\tbc08      \tpop\t{r3}"
+      ],
+      "review": "All linked instructions reviewed; local stack operations and inter-function branches included. No unaccounted SP writes."
+    }
+  },
+  "linkedCallbackEvidence": {
+    "STOCK": "0x9574: offsets 48/52/56 contain Thumb pointers 0x7d85/0x7e25/0x7c79 => pump/focus_retarget/focus_abort; local sweep and drv copy STOCK and only change scalar fields.",
+    "initArray": "[0x95d8,0x95dc) contains 0x5129 => frame_dummy; preinit range empty.",
+    "clones": "Equal endpoints 0x95ec at 0x50c8/0x50cc and 0x50f0/0x50f4; weak literals 0x50d0/0x50f8 zero."
+  }
+}

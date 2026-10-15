@@ -9,18 +9,21 @@ system audit. All flashed firmware is C. The [updated working recommendation](do
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 An [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
-is running through 08:55 America/New_York on October 15. Eleven Astra lanes have
-completed the first integrated batch: [upstream C 3.3](firmware/candidates/3.3.0/README.md)
-is prepared offline with audited request/shutdown ownership, homing readiness,
-transport/motion guards and terminal-only diagnostics. It has 408 bytes of flash
-margin; exact builds, final-source tests, compiled ARM writer checks and all 53
-Swift tests pass. [Evidence and limitations](docs/evidence/upstream-33-hardening-2026-10-15.md).
-**3.3 is not uploaded or camera-qualified.** Uploaded 3.2 still needs physical
-reconnect confirmation and strict verification; no hardware was accessed in this batch.
+is running through 08:55 America/New_York on October 15. The first eleven Astra
+lanes produced frozen [upstream C 3.3](firmware/candidates/3.3.0/README.md).
+Follow-up audits now produce [3.4 offline](firmware/candidates/3.4.0/README.md):
+bounded encoder arithmetic, session-owned query replies, reply retention during
+motion/homing, and terminal homing failure after motor inhibition. It retains the
+upstream C controller and aperture policy. Exact repeat builds, production-path
+regressions with failing controls, compiled writer/stack checks and all 53 Swift
+tests pass. [Evidence and limitations](docs/evidence/upstream-34-bounded-2026-10-15.md).
+**3.4 is not uploaded or camera-qualified.** Uploaded 3.2 still needs physical
+reconnect confirmation and strict verification; no hardware was accessed in this
+scheduled work. Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.16.0, build 20) refreshes
+upload/read-back path for lens metadata. The current app (0.17.0, build 21) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.

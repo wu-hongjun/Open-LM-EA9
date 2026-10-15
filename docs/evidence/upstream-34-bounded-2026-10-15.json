@@ -1,0 +1,222 @@
+{
+  "status": "offline-reviewed-camera-unqualified",
+  "date": "2026-10-15",
+  "version": "3.4.0",
+  "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+  "manifestSHA256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+  "imageBytes": 20480,
+  "codeAndDataEnd": 39660,
+  "marginBeforeDiagnostics": 276,
+  "staticRAMBytes": 3076,
+  "reservedStackBytes": 8192,
+  "repeatImageManifestPatchIdentical": true,
+  "exactFinalComposition": {
+    "status": "passed-exact-frozen-offline-composition",
+    "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+    "buildManifestSHA256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+    "sourceFilesMatched": 46,
+    "checks": [
+      {
+        "name": "commits",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "capture",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "diagnostics",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "coordinate",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-ownership",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-flow",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "home-inhibit",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "new-composition",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "stack",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decoder-boundaries",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "arm-writer",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decode-3.2.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.2.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.3.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.3.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.4.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.4.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      }
+    ],
+    "stackContainerPinsRebound": {
+      "hardened.elf": {
+        "reviewed": "745cc863cbcdff6084b544d3b7dc803dc6416e1657800a35cb4f917ceee45113",
+        "reproduced": "7d564c41a92a759cd46d76601811ad86b51c11bc90d282865ff6e22d2cc63f25"
+      },
+      "hardened.map": {
+        "reviewed": "188d49b51085d88982b28a5f8c5db303669edc0a1573ef1414063d17fb38d0e6",
+        "reproduced": "0d6d4393f02e0c42a4521afa4946a824fa8f8727214b26b6db7c5169a47d548b"
+      }
+    },
+    "hardwareReportsSent": 0,
+    "cameraQualified": false,
+    "limits": "Finite host IRQ cuts, simulated peripherals/NVM and compiled writer address bounds; physical timing, exposure and optical AF remain unqualified."
+  },
+  "coordinate": {
+    "boundaryCases": 147456,
+    "normalTargetChecks": 393216,
+    "predictorChecks": 2646,
+    "negativeControls": 2,
+    "normalOutputsIdentical": true
+  },
+  "queryOwnership": {
+    "cases": 22,
+    "negativeControls": 18,
+    "passes": 22,
+    "ordinaryAndCaptureWireUnchanged": true
+  },
+  "queryFlow": {
+    "cases": 17,
+    "negativeControls": 18,
+    "passes": 17,
+    "ordinaryWireUnchanged": true
+  },
+  "homing": {
+    "finalCases": 6,
+    "negativeControls": 5
+  },
+  "additionalCompositionCases": 9,
+  "stack": {
+    "maximumAllVectorPriorityBytes": 1560,
+    "conditional": true,
+    "unresolvedCompiledEdges": [],
+    "recursiveComponents": [],
+    "stackHighWaterMeasured": false,
+    "negativeEvidenceGuards": 7
+  },
+  "swiftTests": 53,
+  "appVersion": "0.17.0",
+  "appBuild": 21,
+  "nativePreparation": {
+    "checks": [
+      {
+        "command": "prepare-bounded-upstream",
+        "version": "3.4.0",
+        "bytes": 20480,
+        "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-hardened-upstream",
+        "version": "3.3.0",
+        "bytes": 20480,
+        "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-startup",
+        "version": "3.2.0",
+        "bytes": 20480,
+        "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-upstream",
+        "version": "3.1.0",
+        "bytes": 20480,
+        "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-af",
+        "version": "3.0.0",
+        "bytes": 20480,
+        "sha256": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03",
+        "nativePrepareMatchesCandidate": true
+      }
+    ],
+    "incompatible85RejectedWithoutOutput": true,
+    "CLI_SHA256": "25d3cc73317200802bcd6e0fa46ee029279f5d0ce5914eb8d164ea9c6dddaae0",
+    "hardwareReportsSent": 0,
+    "canonicalStateModified": false,
+    "repeatImageManifestPatchIdentical": true
+  },
+  "priorArtifactsPreserved": 52,
+  "hardwareReportsSent": 0,
+  "adapterInstalledVersionChanged": false,
+  "canonicalStateModified": false,
+  "pendingHardwareGate": "Uploaded3.2 still awaits owner-confirmed physical reconnect and strict verification.3.4 prepared offline only.",
+  "limits": [
+    "Finite synthetic protocol/encoder/clock/NVM execution is not physical timing or camera acceptance.",
+    "Coordinate capacity is arithmetic admission, not physical travel or infinity calibration.",
+    "Consecutive target and servo reads can shift the internal relative target.",
+    "Extraordinary timer gaps retain implementation-defined unsigned-to-signed conversion.",
+    "Physical iris is unknown; fixed nominal aperture and donor optical mapping need camera/optical validation.",
+    "REA reconstruction is partial; factory parity is not established."
+  ],
+  "evidenceHashes": {
+    "firmware/candidates/3.4.0/contax-zeiss-50-f1-4.manifest.json": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+    "firmware/candidates/diagnostic-registry.json": "3b679ceeacc6fe3f35fc343d04e7af24f5ecdc7c607804cac003bab216fe4099",
+    "firmware/upstream-hardening/next/accepted-lanes.json": "f90ff1f1050f3e2bb3122e3486eff648c714b0cb38db831bbf4ac87245270a35",
+    "scripts/build-upstream-bounded.py": "5c9edbf853a6e12f4b9a374acfeb2be7f994beeeccff8e07f977bdf3f25d09b0",
+    "scripts/test-upstream-bounded.py": "c163eed65a8749681cd7676028bcfdb311334ecd4b626cf97172a6c4935cd383",
+    "scripts/startup_diagnostic_registry.py": "3f696941973ba49cd9733f1795ebb63bc88d8c14d86e75791a02253177a6eb66",
+    "firmware/upstream-hardening/followup/18-stack34/policy.json": "be95197a7f5f1154ddfa8ab399adbc9e5f1444885f4f38a3be9a46b09e824bf8",
+    "firmware/upstream-hardening/next/stack-reproduction.json": "ceab11e1779b9606c832b68a56c9d22441da3819712b6adf3b24144b185b5a8c"
+  },
+  "compiledMetadataReproductionVerified": true
+}

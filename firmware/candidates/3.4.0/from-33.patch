@@ -1,0 +1,94 @@
+--- frozen33/src/abs_encoder.c
++++ bounded34/src/abs_encoder.c
+@@ -105,3 +105,4 @@
+-	/* Never wrap the software coordinate into an unrelated target. */
+-	if ((d > 0 && g_track > INT32_MAX - d) ||
+-	    (d < 0 && g_track < INT32_MIN - d)) {
++	/* Check capacity before addition. Both bounds are representable for
++	 * every 14-bit shortest difference, even if g_track is corrupted. */
++	if (g_track > ENC_TRACK_LIMIT - d ||
++	    g_track < -ENC_TRACK_LIMIT - d) {
+--- frozen33/src/abs_encoder.h
++++ bounded34/src/abs_encoder.h
+@@ -3,0 +4,7 @@
++
++/* Admitted software coordinate capacity, NOT a physical endstop or calibration.
++ * This invariant bounds fixed-point differences/products in main/servo/predictor.
++ * A reading beyond it latches inhibition and retains the last admitted value.
++ * Changing the limit requires repeating the complete arithmetic range proof. */
++#define ENC_TRACK_LIMIT 65536
++
+--- frozen33/src/emount.c
++++ bounded34/src/emount.c
+@@ -1361 +1361,3 @@
+-	if (em_shutdown_requested() || !g_query_n) {
++	/* The only answer producer is the foreground query worker. Its pure
++	 * conversion cannot consume another answer slot before publication. */
++	if (em_shutdown_requested() || !g_query_n || g_ans_n >= EM_QUERY_Q) {
+--- frozen33/src/emount.h
++++ bounded34/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x33u
++#define EM_FW_VERSION_BCD   0x34u
+--- frozen33/src/main.c
++++ bounded34/src/main.c
+@@ -526,0 +527,3 @@
++	/* Operand-only optical conversions need no encoder origin. Keep the
++	 * bounded worker outside g_homed so homing can answer them too. */
++	focus_answer_queries();
+@@ -570,0 +574,7 @@
++    /* A rejected encoder coordinate must never become a new home reference.
++     * Inhibition is sticky until restart, so this attempt is terminal too. */
++    if (motor_is_inhibited()) {
++        g_next_pending = 0;
++        g_home_state = HOME_FAILED;
++        return 1;
++    }
+@@ -1061,16 +1071,31 @@
+-	if (!em_handshake_done || g_aborted || em_shutdown_requested() || motor_is_inhibited()) return;
+-	uint8_t  tag;
+-	uint16_t operand;
+-
+-	while (em_take_query(&tag, &operand)) {
+-		if (tag == EM_REC_Q_POS2D) {
+-			em_post_query_answer(tag,
+-			        focus_distance_code(focus_em06_to_counts(operand),
+-			                            EM_FOCAL_MM10));
+-		} else {
+-			em_post_query_answer(tag,
+-			        focus_counts_to_em06(
+-			                focus_counts_for_code(operand,
+-			                                      EM_FOCAL_MM10)));
+-		}
+-	}
++    /* A pass is bounded even when RX replenishes the queue during conversion. */
++    for (uint8_t budget = 0; budget < EM_QUERY_Q; budget++) {
++        uint8_t tag;
++        uint16_t operand, value;
++        uint32_t key = st_lock();
++        if (!em_handshake_done || g_aborted || em_shutdown_requested() ||
++            motor_is_inhibited()) {
++            st_unlock(key);
++            return;
++        }
++        /* Capture ownership and dequeue under the same outer interrupt mask. */
++        uint32_t session = em_session_generation();
++        uint8_t taken = em_take_query(&tag, &operand);
++        st_unlock(key);
++        if (!taken) return;
++
++        /* The optical conversion is deliberately outside the critical section. */
++        if (tag == EM_REC_Q_POS2D) {
++            value = focus_distance_code(focus_em06_to_counts(operand),
++                                        EM_FOCAL_MM10);
++        } else {
++            value = focus_counts_to_em06(focus_counts_for_code(operand,
++                                                              EM_FOCAL_MM10));
++        }
++        key = st_lock();
++        if (session == em_session_generation() && em_handshake_done &&
++            !g_aborted && !em_shutdown_requested() && !motor_is_inhibited()) {
++            em_post_query_answer(tag, value);
++        }
++        st_unlock(key);
++    }

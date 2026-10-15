@@ -1,0 +1,225 @@
+{
+  "source_hashes_verified": 46,
+  "template_scale_bytes": [
+    32,
+    0
+  ],
+  "post_init_scale_bytes": [
+    8,
+    0
+  ],
+  "only_production_setter_argument": "EM_FOCAL_MM10=500",
+  "direct_write_offsets": {
+    "EA9_OFF_06 + EM06_MOTION": [
+      6
+    ],
+    "EA9_OFF_06 + EM06_DIRECTION": [
+      7
+    ],
+    "EA9_OFF_05 + EM05_DIST_COARSE": [
+      453
+    ],
+    "EA9_OFF_05 + EM05_POS_COARSE": [
+      484
+    ],
+    "EA9_OFF_05 + EM05_FLAGS": [
+      452
+    ],
+    "EA9_OFF_06 + EM06_POS_A": [
+      8
+    ],
+    "EA9_OFF_06 + EM06_POS_A + 1": [
+      9
+    ],
+    "EA9_OFF_06 + EM06_POS_B": [
+      26
+    ],
+    "EA9_OFF_06 + EM06_POS_B + 1": [
+      27
+    ],
+    "EA9_OFF_06 + EM06_SCAN_STATE": [
+      31
+    ],
+    "EA9_OFF_06 + EM06_DEFOCUS": [
+      19
+    ],
+    "EA9_OFF_05 + EM05_AP_MAX": [
+      474
+    ],
+    "EA9_OFF_05 + EM05_AP_MAX2": [
+      481
+    ],
+    "EA9_OFF_05 + EM05_AP_MIN": [
+      482
+    ],
+    "EA9_OFF_05 + EM05_AP_WIDE": [
+      476
+    ],
+    "EA9_OFF_05 + EM05_AP_CONST_A0": [
+      478
+    ],
+    "EA9_OFF_05 + EM05_AP_CONST_01": [
+      489
+    ],
+    "EA9_OFF_05 + EM05_SLOT_A + k": [
+      462,
+      463,
+      464,
+      465,
+      466,
+      467
+    ],
+    "EA9_OFF_05 + EM05_SLOT_B + k": [
+      468,
+      469,
+      470,
+      471,
+      472,
+      473
+    ],
+    "EA9_OFF_28 + EM28_SLOT_A + k": [
+      885,
+      886,
+      887,
+      888,
+      889,
+      890
+    ],
+    "EA9_OFF_28 + EM28_SLOT_B + k": [
+      891,
+      892,
+      893,
+      894,
+      895,
+      896
+    ],
+    "EA9_OFF_07 + EM07_VERSION": [
+      112
+    ],
+    "EA9_OFF_07 + 15": [
+      115
+    ],
+    "EA9_OFF_07 + 16": [
+      116
+    ],
+    "EA9_OFF_06 + 0x20": [
+      32
+    ],
+    "EA9_OFF_06 + 0x21": [
+      33
+    ],
+    "EA9_OFF_06 + 0x22": [
+      34
+    ],
+    "EA9_OFF_06 + 0x23": [
+      35
+    ],
+    "EA9_OFF_05 + 4": [
+      428
+    ],
+    "EA9_OFF_06 + 4": [
+      4
+    ],
+    "EA9_OFF_06 + len - 3": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ],
+    "EA9_OFF_06 + len - 2": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "EA9_OFF_06 + len - 1": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ]
+  },
+  "put16_write_offsets": [
+    430,
+    431,
+    432,
+    433,
+    450,
+    451,
+    454,
+    455,
+    456,
+    457,
+    854,
+    855,
+    856,
+    857,
+    878,
+    879,
+    880,
+    881,
+    883,
+    884
+  ],
+  "fixup_write_offsets": [
+    150,
+    854,
+    855,
+    856,
+    857,
+    782,
+    783,
+    784
+  ],
+  "velocity_alias_write_offsets": [
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "main_int32_defocus_abs_bound": 1114112,
+  "main_int32_relative_abs_bound": 196608,
+  "result": "PASS: reachable production defocus scale remains 8"
+}

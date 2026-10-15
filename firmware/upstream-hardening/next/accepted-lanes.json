@@ -1,0 +1,26 @@
+{
+  "status": "offline-candidate-unqualified",
+  "baseVersion": "3.3.0",
+  "nextVersion": "3.4.0",
+  "baseImageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "applicators": [
+    "firmware/upstream-hardening/next/apply_coordinate.py",
+    "firmware/upstream-hardening/followup/12-query/apply.py",
+    "firmware/upstream-hardening/followup/16-query-flow/apply.py",
+    "firmware/upstream-hardening/followup/17-composition/apply.py"
+  ],
+  "inputs": {
+    "firmware/upstream-hardening/next/apply_coordinate.py": "c972b44833b4aeef6a5b5a8e8a8656cfce59cc9d841222ed282bccdb414c131c",
+    "firmware/upstream-hardening/next/test_coordinate.py": "2925636b1fad93723a52ecf8d4da591b40801d87e3fa7289cf7452f1c85f8729",
+    "firmware/upstream-hardening/next/test_coordinate.c": "d038af99770ebdf6285d6eb090f696f615a38bacf6afb39b338f57245ae24956",
+    "firmware/upstream-hardening/followup/12-query/apply.py": "afc1971a9ba011a551e5811e75d13cf47dd1ef26a598bbefdc6a5ddace3cb5eb",
+    "firmware/upstream-hardening/followup/16-query-flow/apply.py": "07225617c6d0f0a644e99067398a00b2a9b9397f8145823e489de11b0693bdb7",
+    "firmware/upstream-hardening/followup/15-coordinate/check_ranges.py": "dc9402a1823a04fa5e3a65da18c07b049f212946b0bd874669c11b73fc5c2cba",
+    "firmware/upstream-hardening/followup/15-coordinate/check_scale.py": "cb208ff1e69369747884fc5807bc2d7aa0808792a95c7850df9e72e77a565fa8",
+    "firmware/upstream-hardening/followup/17-composition/apply.py": "ddcea48166388b263a3b7443457adf2b35c5505f4988b913858739f8efd4d8fd",
+    "firmware/upstream-hardening/next/test_query_ownership.py": "9550cf11a9dfc293060ac6c336928ed9b6c1a5b0516a32e9b29b05f053b933de",
+    "firmware/upstream-hardening/next/test_query_flow.py": "0602d653f2be436c4cf07611fb8762710b578e95e7802bd95a6376145fad16ca"
+  },
+  "hardwareReportsSent": 0,
+  "cameraQualified": false
+}

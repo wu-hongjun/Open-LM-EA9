@@ -21,7 +21,7 @@ def bounded_json(path):
     return json.loads(path.read_text())
 
 def resolve_candidate(root, version):
-    if version not in ('3.2.0', '3.3.0'):
+    if version not in ('3.2.0', '3.3.0', '3.4.0'):
         raise ValueError('Unsupported diagnostic firmware version.')
     path = root/'firmware/candidates'/version/'contax-zeiss-50-f1-4.bin'
     descriptor = bounded_json(path.with_suffix('.manifest.json'))
@@ -52,7 +52,7 @@ def decode_extended_pages(data, decode_v1, version):
     translated = bytearray(data)
     for index in range(16):
         p = data[index*64:(index+1)*64]
-        if p[4] == 2 and version == '3.3.0':
+        if p[4] == 2 and version in ('3.3.0', '3.4.0'):
             # Verify original CRC before adapting the stable legacy fields.
             if zlib.crc32(p[:60]) != int.from_bytes(p[60:64], 'little'):
                 continue
@@ -80,6 +80,7 @@ def decode_extended_pages(data, decode_v1, version):
             fault=int.from_bytes(p[14:16], 'little')
             reasons={10:'uart-rx-drain-fault',11:'home-failed',12:'motor-poll-budget',13:'servo-poll-budget',14:'servo-runaway',15:'servo-wrong-way',16:'encoder-overflow'}
             if fault in reasons:summary['fault']=reasons[fault]
+            if fault==16 and version=='3.4.0':summary['fault']='encoder-coordinate-capacity'
             summary['persistedEvents']=sum(len(e.get('events', [])) for e in result['pages'] if e.get('boot')==entry['boot'] and e['slot']>entry['slot'])
             summary['eventSnapshotComplete']=summary['persistedEvents']==summary['plannedEvents']
         if p[4]==2:
@@ -88,7 +89,7 @@ def decode_extended_pages(data, decode_v1, version):
     occupied = [p['slot'] for p in result['pages'] if p['state'] != 'erased']
     frontier = max(occupied, default=-1)+1
     result.update({
-        'format': 'EA9 startup trace v1/v2' if version == '3.3.0' else 'EA9 startup trace v1',
+        'format': 'EA9 startup trace v1/v2' if version in ('3.3.0', '3.4.0') else 'EA9 startup trace v1',
         'appendFrontierSlot': frontier,
         'appendablePages': 16-frontier,
         'strandedErasedPages': sum(p['state'] == 'erased' and p['slot'] < frontier for p in result['pages']),
@@ -100,7 +101,7 @@ def decode_extended_pages(data, decode_v1, version):
 
 def main(root, decode_v1):
     import argparse
-    parser = argparse.ArgumentParser(description='Decode pinned 3.2/3.3 diagnostics offline; no device access.')
+    parser = argparse.ArgumentParser(description='Decode pinned 3.2/3.3/3.4 diagnostics offline; no device access.')
     parser.add_argument('backup', type=Path)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()

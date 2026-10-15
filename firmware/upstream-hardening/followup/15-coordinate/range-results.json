@@ -1,0 +1,27 @@
+{
+  "frozen_hashes_verified": 46,
+  "tracker_threshold_cases": 98301,
+  "raw_difference_residues": 16384,
+  "int32_absolute_bounds": {
+    "servo_target_abs": 137024,
+    "servo_error_abs": 202560,
+    "servo_error_times_1000": 202560000,
+    "position_difference_times_1000": 131072000,
+    "velocity_abs": 131072000,
+    "twice_velocity_abs": 262144000,
+    "velocity_error_abs": 131112000,
+    "feedforward_numerator_abs": 2080000,
+    "feedforward_abs": 2120000,
+    "duty_before_clamp_abs": 2676174,
+    "predictor_fresh_abs": 33554432,
+    "predictor_blend_delta_rounded_abs": 67108865,
+    "predictor_frame_product_abs": 1006632960,
+    "scan_centred_hi": 268092,
+    "drive_speed_product": 1179612000,
+    "report_difference_abs": 131072,
+    "distance_product": 2725000,
+    "extension_product_rounded": 26786976
+  },
+  "int64_defocus_absolute_bound": 8589869056,
+  "result": "PASS: proposed coordinate arithmetic contract"
+}
