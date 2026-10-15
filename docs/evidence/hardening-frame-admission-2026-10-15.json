@@ -1,0 +1,236 @@
+{
+  "status": "passed-offline-overlay-not-released",
+  "frozenCandidateVersion": "3.2.0",
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "captures": {
+    "captureFrames": 3456,
+    "paddedWindows": 1240,
+    "checks": 207131
+  },
+  "productionDispatcherCases": [
+    {
+      "source": "frozen32",
+      "case": "valid-init",
+      "exitCode": 0,
+      "outcome": "valid-init: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "frozen32",
+      "case": "valid-padding",
+      "exitCode": 0,
+      "outcome": "valid-padding: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "frozen32",
+      "case": "valid-move",
+      "exitCode": 0,
+      "outcome": "valid-move: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "frozen32",
+      "case": "checksum",
+      "exitCode": 1,
+      "outcome": "checksum: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "terminator",
+      "exitCode": 1,
+      "outcome": "terminator: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "length-zero",
+      "exitCode": 1,
+      "outcome": "length-zero: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "length-high",
+      "exitCode": 1,
+      "outcome": "length-high: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "truncated",
+      "exitCode": 1,
+      "outcome": "truncated: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "header-only",
+      "exitCode": 1,
+      "outcome": "header-only: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "bad-move",
+      "exitCode": 1,
+      "outcome": "bad-move: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "truncated-move",
+      "exitCode": 1,
+      "outcome": "truncated-move: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "short-capability",
+      "exitCode": 1,
+      "outcome": "short-capability: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "short-offer",
+      "exitCode": 1,
+      "outcome": "short-offer: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "short-mode",
+      "exitCode": 1,
+      "outcome": "short-mode: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "short-aperture",
+      "exitCode": 1,
+      "outcome": "short-aperture: FAIL; admitted=1 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "valid-init",
+      "exitCode": 0,
+      "outcome": "valid-init: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "valid-padding",
+      "exitCode": 0,
+      "outcome": "valid-padding: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "valid-move",
+      "exitCode": 0,
+      "outcome": "valid-move: pass; admitted=1 expected=1"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "checksum",
+      "exitCode": 0,
+      "outcome": "checksum: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "terminator",
+      "exitCode": 0,
+      "outcome": "terminator: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "length-zero",
+      "exitCode": 0,
+      "outcome": "length-zero: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "length-high",
+      "exitCode": 0,
+      "outcome": "length-high: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "truncated",
+      "exitCode": 0,
+      "outcome": "truncated: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "header-only",
+      "exitCode": 0,
+      "outcome": "header-only: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "bad-move",
+      "exitCode": 0,
+      "outcome": "bad-move: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "truncated-move",
+      "exitCode": 0,
+      "outcome": "truncated-move: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "short-capability",
+      "exitCode": 0,
+      "outcome": "short-capability: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "short-offer",
+      "exitCode": 0,
+      "outcome": "short-offer: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "short-mode",
+      "exitCode": 0,
+      "outcome": "short-mode: pass; admitted=0 expected=0"
+    },
+    {
+      "source": "gated-overlay",
+      "case": "short-aperture",
+      "exitCode": 0,
+      "outcome": "short-aperture: pass; admitted=0 expected=0"
+    }
+  ],
+  "frozenMalformedAdmissionsDetected": 8,
+  "frozenPaddingOperandDefectsDetected": 4,
+  "validProductionControlsPerSource": 3,
+  "gatedProductionCasesPassed": 15,
+  "hardwareReportsSent": 0,
+  "publishedFirmwareChanged": false,
+  "cameraQualified": false,
+  "sourceSHA256": {
+    "scripts/test-upstream-frame-admission.py": "78cf1c7b912437a772e617157c76f027ec79b2022a367cb6c56814eb7b0d227d",
+    "references/analysis/entropy512-frames.jsonl": "1e6193e4c70d81b04547a167a811f3fcc1b8360433e4126c5a5f26c284290cae",
+    "firmware/candidates/3.2.0/contax-zeiss-50-f1-4.manifest.json": "677d1f19c82acc9a79281882f1c0b70b2b33ddae189048538e71c18fe2abd6b2",
+    "firmware/upstream-diagnostic/build/manifest.json": "677d1f19c82acc9a79281882f1c0b70b2b33ddae189048538e71c18fe2abd6b2",
+    "firmware/upstream-diagnostic/build/src/emount.c": "9cd0db65476c109b12cd852e728df8edd1c16509d24b4e62de6c3289152112ad",
+    "firmware/upstream-diagnostic/build/src/emount.h": "18559208f5f31aadae4f02f03be440719f48a4d56c0008e5532c09e386760da5",
+    "firmware/upstream-diagnostic/build/src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "firmware/upstream-diagnostic/build/src/startup_trace.c": "239cd8b4637cd34631c9624dcec6efb709d033a640e547c818359bb5ac05ba94",
+    "firmware/upstream-diagnostic/build/tools/hosttest/shim.c": "013e9b4de1e506a6394638d30f044dc48dbf19177f156f657dd5fa0ff492212d",
+    "firmware/upstream-diagnostic/tests/trace_host.c": "c3b65560600e5334a70e665cc290ea87b341198477230ea8a01e4d22c3b6b4e9",
+    "firmware/upstream-hardening/src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "firmware/upstream-hardening/src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "firmware/upstream-hardening/tests/test_dispatch.c": "8ebad94fd42e9a40cade4b2469a2260a1415c42ee3a00e4073069a91612a614c",
+    "firmware/upstream-hardening/tests/test_frames.c": "af79cbb33eb047b6c2ab9e3549426b94db24ff1e2f29bf5ee5260087555cbb8b"
+  },
+  "overlaySHA256": "965ce74136fa67d5a336d7e96a016d3f2dcdeb419d60ce7d3045df7e9b7a61d5",
+  "limits": "Scripted chip-select and immediate transmit; no real UART/IRQ/NVM/camera timing or optical AF. Valid framing does not establish valid message operands or capture/shutdown arbitration.",
+  "previousPublishedArtifactsVerifiedUnchanged": 26,
+  "current32CandidateAndAppResourceUnchanged": true,
+  "dateLocal": "2026-10-15",
+  "workWindowUTC": {
+    "start": "2026-10-15T04:55:51Z",
+    "end": "2026-10-15T12:55:51Z"
+  },
+  "releaseSourceCommit": "c43e39079c9151acf9e9f9b0e61f47ab204c8b22",
+  "ARMModuleCompile": {
+    "target": "Cortex-M0+ Thumb",
+    "optimization": "O2",
+    "toolchain": "Arm GNU 14.2.rel1",
+    "textBytes": 128,
+    "dataBytes": 0,
+    "bssBytes": 0,
+    "objectSHA256": "bab804b83697201b067f60647937eb059ac67507ebbeff0913cdd8b0e58e25eb",
+    "moduleSourceSHA256": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "scope": "Module object only, not a linked release or physical execution-time measurement"
+  }
+}

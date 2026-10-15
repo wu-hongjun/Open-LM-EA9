@@ -8,6 +8,11 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
+An [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
+is running through 08:55 America/New_York on October 15. The first offline pass
+reproduces receive-frame admission and padding/operand defects and validates a
+modular guard. It does not modify the uploaded 3.2 image or qualify camera use.
+
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
 upload/read-back path for lens metadata. The current app (0.15.0, build 19) refreshes

@@ -7,6 +7,12 @@ with normal shutdown. This candidate repairs a reproduced first-window receive
 loss, restores stock lens ID 234 as a compatibility control and adds bounded startup/
 handshake diagnostics. Whether it fixes the physical A7C II failure is unproven.
 
+The subsequent [offline hardening pass](../../../docs/firmware-hardening-2026-10-15.md)
+reproduces malformed-frame admission and padded short-message operand defects
+in this frozen source. Its tested frame gate is a development overlay, not part
+of this image. 3.2 remains an unqualified diagnostic candidate; no new camera
+success or failure has been reported.
+
 | Property | Value |
 | --- | --- |
 | Upstream base | `d52ed06cc449918f938e0695fbf29a0c4141f2b2` |
