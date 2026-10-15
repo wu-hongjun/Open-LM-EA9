@@ -52,7 +52,9 @@ separate checks. Do not launch the app during offline work: normal refresh
 enumerates hardware. USB backup/apply/verification and camera tests remain
 owner-coordinated. The prior 3.2 journal was resolved by strict verification in
 a separate interactive session; the authorized 3.6 installation also passed its
-own physical reconnect and strict verification. One camera cycle and log review
-are requested. No script here modifies either journal.
+own physical reconnect and strict verification. The later
+[camera trial failed capture/shutdown](../../../docs/evidence/upstream-36-camera-failure-2026-10-15.md);
+read-only logs were preserved and further 3.6 trials are held. No script here
+modifies either journal.
 See [offline evidence](../../../docs/evidence/upstream-36-handoff-2026-10-15.md)
 and the separate [installation record](../../../docs/evidence/upstream-36-upload-2026-10-15.md).

@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.19.0, build 23
+# Device workflow: prototype 0.19.1, build 24
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -8,10 +8,17 @@ f-number for firmware with a runtime profile row. Upstream candidates instead
 compile the original 50mm f/1.4 profile; library edits stay local on those images.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
-The latest packaged candidate is **upstream AF 3.6.0**, camera-unqualified.
+**Upstream AF 3.6.0 camera testing is held after capture and shutdown failure.**
+The app shows that result and disables ordinary 3.6 installation. USB backup and
+recovery remain available. [Failure and surviving diagnostic evidence](evidence/upstream-36-camera-failure-2026-10-15.md).
+Do not repeat this image on the camera. Historical explicit CLI preparation/apply
+commands retain their pinned images for coordinated research/recovery.
+
+The latest packaged firmware is **upstream AF 3.6.0**.
 Its [authorized upload and strict verification](evidence/upstream-36-upload-2026-10-15.md)
-passed after owner-confirmed physical reconnect; camera results and log review
-are pending. USB tools provide **Install Upstream AF 3.6.0** as a separate
+passed after owner-confirmed physical reconnect. The later camera trial failed;
+a read-only post-camera backup and log review followed. USB tools retain the disabled
+**Install Upstream AF 3.6.0** control as a separate
 action; changing the dropdown does not install it. The native CLI equivalents
 are `prepare-handoff-upstream` and `apply-handoff-upstream`. Other/edited profiles
 are rejected. [Build/test evidence](evidence/upstream-36-handoff-2026-10-15.md)
@@ -26,7 +33,7 @@ The historical `prepare-startup`/`apply-startup`
 commands still select 3.2. Installed 3.2–3.6 routes the main action to USB tools,
 labels camera compatibility unqualified and avoids ordinary profile application.
 After one coordinated camera cycle, save a read-only backup and use the offline
-decoder before further camera trials.
+decoder for evidence review. Further 3.6 camera trials remain held.
 Initial full-image verification includes the blank log area. Later log retrieval
 does not relax that check; ordinary image inspection still rejects changed bytes.
 

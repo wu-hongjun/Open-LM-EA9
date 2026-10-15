@@ -8,10 +8,12 @@ That image was uploaded and [strictly verified](evidence/upstream-32-upload-2026
 after owner-confirmed physical reconnect. The [October 15 hardening campaign](firmware-hardening-2026-10-15.md)
 then prepared separately versioned offline candidates with reproduced software
 fault fixes, most recently [3.6](evidence/upstream-36-handoff-2026-10-15.md).
-App 0.19/build 23 includes its separate explicit installation action.
+App 0.19/build 23 introduced its separate explicit installation action;
+current app0.19.1/build24 disables that ordinary action after the reported failure.
 Its [owner-authorized 3.6 installation](evidence/upstream-36-upload-2026-10-15.md)
-passed strict verification after its own physical reconnect. One camera cycle
-and log review are requested; results remain pending.
+passed strict verification after its own physical reconnect. The later
+[camera trial failed capture/shutdown](evidence/upstream-36-camera-failure-2026-10-15.md),
+and a read-only backup preserved diagnostic evidence. Further 3.6 trials are held.
 They retain the upstream controller and native Swift host;
 A7C II acceptance remains unqualified. This source hardening does not replace
 the outstanding initial camera qualification gate.

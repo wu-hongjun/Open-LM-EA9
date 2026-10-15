@@ -19,22 +19,27 @@ production-path regressions with failing controls, independent composition and
 compiled writer/stack checks, and all 53 Swift tests pass.
 [Evidence and limitations](docs/evidence/upstream-36-handoff-2026-10-15.md).
 The offline decoder also distinguishes inconsistent or partial multi-boot logs.
-**3.6 is uploaded and strictly byte-verified after physical reconnect; one camera
-cycle and log review are requested.** The owner authorized the interactive installation after
+**3.6 is uploaded and strictly byte-verified, but camera capture/shutdown failed.
+Further 3.6 camera trials are held.** The owner reports slight focus movement,
+shutter-press freeze and shutdown nonresponse. A read-only backup preserved 13
+valid diagnostic pages: a sticky `servo-wrong-way` inhibit and a later shutdown
+UART-disable marker. This does not locate the shutter failure or prove camera
+power-off. [Failure evidence](docs/evidence/upstream-36-camera-failure-2026-10-15.md).
+The owner authorized the interactive installation after
 [3.2 strict verification passed](docs/evidence/upstream-32-upload-2026-10-15.md).
 No hardware was accessed during scheduled work; the separate
 [3.6 installation record](docs/evidence/upstream-36-upload-2026-10-15.md)
-tracks the owner-coordinated USB steps. No 3.6 camera results or qualification
-are claimed yet.
+tracks the owner-coordinated USB steps. Physical compatibility remains failed.
 Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.19.0, build 23) refreshes
+upload/read-back path for lens metadata. The current app (0.19.1, build 24) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
+It marks installed 3.6 as held and disables ordinary installation of that image.
 The upstream candidates use the original fixed 50mm profile; they cannot apply
 runtime lens edits. [Factory reconstruction remains partial](docs/reverse-engineering/status-2026-10-15.md).
 The **historical upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4

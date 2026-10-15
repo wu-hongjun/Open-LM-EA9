@@ -1,0 +1,154 @@
+{
+  "method": "Offline source-pin verification and sanitized interpretation of completed native backup decoder output; no new execution reproduction",
+  "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "allManifestSourcePinsMatch": true,
+  "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+  "reviewedSources": {
+    "src/main.c": "982c1beb7dca621fd2c403e1f7bc670f2859003c960265bad936c6f348c9b3b3",
+    "src/servo.c": "5eadc1bf93f62a1369187e54b8fb7b3a148155802fd94767e56c2c602a8ef21b",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/emount.c": "57fe9dfe08068db6a2f4596faf27371b74881f84573b79facca4d728cd349d41",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/startup_trace.c": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd",
+    "src/startup_trace_flash.c": "cffa577712febb8b19f0fd7590fbf9feb94c0628deb0d9ece52a8aadc53da322"
+  },
+  "diagnosticCounts": {
+    "validPages": 13,
+    "invalidPages": 0,
+    "erasedPages": 3,
+    "semanticallyInconsistentPages": 0,
+    "unassociatedPages": 0
+  },
+  "sanitizedSummary": {
+    "stage": "connected",
+    "handshakeFlag": true,
+    "fault": "servo-wrong-way",
+    "rxFrames": 1614,
+    "txReturns": 1618,
+    "uartErrors": 0,
+    "uartStatus": 0,
+    "droppedEvents": 6429,
+    "retention": "first-24-and-last-24",
+    "bufferedEvents": 48,
+    "plannedEvents": 48,
+    "shutdownUARTDisabledObserved": true,
+    "persistedEvents": 48,
+    "eventSnapshotComplete": true,
+    "eventSnapshotStatus": "complete"
+  },
+  "retainedTailEvents": [
+    {
+      "event": "tx-returned",
+      "id": "0x6"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "rx-frame",
+      "id": "0x3"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "rx-frame",
+      "id": "0x4"
+    },
+    {
+      "event": "tx-returned",
+      "id": "0x5"
+    },
+    {
+      "event": "tx-returned",
+      "id": "0x6"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "rx-frame",
+      "id": "0x3"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "rx-frame",
+      "id": "0x4"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "rx-frame",
+      "id": "0xa"
+    },
+    {
+      "event": "tx-returned",
+      "id": "0x5"
+    },
+    {
+      "event": "tx-returned",
+      "id": "0xa"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x1"
+    },
+    {
+      "event": "cs-edge",
+      "id": "0x0"
+    },
+    {
+      "event": "tx-returned",
+      "id": "0x16"
+    },
+    {
+      "event": "shutdown-uart-disabled",
+      "id": "0x0"
+    }
+  ],
+  "interpretation": {
+    "wrongWayGuardRecorded": true,
+    "shutdownTransmitReturned": true,
+    "shutdownUARTDisableBoundaryRecorded": true,
+    "wrongWayFaultTimestampAvailable": false,
+    "motionSamplesAvailable": false,
+    "shutterPressTimeAvailable": false,
+    "captureOwnershipLogged": false,
+    "physicalDeliveryProven": false,
+    "pa23WriteProven": false,
+    "cameraPowerOffProven": false,
+    "shutterRootCauseLocated": false
+  },
+  "hardwareAccessByThisLane": false,
+  "firmwareChanged": false
+}

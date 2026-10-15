@@ -1,6 +1,12 @@
 # 3.6.0 — upstream C startup handoff, Contax Zeiss 50mm f/1.4
 
-**Prepared offline; not uploaded or camera-qualified.** This extends frozen
+**Camera acceptance failed; further trials are held.** Upload and strict
+verification passed; the owner then reported shutter-press freeze and shutdown
+nonresponse. [Failure and surviving logs](../../../docs/evidence/upstream-36-camera-failure-2026-10-15.md).
+App0.19.1/build24 disables ordinary installation. The image, manifest and patch
+below remain unchanged.
+
+The original offline preparation extends frozen
 [3.5](../3.5.0/README.md) with a scoped startup receive-ownership fix.
 It retains the upstream controller, gains, optical tables, aperture policy,
 motor/sensor drivers, wait budgets and diagnostic storage.
@@ -43,10 +49,10 @@ Explicit commands: `prepare-handoff-upstream` / `apply-handoff-upstream`.
 Earlier commands retain their images. Only the original unedited 50mm profile
 is supported. Actual iris stays Unknown; factory reconstruction remains partial.
 
-The pending uploaded 3.2 transaction still requires owner-confirmed physical
-reconnect and strict full-image/protected-data verification. This offline
-candidate does not resolve it or authorize another flash. See the
-[future coordinated procedure](../../../docs/upstream-handoff-test.md),
+The prior 3.2 transaction and this 3.6 installation passed strict verification
+after separate owner-confirmed physical reconnects. Camera failure does not
+invalidate those byte comparisons. Do not repeat 3.6 trials. See the
+[held coordinated procedure](../../../docs/upstream-handoff-test.md),
 [build/test workbench](../../upstream-hardening/next36/README.md),
 [manifest](contax-zeiss-50-f1-4.manifest.json) and
 [complete delta from 3.5](from-35.patch). Prior releases and stock recovery remain exact.

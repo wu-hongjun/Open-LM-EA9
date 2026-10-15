@@ -7,6 +7,7 @@ project-module imports, device APIs, network, app or canonical state access.
 import hashlib
 import json
 from pathlib import Path
+import plistlib
 import re
 import subprocess
 
@@ -32,12 +33,14 @@ docs = ['README.md', 'firmware/README.md', 'docs/macos-device-workflow.md',
         'firmware/upstream-hardening/README.md']
 texts = {path: (ROOT / path).read_text() for path in docs}
 readme, index, workflow, prototype = [texts[path] for path in docs[:4]]
+info = plistlib.loads((ROOT / 'apps/macos/Info.plist').read_bytes())
+app_version, app_build = info['CFBundleShortVersionString'], info['CFBundleVersion']
 checks = {
     'original_findings_bound_to_pinned_commit': all(row['matches'] for row in before.values()),
     'firmware_index_points_to_36': 'The latest candidate is [upstream AF 3.6]' in index,
     'firmware_index_old_source_is_scoped': 'Historical custom 3.0 build and checks' in index,
-    'device_workflow_019_build23': '# Device workflow: prototype 0.19.0, build 23' in workflow,
-    'prototype_019_build23': 'Current app: **0.19.0, build 23**' in prototype,
+    'device_workflow_matches_current_app': f'# Device workflow: prototype {app_version}, build {app_build}' in workflow,
+    'prototype_matches_current_app': f'Current app: **{app_version}, build {app_build}**' in prototype,
     'workflow_explicit_36_command': '`prepare-handoff-upstream` and `apply-handoff-upstream`' in workflow,
     'workflow_fixed_profile_scope': 'The upstream 3.1–3.6 candidates' in workflow and 'runtime profile row' in workflow,
     'prototype_fixed_profile_scope': 'Fixed upstream 3.1–3.6 images accept only the original unedited 50mm profile' in prototype,
@@ -59,6 +62,7 @@ for path, content in texts.items():
                       'exists': (ROOT / path).parent.joinpath(target).exists()})
 checks['local_markdown_targets_exist'] = all(row['exists'] for row in links)
 result = {'scope': 'Pinned original commit vs current working-tree documentation only',
+          'currentApp': {'version': app_version, 'build': app_build},
           'originalHEAD': head, 'currentHEAD': current_head,
           'sourcePinSHA256': sha((LANE / 'source-pin.json').read_bytes()),
           'before': before, 'afterChecks': checks,

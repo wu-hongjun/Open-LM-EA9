@@ -1,6 +1,10 @@
-# Upstream AF 3.6 — future installation and camera acceptance
+# Upstream AF 3.6 — held camera procedure and log retrieval
 
-**Upload and strict verification passed; one camera cycle and log review requested.**
+**Camera capture/shutdown failed; further 3.6 trials are held.**
+The owner reports shutter-press freeze and shutdown nonresponse. A read-only
+backup and log review followed. See the [failure record](evidence/upstream-36-camera-failure-2026-10-15.md).
+The steps below preserve the requested historical procedure; they are not a
+request to repeat it. Backup/recovery remain coordinated separately.
 See the [live installation record](evidence/upstream-36-upload-2026-10-15.md).
 No camera action is requested by this document alone.
 The [candidate](../firmware/candidates/3.6.0/README.md) and

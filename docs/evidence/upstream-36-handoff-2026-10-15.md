@@ -1,6 +1,6 @@
 # Upstream C 3.6 — startup ownership and diagnostic interpretation
 
-**Prepared offline; not uploaded or camera-qualified.** The new candidate fixes
+**Offline preparation record; later camera acceptance failed.** The candidate fixes
 a reproduced startup producer race. A separate host-only decoder change stops
 CRC-valid, writer-impossible page layouts from falsely completing a diagnostic
 snapshot. [Machine-readable evidence](upstream-36-handoff-2026-10-15.json) binds
@@ -9,8 +9,9 @@ the image, sources, tests and host integration. [Campaign](../audits/astra-harde
 This record describes the offline preparation milestone. The later
 [owner-authorized installation](upstream-36-upload-2026-10-15.md) is recorded
 separately: 3.2 verification passed, followed by 3.6 upload and its own physical
-reconnect/strict verification. One camera cycle and logs are requested; no
-camera result is inferred.
+reconnect/strict verification. The later [camera trial failed capture/shutdown](upstream-36-camera-failure-2026-10-15.md).
+Read-only logs were preserved; further 3.6 trials are held. The offline passes
+below remain software evidence and do not override that physical result.
 
 ## Startup finding and accepted design
 

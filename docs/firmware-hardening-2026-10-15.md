@@ -22,7 +22,8 @@ its verification and installing 3.6, and confirmed physical reconnect. **3.2
 strict verification passed at 12:02:46 UTC; the separate 3.6 upload completed
 at 12:05:50 UTC and passed its own strict verification at 12:23:54 UTC after
 owner-confirmed physical reconnect.** [Installation record](evidence/upstream-36-upload-2026-10-15.md).
-One camera cycle and post-cycle log review are requested; results remain pending.
+The later camera trial failed capture/shutdown. Read-only logs were preserved;
+further 3.6 trials are held. [Failure record](evidence/upstream-36-camera-failure-2026-10-15.md).
 These hardware steps are separately
 owner-coordinated and do not extend the offline scope of scheduled passes.
 Do not infer a reconnect from elapsed time or enumerate the adapter during a
@@ -403,3 +404,33 @@ adapter to its USB cap and explicitly confirm physical reconnect for later
 read-only backup/log retrieval. No further USB report is authorized by elapsed
 time or this ledger; await that confirmation. No AF-S/restart or camera-stability
 claim precedes cycle and log review. [Live record](evidence/upstream-36-upload-2026-10-15.md).
+
+### Actual 3.6 camera failure and diagnostic recovery
+
+The owner reports inability to take a photo, slight motor movement on focus,
+shutter-press camera freeze and shutdown nonresponse. Actual MF/AF, Pre-AF,
+aperture, exact half/full-press stage and battery action remain unverified.
+This fails capture/shutdown acceptance and holds further 3.6 trials. The owner
+was told to stop; no repeat or new flash followed. After the reported computer
+return, native read-only backup found a new qualified same-unit connection and
+completed at 12:30:35 UTC with two matching full-flash/auxiliary passes.
+
+All flash changes are confined to diagnostics; all other flash and protected
+auxiliary data match the strict pre-camera readback. Thirteen valid writer-
+consistent pages retain 48 first/last events with 6,429 evictions. The trace
+records historical connected/handshake state, sticky `servo-wrong-way`, and
+later successful-return shutdown echo plus UART-disable/flush marker. This
+does not prove shutter cause, reply delivery, PA23 completion or body power-off.
+The sealed snapshot cannot show a later shutdown-tail fault. Astra32 independently
+reviews all 46 source pins and those limits; no firmware remedy is inferred.
+[Owner and backup evidence](evidence/upstream-36-camera-failure-2026-10-15.md).
+
+App0.19.1/build24 marks installed 3.6 held and disables ordinary installation of
+that image while preserving backup/recovery. The workflow control fails on the
+prior app in three intended assertions, then all 53 Swift tests and signed
+packaging pass after the narrow host change. Exact app0.19/build23, CLI and
+bundles are preserved privately. Firmware images, manifests, pins and original
+stock recovery remain unchanged. No app launch or hardware write followed the
+failed test. This is a failed physical milestone with useful evidence, not a
+stable release or factory parity. Continue only bounded offline evidence work
+until the authorized deadline; final status must retain this failure.

@@ -345,7 +345,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
-        case "3.6.0": return "Upstream AF 3.6 is camera-unqualified. It keeps startup receive ownership separate from EIC delivery while UART reception stays active. Collect a read-only backup after one coordinated camera cycle before another trial."
+        case "3.6.0": return "Upstream AF 3.6 is held after a shutter-press camera freeze and shutdown nonresponse. Keep the camera off and save a read-only backup for log review. Do not retry this image."
         case "3.5.0": return "Upstream AF 3.5 is camera-unqualified. It preserves the resolved focus target and rejects homing completion after an expired phase. Collect a read-only backup after one coordinated camera cycle before another trial."
         case "3.4.0": return "Upstream 3.4 is camera-unqualified. It adds bounded encoder coordinates and preserves query replies during motion and homing. After one coordinated camera cycle, collect a read-only backup before another trial."
         case "3.3.0": return "Upstream hardening 3.3 is camera-unqualified. It adds capture/shutdown ownership and guarded homing. After one coordinated camera cycle, collect a read-only backup before another trial."
@@ -415,7 +415,8 @@ enum AppTab: Hashable { case device, lensLibrary }
         applyLens(variant: .autofocusAbsoluteUpstream)
     }
     var canInstallStartupHandoff: Bool {
-        guard canChangeFirmware, let profile = preparedLens,
+        guard Self.cameraFailureHolds[FirmwareVariant.autofocusStartupHandoff.versionString] == nil,
+              canChangeFirmware, let profile = preparedLens,
               currentAppliedLens?.firmwareVersion != "3.6.0" else { return false }
         return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusStartupHandoff)) != nil
     }

@@ -1,5 +1,5 @@
 {
-  "status": "uploaded-and-strictly-verified-one-camera-cycle-requested",
+  "status": "strict-byte-verification-passed-camera-capture-shutdown-failed-held",
   "date": "2026-10-15",
   "sourceGitCommit": "89e6d0dd2142e57c930540faa68632794769622e",
   "appVersion": "0.19.0",
@@ -40,8 +40,8 @@
     "durableBeforeSTART": true
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestingPerformed": null,
-  "cameraAcceptancePassed": null,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
   "privateLogSHA256": {
     "upload.stdout.txt": "633a44973b6733d0392d052329edfb31277982c3cb7751f2311efc5c67750dfb",
     "upload.progress.txt": "e1aa9ef5201b3b28f72a0a4392745aa980b584adce41375de545c0e2faa04bce",
@@ -87,8 +87,8 @@
     "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
   },
   "initialCameraCycleRequested": true,
-  "cameraResultsReported": false,
-  "diagnosticLogRetrievalPending": true,
+  "cameraResultsReported": true,
+  "diagnosticLogRetrievalPending": false,
   "noRestartOrAFSBeforeLogReview": true,
   "requestedCameraSettings": {
     "camera": "Sony A7C II",
@@ -103,5 +103,70 @@
     "idleSeconds": 10,
     "photoPrerequisites": "Normal updating preview/aperture/motion and confirmed MF; otherwise skip",
     "actualSettingsVerified": false
-  }
+  },
+  "furtherCameraTrialsHeld": true,
+  "actualFocusModeVerified": false,
+  "ownerCameraObservations": {
+    "cannotTakePhoto": true,
+    "slightMotorMovementOnFocus": true,
+    "cameraFreezesOnShutterPress": true,
+    "shutdownUnresponsive": true,
+    "returnedToComputer": true
+  },
+  "postCameraBackup": {
+    "scope": "Read-only native backup followed by offline hash/range/decoder audit; no write or recovery action",
+    "backupNativeExitCode": 0,
+    "completedAtUTC": "2026-10-15T12:30:35.605868+00:00",
+    "firmwareVersion": "3.6.0",
+    "sameUnitAndNewConnectionConfirmed": true,
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "preCameraFlashSHA256": "7b15614f706b6a937b586d4ab3fed76306a73e7d2ed02df421d529586f93ac7f",
+    "postCameraFlashSHA256": "504a69512dbd707454112a26d29e6da8cbe0abbfd1a3c1580b5c2d99d4123c61",
+    "changedFlashBytes": 830,
+    "changesConfinedToDiagnosticRange": "[0x9c00,0xa000)",
+    "strictOutsideLogChecks": {
+      "allFlashOutsideDiagnosticAreaUnchanged": true,
+      "deviceIDUnchanged": true,
+      "userRowUnchanged": true,
+      "calibrationUnchanged": true
+    },
+    "pristineFullImageMatchAfterCamera": false,
+    "immutableCandidatePrefixMatches": true,
+    "diagnostics": {
+      "validPages": 13,
+      "invalidPages": 0,
+      "erasedPages": 3,
+      "semanticallyInconsistentPages": 0,
+      "unassociatedPages": 0,
+      "summaryStage": "connected",
+      "handshakeFlag": true,
+      "firstStickyFault": "servo-wrong-way",
+      "rxFrames": 1614,
+      "txReturns": 1618,
+      "uartErrors": 0,
+      "shutdownUARTDisabledObserved": true,
+      "persistedEvents": 48,
+      "plannedEvents": 48,
+      "eventSnapshotStatus": "complete",
+      "droppedEvents": 6429
+    },
+    "installationVerificationPerformedByDecoder": false,
+    "cameraAcceptanceProven": false,
+    "limits": [
+      "A complete retained first/last snapshot is not the complete event history",
+      "Writer consistency and CRC are not authentication",
+      "Shutdown UART-disable breadcrumb precedes PA23 completion and does not prove camera power-off",
+      "Sticky servo-wrong-way lacks fault-time sensor/target/duty samples and does not establish capture-freeze cause",
+      "Actual camera settings, exact press stage and battery removal remain unverified"
+    ],
+    "privateEvidenceSHA256": {
+      "decoded.json": "6fe7cf637dbe5b79f4e04b4bb0c5bfcda434ceced0f2010c6fdb9d177f1185a2",
+      "backup.stdout.txt": "05cabe0bf4d1ca2efcdce776bf17c68c85eb117e468ff850224f5bc20f7a1145",
+      "backup.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+    }
+  },
+  "cameraFailureEvidence": "upstream-36-camera-failure-2026-10-15.json"
 }

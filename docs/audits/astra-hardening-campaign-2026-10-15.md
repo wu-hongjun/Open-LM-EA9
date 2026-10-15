@@ -48,6 +48,7 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 29 | Exact 3.6 stack, vectors and compiled EIC order | Astra complete; conditional 1,560-byte envelope; 29 negative guards plus exact-bound positive | `followup/29-stack36`, [report](astra-29-stack36-2026-10-15.md) |
 | 30 | Current release/runbook and canonical state guidance | Astra complete; four documentation findings corrected; 16 static after-checks and local link checks pass | `followup/30-release-runbook`, [report](astra-30-release-runbook-2026-10-15.md) |
 | 31 | Original factory terminal shutdown/sleep tail | Astra complete; root reproduces 35 Thumb cases and nine contrasting controls; old pre-format/UART interpretation corrected | `followup/31-factory-shutdown-tail`, [report](astra-31-factory-shutdown-tail-2026-10-15.md) |
+| 32 | Actual 3.6 capture failure and retained diagnostic interpretation | Astra complete; all 46 source pins match; real trace narrows motion inhibition/shutdown endpoint, no root cause or patch claimed | `followup/32-af36-capture-failure`, [report](astra-32-af36-capture-failure-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -185,3 +186,15 @@ verification and an independent offline audit passed at 12:23:54 UTC. One
 loaded-lens MF cycle and post-cycle log review are requested; actual settings
 and camera results remain pending in the installation record. The scheduled
 and agent boundary remains offline.
+
+The owner subsequently reported a 3.6 shutter-press freeze and shutdown
+nonresponse. Root retrieved the read-only post-camera backup; Astra32 independently
+matched all 46 source pins and interpreted its surviving 13-page trace. Sticky
+wrong-way inhibition can suppress motion/completion; a later shutdown echo and
+UART-disable marker establish progress only to that software point. No fault
+time, complete capture exchange, PA23 completion or body power-off is proved.
+No firmware patch follows from this finding. Root marked 3.6 held in app0.19.1/
+build24; meaningful failing controls, all 53 Swift tests and packaging pass.
+No further camera trial, flash or stock restoration followed. The
+[failure record](../evidence/upstream-36-camera-failure-2026-10-15.md) supersedes
+the earlier camera-pending status while preserving strict USB equality.

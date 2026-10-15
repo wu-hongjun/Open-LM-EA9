@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-15",
+  "status": "camera-capture-and-shutdown-failed-further-36-trials-held",
+  "firmwareVersion": "3.6.0",
+  "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "strictPreCameraVerificationPassed": true,
+  "implementation": {
+    "foundation": "weiziqian/E-mount-impl-on-Techart-EA9",
+    "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+    "language": "C",
+    "controller": "upstream, not earlier reconstructed factory PID",
+    "unmodifiedUpstreamImage": false,
+    "localChanges": "Reviewed source hardening and fixed lens/build/version configuration; see3.3\u20133.6 release evidence"
+  },
+  "ownerObservations": {
+    "cannotTakePhoto": true,
+    "slightMotorMovementOnFocus": true,
+    "cameraFreezesOnShutterPress": true,
+    "shutdownUnresponsive": true,
+    "returnedToComputer": true
+  },
+  "unverified": [
+    "actual focus mode",
+    "Pre-AF",
+    "exposure mode/EV/ISO",
+    "displayed aperture",
+    "preview brightness",
+    "half-press vs full-press freeze trigger",
+    "focus lock or optical accuracy",
+    "saved-photo filesystem status",
+    "battery-removal action",
+    "physical ring settings and exact cycle count"
+  ],
+  "cameraAcceptancePassed": false,
+  "furtherCameraTrialsHeld": true,
+  "restoreOrAdditionalFirmwareUploadPerformed": false,
+  "postCameraBackup": {
+    "scope": "Read-only native backup followed by offline hash/range/decoder audit; no write or recovery action",
+    "backupNativeExitCode": 0,
+    "completedAtUTC": "2026-10-15T12:30:35.605868+00:00",
+    "firmwareVersion": "3.6.0",
+    "sameUnitAndNewConnectionConfirmed": true,
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "preCameraFlashSHA256": "7b15614f706b6a937b586d4ab3fed76306a73e7d2ed02df421d529586f93ac7f",
+    "postCameraFlashSHA256": "504a69512dbd707454112a26d29e6da8cbe0abbfd1a3c1580b5c2d99d4123c61",
+    "changedFlashBytes": 830,
+    "changesConfinedToDiagnosticRange": "[0x9c00,0xa000)",
+    "strictOutsideLogChecks": {
+      "allFlashOutsideDiagnosticAreaUnchanged": true,
+      "deviceIDUnchanged": true,
+      "userRowUnchanged": true,
+      "calibrationUnchanged": true
+    },
+    "pristineFullImageMatchAfterCamera": false,
+    "immutableCandidatePrefixMatches": true,
+    "diagnostics": {
+      "validPages": 13,
+      "invalidPages": 0,
+      "erasedPages": 3,
+      "semanticallyInconsistentPages": 0,
+      "unassociatedPages": 0,
+      "summaryStage": "connected",
+      "handshakeFlag": true,
+      "firstStickyFault": "servo-wrong-way",
+      "rxFrames": 1614,
+      "txReturns": 1618,
+      "uartErrors": 0,
+      "shutdownUARTDisabledObserved": true,
+      "persistedEvents": 48,
+      "plannedEvents": 48,
+      "eventSnapshotStatus": "complete",
+      "droppedEvents": 6429
+    },
+    "installationVerificationPerformedByDecoder": false,
+    "cameraAcceptanceProven": false,
+    "limits": [
+      "A complete retained first/last snapshot is not the complete event history",
+      "Writer consistency and CRC are not authentication",
+      "Shutdown UART-disable breadcrumb precedes PA23 completion and does not prove camera power-off",
+      "Sticky servo-wrong-way lacks fault-time sensor/target/duty samples and does not establish capture-freeze cause",
+      "Actual camera settings, exact press stage and battery removal remain unverified"
+    ],
+    "privateEvidenceSHA256": {
+      "decoded.json": "6fe7cf637dbe5b79f4e04b4bb0c5bfcda434ceced0f2010c6fdb9d177f1185a2",
+      "backup.stdout.txt": "05cabe0bf4d1ca2efcdce776bf17c68c85eb117e468ff850224f5bc20f7a1145",
+      "backup.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+    }
+  },
+  "interpretation": {
+    "softwareConnectedStateReached": true,
+    "firstStickyFault": "servo-wrong-way",
+    "shutdownEchoReturnAndUARTDisableBoundaryReached": true,
+    "physicalShutdownConfirmed": false,
+    "captureFreezeCauseEstablished": false,
+    "motorPolarityChangeJustified": false,
+    "faultToShutterTimingEstablished": false
+  },
+  "nextEvidenceGate": "Offline interpretation of surviving trace; no repeated camera test of3.6. Any later changed firmware needs a new version, explicit upload and strict verification.",
+  "hostHoldUpdate": {
+    "appVersion": "0.19.1",
+    "appBuild": 24,
+    "swiftTestsPassed": 53,
+    "swiftSuiteCounts": [
+      7,
+      35,
+      11
+    ],
+    "frozenAppExpectedWorkflowFailures": 3,
+    "signedPackagingPassed": true,
+    "nativeCLIUnchanged": true,
+    "priorAppCLIBundlesPreservedPrivately": true,
+    "priorReleaseRecoveryPinArtifactsUnchanged": 60,
+    "firmware36ImageManifestResourceUnchanged": true,
+    "appBinarySHA256": "478bac84281187dcd4db274d4a3c24fd9c31b54ec904977a93b8c9b9102f400a",
+    "cliSHA256": "781231a3e6b6ef29e442cef982f92e4eb158d805ac315d226bf112eeb332d394",
+    "sourceSHA256": {
+      "apps/macos/Info.plist": "05a6e363217371cc6ed1454ab59393f6fca4d875cd32d9c399566bab13fe2baa",
+      "apps/macos/Sources/OpenLMEA9/AppModel.swift": "8a17e5138d8e312bba64dcb6d8f393c1f0e9eb280d65010ef6a0e746406c726a",
+      "apps/macos/Sources/OpenLMEA9/DeviceWorkflow.swift": "03ac96b9ecdaa7578feccb091e750f6427cefc037aa66e19c7f1f654e3dd2d01",
+      "apps/macos/Sources/OpenLMEA9/DeviceOverview.swift": "7e12e2c7a8ddf53f903fe3010f981d405539930125266d3cbc06c0baa7caa4cd",
+      "apps/macos/Tests/AppWorkflowTests/DeviceWorkflowTests.swift": "1e9facee2ca6e3d1d619c1c17d6587b7e2533ae3f5d60b49f616fd29bb93fd6d"
+    },
+    "privateLogSHA256": {
+      "hold-before.stdout.txt": "3aaadb2f6a07eb9d9487b5c7b8267b876ae25faef0573b8e711278b9d1ab1cbe",
+      "hold-before.stderr.txt": "50ce3db37dc0026e9fa204d077530a2964824f0b29f97235c793e1cb1bf5e360",
+      "swift-tests.stdout.txt": "f80a2f69e09caaa556d99887078a757323af9a28ebd81b9de0499b1a7ac0e317",
+      "swift-tests.stderr.txt": "e3b33368a85ee86e9f7fe54e75fcd4e75f9f508ae18924f755aaa17d29c0ce04",
+      "package.stdout.txt": "5601920020725bbbd0034290176406f1333564b93d003263779651c45889783a",
+      "package.stderr.txt": "8fd488a93fb5554c53428315eecda8961388cac026d7de50b6bf378fc8a675a6"
+    },
+    "appLaunched": false,
+    "firmwareWritesAfterCameraFailure": 0,
+    "currentGuideChecksPassed": 16,
+    "currentRelativeMarkdownTargetsPresent": 222
+  },
+  "independentReview": {
+    "lane": 32,
+    "allExactManifestSourcePinsMatch": true,
+    "sourceCount": 46,
+    "report": "../audits/astra-32-af36-capture-failure-2026-10-15.md",
+    "newFirmwareFixClaimed": false
+  }
+}

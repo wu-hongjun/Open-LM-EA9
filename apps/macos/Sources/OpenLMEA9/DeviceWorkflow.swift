@@ -20,7 +20,8 @@ enum DeviceLensAction {
 @MainActor extension AppModel {
     static let cameraFailureHolds = [
         "3.0.0": "AF 3.0 failed capture and shutdown testing with a full-press freeze requiring battery removal.",
-        "3.1.0": "Upstream 3.1 failed camera testing: aperture showed -- and the shutter would not release. Shutdown worked."
+        "3.1.0": "Upstream 3.1 failed camera testing: aperture showed -- and the shutter would not release. Shutdown worked.",
+        "3.6.0": "Upstream AF 3.6 failed capture and shutdown testing: shutter press froze the camera and it did not shut down."
     ]
     var installedCameraFailureHold: Bool {
         Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] != nil

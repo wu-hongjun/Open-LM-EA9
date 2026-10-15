@@ -241,7 +241,7 @@ struct DeviceToolsView: View {
                             Button("Install Upstream Baseline 3.1.0", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)
                             Text("Startup diagnostic 3.2.0 tests the first-window receive fix and stock lens identity. It is compiled for the original 50mm f/1.4 profile. Camera compatibility is unqualified; collect a backup after one coordinated camera cycle.").font(.callout)
                             Button("Install Startup Diagnostic 3.2.0", action: model.installStartupDiagnostic).disabled(!model.canInstallStartupDiagnostic)
-                            Text("Upstream AF 3.6.0 guards startup receive ownership while keeping UART reception active. This fixed 50mm f/1.4 candidate is camera-unqualified. Review the backup after one coordinated cycle before further testing.").font(.callout)
+                            Text("Upstream AF 3.6.0 is held after a camera freeze on shutter press and shutdown nonresponse. Save a read-only backup for log review; do not repeat camera testing with this image.").font(.callout)
                             Button("Install Upstream AF 3.6.0", action: model.installStartupHandoff).disabled(!model.canInstallStartupHandoff)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)

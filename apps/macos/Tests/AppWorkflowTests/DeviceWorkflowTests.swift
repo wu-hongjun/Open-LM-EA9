@@ -333,7 +333,7 @@ private actor DiscoveryFixture {
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "Upstream AF candidate")
     #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
-    #expect(model.canInstallStartupHandoff)
+    #expect(!model.canInstallStartupHandoff) // Known 3.6 camera failure blocks a new install, too.
     model.chooseDeviceLens("contax-zeiss-85-f1-4")
     #expect(!model.canInstallStartupHandoff)
     model.chooseDeviceLens(profile.id)
@@ -342,7 +342,8 @@ private actor DiscoveryFixture {
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.6.0"))
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallStartupHandoff)
-    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Upstream AF candidate")
-    #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
+    #expect(model.installedCameraFailureHold && model.workflowTitle == "AF 3.6 camera testing held")
+    #expect(model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowDetail.contains("shutter press") && model.firmwareBehaviorNote.contains("held"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 }

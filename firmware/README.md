@@ -7,13 +7,18 @@ the controller, optical maps and aperture policy remain upstream. Exact repeat
 builds and production-path regressions pass, with physical camera qualification
 still open. See [3.6 evidence](../docs/evidence/upstream-36-handoff-2026-10-15.md)
 and the [build/test workbench](upstream-hardening/next36/README.md) for prerequisites
-and commands. App 0.19/build 23 includes a separate explicit 3.6 installation action.
+and commands. App 0.19.1/build 24 marks 3.6 held after the
+[reported capture/shutdown failure](../docs/evidence/upstream-36-camera-failure-2026-10-15.md)
+and disables ordinary installation. Preserve the original image for research;
+do not repeat camera testing of 3.6.
 
 **Hardware gate:** [3.2 strict verification passed](../docs/evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect. The separately authorized
 [3.6 upload and strict verification passed](../docs/evidence/upstream-36-upload-2026-10-15.md)
-after its own physical reconnect. One camera cycle and log review are requested. Follow the
-[coordinated camera and log procedure](../docs/upstream-handoff-test.md).
+after its own physical reconnect. The later camera cycle failed, and a read-only
+backup/log review was completed. The
+[coordinated camera and log procedure](../docs/upstream-handoff-test.md)
+is held for this image.
 No offline test establishes capture, exposure, optical AF or factory parity.
 
 Upstream 3.1 failed the A7C II check with aperture `--` and blocked shutter;

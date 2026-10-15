@@ -1,6 +1,6 @@
 # Upstream C 3.6 installation and camera cycle — October 15, 2026
 
-**Upload and strict physical-reconnect verification passed; one camera cycle and log retrieval requested.**
+**Strict USB verification passed; camera capture/shutdown failed. Further 3.6 camera trials are held.**
 The owner explicitly requested resolving the pending 3.2 verification, then
 installing 3.6 for the Contax Zeiss 50mm f/1.4 with the adapter on its USB cap
 and the TECHART updater closed. The owner confirmed the first physical
@@ -73,22 +73,41 @@ retained the original armed upload connection's marker. Raw state, unit data,
 backups and exchange logs remain private. USB equality proves installed bytes;
 it does not qualify camera capture, exposure, autofocus or shutdown.
 
-## Pending one-cycle camera check and logs
+## Camera failure and completed read-only log retrieval
 
-After strict verification, the owner was asked to use the [coordinated 3.6 procedure](../upstream-handoff-test.md):
-one loaded-lens cycle, separately selected MF, still-photo A, Pre-AF Off where
-available, EV0, Auto ISO, physical focus infinity and iris f/1.4. Record actual
-settings, preview, aperture, motor/quiet idle and shutdown. Take at most one
-photo only if preview/aperture/motion are normal and MF is confirmed. Stop for
-freeze or abnormal drive; remove the battery if unresponsive or motion continues.
-No restart or AF-S precedes result/log review. These settings and outcomes are
-currently unverified. One cycle has been requested; no results have been reported.
-The owner was asked to confirm power-off, USB-cap return and physical reconnect
-with the observations before any post-camera reports.
+The requested one-cycle procedure is preserved in the
+[held runbook](../upstream-handoff-test.md). The owner subsequently reports
+inability to take a photo, slight motor movement when trying to focus, a frozen
+camera on shutter press and shutdown nonresponse. Actual focus mode, Pre-AF,
+aperture, physical ring settings, exact half/full-press stage, saved-file status
+and battery-removal action remain unverified. This is a failed capture/shutdown
+result, not a confirmed controlled MF or AF-S trial. No further 3.6 trial was
+requested. The owner was told to stop and remove the battery if unresponsive.
 
-After the owner confirms power-off, return to the USB cap and physical reconnect,
-save a fresh native read-only two-pass backup and run the offline decoder.
-Compare flash outside `[0x9c00,0xa000)` and protected auxiliary data with this
-installation's verified pre-camera readback. Terminal shutdown/fail-stop flushes
-v2 records; a ten-second idle does not. Battery loss can leave incomplete/blank
-logs. Preserve actual camera frames privately and publish sanitized observations.
+After the owner reported returning the lens to the computer, root interpreted
+the existing cap-return context and saved a new native read-only backup. The
+native service found a new qualified same-unit connection, completed two matching
+flash/auxiliary passes and 4,359 CHECK/READ exchanges, and exited 0 at
+**12:30:35 UTC / 08:30:35 America/New_York**. No upload, restore, erase or retry
+was sent. Full flash SHA-256:
+`504a69512dbd707454112a26d29e6da8cbe0abbfd1a3c1580b5c2d99d4123c61`.
+
+A separate offline audit finds all flash changes confined to
+`[0x9c00,0xa000)` diagnostics, with every other flash byte and protected auxiliary
+window unchanged from this installation's strict readback. The immutable code
+prefix matches 3.6. The decoder identifies 13 valid writer-consistent pages,
+three erased pages, no invalid/inconsistent/unassociated pages, and a complete
+48-event retained first/last snapshot with 6,429 event evictions. A connected
+breadcrumb, sticky `servo-wrong-way` fault and later shutdown UART-disable
+marker narrow the observation. They do not establish shutter cause, motor
+polarity, reply delivery or physical camera shutdown. The marker precedes the
+post-flush shutdown tail, which is unobserved.
+
+[Failure evidence and source interpretation](upstream-36-camera-failure-2026-10-15.md)
+and [independent Astra32 review](../audits/astra-32-af36-capture-failure-2026-10-15.md)
+retain limits. App0.19.1/build24 marks 3.6 held and disables ordinary installation
+while preserving backup/recovery. Original firmware, manifest/digest pins and
+stock recovery remain exact; the successful USB verification is not relabeled
+a failed byte comparison. Raw camera frames, dump, identities and full decoded
+records remain private. No additional firmware upload or stock restoration was
+performed after this failure.
