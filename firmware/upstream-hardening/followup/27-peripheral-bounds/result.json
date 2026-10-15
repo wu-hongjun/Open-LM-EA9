@@ -1,0 +1,200 @@
+{
+  "status": "passed-exact-35-compiled-peripheral-bounds",
+  "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+  "manifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+  "elfSHA256": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+  "sourceHashesVerified": 46,
+  "symbols": {
+    "clock_init": 21072,
+    "abs_encoder_set_reference": 28352,
+    "abs_encoder_init": 28148,
+    "motor_drive": 28064,
+    "em_uart_send": 26236,
+    "vdd_track_sample": 31172,
+    "st_fail": 36252,
+    "st_note": 34932,
+    "_etext": 38392,
+    "_erelocate": 536872192,
+    "_srelocate": 536870912
+  },
+  "positiveCases": 11,
+  "failingMutationControls": 1,
+  "cases": [
+    {
+      "case": "clock-stuck",
+      "events": [
+        [
+          "fault",
+          1
+        ],
+        [
+          "note",
+          6,
+          1
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "encoder-dre",
+      "events": [
+        [
+          "fault",
+          2
+        ],
+        [
+          "note",
+          6,
+          2
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "encoder-rxc",
+      "events": [
+        [
+          "fault",
+          2
+        ],
+        [
+          "note",
+          6,
+          2
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "encoder-reset",
+      "events": [
+        [
+          "fault",
+          2
+        ],
+        [
+          "note",
+          6,
+          2
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "motor-sync",
+      "events": [
+        [
+          "fault",
+          4
+        ],
+        [
+          "note",
+          6,
+          4
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "uart-dre",
+      "events": [
+        [
+          "fault",
+          5
+        ],
+        [
+          "note",
+          6,
+          5
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "uart-txc",
+      "events": [
+        [
+          "fault",
+          5
+        ],
+        [
+          "note",
+          6,
+          5
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "adc-result",
+      "events": [
+        [
+          "fault",
+          3
+        ],
+        [
+          "note",
+          6,
+          3
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "encoder-ready",
+      "events": [
+        [
+          "return",
+          0
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "clock-ready",
+      "events": [
+        [
+          "return",
+          100
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "uart-ready",
+      "events": [
+        [
+          "return",
+          1
+        ]
+      ],
+      "instructionBudget": 40000000,
+      "mutation": false
+    },
+    {
+      "case": "encoder-budget-removed",
+      "events": [],
+      "instructionBudget": 40000000,
+      "mutation": true
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "canonicalStateModified": false,
+  "limits": [
+    "Memory-backed MMIO with explicitly supplied readiness; no asynchronous IRQ or electrical model.",
+    "All positive fault guards use the actual 4194304 iteration bound; the 40000000 instruction ceiling is an emulator stopping rule, not physical time.",
+    "Execution stops at st_note after the actual interrupt-mask and GPIO stores; flash flush and terminal WFI are not executed here.",
+    "The mutation removes only the first SPI DRE budget decrement in emulator memory, leaving published files unchanged.",
+    "GPIO register stores are verified; bridge voltage, current, motor coast and physical latency remain unmeasured."
+  ]
+}

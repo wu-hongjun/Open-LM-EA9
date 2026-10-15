@@ -40,6 +40,12 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 21 | Public query workload and release counter consumers | Astra complete; no real query workload established; 28 capacity fixtures; counter omission independently supported | `followup/21-workload`, [report](astra-21-workload-2026-10-15.md) |
 | 22 | Exact 3.5 compiled stack and evidence integrity | Astra complete; conditional 1,560-byte envelope, 20 negative guards; root repeat-build check passes | `followup/22-stack35`, [report](astra-22-stack35-2026-10-15.md) |
 | 23 | Independent final target/time/caller and counter composition | Astra complete; 51 positive executions, 4 failing controls and 9 caller cancellation cuts; no additional patch justified | `followup/23-composition35`, [report](astra-23-composition35-2026-10-15.md) |
+| 24 | Original factory reset-to-app core/interrupt contract | Astra complete; 8 path cases, 2 initializer fixtures, 9 controls; conditional entry facts refined | `followup/24-boot-entry`, [report](astra-24-boot-entry-2026-10-15.md) |
+| 25 | Multi-boot diagnostic page cohorts and semantic trust | Astra complete; host decoder fix, 448 histories, 19 frozen controls, 1,827 mutation decodes | `followup/25-diagnostic-cohorts`, [report](astra-25-diagnostic-cohorts-2026-10-15.md) |
+| 26 | Compiled IRQ lead and foreground startup receive handoff | Astra interrupted by content filtering; root reproduced and prepared scoped change; independent review 28 required | `followup/26-compiled-irq`, [root report](root-26-startup-handoff-2026-10-15.md) |
+| 27 | Compiled polling guards and emergency GPIO ordering | Root extension, not an Astra lane; 11 positive executions plus guard-removed control on 3.5 | `followup/27-peripheral-bounds`, [report](root-27-peripheral-bounds-2026-10-15.md) |
+| 28 | Independent startup proposal and exact 3.6 review | Astra complete; global mask rejected, scoped EIC gate accepted; 287 assertions including 41 exact-final cases | `followup/28-startup-handoff-review`, [report](astra-28-startup-handoff-review-2026-10-15.md) |
+| 29 | Exact 3.6 stack, vectors and compiled EIC order | Astra complete; conditional 1,560-byte envelope; 29 negative guards plus exact-bound positive | `followup/29-stack36`, [report](astra-29-stack36-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -129,3 +135,21 @@ growth or scheduler policy is inferred from synthetic workload fixtures.
 controls, host integration and physical limits. All 56 prior release/recovery/pin
 artifacts and historical registry entries remain exact. No hardware action or
 camera qualification occurred; the pending 3.2 transaction is unchanged.
+
+## Follow-up startup and observability composition 3.6
+
+Four further Astra audits (24, 25, 28, 29) completed distinct missing contracts;
+root continued the interrupted 26 reproduction and added compiled peripheral
+evidence in 27. The matrix distinguishes these outcomes and does not inflate the
+completed Astra count. Root integrated the host-only cohort decoder fix and the
+scoped EIC setup/start firmware change. Independent review rejected the initial
+global interrupt mask because it delayed a final UART byte past rescue.
+
+[3.6 evidence](../evidence/upstream-36-handoff-2026-10-15.md) records exact final
+regressions, compiled ordering/stack checks, repeat builds and app 0.19/build 23.
+The image has 268 bytes before unchanged logs; only two excluded legacy RAM
+snapshots are omitted to retain the release floor. All 60 prior release/recovery/
+pin artifacts and historical registry entries remain unchanged. Boot state is
+more precisely bounded under ordinary-reset preconditions, not physically
+qualified. No camera or hardware action occurred; uploaded 3.2 still awaits its
+owner-confirmed reconnect and strict verification.

@@ -1,0 +1,23 @@
+{
+  "boot_sha256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+  "build_pins": {
+    "hardened.elf": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+    "raw.bin": "f72990051b055196a7b5fa0e6cce107494c543a75239eca49a95f892c8021a1c",
+    "contax-zeiss-50-f1-4.bin": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+    "manifest.json": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de"
+  },
+  "reference_pins": {
+    "docs/reverse-engineering/stock-boot-inventory.csv": "9ff3044acb3734fa4ea51c5b8aab7ac7a87c0309f0e5e9ed7ddf56281405cae6",
+    "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/nvmctrl.h": "07d5a14d439b5de802b6ecb06c883545649efbe40e48fb85a3ed542bd17166f0",
+    "tools/firmware-deps/samd21-dfp-2/samd21a/include/samd21e17a.h": "be6fdd0fd25ac0f9a583c32685cfe2c7eb7e79d45ae7ae18814f63ce667cc6f5"
+  },
+  "limitations": [
+    "Original Thumb execution with functional synthetic MMIO, no asynchronous exceptions or physical timing.",
+    "Initial CONTROL=0, PRIMASK=0 and IPSR=0 are explicit reset-like preconditions; no physical processor reset is observed.",
+    "PSP initial value is synthetic and irrelevant when CONTROL.SPSEL=0. Non-reset cases are sensitivity controls, not claimed reachable factory cold starts.",
+    "NVIC active exceptions are not emulated; no asynchronous pending arrival is injected. Peripheral-ready and synchronization responses are fixtures, not measurements.",
+    "Unicorn Cortex-M0 accepts some unsupported instructions; execution alone does not prove ARMv6-M legality.",
+    "NVM IRQ5 is enabled with NVM INTEN reset-zero; physical reset semantics, unexpected pending events, NMI/HardFault and debugger interventions remain outside this finite model.",
+    "No source defect or firmware change is claimed; C3.5 and all published artifacts stay frozen."
+  ]
+}

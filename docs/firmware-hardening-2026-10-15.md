@@ -292,3 +292,55 @@ Avoid tuning gains, physical origin, watchdogs or queue sizes from simulated
 timing. Do not repeat passing release suites without a new change or concern.
 Continue within the authorized window; publish final evidence-based status and
 pause the heartbeat at 12:55:51 UTC.
+
+### Follow-up startup ownership and diagnostic cohorts: upstream C 3.6
+
+Astra24 extends the original boot-to-app trace and refines the conditional core/
+interrupt assumptions: normal reset supports MSP use; the boot path preserves
+CONTROL/PRIMASK/priorities, leaves NVM IRQ5 enabled with modeled reset peripheral
+INTEN zero, and starts SysTick with TICKINT clear. This is original-instruction
+progress, not physical exception delivery or a reason to rewrite startup.
+
+The interrupted Astra26 turn supplied a startup lead; root reproduced a real
+single-producer violation when foreground first-window rescue is preempted by
+EIC. Independent Astra28 found that the initial global interrupt mask delays a
+final UART byte past rescue, so root rejected it. The accepted scoped EIC setup/
+start keeps UART and SysTick live and enables EIC only after rescue/reset. Its
+287 asserted sanitizer cases include 41 against exact final 3.6 source, frozen
+failures and placement controls. Two logging-only RAM RX snapshots are omitted
+to retain the existing margin floor; all 22 release units have no read consumer,
+logging-enabled tokens stay identical and complete trace/wire parity passes.
+
+[3.6](../firmware/candidates/3.6.0/README.md) is prepared offline, SHA-256
+`d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f`.
+Two fresh builds reproduce image, manifest and complete patch. Code/data ends
+0x9af4 with 268 bytes before unchanged logs; static RAM is 3,064 bytes and stack
+reservation 8,192. Astra29 validates the exact compiled ordering, 1,560-byte
+conditional stack envelope and 29 negative evidence controls. Root's unified
+runner passes on the repeat build, including retained production-path regressions,
+compiled writer and decoder boundaries. All 53 Swift tests, signed app 0.19/build
+23 and isolated native preparation pass. All 60 prior released artifacts/pins
+and historical registry entries remain unchanged.
+
+Astra25's separate host-only decoder fix identifies impossible page/cohort
+layouts that previously falsely completed CRC-valid snapshots. Root replays 448
+production histories, 896 version decodes, 19 frozen controls, 1,827 mutations,
+six v1 repeated summaries and the existing boundary suites. Valid partial and
+unassociated evidence remains visible; CRC consistency is not authenticity or
+installation verification. Root27 separately executes compiled 3.5 peripheral
+wait/emergency-GPIO guards: 11 positives and a guard-removed control. No physical
+time bound is inferred. [Unified evidence](evidence/upstream-36-handoff-2026-10-15.md)
+records exact inputs, honest lane dispositions and remaining limits.
+
+**Hardware unchanged:** uploaded 3.2 is still pending owner-confirmed physical
+reconnect and strict verification. No device enumeration/open/report, updater,
+flash, motor, app launch or canonical state mutation occurred. Do not bypass its
+journal or infer reconnection. 3.6 is not installed, stable or camera-qualified.
+Factory reconstruction remains partial; the active controller is upstream C.
+
+**Remaining bounded work:** review release/runbook consistency and any concrete
+new contract gap; do not repeat completed lanes or tune physical timing, origin,
+gains or queue sizes without new evidence. EIC coalescing and UART boundary
+limitations remain explicit rather than guessed away. Preserve all published
+images. Continue only through 12:55:51 UTC, then publish actual final status,
+commit/push completed work and pause the heartbeat as authorized.

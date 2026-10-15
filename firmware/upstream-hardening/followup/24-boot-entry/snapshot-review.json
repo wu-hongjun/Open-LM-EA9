@@ -1,0 +1,128 @@
+{
+  "result": "pass",
+  "runner_sha256": "c355035b7366f8eed4348d4596613ba869f60debaf850f104f8913c8f64f108f",
+  "compiler_sha256": "07bfe9e74cfe028af639bf38703b2259c608aedee6ff991752084a10b82da614",
+  "manifest_sha256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+  "verified_source_hashes": 46,
+  "flags": [
+    "-mthumb",
+    "-mcpu=cortex-m0plus",
+    "-O2",
+    "-DNDEBUG",
+    "-DEA9_NO_LOG",
+    "-D__SAMD21E17A__",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-common",
+    "-fstack-usage",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-std=gnu99",
+    "-g"
+  ],
+  "unit_flags": {
+    "main": [
+      "-Os"
+    ],
+    "emount": [
+      "-Os"
+    ],
+    "em_frame": [
+      "-Os"
+    ],
+    "em_owner": [
+      "-Os"
+    ],
+    "em_shutdown": [
+      "-Os"
+    ],
+    "startup_trace": [
+      "-Os"
+    ],
+    "focus_dist": [
+      "-Os"
+    ],
+    "focus_map": [
+      "-Os"
+    ],
+    "focus_pred": [
+      "-Os"
+    ]
+  },
+  "raw_identifier_inventory": {
+    "emount.h": [
+      {
+        "line": 613,
+        "text": "extern volatile uint32_t em_rx_bytes_at_open;"
+      }
+    ],
+    "main.c": [
+      {
+        "line": 1716,
+        "text": "| ((em_rx_bytes_at_close - em_rx_bytes_at_open) << 16);"
+      }
+    ],
+    "emount.c": [
+      {
+        "line": 250,
+        "text": "volatile uint32_t em_rx_bytes_at_open;"
+      },
+      {
+        "line": 1529,
+        "text": "em_rx_bytes_at_open = em_rx_bytes;"
+      }
+    ]
+  },
+  "preprocessing": {
+    "release": {
+      "units": 22,
+      "identifier_occurrences": [
+        {
+          "unit": "emount",
+          "lines": [
+            "extern volatile uint32_t em_rx_bytes_at_open;",
+            "volatile uint32_t em_rx_bytes_at_open;",
+            "em_rx_bytes_at_open = em_rx_bytes;"
+          ]
+        },
+        {
+          "unit": "main",
+          "lines": [
+            "extern volatile uint32_t em_rx_bytes_at_open;"
+          ]
+        }
+      ],
+      "guarded_emount_sha256": "42dcfd86e93b9c039b9de23f16674499788af09b7d5ae01100b8d11d35c0e62f",
+      "original_emount_sha256": "86656825edb3924133832d51bb1b64142f4e623658836a502f316e0a2c307ad0"
+    },
+    "logging_enabled": {
+      "units": 22,
+      "identifier_occurrences": [
+        {
+          "unit": "emount",
+          "lines": [
+            "extern volatile uint32_t em_rx_bytes_at_open;",
+            "volatile uint32_t em_rx_bytes_at_open;",
+            "em_rx_bytes_at_open = em_rx_bytes;"
+          ]
+        },
+        {
+          "unit": "main",
+          "lines": [
+            "extern volatile uint32_t em_rx_bytes_at_open;",
+            "| ((em_rx_bytes_at_close - em_rx_bytes_at_open) << 16);"
+          ]
+        }
+      ],
+      "guarded_emount_sha256": "36fe39e9ecf36a54372f0e7ee8d212b450ca1fd9eb8286b45bddfd5014887e8b",
+      "original_emount_sha256": "36fe39e9ecf36a54372f0e7ee8d212b450ca1fd9eb8286b45bddfd5014887e8b"
+    }
+  },
+  "conclusion": "Release has one snapshot assignment and no read/address-taking consumer. Logging-enabled variant has legacy page-2 subtraction; proposed EA9_NO_LOG guard preserves its preprocessed emount tokens exactly. Release tokens differ solely by that assignment.",
+  "limits": [
+    "Only private proposal and preprocessing artifacts written. No shared source edit or linked image built.",
+    "This is a consumer/preprocessing review, not measured code size, timing, camera qualification or acceptance of any new image.",
+    "The live volatile em_rx_bytes counter and every other statement remain identical in the token comparison. Its removed snapshot read is a RAM read, not an MMIO read."
+  ]
+}

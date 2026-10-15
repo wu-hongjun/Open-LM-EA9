@@ -11,7 +11,7 @@ from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_SP, UC_AR
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True)
 parser.add_argument('--build',type=Path,default=ROOT/'firmware/upstream-diagnostic/build')
-parser.add_argument('--version',choices=['3.2.0','3.3.0','3.4.0','3.5.0'],default='3.2.0')
+parser.add_argument('--version',choices=['3.2.0','3.3.0','3.4.0','3.5.0','3.6.0'],default='3.2.0')
 args=parser.parse_args()
 b=args.build.resolve()
 elf=b/('diagnostic.elf' if args.version=='3.2.0' else 'hardened.elf')

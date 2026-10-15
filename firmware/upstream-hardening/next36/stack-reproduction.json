@@ -1,0 +1,10 @@
+{
+  "referenceELFSHA256": "df8efe1dbbe04241aa4b85ec20072ba6ae99627338599373dc409454cf7a06e5",
+  "reviewedPolicySHA256": "fd849f2ead4acb7ec17370a5c7fcead63df70738e2c41e56308e131fe25e4dcf",
+  "objdumpSHA256": "971eb15db5b2110383b75dc3b8953115c0c11f6cd2ce7f651b0efb44e9aedcf6",
+  "normalizedOutputSHA256": {
+    "-d": "588ddd9919a9107c82a5ae892d88d0afb73aa1c5a73e2c4a0ffc7e443ec8b06b",
+    "-t": "e7331c60b1f1992d3d2fac6ac4f559a091d608f44c85ec48f04c34f813616fed",
+    "-p": "2d1a3f8dad0f6eeb23ec7de39725155bf14ac5ec592744f5bd8d6e7c847d6bdc"
+  }
+}

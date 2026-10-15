@@ -1,0 +1,34 @@
+{
+  "status": "offline-candidate-unqualified",
+  "baseVersion": "3.5.0",
+  "nextVersion": "3.6.0",
+  "baseImageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/26-compiled-irq/apply.py",
+      "entry": "scoped",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/26-compiled-irq/apply.py",
+      "entry": "omit_legacy_snapshot",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/26-compiled-irq/apply.py",
+      "entry": "omit_legacy_close_snapshot",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/26-compiled-irq/apply.py",
+      "entry": "host_api",
+      "argument": "work"
+    }
+  ],
+  "inputs": {
+    "firmware/upstream-hardening/followup/26-compiled-irq/apply.py": "959fb8943b2eaed26cd64d80d070c15275e4e84ef705ffdc31a826f2036dcea7",
+    "firmware/upstream-hardening/followup/26-compiled-irq/run_handoff.py": "9ea19d41d5e56d378685855acff4a5cd880096b7da8f4fc8fff0f9c1cf5b9f7a",
+    "firmware/upstream-hardening/followup/26-compiled-irq/test_handoff.c": "1f77f3e0d09376aca232020efec8ac979ae3bacd422df91e9725b71f9b7b33dc",
+    "firmware/upstream-hardening/followup/26-compiled-irq/review_snapshots.py": "1851415866a5b5db16eb3b5cfb166b21ce92f64c185ace20d0496fa569fc6de5"
+  }
+}

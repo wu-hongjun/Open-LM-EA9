@@ -1,0 +1,2606 @@
+{
+  "schema": 1,
+  "runner_sha256": "6e8abb68709c9d84c2a54d768b77204dfa91bdbb296d50b44ba8efbdd4df9ef8",
+  "policy_sha256": "cef6b9b592ccae28126739c876d0b2c0205e910b46fcf9752a3b9286b813054d",
+  "source_manifest_hashes_verified": 46,
+  "inputs": {
+    "boot_sha256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+    "build_pins": {
+      "hardened.elf": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+      "raw.bin": "f72990051b055196a7b5fa0e6cce107494c543a75239eca49a95f892c8021a1c",
+      "contax-zeiss-50-f1-4.bin": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+      "manifest.json": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de"
+    },
+    "reference_pins": {
+      "docs/reverse-engineering/stock-boot-inventory.csv": "9ff3044acb3734fa4ea51c5b8aab7ac7a87c0309f0e5e9ed7ddf56281405cae6",
+      "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/nvmctrl.h": "07d5a14d439b5de802b6ecb06c883545649efbe40e48fb85a3ed542bd17166f0",
+      "tools/firmware-deps/samd21-dfp-2/samd21a/include/samd21e17a.h": "be6fdd0fd25ac0f9a583c32685cfe2c7eb7e79d45ae7ae18814f63ce667cc6f5"
+    },
+    "limitations": [
+      "Original Thumb execution with functional synthetic MMIO, no asynchronous exceptions or physical timing.",
+      "Initial CONTROL=0, PRIMASK=0 and IPSR=0 are explicit reset-like preconditions; no physical processor reset is observed.",
+      "PSP initial value is synthetic and irrelevant when CONTROL.SPSEL=0. Non-reset cases are sensitivity controls, not claimed reachable factory cold starts.",
+      "NVIC active exceptions are not emulated; no asynchronous pending arrival is injected. Peripheral-ready and synchronization responses are fixtures, not measurements.",
+      "Unicorn Cortex-M0 accepts some unsupported instructions; execution alone does not prove ARMv6-M legality.",
+      "NVM IRQ5 is enabled with NVM INTEN reset-zero; physical reset semantics, unexpected pending events, NMI/HardFault and debugger interventions remain outside this finite model.",
+      "No source defect or firmware change is claimed; C3.5 and all published artifacts stay frozen."
+    ]
+  },
+  "cases": [
+    {
+      "name": "reset_like",
+      "synthetic_initial": {},
+      "result": {
+        "termination": "app_main",
+        "instructions": 23707,
+        "unique_instructions": 873,
+        "trace_sha256": "846b7ab70e9e862ac16aaf9919859a5def5d88b94b6259f42a0fb3e80735f256",
+        "checkpoints": {
+          "0x2510": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20001668",
+            "psp": "0x20006000",
+            "sp": "0x20001668",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x251c": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x2520": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x5150": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x82b4": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 0,
+          "primask": 0,
+          "msp": "0x20002bf0",
+          "psp": "0x20006000",
+          "sp": "0x20002bf0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x20",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "erased_synthetic_calibration",
+      "synthetic_initial": {
+        "calibration": 4294967295
+      },
+      "result": {
+        "termination": "app_main",
+        "instructions": 23712,
+        "unique_instructions": 878,
+        "trace_sha256": "becd5da1401c8ba6c38ccefd4b01b98f99cd48cd68515391e785e138415f918f",
+        "checkpoints": {
+          "0x2510": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20001668",
+            "psp": "0x20006000",
+            "sp": "0x20001668",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x251c": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x2520": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x5150": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x82b4": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 0,
+          "primask": 0,
+          "msp": "0x20002bf0",
+          "psp": "0x20006000",
+          "sp": "0x20002bf0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x20",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "nonreset_masked",
+      "synthetic_initial": {
+        "primask": 1
+      },
+      "result": {
+        "termination": "app_main",
+        "instructions": 23707,
+        "unique_instructions": 873,
+        "trace_sha256": "846b7ab70e9e862ac16aaf9919859a5def5d88b94b6259f42a0fb3e80735f256",
+        "checkpoints": {
+          "0x2510": {
+            "control": 0,
+            "primask": 1,
+            "msp": "0x20001668",
+            "psp": "0x20006000",
+            "sp": "0x20001668",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x251c": {
+            "control": 0,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x2520": {
+            "control": 0,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x5150": {
+            "control": 0,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x82b4": {
+            "control": 0,
+            "primask": 1,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 0,
+          "primask": 1,
+          "msp": "0x20002bf0",
+          "psp": "0x20006000",
+          "sp": "0x20002bf0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x20",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "nonreset_psp",
+      "synthetic_initial": {
+        "control": 2
+      },
+      "result": {
+        "termination": "app_main",
+        "instructions": 23707,
+        "unique_instructions": 873,
+        "trace_sha256": "846b7ab70e9e862ac16aaf9919859a5def5d88b94b6259f42a0fb3e80735f256",
+        "checkpoints": {
+          "0x2510": {
+            "control": 2,
+            "primask": 0,
+            "msp": "0x20001690",
+            "psp": "0x20005fd8",
+            "sp": "0x20005fd8",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x251c": {
+            "control": 2,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x2520": {
+            "control": 2,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x5150": {
+            "control": 2,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "0x82b4": {
+            "control": 2,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20005fc0",
+            "sp": "0x20005fc0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 2,
+          "primask": 0,
+          "msp": "0x20002c00",
+          "psp": "0x20005fc0",
+          "sp": "0x20005fc0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x20",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "nonreset_nvic",
+      "synthetic_initial": {
+        "enabled": 1024,
+        "pending": 160,
+        "priority": 192,
+        "system_pending": 335544320
+      },
+      "result": {
+        "termination": "app_main",
+        "instructions": 23707,
+        "unique_instructions": 873,
+        "trace_sha256": "846b7ab70e9e862ac16aaf9919859a5def5d88b94b6259f42a0fb3e80735f256",
+        "checkpoints": {
+          "0x2510": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20001668",
+            "psp": "0x20006000",
+            "sp": "0x20001668",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x80",
+            "system_pending": "0x14000000",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "0x251c": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x80",
+            "system_pending": "0x14000000",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "0x2520": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x80",
+            "system_pending": "0x14000000",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "0x5150": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002c00",
+            "psp": "0x20006000",
+            "sp": "0x20002c00",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x80",
+            "system_pending": "0x14000000",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "0x82b4": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x80",
+            "system_pending": "0x14000000",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 0,
+          "primask": 0,
+          "msp": "0x20002bf0",
+          "psp": "0x20006000",
+          "sp": "0x20002bf0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x420",
+          "nvic_pending": "0x80",
+          "system_pending": "0x14000000",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "nonreset_combined",
+      "synthetic_initial": {
+        "control": 2,
+        "primask": 1,
+        "enabled": 1040,
+        "pending": 1056,
+        "priority": 128
+      },
+      "result": {
+        "termination": "app_main",
+        "instructions": 23707,
+        "unique_instructions": 873,
+        "trace_sha256": "846b7ab70e9e862ac16aaf9919859a5def5d88b94b6259f42a0fb3e80735f256",
+        "checkpoints": {
+          "0x2510": {
+            "control": 2,
+            "primask": 1,
+            "msp": "0x20001690",
+            "psp": "0x20005fd8",
+            "sp": "0x20005fd8",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x400",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+          },
+          "0x251c": {
+            "control": 2,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x400",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+          },
+          "0x2520": {
+            "control": 2,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x400",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+          },
+          "0x5150": {
+            "control": 2,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20005fd0",
+            "sp": "0x20005fd0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x400",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+          },
+          "0x82b4": {
+            "control": 2,
+            "primask": 1,
+            "msp": "0x20002c00",
+            "psp": "0x20005fc0",
+            "sp": "0x20005fc0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x400",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          },
+          {
+            "pc": "0x251e",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          },
+          {
+            "pc": "0x5192",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x5000"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          },
+          {
+            "pc": "0x2518",
+            "instruction": "msr msp, r2"
+          }
+        ],
+        "final": {
+          "control": 2,
+          "primask": 1,
+          "msp": "0x20002c00",
+          "psp": "0x20005fc0",
+          "sp": "0x20005fc0",
+          "ipsr": 0,
+          "vtor": "0x5000",
+          "nvic_enabled": "0x430",
+          "nvic_pending": "0x400",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "e2b0ec316890b934d14dc80fb04c6224b54157a5e408f392dc2a76d8fef3f6cf"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 6
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "strap_high_stops_before_usb_runtime",
+      "synthetic_initial": {
+        "strap": 1
+      },
+      "result": {
+        "termination": "usb_branch_entry",
+        "instructions": 6932,
+        "unique_instructions": 733,
+        "trace_sha256": "41f97916176207af05cb77ac2c5f48fd03cdcf108cc2f7137eafe264437bcd79",
+        "checkpoints": {
+          "0x3380": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20001668",
+            "psp": "0x20006000",
+            "sp": "0x20001668",
+            "ipsr": 0,
+            "vtor": "0x0",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x5",
+            "systick_load": "0xffffff",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          }
+        },
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          },
+          {
+            "pc": "0xdec",
+            "address": "0xe000e180",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfa",
+            "address": "0xe000e280",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0xdfc",
+            "address": "0xe000e100",
+            "width": 4,
+            "value": "0x20"
+          },
+          {
+            "pc": "0x11c4",
+            "address": "0xe000e014",
+            "width": 4,
+            "value": "0xffffff"
+          },
+          {
+            "pc": "0x11c8",
+            "address": "0xe000e010",
+            "width": 4,
+            "value": "0x5"
+          }
+        ],
+        "special_instructions": [
+          {
+            "pc": "0xdee",
+            "instruction": "dsb sy"
+          },
+          {
+            "pc": "0xdf2",
+            "instruction": "isb sy"
+          },
+          {
+            "pc": "0x384",
+            "instruction": "mrs r3, primask"
+          },
+          {
+            "pc": "0x38a",
+            "instruction": "cpsid i"
+          },
+          {
+            "pc": "0x38c",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x392",
+            "instruction": "dmb sy"
+          },
+          {
+            "pc": "0x398",
+            "instruction": "msr primask, r3"
+          }
+        ],
+        "final": {
+          "control": 0,
+          "primask": 0,
+          "msp": "0x20001668",
+          "psp": "0x20006000",
+          "sp": "0x20001668",
+          "ipsr": 0,
+          "vtor": "0x0",
+          "nvic_enabled": "0x20",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x5",
+          "systick_load": "0xffffff",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000414",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000041c",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 4
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x40000824",
+            "width": 2,
+            "count": 2
+          },
+          {
+            "address": "0x40000c01",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 3
+          },
+          {
+            "address": "0x41004420",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4100443c",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100444a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41004457",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004458",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x41004459",
+            "width": 1,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 3
+          },
+          {
+            "address": "0x41005000",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x41005002",
+            "width": 1,
+            "count": 5
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 4
+          },
+          {
+            "address": "0x60000000",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x60000010",
+            "width": 4,
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "oscillator_not_ready_no_handoff",
+      "synthetic_initial": {
+        "ready": 0
+      },
+      "result": {
+        "termination": "bounded_poll_stop",
+        "instructions": 10723,
+        "unique_instructions": 174,
+        "trace_sha256": "9d51b67ae39aea1410817023b13cc708380ee705888404ce8ba956c830f20cf3",
+        "checkpoints": {},
+        "core_writes": [
+          {
+            "pc": "0x162",
+            "address": "0xe000ed08",
+            "width": 4,
+            "value": "0x0"
+          }
+        ],
+        "special_instructions": [],
+        "final": {
+          "control": 0,
+          "primask": 0,
+          "msp": "0x20001648",
+          "psp": "0x20006000",
+          "sp": "0x20001648",
+          "ipsr": 0,
+          "vtor": "0x0",
+          "nvic_enabled": "0x0",
+          "nvic_pending": "0x0",
+          "system_pending": "0x0",
+          "systick_ctrl": "0x0",
+          "systick_load": "0x0",
+          "nvm_inten": 0,
+          "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+        },
+        "mmio_read_addresses": [
+          {
+            "address": "0x40000408",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000409",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040a",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000040b",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x4000080c",
+            "width": 4,
+            "count": 2000
+          },
+          {
+            "address": "0x40000818",
+            "width": 4,
+            "count": 1
+          },
+          {
+            "address": "0x4000081c",
+            "width": 1,
+            "count": 1
+          },
+          {
+            "address": "0x40000820",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x41004004",
+            "width": 4,
+            "count": 2
+          },
+          {
+            "address": "0x4100480e",
+            "width": 1,
+            "count": 3
+          },
+          {
+            "address": "0x41005003",
+            "width": 1,
+            "count": 2
+          }
+        ]
+      }
+    }
+  ],
+  "initializer_cases": [
+    {
+      "initial_priority": 0,
+      "stages": [
+        {
+          "name": "delay_init",
+          "address": "0x533c",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "core_writes": [
+            {
+              "pc": "0x5340",
+              "address": "0xe000e014",
+              "width": 4,
+              "value": "0xbb7f"
+            },
+            {
+              "pc": "0x5344",
+              "address": "0xe000e018",
+              "width": 4,
+              "value": "0x0"
+            },
+            {
+              "pc": "0x5348",
+              "address": "0xe000e010",
+              "width": 4,
+              "value": "0x7"
+            }
+          ]
+        },
+        {
+          "name": "em_uart_init",
+          "address": "0x6478",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb"
+          },
+          "core_writes": [
+            {
+              "pc": "0x64e2",
+              "address": "0xe000e100",
+              "width": 4,
+              "value": "0x400"
+            }
+          ]
+        },
+        {
+          "name": "em_eic_init",
+          "address": "0x66f8",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "089f7f0a4401b765a4bba4f80e3356ee66ec06e593527d4f038ddc237324a848"
+          },
+          "core_writes": [
+            {
+              "pc": "0x678a",
+              "address": "0xe000e404",
+              "width": 4,
+              "value": "0x40"
+            },
+            {
+              "pc": "0x678e",
+              "address": "0xe000e100",
+              "width": 4,
+              "value": "0x10"
+            }
+          ]
+        }
+      ],
+      "synthetic_reset_completion_reads": [
+        {
+          "address": "0x42000c00",
+          "width": 4,
+          "value": "0x0"
+        },
+        {
+          "address": "0x42000c00",
+          "width": 4,
+          "value": "0x40100004"
+        },
+        {
+          "address": "0x40001800",
+          "width": 1,
+          "value": "0x0"
+        }
+      ]
+    },
+    {
+      "initial_priority": 192,
+      "stages": [
+        {
+          "name": "delay_init",
+          "address": "0x533c",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x20",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "core_writes": [
+            {
+              "pc": "0x5340",
+              "address": "0xe000e014",
+              "width": 4,
+              "value": "0xbb7f"
+            },
+            {
+              "pc": "0x5344",
+              "address": "0xe000e018",
+              "width": 4,
+              "value": "0x0"
+            },
+            {
+              "pc": "0x5348",
+              "address": "0xe000e010",
+              "width": 4,
+              "value": "0x7"
+            }
+          ]
+        },
+        {
+          "name": "em_uart_init",
+          "address": "0x6478",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x420",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "05bba337f9707ed691d97fb7d5f2ab3cdab1323e7c06e303be94959423706ac9"
+          },
+          "core_writes": [
+            {
+              "pc": "0x64e2",
+              "address": "0xe000e100",
+              "width": 4,
+              "value": "0x400"
+            }
+          ]
+        },
+        {
+          "name": "em_eic_init",
+          "address": "0x66f8",
+          "state": {
+            "control": 0,
+            "primask": 0,
+            "msp": "0x20002bf0",
+            "psp": "0x20006000",
+            "sp": "0x20002bf0",
+            "ipsr": 0,
+            "vtor": "0x5000",
+            "nvic_enabled": "0x430",
+            "nvic_pending": "0x0",
+            "system_pending": "0x0",
+            "systick_ctrl": "0x7",
+            "systick_load": "0xbb7f",
+            "nvm_inten": 0,
+            "priorities_sha256": "402b17f9315fd4b97b5f07fe61c5c2682a159b6496bcd02cc904bcd14415db28"
+          },
+          "core_writes": [
+            {
+              "pc": "0x678a",
+              "address": "0xe000e404",
+              "width": 4,
+              "value": "0xc0c0c040"
+            },
+            {
+              "pc": "0x678e",
+              "address": "0xe000e100",
+              "width": 4,
+              "value": "0x10"
+            }
+          ]
+        }
+      ],
+      "synthetic_reset_completion_reads": [
+        {
+          "address": "0x42000c00",
+          "width": 4,
+          "value": "0x0"
+        },
+        {
+          "address": "0x42000c00",
+          "width": 4,
+          "value": "0x40100004"
+        },
+        {
+          "address": "0x40001800",
+          "width": 1,
+          "value": "0x0"
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "mutation": "omit_msp",
+      "rejected": true,
+      "reason": "application MSP not loaded"
+    },
+    {
+      "mutation": "omit_vtor",
+      "rejected": true,
+      "reason": "application VTOR not assigned before entry"
+    },
+    {
+      "mutation": "omit_primask_restore",
+      "rejected": true,
+      "reason": "PRIMASK not restored"
+    },
+    {
+      "mutation": "omit_nvm_enable",
+      "rejected": true,
+      "reason": "NVM IRQ enable contract"
+    },
+    {
+      "mutation": "omit_nvm_pending_clear",
+      "rejected": true,
+      "reason": "NVM pending clear contract"
+    },
+    {
+      "mutation": "enable_boot_tickint",
+      "rejected": true,
+      "reason": "boot SysTick contract"
+    },
+    {
+      "mutation": "assume_reset_state_for_nonreset_masked",
+      "rejected": true,
+      "reason": "injected non-reset state survives original handoff and application reset"
+    },
+    {
+      "mutation": "assume_reset_state_for_nonreset_psp",
+      "rejected": true,
+      "reason": "injected non-reset state survives original handoff and application reset"
+    },
+    {
+      "mutation": "assume_reset_state_for_nonreset_nvic",
+      "rejected": true,
+      "reason": "injected non-reset state survives original handoff and application reset"
+    }
+  ],
+  "result": "pass",
+  "hardware_actions": 0,
+  "limitations": [
+    "Original Thumb execution with functional synthetic MMIO, no asynchronous exceptions or physical timing.",
+    "Initial CONTROL=0, PRIMASK=0 and IPSR=0 are explicit reset-like preconditions; no physical processor reset is observed.",
+    "PSP initial value is synthetic and irrelevant when CONTROL.SPSEL=0. Non-reset cases are sensitivity controls, not claimed reachable factory cold starts.",
+    "NVIC active exceptions are not emulated; no asynchronous pending arrival is injected. Peripheral-ready and synchronization responses are fixtures, not measurements.",
+    "Unicorn Cortex-M0 accepts some unsupported instructions; execution alone does not prove ARMv6-M legality.",
+    "NVM IRQ5 is enabled with NVM INTEN reset-zero; physical reset semantics, unexpected pending events, NMI/HardFault and debugger interventions remain outside this finite model.",
+    "No source defect or firmware change is claimed; C3.5 and all published artifacts stay frozen."
+  ]
+}

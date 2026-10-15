@@ -1,0 +1,250 @@
+{
+  "pins": {
+    "3.2.0": {
+      "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+      "manifestSHA256": "677d1f19c82acc9a79281882f1c0b70b2b33ddae189048538e71c18fe2abd6b2",
+      "traceSourceSHA256": "239cd8b4637cd34631c9624dcec6efb709d033a640e547c818359bb5ac05ba94"
+    },
+    "3.3.0": {
+      "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+      "manifestSHA256": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+      "traceSourceSHA256": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd"
+    },
+    "3.4.0": {
+      "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+      "manifestSHA256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+      "traceSourceSHA256": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd"
+    },
+    "3.5.0": {
+      "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+      "manifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+      "traceSourceSHA256": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd"
+    }
+  },
+  "productionHistories": 448,
+  "versionDecodes": 896,
+  "controls": [
+    {
+      "case": "summary-boot-after-slot",
+      "syntheticOnly": true,
+      "fixtureSHA256": "4eb5e3462c727bd59731529ff9e1b966c9d08e7c6938c6e00e9f0b040e116ac8",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "event-boot-after-slot",
+      "syntheticOnly": true,
+      "fixtureSHA256": "6b5dbca63b9c3d249a9dd80f055817cce599032f2f98da5ae56b3476286f36fe",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 2,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "event-at-required-summary-slot",
+      "syntheticOnly": true,
+      "fixtureSHA256": "09ca56a6bbbc23d69ab6fec37ec0d388c05dbd09ed34869752714eb8776dfdac",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 2,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "event-beyond-maximum-span",
+      "syntheticOnly": true,
+      "fixtureSHA256": "abcc1149b2a662d26f9859d4e69af1c0df8383bf5addd574c130b30c4b650472",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-planned-under-budget",
+      "syntheticOnly": true,
+      "fixtureSHA256": "76ec8b455b2133fb1dd8a1f4e7ac75b118377176518060320f712df7963cde3d",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-dropped-without-eviction",
+      "syntheticOnly": true,
+      "fixtureSHA256": "566c43c8415dec65de8850c2a55d35907e73429e4b3bc5faca0f69a0f6e721d6",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-nonboolean-handshake",
+      "syntheticOnly": true,
+      "fixtureSHA256": "45fb0c4bb642a093924aa2a2bae4713defa7e626d3df28f287a6b2c8ea3d4755",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-nonboolean-capability",
+      "syntheticOnly": true,
+      "fixtureSHA256": "3abcbd8fc24cd28b2046472b5517ac248d63838041328f37dde7709e3998c999",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-reserved-byte",
+      "syntheticOnly": true,
+      "fixtureSHA256": "0c489188e9a0dfba10299c6c01c737ae4b41002ce308f7074a379f9aa8d2b538",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-rx-count-below-surviving-events",
+      "syntheticOnly": true,
+      "fixtureSHA256": "a000e6fc5697abf29f19dcf0c04140416571cb1c1fa12e78a73978a2154b13bd",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "summary-tx-count-below-surviving-events",
+      "syntheticOnly": true,
+      "fixtureSHA256": "70341bb21c2844373fb9080c578368e81666e88f9612cdae569bae9d61dcd621",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "events-relocated-past-plan",
+      "syntheticOnly": true,
+      "fixtureSHA256": "342ea47a2cc3723af7f5ec80f9b996f224ed4bcdb1507b0c075da52c15979626",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "event-count-balanced-wrong-slots",
+      "syntheticOnly": true,
+      "fixtureSHA256": "42d945c686353b3ee5ccbf65e89510253b21b60f7bf23101aa446f06d1de86be",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "foreign-boot-events-relabeled",
+      "syntheticOnly": true,
+      "fixtureSHA256": "6f24b35dbbb743c2aad142cba7dc65a9927664d9d696be1cc6fccb7a30b760c1",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [],
+      "proposalComplete": []
+    },
+    {
+      "case": "v1-record-in-v2-image",
+      "syntheticOnly": true,
+      "fixtureSHA256": "16d73e7d82fed1c7deba15c21174aeb66daa7070aead86d05b0ccd494b018be3",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "duplicate-summary-cohort",
+      "syntheticOnly": true,
+      "fixtureSHA256": "d155ca352504e9c72feb1f0573e3d04e95d848936cc0b085bb02ae53ecc4745a",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": [
+        0
+      ]
+    },
+    {
+      "case": "unused-event-padding",
+      "syntheticOnly": true,
+      "fixtureSHA256": "98987acd2e7b110b11fb0227f4ff3c6135a2ac6f66f05ce86627b7fbeab3d880",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "equal-total-wrong-layout",
+      "syntheticOnly": true,
+      "fixtureSHA256": "20b5aba4847d0f8d409d8a80f89a400418b9d7e98b0c00f8070d397b19484e7c",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 2,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    },
+    {
+      "case": "borrow-events-across-other-cohort",
+      "syntheticOnly": true,
+      "fixtureSHA256": "3510e563fb62fe965b9c604a7816bcff4391325cf1e632ea00917e519983060e",
+      "frozenInvalidPages": 0,
+      "proposalInconsistentPages": 1,
+      "frozenComplete": [
+        0
+      ],
+      "proposalComplete": []
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "installationVerificationPerformed": false,
+  "cameraAcceptanceProven": false,
+  "proposedRegistrySHA256": "776c80f6cf7b9b60672d6053595dd56b9a6193ae40bcb0725750b2697e74a915",
+  "legacyRepeatedFlushSummaries": 6,
+  "mutationDecodes": 1827,
+  "sourcePinFailingControls": [
+    "startup_trace.c",
+    "startup_trace.h"
+  ],
+  "existingDecoderChecks": [
+    "25 decoder pin/page/native checks pass",
+    "37 decoder pin/page/native checks pass"
+  ],
+  "sourceSHA256": {
+    "cohorts.py": "5bb96a844eba2b38c760c546d0bbdfc049fda93e7991a1b3ec648eb750d9f5a6",
+    "frozen_registry.py": "e01c4b210577a22eec7cacd535a29ef31a272214247780e4432f7c958895ede8",
+    "run.py": "52454494a8e745e0df72c0dd8df92e35ccc38e9f57c42a4e33a9ac5e37a664e8",
+    "fixture.c": "517650b30e0f61c4b45333ee19d89ce6bce271dfe3eca6cc8548c70d58bd8c57",
+    "apply.py": "4fd6035e228ac59b30824e34b5366677e8310102d2fc8a8a81b518276f9b7d30"
+  },
+  "status": "host-only-proposal-tested-offline",
+  "limits": "Synthetic bytes and inert host flash; CRC consistency is not authenticity. No unit corruption observed, installation verification, hardware behavior, camera acceptance or firmware modification."
+}

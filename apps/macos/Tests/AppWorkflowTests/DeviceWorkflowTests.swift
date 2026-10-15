@@ -333,6 +333,16 @@ private actor DiscoveryFixture {
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "Upstream AF candidate")
     #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
-
-
+    #expect(model.canInstallStartupHandoff)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(!model.canInstallStartupHandoff)
+    model.chooseDeviceLens(profile.id)
+    let handoff = try ApplicationImage.personalized(profile, variant: .autofocusStartupHandoff)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(handoff.setting), firmwareVersion: "3.6.0", imageSHA256: digest(handoff.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.6.0"))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallStartupHandoff)
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Upstream AF candidate")
+    #expect(model.workflowDetail.contains("read-only backup") && model.firmwareBehaviorNote.contains("unqualified"))
+    #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 }

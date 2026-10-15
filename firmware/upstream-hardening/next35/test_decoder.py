@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);a=p.parse_args();out=a.output.resolve();assert out.is_relative_to(ROOT/'artifacts/private');out.mkdir(exist_ok=False)
 repo=out/'repository';(repo/'scripts').mkdir(parents=True)
-for n in ['decode-startup-diagnostics.py','startup_diagnostic_registry.py']:shutil.copyfile(ROOT/'scripts'/n,repo/'scripts'/n)
+for n in ['decode-startup-diagnostics.py','startup_diagnostic_registry.py','startup_diagnostic_cohorts.py']:shutil.copyfile(ROOT/'scripts'/n,repo/'scripts'/n)
 for v in ['3.2.0','3.3.0','3.4.0','3.5.0']:
  d=repo/'firmware/candidates'/v;d.mkdir(parents=True)
  for n in ['contax-zeiss-50-f1-4.bin','contax-zeiss-50-f1-4.manifest.json']:shutil.copyfile(ROOT/'firmware/candidates'/v/n,d/n)
@@ -43,5 +43,5 @@ for version,meaning in [('3.3.0','encoder-overflow'),('3.4.0','encoder-coordinat
   bad=bytearray(b);bad[offset]^=1;check(version+'-prefix-'+str(offset),bad,False)
  legacy=flash('3.2.0');legacy[0x9c00:0x9c40]=page();check('legacy-v2-reject-'+version,legacy,True)
  j=subprocess.run([sys.executable,repo/'scripts/decode-startup-diagnostics.py',out/'synthetic-flash.bin'],capture_output=True,text=True,check=True);assert json.loads(j.stdout)['validPages']==0
-b=flash('3.4.0');b[0x4001]=6;check('unknown-version',b,False)
+b=flash('3.4.0');b[0x4001]=7;check('unknown-version',b,False)
 (out/'result.json').write_text(json.dumps(dict(status='passed',checks=rows,hardwareReportsSent=0,syntheticFramesOnly=True),indent=2)+'\n');print(f'{len(rows)} decoder pin/page/native checks pass')

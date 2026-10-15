@@ -1,0 +1,152 @@
+[
+  {
+    "case": "insufficient-budget",
+    "status": "rejected",
+    "diagnostic": "conditional bound 1560 exceeds budget 1559"
+  },
+  {
+    "case": "missing-pump-callback",
+    "status": "rejected",
+    "diagnostic": "unknown indirect call: servo_move_from@721c"
+  },
+  {
+    "case": "missing-library-frame",
+    "status": "rejected",
+    "diagnostic": "unknown library frame: memcpy"
+  },
+  {
+    "case": "wrong-elf-pin",
+    "status": "rejected",
+    "diagnostic": "pin mismatch: hardened.elf"
+  },
+  {
+    "case": "wrong-map-pin",
+    "status": "rejected",
+    "diagnostic": "pin mismatch: hardened.map"
+  },
+  {
+    "case": "recursive-servo-callback",
+    "status": "rejected",
+    "diagnostic": "recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_from -> servo_move_from"
+  },
+  {
+    "case": "wrong-callback-caller",
+    "status": "rejected",
+    "diagnostic": "indirect caller mismatch: 721c"
+  },
+  {
+    "case": "wrong-callback-target",
+    "status": "rejected",
+    "diagnostic": "reviewed call inventory mismatch"
+  },
+  {
+    "case": "understated-library-frame",
+    "status": "rejected",
+    "diagnostic": "reviewed library frame mismatch: memcpy"
+  },
+  {
+    "case": "wrong-library-body",
+    "status": "rejected",
+    "diagnostic": "reviewed library body mismatch: memcpy"
+  },
+  {
+    "case": "wrong-stock-pointer",
+    "status": "rejected",
+    "diagnostic": "reviewed callback/literal mismatch: 95ac"
+  },
+  {
+    "case": "wrong-static-ram",
+    "status": "rejected",
+    "diagnostic": "reviewed layout mismatch: staticRAMBytes"
+  },
+  {
+    "case": "wrong-call-count",
+    "status": "rejected",
+    "diagnostic": "compiled inventory mismatch: callSiteCount"
+  },
+  {
+    "case": "cleared-physical-caveats",
+    "status": "rejected",
+    "diagnostic": "physical caveats missing or changed"
+  },
+  {
+    "case": "source-content",
+    "status": "rejected",
+    "diagnostic": "source mismatch: src/servo.c"
+  },
+  {
+    "case": "dynamic-compiler-frame",
+    "status": "rejected",
+    "diagnostic": "unbounded/dynamic frame: servo_move_from"
+  },
+  {
+    "case": "compiler-frame-size",
+    "status": "rejected",
+    "diagnostic": "compiler stack usage differs from pinned manifest"
+  },
+  {
+    "case": "elf-raw-byte-mismatch",
+    "status": "rejected",
+    "diagnostic": "ELF/raw image mismatch"
+  },
+  {
+    "case": "raw-image-byte-mismatch",
+    "status": "rejected",
+    "diagnostic": "raw/published image mismatch"
+  },
+  {
+    "case": "unconditional-claim",
+    "status": "rejected",
+    "diagnostic": "unconditional safety unavailable"
+  },
+  {
+    "case": "exact-bound-budget",
+    "status": "accepted",
+    "budgetBytes": 1560
+  },
+  {
+    "case": "branch-bypasses-rescue",
+    "status": "rejected",
+    "diagnostic": "handoff ordering/path mismatch"
+  },
+  {
+    "case": "missing-deferred-start",
+    "status": "rejected",
+    "diagnostic": "handoff ordering/path mismatch"
+  },
+  {
+    "case": "missing-IRQ4-disable",
+    "status": "rejected",
+    "diagnostic": "EIC disable/store/start instruction mismatch: 0x66e4"
+  },
+  {
+    "case": "missing-disable-DSB",
+    "status": "rejected",
+    "diagnostic": "EIC disable/store/start instruction mismatch: 0x66e6"
+  },
+  {
+    "case": "missing-disable-ISB",
+    "status": "rejected",
+    "diagnostic": "EIC disable/store/start instruction mismatch: 0x66ea"
+  },
+  {
+    "case": "missing-IRQ4-enable",
+    "status": "rejected",
+    "diagnostic": "EIC disable/store/start instruction mismatch: 0x67ac"
+  },
+  {
+    "case": "NVM-vector-rebound",
+    "status": "rejected",
+    "diagnostic": "vector target mismatch: 21"
+  },
+  {
+    "case": "STOCK-symbol-misbinding",
+    "status": "rejected",
+    "diagnostic": "STOCK symbol binding mismatch"
+  },
+  {
+    "case": "new-global-mask",
+    "status": "rejected",
+    "diagnostic": "global mask instruction inventory changed"
+  }
+]

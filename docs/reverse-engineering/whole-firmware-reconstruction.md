@@ -14,6 +14,15 @@ and its results remain intact. This adds sensor byte order and initialization/
 restore-origin evidence, not physical calibration or complete firmware coverage.
 Read [the new findings and precise limits](stock-re-progress-2026-10-12.md).
 
+## October 15 original boot-entry contract
+
+[Audit 24](../audits/astra-24-boot-entry-2026-10-15.md) executes the original
+reset-to-application path with supplied MMIO and no asynchronous exceptions.
+It refines CONTROL/PRIMASK/MSP, inherited NVM IRQ5 and boot SysTick conditions;
+it does not increase the application semantic-model count or establish physical
+exception handoff. The upstream C 3.6 startup handoff fix is a separately tested
+ownership policy, not a complete factory scheduler reconstruction.
+
 ## Baseline and complete flash scope
 
 The retained 128 KiB original unit dump has SHA-256 `1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01`. The official 1.8.0 application is exactly 20,172 bytes, linked at `0x5000`, with SHA-256 `f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564`. The first 16 KiB boot region has SHA-256 `8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895`.

@@ -63,3 +63,16 @@ repeat builds and host checks pass. Hardware timing and camera acceptance remain
 open. The public captures contain no query records in the inspected traffic and
 do not establish a real query deadline; synthetic capacity tests do not justify
 an arbitrary buffer or scheduling change. Original overlays and releases stay frozen.
+
+## Startup and observability follow-ups
+
+The [3.6 workbench](../next36/README.md) accepts a scoped EIC startup handoff;
+the earlier full-PRIMASK proposal is rejected after independent late-UART-byte
+tests. Astra24 supplies conditional original boot-entry facts, Astra25 supplies
+the host diagnostic-cohort fix, root26 completes the interrupted startup lead,
+root27 checks compiled 3.5 peripheral polling, Astra28 reviews exact final 3.6
+source, and Astra29 validates compiled ordering and stack. Their reports and
+failing controls are indexed in the
+[campaign](../../../docs/audits/astra-hardening-campaign-2026-10-15.md).
+No interrupted or root-only scope is counted as another completed Astra lane.
+Published images/recovery stay frozen; physical camera qualification is pending.

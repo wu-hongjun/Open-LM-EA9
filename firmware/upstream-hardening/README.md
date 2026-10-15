@@ -1,8 +1,8 @@
 # Upstream C hardening workbench
 
-The current follow-up composition is the separately frozen [3.5 offline candidate](../candidates/3.5.0/README.md).
-See its [build and test workbench](next35/README.md) and
-[evidence](../../docs/evidence/upstream-35-absolute-2026-10-15.md).
+The current follow-up composition is the separately frozen [3.6 offline candidate](../candidates/3.6.0/README.md).
+See its [build and test workbench](next36/README.md) and
+[evidence](../../docs/evidence/upstream-36-handoff-2026-10-15.md).
 It is **not installed or camera-qualified** and does not change the pending uploaded 3.2.
 The sections below preserve the original eleven-lane 3.3 composition and commands.
 [Unified evidence](../../docs/evidence/upstream-33-hardening-2026-10-15.md),

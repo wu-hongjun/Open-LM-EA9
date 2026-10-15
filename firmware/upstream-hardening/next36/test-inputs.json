@@ -1,0 +1,39 @@
+{
+  "version": [
+    3,
+    6,
+    0
+  ],
+  "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+  "templates": {
+    "coordinate": {
+      "path": "firmware/upstream-hardening/next35/test_coordinate.py",
+      "sha256": "fef390e875d923a15f1f75b847f223c44777d67f8fc743dbbab528920cd36e82"
+    },
+    "query-ownership": {
+      "path": "firmware/upstream-hardening/next35/test_query_ownership.py",
+      "sha256": "dc77e722879f47838c9d878d3fa07a17d281af016b1bd7180eaad2e36a650ccf"
+    },
+    "query-flow": {
+      "path": "firmware/upstream-hardening/next35/test_query_flow.py",
+      "sha256": "cfa2bc819a6a4b874f5a77a4b386fcc654f64b0f9555b198c24f857861782e54"
+    },
+    "absolute-target": {
+      "path": "firmware/upstream-hardening/next35/test_target.py",
+      "sha256": "a3a2fb53902a3780a03e32ae8b1b5388d44c880413725a65363a8c08e6873b15"
+    },
+    "time-contract": {
+      "path": "firmware/upstream-hardening/next35/test_time.py",
+      "sha256": "96123247bee9200d6e27edac0d924b32f8207819e3cb34726a490b7df2e3ab77"
+    },
+    "target-time-composition": {
+      "path": "firmware/upstream-hardening/followup/23-composition35/run.py",
+      "sha256": "ceb0e4e7c5f2b28ea820a0f613200b1ec3ca8c5a11c5d2a22efa344bfa3ce0dd"
+    },
+    "exact-counter-parity": {
+      "path": "firmware/upstream-hardening/followup/23-composition35/run_counter.py",
+      "sha256": "f41aa6014c46745683b87f882e543aa39628a2c5fd12df514ef361d05a4e5cd0"
+    }
+  }
+}

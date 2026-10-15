@@ -1,0 +1,37 @@
+--- frozen35/src/em_eic.c
++++ handoff36/src/em_eic.c
+@@ -30,0 +31,2 @@
++	/* Own startup delivery before publishing callbacks. */
++	NVIC_DisableIRQ(EIC_IRQn);
+@@ -57,0 +60,5 @@
++}
++
++void em_eic_start(void)
++{
++	/* Preserve any edge latched since setup; UART reception stayed live. */
+--- frozen35/src/em_eic.h
++++ handoff36/src/em_eic.h
+@@ -8,0 +9 @@
++/* Prepare peripheral/callbacks with EIC delivery disabled. UART stays live. */
+@@ -17,0 +19,3 @@
++/* Arm delivery after the caller finishes first-window ownership. */
++void em_eic_start(void);
++
+--- frozen35/src/emount.c
++++ handoff36/src/emount.c
+@@ -1528,0 +1529 @@
++#ifndef EA9_NO_LOG
+@@ -1529,0 +1531 @@
++#endif
+@@ -1544,0 +1547 @@
++#ifndef EA9_NO_LOG
+@@ -1545,0 +1549 @@
++#endif
+@@ -1561,0 +1566,2 @@
++
++	em_eic_start();
+--- frozen35/src/emount.h
++++ handoff36/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x35u
++#define EM_FW_VERSION_BCD   0x36u

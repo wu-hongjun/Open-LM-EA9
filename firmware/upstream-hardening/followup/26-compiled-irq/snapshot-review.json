@@ -1,0 +1,45 @@
+{
+  "status": "passed-two-legacy-snapshot-consumer-review",
+  "sourceManifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+  "sourceHashesVerified": 46,
+  "compilerSHA256": "07bfe9e74cfe028af639bf38703b2259c608aedee6ff991752084a10b82da614",
+  "runnerSHA256": "1851415866a5b5db16eb3b5cfb166b21ce92f64c185ace20d0496fa569fc6de5",
+  "results": [
+    {
+      "mode": "release",
+      "units": 22,
+      "expressions": [
+        {
+          "unit": "emount",
+          "line": "em_rx_bytes_at_open = em_rx_bytes;"
+        },
+        {
+          "unit": "emount",
+          "line": "em_rx_bytes_at_close = em_rx_bytes;"
+        }
+      ],
+      "tokenParity": "only-two-assignments-removed"
+    },
+    {
+      "mode": "logging",
+      "units": 22,
+      "expressions": [
+        {
+          "unit": "emount",
+          "line": "em_rx_bytes_at_open = em_rx_bytes;"
+        },
+        {
+          "unit": "emount",
+          "line": "em_rx_bytes_at_close = em_rx_bytes;"
+        },
+        {
+          "unit": "main",
+          "line": "| ((em_rx_bytes_at_close - em_rx_bytes_at_open) << 16);"
+        }
+      ],
+      "tokenParity": "identical"
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "limits": "RAM snapshot reads only; live RX counters, MMIO and all other tokens are unchanged. No physical timing or camera qualification."
+}

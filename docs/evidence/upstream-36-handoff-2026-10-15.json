@@ -1,0 +1,326 @@
+{
+  "status": "offline-reviewed-camera-unqualified",
+  "date": "2026-10-15",
+  "version": "3.6.0",
+  "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+  "imageBytes": 20480,
+  "codeAndDataEnd": 39668,
+  "marginBeforeDiagnostics": 268,
+  "staticRAMBytes": 3064,
+  "reservedStackBytes": 8192,
+  "repeatImageManifestPatchIdentical": true,
+  "exactFinalComposition": {
+    "status": "passed-exact-36-offline-composition",
+    "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+    "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+    "sourceFilesVerified": 46,
+    "checks": [
+      {
+        "name": "commits",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "capture",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "diagnostics",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "coordinate",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-ownership",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-flow",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "absolute-target",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "time-contract",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "target-time-composition",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "exact-counter-parity",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "home-inhibit",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-servo-composition",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "startup-handoff",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "snapshot-consumers",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "stack-and-nvic-order",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decoder-boundaries",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "compiled-writer",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decode-3.2.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.2.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.3.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.3.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.4.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.4.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.5.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.5.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.6.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.6.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      }
+    ],
+    "stackContainerPinsRebound": {
+      "hardened.elf": {
+        "reviewed": "df8efe1dbbe04241aa4b85ec20072ba6ae99627338599373dc409454cf7a06e5",
+        "reproduced": "7d2d4345dfe37a4c405c3b82b43614ae7673b58cd215e5f848e8b7c36135cfe8"
+      },
+      "hardened.map": {
+        "reviewed": "6ee474f81d63f14aa0d34faeeb7dc47e06bc25d30bc695b4242881821e6ec723",
+        "reproduced": "65f3bfac044dd28956553ee9ab53a2b138a30bc21a48bcafc805baa75ce7b734"
+      }
+    },
+    "hardwareReportsSent": 0,
+    "cameraQualified": false,
+    "limits": "Finite host peripheral/IRQ cuts and compiled contracts do not qualify physical timing, exposure, capture/shutdown or optical AF."
+  },
+  "startup": {
+    "totalAssertedCases": 287,
+    "exactFinalCases": 41,
+    "globalMaskRejectedForLateUARTByte": true,
+    "acceptedDesign": "Scoped EIC setup/start with UART/SysTick live and prior PRIMASK preserved",
+    "singleRisingInterruptFrozenFailure": true
+  },
+  "snapshots": {
+    "releaseUnitsReviewed": 22,
+    "removedRAMAssignments": 2,
+    "loggingEnabledTokensIdentical": true,
+    "releaseTokensDifferOnlyByAssignments": true,
+    "completeTraceAndWireParityCutsPerDesign": 4,
+    "liveRXCounterUnchanged": true
+  },
+  "stack": {
+    "maximumAllVectorPriorityBytes": 1560,
+    "conditional": true,
+    "negativeEvidenceGuards": 29,
+    "exactBudgetPositive": true,
+    "sourceHashesVerified": 46,
+    "compilerRecords": 134,
+    "linkedFunctions": 139,
+    "callSites": 463,
+    "indirectSites": 14,
+    "existingCompilerFramesUnchanged": 133,
+    "stackHighWaterMeasured": false
+  },
+  "bootEntry": {
+    "originalPathCases": 8,
+    "initializerFixtures": 2,
+    "negativeControls": 9,
+    "normalResetMSPConditionEstablishedInModel": true,
+    "NVM_IRQ5EnabledAtHandoff": true,
+    "NVM_PeripheralInterruptEnableResetZero": true,
+    "physicalExceptionHandoffUnverified": true,
+    "productionStartupPatchJustified": false
+  },
+  "peripheralCompiled35": {
+    "positiveCases": 11,
+    "failingMutationControls": 1,
+    "actualWaitBudget": 4194304,
+    "instructionCeiling": 40000000,
+    "stoppedBeforeLoggingAndNVM": true,
+    "appliesToVersion": "3.5.0",
+    "physicalTimingMeasured": false
+  },
+  "diagnosticCohorts": {
+    "productionHistories": 448,
+    "versionDecodes": 896,
+    "legacyRepeatedFlushSummaries": 6,
+    "mutationDecodes": 1827,
+    "sourcePinFailingControls": [
+      "startup_trace.c",
+      "startup_trace.h"
+    ],
+    "existingDecoderChecks": [
+      "25 decoder pin/page/native checks pass",
+      "37 decoder pin/page/native checks pass"
+    ]
+  },
+  "diagnosticFrozenFailingControls": 19,
+  "new36DecoderBoundaryChecks": 49,
+  "decoderModuleIdenticalToAuditedProposal": true,
+  "swiftTests": 53,
+  "appVersion": "0.19.0",
+  "appBuild": 23,
+  "nativePreparation": {
+    "checks": [
+      {
+        "command": "prepare-handoff-upstream",
+        "version": "3.6.0",
+        "bytes": 20480,
+        "sha256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-absolute-upstream",
+        "version": "3.5.0",
+        "bytes": 20480,
+        "sha256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-bounded-upstream",
+        "version": "3.4.0",
+        "bytes": 20480,
+        "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-hardened-upstream",
+        "version": "3.3.0",
+        "bytes": 20480,
+        "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-startup",
+        "version": "3.2.0",
+        "bytes": 20480,
+        "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-upstream",
+        "version": "3.1.0",
+        "bytes": 20480,
+        "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-af",
+        "version": "3.0.0",
+        "bytes": 20480,
+        "sha256": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03",
+        "nativePrepareMatchesCandidate": true
+      }
+    ],
+    "incompatible85RejectedWithoutOutput": true,
+    "CLI_SHA256": "781231a3e6b6ef29e442cef982f92e4eb158d805ac315d226bf112eeb332d394",
+    "hardwareReportsSent": 0,
+    "canonicalStateModified": false
+  },
+  "priorArtifactsPreserved": 60,
+  "historicalRegistryEntriesUnchanged": true,
+  "hardwareReportsSent": 0,
+  "canonicalStateModified": false,
+  "adapterInstalledVersionChanged": false,
+  "pendingHardwareGate": "Uploaded 3.2 still awaits owner-confirmed physical reconnect and strict verification; 3.6 is offline only.",
+  "limits": [
+    "Synthetic peripheral/IRQ and compiled contracts do not qualify A7C II capture/exposure/shutdown or optical AF.",
+    "EIC edge coalescing and UART receive-boundary loss/duplicate parsing remain conditional limitations; this gate is not complete peripheral scheduling reconstruction.",
+    "Original boot entry reasoning depends on ordinary reset preconditions and does not prove physical exceptions or arbitrary inherited state.",
+    "Factory reconstruction remains partial; current controller is upstream C.",
+    "Actual iris is Unknown; compiled original 50mm profile and donor optics remain uncalibrated.",
+    "Diagnostic CRC/writer consistency is not authenticity, installation verification or proof of physical execution."
+  ],
+  "evidenceHashes": {
+    "firmware/candidates/3.6.0/contax-zeiss-50-f1-4.manifest.json": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+    "firmware/candidates/diagnostic-registry.json": "85448004582b98314754ff31c7c4039b4bcdff5e4f08c39a40e5dba0378c11f5",
+    "scripts/build-upstream-handoff.py": "4f0c0c149bb9188063af0aaf85376dc745531116db44c16e3629347f5be86057",
+    "scripts/test-upstream-handoff.py": "7c4538728f6763b724dae193c8a678f6274081c9658810a2047e9aea30723c77",
+    "scripts/startup_diagnostic_registry.py": "a220765ed3e3665f32bad21923b47272f6b7b554e0857c764e884dcb8978907a",
+    "scripts/startup_diagnostic_cohorts.py": "5bb96a844eba2b38c760c546d0bbdfc049fda93e7991a1b3ec648eb750d9f5a6",
+    "firmware/upstream-hardening/next36/accepted-lanes.json": "9a648d3d18810cc56d73129fb0bfbb14de5d1dc4ce8af35da12eeeffab7df57b",
+    "firmware/upstream-hardening/next36/replay.py": "91d7c8794db980ff428951b96a4922579ab122c239272f383e12a6ed6124400f",
+    "firmware/upstream-hardening/next36/test-inputs.json": "34f2dd93731a990baa0ac03cc354604c354cb74a807f11f7110b3e9353699a43",
+    "firmware/upstream-hardening/next36/stack-reproduction.json": "9774c7d8cfeaca676afb6ca27c53c06ffd4f2d2a7f0b758a204c9b0c888a8488",
+    "firmware/upstream-hardening/followup/29-stack36/policy.json": "fd849f2ead4acb7ec17370a5c7fcead63df70738e2c41e56308e131fe25e4dcf",
+    "firmware/upstream-hardening/followup/29-stack36/run.py": "8197e86326fb9d0cbafe799631662956051bc6fe5b20663e359525e0521e8b38",
+    "firmware/upstream-hardening/followup/29-stack36/handoff.py": "776c1e81908c55e1c77cdb537b85c6e3194447e7354f953f2bedaed7597a2d1f",
+    "firmware/upstream-hardening/followup/28-startup-handoff-review/run.py": "6dc4354d18858d39aa5db5421d75d9a7bc58871ff1cdc812fa53380f0573facf",
+    "apps/macos/Sources/DeviceKit/LensImage.swift": "53da13a070cc077c7e33661c6299f10f88f6f6bd7f438dcb367c647dc211d5e9",
+    "apps/macos/Sources/DeviceKit/TrustedHandoffUpstream.swift": "bb8a766533a3f8747c5ee28d724abf89aba71df172091ac86634c7ad4ef2a34c",
+    "firmware/upstream-hardening/followup/26-compiled-irq/measure.py": "3a7c40395c6c3a87085e2b56bba51fd3c5185bd6e0a060fc5aa56453f073d77e"
+  }
+}
