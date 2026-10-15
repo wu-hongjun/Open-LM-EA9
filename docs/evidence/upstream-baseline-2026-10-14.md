@@ -1,7 +1,8 @@
 # Direct upstream baseline — October 14, 2026
 
-Subsequent hardware update: the authorized 3.1 upload completed; physical
-reconnect and strict verification are pending. See [the installation record](upstream-31-upload-2026-10-14.md).
+Subsequent hardware update: the authorized 3.1 upload, physical reconnect,
+strict verification and separate offline readback audit passed. Camera
+acceptance is pending. See [the installation record](upstream-31-upload-2026-10-14.md).
 The preparation evidence below describes the earlier offline build only.
 
 **Prepared offline; not flashed or camera-qualified.** After the byte-verified

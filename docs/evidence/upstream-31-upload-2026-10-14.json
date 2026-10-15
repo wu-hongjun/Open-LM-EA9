@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14",
-  "status": "uploaded-awaiting-physical-reconnect-and-strict-verification",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-pending",
   "sourceGitCommit": "11c2ad619a212de51b2a1e0cbf9f96d5597e99cb",
   "transactionID": "A87ABAD1-CC57-4982-AAB8-667A4E8E4B7B",
   "appVersion": "0.14.0",
@@ -24,11 +24,11 @@
   "postSTARTReadsSent": 0,
   "retriesSent": 0,
   "uploadPerformed": true,
-  "strictVerificationPassed": false,
+  "strictVerificationPassed": true,
   "cameraTestingPerformed": false,
   "cameraAcceptancePassed": null,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
-  "physicalReconnectConfirmedAfterUpload": false,
+  "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
   "preUploadBackup": {
     "firmwareVersion": "3.0.0",
@@ -55,5 +55,59 @@
     "planned50.bin": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Not started; require physical reconnect and strict byte verification first"
+  "cameraTestStage": "Initial loaded-lens MF preview/capture/exposure/idle/shutdown check requested; AF-S deferred until results",
+  "verifiedAtUTC": "2026-10-15T01:41:19.796694+00:00",
+  "verifiedAtLocal": "2026-10-14T21:41:19.796694-04:00",
+  "verificationNativeExitCode": 0,
+  "newConnectionAndSameUnitValidated": true,
+  "readback": {
+    "firmwareVersion": "3.1.0",
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "flashSHA256": "07f3dc251d953a128e0c0b10c6a4e172c5620a360be7507511a57f68c1c1ff4d",
+    "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+    "bootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895"
+  },
+  "strictChecks": {
+    "completeApplicationExact": true,
+    "fixedPaddingExact": true,
+    "knownMetadataExact": true,
+    "bootCodeUnchanged": true,
+    "protectedGapUnchanged": true,
+    "retainedUpperFlashUnchanged": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true
+  },
+  "excludedMetadataRange": {
+    "range": "[0x403a,0x4040)",
+    "bytes": 6,
+    "reason": "Established adjacent loader RAM bytes copied by START; no other exclusion"
+  },
+  "offlineIndependentAuditPassed": true,
+  "canonicalAppliedLensAndFirmwareObservationPublished": true,
+  "armedUploadConnectionMarkerRetained": true,
+  "verifiedReadConnectionMarkerClearedByNativeService": true,
+  "verificationLogSHA256": {
+    "verify.stdout.txt": "1359af7e475946df56fdb3bd5db86d96dcbe967d1c5dc425ef00939e39a22063",
+    "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+  },
+  "postSTARTReadCountScope": "Armed upload connection before owner-confirmed physical reconnect; verification reads counted separately",
+  "initialCameraCheckRequested": true,
+  "initialCameraCheckResultsReported": false,
+  "requestedCameraSettings": {
+    "camera": "Sony A7C II",
+    "exposureMode": "still-photo A",
+    "focusMode": "MF",
+    "preAF": "Off",
+    "exposureCompensationEV": 0,
+    "iso": "Auto",
+    "physicalLensFocus": "infinity",
+    "physicalIris": "f/1.4",
+    "idleSeconds": 10,
+    "photoPrerequisites": "Updating normal preview, normal motor behavior and confirmed MF; otherwise skip",
+    "actualSettingsVerified": false
+  }
 }

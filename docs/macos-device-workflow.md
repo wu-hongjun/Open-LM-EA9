@@ -15,8 +15,10 @@ freeze requiring battery removal; further AF 3.0 trials are held. See
 AF 2.9 is explicitly held after capture/shutdown failure. See
 [the current milestone](evidence/af-30-candidate-2026-10-13.md).
 
-The [upstream 3.1 baseline](evidence/upstream-baseline-2026-10-14.md) is uploaded;
-physical reconnect and strict verification are pending. See
+The [upstream 3.1 baseline](evidence/upstream-baseline-2026-10-14.md) is uploaded
+and strictly byte-verified after physical reconnect, with a separate offline
+audit. Camera acceptance is pending; initial MF capture/lifecycle testing is
+requested before AF-S. See
 [the installation record](evidence/upstream-31-upload-2026-10-14.md).
 App 0.14 prominently marks installed AF 3.0 as held
 and routes the primary action to USB tools. Its strict USB result remains valid

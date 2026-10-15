@@ -1,10 +1,11 @@
 # Direct upstream 3.1 upload — October 14, 2026
 
-**Upload complete; physical reconnect and strict byte verification pending.**
+**Upload and strict physical-reconnect verification passed; camera acceptance pending.**
 The owner requested the direct upstream baseline after AF 3.0 focused on
 half-press but froze on full press, saved no photograph and required battery
 removal. The owner then confirmed the adapter returned to the computer.
-Keep it on the USB cap and off the camera until strict verification succeeds.
+The owner then confirmed physical reconnect. Native verification and a separate
+offline audit passed. Camera testing has not started.
 
 ## Exact image and upload
 
@@ -48,16 +49,33 @@ matches pinned AF 3.0; whole-flash equality with the last AF 3.0 readback is
 qualified original. Raw backups, serials, calibration, canonical state and logs
 remain private. Original stock recovery and older pinned images are unchanged.
 
-## Pending verification and camera comparison
+## Completed reconnect verification
 
-Physically unplug and reconnect the cap, keep TECHART Update closed and leave
-the adapter off the camera. After owner confirmation, `dist/ea9ctl verify --idle`
-requires a different registry connection and the same unit before reports. Its
-fresh two-pass readback must match the complete fixed image and known metadata,
-with unchanged boot code, protected gap, retained upper flash and factory
-auxiliary data. The established six-byte loader scratch range
-`[0x403a,0x4040)` is the sole metadata exclusion. A separate offline audit follows.
-No guard deletion or relaxed comparison is part of this procedure.
+The owner replied **“reconnected.”** Descriptor-only inventory found one
+qualified adapter on a new registry connection. Native `dist/ea9ctl verify --idle`
+validated the new connection and the same unit before reports, completed a
+matching two-pass flash/auxiliary readback, and exited 0 at
+**2026-10-15T01:41:19.796694+00:00 UTC**
+(**2026-10-14T21:41:19.796694-04:00 America/New_York**).
+It reported firmware **3.1.0**, 131,072 flash bytes and 4,359 CHECK/READ
+exchanges. This verification sent no writes or retries.
+
+A separate offline audit checked every backup file against its size/hash
+manifest and repeated all strict comparisons: exact 20,480-byte fixed image
+including FF padding, exact 58 known metadata bytes, unchanged boot code,
+protected gap, retained upper flash, user row, calibration and device-ID window.
+There is no runtime profile row in this image. The six established loader
+scratch bytes `[0x403a,0x4040)` remain the sole metadata exclusion. No check was
+relaxed and no reconnect marker was manually changed.
+Full readback SHA-256: `07f3dc251d953a128e0c0b10c6a4e172c5620a360be7507511a57f68c1c1ff4d`.
+
+Canonical applied-lens and dated firmware-observation records now report
+50mm f/1.4 / 3.1.0. The native service cleared the successful read connection's
+marker and retained the original armed upload connection's marker. Raw backups,
+logs and owner identifiers remain private. USB equality proves the installed
+bytes; it does not qualify camera capture, exposure, focus or shutdown.
+
+## Pending camera comparison
 
 After strict verification, use [the camera procedure](../upstream-baseline-test.md):
 first one loaded-lens MF capture/lifecycle cycle with still-photo A, Pre-AF Off,

@@ -1,13 +1,16 @@
 # Direct upstream 3.1 comparison on A7C II
 
 The [fixed 50mm f/1.4 candidate](../firmware/candidates/3.1.0/README.md) is
-uploaded, awaiting physical reconnect and strict verification. It preserves the
+uploaded and strictly byte-verified after physical reconnect. Camera acceptance
+is pending. It preserves the
 upstream implementation;
 [the provenance](../firmware/upstream-baseline/README.md) lists all differences.
-The last verified hardware image was AF 3.0, whose full-press capture and
+The previous verified hardware image was AF 3.0, whose full-press capture and
 shutdown failed; further AF 3.0 trials are held. The owner returned the adapter
 to the USB cap and the authorized 3.1 upload completed with a fresh two-pass
-backup. Keep the adapter off the camera until reconnect verification passes.
+backup. Fresh two-pass readback and a separate offline audit matched the full
+fixed image/metadata and unchanged protected flash/factory data. The initial
+loaded-lens MF capture/lifecycle check below is requested before AF-S.
 See [the installation record](evidence/upstream-31-upload-2026-10-14.md).
 
 ## Upload and exact reconnect verification
