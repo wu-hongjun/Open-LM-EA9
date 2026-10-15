@@ -1,0 +1,254 @@
+{
+  "scope": "Static original-commit release/runbook documentation audit; no hardware or state access",
+  "originalSourceCommit": "89e6d0dd2142e57c930540faa68632794769622e",
+  "sourcePinSHA256": "bdd5553dd17329e7c2f952e0c9ee4e8a073710bec82a6657c18a648075bce078",
+  "app": {
+    "version": "0.19.0",
+    "build": "23",
+    "sourceSHA256": "202a68360e02304a4c005bba1b08060cd536814ebae130dc56932a6825177ea9"
+  },
+  "observations": {
+    "firmware_index_calls_31_current": true,
+    "device_guide_calls_app_015_current": true,
+    "prototype_current_banner_014": true,
+    "prototype_claims_state_flag_isolates_guard": true,
+    "source_guard_is_canonical": true,
+    "cli_explicit_handoff_variant": true,
+    "gui_has_36_install_action": true,
+    "readme_legacy_build_block": true,
+    "readme_missing_handoff_builder": true,
+    "readme_missing_handoff_test_runner": true,
+    "handoff_source_base_35_exact_path": true
+  },
+  "localMarkdownLinks": {
+    "checked": 167,
+    "missing": []
+  },
+  "evidence": {
+    "README.md": {
+      "sha256": "475e24b5c5a4cdcc6e8c2e91c8e239a35566fa3953fd862f485f47d3b530c3d2",
+      "excerpts": [
+        {
+          "start": 10,
+          "end": 23,
+          "text": "\nAn [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)\nis running through 08:55 America/New_York on October 15. The first eleven Astra\nlanes produced frozen [upstream C 3.3](firmware/candidates/3.3.0/README.md).\nFollow-up audits now produce [3.6 offline](firmware/candidates/3.6.0/README.md):\na scoped startup EIC handoff prevents competing receive producers while keeping\nUART reception active, retaining 3.5's target/time and 3.4's encoder/query fixes.\nIt retains the upstream C controller and aperture policy. Exact repeat builds,\nproduction-path regressions with failing controls, independent composition and\ncompiled writer/stack checks, and all 53 Swift tests pass.\n[Evidence and limitations](docs/evidence/upstream-36-handoff-2026-10-15.md).\nThe offline decoder also distinguishes inconsistent or partial multi-boot logs.\n**3.6 is not uploaded or camera-qualified.** Uploaded 3.2 still needs physical\nreconnect confirmation and strict verification; no hardware was accessed in this"
+        },
+        {
+          "start": 166,
+          "end": 179,
+          "text": "The Biotar is 58mm f/2, as confirmed by the owner. Build and open:\n\n```sh\npython3 references/visuals/fetch_assets.py\npython3 scripts/build-firmware.py\npython3 scripts/build-upstream-baseline.py\n./scripts/swift-local.sh test\npython3 scripts/test-firmware.py --af\n./scripts/build-macos-app.sh\nopen \"dist/Open LM-EA9.app\"\n```\n\n- [Direct upstream baseline and validation](docs/evidence/upstream-baseline-2026-10-14.md)\n- [Fixed 50mm f/1.4 upstream 3.1 candidate](firmware/candidates/3.1.0/README.md)"
+        }
+      ]
+    },
+    "firmware/README.md": {
+      "sha256": "3d7b78c694bef7c9934221a41d00ab9b6fa1b1b4a4942e484f58726e2fdf1f36",
+      "excerpts": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "# Firmware prototype\n\nThe current comparison is a [direct upstream 3.1 baseline](upstream-baseline/README.md),\nprepared offline for the original 50mm f/1.4 profile. Its protocol/controller/\nmain/driver C files remain upstream; it uses a separate reproducible builder.\nAF 3.0 remains held after capture/shutdown failure. See [the baseline evidence](../docs/evidence/upstream-baseline-2026-10-14.md)."
+        },
+        {
+          "start": 40,
+          "end": 42,
+          "text": "\nCurrent source builds **AF 3.0** under `ea9/build/arbitrated`, with camera BCD\n0x30 and loader 3.0.0. `em_arbitration` separates capture/RX/TX/session/shutdown"
+        },
+        {
+          "start": 75,
+          "end": 80,
+          "text": "historical variant. Current native `prepare-af` selects 3.0.\nSee the [audit](../docs/audits/firmware-correctness-2026-10-11.md) and\n[offline build/test record](../docs/evidence/software-polish-2026-10-11.md).\n\nThe 50mm 2.2 image was installed and **USB byte-verified after physical reconnect**.\nSee the [installation record](../docs/evidence/af-22-upload-2026-10-11.md)."
+        },
+        {
+          "start": 102,
+          "end": 118,
+          "text": "python3 scripts/test-firmware.py\n./scripts/build-macos-app.sh\n```\n\nDependency versions, official source URLs and digests are pinned in\n`dependencies.json`. The local cache is ignored. The packaged Mac app includes\nthe pinned released templates and the new candidate and a digest pin; it personalizes only the\nreserved profile row. A template with its zeroed profile is intentionally invalid.\n\nChanges from the reference:\n\n- The frozen metadata release uses a dedicated `metadata_main.c` entry point; the motion implementation is not\n  linked. The inherited motion files remain available for a subsequent audited\n  autofocus milestone. No flash logging is linked.\n- `lens_profile.c` validates the versioned CRC-protected profile and applies\n  focal length, manually reported aperture and lens name through the existing\n  frame setters. No measured geometry from another lens is reused."
+        }
+      ]
+    },
+    "docs/macos-device-workflow.md": {
+      "sha256": "707ceacaeffdcc309a8b7544dcde1a04123be9dd4aa2bbe9adf8f5a8cc9b0127",
+      "excerpts": [
+        {
+          "start": 1,
+          "end": 20,
+          "text": "# Device workflow: prototype 0.15.0, build 19\n\nOpen `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,\nconnection, dated firmware read and the last USB-verified lens setting.\nActual aperture is **Unknown**; the displayed fixed f-number is camera metadata.\nUse the lens ring to stop down. The library editor lets you override the fixed\ncamera f-number while retaining the unknown physical setting.\nThe secondary **Lens Library** tab retains the photographs and metadata editor.\n\nStartup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4\nprofile on October 15; physical reconnect and strict byte verification are pending.\nSee [the installation record](evidence/upstream-32-upload-2026-10-15.md). USB tools provide a separate **Install Startup Diagnostic 3.2.0**\naction; changing the dropdown does not install it. Other/edited profiles are\nrejected. The native CLI equivalents are `prepare-startup` and `apply-startup`.\nThis upload followed a separately coordinated owner request. Installed 3.2 routes\nthe main action to USB tools, labels camera compatibility unqualified and avoids\nrepeat installation. After one coordinated camera cycle, save a read-only backup\nand use the offline decoder, as described in [the diagnostic runbook](upstream-startup-diagnostic-test.md).\nInitial full-image verification includes the blank log area. Later log retrieval\ndoes not relax that check; ordinary image inspection still rejects changed bytes."
+        },
+        {
+          "start": 42,
+          "end": 64,
+          "text": "## Change a lens\n\n1. Connect the adapter through its USB cap with TECHART Update closed.\n2. Choose a lens in the **Lens profile** dropdown on Device. All eight requested\n   lenses are included, with the corrected Biotar 58mm f/2. The selected-on-Mac\n   preview shows the focal length and reported aperture that will be applied.\n3. Confirm **Updater closed \u00b7 USB cap reconnected**, then click **Apply profile**.\n4. After upload, physically unplug and reconnect the cap. The app detects the\n   new connection; confirm the prerequisite again and click **Verify lens**.\n5. Use the adapter on the camera after byte verification succeeds.\n\nChoosing a profile saves only a local preparation. The on-adapter photo and\nsetting retain the last verified value until the uploaded image is verified.\nAn unchanged profile shows **Up to date**. The primary action preserves the\nverified installed firmware variant, including legacy AF 2.1. Upgrading to the\nupstream 3.1 baseline was a separate **USB tools \u2192 Experimental autofocus** action,\ncompiled only for the original Contax Zeiss 50mm f/1.4 profile. It does not use\na runtime lens-profile row. Other/edited profiles are rejected before USB.\nWhen that baseline is installed, the dropdown explains its fixed configuration\nand offers USB tools rather than pretending another profile can be applied.\nThe CLI `apply-upstream` still selects held 3.1 for explicit recovery/research;\ndo not retry it for camera use. Historical `apply-af` still selects held 3.0.\nPlain `apply` selects metadata-only 2.0."
+        },
+        {
+          "start": 89,
+          "end": 108,
+          "text": "The app checks macOS USB/HID descriptors and bounded local history every two\nseconds, on launch, and when it becomes active. It detects connection changes\nand reloads CLI-published verification records while the window stays open.\nThe monitor cancels when the view ends, skips active operations and rejects\noverlapping refreshes. A changed registry ID, blocked connection or discovery\nfailure clears the connection acknowledgement. Multiple adapters disable USB\noperations. Discovery failure clears the displayed device list.\n\nAutomatic refresh sends **no HID feature reports, CHECK, READ or START**.\nFirmware and lens labels remain dated local evidence associated with the\nqualified unit's serial, not fresh USB readings or identification of a passive\nmounted lens. **Read Version** and **Read Adapter Lens** remain explicit in\nUSB tools. This distinction matters because an armed stock bootloader can\ninterpret an ordinary read request as the next firmware page. Keep the physical\nreconnect guard even though discovery itself is automatic.\n\nThe main view uses the existing sourced photos, compact adapter/firmware card,\nverified lens photo and a visible dropdown/apply row. No new remote images or\nruntime network requests were added. The earlier visual release was built and inspected with\nthe connected adapter; 0.14 packaging and tests were offline. Its last saved 2.1.0/50mm f/1.4 history loaded correctly;"
+        }
+      ]
+    },
+    "docs/macos-prototype.md": {
+      "sha256": "13f933d153ca0de85a930f36a63512709dffab3de224a743de0dc403e6d598c0",
+      "excerpts": [
+        {
+          "start": 1,
+          "end": 17,
+          "text": "> Current app: **0.14.0, build 17** shows actual aperture as Unknown separately\n> from the fixed camera f-number and packages the direct upstream 3.1 baseline.\n> The baseline is fixed to the original 50mm f/1.4 profile and is prepared offline.\n> See [its provenance and validation](evidence/upstream-baseline-2026-10-14.md).\n> Automatic refresh, the Device dropdown and firmware-preserving lens changes\n> remain. AF 3.0 upload and strict reconnect verification passed on October 14;\n> camera acceptance subsequently failed with full-press freeze and battery-\n> required recovery. Further AF 3.0 trials are held. See\n> [the failure record](evidence/af-30-camera-failure-2026-10-14.md) and [the installation record](evidence/af-30-upload-2026-10-14.md), [the workflow](macos-device-workflow.md),\n> [current validation](evidence/af-30-validation-2026-10-13.json) and\n> [AF 3.0 milestone](evidence/af-30-candidate-2026-10-13.md).\n\n# macOS prototype\n\n> Current follow-up (prototype 0.3.0): the [USB metadata milestone](usb-metadata-milestone.md) adds a reviewed, bounded application upload, mandatory physical reconnect and full byte verification. Its first firmware candidate uses the reference C implementation with motor motion disabled. [Actual measurements](evidence/usb-metadata-milestone-2026-10-10.md) distinguish stock upload qualification, custom read-back and pending camera checks. The material below records the earlier research/prototype stage.\n\nVersion 0.2.0, October 10, 2026. Implements the user's authorized next step:"
+        },
+        {
+          "start": 151,
+          "end": 179,
+          "text": "After an uncertain exchange, cancellation, crash or interrupted session,\nphysically reconnect and refresh. The connection's registry ID is persisted in\n`usb-reconnect-required.json` before the transaction and cleared on successful\ncompletion. Relaunching the app does not bypass this guard. Conservative open\nfailures may also require reconnect. There are no automatic transport retries.\nRefresh is manual; the prototype does not provide live hotplug notifications.\n\nThe package includes device serial/unit data. It is private local evidence,\nwith a `0700` directory and `0600` files. The app sends nothing to a server.\nComplete flash read-back is verified; restoring an adapter from the backup is\n**not qualified**. Other factory auxiliary rows and unique-ID words are outside\nthis backup. No install, restore, arbitrary memory access, feature report,\nreset, motor command or profile-apply action exists in the app.\n\n## Command-line diagnostics\n\nThe packaged CLI uses the same DeviceKit pipeline as the GUI:\n\n```sh\n./dist/ea9ctl inventory\n./dist/ea9ctl backup /path/to/new-backup.ea9backup --idle\n```\n\n`--idle` acknowledges the same closed-updater/physical-reconnect prerequisite.\nInventory prints a redacted summary and sends no reports. Backup prints only\nthe destination, size, flash digest and exchange count. The manifest retains\nprivate identity. `--state-directory PATH` can isolate the persistent reconnect\nguard for development; use the shared default in normal operation. Run only\none USB client at a time."
+        }
+      ]
+    },
+    "firmware/candidates/3.6.0/README.md": {
+      "sha256": "3230359877ac29f95ff27213da515fb2d023add4748e34d19dc94695f6a74463",
+      "excerpts": [
+        {
+          "start": 1,
+          "end": 6,
+          "text": "# 3.6.0 \u2014 upstream C startup handoff, Contax Zeiss 50mm f/1.4\n\n**Prepared offline; not uploaded or camera-qualified.** This extends frozen\n[3.5](../3.5.0/README.md) with a scoped startup receive-ownership fix.\nIt retains the upstream controller, gains, optical tables, aperture policy,\nmotor/sensor drivers, wait budgets and diagnostic storage."
+        },
+        {
+          "start": 41,
+          "end": 52,
+          "text": "App **0.19.0/build 23** offers **USB tools \u2192 Install Upstream AF 3.6.0**.\nExplicit commands: `prepare-handoff-upstream` / `apply-handoff-upstream`.\nEarlier commands retain their images. Only the original unedited 50mm profile\nis supported. Actual iris stays Unknown; factory reconstruction remains partial.\n\nThe pending uploaded 3.2 transaction still requires owner-confirmed physical\nreconnect and strict full-image/protected-data verification. This offline\ncandidate does not resolve it or authorize another flash. See the\n[future coordinated procedure](../../../docs/upstream-handoff-test.md),\n[build/test workbench](../../upstream-hardening/next36/README.md),\n[manifest](contax-zeiss-50-f1-4.manifest.json) and\n[complete delta from 3.5](from-35.patch). Prior releases and stock recovery remain exact."
+        }
+      ]
+    },
+    "docs/upstream-handoff-test.md": {
+      "sha256": "235819ee26a6dd3eaa5fd41c13dc43d1a6de7fb5302d13b53e226c02e5711a5c",
+      "excerpts": [
+        {
+          "start": 1,
+          "end": 92,
+          "text": "# Upstream AF 3.6 \u2014 future installation and camera acceptance\n\n**Prepared offline only. No camera action is requested by this document.**\nThe [candidate](../firmware/candidates/3.6.0/README.md) and\n[offline validation](evidence/upstream-36-handoff-2026-10-15.md) do not establish\nA7C II stability. The current 3.2 upload still awaits owner-confirmed physical\nreconnect and strict verification; resolve that existing transaction through its\nnormal guarded path before attempting a separate authorized 3.6 installation.\nNever delete/edit the pending journal or reconnect marker to bypass it.\n\n## Separate upload and byte verification\n\nAfter explicit authorization, confirm the adapter is on the USB cap, the\nTECHART updater is closed and the saved original profile is the unedited\nContax Zeiss 50mm f/1.4. App 0.19/build 23 exposes **USB tools \u2192 Install Upstream AF 3.6.0**. Its CLI equivalent, for that future coordinated operation:\n\n```sh\ndist/ea9ctl apply-handoff-upstream contax-zeiss-50-f1-4 --idle\n# Stop. Owner must physically unplug/reconnect and confirm the new connection.\n# Keep the adapter off the camera until strict verification has passed.\ndist/ea9ctl verify --idle\n```\n\nThe fresh same-unit two-pass backup, durable journal and protected data checks\nremain mandatory. START arms the connection: no CHECK/READ/control/end marker or\nretry is sent afterward on that connection. An acknowledgement is not byte\nverification. Require the complete 20,480-byte pristine image, including all\nblank log pages, and existing protected metadata/flash/auxiliary checks. The\nsix established loader scratch bytes remain the sole metadata exception.\nRecord an independent offline comparison of the verification backup before\ncamera use. A decoder prefix match cannot substitute for this gate.\n\n## One initial loaded-lens cycle\n\nAfter the strict gate succeeds, coordinate one cycle before AF-S. With the\nA7C II off and camera USB disconnected, mount the LM-EA9, C/Y-to-M converter and\n50mm lens. Set the physical focus ring to infinity and iris to f/1.4. Select\nstill-photo A, EV0, Auto ISO, **Manual Focus separately in Focus \u2192 AF/MF \u2192 Focus\nMode**, and Pre-AF Off where available. Record actual settings; unknown settings\nstay unknown. The A exposure dial alone does not select MF.\n\n1. Switch on without shutter/AF-ON. Note preview updating/brightness, aperture\n   display (nominal f/1.4), motor movement/sound and whether it stops.\n2. If responsive and quiet, wait ten seconds after movement stops. If the preview\n   freezes or aperture stays `--`, skip photo/AF and switch off once.\n3. Only if preview, aperture and motion are normal and MF is confirmed, take one\n   photograph. Record whether it saves and its exposure; preserve its local path\n   for optional EXIF inspection. Switch off once and leave it off.\n\nFor a freeze, shutdown nonresponse, grinding, repeated stop impacts or abnormal\ncontinuous drive for about two seconds, stop: switch off; remove the battery if\nunresponsive or motion continues; do not retry or restart for missing details.\nReport the exact trigger (startup/half/full press), saved-photo status and\nshutdown behavior. No further camera cycle or AF-S is needed before log review.\n\nThis candidate intentionally starts no new parking drive on shutdown. Motor\nsilence is not proof of AF failure or physical infinity. Physical iris remains\nmanual and Unknown to the adapter; the nominal f-number cannot track ring changes.\nDo not introduce exposure offsets based only on a mismatched f-number report.\n\n## Read-only logs and next AF-S decision\n\nWith the camera off/unpowered and motor stopped, return to the USB cap and\nphysically reconnect, updater closed. Confirm that state before a new read-only\nnative backup. Use new private paths:\n\n```sh\ndist/ea9ctl backup /new/after-36.ea9backup --idle\npython3 scripts/decode-startup-diagnostics.py /new/after-36.ea9backup --output /new/after-36.json\n```\n\nTrace v2 persists only on terminal shutdown after UART disable, or terminal\nfail-stop. The ten-second idle does **not** flush 3.6. Battery removal, full/torn\nstorage or an unentered terminal path can leave blank/incomplete logs. First 24\nand latest 24 RAM retention is bounded; a summary reports planned events, while\nthe decoder reports how many survived. A shutdown marker proves reaching that\nsoftware point, not electrical power removal or a successful next boot.\n\nDecoder identity checks require the exact version, complete published image and manifest\npins, immutable prefix, and per-page structure/CRC; a native manifest also needs\ntwo flash/auxiliary reads and the full flash hash. It explicitly does not verify\ninstallation. Page `state: valid` means structure/CRC only; `recordTrust` and cohort checks separately identify inconsistent, partial or unassociated evidence. CRC is not authentication. Camera-written diagnostic pages mean ordinary `inspect` no longer\nrecognizes a pristine image; use `backup` plus the decoder after camera use.\nCompare all outside-log flash and auxiliary data separately. Do not erase/reset\nlogs; raw unit dumps and actual camera exchanges stay private.\n\nOnly after a successful preview/MF-capture/idle/shutdown cycle and log review,\nplan a separate bounded AF-S comparison with actual AF-S and Pre-AF Off settings,\na bright stationary target, infinity focus-ring position and physical f/1.4.\nRecord lock/release, hunting, motion and saved-photo sharpness. Neither a green\nindicator nor host tests qualify optical accuracy. AF-C/video, zoom changes,\nother lenses and factory parity remain later acceptance work."
+        }
+      ]
+    },
+    "firmware/upstream-hardening/next36/README.md": {
+      "sha256": "402c7b53f617d1e4ed04f4d5ecd356f0bce072795b498261ae9dd614c9a80603",
+      "excerpts": [
+        {
+          "start": 8,
+          "end": 24,
+          "text": "The builder requires exact pinned 3.5 materialization at\n`artifacts/private/absolute35a`. If absent, reproduce the\n[3.5 prerequisites](../next35/README.md) first:\n\n```sh\npython3 scripts/build-upstream-absolute.py --output artifacts/private/absolute35a\n```\n\nThen choose fresh private output paths under existing parents:\n\n```sh\npython3 scripts/build-upstream-handoff.py --output artifacts/private/recheck36\npython3 scripts/test-upstream-handoff.py --build artifacts/private/recheck36 --output artifacts/private/recheck36-tests\nscripts/swift-local.sh test\nscripts/build-macos-app.sh\n```\n"
+        }
+      ]
+    },
+    "apps/macos/Sources/DeviceKit/NativeHID.swift": {
+      "sha256": "5f01c7f58031133122b8b6a74eae3ad9465166b87a931ad1e410631808f72e21",
+      "excerpts": [
+        {
+          "start": 127,
+          "end": 135,
+          "text": "    private let stateDirectory: URL\n    let safety: USBConnectionSafety\n    public init(stateDirectory: URL) {\n        self.stateDirectory = stateDirectory\n        safety = USBConnectionSafety(directory: USBConnectionSafety.canonicalDirectory)\n    }\n    // Offline tests may isolate safety state; this is not exposed to CLI callers.\n    init(stateDirectory: URL, safety: USBConnectionSafety) {\n        self.stateDirectory = stateDirectory; self.safety = safety"
+        }
+      ]
+    },
+    "apps/macos/Sources/EA9CLI/main.swift": {
+      "sha256": "9770675b430428983b23930b719eeafae8e5a10c5a0494756bcaaf821c7557eb",
+      "excerpts": [
+        {
+          "start": 5,
+          "end": 15,
+          "text": "@main struct EA9CLI {\n    private static func variant(for command: String) -> FirmwareVariant {\n        switch command {\n        case \"prepare-handoff-upstream\", \"apply-handoff-upstream\": .autofocusStartupHandoff\n        case \"prepare-absolute-upstream\", \"apply-absolute-upstream\": .autofocusAbsoluteUpstream\n        case \"prepare-bounded-upstream\", \"apply-bounded-upstream\": .autofocusBoundedUpstream\n        case \"prepare-hardened-upstream\", \"apply-hardened-upstream\": .autofocusUpstreamHardened\n        case \"prepare-startup\", \"apply-startup\": .autofocusStartupDiagnostic\n        case \"prepare-upstream\", \"apply-upstream\": .autofocusUpstreamBaseline\n        case \"prepare-af\", \"apply-af\": .autofocusArbitratedCamera\n        default: .metadataOnly"
+        },
+        {
+          "start": 18,
+          "end": 41,
+          "text": "    static func main() async {\n        do {\n            var args = Array(CommandLine.arguments.dropFirst())\n            var state = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]\n                .appendingPathComponent(\"org.openlmea9.prototype\", isDirectory: true)\n            if let index = args.firstIndex(of: \"--state-directory\"), index + 1 < args.count {\n                state = URL(fileURLWithPath: args[index + 1], isDirectory: true)\n                args.removeSubrange(index...index + 1)\n            }\n            let service = DeviceService(stateDirectory: state)\n            let usage = \"Startup handoff: prepare-handoff-upstream PROFILE-ID NEW.bin | apply-handoff-upstream PROFILE-ID --idle. Absolute upstream: prepare-absolute-upstream PROFILE-ID NEW.bin | apply-absolute-upstream PROFILE-ID --idle. Bounded upstream: prepare-bounded-upstream PROFILE-ID NEW.bin | apply-bounded-upstream PROFILE-ID --idle. Hardened upstream: prepare-hardened-upstream PROFILE-ID NEW.bin | apply-hardened-upstream PROFILE-ID --idle. Startup diagnostic: prepare-startup PROFILE-ID NEW.bin | apply-startup PROFILE-ID --idle. Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin | prepare-upstream PROFILE-ID NEW.bin | apply-upstream PROFILE-ID --idle\"\n            guard args == [\"inventory\"] || (args.count == 3 && [\"backup\",\"apply\",\"apply-af\",\"apply-upstream\",\"apply-startup\",\"apply-hardened-upstream\",\"apply-bounded-upstream\",\"apply-absolute-upstream\",\"apply-handoff-upstream\",\"restore-stock\"].contains(args[0]) && args[2] == \"--idle\")\n                || (args.count == 2 && [\"verify\",\"inspect\",\"qualify-stock\"].contains(args[0]) && args[1] == \"--idle\")\n                || (args.count == 3 && [\"prepare\",\"prepare-af\",\"prepare-upstream\",\"prepare-startup\",\"prepare-hardened-upstream\",\"prepare-bounded-upstream\",\"prepare-absolute-upstream\",\"prepare-handoff-upstream\"].contains(args[0]))\n                || (args.count == 3 && args[0] == \"resolve-stock-after-camera\" && args[2] == \"--idle\") else { throw DeviceError.failure(usage + \" | resolve-stock-after-camera REVIEWED.ea9backup --idle\") }\n            if [\"prepare\",\"prepare-af\",\"prepare-upstream\",\"prepare-startup\",\"prepare-hardened-upstream\",\"prepare-bounded-upstream\",\"prepare-absolute-upstream\",\"prepare-handoff-upstream\"].contains(args[0]) {\n                let library = try LibraryStore(directory: state).loadOrSeed()\n                guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure(\"Unknown lens profile.\") }\n                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: variant(for: args[0]))\n                try data.write(to: URL(fileURLWithPath: args[2]), options: .withoutOverwriting)\n                print(\"Prepared application image: \\(data.count) bytes. No USB reports sent.\")\n                return\n            }\n            let devices = try await service.inventory()"
+        }
+      ]
+    },
+    "apps/macos/Sources/OpenLMEA9/DeviceOverview.swift": {
+      "sha256": "301c67b548e185bec98897c7f2706e603398002b22940012afdb0872db9ac1b8",
+      "excerpts": [
+        {
+          "start": 237,
+          "end": 247,
+          "text": "                    Button(\"Restore Stock from Backup\u2026\", action: model.chooseStockRestore).disabled(!model.canReadDevice)\n                    DisclosureGroup(\"Experimental autofocus\") {\n                        VStack(alignment: .leading, spacing: 12) {\n                            Text(\"Upstream baseline 3.1.0 is held after the A7C II showed -- for aperture and would not release the shutter. Shutdown worked. Further installation and camera trials are unavailable pending investigation.\").font(.callout)\n                            Button(\"Install Upstream Baseline 3.1.0\", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)\n                            Text(\"Startup diagnostic 3.2.0 tests the first-window receive fix and stock lens identity. It is compiled for the original 50mm f/1.4 profile. Camera compatibility is unqualified; collect a backup after one coordinated camera cycle.\").font(.callout)\n                            Button(\"Install Startup Diagnostic 3.2.0\", action: model.installStartupDiagnostic).disabled(!model.canInstallStartupDiagnostic)\n                            Text(\"Upstream AF 3.6.0 guards startup receive ownership while keeping UART reception active. This fixed 50mm f/1.4 candidate is camera-unqualified. Review the backup after one coordinated cycle before further testing.\").font(.callout)\n                            Button(\"Install Upstream AF 3.6.0\", action: model.installStartupHandoff).disabled(!model.canInstallStartupHandoff)\n                            Button(\"Install Metadata Only for Prepared Lens\", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)\n                        }.padding(.top, 12)"
+        }
+      ]
+    },
+    "scripts/build-firmware.py": {
+      "sha256": "9522d33cfff698baf516abc1af1ebca131b1739fc401d57278b8035d3994a712",
+      "excerpts": [
+        {
+          "start": 13,
+          "end": 16,
+          "text": "ROOT = Path(__file__).resolve().parents[1]\nparser = argparse.ArgumentParser(description=__doc__)\nparser.add_argument(\"--variant\", choices=(\"metadata\", \"upstream-af\", \"reconciled-af\", \"hardened-af\", \"factory-af\", \"refined-af\", \"audited-af\", \"polished-af\", \"observed-af\", \"serviced-af\", \"arbitrated-af\"), default=\"metadata\")\nvariant = parser.parse_args().variant"
+        },
+        {
+          "start": 25,
+          "end": 35,
+          "text": "    \"metadata\": (\"ea9-profile-template\", 0x5100, \"d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293\"),\n    \"upstream-af\": (\"ea9-af-template\", 0x5100, \"6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552\"),\n    \"reconciled-af\": (\"ea9-af-reconciled-template\", 0x5000, \"e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36\"),\n}\nif variant in FROZEN:\n    name, size, expected = FROZEN[variant]\n    data = (ROOT / f\"apps/macos/Sources/DeviceKit/Resources/{name}.bin\").read_bytes()\n    if len(data) != size or hashlib.sha256(data).hexdigest() != expected:\n        raise SystemExit(f\"Frozen {variant} template failed length/digest verification; no resource was changed.\")\n    print(f\"Verified frozen {variant} template; use --variant arbitrated-af to build current source.\")\n    raise SystemExit(0)"
+        }
+      ]
+    },
+    "scripts/build-upstream-baseline.py": {
+      "sha256": "5460db42ed55f9f068c6159abb50cebf0628f1bf5a92ad0031cd8ccf1c249854",
+      "excerpts": [
+        {
+          "start": 10,
+          "end": 15,
+          "text": "ROOT = Path(__file__).resolve().parents[1]\nREF = ROOT/'references/upstream/weiziqian/E-mount-impl-on-Techart-EA9'\nOUT = ROOT/'firmware/upstream-baseline/build'\nDEPS = ROOT/'tools/firmware-deps'\nARM = DEPS/'arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-'\nCOMMIT = 'd52ed06cc449918f938e0695fbf29a0c4141f2b2'"
+        },
+        {
+          "start": 51,
+          "end": 56,
+          "text": "    if label=='50f14':\n        edits['src/emount.h']=[('0x59u','0x31u'),('0x11C0u','0x1100u'),\n            ('{ 0xD1, 0xD0, 0xD5, 0xE8, 0xE9, 0xEF }','{ '+', '.join(f'0x{x:02X}' for x in row)+' }')]\n        # Upstream duplicates its default f/1.8 as a literal in one test row.\n        # Update only that configurable-lens fixture, not the conversion code.\n        edits['tools/hosttest/test_emount.c']=[('{ 0x16, EM_APERTURE_NOW }','{ 0x10, EM_APERTURE_NOW }')]"
+        }
+      ]
+    },
+    "scripts/build-upstream-handoff.py": {
+      "sha256": "4f0c0c149bb9188063af0aaf85376dc745531116db44c16e3629347f5be86057",
+      "excerpts": [
+        {
+          "start": 18,
+          "end": 36,
+          "text": "ROOT=Path(__file__).resolve().parents[1]\nLANE=ROOT/'firmware/upstream-hardening'\nBASE=ROOT/'artifacts/private/absolute35a'\nDEPS=ROOT/'tools/firmware-deps'\nARM=str(DEPS/'arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-')\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('--output',required=True,type=Path)\nargs=parser.parse_args(); work=args.output.resolve()\nplan_path=LANE/'next36/accepted-lanes.json'; plan=json.loads(plan_path.read_text())\nfrozen_path=ROOT/'firmware/candidates/3.5.0/contax-zeiss-50-f1-4.manifest.json'\nfrozen=json.loads(frozen_path.read_text())\nassert plan['baseVersion']=='3.5.0' and plan['nextVersion']=='3.6.0'\nassert plan['baseImageSHA256']==frozen['imageSHA256']=='04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632'\nassert sha(frozen_path)=='a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de'\nassert frozen==json.loads((BASE/'manifest.json').read_text()), 'Reproduce frozen 3.5 build inputs first'\nfor name,digest in frozen['sources'].items(): assert sha(BASE/name)==digest,name\nassert sha(ROOT/'firmware/candidates/3.5.0/contax-zeiss-50-f1-4.bin')==frozen['imageSHA256']\nassert sha(BASE/'from-34.patch')==frozen['from34PatchSHA256']"
+        }
+      ]
+    },
+    "scripts/test-upstream-handoff.py": {
+      "sha256": "7c4538728f6763b724dae193c8a678f6274081c9658810a2047e9aea30723c77",
+      "excerpts": [
+        {
+          "start": 10,
+          "end": 26,
+          "text": "ROOT = Path(__file__).resolve().parents[1]\nNEXT = ROOT / 'firmware/upstream-hardening/next36'\np = argparse.ArgumentParser(description=__doc__)\np.add_argument('--build', required=True, type=Path)\np.add_argument('--output', required=True, type=Path)\na = p.parse_args()\nbuild, out = a.build.resolve(), a.output.resolve()\nassert out.is_relative_to(ROOT / 'artifacts/private')\nout.mkdir(exist_ok=False)\nsha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\nmanifest = json.loads((build / 'manifest.json').read_text())\npublished = ROOT / 'firmware/candidates/3.6.0'\nimage = (build / 'contax-zeiss-50-f1-4.bin').read_bytes()\nassert manifest['loaderVersion'] == [3, 6, 0]\nassert manifest['imageSHA256'] == hashlib.sha256(image).hexdigest() == 'd8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f'\nassert (build / 'manifest.json').read_bytes() == (published / 'contax-zeiss-50-f1-4.manifest.json').read_bytes()\nassert image == (published / 'contax-zeiss-50-f1-4.bin').read_bytes()"
+        }
+      ]
+    },
+    "scripts/build-upstream-absolute.py": {
+      "sha256": "15a129ef29b3b4758bdb21086663d941e60842dc49dddc8479099847cac92cb2",
+      "excerpts": [
+        {
+          "start": 18,
+          "end": 36,
+          "text": "ROOT=Path(__file__).resolve().parents[1]\nLANE=ROOT/'firmware/upstream-hardening'\nBASE=ROOT/'artifacts/private/bounded34b'\nDEPS=ROOT/'tools/firmware-deps'\nARM=str(DEPS/'arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-')\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('--output',required=True,type=Path)\nargs=parser.parse_args(); work=args.output.resolve()\nplan_path=LANE/'next35/accepted-lanes.json'; plan=json.loads(plan_path.read_text())\nfrozen_path=ROOT/'firmware/candidates/3.4.0/contax-zeiss-50-f1-4.manifest.json'\nfrozen=json.loads(frozen_path.read_text())\nassert plan['baseVersion']=='3.4.0' and plan['nextVersion']=='3.5.0'\nassert plan['baseImageSHA256']==frozen['imageSHA256']=='fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9'\nassert sha(frozen_path)=='8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a'\nassert frozen==json.loads((BASE/'manifest.json').read_text()), 'Reproduce frozen 3.4 build inputs first'\nfor name,digest in frozen['sources'].items(): assert sha(BASE/name)==digest,name\nassert sha(ROOT/'firmware/candidates/3.4.0/contax-zeiss-50-f1-4.bin')==frozen['imageSHA256']\nassert sha(BASE/'from-33.patch')==frozen['from33PatchSHA256']"
+        }
+      ]
+    },
+    "scripts/build-upstream-bounded.py": {
+      "sha256": "5c9edbf853a6e12f4b9a374acfeb2be7f994beeeccff8e07f977bdf3f25d09b0",
+      "excerpts": [
+        {
+          "start": 18,
+          "end": 21,
+          "text": "ROOT=Path(__file__).resolve().parents[1]\nLANE=ROOT/'firmware/upstream-hardening'\nBASE=ROOT/'firmware/upstream-hardening/build/final-33a'\nDEPS=ROOT/'tools/firmware-deps'"
+        }
+      ]
+    },
+    "scripts/build-upstream-hardened.py": {
+      "sha256": "ec4968f4a201d00829272c024677c2ea3ab03ed638704faa18a6b9e80138bca8",
+      "excerpts": [
+        {
+          "start": 18,
+          "end": 21,
+          "text": "ROOT=Path(__file__).resolve().parents[1]\nLANE=ROOT/'firmware/upstream-hardening'\nBASE=ROOT/'firmware/upstream-diagnostic/build'\nDEPS=ROOT/'tools/firmware-deps'"
+        }
+      ]
+    }
+  }
+}

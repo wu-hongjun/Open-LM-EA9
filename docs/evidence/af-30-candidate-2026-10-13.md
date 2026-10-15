@@ -139,8 +139,17 @@ Checks completed after the final interrupt-boundary review:
 | [Retained queue, telemetry and opaque query checks](af-30-retained-regressions-2026-10-13.json) | Pass; 32 original complete `0x34` replies and frozen controls retained |
 | [Pure factory controller oracle](af-30-factory-oracle-2026-10-13.json) | 7,323 original-instruction comparisons; gain mutation detected |
 | [Original frame sync/completion](af-30-stock-motion-oracle-2026-10-13.json) | 12 / 18 cases pass |
-| [Original shutdown ordering](af-30-stock-shutdown-oracle-2026-10-13.json) | 24 legal echoes plus direct-state bad-checksum boundary recorded |
+| [Historical original shutdown ordering](af-30-stock-shutdown-oracle-2026-10-13.json) | 24 legal echoes plus pre-format direct-state observation; see October 15 correction below |
 | [Prior releases/recovery](af-30-preserved-releases-2026-10-13.json) | 21 artifacts byte-identical; checked owner state unchanged |
+
+**October 15 oracle correction:** the historical shutdown replay cut `0x51c8`
+before the original formatter and mislabeled it as final transmission. The
+[new terminal-tail audit](../audits/astra-31-factory-shutdown-tail-2026-10-15.md)
+and corrected live replay observe the formatted buffer at UART boundary `0x9180`.
+The formatter repairs the synthetic malformed checksum/terminator there; the
+earlier JSON's no-repair interpretation is superseded. Historical JSON, firmware
+images and validation pins remain exact. This corrects evidence interpretation;
+it changes no candidate or physical camera outcome.
 
 The fixtures supply CS/VD edges, sensor/voltage data and UART completion, and
 instrument selected delay/TX boundaries. They do not simulate concurrent real

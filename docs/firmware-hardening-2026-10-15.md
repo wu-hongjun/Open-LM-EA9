@@ -17,11 +17,15 @@ take precedence over proposed explanations.
 ## Hardware and release state
 
 3.2 was [uploaded](evidence/upstream-32-upload-2026-10-15.md) before this work
-window. **Owner physical reconnect confirmation and strict byte verification
-are still pending.** Camera testing/log retrieval has not occurred. Do not
-infer the reconnect from elapsed time or inspect the adapter during scheduled
-passes. The earlier upload authorization is not permission to replace it with
-an unreviewed future candidate. Coordinate hardware actions in the chat.
+window. In a later interactive turn, the owner explicitly requested resolving
+its verification and installing 3.6, and confirmed physical reconnect. **3.2
+strict verification passed at 12:02:46 UTC; the separate 3.6 upload completed
+at 12:05:50 UTC and now awaits its own owner physical reconnect and strict
+verification.** [Installation record](evidence/upstream-36-upload-2026-10-15.md).
+No camera cycle/log retrieval occurred. These hardware steps are separately
+owner-coordinated and do not extend the offline scope of scheduled passes.
+Do not infer a reconnect from elapsed time or enumerate the adapter during a
+heartbeat. Keep the pending 3.6 journal and reconnect guard intact.
 
 Scheduled work is offline: no device enumeration/open, HID reports, updater,
 flash, motor operation or canonical Application Support mutation. Preserve raw
@@ -344,3 +348,39 @@ gains or queue sizes without new evidence. EIC coalescing and UART boundary
 limitations remain explicit rather than guessed away. Preserve all published
 images. Continue only through 12:55:51 UTC, then publish actual final status,
 commit/push completed work and pause the heartbeat as authorized.
+
+### Release guidance and original terminal-tail evidence
+
+Astra30 identified four public documentation defects, including stale app/
+firmware versions and the false claim that `--state-directory` isolates the
+physical reconnect guard. Root updated current guides and current 3.6 build/test
+entry points, retaining historical commands and image meanings. Sixteen static
+after-checks pass; original source excerpts are pinned to the reviewed commit,
+with separate current-guide link and source checks. No runtime code changed.
+
+Astra31 closes a specific original-instruction gap left by lane04: terminal
+shutdown tail, original interrupt-mask helpers, UART disable and sleep setup.
+Root repeats 35 cases and nine wrong-interpretation controls. The old shutdown
+test cut `0x51c8` before the formatter and mislabeled those bytes as final UART.
+The corrected live replay observes original formatting and UART boundary
+`0x9180`; all 25 cases pass, including malformed-input normalization and its
+contrasting pre-format observation. Historical JSON and its pins remain intact
+with explicit adjacent corrections. No firmware change follows from this result.
+WFI is stopped before execution or given an explicit synthetic wake; physical
+sleep/wake, cancellation, motor arrival and ordinary reachability stay unproved.
+
+In a separate interactive sequence, the owner explicitly confirmed physical
+reconnect for the old 3.2 transaction. Native strict verification plus an
+independent offline audit passed at 12:02:46 UTC. The owner-authorized 3.6 upload
+then completed at 12:05:50 UTC after a fresh two-pass backup exactly matching
+verified 3.2. No reports followed START on the armed connection. 3.6 now awaits
+its own owner-confirmed physical reconnect and full strict verification;
+camera testing has not started. [Live record](evidence/upstream-36-upload-2026-10-15.md).
+This does not change the offline boundary for scheduled runs or subagents.
+
+Root's final checks for this batch pass: 35 original terminal-tail cases, nine
+contrasting interpretations, 25 corrected historical-oracle cases and a rejected
+pre-format-as-wire mutation; 16 current-guide checks and 214 relative Markdown
+targets. All 60 prior release/recovery/pin artifacts, frozen 3.6 image/manifest/
+resource and both historical shutdown-oracle JSON files are unchanged.
+[Integration evidence](evidence/release-guidance-and-factory-tail-2026-10-15.json).

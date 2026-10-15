@@ -19,9 +19,13 @@ production-path regressions with failing controls, independent composition and
 compiled writer/stack checks, and all 53 Swift tests pass.
 [Evidence and limitations](docs/evidence/upstream-36-handoff-2026-10-15.md).
 The offline decoder also distinguishes inconsistent or partial multi-boot logs.
-**3.6 is not uploaded or camera-qualified.** Uploaded 3.2 still needs physical
-reconnect confirmation and strict verification; no hardware was accessed in this
-scheduled work. Earlier released images and original recovery remain exact.
+**3.6 is uploaded; its separate physical reconnect and strict verification are
+pending.** The owner subsequently authorized the interactive installation after
+[3.2 strict verification passed](docs/evidence/upstream-32-upload-2026-10-15.md).
+No hardware was accessed during scheduled work; the separate
+[3.6 installation record](docs/evidence/upstream-36-upload-2026-10-15.md)
+tracks the owner-coordinated USB steps. No 3.6 camera qualification is claimed.
+Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
@@ -32,15 +36,16 @@ to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
 The upstream candidates use the original fixed 50mm profile; they cannot apply
 runtime lens edits. [Factory reconstruction remains partial](docs/reverse-engineering/status-2026-10-15.md).
-The **upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4 has been
-uploaded; physical reconnect and strict byte verification are pending**. It
+The **historical upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4
+was uploaded and strictly byte-verified after physical reconnect**. The owner
+requested proceeding to 3.6 before a 3.2 camera cycle. It
 repairs first-window opener loss reproduced in 11 frozen-3.1 cases, restores
 stock lens ID 234 as a compatibility control and
 adds bounded startup/handshake records in a reserved application tail. It retains
 upstream's AF algorithms and optional aperture-field behavior. All 12 repaired
 arrival cases, eight upstream host outcomes, nine compiled ARM writer checks,
 seven decoder tests and 53 Swift tests pass. It is **not camera-qualified**;
-the A7C II aperture/capture fix remains to be tested after reconnect verification.
+the A7C II aperture/capture behavior remains unverified for that image.
 The upload retained fresh backup, durable journal and physical-reconnect guards.
 [Current installation and test record](docs/evidence/upstream-32-upload-2026-10-15.md).
 [Candidate](firmware/candidates/3.2.0/README.md) ·
@@ -163,18 +168,29 @@ motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
 shutdown. Homing and measured timing remain unverified. The converter is now
 available for a controlled loaded-lens baseline.
-The Biotar is 58mm f/2, as confirmed by the owner. Build and open:
+The Biotar is 58mm f/2, as confirmed by the owner. For current offline firmware
+reproduction, first follow the pinned toolchain and exact 3.5 source prerequisites
+in the [3.6 workbench](firmware/upstream-hardening/next36/README.md). Existing
+materializations are preserved; choose fresh private output paths:
 
 ```sh
-python3 references/visuals/fetch_assets.py
-python3 scripts/build-firmware.py
-python3 scripts/build-upstream-baseline.py
+python3 scripts/build-upstream-handoff.py --output artifacts/private/recheck36
+python3 scripts/test-upstream-handoff.py --build artifacts/private/recheck36 --output artifacts/private/recheck36-tests
 ./scripts/swift-local.sh test
-python3 scripts/test-firmware.py --af
 ./scripts/build-macos-app.sh
-open "dist/Open LM-EA9.app"
 ```
 
+The earlier `build-firmware.py` and `build-upstream-baseline.py` reproduce/check
+historical metadata/custom firmware and 3.1 respectively; they do not build 3.6.
+On a fresh checkout, restore the ignored photographed assets as described in
+[photo provenance](references/visuals/README.md) before packaging the app.
+For interactive app use, open `dist/Open LM-EA9.app` after the build. Keep it
+closed during CLI USB operations and offline runs; normal app refresh enumerates
+connected devices. Building or passing tests does not authorize a flash.
+
+- [Current fixed 50mm AF 3.6 candidate and exact pins](firmware/candidates/3.6.0/README.md)
+- [AF 3.6 build/test workbench and prerequisites](firmware/upstream-hardening/next36/README.md)
+- [AF 3.6 coordinated install, camera cycle and log retrieval](docs/upstream-handoff-test.md)
 - [Direct upstream baseline and validation](docs/evidence/upstream-baseline-2026-10-14.md)
 - [Fixed 50mm f/1.4 upstream 3.1 candidate](firmware/candidates/3.1.0/README.md)
 - [AF 3.0 capture/shutdown arbitration and homing readiness](docs/evidence/af-30-candidate-2026-10-13.md)

@@ -1,11 +1,13 @@
 # Upstream AF 3.6 — future installation and camera acceptance
 
-**Prepared offline only. No camera action is requested by this document.**
+**Coordinated procedure; upload complete, strict verification pending.**
+See the [live installation record](evidence/upstream-36-upload-2026-10-15.md).
+No camera action is requested by this document alone.
 The [candidate](../firmware/candidates/3.6.0/README.md) and
 [offline validation](evidence/upstream-36-handoff-2026-10-15.md) do not establish
-A7C II stability. The current 3.2 upload still awaits owner-confirmed physical
-reconnect and strict verification; resolve that existing transaction through its
-normal guarded path before attempting a separate authorized 3.6 installation.
+A7C II stability. The prior 3.2 transaction passed its normal guarded verification
+after owner-confirmed physical reconnect. The owner then separately authorized
+3.6 installation; it needs its own physical reconnect and strict verification.
 Never delete/edit the pending journal or reconnect marker to bypass it.
 
 ## Separate upload and byte verification

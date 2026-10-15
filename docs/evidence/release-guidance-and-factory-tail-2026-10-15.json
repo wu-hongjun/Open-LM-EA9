@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-15",
+  "scope": "Root integration of documentation and factory oracle corrections; no firmware or host runtime change",
+  "factoryTail": {
+    "caseCount": 35,
+    "wrongInterpretationsRejected": 9,
+    "rootRepeatResultSHA256": "5fe0cc5d88b587156f03c7f5bc8b7f355af8c5a18fbbad583b60102fdd23e90b",
+    "publishedResultSHA256": "5fe0cc5d88b587156f03c7f5bc8b7f355af8c5a18fbbad583b60102fdd23e90b",
+    "runnerSHA256": "59f7dddeeea5cad34f998dfe1baefa3fb139600375d87e611ecb0a10cc440fff"
+  },
+  "correctedLiveOracle": {
+    "passingCases": 25,
+    "malformedNormalizedAtUART": true,
+    "wrongPreformatAsWireMutationRejected": true,
+    "expectedMutationFailure": "Formatted UART frame mismatch",
+    "scriptSHA256": "9a0fcacfb2cb4c13c3d98057bf9c78253650b0e470275d85da72aa0f48f9921c",
+    "rootResultSHA256": "5f87115bbe93d75387cd813e5c26e3dfd063f10c13e3bc9df0fd4b2b5174ce55"
+  },
+  "guides": {
+    "sourceCommit": "89e6d0dd2142e57c930540faa68632794769622e",
+    "staticChecksPassed": 16,
+    "relativeMarkdownTargetsPresent": 214,
+    "originalEvidencePreservedSeparately": true
+  },
+  "preservation": {
+    "priorReleaseRecoveryPinArtifactsUnchanged": 60,
+    "frozen36ImageManifestResourceUnchanged": true,
+    "historicalShutdownOracleJSONUnchanged": 2
+  },
+  "hardwareScope": "Auditors and offline test commands use no device APIs or canonical state; the separately authorized interactive USB installation is recorded in upstream-36-upload-2026-10-15.md",
+  "limits": [
+    "No physical sleep/wake or exception model",
+    "No current camera acceptance or factory parity",
+    "No firmware behavior change justified by these new findings"
+  ]
+}

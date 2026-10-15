@@ -1,13 +1,17 @@
 # Recommended LM-EA9 system design
 
-## Updated working recommendation — October 14, 2026
+## Updated working recommendation — October 15, 2026
 
 The owner subsequently authorized the upstream C direction for the
 [3.2 startup/handshake milestone](evidence/upstream-32-startup-diagnostic-2026-10-15.md).
-That image was uploaded; physical reconnect and strict verification remain
-pending. The [October 15 hardening campaign](firmware-hardening-2026-10-15.md)
+That image was uploaded and [strictly verified](evidence/upstream-32-upload-2026-10-15.md)
+after owner-confirmed physical reconnect. The [October 15 hardening campaign](firmware-hardening-2026-10-15.md)
 then prepared separately versioned offline candidates with reproduced software
-fault fixes. They retain the upstream controller and native Swift host;
+fault fixes, most recently [3.6](evidence/upstream-36-handoff-2026-10-15.md).
+App 0.19/build 23 includes its separate explicit installation action.
+Its [owner-authorized 3.6 upload](evidence/upstream-36-upload-2026-10-15.md) is
+complete; its own physical reconnect and strict verification are pending.
+They retain the upstream controller and native Swift host;
 A7C II acceptance remains unqualified. This source hardening does not replace
 the outstanding initial camera qualification gate.
 
@@ -38,7 +42,7 @@ The sections below retain the **earlier October 10 Rust-first research
 recommendation and its qualification gates**, rather than the current working
 direction above.
 
-> Current follow-up (prototype 0.3.0): the [USB metadata milestone](usb-metadata-milestone.md) adds a reviewed, bounded application upload, mandatory physical reconnect and full byte verification. Its first firmware candidate uses the reference C implementation with motor motion disabled. [Actual measurements](evidence/usb-metadata-milestone-2026-10-10.md) distinguish stock upload qualification, custom read-back and pending camera checks. The material below records the earlier research/prototype stage.
+> Historical follow-up (prototype 0.3.0): the [USB metadata milestone](usb-metadata-milestone.md) added a reviewed, bounded application upload, mandatory physical reconnect and full byte verification. Its first firmware candidate used the reference C implementation with motor motion disabled. [Actual measurements](evidence/usb-metadata-milestone-2026-10-10.md) distinguish stock upload qualification, custom read-back and pending camera checks. The material below records the earlier research/prototype stage.
 
 Implementation follow-up: the user authorized the
 [native Mac prototype](macos-prototype.md), now using SwiftUI/AppKit, native Swift

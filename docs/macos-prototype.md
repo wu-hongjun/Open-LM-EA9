@@ -1,24 +1,20 @@
-> Current app: **0.14.0, build 17** shows actual aperture as Unknown separately
-> from the fixed camera f-number and packages the direct upstream 3.1 baseline.
-> The baseline is fixed to the original 50mm f/1.4 profile and is prepared offline.
-> See [its provenance and validation](evidence/upstream-baseline-2026-10-14.md).
-> Automatic refresh, the Device dropdown and firmware-preserving lens changes
-> remain. AF 3.0 upload and strict reconnect verification passed on October 14;
-> camera acceptance subsequently failed with full-press freeze and battery-
-> required recovery. Further AF 3.0 trials are held. See
-> [the failure record](evidence/af-30-camera-failure-2026-10-14.md) and [the installation record](evidence/af-30-upload-2026-10-14.md), [the workflow](macos-device-workflow.md),
-> [current validation](evidence/af-30-validation-2026-10-13.json) and
-> [AF 3.0 milestone](evidence/af-30-candidate-2026-10-13.md).
-
 # macOS prototype
 
-> Current follow-up (prototype 0.3.0): the [USB metadata milestone](usb-metadata-milestone.md) adds a reviewed, bounded application upload, mandatory physical reconnect and full byte verification. Its first firmware candidate uses the reference C implementation with motor motion disabled. [Actual measurements](evidence/usb-metadata-milestone-2026-10-10.md) distinguish stock upload qualification, custom read-back and pending camera checks. The material below records the earlier research/prototype stage.
+Current app: **0.19.0, build 23**, October 15, 2026. Device opens first, with
+automatic descriptor/history refresh, eight photographed lens profiles, local
+metadata editing and explicit guarded USB operations. The host uses native
+Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
+on upstream C; Rust is deferred while qualifying the camera contract.
 
-Version 0.2.0, October 10, 2026. Implements the user's authorized next step:
-a visual Device-first overview, eight photographed lens profiles, local metadata editing and
-verified read-only USB backup. The selected host stack is native Swift 6, SwiftUI, selective AppKit,
-IOHID and CryptoKit. No external package, cloud account or Rust toolchain is
-needed. Firmware language and the future management encoding remain open.
+The latest packaged candidate is [upstream AF 3.6](evidence/upstream-36-handoff-2026-10-15.md),
+for the original 50mm f/1.4 profile. It has no runtime profile row.
+[3.2 verification passed](evidence/upstream-32-upload-2026-10-15.md) after physical
+reconnect; the separately authorized [3.6 upload](evidence/upstream-36-upload-2026-10-15.md)
+now awaits its own physical reconnect and strict verification.
+No 3.6 camera qualification is claimed. See the [current Device workflow](macos-device-workflow.md)
+and [coordinated 3.6 procedure](upstream-handoff-test.md). The dated
+[initial prototype record](evidence/macos-prototype-2026-10-10.md) preserves the
+earlier read-only milestone; current capabilities are described below.
 
 ## Build and open
 
@@ -61,7 +57,7 @@ or backup. Open **Read version…** or **USB tools…** and prepare the connecti
 using the prerequisite checkbox first.
 Read Version uses the same exclusive session, idle acknowledgement and persisted
 reconnect guard as backup, and sends exactly one qualified CHECK, with no memory
-reads. Qualified stock 1.8.0 and pinned custom 2.0.0, 2.1.0, 2.2.0, 2.3.0 and 2.4.0 responses are accepted. This is the
+reads. Qualified stock 1.8.0 and supported pinned custom versions are accepted. This is the
 loader's reported version, not an installed-image or camera-behavior check.
 
 A dated version observation is saved privately in Application Support as
@@ -85,7 +81,10 @@ choice and returns to Device; the Device dropdown now switches profiles directly
 photograph or sliders button to edit metadata in a sheet, then choose **Save
 Lens** (Command-S). **Revert** restores the saved values. Closing the editor or
 quitting protects unsaved edits with Save/Discard/Cancel. Invalid numeric fields
-show an explanation and disable Save. Local metadata is never sent to the adapter.
+show an explanation and disable Save. Editing and saving change the local library;
+**Apply profile** is a separate USB action on variants with a runtime profile row.
+Fixed upstream 3.1–3.6 images accept only the original unedited 50mm profile and
+route other selections to USB tools rather than silently changing firmware.
 
 The first launch seeds the library from the canonical
 [requested inventory](../profiles/requested-lenses.json). A bundled copy is
@@ -98,8 +97,9 @@ calibration note is retained. **Photo Credits…** shows photo sources and varia
 
 For a zoom, enter a minimum, maximum and optional current focal length. Leave
 the current setting blank if unknown. Nominal maximum aperture is a lens
-specification; the optional aperture-ring setting describes a manually set
-f-number. Neither setting is sensed through the passive mount. Calibration
+specification; the optional fixed camera f-number is owner-declared metadata.
+The physical iris remains **Unknown** even when that field is set. Use the lens
+ring to stop down; the passive mount does not sense its setting. Calibration
 remains explicitly unmeasured. The zoom's variable-aperture table, optical
 model, camera-facing lens ID and focus-reference calibration are not invented.
 
@@ -153,14 +153,17 @@ physically reconnect and refresh. The connection's registry ID is persisted in
 `usb-reconnect-required.json` before the transaction and cleared on successful
 completion. Relaunching the app does not bypass this guard. Conservative open
 failures may also require reconnect. There are no automatic transport retries.
-Refresh is manual; the prototype does not provide live hotplug notifications.
+Descriptor/history refresh also runs every two seconds and on app activation;
+automatic refresh sends no CHECK, READ, START or feature reports.
 
 The package includes device serial/unit data. It is private local evidence,
 with a `0700` directory and `0600` files. The app sends nothing to a server.
-Complete flash read-back is verified; restoring an adapter from the backup is
-**not qualified**. Other factory auxiliary rows and unique-ID words are outside
-this backup. No install, restore, arbitrary memory access, feature report,
-reset, motor command or profile-apply action exists in the app.
+Complete flash read-back and the same-unit application upload/restoration path
+have been exercised with physical reconnect and strict byte comparison.
+Bootloader restoration and power-loss recovery remain unqualified. Other factory
+auxiliary rows and unique-ID words are outside this backup. USB tools expose
+pinned application installation, verification and stock application restoration;
+they provide no arbitrary memory writer or direct motor command.
 
 ## Command-line diagnostics
 
@@ -174,9 +177,10 @@ The packaged CLI uses the same DeviceKit pipeline as the GUI:
 `--idle` acknowledges the same closed-updater/physical-reconnect prerequisite.
 Inventory prints a redacted summary and sends no reports. Backup prints only
 the destination, size, flash digest and exchange count. The manifest retains
-private identity. `--state-directory PATH` can isolate the persistent reconnect
-guard for development; use the shared default in normal operation. Run only
-one USB client at a time.
+private identity. `--state-directory PATH` selects library and history storage;
+the physical reconnect guard and USB operation lock always remain in canonical
+Application Support state. This flag cannot bypass an armed connection. Use the
+shared default for coordinated hardware operations and run one USB client at a time.
 
 Verify a saved package later without USB access:
 
@@ -196,13 +200,16 @@ read history or authenticate its creator.
 | `DeviceKit/Backup` | Closed CHECK/READ codec, qualification, read comparison, manifest and atomic package publication |
 | `DeviceKit/FirmwareObservation` | Dated device-reported version, bounded private history, response qualification |
 | `DeviceKit/NativeHID` | Descriptor discovery, exclusive session, owned run loop/callback buffers, deadline/cancellation/reconnect handling |
+| `DeviceKit/Upload` | Pinned application reports, durable journal, strict reconnect verification and protected-data comparison |
 | `OpenLMEA9` | SwiftUI presentation, AppKit file panels/quit handling, draft versus saved state |
-| `EA9CLI` | Headless access to the identical read-only service |
+| `EA9CLI` | Headless access to the same guarded backup, upload and verification services |
 
 The device service reserves the entire operation using a lock, runs all native
 HID lifetime operations on one worker thread, and returns Sendable value types.
 It does not rely on actor isolation across `await` to serialize a transaction.
-Every native report is constructed from the closed request enum. Callback data
+Read reports use a closed read-only request enum; upload START/pages use a
+separate report type. After START, the connection is blocked until physical
+reconnect; no CHECK, READ, end marker, retry or extra padding follows it. Callback data
 is copied before the next report; mismatched type, ID, length, duplicate input,
 unsolicited input or deadline failure stops the session. Swift's two
 `@unchecked Sendable` classes are the cancellation token and device service;
@@ -216,8 +223,8 @@ the firmware/management schemas earn that reuse. The Mac transport remains
 native. The app is prepared for a separate management backend; stock backup
 access does not establish application USB reachability or autofocus quality.
 
-Next qualification includes a reachable management service, profile read-back,
-firmware packaging/restoration evidence, body-specific optical/motion tests,
+Next qualification includes an application management service without reflashing,
+body-specific capture/exposure/optical/motion tests,
 sleep/unplug stress and full VoiceOver/keyboard testing on supported OS builds.
 See [system design](system-design-recommendation.md) and the separate
 [profile/backup format contract](macos-prototype-formats.md).
@@ -231,7 +238,7 @@ Hardware behavior comes from the pinned local bootloader analysis and measured
 USB evidence, rather than generic USB API documentation.
 
 
-## Experimental AF milestone (0.4.0, build 7)
+## Historical experimental AF milestone (0.4.0, build 7)
 
 USB tools now includes an **Experimental autofocus** disclosure with explicit AF
 and metadata-only installation actions. Both save a recovery backup, use pinned

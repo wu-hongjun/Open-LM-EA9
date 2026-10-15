@@ -61,11 +61,21 @@ executes entry `0x5e00` with explicitly seeded shutdown phase 2 and PA3 low.
 
 - 24 valid generated request/sample/sequence cases with the expected raw echo
   and ordered shutdown actions.
-- One direct-state bad-checksum counterexample: stock preserves that checksum
-  at this echo boundary. It bypasses receive validation and is not a legal
-  camera request. No checksum-repair claim is made for stock shutdown.
+- One direct-state bad-checksum observation at the pre-format buffer boundary.
+  It bypasses receive validation and is not a legal camera request. The original
+  record's interpretation of this boundary is corrected below.
 
-The final transmit helper, timing/UART services and sleep are explicit cuts;
+**October 15 correction:** `0x51c8` is the GPIO handoff before formatting,
+not the final UART sender. The [terminal-tail audit](../audits/astra-31-factory-shutdown-tail-2026-10-15.md)
+executes the original formatter and observes its pointer/count buffer at UART
+boundary `0x9180`: length, checksum and terminator are normalized there.
+The live replay now distinguishes both observations and rejects equating the
+malformed pre-format buffer with UART bytes. All 25 corrected replay cases pass.
+The old JSON and validation pins remain unchanged as historical evidence; its
+`checksumFinding` and `transmitCut` wording do not describe final UART bytes.
+This correction establishes no malformed receiver admission or physical delivery.
+
+In the historical replay, the pre-format GPIO helper, timing/UART services and sleep were explicit cuts;
 registers are dummy memory and wake is supplied. This establishes action order
 under the seeded phase, not ordinary reachability, physical elapsed time or
 the whole camera conversation. It adds fixtures for an already reconstructed

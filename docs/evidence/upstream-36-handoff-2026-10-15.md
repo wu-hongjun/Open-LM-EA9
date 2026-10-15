@@ -6,6 +6,11 @@ CRC-valid, writer-impossible page layouts from falsely completing a diagnostic
 snapshot. [Machine-readable evidence](upstream-36-handoff-2026-10-15.json) binds
 the image, sources, tests and host integration. [Campaign](../audits/astra-hardening-campaign-2026-10-15.md).
 
+This record describes the offline preparation milestone. The later
+[owner-authorized installation](upstream-36-upload-2026-10-15.md) is recorded
+separately: 3.2 verification passed, 3.6 upload completed, and 3.6's own physical
+reconnect/strict verification remains pending. No camera result is inferred.
+
 ## Startup finding and accepted design
 
 Frozen 3.5 enables EIC delivery before calling its falling-edge receive path

@@ -1,0 +1,4171 @@
+{
+  "status": "pass-bounded-original-tail",
+  "stockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "unicornVersion": "2.1.4",
+  "caseCount": 35,
+  "cases": [
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 0,
+        "armed": 0,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 0,
+        "armed": 0,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 0,
+        "armed": 1,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 0,
+        "armed": 1,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 1,
+        "armed": 0,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 1,
+        "armed": 0,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 1,
+        "armed": 1,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 0,
+        "completion": 1,
+        "armed": 1,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 0,
+        "armed": 0,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 0,
+        "armed": 0,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 0,
+        "armed": 1,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 0,
+        "armed": 1,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 1,
+        "armed": 0,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 1,
+        "armed": 0,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 1,
+        "armed": 1,
+        "park": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "terminal-flags-mask",
+      "inputs": {
+        "primask": 1,
+        "completion": 1,
+        "armed": 1,
+        "park": 1
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          1
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        1,
+        1
+      ],
+      "criticalRestores": [
+        1,
+        1
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "state1-not-complete",
+      "inputs": {},
+      "stop": "returned",
+      "pc": "0x1000",
+      "events": [],
+      "eventCount": 0,
+      "registerWrites": [],
+      "inputReads": [],
+      "inputReadCount": 0,
+      "pinSamples": 0,
+      "uartSyncReads": 0,
+      "criticalEntries": [],
+      "criticalRestores": [],
+      "criticalEntryCount": 0,
+      "finalPrimask": 0,
+      "requestFlag": 1,
+      "shutdownState": 1,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": false,
+      "uartEqualsValid": false
+    },
+    {
+      "name": "state1-complete-only-advances",
+      "inputs": {},
+      "stop": "returned",
+      "pc": "0x1000",
+      "events": [],
+      "eventCount": 0,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [],
+      "inputReadCount": 0,
+      "pinSamples": 0,
+      "uartSyncReads": 0,
+      "criticalEntries": [],
+      "criticalRestores": [],
+      "criticalEntryCount": 0,
+      "finalPrimask": 0,
+      "requestFlag": 1,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 1,
+      "preformatEqualsValid": false,
+      "uartEqualsValid": false
+    },
+    {
+      "name": "completion-cleared-after-state2-still-enters-tail",
+      "inputs": {},
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 0,
+      "armed": 1,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "initial-high",
+      "inputs": {
+        "pins": [
+          8,
+          8,
+          0,
+          0
+        ]
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 13,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 5,
+      "pinSamples": 4,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalEntryCount": 4,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "second-sample-high",
+      "inputs": {
+        "pins": [
+          0,
+          8,
+          0,
+          0
+        ]
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 13,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 5,
+      "pinSamples": 4,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalEntryCount": 4,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "held-high-input-no-finite-tail",
+      "inputs": {},
+      "stop": "instruction-budget",
+      "pc": "0x5f28",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ]
+      ],
+      "eventCount": 132,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 127,
+      "pinSamples": 126,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalEntryCount": 127,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "output-configured-pin-selects-out-low",
+      "inputs": {},
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 8,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "output-configured-pin-selects-out-high",
+      "inputs": {},
+      "stop": "instruction-budget",
+      "pc": "0x5f28",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ]
+      ],
+      "eventCount": 132,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 127,
+      "pinSamples": 126,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "criticalEntryCount": 127,
+      "finalPrimask": 1,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "uart-sync-eventually-clears",
+      "inputs": {},
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 5,
+      "pinSamples": 2,
+      "uartSyncReads": 3,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "uart-sync-held-no-finite-tail",
+      "inputs": {},
+      "stop": "instruction-budget",
+      "pc": "0x7d64",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ]
+      ],
+      "eventCount": 5,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        },
+        {
+          "address": "0x4200101c",
+          "value": 2
+        }
+      ],
+      "inputReadCount": 8,
+      "pinSamples": 0,
+      "uartSyncReads": 1267,
+      "criticalEntries": [],
+      "criticalRestores": [],
+      "criticalEntryCount": 0,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "uart-sync-bit0-also-blocks",
+      "inputs": {},
+      "stop": "instruction-budget",
+      "pc": "0x7d64",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ]
+      ],
+      "eventCount": 5,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        },
+        {
+          "address": "0x4200101c",
+          "value": 1
+        }
+      ],
+      "inputReadCount": 8,
+      "pinSamples": 0,
+      "uartSyncReads": 1267,
+      "criticalEntries": [],
+      "criticalRestores": [],
+      "criticalEntryCount": 0,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "uart-sync-bit2-does-not-block",
+      "inputs": {},
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 4
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "preformat-is-not-uart",
+      "inputs": {
+        "suppliedTxReturn": 0,
+        "bypassesRxAdmission": true
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": false,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "preformat-is-not-uart",
+      "inputs": {
+        "suppliedTxReturn": -7,
+        "bypassesRxAdmission": true
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          -7
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": false,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "sleep-mode2-clears-deep-bit",
+      "inputs": {
+        "suppliedSCR": 0
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "sleep-mode2-clears-deep-bit",
+      "inputs": {
+        "suppliedSCR": 4
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "sleep-mode2-clears-deep-bit",
+      "inputs": {
+        "suppliedSCR": 4294967295
+      },
+      "stop": "at-wfi-before-execution",
+      "pc": "0x5f7e",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 4294967291
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "supplied-wake-returns",
+      "inputs": {},
+      "stop": "returned",
+      "pc": "0x1000",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ]
+      ],
+      "eventCount": 11,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    },
+    {
+      "name": "supplied-wake-enters-pending-sample",
+      "inputs": {},
+      "stop": "post-wake-sensor-entry-cut",
+      "pc": "0x8cc0",
+      "events": [
+        [
+          "gpio-preformat"
+        ],
+        [
+          "uart-send",
+          11,
+          0
+        ],
+        [
+          "delay",
+          50
+        ],
+        [
+          "uart-disable-entry"
+        ],
+        [
+          "uart-enable-bit-clear",
+          2779054081
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "delay",
+          1
+        ],
+        [
+          "gpio-pa23-set"
+        ],
+        [
+          "delay",
+          100
+        ],
+        [
+          "sleep-setup",
+          2
+        ],
+        [
+          "wfi-boundary",
+          0
+        ],
+        [
+          "post-wake-sensor-entry"
+        ]
+      ],
+      "eventCount": 12,
+      "registerWrites": [
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 1024
+        },
+        {
+          "address": "0x42001000",
+          "size": 4,
+          "value": 2779054081
+        },
+        {
+          "address": "0x60000018",
+          "size": 4,
+          "value": 8388608
+        },
+        {
+          "address": "0xe000ed10",
+          "size": 4,
+          "value": 161
+        },
+        {
+          "address": "0x40000401",
+          "size": 1,
+          "value": 2
+        }
+      ],
+      "inputReads": [
+        {
+          "address": "0x4200101c",
+          "value": 0
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        },
+        {
+          "address": "0x41004420",
+          "value": 0,
+          "primask": 1
+        }
+      ],
+      "inputReadCount": 3,
+      "pinSamples": 2,
+      "uartSyncReads": 1,
+      "criticalEntries": [
+        0,
+        0
+      ],
+      "criticalRestores": [
+        0,
+        0
+      ],
+      "criticalEntryCount": 2,
+      "finalPrimask": 0,
+      "requestFlag": 0,
+      "shutdownState": 2,
+      "completion": 1,
+      "armed": 0,
+      "preformatEqualsValid": true,
+      "uartEqualsValid": true
+    }
+  ],
+  "traceTruncation": "Events capped at 24, input reads and critical masks at 12 per case; full counts retained. Only budget-exhaustion traces exceed these caps.",
+  "wrongInterpretationsRejected": [
+    "preformat GPIO handoff is the wire buffer",
+    "state2 rechecks completion and refuses sleep if zero",
+    "tail always clears motor armed",
+    "tail always enables interrupts before WFI",
+    "first low sample alone permits sleep",
+    "PA3 wait has a finite local timeout",
+    "UART disable ignores synchronization",
+    "WFI is a terminal return with no pending foreground work",
+    "sleep argument2 selects deep sleep"
+  ],
+  "cuts": {
+    "delay0x66fc": "recorded call, returns -7; no time passes",
+    "dmaStop0x91ac": "returns -7, no DMA model",
+    "uartSend0x9180": "records complete formatted synthetic frame and supplies return; no physical TX completion",
+    "wfi0x5f7e": "stop before execution, or explicit PC skip as supplied wake",
+    "sensor0x8cc0": "stop at entry only in pending-work supplied-wake case"
+  },
+  "executedBoundaries": [
+    "0x51d4 formatter",
+    "0x51c8 GPIO handoff",
+    "0x70d0/0x7d56 UART disable",
+    "0x7174 valid-descriptor assertion",
+    "0x66cc/0x66da PRIMASK save/disable/restore",
+    "0x7a70 sleep preparation"
+  ],
+  "limits": [
+    "Supplied state1/state2, synthetic RX, Thread mode CONTROL=0, no asynchronous exceptions",
+    "MMIO is inert RAM with caller-scripted PA3 and UART sync inputs; UART descriptor hardware pointer supplied",
+    "No physical sleep/wake, pending IRQ eligibility, latency, oscillator, motor cancellation or travel proof",
+    "Budget exhaustion plus inspected back-edge establishes no local software timeout, not a physical hang",
+    "No ordinary boot-to-shutdown reachability, complete firmware equivalence or camera acceptance"
+  ],
+  "sourceSHA256": {
+    "firmware/upstream-hardening/followup/31-factory-shutdown-tail/run.py": "59f7dddeeea5cad34f998dfe1baefa3fb139600375d87e611ecb0a10cc440fff",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597"
+  },
+  "originalRangeSHA256": {
+    "0x5e00-0x605f": "ba8cf61aaf5e2c781b57b4a4c18759db59965261db5e8a1cab0bb4b5a06741fa",
+    "0x51c8-0x5237": "9479e95feeb656a2cf54c969169ae17bd17fdf03747429c87006ef7f00ce62d4",
+    "0x66cc-0x66e5": "5b68739de95f3f2596c79aa68c3741afc856e4629a8980de01ec48e91131752a",
+    "0x70d0-0x70fb": "3579fd78b8fe9abcbb9b34a7a8de0b35edd632dcee9fce46297f2ae0adc422e5",
+    "0x7d56-0x7d67": "08aaace482201879e216b4851a417d2799f8ba8ed5fee28c4cc9de4125c80e74",
+    "0x7a70-0x7aa7": "8e48b45888a2cce4c8d0ed66fa5c2e625e5f5bbb77baac0db3fb49c0291c07c0"
+  }
+}

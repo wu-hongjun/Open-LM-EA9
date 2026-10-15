@@ -1,16 +1,33 @@
-# Firmware prototype
+# Firmware development
 
-The current comparison is a [direct upstream 3.1 baseline](upstream-baseline/README.md),
-prepared offline for the original 50mm f/1.4 profile. Its protocol/controller/
-main/driver C files remain upstream; it uses a separate reproducible builder.
-AF 3.0 remains held after capture/shutdown failure. See [the baseline evidence](../docs/evidence/upstream-baseline-2026-10-14.md).
+The latest candidate is [upstream AF 3.6](candidates/3.6.0/README.md), prepared
+offline for the original Contax Zeiss 50mm f/1.4. It builds on pinned upstream C
+with reviewed framing, ownership, homing, query, target/time and startup fixes;
+the controller, optical maps and aperture policy remain upstream. Exact repeat
+builds and production-path regressions pass, with physical camera qualification
+still open. See [3.6 evidence](../docs/evidence/upstream-36-handoff-2026-10-15.md)
+and the [build/test workbench](upstream-hardening/next36/README.md) for prerequisites
+and commands. App 0.19/build 23 includes a separate explicit 3.6 installation action.
+
+**Hardware gate:** [3.2 strict verification passed](../docs/evidence/upstream-32-upload-2026-10-15.md)
+after owner-confirmed physical reconnect. The separately authorized
+[3.6 upload is complete](../docs/evidence/upstream-36-upload-2026-10-15.md),
+awaiting its own physical reconnect and strict verification. Follow the
+[coordinated camera and log procedure](../docs/upstream-handoff-test.md).
+No offline test establishes capture, exposure, optical AF or factory parity.
+
+Upstream 3.1 failed the A7C II check with aperture `--` and blocked shutter;
+AF 3.0 failed capture/shutdown. Further trials of those images are held. The
+sections below retain their historical implementation and build boundaries.
 
 
 The [committed original stock 1.8.0 recovery bundle](recovery/stock-1.8.0/README.md)
 includes the vendor application and an encrypted exact same-unit backup. Its
 offline unpack/verification tool sends no USB reports; the key stays outside Git.
 
-The first installable candidate is a **metadata qualification build with motor
+## Earlier custom firmware and metadata qualification
+
+The first installable candidate was a **metadata qualification build with motor
 motion disabled**. It uses C for the inspected SAMD21 register and E-mount paths;
 it is not the production autofocus firmware or a decision against a later Rust
 implementation. The macOS app and USB loader transport use native Swift.
@@ -30,7 +47,7 @@ relabeling the strict failure. See the
 [current stock comparison record](../docs/evidence/stock-18-comparison-2026-10-11.md).
 The requested unknown-aperture behavior and current fixed-range declaration are
 assessed in [manual aperture policy](../docs/manual-aperture-policy.md).
-Offline build and checks:
+Historical custom 3.0 build and checks (these do not build upstream 3.6):
 
 ```sh
 python3 scripts/build-firmware.py --variant arbitrated-af
@@ -38,7 +55,7 @@ python3 scripts/build-firmware.py --variant arbitrated-af
 python3 scripts/test-firmware.py --af
 ```
 
-Current source builds **AF 3.0** under `ea9/build/arbitrated`, with camera BCD
+The custom `ea9` source builds **AF 3.0** under `ea9/build/arbitrated`, with camera BCD
 0x30 and loader 3.0.0. `em_arbitration` separates capture/RX/TX/session/shutdown
 ownership; `af_readiness` admits bounded nonblocking homing. Factory-derived
 capture opener echo and shutdown ordering are tested against original instructions.
@@ -105,8 +122,10 @@ python3 scripts/test-firmware.py
 
 Dependency versions, official source URLs and digests are pinned in
 `dependencies.json`. The local cache is ignored. The packaged Mac app includes
-the pinned released templates and the new candidate and a digest pin; it personalizes only the
-reserved profile row. A template with its zeroed profile is intentionally invalid.
+pinned released templates and separate fixed upstream candidates. The earlier
+custom templates personalize only a reserved profile row; a custom template with
+its zeroed row is intentionally invalid. Upstream 3.1–3.6 images have no runtime
+profile row and reject edited profiles.
 
 Changes from the reference:
 

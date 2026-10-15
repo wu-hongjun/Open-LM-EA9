@@ -1,0 +1,23 @@
+{
+  "guards": [
+    {
+      "case": "existing-output",
+      "rejected": true
+    },
+    {
+      "case": "optimized-python",
+      "rejected": true
+    }
+  ],
+  "resultsUnchangedSHA256": "5fe0cc5d88b587156f03c7f5bc8b7f355af8c5a18fbbad583b60102fdd23e90b",
+  "upstream36SourceReview": {
+    "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+    "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+    "reviewedSourceSHA256": {
+      "src/main.c": "982c1beb7dca621fd2c403e1f7bc670f2859003c960265bad936c6f348c9b3b3",
+      "src/emount.c": "57fe9dfe08068db6a2f4596faf27371b74881f84573b79facca4d728cd349d41",
+      "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee"
+    },
+    "method": "Read-only source review; no new upstream runtime test or equivalence claim"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "status": "uploaded-awaiting-physical-reconnect-and-strict-verification",
+  "status": "uploaded-and-strictly-verified-camera-cycle-skipped-for-authorized-36",
   "sourceGitCommit": "c43e39079c9151acf9e9f9b0e61f47ab204c8b22",
   "transactionID": "23FD8342-6BF8-41A2-8250-4AF6F46DF246",
   "appVersion": "0.15.0",
@@ -28,11 +28,11 @@
   "postSTARTReadsSent": 0,
   "retriesSent": 0,
   "uploadPerformed": true,
-  "strictVerificationPassed": false,
+  "strictVerificationPassed": true,
   "cameraTestingPerformed": false,
   "cameraAcceptancePassed": null,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
-  "physicalReconnectConfirmedAfterUpload": false,
+  "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
   "preUploadBackup": {
     "firmwareVersion": "3.1.0",
@@ -59,5 +59,49 @@
     "planned50.bin": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Not started; require physical reconnect and strict byte verification first"
+  "cameraTestStage": "No 3.2 camera cycle; owner requested resolving verification then a separate 3.6 installation",
+  "verifiedAtUTC": "2026-10-15T12:02:46.874568+00:00",
+  "verifiedAtLocal": "2026-10-15T08:02:46.874568-04:00",
+  "verificationNativeExitCode": 0,
+  "newConnectionAndSameUnitValidated": true,
+  "readback": {
+    "firmwareVersion": "3.2.0",
+    "flashBytes": 131072,
+    "flashReadPasses": 2,
+    "auxiliaryReadPasses": 2,
+    "reportExchanges": 4359,
+    "flashSHA256": "e163b1483e02f657a86cd1444f77a01fc77982ee11992b8edb2f3853827be29c",
+    "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+    "bootCodeSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895"
+  },
+  "strictChecks": {
+    "completeApplicationExact": true,
+    "initialDiagnosticTailBlank": true,
+    "knownMetadataExact": true,
+    "bootCodeUnchanged": true,
+    "protectedGapUnchanged": true,
+    "retainedUpperFlashUnchanged": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true
+  },
+  "excludedMetadataRange": {
+    "range": "[0x403a,0x4040)",
+    "bytes": 6,
+    "reason": "Established adjacent loader RAM bytes copied by START; no other exclusion"
+  },
+  "offlineIndependentAuditPassed": true,
+  "canonicalAppliedLensAndFirmwareObservationPublished": true,
+  "armedUploadConnectionMarkerRetained": true,
+  "verifiedReadConnectionMarkerClearedByNativeService": true,
+  "verificationLogSHA256": {
+    "verify.stdout.txt": "99b68ebee4646e7502cdfddfc434a368734bf14c6c72f5a54e90aa9ddfe89e4d",
+    "verify.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4"
+  },
+  "verificationAppVersion": "0.19.0",
+  "verificationAppBuild": 23,
+  "verificationCLISHA256": "781231a3e6b6ef29e442cef982f92e4eb158d805ac315d226bf112eeb332d394",
+  "initialCameraCheckRequested": false,
+  "diagnosticLogRetrievalPending": false,
+  "postSTARTReadCountScope": "Armed upload connection before owner-confirmed physical reconnect; verification reads counted separately"
 }

@@ -1,21 +1,31 @@
-# Device workflow: prototype 0.15.0, build 19
+# Device workflow: prototype 0.19.0, build 23
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
 Actual aperture is **Unknown**; the displayed fixed f-number is camera metadata.
-Use the lens ring to stop down. The library editor lets you override the fixed
-camera f-number while retaining the unknown physical setting.
+Use the lens ring to stop down. The library editor can declare a fixed camera
+f-number for firmware with a runtime profile row. Upstream candidates instead
+compile the original 50mm f/1.4 profile; library edits stay local on those images.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
+The latest packaged candidate is **upstream AF 3.6.0**, camera-unqualified.
+Its [authorized upload](evidence/upstream-36-upload-2026-10-15.md) is complete;
+owner physical reconnect and strict verification are pending. USB tools provide **Install Upstream AF 3.6.0** as a separate
+action; changing the dropdown does not install it. The native CLI equivalents
+are `prepare-handoff-upstream` and `apply-handoff-upstream`. Other/edited profiles
+are rejected. [Build/test evidence](evidence/upstream-36-handoff-2026-10-15.md)
+and the [coordinated installation/camera procedure](upstream-handoff-test.md)
+describe the exact image and its limits.
+
 Startup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4
-profile on October 15; physical reconnect and strict byte verification are pending.
-See [the installation record](evidence/upstream-32-upload-2026-10-15.md). USB tools provide a separate **Install Startup Diagnostic 3.2.0**
-action; changing the dropdown does not install it. Other/edited profiles are
-rejected. The native CLI equivalents are `prepare-startup` and `apply-startup`.
-This upload followed a separately coordinated owner request. Installed 3.2 routes
-the main action to USB tools, labels camera compatibility unqualified and avoids
-repeat installation. After one coordinated camera cycle, save a read-only backup
-and use the offline decoder, as described in [the diagnostic runbook](upstream-startup-diagnostic-test.md).
+profile on October 15. [Strict verification passed](evidence/upstream-32-upload-2026-10-15.md)
+after owner-confirmed physical reconnect, resolving that transaction before 3.6.
+Do not delete or edit a pending journal or reconnect marker.
+The historical `prepare-startup`/`apply-startup`
+commands still select 3.2. Installed 3.2–3.6 routes the main action to USB tools,
+labels camera compatibility unqualified and avoids ordinary profile application.
+After one coordinated camera cycle, save a read-only backup and use the offline
+decoder before further camera trials.
 Initial full-image verification includes the blank log area. Later log retrieval
 does not relax that check; ordinary image inspection still rejects changed bytes.
 
@@ -25,7 +35,7 @@ freeze requiring battery removal; further AF 3.0 trials are held. See
 [the failure record](evidence/af-30-camera-failure-2026-10-14.md) and
 [the installation record](evidence/af-30-upload-2026-10-14.md).
 AF 2.9 is explicitly held after capture/shutdown failure. See
-[the current milestone](evidence/af-30-candidate-2026-10-13.md).
+[the historical AF 3.0 milestone](evidence/af-30-candidate-2026-10-13.md).
 
 The [upstream 3.1 baseline](evidence/upstream-baseline-2026-10-14.md) is uploaded
 and strictly byte-verified after physical reconnect, with a separate offline
@@ -39,7 +49,13 @@ App 0.14 prominently marks installed AF 3.0 as held
 and routes the primary action to USB tools. Its strict USB result remains valid
 while camera capture/shutdown acceptance is failed.
 
-## Change a lens
+## Choose a lens and apply supported metadata
+
+All eight lenses can be edited and prepared locally. **Apply profile** requires
+verified firmware with a runtime profile row. The upstream 3.1–3.6 candidates
+are fixed to the original 50mm f/1.4 and offer USB tools instead. They cannot
+switch to the selected lens or use an aperture override without a new firmware
+candidate. The following apply sequence is for supported runtime-profile images.
 
 1. Connect the adapter through its USB cap with TECHART Update closed.
 2. Choose a lens in the **Lens profile** dropdown on Device. All eight requested
@@ -53,12 +69,10 @@ while camera capture/shutdown acceptance is failed.
 Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
-verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-upstream 3.1 baseline was a separate **USB tools → Experimental autofocus** action,
-compiled only for the original Contax Zeiss 50mm f/1.4 profile. It does not use
-a runtime lens-profile row. Other/edited profiles are rejected before USB.
-When that baseline is installed, the dropdown explains its fixed configuration
-and offers USB tools rather than pretending another profile can be applied.
+verified installed firmware variant, including legacy AF 2.1. Installing an
+upstream candidate is a separate **USB tools → Experimental autofocus** action,
+with its own pinned image and coordinated test. Installed fixed upstream firmware
+explains its compiled configuration and offers USB tools from the dropdown.
 The CLI `apply-upstream` still selects held 3.1 for explicit recovery/research;
 do not retry it for camera use. Historical `apply-af` still selects held 3.0.
 Plain `apply` selects metadata-only 2.0.
@@ -102,6 +116,8 @@ USB tools. This distinction matters because an armed stock bootloader can
 interpret an ordinary read request as the next firmware page. Keep the physical
 reconnect guard even though discovery itself is automatic.
 
+## Historical validation
+
 The main view uses the existing sourced photos, compact adapter/firmware card,
 verified lens photo and a visible dropdown/apply row. No new remote images or
 runtime network requests were added. The earlier visual release was built and inspected with
@@ -120,5 +136,5 @@ preserve the verified installed variant. The [2.6 record](evidence/af-26-candida
 covers offline preparation and the restored opaque `0x34` reply; exposure and
 optical AF remain unqualified. The previous [2.5 candidate](../firmware/candidates/2.5.0/README.md)
 remains frozen and held after the [aperture audit](audits/aperture-protocol-design-2026-10-11.md).
-The adapter was disconnected during 2.6 preparation; upload and strict reconnect
-readback will be coordinated separately before camera testing.
+The adapter was disconnected during 2.6 preparation; that dated record describes
+its own preparation boundary and does not select 2.6 in the current app.

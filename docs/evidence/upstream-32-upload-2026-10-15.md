@@ -1,9 +1,10 @@
 # Upstream C 3.2 installation and diagnostic cycle — October 15, 2026
 
-**Upload complete; owner physical reconnect and strict byte verification pending.**
+**Upload and strict physical-reconnect verification passed. No 3.2 camera cycle was performed.**
 The owner explicitly requested 3.2 for the Contax Zeiss 50mm f/1.4 and confirmed
 that the adapter was on its USB update cap with the official updater closed.
-Keep the adapter off the camera until reconnect verification passes.
+The owner subsequently requested resolving this transaction before a separate
+3.6 installation and explicitly confirmed physical reconnect on October 15.
 
 ## Image and preflight
 
@@ -49,32 +50,39 @@ planned/pending/committed image equality, the upload timestamp and retained guar
 Raw backups, unit identifiers, factory data, journals and exchange logs remain
 private. Original stock recovery and all earlier pinned firmware are unchanged.
 
-## Pending reconnect verification
+## Completed reconnect verification
 
-Require the owner's physical unplug/reconnect confirmation before native
-`dist/ea9ctl verify --idle`. It must see a different connection and the same
-unit, then complete a fresh matching two-pass readback. Compare every byte of
-`[0x5000,0xa000)`, including the blank diagnostic tail, exact known metadata,
-unchanged boot code, protected gap, upper flash and auxiliary data. The sole
-metadata exclusion is the established six loader scratch bytes
-`[0x403a,0x4040)`. Repeat those comparisons in an offline audit. No guard removal
-or relaxed diagnostic-image matching is permitted.
+The owner confirmed physical unplug/reconnect through the USB cap, updater
+closed and adapter off the camera. Native `dist/ea9ctl verify --idle` required
+a different connection and the same unit before reports, completed two matching
+full-flash/auxiliary passes, and exited 0. Verification completed at
+**2026-10-15T12:02:46.874568+00:00 UTC**
+(**2026-10-15T08:02:46.874568-04:00 America/New_York**).
+The reviewed, signed CLI from app **0.19/build 23** was used for this later step;
+its SHA-256 is `781231a3e6b6ef29e442cef982f92e4eb158d805ac315d226bf112eeb332d394`.
+The original upload CLI/version evidence above remains unchanged.
 
-## Pending one-cycle camera check and log retrieval
+The readback reports **3.2.0**, 131,072 flash bytes and 4,359 CHECK/READ
+exchanges, with no writes or retries. A separate offline audit validates every
+backup file against its size/hash manifest and repeats all strict comparisons:
+exact 20,480-byte application including all 1,024 blank diagnostic bytes, exact
+58 known metadata bytes, unchanged boot code, protected gap, retained upper
+flash, user row, calibration and device-ID window. The six established loader
+scratch bytes `[0x403a,0x4040)` are the sole metadata exclusion. No diagnostic
+prefix relaxation or manual journal/guard change was used.
 
-Use [the coordinated procedure](../upstream-startup-diagnostic-test.md): one
-loaded-lens cycle with A mode, separately selected MF, Pre-AF Off where available,
-EV 0, Auto ISO, physical focus infinity and iris f/1.4. Record actual settings,
-preview, displayed aperture, motor/idle and shutdown. Take at most one photograph
-only if preview/aperture/motor behavior are normal and MF is confirmed. Stop on
-freeze or abnormal drive; remove the battery if unresponsive or motion continues.
-No AF-S attempt or restart precedes log retrieval.
+Full readback SHA-256: `e163b1483e02f657a86cd1444f77a01fc77982ee11992b8edb2f3853827be29c`.
+Canonical applied-lens and dated firmware-observation records were published by
+the native service. Its successful read-connection marker was cleared, while
+the original armed upload connection's marker remains retained. Raw backups,
+unit data, exchange logs and state remain private.
 
-After the owner confirms the adapter is unpowered, returned to its USB cap and
-physically reconnected with the updater closed, save a new native read-only
-two-pass `backup`, then run the offline startup decoder. Require the immutable
-prefix to match 3.2 and compare flash outside `[0x9c00,0xa000)` plus all factory
-auxiliary data against this installation's verified pre-camera readback. Real
-camera exchange records remain private; publish sanitized stages, counts,
-checksums, outcomes and uncertainty. A blank log alone does not locate a failure.
-Do not call `inspect` to bypass whole-image equality after diagnostic self-writes.
+## Camera disposition
+
+No 3.2 camera cycle, photograph or log retrieval occurred. The owner requested
+verification followed by a separate **3.6** installation for the same 50mm
+f/1.4 profile. This strict pass resolves the original transaction without
+claiming camera capture, exposure, focus, shutdown or factory parity. Coordinate
+the next installation and one-cycle test through the
+[3.6 procedure](../upstream-handoff-test.md); its upload needs its own physical
+reconnect and complete byte verification before camera use.

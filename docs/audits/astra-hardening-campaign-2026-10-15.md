@@ -46,6 +46,8 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 27 | Compiled polling guards and emergency GPIO ordering | Root extension, not an Astra lane; 11 positive executions plus guard-removed control on 3.5 | `followup/27-peripheral-bounds`, [report](root-27-peripheral-bounds-2026-10-15.md) |
 | 28 | Independent startup proposal and exact 3.6 review | Astra complete; global mask rejected, scoped EIC gate accepted; 287 assertions including 41 exact-final cases | `followup/28-startup-handoff-review`, [report](astra-28-startup-handoff-review-2026-10-15.md) |
 | 29 | Exact 3.6 stack, vectors and compiled EIC order | Astra complete; conditional 1,560-byte envelope; 29 negative guards plus exact-bound positive | `followup/29-stack36`, [report](astra-29-stack36-2026-10-15.md) |
+| 30 | Current release/runbook and canonical state guidance | Astra complete; four documentation findings corrected; 16 static after-checks and local link checks pass | `followup/30-release-runbook`, [report](astra-30-release-runbook-2026-10-15.md) |
+| 31 | Original factory terminal shutdown/sleep tail | Astra complete; root reproduces 35 Thumb cases and nine contrasting controls; old pre-format/UART interpretation corrected | `followup/31-factory-shutdown-tail`, [report](astra-31-factory-shutdown-tail-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -153,3 +155,27 @@ pin artifacts and historical registry entries remain unchanged. Boot state is
 more precisely bounded under ordinary-reset preconditions, not physically
 qualified. No camera or hardware action occurred; uploaded 3.2 still awaits its
 owner-confirmed reconnect and strict verification.
+
+## Release guidance and terminal-tail follow-up
+
+Lane30 found stale firmware/app entry points and an incorrect claim that the
+CLI state-directory flag isolates reconnect safety. Root corrected the current
+guides, explicit 3.6 build/test commands, runtime-profile scope and canonical
+guard/lock description. Original HEAD excerpts remain pinned separately from
+current-document checks. No firmware or host implementation changed.
+
+Lane31 executes a previously cut original factory terminal tail. Root repeats
+35 supplied-state Thumb cases and nine contrasting controls. It distinguishes
+the pre-format GPIO helper at `0x51c8` from formatted UART bytes at `0x9180`,
+executes original mask/UART-disable/sleep setup, and records explicit WFI/wake
+cuts. Root corrects the live historical replay and adjacent prose; all 25 replay
+cases pass. Original oracle JSON, releases and pins remain unchanged. The
+factory state2 completion/mask/sleep facts justify no runtime change to 3.6.
+Physical sleep, wake, motion and camera acceptance remain unqualified.
+
+The owner separately authorized interactive verification/upload and explicitly
+confirmed physical reconnect: 3.2 strict native and offline verification passed
+at 12:02:46 UTC; 3.6 upload completed at 12:05:50 UTC. Its own physical reconnect
+and strict verification are now pending in the [live installation record](../evidence/upstream-36-upload-2026-10-15.md).
+Agents and scheduled work remained offline. This interactive authorization does
+not permit a heartbeat to enumerate or operate hardware.
