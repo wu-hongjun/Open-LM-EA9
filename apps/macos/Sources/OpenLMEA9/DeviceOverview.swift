@@ -241,6 +241,8 @@ struct DeviceToolsView: View {
                             Button("Install Upstream Baseline 3.1.0", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)
                             Text("Startup diagnostic 3.2.0 tests the first-window receive fix and stock lens identity. It is compiled for the original 50mm f/1.4 profile. Camera compatibility is unqualified; collect a backup after one coordinated camera cycle.").font(.callout)
                             Button("Install Startup Diagnostic 3.2.0", action: model.installStartupDiagnostic).disabled(!model.canInstallStartupDiagnostic)
+                            Text("Upstream hardening 3.3.0 adds audited request ownership, shutdown priority and homing guards. This fixed 50mm f/1.4 candidate is camera-unqualified. Review the backup after one coordinated cycle before further testing.").font(.callout)
+                            Button("Install Upstream Hardening 3.3.0", action: model.installHardenedUpstream).disabled(!model.canInstallHardenedUpstream)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

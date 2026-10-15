@@ -345,6 +345,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
+        case "3.3.0": return "Upstream hardening 3.3 is camera-unqualified. It adds capture/shutdown ownership and guarded homing. After one coordinated camera cycle, collect a read-only backup before another trial."
         case "3.2.0": return "Startup diagnostic 3.2 is a camera-unqualified 50mm f/1.4 candidate. After one coordinated camera cycle, collect a read-only USB backup for diagnostic decoding."
         case "2.9.0": return "AF 2.9 is held after capture freeze and shutdown failure. Use a separately verified replacement before camera testing."
         case "2.8.0": return "AF 2.8 is held after preview and shutdown failures. Restore stock or use a separately reviewed replacement."
@@ -383,6 +384,15 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canInstallStartupDiagnostic else { return }
         applyLens(variant: .autofocusStartupDiagnostic)
     }
+    var canInstallHardenedUpstream: Bool {
+        guard canChangeFirmware, let profile = preparedLens,
+              currentAppliedLens?.firmwareVersion != "3.3.0" else { return false }
+        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusUpstreamHardened)) != nil
+    }
+    func installHardenedUpstream() {
+        guard canInstallHardenedUpstream else { return }
+        applyLens(variant: .autofocusUpstreamHardened)
+    }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }
@@ -391,7 +401,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         let alert = NSAlert()
         alert.messageText = "Apply \(profile.displayName) to the adapter?"
         alert.informativeText = (variant.enablesAutofocus ? "Experimental AF \(variant.versionString) enables motor movement and may move the mount during camera startup. Exposure and focus accuracy with this lens are not yet qualified. A verified backup is saved first. Unplug and reconnect after upload to verify." : "This prototype installs custom firmware and saves a verified backup first. Motor motion is disabled in this metadata test build; use manual focus on the A7C II. It reports the focal length and aperture you choose; it cannot sense the lens’s aperture or zoom rings. Unplug and reconnect afterward to verify the update.")
-        if variant == .autofocusStartupDiagnostic {
+        if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened].contains(variant) {
             alert.informativeText += " This diagnostic build records at most sixteen flash pages inside its reserved application area, with no runtime erase. Collect the backup after one camera cycle; do not repeat testing before reviewing it."
         }
         alert.addButton(withTitle: "Apply"); alert.addButton(withTitle: "Cancel")

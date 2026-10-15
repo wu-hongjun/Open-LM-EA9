@@ -1,0 +1,864 @@
+{
+  "status": "offline-reviewed-camera-unqualified",
+  "baseImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "loaderVersion": [
+    3,
+    3,
+    0
+  ],
+  "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "imageBytes": 20480,
+  "rawBytes": 19048,
+  "codeAndDataEnd": 39528,
+  "codeMarginBeforeDiagnostics": 408,
+  "staticRAMBytes": 3076,
+  "reservedStackBytes": 8192,
+  "diagnosticRange": [
+    39936,
+    40960
+  ],
+  "diagnosticPageBytes": 64,
+  "diagnosticPages": 16,
+  "lensID": 234,
+  "nominalApertureAV": 4352,
+  "runtimeLensProfilesSupported": false,
+  "cameraQualified": false,
+  "hardwareReportsSent": 0,
+  "publishedFirmwareChanged": false,
+  "acceptedPlanSHA256": "c6d9a37cfd74c7249c2606925fbfd270bfa83da65ba989ddf73e110a75979763",
+  "baseManifestSHA256": "677d1f19c82acc9a79281882f1c0b70b2b33ddae189048538e71c18fe2abd6b2",
+  "buildScriptSHA256": "ec4968f4a201d00829272c024677c2ea3ab03ed638704faa18a6b9e80138bca8",
+  "laneInputs": {
+    "firmware/upstream-hardening/apply_frame.py": "bc145e319db59c9084e061331425a16eb26fe63d3cbc77a4361d84846f7ae16e",
+    "firmware/upstream-hardening/apply_tx.py": "fb71ac38022e7edea4c20bdf9f642f700923643f6914691a8256d18fd1d7ef0e",
+    "firmware/upstream-hardening/lanes/02-shutdown/apply.py": "bc4d14c0f16b518b69819448bae584a42be283f34361a66fb6fb8cf8befefec6",
+    "firmware/upstream-hardening/lanes/02-shutdown/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "firmware/upstream-hardening/lanes/02-shutdown/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "firmware/upstream-hardening/lanes/02-shutdown/run.py": "9d2587db4e2045bed69904112adb8d01d5a577b1e08560f8271b8d53cc4fcb02",
+    "firmware/upstream-hardening/lanes/02-shutdown/test_shutdown.c": "f8be565c7db5ff45c0b41f238ff11318f12c42d659da64c01713e6dec0235f82",
+    "firmware/upstream-hardening/lanes/01-capture/apply.py": "43e12a6190bcd19d4779eb3698e575465afffe86b9431356cdedcb29e095589f",
+    "firmware/upstream-hardening/lanes/01-capture/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "firmware/upstream-hardening/lanes/01-capture/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "firmware/upstream-hardening/lanes/01-capture/run.py": "9c279361173a962771732a9bba039799dbeefee95dd3bcefcadca824694bb113",
+    "firmware/upstream-hardening/lanes/01-capture/test_capture.c": "d3143eeedee6c7be34bfe55d1b019bd789d34b9fc1ff7b741644f561abc18a75",
+    "firmware/upstream-hardening/lanes/03-homing/apply.py": "30b2247171abe44c2100a89e084074e9ddcde843df29bde9f1850f4bceff8397",
+    "firmware/upstream-hardening/lanes/03-homing/home_policy.inc": "ca7f925e10ab82dbebe3095898915aeee0ee18492d6bcee4fd5fa67d559ede4f",
+    "firmware/upstream-hardening/lanes/03-homing/home_service.inc": "57d63be170148e7290aed466341169254c93a2a781768b4a88ac18fe85e2d592",
+    "firmware/upstream-hardening/lanes/03-homing/test.py": "1631beeded452443739bdbd83e701a6c3da030ed8885c3e21c20b0d1c5642a2f",
+    "firmware/upstream-hardening/lanes/03-homing/test_home.c": "ce83837974f483da2111bc690b0b836758c4fddc9d220b80bf5cb3af7ff6391f",
+    "firmware/upstream-hardening/lanes/05-transport/apply.py": "9134aa337138a2ee047144f2f445adbf8efe3f3fa8a71ef1dd4aa2a4cdb363df",
+    "firmware/upstream-hardening/lanes/05-transport/run.py": "7e483798fa6e78bd409d6f8f7fff957403b9ab1f90e15664ea349bd9f9d24025",
+    "firmware/upstream-hardening/lanes/05-transport/test_send.c": "ffd1b5afa6e7ffc344d37cd3920dc13bd1499f57293d649383998415492a678e",
+    "firmware/upstream-hardening/lanes/05-transport/test_tx.c": "2289a3030cf36021871ddb3289b748902c55fd3f32f5e8fba0e79ac6a31feb83",
+    "firmware/upstream-hardening/lanes/05-transport/test_uart.c": "932080e7927b94b679aaca0ca512edbd7ac842ea4ec70399ad157e4b66ad211e",
+    "firmware/upstream-hardening/lanes/05-transport/transmit.inc": "56817f0b15a2fec1ed48c77dd0d96ac049aea53aca0e8551a5030b257d805510",
+    "firmware/upstream-hardening/lanes/06-motion/apply.py": "0db6b46f65ed7686ce8088dd86e978d58891fc6e078a4de1a0f669e14d0976c3",
+    "firmware/upstream-hardening/lanes/06-motion/board_host.h": "34c88e4795c15b0675b1741714b3112e7a05eb1c2a821f6283f077e332e9c933",
+    "firmware/upstream-hardening/lanes/06-motion/motor_apply.py": "972e308810d4e224726482e76a8c5f3f0655d01225a0313acb85d6b074d21099",
+    "firmware/upstream-hardening/lanes/06-motion/run.py": "b77172b140fe1ba399ea56f492b7b1e5d8b46e447aaa641111a13f51c62b85ab",
+    "firmware/upstream-hardening/lanes/06-motion/test_encoder.c": "bf4dadfa6c931202b6316a5791e3307151a5a631d812c9f1ade981eefa2dac0a",
+    "firmware/upstream-hardening/lanes/06-motion/test_home_commit.c": "8281e4cf1c5e6da0c5dbcdd2f1292ba3ff17f7222fa808bcdfc08b14e1b682c2",
+    "firmware/upstream-hardening/lanes/06-motion/test_main.c": "f1ae82f42ef8358ba3f5e489f7d23fa9f8f50205d58efd94f6eeea76a8a89a03",
+    "firmware/upstream-hardening/lanes/06-motion/test_motor.c": "c0bacd594112d36317296df14cc2fab4669494ec081e80ff98dd030bf0cabed6",
+    "firmware/upstream-hardening/lanes/06-motion/test_servo.c": "c8eb0c22126bdcf6e63de2e3f6172455bac7a6686e1333a6c87d84c3dd645cc9",
+    "firmware/upstream-hardening/lanes/07-aperture/apply.py": "21863345975625ff12ecf0461dd4dae460146cbf3ffe9c80b84de25048d632fb",
+    "firmware/upstream-hardening/lanes/07-aperture/run.py": "b3d2460a64b1d5addaa60970d74e177b6dddd6cadc30eb34272f4aa9602759c3",
+    "firmware/upstream-hardening/lanes/07-aperture/test_aperture.c": "3f3395b5e826174cfd76aabbb885014f31eedb7b4565d41219d620c06362e965",
+    "firmware/upstream-hardening/lanes/08-diagnostics/apply.py": "4d19e4bebd890085c0829b3d11b3dab6c637a97875a298b0e85d6dc4c25638b5",
+    "firmware/upstream-hardening/lanes/08-diagnostics/apply_decoder.py": "9cc864857acf42781a1c2558f8786524943c1d51756158ece04e9ca3a079a122",
+    "firmware/upstream-hardening/lanes/08-diagnostics/decoder_extension.py": "1ee77e89b2d278bc32bf28d9d38e50c67729cf121aea2860623ad298b020d446",
+    "firmware/upstream-hardening/lanes/08-diagnostics/flush.inc": "27a2986748b2cd3ea6685978bb05e5e848ddb1d1a18d8d492ded83e4c8b9892d",
+    "firmware/upstream-hardening/lanes/08-diagnostics/run.py": "c32419a4714fea58e5cd88c770307d79a3d02dd7788a6ff42d9167ed4970c3ae",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_capability.c": "330bc791c05686ea6bb2bf2a54cac515e66a492ab607ab79e79813468ff0d0e3",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_decoder.py": "784d185ddbea4695b6212d16a63ccccff8d8c76a07a7225e91c5fa1ab780450b",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_storage.c": "ae60dedc31515302dca26ec85ba1fe8fba739a747958e0d48140cd331dcaca2f",
+    "firmware/upstream-hardening/lanes/10-integration/apply.py": "0cd1c8bf940b53c39956d4d66247a009d3eff5814dee2409cd0bd17728316ec1",
+    "firmware/upstream-hardening/lanes/10-integration/diagnostics.py": "78364b05bfecf8dbaebfb2cc742e74647bfccf12dd7122e76d72ad9fb60229d0",
+    "firmware/upstream-hardening/lanes/10-integration/regression.py": "0cdcf139f0cd810937435fb1bdd35677d3d8d5a74a0eef008a74f8f5e682aea4",
+    "firmware/upstream-hardening/lanes/10-integration/run.py": "2a5054ae12ad95e025df4f93023cfbd54594138515c439d150eb188eb011d7de",
+    "firmware/upstream-hardening/lanes/10-integration/test_commit.c": "61063a2ad574ab657d58ad3d596fecca04f466bb34e5040365de4bd1be12deb1",
+    "firmware/upstream-hardening/lanes/09-release/apply.py": "79543e004decff8ce1906ce768268855da1e0a7206baf6e13ee6dbaa17c726a5",
+    "firmware/upstream-hardening/lanes/09-release/flags.json": "a279f03e72b02c3066eda78832112fd885ca471c33747a32d763fa0d6d9433e2",
+    "firmware/upstream-hardening/lanes/09-release/run.py": "bfd6c2f67bf8523c7d0e8977bb94e56988f3700c8eacbdc9999a6b5ca08ace33",
+    "firmware/upstream-hardening/lanes/09-release/test.py": "eadf8a42e2637ddf380466aabc919b7af49bbf1e562ff75be77dcb8980a8a360",
+    "firmware/upstream-hardening/lanes/09-release/test_pure.c": "4727506347bbf810d855be3b2941da3489c59bb5d5ece6c6559b0ff2ad3f253a"
+  },
+  "units": [
+    "startup_samd21",
+    "system_samd21",
+    "board",
+    "clock",
+    "delay",
+    "emount",
+    "emount_packets",
+    "em_uart",
+    "em_eic",
+    "motor",
+    "abs_encoder",
+    "servo",
+    "focus_map",
+    "focus_dist",
+    "focus_pred",
+    "vdd",
+    "main",
+    "startup_trace",
+    "startup_trace_flash",
+    "em_frame",
+    "em_owner",
+    "em_shutdown"
+  ],
+  "flags": [
+    "-mthumb",
+    "-mcpu=cortex-m0plus",
+    "-O2",
+    "-DNDEBUG",
+    "-DEA9_NO_LOG",
+    "-D__SAMD21E17A__",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-common",
+    "-fstack-usage",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-std=gnu99",
+    "-g"
+  ],
+  "unitFlags": {
+    "main": [
+      "-Os"
+    ],
+    "emount": [
+      "-Os"
+    ],
+    "em_frame": [
+      "-Os"
+    ],
+    "em_owner": [
+      "-Os"
+    ],
+    "em_shutdown": [
+      "-Os"
+    ],
+    "startup_trace": [
+      "-Os"
+    ],
+    "focus_dist": [
+      "-Os"
+    ],
+    "focus_map": [
+      "-Os"
+    ],
+    "focus_pred": [
+      "-Os"
+    ]
+  },
+  "sources": {
+    "src/abs_encoder.c": "5ca6304a138f01bfc5cd757513186f8e170cafd71d2d34d82e65761f0b604777",
+    "src/abs_encoder.h": "271a3812014b3cbb37cc0886c1b109e1d96e1eb40693d35f274665a6e92e6ef0",
+    "src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "src/clock.c": "c6885dc2011cc7f288efda5d22228468659a4a319bb310e50dde58f0c8e31e17",
+    "src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "src/delay.c": "1aad5912b7675622b34968a63b9266b59b00ec12ff6018b0b414c0a9648e5d66",
+    "src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "src/ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "src/em_eic.c": "fc0df89898d81d7f40ac11356549379c4db6b11fb6075f806214437db2d5d0fd",
+    "src/em_eic.h": "f5ebf5cd079a67f3afb11917b370b85d07cb541a8c9a432aafb7a40cf6ad7f35",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/em_uart.h": "6353df5d6ab1e5e27c4a60e7824c8019216da9eea7ad805580c69fa463a7d892",
+    "src/emount.c": "2e09b5e029c1584b560dd40ea260aff119880811db61f245d3c6f228227ec378",
+    "src/emount.h": "5469d6048a4378ba880f36c582b22615364f57da45914868e91ed0976f917ffe",
+    "src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "src/focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "src/focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "src/focus_pred.c": "8043c0ae7b8c44e60c318bc95510bef72933795210aa903d681e693d84788f6d",
+    "src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "src/main.c": "b82a84de828fa3dd776e32f557d8bb299b46086a8a96c415c69f90c587c9fad7",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/motor.h": "6127d9f2d56be4df2decaca735d273b8a2deb85e6edacd81a4b70438907741ee",
+    "src/servo.c": "e86738affa837d9c10fa3988670d377b0b0de5e222851e619a4c20b206078e08",
+    "src/servo.h": "30312c9a62dcac7d7043f5a72717dc1365891f30195c1c932b9829e343a02752",
+    "src/startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "src/startup_trace.c": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd",
+    "src/startup_trace.h": "cf7438a6e439b99b14e70ebe80d314345cb3da33a3457ea411ac62c33513554a",
+    "src/startup_trace_flash.c": "cffa577712febb8b19f0fd7590fbf9feb94c0628deb0d9ece52a8aadc53da322",
+    "src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "src/vdd.c": "1c196552db7546d2b734a5e698fe95f6a6d4b0136f0163ccab9252d1425d56a4",
+    "src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "from32PatchSHA256": "b66ac931c3d97b72cc2995a0c2b47553f0061e656acc18ed036f1b6b8e5b82e6",
+  "stackHighWaterMeasured": false,
+  "compilerStackUsage": [
+    {
+      "function": "spi_xfer.constprop",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_raw",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_set_reference",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_position",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_track_reset",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_track",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "board_init_pins",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "clock_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "clock_enable_peripheral",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "delay_init",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "SysTick_Handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "millis",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "delay_ms",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "delay_us",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_pin_level",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_eic_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "EIC_Handler",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_eic_receive_pending",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_frame_open",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_cs",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_vd",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_offer",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_take",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_cancel",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_status_begin",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_status_valid",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_accept",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_begin",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "SERCOM1_Handler",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_reset",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_len",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_buf",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_disable",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_send",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "on_vd_edge",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_transmit",
+      "bytes": 304,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_ack",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "on_cs_edge",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_requested",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_shutdown_inhibit_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_session_generation",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_control_overflow",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_park_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_powerdown_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_shutdown_enabled",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_motion",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_push_velocity",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_subject_distance",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_in_motion",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_focus_position",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_scan_state",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_post_event",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_post_query_answer",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_scan_finish",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_focal_length",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_aperture_from_descriptor",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_defocus_scale",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_aperture",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_aperture_to_descriptor",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_aperture_range",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_optical_rows",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_take_focus_cmd",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_take_query",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_init",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "em_pump_status",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "em_poll",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "distance_mm",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_log2_q6",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_exp2_q6",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_distance_code",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_counts_for_code",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_distance_coarse",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_em06_to_counts",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_counts_to_em06",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_begin",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_retarget",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_end",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_sample",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_ahead",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motion_shutdown_inhibit",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "powerdown_signal",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "home_command",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "home_cancel_requested",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_report_at",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "pump",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_report",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_invalid",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_abort",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_event",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_cmd_target",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_retarget",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "focus_run.isra",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "focus_exec",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "main",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "motor_drive.part.0",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "motor_is_inhibited",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_emergency_release",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_inhibit",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_attach_pins",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_release",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_coast",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_brake",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_drive",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_seek_end",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "servo_move_rel",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": "Dummy_Handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "Reset_Handler",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "put32",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_crc32",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "append",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "st_init",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "st_note",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "st_flush",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "st_preserve_first_window",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "st_inhibit_fault",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "st_lock",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_unlock",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_read_page",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "st_write_page",
+      "bytes": 28,
+      "kind": "static"
+    },
+    {
+      "function": "st_fail",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "SystemInit",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "SystemCoreClockUpdate",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_read_mv",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_read_burst",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_reset",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_sample",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_result",
+      "bytes": 8,
+      "kind": "static"
+    }
+  ]
+}

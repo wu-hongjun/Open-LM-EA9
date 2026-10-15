@@ -1,0 +1,78 @@
+{
+  "status": "offline-proposal-final-composition-tested",
+  "before": {
+    "codeAndDataEnd": 43324,
+    "margin": -3388,
+    "staticRAMBytes": 3964,
+    "linkExit": 1
+  },
+  "after": {
+    "codeAndDataEnd": 39528,
+    "margin": 408,
+    "staticRAMBytes": 3076,
+    "linkExit": 0,
+    "imageSHA256": "44a5fa18b0e7e87b9a6c5b27b06535e7e5ec539621a623ad32038efcdc92f86e"
+  },
+  "flashSaved": 3796,
+  "RAMSaved": 888,
+  "repeatBuildIdentical": true,
+  "legacyDiagnosticCompile": true,
+  "checks": 208,
+  "exactWireScenarioPairs": 77,
+  "opaqueOperands": 65536,
+  "pureInputs": 65536,
+  "predictorSamples": 40000,
+  "hardwareAccess": false,
+  "cameraQualified": false,
+  "evidence": "artifacts/private/astra-09-verified",
+  "flagsByUnit": {
+    "main": [
+      "-Os"
+    ],
+    "emount": [
+      "-Os"
+    ],
+    "em_frame": [
+      "-Os"
+    ],
+    "em_owner": [
+      "-Os"
+    ],
+    "em_shutdown": [
+      "-Os"
+    ],
+    "startup_trace": [
+      "-Os"
+    ],
+    "focus_dist": [
+      "-Os"
+    ],
+    "focus_map": [
+      "-Os"
+    ],
+    "focus_pred": [
+      "-Os"
+    ]
+  },
+  "sourceInputSHA256": {
+    "firmware/upstream-hardening/apply_frame.py": "bc145e319db59c9084e061331425a16eb26fe63d3cbc77a4361d84846f7ae16e",
+    "firmware/upstream-hardening/apply_tx.py": "fb71ac38022e7edea4c20bdf9f642f700923643f6914691a8256d18fd1d7ef0e",
+    "firmware/upstream-hardening/lanes/02-shutdown/apply.py": "bc4d14c0f16b518b69819448bae584a42be283f34361a66fb6fb8cf8befefec6",
+    "firmware/upstream-hardening/lanes/01-capture/apply.py": "43e12a6190bcd19d4779eb3698e575465afffe86b9431356cdedcb29e095589f",
+    "firmware/upstream-hardening/lanes/03-homing/apply.py": "30b2247171abe44c2100a89e084074e9ddcde843df29bde9f1850f4bceff8397",
+    "firmware/upstream-hardening/lanes/05-transport/apply.py": "9134aa337138a2ee047144f2f445adbf8efe3f3fa8a71ef1dd4aa2a4cdb363df",
+    "firmware/upstream-hardening/lanes/06-motion/apply.py": "0db6b46f65ed7686ce8088dd86e978d58891fc6e078a4de1a0f669e14d0976c3",
+    "firmware/upstream-hardening/lanes/07-aperture/apply.py": "21863345975625ff12ecf0461dd4dae460146cbf3ffe9c80b84de25048d632fb",
+    "firmware/upstream-hardening/lanes/08-diagnostics/apply.py": "4d19e4bebd890085c0829b3d11b3dab6c637a97875a298b0e85d6dc4c25638b5",
+    "firmware/upstream-hardening/lanes/10-integration/apply.py": "0cd1c8bf940b53c39956d4d66247a009d3eff5814dee2409cd0bd17728316ec1",
+    "firmware/upstream-hardening/lanes/09-release/run.py": "bfd6c2f67bf8523c7d0e8977bb94e56988f3700c8eacbdc9999a6b5ca08ace33",
+    "firmware/upstream-hardening/lanes/09-release/test_pure.c": "4727506347bbf810d855be3b2941da3489c59bb5d5ece6c6559b0ff2ad3f253a",
+    "firmware/upstream-hardening/lanes/09-release/test.py": "eadf8a42e2637ddf380466aabc919b7af49bbf1e562ff75be77dcb8980a8a360",
+    "firmware/upstream-hardening/lanes/09-release/flags.json": "a279f03e72b02c3066eda78832112fd885ca471c33747a32d763fa0d6d9433e2",
+    "firmware/upstream-hardening/lanes/09-release/apply.py": "79543e004decff8ce1906ce768268855da1e0a7206baf6e13ee6dbaa17c726a5"
+  },
+  "evidenceSHA256": {
+    "result.json": "2c386623b00ab026419488b25db2945aac7474e6860cdbcbc24cc05154647e9a",
+    "regressions.json": "546a6740c806ee15ca06c4a3d9a03ee98a0c3375151867482c389e996bffa8ad"
+  }
+}

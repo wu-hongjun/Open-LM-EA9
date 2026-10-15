@@ -1,0 +1,9 @@
+{
+  "status": "passed-draft-resource-pin-check",
+  "build": "firmware/upstream-hardening/build/full-draft-6",
+  "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "imageBytes": 20480,
+  "blankDiagnosticBytes": 1024,
+  "hardwareReportsSent": 0,
+  "limits": "Draft composition only, not camera qualification or native HID execution."
+}

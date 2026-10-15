@@ -1,0 +1,182 @@
+{
+  "status": "offline-proposal-tested",
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "cases": [
+    {
+      "source": "frozen32",
+      "case": "tail",
+      "exitCode": 1,
+      "diagnostic": "line 38: ms==(n<24?n:n+54)"
+    },
+    {
+      "source": "frozen32",
+      "case": "summary-reserved",
+      "exitCode": 1,
+      "diagnostic": "line 43: q && u16(q+30)==48 && q[35]==0"
+    },
+    {
+      "source": "frozen32",
+      "case": "partial-budget",
+      "exitCode": 1,
+      "diagnostic": "line 46: q && u16(q+30)==40 && q[35]==8"
+    },
+    {
+      "source": "frozen32",
+      "case": "terminal-once",
+      "exitCode": 1,
+      "diagnostic": "line 48: writes==before"
+    },
+    {
+      "source": "frozen32",
+      "case": "saturation",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen32",
+      "case": "gated",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen32",
+      "case": "cuts",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen32",
+      "case": "read-error",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen32",
+      "case": "full",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "tail",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "summary-reserved",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "partial-budget",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "terminal-once",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "saturation",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "gated",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "cuts",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "read-error",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "full",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "budgets",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "inhibit-facts",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "frozen32",
+      "case": "capability-9",
+      "exitCode": 1,
+      "diagnostic": "line 11: q[32]==(len>=11)"
+    },
+    {
+      "source": "frozen32",
+      "case": "capability-10",
+      "exitCode": 1,
+      "diagnostic": "line 11: q[32]==(len>=11)"
+    },
+    {
+      "source": "frozen32",
+      "case": "capability-11",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "capability-9",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "capability-10",
+      "exitCode": 0,
+      "diagnostic": ""
+    },
+    {
+      "source": "proposed",
+      "case": "capability-11",
+      "exitCode": 0,
+      "diagnostic": ""
+    }
+  ],
+  "frozenNegativeControls": 6,
+  "compiledWriterSourceUnchanged": true,
+  "liveBusFlushSitesRemoved": 2,
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "sourceSHA256": {
+    "firmware/upstream-hardening/lanes/08-diagnostics/apply.py": "4d19e4bebd890085c0829b3d11b3dab6c637a97875a298b0e85d6dc4c25638b5",
+    "firmware/upstream-hardening/lanes/08-diagnostics/apply_decoder.py": "2f6d035c69552777a7ebb48811fafd5d283464b9b2ca3155e8b5632b27de88c3",
+    "firmware/upstream-hardening/lanes/08-diagnostics/decoder_extension.py": "1ee77e89b2d278bc32bf28d9d38e50c67729cf121aea2860623ad298b020d446",
+    "firmware/upstream-hardening/lanes/08-diagnostics/flush.inc": "27a2986748b2cd3ea6685978bb05e5e848ddb1d1a18d8d492ded83e4c8b9892d",
+    "firmware/upstream-hardening/lanes/08-diagnostics/run.py": "c32419a4714fea58e5cd88c770307d79a3d02dd7788a6ff42d9167ed4970c3ae",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_capability.c": "330bc791c05686ea6bb2bf2a54cac515e66a492ab607ab79e79813468ff0d0e3",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_decoder.py": "784d185ddbea4695b6212d16a63ccccff8d8c76a07a7225e91c5fa1ab780450b",
+    "firmware/upstream-hardening/lanes/08-diagnostics/test_storage.c": "ae60dedc31515302dca26ec85ba1fe8fba739a747958e0d48140cd331dcaca2f"
+  },
+  "limits": "Inert flash and scripted failure bytes; no physical endurance, voltage, timing, NVM/cache-coherence or asynchronous peripheral proof."
+}

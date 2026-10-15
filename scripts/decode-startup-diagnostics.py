@@ -101,4 +101,6 @@ def main():
     else:print(encoded,end='')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    from startup_diagnostic_registry import main as registry_main
+    registry_main(ROOT, decode_pages)

@@ -1,0 +1,557 @@
+{
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "casesPerSource": 18,
+  "results": [
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "deferred"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 48: !em_m08_aperture_on"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "overflow"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 53: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "session"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 56: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 59: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "metadata"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "opaque"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "0"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "32"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 46: sent_n==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "deferred"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 48: !em_m08_aperture_on"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "overflow"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 53: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "session"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 56: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "capture"
+      ],
+      "exitCode": 1,
+      "result": "FAIL 59: word(sent[sent_n-1]+15)==0"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "metadata"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "composed",
+      "case": [
+        "opaque"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "8",
+        "9",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "8",
+        "10",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "27",
+        "9",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "27",
+        "10",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "52",
+        "9",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "0"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "short",
+        "52",
+        "10",
+        "32"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "deferred"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "overflow"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "session"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "capture"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "metadata"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "aperture",
+      "case": [
+        "opaque"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    }
+  ],
+  "hardwareAccess": false,
+  "cameraQualified": false,
+  "inputs": {
+    "firmware/upstream-hardening/lanes/07-aperture/run.py": "b3d2460a64b1d5addaa60970d74e177b6dddd6cadc30eb34272f4aa9602759c3",
+    "firmware/upstream-hardening/lanes/07-aperture/test_aperture.c": "3f3395b5e826174cfd76aabbb885014f31eedb7b4565d41219d620c06362e965",
+    "firmware/upstream-hardening/lanes/07-aperture/apply.py": "21863345975625ff12ecf0461dd4dae460146cbf3ffe9c80b84de25048d632fb"
+  },
+  "objectTextDeltaBytes": 84,
+  "objectDataDeltaBytes": 0,
+  "objectBSSDeltaBytes": 0,
+  "opticsChanged": false
+}

@@ -1,0 +1,144 @@
+Building for debugging...
+[Computing dependencies]
+[Pre-planning 1 / 327]
+[Planning deferred tasks]
+[128 / 223] OpenLMEA9_LensCore
+[134 / 223]
+[135 / 224] LensCore
+[144 / 262]
+[145 / 262]
+[147 / 262]
+[150 / 262]
+[152 / 262]
+[154 / 262]
+[157 / 262]
+[158 / 262]
+[160 / 262]
+[161 / 262]
+[163 / 262]
+[166 / 262]
+[167 / 262]
+[168 / 262]
+[169 / 262]
+[173 / 262] LensCore
+[182 / 263] DeviceKit
+[185 / 283]
+[199 / 283] DeviceKit
+[208 / 283] DeviceKit
+[217 / 286] DeviceKit
+[217 / 286] ea9ctl-product
+[219 / 288] ea9ctl-product
+[220 / 288] OpenLMEA9-product
+[228 / 334]
+[231 / 334]
+[233 / 334]
+[235 / 334]
+[238 / 334]
+[240 / 334]
+[241 / 334]
+[242 / 334]
+[243 / 334]
+[246 / 334]
+[247 / 334]
+[248 / 334] DeviceKit
+[248 / 334] LensCore
+[248 / 334] DeviceKit
+[248 / 334]
+[251 / 334] DeviceKit
+[255 / 335] ea9ctl-product
+[258 / 335] DeviceKit
+[264 / 336] LensCoreTests-product
+[265 / 342] DeviceKitTests-product
+[265 / 348] ea9ctl-product
+[267 / 348]
+[269 / 348]
+[285 / 348] OpenLMEA9
+[286 / 348] LensCoreTests-product
+[288 / 348] LensCoreTests-product
+[290 / 348] OpenLMEA9-product
+[299 / 348] OpenLMEA9
+[300 / 348] DeviceKitTests-product
+[308 / 348] DeviceKitTests-product
+[314 / 348] DeviceKitTests-product
+[314 / 348] LensCoreTests-product
+[316 / 348] DeviceKitTests-product
+[316 / 348] LensCoreTests-product
+[320 / 348] DeviceKitTests-product
+[320 / 348] OpenLMEA9-product
+[320 / 348] OpenLMEA9
+[320 / 348] OpenLMEA9-product
+[322 / 348] OpenLMEA9
+[324 / 348] OpenLMEA9-product
+[333 / 349] AppWorkflowTests-product
+[334 / 349] DeviceKitTests-product
+[337 / 349] DeviceKitTests-product
+[338 / 349] AppWorkflowTests-product
+[341 / 352] AppWorkflowTests-product
+[342 / 352] AppWorkflowTests-product
+[346 / 352] AppWorkflowTests-product
+[348 / 352] AppWorkflowTests-product
+[351 / 352] AppWorkflowTests-product
+Build complete! (44.65 sec)
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant:) started.
+◇ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamBaseline to upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusStartupDiagnostic to upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamHardened to upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryBaseline to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryRefined to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusAuditedAperture to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusPolished to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusObservedMotion to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusServicedCamera to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusArbitratedCamera to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamBaseline to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusStartupDiagnostic to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamHardened to uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryBaseline to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryRefined to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusAuditedAperture to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusPolished to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusObservedMotion to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusServicedCamera to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusArbitratedCamera to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamBaseline to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusStartupDiagnostic to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamHardened to reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) started.
+◇ Test case passing 1 argument variant → .metadataOnly to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusExperimental to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusReconciled to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusHardened to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryBaseline to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusFactoryRefined to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusAuditedAperture to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusPolished to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusObservedMotion to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusServicedCamera to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusArbitratedCamera to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamBaseline to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusStartupDiagnostic to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+◇ Test case passing 1 argument variant → .autofocusUpstreamHardened to journalSurvivesArmedCrashAndRejectsImageTampering(variant:) started.
+✔ Test uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant:) with 14 test cases passed after 0.338 seconds.
+✔ Test upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant:) with 3 test cases passed after 0.338 seconds.
+✔ Test journalSurvivesArmedCrashAndRejectsImageTampering(variant:) with 14 test cases passed after 0.382 seconds.
+✔ Test reconnectVerificationRejectsSameConnectionWrongBytesAndChangedFactoryData(variant:) with 14 test cases passed after 0.411 seconds.
+✔ Test run with 4 tests in 0 suites passed after 0.411 seconds.
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test upstreamBaselineKeepsCompiledLensAndDoesNotOfferProfileApply() started.
+✔ Test upstreamBaselineKeepsCompiledLensAndDoesNotOfferProfileApply() passed after 0.111 seconds.
+✔ Test run with 1 test in 0 suites passed after 0.111 seconds.

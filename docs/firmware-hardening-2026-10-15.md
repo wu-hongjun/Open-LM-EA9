@@ -84,7 +84,7 @@ This is a tested integration overlay, **not an installed fix**. The capture
 fixtures and shim do not execute real UART interrupt timing. No surviving A7C II
 trace proves malformed input caused the observed freeze.
 
-**Next bounded pass:** audit request/status ownership using the
+**Original follow-on plan (completed by the batch below):** audit request/status ownership using the
 [factory interruption findings](evidence/af-30-camera-failure-2026-10-14.md).
 Extend the production probes to CS/VD arrivals during status 05/gap/06 and
 ordinary control replies, immutable request/sequence handoff and shutdown
@@ -103,3 +103,43 @@ behavioral simplification until equivalent outputs are reproduced here.
 - [REA reconstruction ledger](reverse-engineering/whole-firmware-reconstruction.md), [factory AF baseline](reverse-engineering/factory-af-baseline.md) and [sensor/origin extension](reverse-engineering/stock-re-progress-2026-10-12.md).
 - [Previous independent audit/polish dispositions](evidence/overnight-audit-polish-2026-10-12.md).
 - [One-cycle camera and log retrieval runbook](upstream-startup-diagnostic-test.md).
+
+
+### Eleven-lane integrated batch: upstream C 3.3
+
+The owner requested at least ten Astra lanes. All ten ran in waves, with an
+additional independent host lane. [Campaign and reports](audits/astra-hardening-campaign-2026-10-15.md)
+record findings, failing controls and dispositions. Root integrated verified
+frame, capture/shutdown ownership, transport, homing, motor/servo/session and
+aperture bounds. The independent composed-source review reproduced five
+additional failures and fixed request-pointer lifetime and readiness/TX commit
+races. The REA lane rejected a blanket sequence rewrite and documented deliberate
+snapshot/shutdown policy divergences from factory behavior.
+
+[Candidate 3.3](../firmware/candidates/3.3.0/README.md) is frozen offline, SHA256
+`adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd`.
+Two fresh builds reproduce image/manifest/complete patch. Final-source 7 commit,
+65 capture/session, 14 diagnostic and 9 compiled ARM writer cases pass; root
+release cleanup 208 regressions and all 53 Swift tests pass. App 0.16/build 20 and
+explicit new CLI preparation match that image. [Evidence](evidence/upstream-33-hardening-2026-10-15.md)
+and [machine-readable results](evidence/upstream-33-hardening-2026-10-15.json)
+retain limits and exact pins. Code plus initialized data ends 0x9a68, leaving 408
+bytes before logs, with 3,076 static RAM bytes and 8 KiB reserved stack. Physical
+stack high-water and IRQ/timing budgets remain unmeasured. All 47 prior released
+image/manifest/recovery/pin artifacts are byte-identical.
+
+**Hardware state unchanged:** no enumeration/open/report/updater/flash/motor or
+canonical Application Support writes. Uploaded 3.2 still awaits owner-confirmed
+physical reconnect and strict verification. 3.3 has not been installed. Read the
+[future procedure](upstream-hardening-test.md); do not infer authorization to
+flash 3.3 from this offline milestone.
+
+**Next bounded offline passes:** audit the remaining query/event publication
+and capture-state combinations against the original-instruction contracts;
+add source-bound regressions for any demonstrated gap. Review whole-chain
+stack/interrupt assumptions and remaining encoder/servo arithmetic ranges using
+actual reachable bounds. Do not claim physical timing or optical parity. Keep
+3.3 frozen; any changed executable requires a separately versioned candidate.
+Do not respawn completed lanes just to fill the requested count. Preserve the
+current installation journal and keep camera acceptance separate. At 12:55:51 UTC,
+record actual results and pause the heartbeat as previously instructed.

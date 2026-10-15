@@ -1,0 +1,3893 @@
+{
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "checks": 392,
+  "frozenNegativeControls": 57,
+  "results": [
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=13 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        6
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        9
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=13 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=13 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=13 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "attach",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=13 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        6
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        9
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "drive",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        6
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        9
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "reverse",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        6
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        9
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "brake",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "release",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        6
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        9
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        10
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        26
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        27
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        28
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        29
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        30
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        31
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        32
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        33
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        34
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        35
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        36
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        37
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        38
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        39
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "init",
+        40
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=40 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "sticky",
+        0
+      ],
+      "exit": 1,
+      "stdout": "FAIL remux after sticky cutoff",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "transient",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=25 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "seek-freeze",
+        0
+      ],
+      "exit": 1,
+      "stdout": "FAIL unbounded frozen clock",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "seek-duty",
+        0
+      ],
+      "exit": 1,
+      "stdout": "FAIL uint16 duty reversed before clamp",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "freeze"
+      ],
+      "exit": 1,
+      "stdout": "FAIL frozen clock has no finite work bound",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "stale"
+      ],
+      "exit": 1,
+      "stdout": "FAIL outcome=0 reads=6 drives=4 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "stationary"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=0 reads=6 drives=4 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "final-inhibit"
+      ],
+      "exit": 1,
+      "stdout": "FAIL outcome=0 reads=6 drives=4 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "retarget"
+      ],
+      "exit": 1,
+      "stdout": "FAIL outcome=0 reads=6 drives=4 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "runaway"
+      ],
+      "exit": 1,
+      "stdout": "FAIL outcome=3 reads=3 drives=1 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "wrongway"
+      ],
+      "exit": 1,
+      "stdout": "FAIL outcome=4 reads=3 drives=1 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        0
+      ],
+      "exit": -6,
+      "stdout": "",
+      "stderr": "<repo>/artifacts/private/astra-06-verified/frozen32/encoder_test.inc:10:14: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int32_t' (aka 'int')\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior <repo>/artifacts/private/astra-06-verified/frozen32/encoder_test.inc:10:14 \n"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        1
+      ],
+      "exit": -6,
+      "stdout": "",
+      "stderr": "<repo>/artifacts/private/astra-06-verified/frozen32/encoder_test.inc:10:14: runtime error: signed integer overflow: -2147483648 + -1 cannot be represented in type 'int32_t' (aka 'int')\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior <repo>/artifacts/private/astra-06-verified/frozen32/encoder_test.inc:10:14 \n"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS result=8 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS result=-8 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=5 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "attach",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        26
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        27
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        28
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "drive",
+        29
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        26
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        27
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        28
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reverse",
+        29
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=17 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        26
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        27
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        28
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "brake",
+        29
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=29 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "release",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=23 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=32 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=32 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        9
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        10
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        11
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        12
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        13
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        14
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        15
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        16
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        17
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        18
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        19
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        20
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        21
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        22
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        23
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        24
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        25
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        26
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        27
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        28
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        29
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        30
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        31
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        32
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        33
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        34
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        35
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        36
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        37
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        38
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        39
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        40
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        41
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        42
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        43
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "init",
+        44
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=44 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "sticky",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=60 waits=9",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "transient",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=41 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "seek-freeze",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=53 waits=4",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "seek-duty",
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS boundaries=51 waits=8",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "freeze"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=2 reads=1000001 drives=1 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "stale"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=5 reads=8 drives=5 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "stationary"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=0 reads=7 drives=4 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "final-inhibit"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=5 reads=6 drives=4 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "retarget"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=5 reads=8 drives=5 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "runaway"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=3 reads=3 drives=1 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "wrongway"
+      ],
+      "exit": 0,
+      "stdout": "PASS outcome=4 reads=3 drives=1 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS result=2147483647 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS result=-2147483648 inhibit=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS result=8 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS result=-8 inhibit=0",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=0 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        1
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=1 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        2
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=2 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        3
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=3 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        4
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=4 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        5
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=5 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=6 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        7
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=7 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        8
+      ],
+      "exit": 1,
+      "stdout": "FAIL mode=8 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [],
+      "exit": 1,
+      "stdout": "FAIL accepted_before=1 accepted_after=0 ready=1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        "stuck"
+      ],
+      "exit": 1,
+      "stdout": "FAIL:31:reads==4 && inhibited==1",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        "error"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        "overflow"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "before06",
+      "case": [
+        "reset"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        0
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=0 events=1 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        1
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=1 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        2
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=2 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        3
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=3 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        4
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=4 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        5
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=5 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        6
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=6 events=0 aborted=1 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        7
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=7 events=0 aborted=0 runs=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        8
+      ],
+      "exit": 0,
+      "stdout": "PASS mode=8 events=0 aborted=0 runs=0",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [],
+      "exit": 0,
+      "stdout": "PASS accepted_before=0 accepted_after=1 ready=1",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "stuck"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "error"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "overflow"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    },
+    {
+      "source": "patched",
+      "case": [
+        "reset"
+      ],
+      "exit": 0,
+      "stdout": "PASS",
+      "stderr": ""
+    }
+  ],
+  "hardwareAccess": false,
+  "cameraQualified": false,
+  "inputs": {
+    "test_servo.c": "c8eb0c22126bdcf6e63de2e3f6172455bac7a6686e1333a6c87d84c3dd645cc9",
+    "run.py": "b77172b140fe1ba399ea56f492b7b1e5d8b46e447aaa641111a13f51c62b85ab",
+    "board_host.h": "34c88e4795c15b0675b1741714b3112e7a05eb1c2a821f6283f077e332e9c933",
+    "test_encoder.c": "bf4dadfa6c931202b6316a5791e3307151a5a631d812c9f1ade981eefa2dac0a",
+    "test_motor.c": "c0bacd594112d36317296df14cc2fab4669494ec081e80ff98dd030bf0cabed6",
+    "test_main.c": "f1ae82f42ef8358ba3f5e489f7d23fa9f8f50205d58efd94f6eeea76a8a89a03",
+    "motor_apply.py": "972e308810d4e224726482e76a8c5f3f0655d01225a0313acb85d6b074d21099",
+    "test_home_commit.c": "8281e4cf1c5e6da0c5dbcdd2f1292ba3ff17f7222fa808bcdfc08b14e1b682c2",
+    "apply.py": "0db6b46f65ed7686ce8088dd86e978d58891fc6e078a4de1a0f669e14d0976c3"
+  },
+  "patchedSources": {
+    "motor.c": "ad651634ea9c48c716b22541e083ab4f315f41f0fb045df7f6d3eec52e5b5db7",
+    "servo.c": "6b2af40e695f655be74d2b96ec9820d0344172230aefa50ddcf0cd04c6a00313",
+    "abs_encoder.c": "420291f9dd396f129c7f543650eaab1acf6e6d625a99cb772d15460662be23ac"
+  },
+  "before06NegativeControls": 9,
+  "patchedPassingControls": 206
+}

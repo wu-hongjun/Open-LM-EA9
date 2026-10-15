@@ -1,0 +1,29 @@
+{
+  "main": [
+    "-Os"
+  ],
+  "emount": [
+    "-Os"
+  ],
+  "em_frame": [
+    "-Os"
+  ],
+  "em_owner": [
+    "-Os"
+  ],
+  "em_shutdown": [
+    "-Os"
+  ],
+  "startup_trace": [
+    "-Os"
+  ],
+  "focus_dist": [
+    "-Os"
+  ],
+  "focus_map": [
+    "-Os"
+  ],
+  "focus_pred": [
+    "-Os"
+  ]
+}

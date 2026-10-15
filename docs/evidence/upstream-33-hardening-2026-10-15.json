@@ -1,0 +1,147 @@
+{
+  "status": "offline-reviewed-camera-unqualified",
+  "date": "2026-10-15",
+  "astraLanes": 11,
+  "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "imageBytes": 20480,
+  "codeAndDataEnd": 39528,
+  "marginBeforeDiagnostics": 408,
+  "staticRAMBytes": 3076,
+  "reservedStackBytes": 8192,
+  "largestCompilerFunctionFrame": {
+    "function": "em_transmit",
+    "bytes": 304,
+    "kind": "static"
+  },
+  "stackHighWaterMeasured": false,
+  "repeatImageManifestPatchIdentical": true,
+  "exactFinalComposition": {
+    "status": "passed-exact-frozen-offline-composition",
+    "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+    "buildManifestSHA256": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+    "sourceFilesMatched": 46,
+    "checks": [
+      {
+        "name": "commits",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "capture",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "diagnostics",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "arm-writer",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decode-3.2.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.2.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.3.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.3.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      }
+    ],
+    "hardwareReportsSent": 0,
+    "cameraQualified": false,
+    "limits": "Finite host IRQ cuts, simulated peripherals/NVM and compiled writer address bounds; physical timing, exposure and optical AF remain unqualified."
+  },
+  "releaseRegression": {
+    "checks": 208,
+    "exactWireCases": 18,
+    "wireOperandCases": 65536,
+    "servoOutputComparisons": 7,
+    "hardwareAccess": false,
+    "cameraQualified": false
+  },
+  "sizeCleanup": {
+    "before": {
+      "codeAndDataEnd": 43324,
+      "margin": -3388,
+      "staticRAMBytes": 3964,
+      "linkExit": 1
+    },
+    "after": {
+      "codeAndDataEnd": 39528,
+      "margin": 408,
+      "staticRAMBytes": 3076,
+      "linkExit": 0,
+      "imageSHA256": "44a5fa18b0e7e87b9a6c5b27b06535e7e5ec539621a623ad32038efcdc92f86e"
+    },
+    "flashSaved": 3796,
+    "RAMSaved": 888,
+    "repeatBuildIdentical": true,
+    "legacyDiagnosticCompile": true
+  },
+  "swiftTests": 53,
+  "appVersion": "0.16.0",
+  "appBuild": 20,
+  "nativePreparation": {
+    "checks": [
+      {
+        "command": "prepare-hardened-upstream",
+        "version": "3.3.0",
+        "bytes": 20480,
+        "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-startup",
+        "version": "3.2.0",
+        "bytes": 20480,
+        "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-upstream",
+        "version": "3.1.0",
+        "bytes": 20480,
+        "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-af",
+        "version": "3.0.0",
+        "bytes": 20480,
+        "sha256": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03",
+        "nativePrepareMatchesCandidate": true
+      }
+    ],
+    "incompatible85RejectedWithoutOutput": true,
+    "CLI_SHA256": "c6725803e3722921c418ea78b44571b360c05d63b8f52c655d1896224176e689",
+    "hardwareReportsSent": 0
+  },
+  "priorArtifactsPreserved": 47,
+  "hardwareReportsSent": 0,
+  "adapterInstalledVersionChanged": false,
+  "pendingHardwareGate": "Uploaded3.2 still awaits owner-confirmed physical reconnect and strict byte verification.3.3 prepared offline only.",
+  "evidenceHashes": {
+    "firmware/candidates/3.3.0/contax-zeiss-50-f1-4.manifest.json": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+    "firmware/candidates/diagnostic-registry.json": "f2865435451fe1d9bb91583fbd210d7b18cf513bfbc78fdde2cb27c79dd2bf17",
+    "firmware/upstream-hardening/accepted-lanes.json": "c6d9a37cfd74c7249c2606925fbfd270bfa83da65ba989ddf73e110a75979763",
+    "scripts/build-upstream-hardened.py": "ec4968f4a201d00829272c024677c2ea3ab03ed638704faa18a6b9e80138bca8",
+    "scripts/test-upstream-hardened.py": "d7cf39c8f5dc4ae83a26b70a8de69ebc1f3e65d2cd02efddb7e50f6114d83fc6",
+    "scripts/decode-startup-diagnostics.py": "86357d857408608bb6e6a24cf568d0f67207ddf42109861f58af7d5a88ce5586",
+    "scripts/startup_diagnostic_registry.py": "1ee77e89b2d278bc32bf28d9d38e50c67729cf121aea2860623ad298b020d446"
+  }
+}

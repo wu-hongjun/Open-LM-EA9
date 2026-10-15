@@ -1,0 +1,1244 @@
+{
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "shutdownComposition": true,
+  "casesPerSource": 59,
+  "frozenFailingControls": 53,
+  "results": [
+    {
+      "source": "frozen32",
+      "case": [
+        "focus-copy"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 118: em_take_focus_cmd(&cmd) && cmd.target==0x1234"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "session-queues"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 125: !em_take_focus_cmd(&cmd)"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "failed-init"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 95: sent_n==0 && !em_handshake_done"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "failed-tail"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 100: sent_n==1 && em_frames_tx==tx+1 && em_events_sent==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "failed-raw"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 105: sent_n==1"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "baseline"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "immutable"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 63: sent[0][7]==0x34 && sent[0][8]==0x12 && sent[0][4]==0"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "first-wins"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 62: sent_n==1 && sent[0][5]==0x34"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "sequence"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "active"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "session"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "1",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "1",
+        "3",
+        "16"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "2",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "2",
+        "3",
+        "16"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "3",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "3",
+        "3",
+        "16"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "4",
+        "3",
+        "16"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "5",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "5",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "10",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "11",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "27",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "40",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "25",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "6",
+        "52",
+        "11"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 78: sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "normal",
+        "6",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "9"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "17"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "64"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "255"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "256"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 77: injected && sent_n==old"
+    },
+    {
+      "source": "frozen32",
+      "case": [
+        "failed-shutdown"
+      ],
+      "exitCode": 1,
+      "result": "FAIL line 112: !em_shutdown_acked && em_frames_tx==tx && sent_n==0"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "focus-copy"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "session-queues"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "failed-init"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "failed-tail"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "failed-raw"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "baseline"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "immutable"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "first-wins"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "sequence"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "active"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "session"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "1",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "1",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "2",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "2",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "3",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "3",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "4",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "5",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "5",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "10",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "11",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "27",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "40",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "25",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "6",
+        "52",
+        "11"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "normal",
+        "6",
+        "3",
+        "16"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "9"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "17"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "64"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "255"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "capture",
+        "4",
+        "52",
+        "256"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "source": "owned",
+      "case": [
+        "failed-shutdown"
+      ],
+      "exitCode": 0,
+      "result": "PASS"
+    }
+  ],
+  "inputs": {
+    "firmware/upstream-hardening/lanes/01-capture/test_capture.c": "d3143eeedee6c7be34bfe55d1b019bd789d34b9fc1ff7b741644f561abc18a75",
+    "firmware/upstream-hardening/lanes/01-capture/run.py": "9c279361173a962771732a9bba039799dbeefee95dd3bcefcadca824694bb113",
+    "firmware/upstream-hardening/lanes/01-capture/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "firmware/upstream-hardening/lanes/01-capture/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "firmware/upstream-hardening/lanes/01-capture/apply.py": "43e12a6190bcd19d4779eb3698e575465afffe86b9431356cdedcb29e095589f"
+  },
+  "patchedSHA256": "f45283e647fb11ff6b382bba76e1574880c1c884db836e03e63e7993976af3cd",
+  "hardwareAccess": false,
+  "cameraQualified": false
+}

@@ -1,0 +1,10 @@
+{
+  "format": "EA9 diagnostic candidate pins v1",
+  "versions": {
+    "3.3.0": {
+      "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+      "manifestSHA256": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+      "immutablePrefixSHA256": "25e095179a5faabfe201ed001cb0e9437e9c8c93861955fb4a57adf44f33e63c"
+    }
+  }
+}

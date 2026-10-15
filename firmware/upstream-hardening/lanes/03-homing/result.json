@@ -1,0 +1,339 @@
+{
+  "status": "offline-proposal-not-released",
+  "sourceMainSHA256": "41022c2190421e2b96303428e621914ec8504d5e4d18dc54315109c623aeb009",
+  "overlayMainSHA256": "790eee63b0d06a156c60d7f6d947ce7c60d2d9120f18f8a3830a2332f425de29",
+  "frozenImageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+  "checks": 44,
+  "negativeControls": 18,
+  "positiveControlsPerSource": 4,
+  "cases": [
+    {
+      "source": "frozen32",
+      "case": "stationary-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "stationary-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "travel-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "travel-control: pass ready=1 reset=1 pumps=179 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "wrap-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "wrap-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "move-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "move-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "pre-stop",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "pre-stop: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "burst-stop",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "burst-stop: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "stop",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "stop: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "settle-stop",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "settle-stop: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "shutdown",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "shutdown: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "settle-shutdown",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "settle-shutdown: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "pre-shutdown",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "pre-shutdown: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "session",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "session: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "settle-session",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "settle-session: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "commit-stop",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "commit-stop: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "commit-session",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "commit-session: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "drive-timeout",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "drive-timeout: FAIL ready=1 reset=1 pumps=340 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "settle-timeout",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "settle-timeout: FAIL ready=1 reset=1 pumps=540 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "frozen-clock",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "frozen-clock: FAIL ready=0 reset=0 pumps=1000011 duty=-800 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "retry",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "retry: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "budget",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "budget: FAIL ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "frozen32",
+      "case": "shutdown-park",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "shutdown-park: FAIL servo_calls=1 diagnostic_calls=1"
+    },
+    {
+      "source": "frozen32",
+      "case": "inhibited-park",
+      "expectedExit": 1,
+      "exit": 1,
+      "output": "inhibited-park: FAIL servo_calls=1 diagnostic_calls=1"
+    },
+    {
+      "source": "overlay",
+      "case": "stationary-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "stationary-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "travel-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "travel-control: pass ready=1 reset=1 pumps=179 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "wrap-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "wrap-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "move-control",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "move-control: pass ready=1 reset=1 pumps=80 duty=0 attached=1 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "pre-stop",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "pre-stop: pass ready=0 reset=0 pumps=0 duty=0 attached=0 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "burst-stop",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "burst-stop: pass ready=0 reset=0 pumps=0 duty=0 attached=0 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "stop",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "stop: pass ready=0 reset=0 pumps=5 duty=0 attached=0 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "settle-stop",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "settle-stop: pass ready=0 reset=0 pumps=45 duty=0 attached=0 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "shutdown",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "shutdown: pass ready=0 reset=0 pumps=5 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "settle-shutdown",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "settle-shutdown: pass ready=0 reset=0 pumps=45 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "pre-shutdown",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "pre-shutdown: pass ready=0 reset=0 pumps=0 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "session",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "session: pass ready=0 reset=0 pumps=5 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "settle-session",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "settle-session: pass ready=0 reset=0 pumps=45 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "commit-stop",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "commit-stop: pass ready=0 reset=1 pumps=80 duty=0 attached=0 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "commit-session",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "commit-session: pass ready=0 reset=1 pumps=80 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "drive-timeout",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "drive-timeout: pass ready=0 reset=0 pumps=300 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "settle-timeout",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "settle-timeout: pass ready=0 reset=0 pumps=540 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "frozen-clock",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "frozen-clock: pass ready=0 reset=0 pumps=999999 duty=0 attached=0 stops=0"
+    },
+    {
+      "source": "overlay",
+      "case": "retry",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "retry: pass ready=1 reset=1 pumps=85 duty=0 attached=1 stops=1"
+    },
+    {
+      "source": "overlay",
+      "case": "budget",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "budget: pass ready=0 reset=0 pumps=10 duty=0 attached=0 stops=2"
+    },
+    {
+      "source": "overlay",
+      "case": "shutdown-park",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "shutdown-park: pass servo_calls=0 diagnostic_calls=0"
+    },
+    {
+      "source": "overlay",
+      "case": "inhibited-park",
+      "expectedExit": 0,
+      "exit": 0,
+      "output": "inhibited-park: pass servo_calls=0 diagnostic_calls=0"
+    }
+  ],
+  "cuts": [
+    "protocol command/session/shutdown admission",
+    "encoder and mechanical response",
+    "voltage sampling",
+    "PWM and GPIO",
+    "NVM writes",
+    "millisecond clock"
+  ],
+  "limits": [
+    "No real IRQ timing or motor electrical bound",
+    "Stationary sensor does not prove physical infinity",
+    "Driver inhibit and session/shutdown modules required"
+  ],
+  "inputs": {
+    "home_service.inc": "57d63be170148e7290aed466341169254c93a2a781768b4a88ac18fe85e2d592",
+    "test_home.c": "ce83837974f483da2111bc690b0b836758c4fddc9d220b80bf5cb3af7ff6391f",
+    "test.py": "1631beeded452443739bdbd83e701a6c3da030ed8885c3e21c20b0d1c5642a2f",
+    "home_policy.inc": "ca7f925e10ab82dbebe3095898915aeee0ee18492d6bcee4fd5fa67d559ede4f",
+    "apply.py": "30b2247171abe44c2100a89e084074e9ddcde843df29bde9f1850f4bceff8397"
+  }
+}

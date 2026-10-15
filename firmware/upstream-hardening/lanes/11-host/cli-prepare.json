@@ -1,0 +1,35 @@
+{
+  "status": "passed-offline-prepare-only",
+  "cases": [
+    {
+      "command": "prepare-hardened-upstream",
+      "profile": "contax-zeiss-50-f1-4",
+      "exitCode": 0,
+      "outputExists": true,
+      "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd"
+    },
+    {
+      "command": "prepare-startup",
+      "profile": "contax-zeiss-50-f1-4",
+      "exitCode": 0,
+      "outputExists": true,
+      "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df"
+    },
+    {
+      "command": "prepare-upstream",
+      "profile": "contax-zeiss-50-f1-4",
+      "exitCode": 0,
+      "outputExists": true,
+      "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f"
+    },
+    {
+      "command": "prepare-hardened-upstream",
+      "profile": "contax-zeiss-85-f1-4",
+      "exitCode": 1,
+      "outputExists": false
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "deviceEnumerationInvoked": false,
+  "canonicalApplicationSupportAccessed": false
+}

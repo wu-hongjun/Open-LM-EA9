@@ -1,0 +1,385 @@
+{
+  "status": "pass-bounded-original-instruction-contracts",
+  "stockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "phaseGateCases": [
+    {
+      "phase": 0,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 0,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 0,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 0,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": false
+    },
+    {
+      "phase": 2,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 2,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 2,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 2,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 3,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 3,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 3,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 3,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 5,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 5,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 5,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 5,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 6,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 6,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 6,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 6,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": false
+    },
+    {
+      "phase": 9,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 9,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 9,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 9,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": false
+    },
+    {
+      "phase": 12,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 12,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 12,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 12,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 13,
+      "id": 10,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 13,
+      "id": 10,
+      "callbacksEnabled": 1,
+      "mode5": true
+    },
+    {
+      "phase": 13,
+      "id": 52,
+      "callbacksEnabled": 0,
+      "mode5": false
+    },
+    {
+      "phase": 13,
+      "id": 52,
+      "callbacksEnabled": 1,
+      "mode5": true
+    }
+  ],
+  "connectedConditionalStatusPath": "12,13,2,3,5,6",
+  "echoOwnershipCases": [
+    {
+      "rxChangedBeforeCallback": false,
+      "sentOriginalSnapshot": true,
+      "sentCurrentReceiveBuffer": true
+    },
+    {
+      "rxChangedBeforeCallback": true,
+      "sentOriginalSnapshot": false,
+      "sentCurrentReceiveBuffer": true
+    }
+  ],
+  "rawEchoFormatterNormalizes": "checksum and terminator",
+  "shutdownDispatchCases": [
+    {
+      "mode": 1,
+      "class": 0,
+      "requestLatched": false
+    },
+    {
+      "mode": 1,
+      "class": 2,
+      "requestLatched": true
+    },
+    {
+      "mode": 4,
+      "class": 0,
+      "requestLatched": false
+    },
+    {
+      "mode": 4,
+      "class": 2,
+      "requestLatched": false
+    },
+    {
+      "mode": 5,
+      "class": 0,
+      "requestLatched": false
+    },
+    {
+      "mode": 5,
+      "class": 2,
+      "requestLatched": false
+    }
+  ],
+  "parkCases": [
+    {
+      "parkOption": 0,
+      "initialCompletion": 0,
+      "armedAfterState0": 0,
+      "stateAfterTwoPolls": 1
+    },
+    {
+      "parkOption": 0,
+      "initialCompletion": 1,
+      "armedAfterState0": 0,
+      "stateAfterTwoPolls": 2
+    },
+    {
+      "parkOption": 1,
+      "initialCompletion": 0,
+      "armedAfterState0": 1,
+      "stateAfterTwoPolls": 1
+    },
+    {
+      "parkOption": 1,
+      "initialCompletion": 1,
+      "armedAfterState0": 1,
+      "stateAfterTwoPolls": 1
+    }
+  ],
+  "ordinaryTemplateSequenceCases": [
+    {
+      "mode": 1,
+      "phase": 0,
+      "requestSequence": 0,
+      "sent": true,
+      "replySequence": 165
+    },
+    {
+      "mode": 1,
+      "phase": 0,
+      "requestSequence": 113,
+      "sent": true,
+      "replySequence": 165
+    },
+    {
+      "mode": 1,
+      "phase": 0,
+      "requestSequence": 255,
+      "sent": true,
+      "replySequence": 165
+    },
+    {
+      "mode": 4,
+      "phase": 0,
+      "requestSequence": 0,
+      "sent": false,
+      "replySequence": null
+    },
+    {
+      "mode": 4,
+      "phase": 0,
+      "requestSequence": 113,
+      "sent": false,
+      "replySequence": null
+    },
+    {
+      "mode": 4,
+      "phase": 0,
+      "requestSequence": 255,
+      "sent": false,
+      "replySequence": null
+    },
+    {
+      "mode": 4,
+      "phase": 6,
+      "requestSequence": 0,
+      "sent": false,
+      "replySequence": null
+    },
+    {
+      "mode": 4,
+      "phase": 6,
+      "requestSequence": 113,
+      "sent": false,
+      "replySequence": null
+    },
+    {
+      "mode": 4,
+      "phase": 6,
+      "requestSequence": 255,
+      "sent": false,
+      "replySequence": null
+    }
+  ],
+  "timeoutCanPublishCompletion": true,
+  "originCases": [
+    {
+      "sample": 5000,
+      "reference": 4800,
+      "position": 4146
+    },
+    {
+      "sample": 100,
+      "reference": 16000,
+      "position": 4216
+    },
+    {
+      "sample": 16000,
+      "reference": 100,
+      "position": 4216
+    },
+    {
+      "sample": 8191,
+      "reference": 8192,
+      "position": 8191
+    }
+  ],
+  "negativeControls": [
+    "ID-only capture rule fails phase0 ID34 control",
+    "phase-only capture rule fails disabled callback gate control",
+    "immutable factory echo model fails changed-RX callback control",
+    "verbatim malformed echo model fails formatter control",
+    "unconditional park model fails disabled-option control",
+    "linear signed origin model fails seam control",
+    "ordinary seq+1 rule fails template-sequence control"
+  ],
+  "cuts": {
+    "CS": "RX start/stop 0x91c4/0x91ac; dummy PORT registers",
+    "TX": "0x51c8 and UART send 0x9180; bytes recorded synchronously",
+    "timers": "0x609c records requests; callbacks explicitly invoked",
+    "main": "critical sections, delays, NVM, UART disable, sleep preparation and final motor drivers stubbed; shutdown sleep tail not invoked",
+    "sensor": "0x89a4 returns caller supplied synthetic sample"
+  },
+  "limits": [
+    "No hardware, actual IRQ/DMA/peripheral timing or ordinary boot-to-connected reachability",
+    "RX mutation is a supplied dependency probe, not proof a live overwrite race is reachable",
+    "No homing enabling writer discovered; do not force gate or import synthetic origin",
+    "No full camera grammar, optics, physical travel, or factory equivalence claim"
+  ],
+  "sourceSHA256": {
+    "firmware/upstream-hardening/lanes/04-factory/test_factory_contracts.py": "d87ce8a7aab8f888c90cc5542b998efc8c978d12258befa0c359e90c5be7c5df",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597"
+  }
+}

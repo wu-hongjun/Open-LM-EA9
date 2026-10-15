@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute the compiled 3.2 NVM writer's bounds in Unicorn, not on hardware."""
+"""Execute a pinned compiled NVM writer's bounds in Unicorn, not on hardware."""
 import argparse
 import hashlib
 import json
@@ -10,16 +10,19 @@ from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_SP, UC_AR
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True)
+parser.add_argument('--build',type=Path,default=ROOT/'firmware/upstream-diagnostic/build')
+parser.add_argument('--version',choices=['3.2.0','3.3.0'],default='3.2.0')
 args=parser.parse_args()
-b=ROOT/'firmware/upstream-diagnostic/build'
+b=args.build.resolve()
+elf=b/('diagnostic.elf' if args.version=='3.2.0' else 'hardened.elf')
 nm=ROOT/'tools/firmware-deps/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-nm'
 symbols={}
-for line in subprocess.check_output([str(nm),str(b/'diagnostic.elf')],text=True).splitlines():
+for line in subprocess.check_output([str(nm),str(elf)],text=True).splitlines():
     q=line.split()
     if len(q)==3:symbols[q[2]]=int(q[0],16)
-image=(b/'bounded.bin').read_bytes()
+image=(b/('bounded.bin' if args.version=='3.2.0' else 'contax-zeiss-50-f1-4.bin')).read_bytes()
 assert hashlib.sha256(image).hexdigest()==json.loads((b/'manifest.json').read_text())['imageSHA256']
-assert image==(ROOT/'firmware/candidates/3.2.0/contax-zeiss-50-f1-4.bin').read_bytes()
+assert image==(ROOT/'firmware/candidates'/args.version/'contax-zeiss-50-f1-4.bin').read_bytes()
 results=[]
 for name,address,occupied,error,expected in [
     ('first-page',0x9c00,False,False,1),('last-page',0x9fc0,False,False,1),
@@ -58,7 +61,7 @@ for name,address,occupied,error,expected in [
     results.append({'case':name,'return':actual,'pageBufferStores':len(stores),
                     'NVMCommands':commands,'outsideDiagnosticRegionUnchanged':True})
 e={'status':'passed-compiled-candidate-instruction-bounds','cases':results,
-   'elfSHA256':hashlib.sha256((b/'diagnostic.elf').read_bytes()).hexdigest(),
+   'elfSHA256':hashlib.sha256(elf.read_bytes()).hexdigest(),
    'imageSHA256':hashlib.sha256(image).hexdigest(),'hardwareReportsSent':0,
    'limits':'NVM READY and flash-buffer memory are supplied. This checks compiled address/command/erased-page/error guards, not physical programming, voltage, cache coherence or write timing.'}
 with args.output.open('x') as out:json.dump(e,out,indent=2);out.write('\n')

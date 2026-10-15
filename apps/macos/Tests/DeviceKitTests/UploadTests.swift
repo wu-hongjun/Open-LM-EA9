@@ -356,7 +356,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: same, original: original) }
     let current = try fixture(loader, directory, "current", id: 11)
     #expect(try VerificationEngine().verify(pending: pending, current: current, original: original)?.setting == image.setting)
-    if variant == .autofocusStartupDiagnostic {
+    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened].contains(variant) {
         loader.flash[0x9c00] = 0
         let nonblankLog = try fixture(loader, directory, "unexpected-log-before-camera", id: 11)
         #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: nonblankLog, original: original) }
@@ -442,6 +442,9 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.2.0")
     #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,3,0])
+    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.3.0")
+    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,4,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
     loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,10,0])
     #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
@@ -479,7 +482,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(try VerificationEngine().verify(pending: pending, current: after, original: af)?.firmwareVersion == "2.0.0")
 }
 
-@Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic])
+@Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened])
 func upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant: FirmwareVariant) throws {
     let image = try ApplicationImage.personalized(profile(), variant: variant)
     #expect(image.data == (try ApplicationImage.template(variant)))

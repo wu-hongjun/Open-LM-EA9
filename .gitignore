@@ -21,6 +21,7 @@ __pycache__/
 /firmware/ea9/build/
 /firmware/upstream-baseline/build/
 /firmware/upstream-diagnostic/build/
+/firmware/upstream-hardening/build/
 /artifacts/firmware-milestone/
 /artifacts/factory-af*/
 /artifacts/af25-*

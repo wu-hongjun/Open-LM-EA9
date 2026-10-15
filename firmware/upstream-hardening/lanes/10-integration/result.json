@@ -1,0 +1,31 @@
+{
+  "status": "exact-full-draft-source-reviewed",
+  "before10Failures": 5,
+  "before10PassingControls": 2,
+  "proposedPasses": 7,
+  "captureRegressionPasses": 65,
+  "hardwareAccess": false,
+  "cameraQualified": false,
+  "inputs": {
+    "run.py": "2a5054ae12ad95e025df4f93023cfbd54594138515c439d150eb188eb011d7de",
+    "regression.py": "0cdcf139f0cd810937435fb1bdd35677d3d8d5a74a0eef008a74f8f5e682aea4",
+    "diagnostics.py": "78364b05bfecf8dbaebfb2cc742e74647bfccf12dd7122e76d72ad9fb60229d0",
+    "test_commit.c": "61063a2ad574ab657d58ad3d596fecca04f466bb34e5040365de4bd1be12deb1",
+    "apply.py": "0cd1c8bf940b53c39956d4d66247a009d3eff5814dee2409cd0bd17728316ec1"
+  },
+  "evidence": [
+    "artifacts/private/astra-10-control-02/result.json",
+    "artifacts/private/astra-10-proposed-03/result.json",
+    "artifacts/private/astra-10-regression-01/result.json",
+    "artifacts/private/astra-10-final-commits/result.json",
+    "artifacts/private/astra-10-final-regression/result.json",
+    "artifacts/private/astra-10-final-diagnostics/result.json",
+    "artifacts/private/astra-10-final-source-comparison.json"
+  ],
+  "finalDraft": "firmware/upstream-hardening/build/full-draft-6",
+  "finalDraftManifestImageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+  "finalTargetedPasses": 7,
+  "finalCapturePasses": 65,
+  "finalDiagnosticPasses": 14,
+  "remainingBlockingFindingsWithinReviewedScope": 0
+}
