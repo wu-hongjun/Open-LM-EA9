@@ -1,0 +1,11 @@
+{
+  "referenceELFSHA256": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+  "reviewedPolicySHA256": "604196770baa285cbbddc78996b0be09544743651e6bced23c1588732e5868b5",
+  "normalization": "Replace only exact input ELF filename in the file-format header; preserve every other output byte.",
+  "objdumpSHA256": "971eb15db5b2110383b75dc3b8953115c0c11f6cd2ce7f651b0efb44e9aedcf6",
+  "normalizedOutputSHA256": {
+    "-d": "cf18f015258be66c7b92bca05ab94a63df5faa891fb6099efb293e70a37724cf",
+    "-t": "b2c82018f08424ced2652de375713f7fefee4afdca2d1118601b97d20b0c6e59",
+    "-p": "1e0c69acecc5b87d2a284418e16a73b1055a3b2c00f46fba4390d17fdd4959b7"
+  }
+}

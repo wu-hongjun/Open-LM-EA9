@@ -239,3 +239,56 @@ Review release/runbook usability and trace observability as needed; avoid
 repeating passed suites without a new concern. Keep all published pins and the
 pending journal intact. Continue only until 12:55:51 UTC, then publish actual final
 status and pause the heartbeat as authorized.
+
+### Follow-up target handoff and time contracts: upstream C 3.5
+
+Astra lanes 19–23 completed distinct target, elapsed-time, public workload,
+compiled-stack and independent final-composition audits. Main previously resolved
+an absolute target from one position sample, then the relative servo sampled
+again and shifted that target. The new shared-start entry keeps the resolved
+destination and starting sample together. Homing now rejects stillness success
+if its post-operation sampled tick reaches the phase cap. An exact arithmetic
+identity handles unsigned predictor intervals above INT32_MAX without a guessed
+latency threshold or changed gains.
+
+The composition with all three fixes initially left 248 bytes before diagnostics,
+failing the required 256-byte release floor. Consumer review and exact release/
+debug parity support omitting only an excluded legacy logging counter increment;
+actual VD period measurement, wire output and live diagnostics stay intact.
+[3.5](../firmware/candidates/3.5.0/README.md), SHA-256
+`04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632`,
+ends at 0x9af8 with 264 bytes before unchanged logs, 3,072 static RAM bytes and
+8,192 reserved stack bytes. The conditional compiled stack envelope remains
+1,560 bytes; its physical high-water is unmeasured.
+
+Two fresh builds reproduce image, manifest and complete patch. Exact final
+regressions with failing controls, independent composition and counter checks,
+20 negative stack-evidence guards, nine compiled ARM writer cases and decoder
+boundaries pass. All 53 Swift tests pass. Signed app 0.18/build 22 and its explicit
+new prepare/apply commands preserve earlier command images and strict full-image
+verification. All 56 earlier release/recovery/pin artifacts and historical
+registry entries remain unchanged. [Unified evidence](evidence/upstream-35-absolute-2026-10-15.md)
+and [future coordinated procedure](upstream-absolute-test.md) retain exact pins
+and limits. No app launch, hardware access or canonical state mutation occurred.
+
+The public traffic review contains no query records in the inspected body 0x04
+frames. It cannot establish real query batch sizes or response deadlines; its
+synthetic capacity controls justify no arbitrary queue growth. Independent
+Move/Scan/Drive cancellation cuts show an internal deadband return cannot publish
+success after ownership cancellation, so no speculative completion patch was
+added. Shared-start sampling changes the initial velocity/guard baseline and
+removes one sensor transaction; physical timing, calibration, exposure and optical
+AF remain unqualified. [Factory reconstruction remains partial](reverse-engineering/status-2026-10-15.md);
+the current controller is upstream C rather than the historical recovered PID.
+
+**Hardware state unchanged:** 3.5 is prepared offline only. Uploaded 3.2 still
+awaits owner-confirmed physical reconnect and strict verification. Do not infer
+that event, bypass its journal, flash during scheduled work or request another
+camera cycle here. Preserve all published artifacts.
+
+**Next bounded work:** pursue a specific remaining factory contract or observability
+gap only when it has inspectable evidence and a production-path failing control.
+Avoid tuning gains, physical origin, watchdogs or queue sizes from simulated
+timing. Do not repeat passing release suites without a new change or concern.
+Continue within the authorized window; publish final evidence-based status and
+pause the heartbeat at 12:55:51 UTC.

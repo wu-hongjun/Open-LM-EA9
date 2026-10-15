@@ -35,6 +35,11 @@ original recovery, unit dumps and keys are immutable/private as appropriate.
 | 16 | Query answer capacity and motion/homing service | Astra complete; 17 cases and 18 failing controls; integrated 3.4 | `followup/16-query-flow`, [report](astra-16-query-flow-2026-10-15.md) |
 | 17 | New coordinate/query composition and inhibited readiness | Astra complete; false HOME_READY fixed; 6 home/9 composition cases and 5 failing controls | `followup/17-composition`, [report](astra-17-composition-2026-10-15.md) |
 | 18 | Exact 3.4 whole-chain stack and nested query review | Astra complete; root exact/reproduction checks and 7 negative guards pass | `followup/18-stack34`, [report](astra-18-stack34-2026-10-15.md) |
+| 19 | Shared starting sample and absolute servo destination | Astra complete; 20 cases, 10 failing controls, 7 relative API parity probes; integrated 3.5 | `followup/19-absolute-target`, [report](astra-19-absolute-target-2026-10-15.md) |
+| 20 | Homing post-operation deadlines and unsigned predictor time | Astra complete; 62 executions and 8 path guards; integrated 3.5 | `followup/20-time-contract`, [report](astra-20-time-contract-2026-10-15.md) |
+| 21 | Public query workload and release counter consumers | Astra complete; no real query workload established; 28 capacity fixtures; counter omission independently supported | `followup/21-workload`, [report](astra-21-workload-2026-10-15.md) |
+| 22 | Exact 3.5 compiled stack and evidence integrity | Astra complete; conditional 1,560-byte envelope, 20 negative guards; root repeat-build check passes | `followup/22-stack35`, [report](astra-22-stack35-2026-10-15.md) |
+| 23 | Independent final target/time/caller and counter composition | Astra complete; 51 positive executions, 4 failing controls and 9 caller cancellation cuts; no additional patch justified | `followup/23-composition35`, [report](astra-23-composition35-2026-10-15.md) |
 
 Lane directories are relative to `firmware/upstream-hardening/`; reports are in
 this directory. Private scratch is under `artifacts/private/astra-NN-*`. Shared
@@ -48,8 +53,8 @@ control against frozen source, tests through the production path where feasible
 and an explicit limitation statement. Track accepted, deferred and rejected
 findings individually. Keep the C foundation modular; do not restore the failed
 AF 3.0 scheduler/controller wholesale. Retain exact aperture/optical evidence and
-avoid guessed gains/origins/exposure compensation. Behavioral changes receive
-version 3.3 with a new digest, fixed original 50mm profile and explicit host
+avoid guessed gains/origins/exposure compensation. The initial behavioral changes received
+version 3.3; subsequent changes require another version and digest, the fixed original 50mm profile and explicit host
 installation action; old command meanings and frozen releases remain unchanged.
 
 The initial frame admission module and its 207,131 finite checks are already in
@@ -105,3 +110,22 @@ fresh same-image reproduction. [3.4 evidence](../evidence/upstream-34-bounded-20
 records source hashes, failing controls, size, host integration and limits.
 All published 3.3 and earlier artifacts remain frozen. Nothing was flashed or
 camera-qualified. The uploaded 3.2 reconnect/verification gate remains pending.
+
+## Follow-up target and time composition 3.5
+
+Lanes 19–23 close distinct remaining source questions. Root integrated the shared
+starting-sample/absolute-target entry and post-stillness homing deadline checks,
+plus the exact zero quotient for exceptionally long unsigned predictor intervals.
+Independent consumer review supports omitting only a release-invisible legacy
+counter update. The resulting image retains 264 bytes before diagnostic storage;
+the same composition without that omission fails the 256-byte release floor.
+
+Lanes 22/23 reviewed the exact final source and compiled artifact rather than
+individual overlays. The root acceptance runner, fresh reproducible build,
+compiled writer, decoder, native preparation and 53 Swift tests pass. The public
+capture study establishes no query batch rate or response deadline, so no buffer
+growth or scheduler policy is inferred from synthetic workload fixtures.
+[3.5 evidence](../evidence/upstream-35-absolute-2026-10-15.md) records all pins,
+controls, host integration and physical limits. All 56 prior release/recovery/pin
+artifacts and historical registry entries remain exact. No hardware action or
+camera qualification occurred; the pending 3.2 transaction is unchanged.

@@ -1,8 +1,10 @@
 # Upstream C hardening workbench
 
-This workbench now builds the separately frozen [3.3 offline candidate](../candidates/3.3.0/README.md).
-Eleven Astra lanes audited and root integrated the composition. It is **not
-installed or camera-qualified** and does not change the pending uploaded 3.2.
+The current follow-up composition is the separately frozen [3.5 offline candidate](../candidates/3.5.0/README.md).
+See its [build and test workbench](next35/README.md) and
+[evidence](../../docs/evidence/upstream-35-absolute-2026-10-15.md).
+It is **not installed or camera-qualified** and does not change the pending uploaded 3.2.
+The sections below preserve the original eleven-lane 3.3 composition and commands.
 [Unified evidence](../../docs/evidence/upstream-33-hardening-2026-10-15.md),
 [campaign](../../docs/audits/astra-hardening-campaign-2026-10-15.md) and
 [eight-hour ledger](../../docs/firmware-hardening-2026-10-15.md) track scope and

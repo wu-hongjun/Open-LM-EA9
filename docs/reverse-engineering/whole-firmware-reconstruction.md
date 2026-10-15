@@ -1,6 +1,6 @@
 # Whole firmware reconstruction ledger
 
-**We have a mapped factory firmware, substantial reconstructed behavior, and executable host models; we do not yet have a complete, buildable replacement firmware.** This ledger distinguishes original-byte preservation, recovered code layout, semantic reconstruction, and finite behavioral validation. Research date: October 10, 2026 (America/New_York). All new work is offline; no device enumeration, USB reports, updater execution, flashing, or motor operation was performed.
+**We have a mapped factory image, substantial reconstructed behavior and executable host models; we do not yet have a complete, buildable reconstruction of the factory firmware.** The separate upstream C replacement candidates do build, but that does not establish factory equivalence. See the [October 15 status](status-2026-10-15.md). This ledger distinguishes original-byte preservation, recovered code layout, semantic reconstruction, and finite behavioral validation. Research date: October 10, 2026 (America/New_York). All new work is offline; no device enumeration, USB reports, updater execution, flashing, or motor operation was performed.
 
 ## October 12 sensor/origin extension
 

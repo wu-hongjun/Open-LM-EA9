@@ -1,0 +1,70 @@
+--- frozen34/src/emount.c
++++ absolute35/src/emount.c
+@@ -1022,0 +1023 @@
++#ifndef EA9_NO_LOG
+@@ -1023,0 +1025 @@
++#endif
+--- frozen34/src/emount.h
++++ absolute35/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x34u
++#define EM_FW_VERSION_BCD   0x35u
+--- frozen34/src/focus_pred.c
++++ absolute35/src/focus_pred.c
+@@ -64 +64 @@
+-	p->vel_q8   = blend(p->vel_q8, ((pos - p->last_pos) * 256) / (int32_t)dt);
++	p->vel_q8   = blend(p->vel_q8, (dt > INT32_MAX ? 0 : ((pos - p->last_pos) * 256) / (int32_t)dt));
+--- frozen34/src/main.c
++++ absolute35/src/main.c
+@@ -675 +675,2 @@
+-		    && home_still_for(&still, HOME_STILL_MS)) {
++		    && home_still_for(&still, HOME_STILL_MS)
++		    && (uint32_t)(millis() - t0) < HOME_MS) {
+@@ -703 +704,2 @@
+-		    && home_still_for(&still, HOME_STILL_MS)) {
++		    && home_still_for(&still, HOME_STILL_MS)
++		    && (uint32_t)(millis() - t0) < HOME_SETTLE_MS) {
+@@ -928 +930 @@
+-	servo_move_rel(-here, &PARK, &r);
++	servo_move_from(here, 0, &PARK, &r);
+@@ -1268,4 +1270,2 @@
+-	/* The predictor's target is the COMMANDED position, not the servo's
+-	 * internal start+delta -- they differ by whatever the encoder moved
+-	 * between the two reads, and the field the body sees should be bounded
+-	 * by what it asked for. */
++	/* Keep the resolved destination and starting sample shared by the
++	 * predictor and servo. A later feedback read must not shift the target. */
+@@ -1273 +1273 @@
+-	servo_move_rel(delta, cfg, &r);
++	servo_move_from(here, want, cfg, &r);
+--- frozen34/src/servo.c
++++ absolute35/src/servo.c
+@@ -81,2 +81,2 @@
+-void servo_move_rel(int32_t delta, const struct servo_cfg *cfg,
+-                    struct servo_result *out)
++void servo_move_from(int32_t start, int32_t target,
++                     const struct servo_cfg *cfg, struct servo_result *out)
+@@ -85,2 +84,0 @@
+-	int32_t  start  = abs_encoder_track();
+-	int32_t  target = start + delta;
+@@ -102 +100 @@
+-	int16_t  leg_sign  = (delta >= 0) ? 1 : -1;
++	int16_t  leg_sign  = (target >= start) ? 1 : -1;
+@@ -491,0 +490,8 @@
++
++/* Preserve the relative API for callers that have not resolved a target. */
++void servo_move_rel(int32_t delta, const struct servo_cfg *cfg,
++                    struct servo_result *out)
++{
++	int32_t start = abs_encoder_track();
++	servo_move_from(start, start + delta, cfg, out);
++}
+--- frozen34/src/servo.h
++++ absolute35/src/servo.h
+@@ -407,0 +408,6 @@
++/* Use a caller-owned admitted position sample and an absolute target in the
++ * same coordinate system. The caller must keep both in the controller's
++ * supported arithmetic domain. Feedback is read again before any drive. */
++void servo_move_from(int32_t start, int32_t target,
++                     const struct servo_cfg *cfg, struct servo_result *out);
++

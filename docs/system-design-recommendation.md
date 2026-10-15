@@ -2,10 +2,14 @@
 
 ## Updated working recommendation — October 14, 2026
 
-The owner subsequently authorized this upstream C direction for the
-[3.2 startup/handshake milestone](evidence/upstream-32-startup-diagnostic-2026-10-15.md),
-with hardware flashing deferred. That offline candidate and the native Swift
-host are now implemented; A7C II acceptance remains unqualified.
+The owner subsequently authorized the upstream C direction for the
+[3.2 startup/handshake milestone](evidence/upstream-32-startup-diagnostic-2026-10-15.md).
+That image was uploaded; physical reconnect and strict verification remain
+pending. The [October 15 hardening campaign](firmware-hardening-2026-10-15.md)
+then prepared separately versioned offline candidates with reproduced software
+fault fixes. They retain the upstream controller and native Swift host;
+A7C II acceptance remains unqualified. This source hardening does not replace
+the outstanding initial camera qualification gate.
 
 Use the pinned upstream **C firmware as the development foundation**, retain the
 native SwiftUI/AppKit application and Swift IOHID/update service, and keep the

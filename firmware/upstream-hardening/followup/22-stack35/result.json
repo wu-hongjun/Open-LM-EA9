@@ -1,0 +1,5161 @@
+{
+  "status": "PASS-CONDITIONAL-SOFTWARE-BOUND",
+  "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+  "inputPins": {
+    "hardened.elf": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+    "hardened.map": "4021da4942ab9e9722af54775c1298cfad455d8652a2774fb2d53d5b8c4774d3",
+    "manifest.json": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+    "contax-zeiss-50-f1-4.bin": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+    "raw.bin": "f72990051b055196a7b5fa0e6cce107494c543a75239eca49a95f892c8021a1c"
+  },
+  "sourceHashesVerified": 46,
+  "compilerFramesVerified": 133,
+  "functionCount": 138,
+  "callSiteCount": 462,
+  "indirectCallSites": 14,
+  "unresolvedCompiledEdges": [],
+  "unboundedCompiledFrames": [],
+  "recursiveComponents": [],
+  "libraryFramesWithoutSU": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24
+  },
+  "roots": {
+    "Reset_Handler": {
+      "bytes": 1156,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "main": {
+      "bytes": 1140,
+      "chain": [
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "EIC_Handler": {
+      "bytes": 156,
+      "chain": [
+        "EIC_Handler",
+        "on_cs_edge",
+        "em_shutdown_accept",
+        "em_frame_open"
+      ]
+    },
+    "SERCOM1_Handler": {
+      "bytes": 32,
+      "chain": [
+        "SERCOM1_Handler",
+        "st_inhibit_fault",
+        "st_lock"
+      ]
+    },
+    "SysTick_Handler": {
+      "bytes": 0,
+      "chain": [
+        "SysTick_Handler"
+      ]
+    },
+    "Dummy_Handler": {
+      "bytes": 0,
+      "chain": [
+        "Dummy_Handler"
+      ]
+    }
+  },
+  "maximumDefaultPriorityBytes": 1416,
+  "maximumThreeActiveIRQBytes": 1452,
+  "maximumAllVectorPriorityBytes": 1560,
+  "budgetBytes": 8192,
+  "reservedStackBytes": 8192,
+  "staticRAMBytes": 3072,
+  "stackStart": "0x20000c00",
+  "stackTop": "0x20002c00",
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector."
+  },
+  "unknowns": [
+    "Prior stock reconstruction resolves the intended MSP/vector handoff at 0x2510; CONTROL/PSP selection, PRIMASK and physical execution of that path remain unverified.",
+    "SERCOM1 and SysTick priorities, other enabled/pending IRQs and interrupt state during the reconstructed vector transition remain unestablished; only EIC priority 1 is explicitly configured by the app.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "stackHighWaterMeasured": false,
+  "calls": [
+    {
+      "address": "50c4",
+      "caller": "deregister_tm_clones",
+      "kind": "reviewed-indirect",
+      "targets": []
+    },
+    {
+      "address": "50ec",
+      "caller": "register_tm_clones",
+      "kind": "reviewed-indirect",
+      "targets": []
+    },
+    {
+      "address": "5106",
+      "caller": "__do_global_dtors_aux",
+      "kind": "direct",
+      "targets": [
+        "deregister_tm_clones"
+      ]
+    },
+    {
+      "address": "5138",
+      "caller": "frame_dummy",
+      "kind": "direct",
+      "targets": [
+        "register_tm_clones"
+      ]
+    },
+    {
+      "address": "516a",
+      "caller": "Reset_Handler",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "5182",
+      "caller": "Reset_Handler",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "51da",
+      "caller": "Reset_Handler",
+      "kind": "direct",
+      "targets": [
+        "__libc_init_array"
+      ]
+    },
+    {
+      "address": "51de",
+      "caller": "Reset_Handler",
+      "kind": "direct",
+      "targets": [
+        "main"
+      ]
+    },
+    {
+      "address": "52dc",
+      "caller": "clock_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "532e",
+      "caller": "clock_enable_peripheral",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "538e",
+      "caller": "delay_ms",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "53d4",
+      "caller": "delay_us",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "53e2",
+      "caller": "on_vd_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5418",
+      "caller": "on_vd_edge",
+      "kind": "direct",
+      "targets": [
+        "em_owner_vd"
+      ]
+    },
+    {
+      "address": "5470",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "54aa",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "54b8",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "54c4",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "54cc",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "em_eic_receive_pending"
+      ]
+    },
+    {
+      "address": "5506",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "550e",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "em_uart_send"
+      ]
+    },
+    {
+      "address": "551a",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_valid"
+      ]
+    },
+    {
+      "address": "5534",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "delay_us"
+      ]
+    },
+    {
+      "address": "5548",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "555c",
+      "caller": "em_transmit",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "559a",
+      "caller": "em_shutdown_ack",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_begin"
+      ]
+    },
+    {
+      "address": "55a8",
+      "caller": "em_shutdown_ack",
+      "kind": "direct",
+      "targets": [
+        "em_transmit"
+      ]
+    },
+    {
+      "address": "55bc",
+      "caller": "em_shutdown_ack",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "55d6",
+      "caller": "em_shutdown_ack",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "powerdown_signal"
+      ]
+    },
+    {
+      "address": "5604",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5616",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5622",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_owner_cs"
+      ]
+    },
+    {
+      "address": "562e",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_reset"
+      ]
+    },
+    {
+      "address": "5636",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_buf"
+      ]
+    },
+    {
+      "address": "563c",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_len"
+      ]
+    },
+    {
+      "address": "5648",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_frame_open"
+      ]
+    },
+    {
+      "address": "565e",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5670",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "567e",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_accept"
+      ]
+    },
+    {
+      "address": "5690",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_owner_cancel"
+      ]
+    },
+    {
+      "address": "56a0",
+      "caller": "on_cs_edge",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ]
+    },
+    {
+      "address": "56de",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "56f0",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "570c",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5720",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5732",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5738",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "575e",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "em_owner_offer"
+      ]
+    },
+    {
+      "address": "581c",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "582e",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "__gnu_thumb1_case_sqi"
+      ]
+    },
+    {
+      "address": "5862",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "5880",
+      "caller": "on_cs_edge",
+      "kind": "direct",
+      "targets": [
+        "__gnu_thumb1_case_sqi"
+      ]
+    },
+    {
+      "address": "59f2",
+      "caller": "em_push_velocity",
+      "kind": "direct",
+      "targets": [
+        "memmove"
+      ]
+    },
+    {
+      "address": "5ab6",
+      "caller": "em_post_event",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5ada",
+      "caller": "em_post_event",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5af2",
+      "caller": "em_post_query_answer",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5b16",
+      "caller": "em_post_query_answer",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5c48",
+      "caller": "em_set_aperture_range",
+      "kind": "direct",
+      "targets": [
+        "em_aperture_to_descriptor"
+      ]
+    },
+    {
+      "address": "5c50",
+      "caller": "em_set_aperture_range",
+      "kind": "direct",
+      "targets": [
+        "em_aperture_to_descriptor"
+      ]
+    },
+    {
+      "address": "5cb0",
+      "caller": "em_take_focus_cmd",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5cc6",
+      "caller": "em_take_focus_cmd",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5cde",
+      "caller": "em_take_focus_cmd",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5cfa",
+      "caller": "em_take_query",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5d16",
+      "caller": "em_take_query",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5d3a",
+      "caller": "em_take_query",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5da8",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_set_focal_length"
+      ]
+    },
+    {
+      "address": "5db2",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_set_aperture_range"
+      ]
+    },
+    {
+      "address": "5dba",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_set_aperture"
+      ]
+    },
+    {
+      "address": "5dc4",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_set_optical_rows"
+      ]
+    },
+    {
+      "address": "5ddc",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_init"
+      ]
+    },
+    {
+      "address": "5de0",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5df2",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5df6",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5e08",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5e0e",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "5e14",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5e1c",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "5e2e",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5e34",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_buf"
+      ]
+    },
+    {
+      "address": "5e3a",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_len"
+      ]
+    },
+    {
+      "address": "5e42",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_preserve_first_window"
+      ]
+    },
+    {
+      "address": "5e4c",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_len"
+      ]
+    },
+    {
+      "address": "5e52",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5e64",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5e6a",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "5e6e",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5e76",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5e88",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5e94",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "5ea2",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5eb2",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_eic_init"
+      ]
+    },
+    {
+      "address": "5eb6",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5ec8",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "5ecc",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_len"
+      ]
+    },
+    {
+      "address": "5ed4",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_buf"
+      ]
+    },
+    {
+      "address": "5ee6",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "on_cs_edge"
+      ]
+    },
+    {
+      "address": "5eec",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "delay_ms"
+      ]
+    },
+    {
+      "address": "5ef6",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5f0a",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "5f0e",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5f20",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "5f3c",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5f46",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_reset"
+      ]
+    },
+    {
+      "address": "5f5a",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "5f6e",
+      "caller": "em_init",
+      "kind": "direct",
+      "targets": [
+        "em_uart_rx_reset"
+      ]
+    },
+    {
+      "address": "5ff2",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "5ffe",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_begin"
+      ]
+    },
+    {
+      "address": "6014",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "602a",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "delay_us"
+      ]
+    },
+    {
+      "address": "6030",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_valid"
+      ]
+    },
+    {
+      "address": "604a",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_transmit"
+      ]
+    },
+    {
+      "address": "605c",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_valid"
+      ]
+    },
+    {
+      "address": "6068",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "delay_us"
+      ]
+    },
+    {
+      "address": "606e",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_valid"
+      ]
+    },
+    {
+      "address": "60cc",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_owner_status_valid"
+      ]
+    },
+    {
+      "address": "60da",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "em_transmit"
+      ]
+    },
+    {
+      "address": "614c",
+      "caller": "em_pump_status",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "61f8",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_pump_status"
+      ]
+    },
+    {
+      "address": "6212",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "621a",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_owner_cancel"
+      ]
+    },
+    {
+      "address": "6224",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6232",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_ack"
+      ]
+    },
+    {
+      "address": "623e",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "6254",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_owner_take"
+      ]
+    },
+    {
+      "address": "6272",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6282",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "delay_us"
+      ]
+    },
+    {
+      "address": "628a",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_transmit"
+      ]
+    },
+    {
+      "address": "6290",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "62ba",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "62c4",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_pump_status"
+      ]
+    },
+    {
+      "address": "62fa",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_ack"
+      ]
+    },
+    {
+      "address": "6300",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "633a",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "634c",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "6350",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "6376",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "6390",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_set_aperture"
+      ]
+    },
+    {
+      "address": "63d0",
+      "caller": "em_poll",
+      "kind": "direct",
+      "targets": [
+        "em_transmit"
+      ]
+    },
+    {
+      "address": "647e",
+      "caller": "em_uart_init",
+      "kind": "direct",
+      "targets": [
+        "clock_enable_peripheral"
+      ]
+    },
+    {
+      "address": "6504",
+      "caller": "em_uart_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "65a0",
+      "caller": "SERCOM1_Handler",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "65b6",
+      "caller": "SERCOM1_Handler",
+      "kind": "direct",
+      "targets": [
+        "st_inhibit_fault"
+      ]
+    },
+    {
+      "address": "65ba",
+      "caller": "SERCOM1_Handler",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "65ea",
+      "caller": "em_uart_rx_reset",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "660e",
+      "caller": "em_uart_rx_reset",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6670",
+      "caller": "em_uart_disable",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "66ca",
+      "caller": "em_uart_send",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6794",
+      "caller": "em_eic_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "67e0",
+      "caller": "EIC_Handler",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "on_cs_edge"
+      ]
+    },
+    {
+      "address": "67f4",
+      "caller": "EIC_Handler",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "on_vd_edge"
+      ]
+    },
+    {
+      "address": "682c",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "6858",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "68d0",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "68fc",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "690a",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "690e",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "693a",
+      "caller": "motor_drive.part.0",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6a52",
+      "caller": "motor_attach_pins",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "6a7e",
+      "caller": "motor_attach_pins",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6ab4",
+      "caller": "motor_init",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "6ae0",
+      "caller": "motor_init",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6bce",
+      "caller": "motor_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6cca",
+      "caller": "motor_release",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6cec",
+      "caller": "motor_brake",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "6d16",
+      "caller": "motor_brake",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "6d90",
+      "caller": "motor_brake",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6daa",
+      "caller": "motor_drive",
+      "kind": "direct",
+      "targets": [
+        "motor_drive.part.0"
+      ]
+    },
+    {
+      "address": "6dea",
+      "caller": "spi_xfer.constprop.0",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6ea2",
+      "caller": "abs_encoder_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "6ec8",
+      "caller": "abs_encoder_set_reference",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6ece",
+      "caller": "abs_encoder_set_reference",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6ef6",
+      "caller": "abs_encoder_track_reset",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6efc",
+      "caller": "abs_encoder_track_reset",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6f24",
+      "caller": "abs_encoder_track",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6f2a",
+      "caller": "abs_encoder_track",
+      "kind": "direct",
+      "targets": [
+        "spi_xfer.constprop.0"
+      ]
+    },
+    {
+      "address": "6f68",
+      "caller": "abs_encoder_track",
+      "kind": "direct",
+      "targets": [
+        "st_inhibit_fault"
+      ]
+    },
+    {
+      "address": "6f6c",
+      "caller": "abs_encoder_track",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "6fa8",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7024",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "702e",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "7034",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "703a",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "707e",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "focus_retarget"
+      ]
+    },
+    {
+      "address": "70a8",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "focus_abort"
+      ]
+    },
+    {
+      "address": "7124",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "7156",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "7182",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "718a",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "7198",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "7220",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "pump"
+      ]
+    },
+    {
+      "address": "7230",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "st_inhibit_fault"
+      ]
+    },
+    {
+      "address": "7234",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "7278",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "focus_abort"
+      ]
+    },
+    {
+      "address": "7302",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "focus_abort"
+      ]
+    },
+    {
+      "address": "7324",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "st_inhibit_fault"
+      ]
+    },
+    {
+      "address": "7328",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "7338",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_drive"
+      ]
+    },
+    {
+      "address": "733c",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_brake"
+      ]
+    },
+    {
+      "address": "739e",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_drive"
+      ]
+    },
+    {
+      "address": "74ec",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "74f4",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7514",
+      "caller": "servo_move_from",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "pump"
+      ]
+    },
+    {
+      "address": "7516",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7530",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_attach_pins"
+      ]
+    },
+    {
+      "address": "75f4",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_drive"
+      ]
+    },
+    {
+      "address": "75f8",
+      "caller": "servo_move_from",
+      "kind": "direct",
+      "targets": [
+        "motor_brake"
+      ]
+    },
+    {
+      "address": "769c",
+      "caller": "distance_mm",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "76aa",
+      "caller": "distance_mm",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "76b4",
+      "caller": "distance_mm",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "7762",
+      "caller": "focus_distance_code",
+      "kind": "direct",
+      "targets": [
+        "distance_mm"
+      ]
+    },
+    {
+      "address": "776a",
+      "caller": "focus_distance_code",
+      "kind": "direct",
+      "targets": [
+        "focus_log2_q6"
+      ]
+    },
+    {
+      "address": "77a4",
+      "caller": "focus_counts_for_code",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "77ae",
+      "caller": "focus_counts_for_code",
+      "kind": "direct",
+      "targets": [
+        "focus_exp2_q6"
+      ]
+    },
+    {
+      "address": "77c0",
+      "caller": "focus_counts_for_code",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "77da",
+      "caller": "focus_counts_for_code",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "77f6",
+      "caller": "focus_distance_coarse",
+      "kind": "direct",
+      "targets": [
+        "distance_mm"
+      ]
+    },
+    {
+      "address": "780a",
+      "caller": "focus_distance_coarse",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "787a",
+      "caller": "focus_pred_sample",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "7912",
+      "caller": "vdd_read_mv",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "791c",
+      "caller": "vdd_read_mv",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "7930",
+      "caller": "vdd_init",
+      "kind": "direct",
+      "targets": [
+        "clock_enable_peripheral"
+      ]
+    },
+    {
+      "address": "798e",
+      "caller": "vdd_init",
+      "kind": "direct",
+      "targets": [
+        "vdd_read_mv"
+      ]
+    },
+    {
+      "address": "7996",
+      "caller": "vdd_init",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "79f0",
+      "caller": "vdd_track_sample",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "7a0e",
+      "caller": "vdd_track_sample",
+      "kind": "direct",
+      "targets": [
+        "st_fail"
+      ]
+    },
+    {
+      "address": "7a54",
+      "caller": "motion_shutdown_inhibit",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "7a66",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "delay_ms"
+      ]
+    },
+    {
+      "address": "7a6c",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "em_uart_disable"
+      ]
+    },
+    {
+      "address": "7a70",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7a82",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "7a86",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7a9c",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "7aa4",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "7abc",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "st_flush"
+      ]
+    },
+    {
+      "address": "7ac0",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7aca",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7ad6",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "delay_ms"
+      ]
+    },
+    {
+      "address": "7adc",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "em_pin_level"
+      ]
+    },
+    {
+      "address": "7af0",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7af6",
+      "caller": "powerdown_signal",
+      "kind": "direct",
+      "targets": [
+        "delay_ms"
+      ]
+    },
+    {
+      "address": "7b20",
+      "caller": "home_command",
+      "kind": "direct",
+      "targets": [
+        "em_take_focus_cmd"
+      ]
+    },
+    {
+      "address": "7b3a",
+      "caller": "home_command",
+      "kind": "direct",
+      "targets": [
+        "motor_emergency_release"
+      ]
+    },
+    {
+      "address": "7b42",
+      "caller": "home_command",
+      "kind": "direct",
+      "targets": [
+        "em_post_event"
+      ]
+    },
+    {
+      "address": "7b52",
+      "caller": "home_command",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "7b56",
+      "caller": "home_command",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "7b82",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_pred_ahead"
+      ]
+    },
+    {
+      "address": "7b8a",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "7b92",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "7ba0",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "em_set_focus_position"
+      ]
+    },
+    {
+      "address": "7bb6",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "7bc0",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "em_set_motion"
+      ]
+    },
+    {
+      "address": "7bd4",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "em_push_velocity"
+      ]
+    },
+    {
+      "address": "7be0",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_distance_code"
+      ]
+    },
+    {
+      "address": "7bec",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "focus_distance_coarse"
+      ]
+    },
+    {
+      "address": "7bfe",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "em_set_subject_distance"
+      ]
+    },
+    {
+      "address": "7c04",
+      "caller": "focus_report_at",
+      "kind": "direct",
+      "targets": [
+        "em_set_in_motion"
+      ]
+    },
+    {
+      "address": "7c1a",
+      "caller": "focus_report",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "7c1e",
+      "caller": "focus_report",
+      "kind": "direct",
+      "targets": [
+        "focus_report_at"
+      ]
+    },
+    {
+      "address": "7c34",
+      "caller": "focus_invalid",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "7c3c",
+      "caller": "focus_invalid",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7c4c",
+      "caller": "focus_invalid",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "7c74",
+      "caller": "focus_abort",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7c86",
+      "caller": "focus_event",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "7c8c",
+      "caller": "focus_event",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7c98",
+      "caller": "focus_event",
+      "kind": "direct",
+      "targets": [
+        "em_post_event"
+      ]
+    },
+    {
+      "address": "7c9e",
+      "caller": "focus_event",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "7caa",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "7cbc",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "7ccc",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "7cd4",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7cdc",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "7cea",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_take_query"
+      ]
+    },
+    {
+      "address": "7cf2",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "7d06",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "focus_em06_to_counts"
+      ]
+    },
+    {
+      "address": "7d0e",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "focus_distance_code"
+      ]
+    },
+    {
+      "address": "7d14",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "7d1a",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "7d32",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "7d3a",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7d48",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "em_post_query_answer"
+      ]
+    },
+    {
+      "address": "7d52",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "7d60",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_for_code"
+      ]
+    },
+    {
+      "address": "7d64",
+      "caller": "focus_answer_queries",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "7d80",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7d8c",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "focus_pred_sample"
+      ]
+    },
+    {
+      "address": "7d92",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "focus_report_at"
+      ]
+    },
+    {
+      "address": "7d96",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "focus_answer_queries"
+      ]
+    },
+    {
+      "address": "7d9a",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "em_poll"
+      ]
+    },
+    {
+      "address": "7d9e",
+      "caller": "pump",
+      "kind": "direct",
+      "targets": [
+        "vdd_track_sample"
+      ]
+    },
+    {
+      "address": "7dbc",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "__gnu_thumb1_case_uqi"
+      ]
+    },
+    {
+      "address": "7dc6",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "focus_em06_to_counts"
+      ]
+    },
+    {
+      "address": "7dd8",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_for_code"
+      ]
+    },
+    {
+      "address": "7dde",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "7dfc",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "7e06",
+      "caller": "focus_cmd_target",
+      "kind": "direct",
+      "targets": [
+        "em_defocus_scale"
+      ]
+    },
+    {
+      "address": "7e1a",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "7e22",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7e2c",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "em_take_focus_cmd"
+      ]
+    },
+    {
+      "address": "7e38",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "7e46",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "focus_cmd_target"
+      ]
+    },
+    {
+      "address": "7e6a",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "7e88",
+      "caller": "focus_retarget",
+      "kind": "direct",
+      "targets": [
+        "focus_pred_retarget"
+      ]
+    },
+    {
+      "address": "7eae",
+      "caller": "home_cancel_requested",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7ee4",
+      "caller": "home_cancel_requested",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "7ef4",
+      "caller": "home_cancel_requested",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "7f00",
+      "caller": "home_cancel_requested",
+      "kind": "direct",
+      "targets": [
+        "home_command"
+      ]
+    },
+    {
+      "address": "7f24",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7f34",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "7f42",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "7f52",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_pred_begin"
+      ]
+    },
+    {
+      "address": "7f5e",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "servo_move_from"
+      ]
+    },
+    {
+      "address": "7f64",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_pred_end"
+      ]
+    },
+    {
+      "address": "7f68",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7f70",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_report"
+      ]
+    },
+    {
+      "address": "7f74",
+      "caller": "focus_run.isra.0",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7fa4",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "7fac",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "motor_is_inhibited"
+      ]
+    },
+    {
+      "address": "7fb8",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "7fda",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_set_scan_state"
+      ]
+    },
+    {
+      "address": "7fe2",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_event"
+      ]
+    },
+    {
+      "address": "7ffa",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_em06_to_counts"
+      ]
+    },
+    {
+      "address": "8020",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "8050",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_set_scan_state"
+      ]
+    },
+    {
+      "address": "8056",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "805e",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_run.isra.0"
+      ]
+    },
+    {
+      "address": "8064",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "807a",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_set_scan_state"
+      ]
+    },
+    {
+      "address": "8082",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_em06_to_counts"
+      ]
+    },
+    {
+      "address": "808a",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_em06_to_counts"
+      ]
+    },
+    {
+      "address": "80ac",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_set_scan_state"
+      ]
+    },
+    {
+      "address": "80b6",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "8112",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "8124",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "812c",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_run.isra.0"
+      ]
+    },
+    {
+      "address": "8132",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_invalid"
+      ]
+    },
+    {
+      "address": "813c",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "em_scan_finish"
+      ]
+    },
+    {
+      "address": "814a",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_event"
+      ]
+    },
+    {
+      "address": "8160",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "81d2",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "81e4",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_counts_to_em06"
+      ]
+    },
+    {
+      "address": "81ec",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_run.isra.0"
+      ]
+    },
+    {
+      "address": "8210",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_cmd_target"
+      ]
+    },
+    {
+      "address": "821e",
+      "caller": "focus_exec",
+      "kind": "direct",
+      "targets": [
+        "focus_run.isra.0"
+      ]
+    },
+    {
+      "address": "82ba",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "board_init_pins"
+      ]
+    },
+    {
+      "address": "82be",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_init"
+      ]
+    },
+    {
+      "address": "82d0",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "82d4",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "clock_init"
+      ]
+    },
+    {
+      "address": "82e6",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "82ea",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "delay_init"
+      ]
+    },
+    {
+      "address": "82ee",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8300",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "8310",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_init"
+      ]
+    },
+    {
+      "address": "8314",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8326",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "832a",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "vdd_init"
+      ]
+    },
+    {
+      "address": "832e",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8340",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "8344",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_init"
+      ]
+    },
+    {
+      "address": "8348",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "835a",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "835e",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_release"
+      ]
+    },
+    {
+      "address": "8364",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_set_powerdown_handler"
+      ]
+    },
+    {
+      "address": "836a",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_set_shutdown_inhibit_handler"
+      ]
+    },
+    {
+      "address": "836e",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_init"
+      ]
+    },
+    {
+      "address": "8372",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8384",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "8388",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_set_reference"
+      ]
+    },
+    {
+      "address": "838c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track_reset"
+      ]
+    },
+    {
+      "address": "8390",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "83a2",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "83a6",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_poll"
+      ]
+    },
+    {
+      "address": "83ca",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "focus_report"
+      ]
+    },
+    {
+      "address": "83ce",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "focus_report"
+      ]
+    },
+    {
+      "address": "83d2",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "focus_answer_queries"
+      ]
+    },
+    {
+      "address": "83ea",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "83fa",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "focus_exec"
+      ]
+    },
+    {
+      "address": "83fe",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "8404",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "840c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_take_focus_cmd"
+      ]
+    },
+    {
+      "address": "8414",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "8428",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "focus_exec"
+      ]
+    },
+    {
+      "address": "8436",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_shutdown_requested"
+      ]
+    },
+    {
+      "address": "8454",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_command"
+      ]
+    },
+    {
+      "address": "8476",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "em_session_generation"
+      ]
+    },
+    {
+      "address": "8484",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "848e",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "8492",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "849c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "vdd_track_reset"
+      ]
+    },
+    {
+      "address": "84a0",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_attach_pins"
+      ]
+    },
+    {
+      "address": "84a6",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_drive"
+      ]
+    },
+    {
+      "address": "84aa",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "84b0",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "84b6",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "84bc",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "84d2",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_inhibit_fault"
+      ]
+    },
+    {
+      "address": "84d6",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_inhibit"
+      ]
+    },
+    {
+      "address": "84ea",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "84f4",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "pump"
+      ]
+    },
+    {
+      "address": "84f8",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "8502",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "850c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "853a",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8542",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "854e",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "855c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8562",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_drive"
+      ]
+    },
+    {
+      "address": "8566",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_brake"
+      ]
+    },
+    {
+      "address": "8572",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "vdd_track_result"
+      ]
+    },
+    {
+      "address": "8576",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "857c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "8582",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8592",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "859c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "pump"
+      ]
+    },
+    {
+      "address": "85a0",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "85a8",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "85b2",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "85e0",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "85e8",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "85f4",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8602",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8620",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "866c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8670",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track"
+      ]
+    },
+    {
+      "address": "8674",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "867c",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "abs_encoder_track_reset"
+      ]
+    },
+    {
+      "address": "8680",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "8686",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "home_cancel_requested"
+      ]
+    },
+    {
+      "address": "8690",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "8694",
+      "caller": "main",
+      "kind": "direct",
+      "targets": [
+        "motor_emergency_release"
+      ]
+    },
+    {
+      "address": "8710",
+      "caller": "append",
+      "kind": "direct",
+      "targets": [
+        "st_read_page"
+      ]
+    },
+    {
+      "address": "872a",
+      "caller": "append",
+      "kind": "direct",
+      "targets": [
+        "memcpy"
+      ]
+    },
+    {
+      "address": "874e",
+      "caller": "append",
+      "kind": "direct",
+      "targets": [
+        "st_crc32"
+      ]
+    },
+    {
+      "address": "8758",
+      "caller": "append",
+      "kind": "direct",
+      "targets": [
+        "put32"
+      ]
+    },
+    {
+      "address": "8760",
+      "caller": "append",
+      "kind": "direct",
+      "targets": [
+        "st_write_page"
+      ]
+    },
+    {
+      "address": "87ea",
+      "caller": "st_init",
+      "kind": "direct",
+      "targets": [
+        "st_read_page"
+      ]
+    },
+    {
+      "address": "888c",
+      "caller": "st_note",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "88dc",
+      "caller": "st_note",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "8a00",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "8a30",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "8a4a",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "put32"
+      ]
+    },
+    {
+      "address": "8a5e",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "put32"
+      ]
+    },
+    {
+      "address": "8a70",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "put32"
+      ]
+    },
+    {
+      "address": "8ae4",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "append"
+      ]
+    },
+    {
+      "address": "8aee",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "8b1a",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "put32"
+      ]
+    },
+    {
+      "address": "8b5e",
+      "caller": "st_flush",
+      "kind": "direct",
+      "targets": [
+        "memset"
+      ]
+    },
+    {
+      "address": "8c4c",
+      "caller": "st_inhibit_fault",
+      "kind": "direct",
+      "targets": [
+        "st_lock"
+      ]
+    },
+    {
+      "address": "8c5a",
+      "caller": "st_inhibit_fault",
+      "kind": "direct",
+      "targets": [
+        "st_unlock"
+      ]
+    },
+    {
+      "address": "8dd2",
+      "caller": "st_fail",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8de4",
+      "caller": "st_fail",
+      "kind": "direct",
+      "targets": [
+        "st_note"
+      ]
+    },
+    {
+      "address": "8de8",
+      "caller": "st_fail",
+      "kind": "direct",
+      "targets": [
+        "millis"
+      ]
+    },
+    {
+      "address": "8e04",
+      "caller": "st_fail",
+      "kind": "direct",
+      "targets": [
+        "st_flush"
+      ]
+    },
+    {
+      "address": "9096",
+      "caller": "em_shutdown_accept",
+      "kind": "direct",
+      "targets": [
+        "em_frame_open"
+      ]
+    },
+    {
+      "address": "920c",
+      "caller": "__udivsi3",
+      "kind": "direct",
+      "targets": [
+        "__aeabi_idiv0"
+      ]
+    },
+    {
+      "address": "9216",
+      "caller": "__aeabi_uidivmod",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "9218",
+      "caller": "__aeabi_uidivmod",
+      "kind": "direct",
+      "targets": [
+        "__udivsi3"
+      ]
+    },
+    {
+      "address": "93e2",
+      "caller": "__divsi3",
+      "kind": "direct",
+      "targets": [
+        "__aeabi_idiv0"
+      ]
+    },
+    {
+      "address": "93ea",
+      "caller": "__aeabi_idivmod",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "93ec",
+      "caller": "__aeabi_idivmod",
+      "kind": "direct",
+      "targets": [
+        "__divsi3"
+      ]
+    },
+    {
+      "address": "943a",
+      "caller": "__libc_init_array",
+      "kind": "direct",
+      "targets": [
+        "_init"
+      ]
+    },
+    {
+      "address": "9450",
+      "caller": "__libc_init_array",
+      "kind": "reviewed-indirect",
+      "targets": []
+    },
+    {
+      "address": "945a",
+      "caller": "__libc_init_array",
+      "kind": "reviewed-indirect",
+      "targets": [
+        "frame_dummy"
+      ]
+    }
+  ],
+  "functionBounds": {
+    "Dummy_Handler": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "Dummy_Handler"
+      ]
+    },
+    "EIC_Handler": {
+      "frameBytes": 16,
+      "chainBytes": 156,
+      "chain": [
+        "EIC_Handler",
+        "on_cs_edge",
+        "em_shutdown_accept",
+        "em_frame_open"
+      ]
+    },
+    "Reset_Handler": {
+      "frameBytes": 16,
+      "chainBytes": 1156,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "SERCOM1_Handler": {
+      "frameBytes": 24,
+      "chainBytes": 32,
+      "chain": [
+        "SERCOM1_Handler",
+        "st_inhibit_fault",
+        "st_lock"
+      ]
+    },
+    "SysTick_Handler": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "SysTick_Handler"
+      ]
+    },
+    "__aeabi_idiv0": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "__aeabi_idiv0"
+      ]
+    },
+    "__aeabi_idivmod": {
+      "frameBytes": 0,
+      "chainBytes": 8,
+      "chain": [
+        "__aeabi_idivmod",
+        "__divsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "__aeabi_uidivmod": {
+      "frameBytes": 0,
+      "chainBytes": 8,
+      "chain": [
+        "__aeabi_uidivmod",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "__divsi3": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "__divsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "__do_global_dtors_aux": {
+      "frameBytes": 8,
+      "chainBytes": 16,
+      "chain": [
+        "__do_global_dtors_aux",
+        "deregister_tm_clones"
+      ]
+    },
+    "__gnu_thumb1_case_sqi": {
+      "frameBytes": 4,
+      "chainBytes": 4,
+      "chain": [
+        "__gnu_thumb1_case_sqi"
+      ]
+    },
+    "__gnu_thumb1_case_uqi": {
+      "frameBytes": 4,
+      "chainBytes": 4,
+      "chain": [
+        "__gnu_thumb1_case_uqi"
+      ]
+    },
+    "__libc_init_array": {
+      "frameBytes": 16,
+      "chainBytes": 40,
+      "chain": [
+        "__libc_init_array",
+        "_init"
+      ]
+    },
+    "__udivsi3": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "_fini": {
+      "frameBytes": 24,
+      "chainBytes": 24,
+      "chain": [
+        "_fini"
+      ]
+    },
+    "_init": {
+      "frameBytes": 24,
+      "chainBytes": 24,
+      "chain": [
+        "_init"
+      ]
+    },
+    "abs_encoder_init": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "abs_encoder_init",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "abs_encoder_set_reference": {
+      "frameBytes": 16,
+      "chainBytes": 292,
+      "chain": [
+        "abs_encoder_set_reference",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "abs_encoder_track": {
+      "frameBytes": 16,
+      "chainBytes": 292,
+      "chain": [
+        "abs_encoder_track",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "abs_encoder_track_reset": {
+      "frameBytes": 16,
+      "chainBytes": 292,
+      "chain": [
+        "abs_encoder_track_reset",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "append": {
+      "frameBytes": 104,
+      "chainBytes": 132,
+      "chain": [
+        "append",
+        "st_write_page"
+      ]
+    },
+    "board_init_pins": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "board_init_pins"
+      ]
+    },
+    "clock_enable_peripheral": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "clock_enable_peripheral",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "clock_init": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "clock_init",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "delay_init": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "delay_init"
+      ]
+    },
+    "delay_ms": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "delay_ms",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "delay_us": {
+      "frameBytes": 16,
+      "chainBytes": 284,
+      "chain": [
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "deregister_tm_clones": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "deregister_tm_clones"
+      ]
+    },
+    "distance_mm": {
+      "frameBytes": 16,
+      "chainBytes": 24,
+      "chain": [
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "em_aperture_to_descriptor": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_aperture_to_descriptor"
+      ]
+    },
+    "em_defocus_scale": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_defocus_scale"
+      ]
+    },
+    "em_eic_init": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "em_eic_init",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_eic_receive_pending": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_eic_receive_pending"
+      ]
+    },
+    "em_frame_open": {
+      "frameBytes": 20,
+      "chainBytes": 20,
+      "chain": [
+        "em_frame_open"
+      ]
+    },
+    "em_init": {
+      "frameBytes": 48,
+      "chainBytes": 332,
+      "chain": [
+        "em_init",
+        "em_uart_init",
+        "clock_enable_peripheral",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_owner_cancel": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_owner_cancel"
+      ]
+    },
+    "em_owner_cs": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_owner_cs"
+      ]
+    },
+    "em_owner_offer": {
+      "frameBytes": 20,
+      "chainBytes": 20,
+      "chain": [
+        "em_owner_offer"
+      ]
+    },
+    "em_owner_status_begin": {
+      "frameBytes": 12,
+      "chainBytes": 12,
+      "chain": [
+        "em_owner_status_begin"
+      ]
+    },
+    "em_owner_status_valid": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_owner_status_valid"
+      ]
+    },
+    "em_owner_take": {
+      "frameBytes": 12,
+      "chainBytes": 12,
+      "chain": [
+        "em_owner_take"
+      ]
+    },
+    "em_owner_vd": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_owner_vd"
+      ]
+    },
+    "em_pin_level": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_pin_level"
+      ]
+    },
+    "em_poll": {
+      "frameBytes": 56,
+      "chainBytes": 684,
+      "chain": [
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_post_event": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "em_post_event",
+        "st_lock"
+      ]
+    },
+    "em_post_query_answer": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "em_post_query_answer",
+        "st_lock"
+      ]
+    },
+    "em_pump_status": {
+      "frameBytes": 40,
+      "chainBytes": 628,
+      "chain": [
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_push_velocity": {
+      "frameBytes": 8,
+      "chainBytes": 16,
+      "chain": [
+        "em_push_velocity",
+        "memmove"
+      ]
+    },
+    "em_scan_finish": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_scan_finish"
+      ]
+    },
+    "em_session_generation": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_session_generation"
+      ]
+    },
+    "em_set_aperture": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "em_set_aperture"
+      ]
+    },
+    "em_set_aperture_range": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "em_set_aperture_range",
+        "em_aperture_to_descriptor"
+      ]
+    },
+    "em_set_focal_length": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "em_set_focal_length"
+      ]
+    },
+    "em_set_focus_position": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_set_focus_position"
+      ]
+    },
+    "em_set_in_motion": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_set_in_motion"
+      ]
+    },
+    "em_set_motion": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "em_set_motion"
+      ]
+    },
+    "em_set_optical_rows": {
+      "frameBytes": 20,
+      "chainBytes": 20,
+      "chain": [
+        "em_set_optical_rows"
+      ]
+    },
+    "em_set_powerdown_handler": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_set_powerdown_handler"
+      ]
+    },
+    "em_set_scan_state": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_set_scan_state"
+      ]
+    },
+    "em_set_shutdown_inhibit_handler": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_set_shutdown_inhibit_handler"
+      ]
+    },
+    "em_set_subject_distance": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "em_set_subject_distance"
+      ]
+    },
+    "em_shutdown_accept": {
+      "frameBytes": 32,
+      "chainBytes": 52,
+      "chain": [
+        "em_shutdown_accept",
+        "em_frame_open"
+      ]
+    },
+    "em_shutdown_ack": {
+      "frameBytes": 8,
+      "chainBytes": 596,
+      "chain": [
+        "em_shutdown_ack",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_shutdown_begin": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_shutdown_begin"
+      ]
+    },
+    "em_shutdown_requested": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_shutdown_requested"
+      ]
+    },
+    "em_take_focus_cmd": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "em_take_focus_cmd",
+        "st_lock"
+      ]
+    },
+    "em_take_query": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "em_take_query",
+        "st_lock"
+      ]
+    },
+    "em_transmit": {
+      "frameBytes": 304,
+      "chainBytes": 588,
+      "chain": [
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_uart_disable": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "em_uart_disable",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_uart_init": {
+      "frameBytes": 8,
+      "chainBytes": 284,
+      "chain": [
+        "em_uart_init",
+        "clock_enable_peripheral",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "em_uart_rx_buf": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_uart_rx_buf"
+      ]
+    },
+    "em_uart_rx_len": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "em_uart_rx_len"
+      ]
+    },
+    "em_uart_rx_reset": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "em_uart_rx_reset",
+        "st_lock"
+      ]
+    },
+    "em_uart_send": {
+      "frameBytes": 16,
+      "chainBytes": 284,
+      "chain": [
+        "em_uart_send",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "focus_abort": {
+      "frameBytes": 8,
+      "chainBytes": 16,
+      "chain": [
+        "focus_abort",
+        "focus_invalid",
+        "em_session_generation"
+      ]
+    },
+    "focus_answer_queries": {
+      "frameBytes": 48,
+      "chainBytes": 80,
+      "chain": [
+        "focus_answer_queries",
+        "focus_counts_for_code",
+        "focus_exp2_q6"
+      ]
+    },
+    "focus_cmd_target": {
+      "frameBytes": 16,
+      "chainBytes": 308,
+      "chain": [
+        "focus_cmd_target",
+        "abs_encoder_track",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "focus_counts_for_code": {
+      "frameBytes": 16,
+      "chainBytes": 32,
+      "chain": [
+        "focus_counts_for_code",
+        "focus_exp2_q6"
+      ]
+    },
+    "focus_counts_to_em06": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "focus_counts_to_em06"
+      ]
+    },
+    "focus_distance_coarse": {
+      "frameBytes": 8,
+      "chainBytes": 32,
+      "chain": [
+        "focus_distance_coarse",
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "focus_distance_code": {
+      "frameBytes": 8,
+      "chainBytes": 32,
+      "chain": [
+        "focus_distance_code",
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "focus_em06_to_counts": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "focus_em06_to_counts"
+      ]
+    },
+    "focus_event": {
+      "frameBytes": 16,
+      "chainBytes": 32,
+      "chain": [
+        "focus_event",
+        "em_post_event",
+        "st_lock"
+      ]
+    },
+    "focus_exec": {
+      "frameBytes": 96,
+      "chainBytes": 1036,
+      "chain": [
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "focus_exp2_q6": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "focus_exp2_q6"
+      ]
+    },
+    "focus_invalid": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "focus_invalid",
+        "em_session_generation"
+      ]
+    },
+    "focus_log2_q6": {
+      "frameBytes": 16,
+      "chainBytes": 16,
+      "chain": [
+        "focus_log2_q6"
+      ]
+    },
+    "focus_pred_ahead": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "focus_pred_ahead"
+      ]
+    },
+    "focus_pred_begin": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "focus_pred_begin"
+      ]
+    },
+    "focus_pred_end": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "focus_pred_end"
+      ]
+    },
+    "focus_pred_retarget": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "focus_pred_retarget"
+      ]
+    },
+    "focus_pred_sample": {
+      "frameBytes": 24,
+      "chainBytes": 32,
+      "chain": [
+        "focus_pred_sample",
+        "__divsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "focus_report": {
+      "frameBytes": 8,
+      "chainBytes": 300,
+      "chain": [
+        "focus_report",
+        "abs_encoder_track",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "focus_report_at": {
+      "frameBytes": 24,
+      "chainBytes": 56,
+      "chain": [
+        "focus_report_at",
+        "focus_distance_coarse",
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "focus_retarget": {
+      "frameBytes": 40,
+      "chainBytes": 348,
+      "chain": [
+        "focus_retarget",
+        "focus_cmd_target",
+        "abs_encoder_track",
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "focus_run.isra.0": {
+      "frameBytes": 112,
+      "chainBytes": 940,
+      "chain": [
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "frame_dummy": {
+      "frameBytes": 8,
+      "chainBytes": 16,
+      "chain": [
+        "frame_dummy",
+        "register_tm_clones"
+      ]
+    },
+    "home_cancel_requested": {
+      "frameBytes": 8,
+      "chainBytes": 64,
+      "chain": [
+        "home_cancel_requested",
+        "home_command",
+        "em_post_event",
+        "st_lock"
+      ]
+    },
+    "home_command": {
+      "frameBytes": 40,
+      "chainBytes": 56,
+      "chain": [
+        "home_command",
+        "em_post_event",
+        "st_lock"
+      ]
+    },
+    "main": {
+      "frameBytes": 104,
+      "chainBytes": 1140,
+      "chain": [
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "memcpy": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "memcpy"
+      ]
+    },
+    "memmove": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "memmove"
+      ]
+    },
+    "memset": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "memset"
+      ]
+    },
+    "millis": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "millis"
+      ]
+    },
+    "motion_shutdown_inhibit": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "motion_shutdown_inhibit",
+        "motor_inhibit"
+      ]
+    },
+    "motor_attach_pins": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "motor_attach_pins",
+        "st_lock"
+      ]
+    },
+    "motor_brake": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "motor_brake",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "motor_drive": {
+      "frameBytes": 8,
+      "chainBytes": 292,
+      "chain": [
+        "motor_drive",
+        "motor_drive.part.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "motor_drive.part.0": {
+      "frameBytes": 16,
+      "chainBytes": 284,
+      "chain": [
+        "motor_drive.part.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "motor_emergency_release": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "motor_emergency_release"
+      ]
+    },
+    "motor_inhibit": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "motor_inhibit"
+      ]
+    },
+    "motor_init": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "motor_init",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "motor_is_inhibited": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "motor_is_inhibited"
+      ]
+    },
+    "motor_release": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "motor_release",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "on_cs_edge": {
+      "frameBytes": 88,
+      "chainBytes": 140,
+      "chain": [
+        "on_cs_edge",
+        "em_shutdown_accept",
+        "em_frame_open"
+      ]
+    },
+    "on_vd_edge": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "on_vd_edge",
+        "em_owner_vd"
+      ]
+    },
+    "powerdown_signal": {
+      "frameBytes": 48,
+      "chainBytes": 324,
+      "chain": [
+        "powerdown_signal",
+        "delay_ms",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "pump": {
+      "frameBytes": 8,
+      "chainBytes": 692,
+      "chain": [
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "put32": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "put32"
+      ]
+    },
+    "register_tm_clones": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "register_tm_clones"
+      ]
+    },
+    "servo_move_from": {
+      "frameBytes": 136,
+      "chainBytes": 828,
+      "chain": [
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "spi_xfer.constprop.0": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "spi_xfer.constprop.0",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "st_crc32": {
+      "frameBytes": 20,
+      "chainBytes": 20,
+      "chain": [
+        "st_crc32"
+      ]
+    },
+    "st_fail": {
+      "frameBytes": 24,
+      "chainBytes": 268,
+      "chain": [
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "st_flush": {
+      "frameBytes": 112,
+      "chainBytes": 244,
+      "chain": [
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "st_inhibit_fault": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "st_inhibit_fault",
+        "st_lock"
+      ]
+    },
+    "st_init": {
+      "frameBytes": 80,
+      "chainBytes": 88,
+      "chain": [
+        "st_init",
+        "st_read_page"
+      ]
+    },
+    "st_lock": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "st_lock"
+      ]
+    },
+    "st_note": {
+      "frameBytes": 40,
+      "chainBytes": 40,
+      "chain": [
+        "st_note",
+        "st_lock"
+      ]
+    },
+    "st_preserve_first_window": {
+      "frameBytes": 12,
+      "chainBytes": 12,
+      "chain": [
+        "st_preserve_first_window"
+      ]
+    },
+    "st_read_page": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "st_read_page"
+      ]
+    },
+    "st_unlock": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "st_unlock"
+      ]
+    },
+    "st_write_page": {
+      "frameBytes": 28,
+      "chainBytes": 28,
+      "chain": [
+        "st_write_page"
+      ]
+    },
+    "vdd_init": {
+      "frameBytes": 8,
+      "chainBytes": 292,
+      "chain": [
+        "vdd_init",
+        "vdd_read_mv",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "vdd_read_mv": {
+      "frameBytes": 16,
+      "chainBytes": 284,
+      "chain": [
+        "vdd_read_mv",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "vdd_track_reset": {
+      "frameBytes": 0,
+      "chainBytes": 0,
+      "chain": [
+        "vdd_track_reset"
+      ]
+    },
+    "vdd_track_result": {
+      "frameBytes": 8,
+      "chainBytes": 8,
+      "chain": [
+        "vdd_track_result"
+      ]
+    },
+    "vdd_track_sample": {
+      "frameBytes": 8,
+      "chainBytes": 276,
+      "chain": [
+        "vdd_track_sample",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    }
+  },
+  "explicitChangedPaths": {
+    "servo/position-to-distance": {
+      "bytes": 552,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "focus_answer_queries",
+        "focus_distance_code",
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "servo/distance-to-position": {
+      "bytes": 552,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "focus_answer_queries",
+        "focus_counts_for_code",
+        "focus_exp2_q6"
+      ]
+    },
+    "servo/predictor": {
+      "bytes": 504,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "focus_pred_sample",
+        "__divsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "inlined-homing/position-to-distance": {
+      "bytes": 208,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "pump",
+        "focus_answer_queries",
+        "focus_distance_code",
+        "distance_mm",
+        "__udivsi3",
+        "__aeabi_idiv0"
+      ]
+    },
+    "inlined-homing/distance-to-position": {
+      "bytes": 208,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "pump",
+        "focus_answer_queries",
+        "focus_counts_for_code",
+        "focus_exp2_q6"
+      ]
+    },
+    "inlined-homing/predictor": {
+      "bytes": 160,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "pump",
+        "focus_pred_sample",
+        "__divsi3",
+        "__aeabi_idiv0"
+      ]
+    }
+  },
+  "releasedRelativeWrapperLinked": false,
+  "relativeWrapperCompilerFrameBytes": 16,
+  "reviewedLibraryBodies": 17,
+  "reviewedRawWords": 14,
+  "exceptionBudget": {
+    "coreWords": 8,
+    "alignmentWords": 1,
+    "bytesPerFrame": 36,
+    "configurablePriorityLevels": 4,
+    "additionalHardFaultAndNMI": 2,
+    "totalFrames": 6,
+    "totalBytes": 216
+  },
+  "analyzerSHA256": "799c472f32e6be1b9ac3d7eee46d521b6fb8a5ae8cdfa0775d6eaab4d1a43806",
+  "baseAnalyzerSHA256": "5c1eb10415c35cd6cf3e3b06b66a7af648045c8c6af0534be4883012b7b9879b",
+  "policySHA256": "604196770baa285cbbddc78996b0be09544743651e6bced23c1588732e5868b5",
+  "runnerSHA256": "52f6413fdb077133a8d13b133432f65e0f5e2752b9b56539fd8b837823b701ad",
+  "guards": {
+    "rejected": 20,
+    "accepted": 1
+  }
+}

@@ -1,0 +1,468 @@
+{
+  "method": "Fresh independent UART extraction of five public .sr files; length/checksum/terminator validated direction-bounded LexOptical candidates with clock annotations removed and whitespace joined. No timestamp or byte repair; no text-trace rate claim.",
+  "entropy512": [
+    {
+      "validatedFrames": 834,
+      "body04": 205,
+      "lens06": 201,
+      "body04Lengths": {
+        "22": 205
+      },
+      "lens06Lengths": {
+        "48": 201
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 205
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "a6000_ef50_viltrox_init.sr",
+      "sha256": "962247e6463eef222f3cbdde46b9f91005fb976da2d638b97b5dce3bb8db33da",
+      "durationSeconds": 3.7391841666666665,
+      "extraction": {
+        "complete_cs_windows": 839,
+        "extraction_errors": 1,
+        "partial_windows": 1,
+        "validated_frames": 834,
+        "windows_without_start_edge": 4
+      },
+      "04ObservedCadence": {
+        "intervals": 204,
+        "medianMilliseconds": 16.683166666666693,
+        "minMilliseconds": 16.62150000000007,
+        "maxMilliseconds": 16.749166666666593
+      },
+      "06ObservedCadence": {
+        "intervals": 200,
+        "medianMilliseconds": 16.684500000000213,
+        "minMilliseconds": 16.662333333333336,
+        "maxMilliseconds": 16.70033333333332
+      }
+    },
+    {
+      "validatedFrames": 620,
+      "body04": 150,
+      "lens06": 151,
+      "body04Lengths": {
+        "22": 150
+      },
+      "lens06Lengths": {
+        "48": 151
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 150
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "a6000_efs24_viltrox_init.sr",
+      "sha256": "8e428d7f1bf2c7da7aa6df928f19a5c5bfd92a824c7fef39d2c3d6e671b091ae",
+      "durationSeconds": 2.828491166666667,
+      "extraction": {
+        "complete_cs_windows": 625,
+        "extraction_errors": 1,
+        "partial_windows": 1,
+        "validated_frames": 620,
+        "windows_without_start_edge": 4
+      },
+      "04ObservedCadence": {
+        "intervals": 149,
+        "medianMilliseconds": 16.684000000000143,
+        "minMilliseconds": 16.62983333333323,
+        "maxMilliseconds": 16.735166666666636
+      },
+      "06ObservedCadence": {
+        "intervals": 150,
+        "medianMilliseconds": 16.684499999999993,
+        "minMilliseconds": 16.666666666666607,
+        "maxMilliseconds": 16.743500000000022
+      }
+    },
+    {
+      "validatedFrames": 724,
+      "body04": 176,
+      "lens06": 177,
+      "body04Lengths": {
+        "22": 176
+      },
+      "lens06Lengths": {
+        "48": 177
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 176
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "a6000_sel55210_init_210.sr",
+      "sha256": "3a0036f4f4441eb4e1fd769dcb29a0847220ecda8180f800cbde2cb16e39a887",
+      "durationSeconds": 3.9863575,
+      "extraction": {
+        "complete_cs_windows": 729,
+        "validated_frames": 724,
+        "windows_without_start_edge": 5
+      },
+      "04ObservedCadence": {
+        "intervals": 175,
+        "medianMilliseconds": 16.684166666666833,
+        "minMilliseconds": 16.639666666666606,
+        "maxMilliseconds": 16.72499999999988
+      },
+      "06ObservedCadence": {
+        "intervals": 176,
+        "medianMilliseconds": 16.6839999999997,
+        "minMilliseconds": 15.371333333333403,
+        "maxMilliseconds": 16.724166666666875
+      }
+    },
+    {
+      "validatedFrames": 398,
+      "body04": 94,
+      "lens06": 96,
+      "body04Lengths": {
+        "22": 94
+      },
+      "lens06Lengths": {
+        "48": 96
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 94
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "a6000_sel55210_init_55.sr",
+      "sha256": "1869e8ef27f0a5fcf6f462964aafc2df7389a0f67e330383f73d92c08dc62f5d",
+      "durationSeconds": 2.628048166666667,
+      "extraction": {
+        "complete_cs_windows": 403,
+        "validated_frames": 398,
+        "windows_without_start_edge": 5
+      },
+      "04ObservedCadence": {
+        "intervals": 93,
+        "medianMilliseconds": 16.682666666666847,
+        "minMilliseconds": 16.62616666666672,
+        "maxMilliseconds": 16.71633333333333
+      },
+      "06ObservedCadence": {
+        "intervals": 95,
+        "medianMilliseconds": 16.6839999999997,
+        "minMilliseconds": 15.34599999999986,
+        "maxMilliseconds": 16.71833333333339
+      }
+    },
+    {
+      "validatedFrames": 880,
+      "body04": 215,
+      "lens06": 216,
+      "body04Lengths": {
+        "22": 215
+      },
+      "lens06Lengths": {
+        "48": 216
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 215
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "a6000_selp1650_init.sr",
+      "sha256": "9d9b8cbc2de9428e98bd14f767646dc7505c7c3f4feadd038030f6725976162a",
+      "durationSeconds": 5.1068351666666665,
+      "extraction": {
+        "complete_cs_windows": 884,
+        "validated_frames": 880,
+        "windows_without_start_edge": 4
+      },
+      "04ObservedCadence": {
+        "intervals": 214,
+        "medianMilliseconds": 16.683583333333416,
+        "minMilliseconds": 16.62750000000002,
+        "maxMilliseconds": 16.715666666666795
+      },
+      "06ObservedCadence": {
+        "intervals": 215,
+        "medianMilliseconds": 16.683166666666693,
+        "minMilliseconds": 16.171833333333385,
+        "maxMilliseconds": 16.715000000000035
+      }
+    }
+  ],
+  "lexOptical": [
+    {
+      "validatedFrames": 12,
+      "body04": 0,
+      "lens06": 1,
+      "body04Lengths": {},
+      "lens06Lengths": {
+        "48": 1
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {},
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "fullinit.txt",
+      "sha256": "6f83b325e4f7a651fa4a6780bdf330c864b05040bd5d844fed9c83586ca8ca20",
+      "directionBlocks": 12,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 4,
+      "body04": 2,
+      "lens06": 0,
+      "body04Lengths": {
+        "22": 2
+      },
+      "lens06Lengths": {},
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 2
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "mainloop_nex7_a7.txt",
+      "sha256": "b698c719483fd2eefd96467b82aa7a32b295375dac996bf531b40a40f9c59e2e",
+      "directionBlocks": 4,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 4
+    },
+    {
+      "validatedFrames": 592,
+      "body04": 141,
+      "lens06": 146,
+      "body04Lengths": {
+        "22": 141
+      },
+      "lens06Lengths": {
+        "48": 146
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 141
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-clocks-and-sync-lines-2.txt",
+      "sha256": "645e267be5dc762a53f3ddb0a347fb487bd318eb073ab7e658c77e0b20624236",
+      "directionBlocks": 603,
+      "rejectedCandidates": 11,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 591
+    },
+    {
+      "validatedFrames": 468,
+      "body04": 232,
+      "lens06": 0,
+      "body04Lengths": {
+        "22": 232
+      },
+      "lens06Lengths": {},
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 232
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-clocks-and-sync-lines.txt",
+      "sha256": "b032f14e1bc3077082d1df32efca0a3692a52f1ab20cfb9c5ab8c589e8e37083",
+      "directionBlocks": 474,
+      "rejectedCandidates": 6,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 468
+    },
+    {
+      "validatedFrames": 0,
+      "body04": 0,
+      "lens06": 0,
+      "body04Lengths": {},
+      "lens06Lengths": {},
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {},
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-partial init with clocks.txt",
+      "sha256": "54d51f46722d208b8d5b276b0a2bb50cf25ebc5f352709db80cb07a3642c77b5",
+      "directionBlocks": 226,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 226,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 451,
+      "body04": 109,
+      "lens06": 106,
+      "body04Lengths": {
+        "22": 105,
+        "27": 4
+      },
+      "lens06Lengths": {
+        "48": 106
+      },
+      "recordTags": {
+        "0x1d": 4
+      },
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 109
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-sony-28-70mm-at-70mm.txt",
+      "sha256": "f8cceda2bc6550374850cc1e59e8e73225724f12e521288e6c767bd52739b03f",
+      "directionBlocks": 451,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 1132,
+      "body04": 280,
+      "lens06": 281,
+      "body04Lengths": {
+        "22": 280
+      },
+      "lens06Lengths": {
+        "48": 281
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 280
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-sony-55mm-init.txt",
+      "sha256": "2f32a80af1cf0fdaddb36746645a7304e75a089700e52f97eb8495d1585580bb",
+      "directionBlocks": 1132,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 2157,
+      "body04": 540,
+      "lens06": 537,
+      "body04Lengths": {
+        "22": 540
+      },
+      "lens06Lengths": {
+        "48": 537
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 540
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-voigtlander-15mm-4.5-30cm-to-inf.txt",
+      "sha256": "f915eb987c8c50037d11c9d6aaca5466ec3f908f82ebf20117c60178f71c1b50",
+      "directionBlocks": 2157,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 1858,
+      "body04": 461,
+      "lens06": 461,
+      "body04Lengths": {
+        "22": 461
+      },
+      "lens06Lengths": {
+        "48": 461
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 461
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-voigtlander-15mm-closing-aperture.txt",
+      "sha256": "3c1480d4970aef5d0d00c85ed8f3b29ffd5973208cfa82f9c74d1ddae9dc3f3a",
+      "directionBlocks": 1858,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 538,
+      "body04": 131,
+      "lens06": 131,
+      "body04Lengths": {
+        "22": 131
+      },
+      "lens06Lengths": {
+        "48": 131
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 131
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-voigtlander-15mm-f4.5-inf.txt",
+      "sha256": "5c3dd7ad73cd4c87dd5402aa583966106f8802b8e96da1db41d923348211fef4",
+      "directionBlocks": 538,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 266,
+      "body04": 64,
+      "lens06": 64,
+      "body04Lengths": {
+        "22": 64
+      },
+      "lens06Lengths": {
+        "48": 64
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 64
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-zeiss-28mm-at-2.8-init.txt",
+      "sha256": "dff0a89f19bebeec728004db7d83e074341f832580f8e8a3b97c451874b536bb",
+      "directionBlocks": 266,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    },
+    {
+      "validatedFrames": 301,
+      "body04": 75,
+      "lens06": 76,
+      "body04Lengths": {
+        "22": 75
+      },
+      "lens06Lengths": {
+        "48": 76
+      },
+      "recordTags": {},
+      "queryRecords": 0,
+      "queryBatchHistogram": {
+        "0": 75
+      },
+      "unknownOrTruncatedRecordWalks": 0,
+      "capture": "nex7-zeiss-28mm-at-2.8-mid.txt",
+      "sha256": "d5ecb9548db2e1a64e138147e2ea28aab6c8587aaec88cdfa11c54a3672be66e",
+      "directionBlocks": 301,
+      "rejectedCandidates": 0,
+      "blocksWithoutSync": 0,
+      "clockAnnotatedBlocksAccepted": 0
+    }
+  ],
+  "limits": [
+    "No query workload bound follows from absence in finite public recordings.",
+    "Directionless LexOptical snippets excluded; corrupt/interrupted candidates excluded.",
+    "0x06 lengths vary by lens; no universal status tail offset inferred.",
+    "No A7C II or EA9 camera capture used; no factory bytes included."
+  ],
+  "hardwareReportsSent": 0
+}

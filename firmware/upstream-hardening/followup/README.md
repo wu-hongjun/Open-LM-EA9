@@ -48,3 +48,18 @@ offline release/host checks and 276 bytes before logs. The partial 13 overlay
 is not used; reviewed coordinate admission bounds the unchanged control math.
 Physical acceptance remains open, and no original workbench or released image
 has been overwritten.
+
+## Target and time follow-ups
+
+Distinct Astra lanes [19 target](../../../docs/audits/astra-19-absolute-target-2026-10-15.md),
+[20 time](../../../docs/audits/astra-20-time-contract-2026-10-15.md),
+[21 workload](../../../docs/audits/astra-21-workload-2026-10-15.md),
+[22 compiled stack](../../../docs/audits/astra-22-stack35-2026-10-15.md) and
+[23 final composition](../../../docs/audits/astra-23-composition35-2026-10-15.md)
+support the separately versioned [3.5 composition](../next35/README.md).
+Root integrated the verified target/time changes and a measured release-only
+counter omission. Exact final regressions, independent stack/composition review,
+repeat builds and host checks pass. Hardware timing and camera acceptance remain
+open. The public captures contain no query records in the inspected traffic and
+do not establish a real query deadline; synthetic capacity tests do not justify
+an arbitrary buffer or scheduling change. Original overlays and releases stay frozen.

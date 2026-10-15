@@ -1,0 +1,39 @@
+{
+  "status": "offline-candidate-unqualified",
+  "baseVersion": "3.4.0",
+  "nextVersion": "3.5.0",
+  "baseImageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/19-absolute-target/apply.py",
+      "entry": "apply",
+      "argument": "src"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/20-time-contract/apply.py",
+      "entry": "home",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/20-time-contract/apply.py",
+      "entry": "predictor",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/next35/apply_counter.py",
+      "entry": "apply",
+      "argument": "work"
+    }
+  ],
+  "inputs": {
+    "firmware/upstream-hardening/followup/19-absolute-target/apply.py": "578bb492f75cc1e7779ccad7135fd1475d574541dff8d0444cd18751dc8cafcd",
+    "firmware/upstream-hardening/followup/19-absolute-target/run.py": "568d6389fd6112f5e527be5a02073cd545911a24a8893cc366980d56e7df07ad",
+    "firmware/upstream-hardening/followup/20-time-contract/apply.py": "aafc50bb1e60fdd701c006e98b152e7a29d1ca6071d0e89964dd387856059002",
+    "firmware/upstream-hardening/followup/20-time-contract/run.py": "85ed4e6a4b1b434b0d048d7a5d32f2606e73c61d8987581e306db8ce3a2126d8",
+    "firmware/upstream-hardening/next35/apply_counter.py": "b587276ef073aafc64178675007a74fb0f08123b654d641f70d75d4620899fe8",
+    "firmware/upstream-hardening/next35/test_counter.c": "d4859c6f37fb9ded044745591331a6e97bfdc7e4eb688ba7d0e8340df2e0cdf6",
+    "firmware/upstream-hardening/next35/test_counter.py": "9d396d4038aeb7fb85070a4dc70a2c2f67ad4ed193c8de0159316e9b919d06f5"
+  },
+  "hardwareReportsSent": 0,
+  "cameraQualified": false
+}

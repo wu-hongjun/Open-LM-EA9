@@ -1,0 +1,327 @@
+{
+  "status": "exact-3.4-synthetic-capacity-controls",
+  "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+  "manifestSourcesVerified": 46,
+  "cases": 28,
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "results": [
+    {
+      "recordsPerFrame": 0,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 0,
+      "admitted": 0,
+      "delivered": 0,
+      "not_admitted": 0,
+      "first_status_answers": 0
+    },
+    {
+      "recordsPerFrame": 0,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 0,
+      "admitted": 0,
+      "delivered": 0,
+      "not_admitted": 0,
+      "first_status_answers": 0
+    },
+    {
+      "recordsPerFrame": 0,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 0,
+      "admitted": 0,
+      "delivered": 0,
+      "not_admitted": 0,
+      "first_status_answers": 0
+    },
+    {
+      "recordsPerFrame": 0,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 0,
+      "admitted": 0,
+      "delivered": 0,
+      "not_admitted": 0,
+      "first_status_answers": 0
+    },
+    {
+      "recordsPerFrame": 1,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 1,
+      "admitted": 1,
+      "delivered": 1,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 1,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 1,
+      "admitted": 1,
+      "delivered": 1,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 1,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 1,
+      "admitted": 1,
+      "delivered": 1,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 1,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 1,
+      "admitted": 1,
+      "delivered": 1,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 2,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 2,
+      "admitted": 2,
+      "delivered": 2,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 2,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 2,
+      "admitted": 2,
+      "delivered": 2,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 2,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 2,
+      "admitted": 2,
+      "delivered": 2,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 2,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 2,
+      "admitted": 2,
+      "delivered": 2,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 3,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 3,
+      "admitted": 3,
+      "delivered": 3,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 3,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 3,
+      "admitted": 3,
+      "delivered": 3,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 3,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 3,
+      "admitted": 3,
+      "delivered": 3,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 3,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 3,
+      "admitted": 3,
+      "delivered": 3,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 4,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 4,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 4,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 0,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 4,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 0,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 5,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 5,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 1,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 5,
+      "cycles": 1,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 5,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 1,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 5,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 5,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 1,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 5,
+      "cycles": 1,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 5,
+      "admitted": 4,
+      "delivered": 4,
+      "not_admitted": 1,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 8,
+      "publicStateHeader": false,
+      "drivePerCycle": false,
+      "requested": 32,
+      "admitted": 20,
+      "delivered": 20,
+      "not_admitted": 12,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 8,
+      "publicStateHeader": false,
+      "drivePerCycle": true,
+      "requested": 32,
+      "admitted": 14,
+      "delivered": 14,
+      "not_admitted": 18,
+      "first_status_answers": 1
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 8,
+      "publicStateHeader": true,
+      "drivePerCycle": false,
+      "requested": 32,
+      "admitted": 20,
+      "delivered": 20,
+      "not_admitted": 12,
+      "first_status_answers": 2
+    },
+    {
+      "recordsPerFrame": 4,
+      "cycles": 8,
+      "publicStateHeader": true,
+      "drivePerCycle": true,
+      "requested": 32,
+      "admitted": 14,
+      "delivered": 14,
+      "not_admitted": 18,
+      "first_status_answers": 1
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "inputs": {
+    "test_batches.c": "cf5b5ce30f91474a69cd9d24db718517bb0cdd6d00ab24c5d4ab547b3aa9a9b5",
+    "run_batches.py": "5fed2d0b1c9ed431cf550d1d34b0370d64dbe1d651f73dae2df344be0fd90470",
+    "test_flow.c": "45bbe9d1ae4cc8369ba70a2027a8889fc91069d70751590371f7375921ec93ca"
+  }
+}

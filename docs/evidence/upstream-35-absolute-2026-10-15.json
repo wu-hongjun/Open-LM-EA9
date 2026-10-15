@@ -1,0 +1,296 @@
+{
+  "status": "offline-reviewed-camera-unqualified",
+  "date": "2026-10-15",
+  "version": "3.5.0",
+  "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+  "manifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+  "imageBytes": 20480,
+  "codeAndDataEnd": 39672,
+  "marginBeforeDiagnostics": 264,
+  "staticRAMBytes": 3072,
+  "reservedStackBytes": 8192,
+  "repeatImageManifestPatchIdentical": true,
+  "exactFinalComposition": {
+    "status": "passed-exact-frozen-offline-composition",
+    "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+    "buildManifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+    "sourceFilesMatched": 46,
+    "checks": [
+      {
+        "name": "commits",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "capture",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "diagnostics",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "coordinate",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-ownership",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "query-flow",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "absolute-target",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "time-contract",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "home-inhibit",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "new-composition",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "release-counter",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "target-time-composition",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "exact-counter-parity",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "stack",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decoder-boundaries",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "arm-writer",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "decode-3.2.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.2.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.3.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.3.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.4.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.4.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      },
+      {
+        "name": "decode-3.5.0",
+        "exitCode": 0,
+        "expectedSuccess": true
+      },
+      {
+        "name": "reject-prefix-3.5.0",
+        "exitCode": 1,
+        "expectedSuccess": false
+      }
+    ],
+    "stackContainerPinsRebound": {
+      "hardened.elf": {
+        "reviewed": "00348791bfc4469137a0ce2edff5631b455485c5c5f1f0ed3c51f2f8ce1d4709",
+        "reproduced": "330dbf896794544be7925f4d42a7376821916163295379ced2c5a9e0cfbf6b86"
+      },
+      "hardened.map": {
+        "reviewed": "4021da4942ab9e9722af54775c1298cfad455d8652a2774fb2d53d5b8c4774d3",
+        "reproduced": "b7c794be02072e35f86c27d0a7f08c95f678ad89bc8a5eda6c83af05a6e7ee7a"
+      }
+    },
+    "hardwareReportsSent": 0,
+    "cameraQualified": false,
+    "limits": "Finite host IRQ cuts, simulated peripherals/NVM and compiled writer address bounds; physical timing, exposure and optical AF remain unqualified."
+  },
+  "target": {
+    "proposalCases": 20,
+    "frozenFailures": 10,
+    "relativeAPIParityCases": 7
+  },
+  "time": {
+    "positiveExecutions": 50,
+    "frozenFailingControls": 12,
+    "pathGuards": 8,
+    "homeExpiredControls": 10,
+    "exceptionalPredictorControls": 2
+  },
+  "stack": {
+    "maximumAllVectorPriorityBytes": 1560,
+    "conditional": true,
+    "unresolvedCompiledEdges": [],
+    "recursiveComponents": [],
+    "negativeEvidenceGuards": 20,
+    "stackHighWaterMeasured": false
+  },
+  "independentComposition": {
+    "positiveExecutions": 51,
+    "failingControls": 4,
+    "compositionCases": 40,
+    "relativeAPICases": 7,
+    "exactCounterCases": 4,
+    "deadbandCallerCancellationCuts": 9
+  },
+  "counterParity": {
+    "periodSamplesPerCase": 17,
+    "statusFramesPerCase": 34,
+    "liveTracePagesPerCase": 12,
+    "counterWrapExercised": true,
+    "periodWireGPIOAndLiveTraceParity": true
+  },
+  "sizeMeasurements": [
+    {
+      "proposal": "target-and-home",
+      "margin": 256,
+      "staticRAMBytes": 3076
+    },
+    {
+      "proposal": "plus-predictor",
+      "margin": 248,
+      "staticRAMBytes": 3076,
+      "rejected": true
+    },
+    {
+      "proposal": "plus-release-only-counter-omission",
+      "margin": 264,
+      "staticRAMBytes": 3072
+    }
+  ],
+  "publicWorkload": {
+    "entropyBody04": 840,
+    "lexOpticalBody04": 2035,
+    "queryRecords": 0,
+    "realQueryDeadlineEstablished": false,
+    "syntheticCapacityCases": 28
+  },
+  "swiftTests": 53,
+  "appVersion": "0.18.0",
+  "appBuild": 22,
+  "nativePreparation": {
+    "checks": [
+      {
+        "command": "prepare-absolute-upstream",
+        "version": "3.5.0",
+        "bytes": 20480,
+        "sha256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-bounded-upstream",
+        "version": "3.4.0",
+        "bytes": 20480,
+        "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-hardened-upstream",
+        "version": "3.3.0",
+        "bytes": 20480,
+        "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-startup",
+        "version": "3.2.0",
+        "bytes": 20480,
+        "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-upstream",
+        "version": "3.1.0",
+        "bytes": 20480,
+        "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "nativePrepareMatchesCandidate": true
+      },
+      {
+        "command": "prepare-af",
+        "version": "3.0.0",
+        "bytes": 20480,
+        "sha256": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03",
+        "nativePrepareMatchesCandidate": true
+      }
+    ],
+    "incompatible85RejectedWithoutOutput": true,
+    "CLI_SHA256": "dcfb5755c4140a3e96b1a59a93c33c392960607bbddfc38f8951f2b2c4cf0352",
+    "hardwareReportsSent": 0,
+    "canonicalStateModified": false,
+    "repeatImageManifestPatchIdentical": true
+  },
+  "priorArtifactsPreserved": 56,
+  "historicalRegistryEntriesUnchanged": true,
+  "hardwareReportsSent": 0,
+  "adapterInstalledVersionChanged": false,
+  "canonicalStateModified": false,
+  "pendingHardwareGate": "Uploaded 3.2 still awaits owner-confirmed physical reconnect and strict verification; 3.5 is offline only.",
+  "limits": [
+    "Finite source/peripheral/IRQ tests are not camera or physical timing qualification.",
+    "Shared-start motion changes the initial sample baseline and removes one encoder transaction; optical/controller behavior needs hardware tests.",
+    "Homing post-operation acceptance is based on sampled ticks, not a guaranteed physical cutoff instant.",
+    "Whole-counter-wrap elapsed aliases remain deferred; exceptional predictor arithmetic fix is not a measured camera symptom.",
+    "Public captures establish no query workload/deadline or arbitrary-load capacity guarantee.",
+    "Factory reconstruction is partial and current firmware retains the upstream controller.",
+    "Actual iris remains unknown; fixed 50mm metadata and donor optical tables require camera/optical qualification."
+  ],
+  "evidenceHashes": {
+    "firmware/candidates/3.5.0/contax-zeiss-50-f1-4.manifest.json": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+    "firmware/candidates/diagnostic-registry.json": "2a4175aebd5856a67951800eb34d5cb2ef0a627341210b4b6131e1f0e514fdb7",
+    "firmware/upstream-hardening/next35/accepted-lanes.json": "913a94c4e5ab24e964f8a07da3bab10c1dd3ed269028e8e01cca7e07bb44416f",
+    "scripts/build-upstream-absolute.py": "15a129ef29b3b4758bdb21086663d941e60842dc49dddc8479099847cac92cb2",
+    "scripts/test-upstream-absolute.py": "5c2c96ff8034a05b5dbf3721e5ed65091127d2fea40cfc1a873db209797859d8",
+    "scripts/startup_diagnostic_registry.py": "e01c4b210577a22eec7cacd535a29ef31a272214247780e4432f7c958895ede8",
+    "firmware/upstream-hardening/next35/stack-reproduction.json": "43cac44c4337a34848a7186190da451d9f2074fa45714ebf752a610723b9bceb",
+    "firmware/upstream-hardening/followup/22-stack35/policy.json": "604196770baa285cbbddc78996b0be09544743651e6bced23c1588732e5868b5",
+    "firmware/upstream-hardening/followup/22-stack35/run.py": "52f6413fdb077133a8d13b133432f65e0f5e2752b9b56539fd8b837823b701ad",
+    "firmware/upstream-hardening/followup/23-composition35/run.py": "ceb0e4e7c5f2b28ea820a0f613200b1ec3ca8c5a11c5d2a22efa344bfa3ce0dd",
+    "firmware/upstream-hardening/followup/23-composition35/run_counter.py": "f41aa6014c46745683b87f882e543aa39628a2c5fd12df514ef361d05a4e5cd0"
+  }
+}
