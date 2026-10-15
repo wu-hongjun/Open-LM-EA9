@@ -15,18 +15,20 @@ connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
-The **upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4 is prepared
-offline; flashing is deferred**. It repairs first-window opener loss reproduced
-in 11 frozen-3.1 cases, restores stock lens ID 234 as a compatibility control and
+The **upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4 has been
+uploaded; physical reconnect and strict byte verification are pending**. It
+repairs first-window opener loss reproduced in 11 frozen-3.1 cases, restores
+stock lens ID 234 as a compatibility control and
 adds bounded startup/handshake records in a reserved application tail. It retains
 upstream's AF algorithms and optional aperture-field behavior. All 12 repaired
 arrival cases, eight upstream host outcomes, nine compiled ARM writer checks,
 seven decoder tests and 53 Swift tests pass. It is **not camera-qualified**;
-the A7C II aperture/capture fix remains to be tested after a separately requested
-upload/reconnect verification. No hardware was accessed during this preparation.
+the A7C II aperture/capture fix remains to be tested after reconnect verification.
+The upload retained fresh backup, durable journal and physical-reconnect guards.
+[Current installation and test record](docs/evidence/upstream-32-upload-2026-10-15.md).
 [Candidate](firmware/candidates/3.2.0/README.md) ·
 [Implementation/evidence](docs/evidence/upstream-32-startup-diagnostic-2026-10-15.md) ·
-[Later one-cycle and log-retrieval procedure](docs/upstream-startup-diagnostic-test.md).
+[One-cycle and log-retrieval procedure](docs/upstream-startup-diagnostic-test.md).
 
 The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is uploaded and
 strictly byte-verified after physical reconnect**. **Camera acceptance failed:**

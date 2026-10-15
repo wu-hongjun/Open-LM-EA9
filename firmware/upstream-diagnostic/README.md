@@ -1,6 +1,8 @@
 # Upstream C startup diagnostic 3.2
 
-**Prepared offline for Contax Zeiss 50mm f/1.4; not uploaded or camera-qualified.**
+**Uploaded for Contax Zeiss 50mm f/1.4; physical reconnect and strict byte
+verification pending. Camera compatibility is unqualified.** See the
+[installation record](../../docs/evidence/upstream-32-upload-2026-10-15.md).
 This lane starts from pinned upstream `d52ed06cc449918f938e0695fbf29a0c4141f2b2`.
 It keeps the upstream servo, focus mapping, prediction, homing and parking
 algorithms. The [reviewable patch](upstream-changes.patch) contains every change

@@ -1,9 +1,10 @@
 # 3.2.0 — upstream C startup diagnostic, 50mm f/1.4
 
-**Prepared and tested offline. Not flashed or camera-qualified.** The installed
-3.1 image remains held after missing aperture and a blocked shutter, with normal
-shutdown. This candidate repairs a reproduced first-window receive loss,
-restores stock lens ID 234 as a compatibility control and adds bounded startup/
+**Uploaded; physical reconnect and strict byte verification pending. Not
+camera-qualified.** [Current installation record](../../../docs/evidence/upstream-32-upload-2026-10-15.md).
+The earlier 3.1 image remains held after missing aperture and a blocked shutter,
+with normal shutdown. This candidate repairs a reproduced first-window receive
+loss, restores stock lens ID 234 as a compatibility control and adds bounded startup/
 handshake diagnostics. Whether it fixes the physical A7C II failure is unproven.
 
 | Property | Value |
@@ -26,17 +27,18 @@ identify where an early power cut or unguarded CPU failure occurred.
 
 Validation covers 12 current first-window cases, 11 frozen-3.1 failures, eight
 retained upstream host outcomes, bounded log storage/failures, nine compiled ARM
-writer cases, seven decoder cases and 53 Swift tests. USB equality and camera
-operation have not been tested for this image. Older firmware and original stock
+writer cases, seven decoder cases and 53 Swift tests. USB byte verification and
+camera operation remain pending for this image. Older firmware and original stock
 recovery are unchanged.
 
 See [design and reproduction](../../upstream-diagnostic/README.md),
 [all upstream source changes](../../upstream-diagnostic/upstream-changes.patch),
 [manifest](contax-zeiss-50-f1-4.manifest.json),
 [evidence](../../../docs/evidence/upstream-32-startup-diagnostic-2026-10-15.md) and
-[future camera/log procedure](../../../docs/upstream-startup-diagnostic-test.md).
+[camera/log procedure](../../../docs/upstream-startup-diagnostic-test.md).
 
 Use **`prepare-startup` / `apply-startup`** for this candidate. Historical
 `apply-upstream` selects held 3.1; `apply-af` selects held 3.0. App 0.15/build 19
-offers a separate **Install Startup Diagnostic 3.2.0** action in USB tools. No
-upload is part of this preparation; coordinate flashing separately.
+offers a separate **Install Startup Diagnostic 3.2.0** action in USB tools. The
+October 15 upload followed a separate explicit owner request; byte verification
+and the single camera cycle/log retrieval are staged separately.

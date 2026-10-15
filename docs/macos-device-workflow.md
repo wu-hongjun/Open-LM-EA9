@@ -7,11 +7,12 @@ Use the lens ring to stop down. The library editor lets you override the fixed
 camera f-number while retaining the unknown physical setting.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
-Startup diagnostic **3.2.0** is prepared offline for the original 50mm f/1.4
-profile. USB tools provide a separate **Install Startup Diagnostic 3.2.0**
+Startup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4
+profile on October 15; physical reconnect and strict byte verification are pending.
+See [the installation record](evidence/upstream-32-upload-2026-10-15.md). USB tools provide a separate **Install Startup Diagnostic 3.2.0**
 action; changing the dropdown does not install it. Other/edited profiles are
 rejected. The native CLI equivalents are `prepare-startup` and `apply-startup`.
-Flashing is deferred to a separately coordinated request. Installed 3.2 routes
+This upload followed a separately coordinated owner request. Installed 3.2 routes
 the main action to USB tools, labels camera compatibility unqualified and avoids
 repeat installation. After one coordinated camera cycle, save a read-only backup
 and use the offline decoder, as described in [the diagnostic runbook](upstream-startup-diagnostic-test.md).

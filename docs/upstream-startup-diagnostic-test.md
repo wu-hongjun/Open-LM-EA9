@@ -1,12 +1,13 @@
-# Upstream 3.2 later upload and one-cycle diagnostic procedure
+# Upstream 3.2 installation and one-cycle diagnostic procedure
 
-**Offline preparation only. The owner will coordinate flashing separately.**
-The adapter has not been queried or programmed during 3.2 preparation. Its last
-verified image remains 3.1, whose camera result failed. Do not repeat that image.
+**October 15: upload complete; physical reconnect and strict byte verification
+pending.** See [the current installation record](evidence/upstream-32-upload-2026-10-15.md).
+The earlier offline preparation used no USB. The last verified image remains
+3.1 until 3.2 verification succeeds; its camera result failed. Do not repeat 3.1.
 See the [3.2 candidate](../firmware/candidates/3.2.0/README.md) and
 [design/evidence](evidence/upstream-32-startup-diagnostic-2026-10-15.md).
 
-## Later installation
+## Installation and required reconnect verification
 
 After an explicit upload request and confirmation that the adapter is on its
 USB cap with TECHART Update closed, use app 0.15/build 19's separate **USB tools
