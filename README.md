@@ -15,22 +15,24 @@ connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
-The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is prepared and
-tested offline**, awaiting the adapter's return to its USB cap. It builds the
+The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is uploaded**;
+physical reconnect and strict byte verification are pending. It builds the
 current pinned upstream commit `d52ed06`, preserving its controller, protocol,
 main loop, homing/park and driver C implementations. Only build compatibility,
 version/lens constants and corresponding pupil-row configuration differ.
 Both upstream host builds pass; all 53 Swift tests pass. App 0.14/build 17 and
 the explicit native `apply-upstream` path retain fresh backup/journal/reconnect/
 strict verification guards. This comparison is fixed to the original 50mm
-f/1.4 profile; runtime lens edits cannot change its compiled firmware. No upload
-or camera pass is claimed.
+f/1.4 profile; runtime lens edits cannot change its compiled firmware. A fresh
+two-pass backup matched the previous verified AF 3.0 flash exactly. All 320 pages
+were acknowledged; no post-START read was sent. No camera pass is claimed.
+[Installation record](docs/evidence/upstream-31-upload-2026-10-14.md) ·
 [Baseline provenance and limits](docs/evidence/upstream-baseline-2026-10-14.md) ·
 [Candidate](firmware/candidates/3.1.0/README.md) ·
 [Upload/camera procedure](docs/upstream-baseline-test.md).
 
-The **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 is uploaded and strictly
-byte-verified after physical reconnect**. Fresh two-pass backup/readback and
+The previous **AF 3.0 candidate for Contax Zeiss 50mm f/1.4 was uploaded and
+strictly byte-verified after physical reconnect**. Fresh two-pass backup/readback and
 separate offline audits passed. **Camera acceptance failed:** the owner reports
 half-press focusing followed by full-press freeze, no saved photo and battery-
 required recovery. Further AF 3.0 trials are held.

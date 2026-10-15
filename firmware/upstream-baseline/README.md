@@ -6,7 +6,8 @@ October 14, 2026. It uses that repository's protocol, servo, main loop, homing,
 shutdown and peripheral drivers together. Our factory-derived controller,
 `em_arbitration`, reference policy and runtime lens-profile layer are absent.
 
-**The 50mm f/1.4 image is prepared offline, not flashed or camera-qualified.**
+**The 50mm f/1.4 image is uploaded; physical reconnect and strict verification
+are pending. It is not camera-qualified.** See [the installation record](../../docs/evidence/upstream-31-upload-2026-10-14.md).
 Upstream documents a Sony a9 II test platform; the owner's A7C II remains an
 independent compatibility check. Its latest header also labels lens ID 50496
 as an experiment; this baseline preserves that value for a faithful comparison.

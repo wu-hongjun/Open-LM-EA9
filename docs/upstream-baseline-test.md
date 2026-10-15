@@ -1,12 +1,14 @@
 # Direct upstream 3.1 comparison on A7C II
 
 The [fixed 50mm f/1.4 candidate](../firmware/candidates/3.1.0/README.md) is
-prepared offline, not uploaded. It preserves the upstream implementation;
+uploaded, awaiting physical reconnect and strict verification. It preserves the
+upstream implementation;
 [the provenance](../firmware/upstream-baseline/README.md) lists all differences.
-The last verified hardware image remains AF 3.0, whose full-press capture and
-shutdown failed. Stop testing it; keep the camera unpowered and remove its
-battery if unresponsive. The owner authorized trying the upstream baseline;
-the physical move back to the USB update cap is still required.
+The last verified hardware image was AF 3.0, whose full-press capture and
+shutdown failed; further AF 3.0 trials are held. The owner returned the adapter
+to the USB cap and the authorized 3.1 upload completed with a fresh two-pass
+backup. Keep the adapter off the camera until reconnect verification passes.
+See [the installation record](evidence/upstream-31-upload-2026-10-14.md).
 
 ## Upload and exact reconnect verification
 
