@@ -5,18 +5,20 @@ a documented host communication protocol, and a polished, easy-to-use macOS app.
 The initial target is a Sony A7C II and manually adapted Contax C/Y lenses.
 
 The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following the
-system audit. The production firmware stack is still being qualified; Rust is
-a candidate, not a requirement.
+system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
+is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.14.0, build 17) refreshes
+upload/read-back path for lens metadata. The current app (0.14.1, build 18) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
 The **direct upstream 3.1 baseline for Contax Zeiss 50mm f/1.4 is uploaded and
-strictly byte-verified after physical reconnect**. Camera acceptance is pending. It builds the
+strictly byte-verified after physical reconnect**. **Camera acceptance failed:**
+the owner reports aperture `--`, no shutter release and no motor movement;
+normal shutdown is confirmed. Further 3.1 trials are held. It builds the
 current pinned upstream commit `d52ed06`, preserving its controller, protocol,
 main loop, homing/park and driver C implementations. Only build compatibility,
 version/lens constants and corresponding pupil-row configuration differ.
@@ -27,8 +29,10 @@ f/1.4 profile; runtime lens edits cannot change its compiled firmware. A fresh
 two-pass backup matched the previous verified AF 3.0 flash exactly. All 320 pages
 were acknowledged; no post-START read was sent on the armed connection.
 Fresh two-pass readback and a separate offline audit matched the full fixed
-image/metadata and unchanged protected flash/factory data. The initial loaded-lens
-MF capture/lifecycle cycle is requested before AF-S; no camera pass is claimed.
+image/metadata and unchanged protected flash/factory data. Actual focus mode and
+other settings remain unverified; motor silence alone does not prove an AF fault.
+App 0.14.1 marks the image as held and disables ordinary baseline installation.
+[Failure and five-case startup investigation](docs/evidence/upstream-31-camera-failure-2026-10-14.md) ·
 [Installation record](docs/evidence/upstream-31-upload-2026-10-14.md) ·
 [Baseline provenance and limits](docs/evidence/upstream-baseline-2026-10-14.md) ·
 [Candidate](firmware/candidates/3.1.0/README.md) ·

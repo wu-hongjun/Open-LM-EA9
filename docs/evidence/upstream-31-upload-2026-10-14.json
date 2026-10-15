@@ -1,6 +1,6 @@
 {
   "date": "2026-10-14",
-  "status": "uploaded-and-strictly-verified-camera-acceptance-pending",
+  "status": "uploaded-and-strictly-verified-camera-acceptance-failed",
   "sourceGitCommit": "11c2ad619a212de51b2a1e0cbf9f96d5597e99cb",
   "transactionID": "A87ABAD1-CC57-4982-AAB8-667A4E8E4B7B",
   "appVersion": "0.14.0",
@@ -25,8 +25,8 @@
   "retriesSent": 0,
   "uploadPerformed": true,
   "strictVerificationPassed": true,
-  "cameraTestingPerformed": false,
-  "cameraAcceptancePassed": null,
+  "cameraTestingPerformed": true,
+  "cameraAcceptancePassed": false,
   "ownerConfirmedUSBCapAndClosedUpdater": true,
   "physicalReconnectConfirmedAfterUpload": true,
   "canonicalArmedConnectionMarkerRetained": true,
@@ -55,7 +55,7 @@
     "planned50.bin": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f"
   },
   "offlineUploadAuditPassed": true,
-  "cameraTestStage": "Initial loaded-lens MF preview/capture/exposure/idle/shutdown check requested; AF-S deferred until results",
+  "cameraTestStage": "Missing aperture and blocked shutter; normal shutdown confirmed. Further upstream 3.1 trials held.",
   "verifiedAtUTC": "2026-10-15T01:41:19.796694+00:00",
   "verifiedAtLocal": "2026-10-14T21:41:19.796694-04:00",
   "verificationNativeExitCode": 0,
@@ -96,7 +96,7 @@
   },
   "postSTARTReadCountScope": "Armed upload connection before owner-confirmed physical reconnect; verification reads counted separately",
   "initialCameraCheckRequested": true,
-  "initialCameraCheckResultsReported": false,
+  "initialCameraCheckResultsReported": true,
   "requestedCameraSettings": {
     "camera": "Sony A7C II",
     "exposureMode": "still-photo A",
@@ -109,5 +109,7 @@
     "idleSeconds": 10,
     "photoPrerequisites": "Updating normal preview, normal motor behavior and confirmed MF; otherwise skip",
     "actualSettingsVerified": false
-  }
+  },
+  "cameraFailureEvidence": "upstream-31-camera-failure-2026-10-14.json",
+  "initialCameraCheckOutcome": "Owner reports aperture --, shutter does not activate and no focus-motor movement; shutdown normal. Actual focus mode and other settings remain unverified."
 }

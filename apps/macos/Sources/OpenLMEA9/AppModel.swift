@@ -344,7 +344,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         switch currentAppliedLens?.firmwareVersion {
         case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
-        case "3.1.0": return "Upstream AF baseline, compiled for Contax Zeiss 50mm f/1.4. Camera compatibility and saved-photo capture still need qualification."
+        case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
         case "2.9.0": return "AF 2.9 is held after capture freeze and shutdown failure. Use a separately verified replacement before camera testing."
         case "2.8.0": return "AF 2.8 is held after preview and shutdown failures. Restore stock or use a separately reviewed replacement."
         case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
@@ -366,10 +366,13 @@ enum AppTab: Hashable { case device, lensLibrary }
         applyLens(variant: variant, preservingFirmware: true)
     }
     var canInstallUpstreamBaseline: Bool {
-        guard canChangeFirmware, let profile = preparedLens else { return false }
+        guard !upstreamBaselineCameraFailureHold, canChangeFirmware, let profile = preparedLens else { return false }
         return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusUpstreamBaseline)) != nil
     }
-    func installAutofocus() { applyLens(variant: .autofocusUpstreamBaseline) }
+    func installAutofocus() {
+        guard canInstallUpstreamBaseline else { return }
+        applyLens(variant: .autofocusUpstreamBaseline)
+    }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }

@@ -1,0 +1,74 @@
+{
+  "status": "passed-offline-boundary-probe-physical-cause-unproven",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+  "fixtureSHA256": "1d7084c4f7abfad14029cdc7ab56c03c45d772ecce03ceefc01570ce2a786c36",
+  "buildProvenanceSHA256": "4e0c3e531e731df2755d55fa594bc607d11f355259cca7363904a5967c4b9e76",
+  "compiledSourceSHA256": {
+    "src/emount.c": "eb4a24fd7b63fa53a92f534642e3284f3bc339c155d7e2bdbe5e9fb704bdca2e",
+    "src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "src/emount.h": "3ba0e7f07a6ccf15d6302049705f45265a553bf0411047505ad2f9c73ddc513e",
+    "tools/hosttest/shim.c": "013e9b4de1e506a6394638d30f044dc48dbf19177f156f657dd5fa0ff492212d"
+  },
+  "hostOptimization": "-O2 -DNDEBUG -DEA9_NO_LOG",
+  "sanitizers": [
+    "AddressSanitizer",
+    "UndefinedBehaviorSanitizer"
+  ],
+  "cases": [
+    {
+      "case": "init-only",
+      "handshakeDone": false,
+      "statusFramesOnVD": 0,
+      "message05ApertureAV": 4352,
+      "message28OptionalApertureAV": 0,
+      "message07LensID": 50496,
+      "passed": true
+    },
+    {
+      "case": "partial-report",
+      "handshakeDone": false,
+      "statusFramesOnVD": 0,
+      "message05ApertureAV": 4352,
+      "message28OptionalApertureAV": 4352,
+      "message07LensID": 50496,
+      "passed": true
+    },
+    {
+      "case": "partial-omit",
+      "handshakeDone": false,
+      "statusFramesOnVD": 0,
+      "message05ApertureAV": 4352,
+      "message28OptionalApertureAV": 0,
+      "message07LensID": 50496,
+      "passed": true
+    },
+    {
+      "case": "complete-report",
+      "handshakeDone": true,
+      "statusFramesOnVD": 2,
+      "message05ApertureAV": 4352,
+      "message28OptionalApertureAV": 4352,
+      "message07LensID": 50496,
+      "passed": true
+    },
+    {
+      "case": "complete-omit",
+      "handshakeDone": true,
+      "statusFramesOnVD": 2,
+      "message05ApertureAV": 4352,
+      "message28OptionalApertureAV": 0,
+      "message07LensID": 50496,
+      "passed": true
+    }
+  ],
+  "hardwareReportsSent": 0,
+  "firmwareChanged": false,
+  "limitations": [
+    "Synthetic checksum-valid requests and scripted GPIO/VD/UART; not recovered A7C II traffic.",
+    "The real main loop, startup, sensor, motor, power and IRQ timing are not executed.",
+    "Handshake flag and status suppression do not prove homing readiness or camera acceptance.",
+    "Optional message 0x28 zero does not mean all aperture fields are unknown.",
+    "Neither an incomplete handshake nor an aperture capability-bit cause is proven on hardware."
+  ]
+}

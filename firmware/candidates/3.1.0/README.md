@@ -1,6 +1,9 @@
 # 3.1.0 — direct upstream baseline, Contax Zeiss 50mm f/1.4
 
-**Uploaded and strictly byte-verified after physical reconnect. Not camera-qualified.**
+**Uploaded and strictly byte-verified after physical reconnect. Camera acceptance
+failed; further trials held.** The owner reports aperture `--`, a blocked shutter
+and no motor movement; shutdown worked. Actual focus mode remains unverified.
+See [the failure investigation](../../../docs/evidence/upstream-31-camera-failure-2026-10-14.md).
 This is the pinned upstream implementation, with documented lens configuration and build
 compatibility changes. It replaces our controller and capture-scheduler work
 for a clean comparison. AF 3.0 remains held after its capture/shutdown failure.
@@ -47,7 +50,8 @@ cmp /new/baseline.bin firmware/candidates/3.1.0/contax-zeiss-50-f1-4.bin
 The October 14 upload completed with a fresh two-pass backup and all 320 pages
 acknowledged. See [the installation record](../../../docs/evidence/upstream-31-upload-2026-10-14.md).
 Fresh two-pass readback and a separate offline audit passed full-image/metadata
-and protected flash/factory-data checks. Initial MF capture/lifecycle testing is
-requested; AF-S follows only after that cycle succeeds.
+and protected flash/factory-data checks. The later camera failure does not alter
+that USB result. No further camera trial is requested. App 0.14.1 disables
+ordinary baseline installation; the original pinned image is preserved.
 Use `apply-upstream`, not the historical `apply-af` command. Do not retry held
 AF 3.0 or bypass reconnect/recovery guards to obtain a baseline.

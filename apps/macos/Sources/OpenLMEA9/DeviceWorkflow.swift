@@ -18,7 +18,16 @@ enum DeviceLensAction {
 /// Product guidance derived from the same guards used by explicit USB actions.
 /// Evaluating this state never reads or writes the adapter.
 @MainActor extension AppModel {
-    var installedCameraFailureHold: Bool { currentAppliedLens?.firmwareVersion == "3.0.0" }
+    static let cameraFailureHolds = [
+        "3.0.0": "AF 3.0 failed capture and shutdown testing with a full-press freeze requiring battery removal.",
+        "3.1.0": "Upstream 3.1 failed camera testing: aperture showed -- and the shutter would not release. Shutdown worked."
+    ]
+    var installedCameraFailureHold: Bool {
+        Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] != nil
+    }
+    var upstreamBaselineCameraFailureHold: Bool {
+        Self.cameraFailureHolds[FirmwareVariant.autofocusUpstreamBaseline.versionString] != nil
+    }
     var pendingBelongsToConnectedAdapter: Bool {
         guard let pendingUpdate, let device = devices.first, devices.count == 1 else { return false }
         return !device.serial.isEmpty && pendingUpdate.device.serial == device.serial
@@ -63,7 +72,9 @@ enum DeviceLensAction {
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Another adapter has an unfinished update" }
         if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Reconnect the USB cap" }
         if waitingForVerification { return "Verify your lens change" }
-        if installedCameraFailureHold { return "AF 3.0 camera testing held" }
+        if let version = currentAppliedLens?.firmwareVersion, Self.cameraFailureHolds[version] != nil {
+            return "AF \(version.split(separator: ".").prefix(2).joined(separator: ".")) camera testing held"
+        }
         if isDirty { return "Save your lens edits" }
         if loadError != nil { return "Recover your lens library" }
         if preparedLensIssue != nil { return "Finish this lens profile" }
@@ -85,7 +96,9 @@ enum DeviceLensAction {
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Connect the adapter used for that update, or review its saved backup in USB tools." }
         if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Physically unplug and reconnect the cap. The app will detect the new connection." }
         if waitingForVerification { return "Confirm the updater is closed, then verify the uploaded settings before using the camera." }
-        if installedCameraFailureHold { return "AF 3.0 failed capture and shutdown testing. Keep it off the camera; USB tools offer the separately prepared upstream baseline." }
+        if let reason = Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] {
+            return reason + " Keep the camera off; open USB tools to review the verified image and backup."
+        }
         if isDirty { return "Save or discard the changes in the lens editor before applying a profile." }
         if loadError != nil { return "The saved library was preserved. Import a valid library from Lens Library to recover it." }
         if let issue = preparedLensIssue { return issue }

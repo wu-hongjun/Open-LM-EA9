@@ -1,25 +1,29 @@
 # Direct upstream 3.1 comparison on A7C II
 
 The [fixed 50mm f/1.4 candidate](../firmware/candidates/3.1.0/README.md) is
-uploaded and strictly byte-verified after physical reconnect. Camera acceptance
-is pending. It preserves the
-upstream implementation;
+uploaded and strictly byte-verified after physical reconnect. **Camera acceptance
+failed; further 3.1 trials are held.** The owner reports aperture `--`, no shutter
+release and no motor movement; shutdown worked. Actual focus mode and other
+settings are unverified. See [the failure investigation](evidence/upstream-31-camera-failure-2026-10-14.md).
+The procedure below is retained for future reviewed candidates, not a retry
+request for this image. The image preserves the upstream implementation;
 [the provenance](../firmware/upstream-baseline/README.md) lists all differences.
 The previous verified hardware image was AF 3.0, whose full-press capture and
 shutdown failed; further AF 3.0 trials are held. The owner returned the adapter
 to the USB cap and the authorized 3.1 upload completed with a fresh two-pass
 backup. Fresh two-pass readback and a separate offline audit matched the full
-fixed image/metadata and unchanged protected flash/factory data. The initial
-loaded-lens MF capture/lifecycle check below is requested before AF-S.
+fixed image/metadata and unchanged protected flash/factory data. No further
+camera trial or stock restoration is requested.
 See [the installation record](evidence/upstream-31-upload-2026-10-14.md).
 
 ## Upload and exact reconnect verification
 
 With the camera off/unpowered, move the adapter to its USB update cap, connect
 the Mac and close TECHART Update. Confirm that physical state before reports.
-App 0.14/build 17 offers **USB tools → Install Upstream Baseline 3.1.0** with
+App 0.14/build 17 offered **USB tools → Install Upstream Baseline 3.1.0** with
 the original Contax Zeiss 50mm f/1.4 profile selected. Other/edited profiles are
-unavailable because this image has fixed compiled metadata.
+unavailable because this image has fixed compiled metadata. App 0.14.1/build 18
+disables this installation action following the failed camera result.
 
 The explicit native CLI path is:
 

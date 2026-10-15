@@ -2,7 +2,9 @@
 
 Subsequent hardware update: the authorized 3.1 upload, physical reconnect,
 strict verification and separate offline readback audit passed. Camera
-acceptance is pending. See [the installation record](upstream-31-upload-2026-10-14.md).
+acceptance subsequently failed with aperture `--`, blocked shutter and normal
+shutdown. Further 3.1 trials are held. See [the installation record](upstream-31-upload-2026-10-14.md)
+and [failure investigation](upstream-31-camera-failure-2026-10-14.md).
 The preparation evidence below describes the earlier offline build only.
 
 **Prepared offline; not flashed or camera-qualified.** After the byte-verified

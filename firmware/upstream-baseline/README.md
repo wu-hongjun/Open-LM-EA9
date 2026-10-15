@@ -7,8 +7,10 @@ shutdown and peripheral drivers together. Our factory-derived controller,
 `em_arbitration`, reference policy and runtime lens-profile layer are absent.
 
 **The 50mm f/1.4 image is uploaded and strictly byte-verified after physical
-reconnect. It is not camera-qualified.** Fresh two-pass readback and a separate
-offline audit passed. See [the installation record](../../docs/evidence/upstream-31-upload-2026-10-14.md).
+reconnect. Camera acceptance failed; further trials are held.** The owner reports
+aperture `--` and blocked shutter, with normal shutdown. Fresh two-pass readback
+and a separate offline audit passed. See [the installation record](../../docs/evidence/upstream-31-upload-2026-10-14.md)
+and [failure investigation](../../docs/evidence/upstream-31-camera-failure-2026-10-14.md).
 Upstream documents a Sony a9 II test platform; the owner's A7C II remains an
 independent compatibility check. Its latest header also labels lens ID 50496
 as an experiment; this baseline preserves that value for a faithful comparison.

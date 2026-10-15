@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.14.0, build 17
+# Device workflow: prototype 0.14.1, build 18
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -17,8 +17,11 @@ AF 2.9 is explicitly held after capture/shutdown failure. See
 
 The [upstream 3.1 baseline](evidence/upstream-baseline-2026-10-14.md) is uploaded
 and strictly byte-verified after physical reconnect, with a separate offline
-audit. Camera acceptance is pending; initial MF capture/lifecycle testing is
-requested before AF-S. See
+audit. Camera acceptance subsequently failed: aperture `--`, blocked shutter,
+no motor movement and normal shutdown. Actual focus mode remains unverified;
+further 3.1 trials are held. App 0.14.1 marks that installed image as held and
+disables ordinary baseline installation, retaining the verified USB history.
+See [the failure investigation](evidence/upstream-31-camera-failure-2026-10-14.md) and
 [the installation record](evidence/upstream-31-upload-2026-10-14.md).
 App 0.14 prominently marks installed AF 3.0 as held
 and routes the primary action to USB tools. Its strict USB result remains valid
@@ -39,12 +42,13 @@ Choosing a profile saves only a local preparation. The on-adapter photo and
 setting retain the last verified value until the uploaded image is verified.
 An unchanged profile shows **Up to date**. The primary action preserves the
 verified installed firmware variant, including legacy AF 2.1. Upgrading to the
-upstream 3.1 baseline is a separate **USB tools → Experimental autofocus** action,
+upstream 3.1 baseline was a separate **USB tools → Experimental autofocus** action,
 compiled only for the original Contax Zeiss 50mm f/1.4 profile. It does not use
 a runtime lens-profile row. Other/edited profiles are rejected before USB.
 When that baseline is installed, the dropdown explains its fixed configuration
 and offers USB tools rather than pretending another profile can be applied.
-The CLI `apply-upstream` selects 3.1; historical `apply-af` still selects held 3.0.
+The CLI `apply-upstream` still selects held 3.1 for explicit recovery/research;
+do not retry it for camera use. Historical `apply-af` still selects held 3.0.
 Plain `apply` selects metadata-only 2.0.
 
 The status panel explains the next action: connection, one-time setup, reading

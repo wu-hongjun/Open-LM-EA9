@@ -1,11 +1,14 @@
 # Direct upstream 3.1 upload — October 14, 2026
 
-**Upload and strict physical-reconnect verification passed; camera acceptance pending.**
+**Upload and strict physical-reconnect verification passed; camera acceptance failed.**
 The owner requested the direct upstream baseline after AF 3.0 focused on
 half-press but froze on full press, saved no photograph and required battery
 removal. The owner then confirmed the adapter returned to the computer.
 The owner then confirmed physical reconnect. Native verification and a separate
-offline audit passed. Camera testing has not started.
+offline audit passed. The later camera check failed: aperture `--`, blocked
+shutter and no motor movement; normal shutdown is confirmed. Actual focus mode
+and other settings remain unverified. Further trials are held.
+See [the failure and offline investigation](upstream-31-camera-failure-2026-10-14.md).
 
 ## Exact image and upload
 
@@ -75,15 +78,16 @@ marker and retained the original armed upload connection's marker. Raw backups,
 logs and owner identifiers remain private. USB equality proves the installed
 bytes; it does not qualify camera capture, exposure, focus or shutdown.
 
-## Pending camera comparison
+## Failed camera comparison
 
-After strict verification, use [the camera procedure](../upstream-baseline-test.md):
+After strict verification, the owner was given [the camera procedure](../upstream-baseline-test.md):
 first one loaded-lens MF capture/lifecycle cycle with still-photo A, Pre-AF Off,
 EV 0, Auto ISO, focus ring infinity and physical iris f/1.4. Confirm actual MF
 separately from the exposure dial. Record updating preview, expected f/1.4,
 quiet ten-second idle, one saved photograph if normal and shutdown. Only after
-that cycle succeeds request one bounded AF-S attempt. Stop on freeze or abnormal
-drive; remove the battery if unresponsive or motion continues, and do not retry.
+that cycle succeeded would a bounded AF-S attempt have followed. The reported
+cycle failed and the owner confirmed normal shutdown. No additional camera
+trial, firmware upload or stock restoration followed the failure.
 
 Neither the successful upload nor upstream's Sony a9 II results qualify A7C II
 capture, focus, exposure or shutdown. AF 3.0 remains held. No stock restoration

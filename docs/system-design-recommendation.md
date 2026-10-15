@@ -1,5 +1,34 @@
 # Recommended LM-EA9 system design
 
+## Updated working recommendation — October 14, 2026
+
+Use the pinned upstream **C firmware as the development foundation**, retain the
+native SwiftUI/AppKit application and Swift IOHID/update service, and keep the
+management contract independent of language. Defer a Rust firmware port and a
+shared Rust host core until there is a camera-qualified baseline and a concrete
+benefit to justify the added boundaries. Every firmware candidate flashed in
+this project has been C; Rust is not implicated in these failures.
+
+This recommendation answers the owner's question about adopting upstream
+instead of continuing the Rust plan. It does not claim upstream is qualified:
+the direct 3.1 build also failed this A7C II check, showing aperture `--` and a
+blocked shutter with normal shutdown. See [the failure and five-case startup
+investigation](evidence/upstream-31-camera-failure-2026-10-14.md).
+
+The next firmware milestone is startup/handshake, nominal lens information,
+MF capture and shutdown on this body, then bounded AF-S and saved-photo checks.
+Only after that baseline succeeds should metadata persistence or controller
+changes be added, one independently testable step at a time. Preserve the
+factory REA findings and previous modular work as comparison evidence; do not
+merge reconstructed behavior wholesale into the first baseline. Keep the
+existing backed-up native upload/reconnect/verification service rather than
+replacing it with an unreviewed flashing path. No new image or flash follows
+from this recommendation alone.
+
+The sections below retain the **earlier October 10 Rust-first research
+recommendation and its qualification gates**, rather than the current working
+direction above.
+
 > Current follow-up (prototype 0.3.0): the [USB metadata milestone](usb-metadata-milestone.md) adds a reviewed, bounded application upload, mandatory physical reconnect and full byte verification. Its first firmware candidate uses the reference C implementation with motor motion disabled. [Actual measurements](evidence/usb-metadata-milestone-2026-10-10.md) distinguish stock upload qualification, custom read-back and pending camera checks. The material below records the earlier research/prototype stage.
 
 Implementation follow-up: the user authorized the

@@ -237,7 +237,7 @@ struct DeviceToolsView: View {
                     Button("Restore Stock from Backup…", action: model.chooseStockRestore).disabled(!model.canReadDevice)
                     DisclosureGroup("Experimental autofocus") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Upstream baseline 3.1.0 uses the reference firmware, compiled for Contax Zeiss 50mm f/1.4. Other profiles require another build. Capture, exposure and shutdown still need camera testing. Select the original 50mm profile, install, then reconnect to verify.").font(.callout)
+                            Text("Upstream baseline 3.1.0 is held after the A7C II showed -- for aperture and would not release the shutter. Shutdown worked. Further installation and camera trials are unavailable pending investigation.").font(.callout)
                             Button("Install Upstream Baseline 3.1.0", action: model.installAutofocus).disabled(!model.canInstallUpstreamBaseline)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)

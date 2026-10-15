@@ -272,17 +272,19 @@ private actor DiscoveryFixture {
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.installedCameraFailureHold && !model.canApplyLens)
     #expect(model.primaryLensAction == .tools && model.workflowTitle == "AF 3.0 camera testing held")
-    #expect(model.canInstallUpstreamBaseline && model.workflowSymbol == "exclamationmark.triangle.fill")
+    #expect(!model.canInstallUpstreamBaseline && model.workflowSymbol == "exclamationmark.triangle.fill")
     try store.saveApplied(AppliedLens(device: device, setting: try #require(image.setting), firmwareVersion: "3.1.0", imageSHA256: digest(image.data), verifiedAt: Date()))
     try store.saveQualification(device: device, transactionID: UUID())
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.1.0"))
     model.chooseDeviceLens(profile.id)
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
-    #expect(model.canInstallUpstreamBaseline && model.preparedMatchesApplied)
-    #expect(!model.canApplyLens && model.primaryLensAction == .upToDate)
+    #expect(!model.canInstallUpstreamBaseline && model.preparedMatchesApplied)
+    #expect(model.installedCameraFailureHold && !model.canApplyLens && model.primaryLensAction == .tools)
+    #expect(model.workflowTitle == "AF 3.1 camera testing held")
+    #expect(model.workflowDetail.contains("Shutdown worked") && model.firmwareBehaviorNote.contains("shutter-release failure"))
     model.chooseDeviceLens("contax-zeiss-85-f1-4")
     #expect(model.variantForLensChanges == .autofocusUpstreamBaseline)
     #expect(!model.canApplyLens && !model.canInstallUpstreamBaseline)
-    #expect(model.primaryLensAction == .tools && model.workflowTitle == "Fixed 50mm upstream baseline")
+    #expect(model.primaryLensAction == .tools && model.workflowTitle == "AF 3.1 camera testing held")
     #expect(model.currentAppliedLens?.setting.id == profile.id && model.pendingUpdate == nil)
 }

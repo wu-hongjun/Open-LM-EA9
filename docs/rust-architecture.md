@@ -1,11 +1,17 @@
 # Rust feasibility study — candidate only
 
+October 14 follow-up: the [updated working recommendation](system-design-recommendation.md)
+is to build on upstream C firmware and the native Swift app, deferring Rust.
+The direct upstream camera trial also failed; resolve that compatibility
+boundary before a language port. This document retains the earlier feasibility
+study and does not describe the implementation now running on the adapter.
+
 **The stack is undecided.** This document explores a Rust-based option, grounded
 in [the reference investigation](reference-research.md). It is not an approved
 implementation plan. The [product direction](product-direction.md) defines the
 confirmed deliverables and the research needed before selecting a stack.
 
-No custom firmware has been flashed. The immediate target is a Sony A7C II and
+At the time of this original study no custom firmware had been flashed. The target is a Sony A7C II and
 the eight user-supplied lenses in [requested-lenses.json](../profiles/requested-lenses.json).
 
 ## Candidate approach to the intended product

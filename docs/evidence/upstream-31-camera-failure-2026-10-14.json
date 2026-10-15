@@ -1,0 +1,59 @@
+{
+  "dateLocal": "2026-10-14",
+  "status": "camera-acceptance-failed-further-trials-held",
+  "firmwareVersion": "3.1.0",
+  "profileID": "contax-zeiss-50-f1-4",
+  "camera": "Sony A7C II",
+  "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+  "transactionID": "A87ABAD1-CC57-4982-AAB8-667A4E8E4B7B",
+  "strictUSBVerificationPassed": true,
+  "cameraAcceptancePassed": false,
+  "ownerReports": [
+    "shutter does not activate and the focus motor is not moving, I see -- in aperture",
+    "it shuts down normally"
+  ],
+  "observations": {
+    "shutterReleased": false,
+    "apertureDisplay": "--",
+    "focusMotorMovementObserved": false,
+    "shutdownNormal": true,
+    "previewUpdating": null,
+    "previewBrightness": null,
+    "actualFocusMode": null,
+    "actualPreAF": null,
+    "actualExposureMode": null,
+    "actualPhysicalIris": null,
+    "actualPhysicalFocusRing": null,
+    "photoSaved": null,
+    "cameraReportedError": null,
+    "currentAdapterLocation": null
+  },
+  "interpretation": {
+    "applicationStarted": null,
+    "handshakeCompleted": null,
+    "physicalFailureCauseProven": false,
+    "motorSilenceAloneProvesAFFailure": false,
+    "missingApertureAloneProvesHandshakeFailure": false,
+    "normalCameraShutdownProvesAdapterParkOrProtocolAcknowledgement": false,
+    "controlledMFOrAFSTestVerified": false
+  },
+  "furtherCameraTrialsHeld": true,
+  "stopInstructionDelivered": true,
+  "postFailureUSBReportsSent": 0,
+  "postFailureFlashWritesSent": 0,
+  "stockRestorationStarted": false,
+  "newFirmwareCandidateBuilt": false,
+  "startupProbeEvidence": "upstream-31-startup-probe-2026-10-14.json",
+  "sourceFindings": [
+    "Pinned main initializes encoder, ADC and motor before em_init; chip-select waits and peripheral waits can block; none is proven stalled on this unit.",
+    "Periodic status is gated by em_handshake_done; answering queued init ID 0x0a sets that flag. The main homing gate depends on it.",
+    "Message 0x08 request bit 7 of frame byte 7 gates only the optional message 0x28 aperture copy; message 0x05 still declares fixed nominal f/1.4 in all five synthetic probe cases.",
+    "Upstream retains experimental lens ID 50496; the previous fork used 234. The effect on A7C II acceptance is unknown."
+  ],
+  "nextInvestigation": [
+    "Resolve boot/startup, first CS/UART window and lens-identity/handshake acceptance before changing AF gains or travel.",
+    "Compare upstream first-window and status/reply timing against original factory instructions and the A7C II observations.",
+    "Design bounded diagnostic breadcrumbs for boot, first CS, parsed requests, replies and handshake; audit storage boundaries/endurance before a diagnostic build or upload.",
+    "Do not force message 0x28 aperture, camera release settings, readiness or motor drive merely to make this failed candidate appear functional."
+  ]
+}
