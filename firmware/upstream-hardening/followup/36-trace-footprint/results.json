@@ -1,0 +1,136 @@
+{
+  "status": "offline-proposal",
+  "sourceIsCompact": true,
+  "hostCallsProductionPacketResetInitializer": true,
+  "sourceHashes": {
+    "artifacts/private/targeted37-repeat/src/emount.c": "c9aab46e79d675fb5e1751ad52560f24372373cc07cc7a55dc04d56069160b24",
+    "artifacts/private/targeted37-repeat/src/startup_trace.c": "096eb2d63947e9e090de4a62f63a477e243b8439ca7108012b5dc6c9c829692d",
+    "artifacts/private/targeted37-repeat/src/startup_trace.h": "7803b5caab6e50c50169aa08ace0c977b1a0f33ea8061cdbe9363dd41abdf9c7",
+    "firmware/upstream-hardening/followup/34-capture-tracing/test_capture.c": "53b0953ed8b29b66b4a9f6db29f2a6febcfcd6c26579d437500f6224f5185ea2",
+    "firmware/upstream-hardening/followup/36-trace-footprint/apply.py": "a3b3e1601c5c7a44de7499197008f8974479a1c46e7908b6fbf9fb96572f5058",
+    "firmware/upstream-hardening/followup/36-trace-footprint/run.py": "2a5a9c895c6099b5a9f0fc6be12c0dd85f48daad3ba6b6f938b48886df68ff31"
+  },
+  "cases": {
+    "before": {
+      "ordinary": {
+        "exit": 0,
+        "syntheticOutputSHA256": "ae05a98e9ac3e135a3c526e80ec0e5a9788d1d7ad1d5c378996cc7300da74139",
+        "assertion": ""
+      },
+      "raw": {
+        "exit": 0,
+        "syntheticOutputSHA256": "8a464c979919b843185336d7a108afaa62fdddec04c43daee8e86342f8dd2698",
+        "assertion": ""
+      },
+      "session-irq": {
+        "exit": 0,
+        "syntheticOutputSHA256": "8f5fdfeb439b3b3c640104f34fa50d25235ad4fa8ca51f1eb74c92a8855e5520",
+        "assertion": ""
+      },
+      "shutdown-irq": {
+        "exit": 0,
+        "syntheticOutputSHA256": "075e704235b529f3057ab9d0ff2f4f30171885f5937de5ef69bb841e772fef82",
+        "assertion": ""
+      },
+      "pending": {
+        "exit": 0,
+        "syntheticOutputSHA256": "c65027cf9c961aac02353c8e527e4763ee41d7ca5314084167053d433289cc88",
+        "assertion": ""
+      },
+      "session-high": {
+        "exit": 0,
+        "syntheticOutputSHA256": "74c31bf354fe40435e390f6db9eadc4a04162bc0981229ba7bccf9b0a270b6c5",
+        "assertion": ""
+      },
+      "failed-tx": {
+        "exit": 0,
+        "syntheticOutputSHA256": "0306cdfe5ece7f239356c0566499aae6c72cc67a9db2a56b1141817dbe23ea15",
+        "assertion": ""
+      },
+      "shutdown": {
+        "exit": 0,
+        "syntheticOutputSHA256": "2259e09f1af5cdc8f3a935d86300193cffecbcf6377a5fb14be682f76b2c97cb",
+        "assertion": ""
+      },
+      "queue": {
+        "exit": 0,
+        "syntheticOutputSHA256": "43db8e2e09413d51291fb5be7f40cb97e8c66304c510dfd2b54b565780c98bca",
+        "assertion": ""
+      },
+      "phase": {
+        "exit": 0,
+        "syntheticOutputSHA256": "b750bb6f428976b204f56e932f4c4c7f6423dcc66acf40bb568af60e2b7e2e90",
+        "assertion": ""
+      }
+    },
+    "compact": {
+      "ordinary": {
+        "exit": 0,
+        "syntheticOutputSHA256": "ae05a98e9ac3e135a3c526e80ec0e5a9788d1d7ad1d5c378996cc7300da74139",
+        "assertion": ""
+      },
+      "raw": {
+        "exit": 0,
+        "syntheticOutputSHA256": "8a464c979919b843185336d7a108afaa62fdddec04c43daee8e86342f8dd2698",
+        "assertion": ""
+      },
+      "session-irq": {
+        "exit": 0,
+        "syntheticOutputSHA256": "8f5fdfeb439b3b3c640104f34fa50d25235ad4fa8ca51f1eb74c92a8855e5520",
+        "assertion": ""
+      },
+      "shutdown-irq": {
+        "exit": 0,
+        "syntheticOutputSHA256": "075e704235b529f3057ab9d0ff2f4f30171885f5937de5ef69bb841e772fef82",
+        "assertion": ""
+      },
+      "pending": {
+        "exit": 0,
+        "syntheticOutputSHA256": "c65027cf9c961aac02353c8e527e4763ee41d7ca5314084167053d433289cc88",
+        "assertion": ""
+      },
+      "session-high": {
+        "exit": 0,
+        "syntheticOutputSHA256": "74c31bf354fe40435e390f6db9eadc4a04162bc0981229ba7bccf9b0a270b6c5",
+        "assertion": ""
+      },
+      "failed-tx": {
+        "exit": 0,
+        "syntheticOutputSHA256": "0306cdfe5ece7f239356c0566499aae6c72cc67a9db2a56b1141817dbe23ea15",
+        "assertion": ""
+      },
+      "shutdown": {
+        "exit": 0,
+        "syntheticOutputSHA256": "2259e09f1af5cdc8f3a935d86300193cffecbcf6377a5fb14be682f76b2c97cb",
+        "assertion": ""
+      },
+      "queue": {
+        "exit": 0,
+        "syntheticOutputSHA256": "43db8e2e09413d51291fb5be7f40cb97e8c66304c510dfd2b54b565780c98bca",
+        "assertion": ""
+      },
+      "phase": {
+        "exit": 0,
+        "syntheticOutputSHA256": "b750bb6f428976b204f56e932f4c4c7f6423dcc66acf40bb568af60e2b7e2e90",
+        "assertion": ""
+      }
+    },
+    "identity-mutant": {
+      "ordinary": {
+        "exit": 1,
+        "syntheticOutputSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "assertion": "FAIL line 80: (log_events[offer].flags&129)==(128|raw)"
+      }
+    },
+    "live-return-mutant": {
+      "session-irq": {
+        "exit": 1,
+        "syntheticOutputSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "assertion": "FAIL line 92: log_events[start].session==0 && log_events[ret].session==0 && log_events[ret].seq==0x41"
+      }
+    }
+  },
+  "completeWireTraceAndCompletionOutputEqual": true,
+  "hardwareAccess": false,
+  "hardwareTimingMeasured": false
+}

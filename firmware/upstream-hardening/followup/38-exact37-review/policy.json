@@ -1,0 +1,494 @@
+{
+  "pins": {
+    "hardened.elf": "f7ae647169d14b81495e14c6b061372ed1f135c4fc904e4b1ff2f338d79a873a",
+    "hardened.map": "4350407df694867e350ac2ae8f8742592a1d35185b8968202a75b90bc6964604",
+    "manifest.json": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b",
+    "raw.bin": "94fea24bcd3d7a22c75a84c5d7995e9e4fddc81fa676dfe010b3ea3112e54ba8",
+    "contax-zeiss-50-f1-4.bin": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5"
+  },
+  "libraryFrames": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24
+  },
+  "indirectCalls": {
+    "50c4": {
+      "caller": "deregister_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints 0x9ab0, weak 0x50d0 zero."
+    },
+    "50ec": {
+      "caller": "register_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints 0x9ab0, weak 0x50f8 zero."
+    },
+    "56c6": {
+      "caller": "em_shutdown_ack",
+      "targets": [
+        "powerdown_signal"
+      ],
+      "evidence": "0x56be loads literal 0x56e0 = g_powerdown; main is sole nonzero registrar."
+    },
+    "5754": {
+      "caller": "on_cs_edge",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ],
+      "evidence": "0x574c loads literal 0x59d4 = g_shutdown_inhibit; main is sole nonzero registrar."
+    },
+    "69b8": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_cs_edge"
+      ],
+      "evidence": "0x699e loads literal 0x69d4 = g_cs_edge; 0x69a0 loads callback into r1, installed by em_init at 0x5fa2."
+    },
+    "69cc": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_vd_edge"
+      ],
+      "evidence": "0x69c4 loads g_vd_edge, installed by em_init at 0x5fa2. Sequential with CS."
+    },
+    "7266": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_retarget"
+      ],
+      "evidence": "cfg in r4; load r3 from cfg+52, pass address of local nt at sp+84. STOCK copies retain pointer."
+    },
+    "733c": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "load r3 from cfg+56 at 0x7336. Multiple source abort checks merged to this emitted site."
+    },
+    "74a8": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "load cfg+48 at 0x74a0, r0=r7 existing position sample."
+    },
+    "7672": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "load cfg+48 at 0x7668, r0=out->end."
+    },
+    "96f8": {
+      "caller": "__libc_init_array",
+      "targets": [],
+      "evidence": "Preinit [0x9a9c,0x9a9c) empty."
+    },
+    "9702": {
+      "caller": "__libc_init_array",
+      "targets": [
+        "frame_dummy"
+      ],
+      "evidence": "Init [0x9a9c,0x9aa0) contains Thumb frame_dummy 0x5129."
+    }
+  },
+  "unknowns": [
+    "Application thread frames require privileged thread mode, CONTROL=0 (MSP), PRIMASK=0 and no active exception on the ordinary reset path. Boot may already select application VTOR before Reset_Handler; packet reconstruction after BSS clear requires inherited IRQ quiescence. Audit37 finite startup fixtures are not physical or asynchronously scheduled entry.",
+    "Boot preserves priorities and non-reset interrupt state, enables NVMCTRL IRQ5 while reset peripheral INTEN remains zero, and runs SysTick with TICKINT clear. App enables UART/SysTick without setting their priorities and sets EIC priority 1; arbitrary inherited pending/active state and vector-transition exception delivery remain unverified.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector.",
+    "qualification": "Audit37 executes this exact 3.7 initializer/reset through main entry under inert boundary assumptions; physical core state, asynchronous arrivals and exception delivery remain unverified.",
+    "followup": "docs/audits/astra-37-packet-initializer-2026-10-15.md"
+  },
+  "requiredPhysicalCaveats": [
+    "Application thread frames require privileged thread mode, CONTROL=0 (MSP), PRIMASK=0 and no active exception on the ordinary reset path. Boot may already select application VTOR before Reset_Handler; packet reconstruction after BSS clear requires inherited IRQ quiescence. Audit37 finite startup fixtures are not physical or asynchronously scheduled entry.",
+    "Boot preserves priorities and non-reset interrupt state, enables NVMCTRL IRQ5 while reset peripheral INTEN remains zero, and runs SysTick with TICKINT clear. App enables UART/SysTick without setting their priorities and sets EIC priority 1; arbitrary inherited pending/active state and vector-transition exception delivery remain unverified.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "referencePins": {
+    "firmware/upstream-hardening/followup/29-stack36/audit.py": "3f4769af304c3825a75ff4adc96de8100d2ca0c017579c53c679c02b39a8264e",
+    "firmware/upstream-hardening/followup/22-stack35/audit.py": "799c472f32e6be1b9ac3d7eee46d521b6fb8a5ae8cdfa0775d6eaab4d1a43806",
+    "firmware/upstream-hardening/followup/29-stack36/policy.json": "fd849f2ead4acb7ec17370a5c7fcead63df70738e2c41e56308e131fe25e4dcf",
+    "firmware/candidates/3.6.0/contax-zeiss-50-f1-4.manifest.json": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae"
+  },
+  "libraryFrameEvidence": {
+    "deregister_tm_clones": {
+      "start": "0x50b4",
+      "localBytes": 8,
+      "bodySHA256": "b88068c2783b2bed78cc70d4502b1dcd23d7f43afe74566dc59306bd5b3835f2",
+      "stackInstructions": [
+        "50b8:\tb510      \tpush\t{r4, lr}",
+        "50c6:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "register_tm_clones": {
+      "start": "0x50d4",
+      "localBytes": 8,
+      "bodySHA256": "a6bd2806ca9c62980065f623fef6448d4ec3e9f6572d19ba4a1741860ea5558f",
+      "stackInstructions": [
+        "50e0:\tb510      \tpush\t{r4, lr}",
+        "50ee:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "__do_global_dtors_aux": {
+      "start": "0x50fc",
+      "localBytes": 8,
+      "bodySHA256": "394cb784bd4ae18428f8ea54347ccba3ab050544708b70937890104a93b55a0c",
+      "stackInstructions": [
+        "50fc:\tb510      \tpush\t{r4, lr}",
+        "511a:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "frame_dummy": {
+      "start": "0x5128",
+      "localBytes": 8,
+      "bodySHA256": "0359c041e26a842a42370af9723a68af7bb97b4e6e0efd1f468a8d83b461e162",
+      "stackInstructions": [
+        "512a:\tb510      \tpush\t{r4, lr}",
+        "513c:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "__gnu_thumb1_case_sqi": {
+      "start": "0x9388",
+      "localBytes": 4,
+      "bodySHA256": "57a58432b13b80752179afc4c6e8e6fb547ce86a5a3e5f602ff9183ac43241ed",
+      "stackInstructions": [
+        "9388:\tb402      \tpush\t{r1}",
+        "9396:\tbc02      \tpop\t{r1}"
+      ]
+    },
+    "__gnu_thumb1_case_uqi": {
+      "start": "0x939c",
+      "localBytes": 4,
+      "bodySHA256": "e42fb1e00b3c441c36e427c14a60b3cba05423c92e37ce65c3014977c8b51cf8",
+      "stackInstructions": [
+        "939c:\tb402      \tpush\t{r1}",
+        "93aa:\tbc02      \tpop\t{r1}"
+      ]
+    },
+    "__udivsi3": {
+      "start": "0x93b0",
+      "localBytes": 8,
+      "bodySHA256": "49ef32246b66648600591c96cdff459f9bf57d78a1877f520b7af2e40be4e448",
+      "stackInstructions": [
+        "94b0:\tb501      \tpush\t{r0, lr}",
+        "94b8:\tbd02      \tpop\t{r1, pc}"
+      ]
+    },
+    "__aeabi_uidivmod": {
+      "start": "0x94bc",
+      "localBytes": 0,
+      "bodySHA256": "b9e194491dc0295e47c7b7a24677f075e9fa201c5130a0f20207bb96245e73d0",
+      "stackInstructions": []
+    },
+    "__divsi3": {
+      "start": "0x94c4",
+      "localBytes": 8,
+      "bodySHA256": "e3fae8611c83fc8bda91d8fedff11077e65cdf89ff040ccc233e70b558662976",
+      "stackInstructions": [
+        "9686:\tb501      \tpush\t{r0, lr}",
+        "968e:\tbd02      \tpop\t{r1, pc}"
+      ]
+    },
+    "__aeabi_idivmod": {
+      "start": "0x9690",
+      "localBytes": 0,
+      "bodySHA256": "141982ad17f0897e4f4a9e186e703a83c70a0165ddd5afd650e18b531d8ced1d",
+      "stackInstructions": []
+    },
+    "__aeabi_idiv0": {
+      "start": "0x9698",
+      "localBytes": 0,
+      "bodySHA256": "57d0cd21201ac99c3c1cdb7463bca24e336b8f74f6bca5716f5874b75a99a37f",
+      "stackInstructions": []
+    },
+    "memmove": {
+      "start": "0x969c",
+      "localBytes": 8,
+      "bodySHA256": "66943e64f2edd3803ba18133b009393f35a0d3b12587c10db2d60d13d2cd217c",
+      "stackInstructions": [
+        "969c:\tb510      \tpush\t{r4, lr}",
+        "96be:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "memset": {
+      "start": "0x96c0",
+      "localBytes": 0,
+      "bodySHA256": "848ccd0aeef7af35d8e73e71f94b5bbdf0dafff4fac353cc50dbd2ceb6376152",
+      "stackInstructions": []
+    },
+    "__libc_init_array": {
+      "start": "0x96d0",
+      "localBytes": 16,
+      "bodySHA256": "f1c4b2f157460c94532d65ec243d1a391671442c21d6d9623e6fb80efab0eac9",
+      "stackInstructions": [
+        "96d0:\tb570      \tpush\t{r4, r5, r6, lr}",
+        "96f2:\tbd70      \tpop\t{r4, r5, r6, pc}"
+      ]
+    },
+    "memcpy": {
+      "start": "0x9718",
+      "localBytes": 8,
+      "bodySHA256": "02283756afed620190c34dc8a72a7bebf98e5ba0b67e58b49c1950a2b6740919",
+      "stackInstructions": [
+        "971a:\tb510      \tpush\t{r4, lr}",
+        "9720:\tbd10      \tpop\t{r4, pc}"
+      ]
+    },
+    "_init": {
+      "start": "0x9a90",
+      "localBytes": 24,
+      "bodySHA256": "0c3975b9ff99df975c995de0d77c13fe4e8b2acf5da74ccd43355815183f50f6",
+      "stackInstructions": [
+        "9a90:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+        "9a94:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+        "9a96:\tbc08      \tpop\t{r3}"
+      ]
+    },
+    "_fini": {
+      "start": "0x9aa0",
+      "localBytes": 24,
+      "bodySHA256": "b805f05dd32ded30cdc0a73a4a547ac166295037d65f6a73939be51712727a66",
+      "stackInstructions": [
+        "9aa0:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+        "9aa4:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+        "9aa6:\tbc08      \tpop\t{r3}"
+      ]
+    }
+  },
+  "sourceNames": [
+    "src/abs_encoder.c",
+    "src/abs_encoder.h",
+    "src/atmel_start.h",
+    "src/board.c",
+    "src/board.h",
+    "src/clock.c",
+    "src/clock.h",
+    "src/delay.c",
+    "src/delay.h",
+    "src/diag.c",
+    "src/diag.h",
+    "src/ea9.ld",
+    "src/em_eic.c",
+    "src/em_eic.h",
+    "src/em_frame.c",
+    "src/em_frame.h",
+    "src/em_owner.c",
+    "src/em_owner.h",
+    "src/em_shutdown.c",
+    "src/em_shutdown.h",
+    "src/em_uart.c",
+    "src/em_uart.h",
+    "src/emount.c",
+    "src/emount.h",
+    "src/emount_packets.c",
+    "src/emount_packets.h",
+    "src/focus_dist.c",
+    "src/focus_dist.h",
+    "src/focus_map.c",
+    "src/focus_map.h",
+    "src/focus_pred.c",
+    "src/focus_pred.h",
+    "src/main.c",
+    "src/motion_trace.c",
+    "src/motion_trace.h",
+    "src/motor.c",
+    "src/motor.h",
+    "src/servo.c",
+    "src/servo.h",
+    "src/startup_samd21.c",
+    "src/startup_trace.c",
+    "src/startup_trace.h",
+    "src/startup_trace_flash.c",
+    "src/system_samd21.c",
+    "src/trace_format.h",
+    "src/trail.c",
+    "src/trail.h",
+    "src/vdd.c",
+    "src/vdd.h"
+  ],
+  "maskInventory": [
+    {
+      "function": "st_fail",
+      "operation": "cpsid",
+      "operand": "i"
+    },
+    {
+      "function": "st_lock",
+      "operation": "mrs",
+      "operand": "r0, PRIMASK"
+    },
+    {
+      "function": "st_lock",
+      "operation": "cpsid",
+      "operand": "i"
+    },
+    {
+      "function": "st_unlock",
+      "operation": "msr",
+      "operand": "PRIMASK, r0"
+    }
+  ],
+  "criticalBodySHA256": {
+    "Reset_Handler": "04ff3fccac015172b974af77eb7b940cf357ee870e23e5ecc8c30df1e0826a69",
+    "ea9_packets_init": "e08883f6b8cedbe4d5d30f2e9efbbcebc66fe8bc2f15625cf4924f24ae651926",
+    "em_init": "537bb94a8f71014a01d2d820b9866436ae1fb7be2027b577b1aec24972f98463",
+    "em_eic_init": "29c2723a8b57b0532ebc9188224380f76579f7f3ef4cf169a39f63516d20f019",
+    "em_eic_start": "fbb9c6eb96198bfd191438215876f91fd96f2ce221658c65d895c9a2764baa3c",
+    "EIC_Handler": "873aefbb61cfa89313bd7157c62112dd9cb565d6a86093bea6471c1fbd45fd0d",
+    "SERCOM1_Handler": "1b4c82fdf165a6645c281c095d85b71a5ac17c0228b453985021798845c2ea34",
+    "st_lock": "3b2795f37d34c6aa824f430ae790cf860d091c2f9ca7399b7b5f22952feafa6e",
+    "st_unlock": "537cf585a0d5c2ddbfe32c44def96c4c7bafd9221246d20b46a88123077039fd",
+    "st_summary": "6e48660dff835b6097574d49278d6d8243c5ff2daf6ece2fed1c4cf1230e1dfb",
+    "st_record": "445d84cf8ca732e7a1c50c8ac8d065a91a64221a895e61dd15c5f9d247e93ee6",
+    "st_flush": "08a72222e17092d7b15daace064152864a956c6ce3e8e003df07a7e91b6e125c",
+    "st_terminal": "08a3c0f83fe57cfccc9c67fd5e7613f0c4e8b2ea29501fbefdd2182d69e2bc62",
+    "st_fail": "f288f8d48b898420c480e0b9d1ca2588b5781edd24bc589132d1be93c46a23c0",
+    "st_write_page": "0ce1622787d2c1b315407e1a4147f2c86c564e12312dac21fe66afae6301b48f",
+    "em_transmit": "1bb6ee990cb0017ea47214a4590a2b8306a2e5a967ac93005f5f3ad737db6a34",
+    "powerdown_signal": "fe429a63d91c6cccc2317b4b5cf45826d80d30a9d75dd552fa5e2253b098c446",
+    "servo_move_from": "7d8dfa9c582e1e9067bcc3a3beeb9e383cbd64c3988bab44cc61eeeea67744c9",
+    "st_motion_finish": "3799ce558d72d5cc1c1471b276a720422186fcd0280bf15e61671dd9655dd9c7"
+  },
+  "reviewedRawWords": {
+    "50c8": "00009ab0",
+    "50cc": "00009ab0",
+    "50d0": "00000000",
+    "50f0": "00009ab0",
+    "50f4": "00009ab0",
+    "50f8": "00000000",
+    "56e0": "2000030c",
+    "59d4": "200002c4",
+    "69d8": "41004400",
+    "69dc": "20000938",
+    "607c": "00005479",
+    "6084": "000056e5",
+    "9a70": "00007ef1",
+    "9a74": "00007fc5",
+    "9a78": "00007e09",
+    "9a9c": "00005129",
+    "9708": "00009a9c",
+    "970c": "00009a9c",
+    "9710": "00009aa0",
+    "9714": "00009a9c",
+    "69d4": "2000093c",
+    "8824": "00007be1",
+    "8828": "00007bcd",
+    "5a98": "200002c4",
+    "5ab0": "2000030c"
+  },
+  "expectedLayout": {
+    "staticRAMBytes": 3044,
+    "reservedStackBytes": 8192,
+    "stackStart": "0x20000be8",
+    "stackTop": "0x20002be8"
+  },
+  "expectedInventory": {
+    "sourceHashesVerified": 49,
+    "compilerFramesVerified": 149,
+    "functionCount": 153,
+    "callSiteCount": 515,
+    "indirectCallSites": 12
+  },
+  "callsSHA256": "db5f95da748c2f776b6e6ccf18f1bd1d6d8763f7e93f77a1cfd40311e651e15f",
+  "expectedCode": {
+    "rawBytes": 19128,
+    "codeAndDataEnd": 39608,
+    "codeMarginBeforeDiagnostics": 328,
+    "diagnosticRange": [
+      39936,
+      40960
+    ],
+    "diagnosticPages": 16,
+    "diagnosticPageBytes": 64,
+    "diagnosticFormatVersion": 3
+  },
+  "analyzerSHA256": "ff226db7c6c1aee09ba8d7bcde05c948f56ff082754334fe9b111a5b44e7ab72",
+  "semanticsSHA256": "2ab04e770a933c02ac64994133516f97c66300dc283377e6058264500f02d11c",
+  "compositionSHA256": "9e4c4b58f037677a9debb8f2964817f2f977c9dad47de0762af7f21cf9fe488b",
+  "baseSourcePins": {
+    "src/abs_encoder.c": "0fa218deffe16bdf1ad08c6cf06f34db034742c60f98d27c407960e94cef17c2",
+    "src/abs_encoder.h": "222b4fd167e64def7a9421dfe452c2bddd071c6cd2116c7914c70fab611c31f7",
+    "src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "src/clock.c": "c6885dc2011cc7f288efda5d22228468659a4a319bb310e50dde58f0c8e31e17",
+    "src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "src/delay.c": "1aad5912b7675622b34968a63b9266b59b00ec12ff6018b0b414c0a9648e5d66",
+    "src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "src/ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "src/em_eic.c": "a92c8e7e846b8a0c01100da875c4f9670cbb042d6e2f0c9e87f478b4aa0e49dd",
+    "src/em_eic.h": "824afdb5724cdf64ba9237e2e4f3db3635b29a39852b4e4ce028b4ab84e96f99",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/em_uart.h": "6353df5d6ab1e5e27c4a60e7824c8019216da9eea7ad805580c69fa463a7d892",
+    "src/emount.c": "57fe9dfe08068db6a2f4596faf27371b74881f84573b79facca4d728cd349d41",
+    "src/emount.h": "447f36cf0d604aa15522a2e46a3880f7b3daec411bd37f056d2f53f6a8c7edde",
+    "src/emount_packets.c": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f",
+    "src/emount_packets.h": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "src/focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "src/focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "src/focus_pred.c": "baa84b9f092fe2ec8730d60b0d5cc3d1b4487dfed6d05da517317f64146e614d",
+    "src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "src/main.c": "982c1beb7dca621fd2c403e1f7bc670f2859003c960265bad936c6f348c9b3b3",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/motor.h": "6127d9f2d56be4df2decaca735d273b8a2deb85e6edacd81a4b70438907741ee",
+    "src/servo.c": "5eadc1bf93f62a1369187e54b8fb7b3a148155802fd94767e56c2c602a8ef21b",
+    "src/servo.h": "3bfb275f4fb5e94638c2312c4aadcd3ddc42ae12eddeb1980563245521081526",
+    "src/startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "src/startup_trace.c": "701fbaaaf330cf05401e00936128f0cff83ad0318381b84f9e436d430a89d1fd",
+    "src/startup_trace.h": "cf7438a6e439b99b14e70ebe80d314345cb3da33a3457ea411ac62c33513554a",
+    "src/startup_trace_flash.c": "cffa577712febb8b19f0fd7590fbf9feb94c0628deb0d9ece52a8aadc53da322",
+    "src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "src/vdd.c": "1c196552db7546d2b734a5e698fe95f6a6d4b0136f0163ccab9252d1425d56a4",
+    "src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "sourceDeltaFrom36": [
+    "src/emount.c",
+    "src/emount.h",
+    "src/emount_packets.c",
+    "src/emount_packets.h",
+    "src/main.c",
+    "src/motion_trace.c",
+    "src/motion_trace.h",
+    "src/servo.c",
+    "src/startup_samd21.c",
+    "src/startup_trace.c",
+    "src/startup_trace.h",
+    "src/startup_trace_flash.c",
+    "src/trace_format.h"
+  ]
+}

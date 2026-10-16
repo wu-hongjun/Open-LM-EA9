@@ -96,3 +96,7 @@ a bright stationary target, infinity focus-ring position and physical f/1.4.
 Record lock/release, hunting, motion and saved-photo sharpness. Neither a green
 indicator nor host tests qualify optical accuracy. AF-C/video, zoom changes,
 other lenses and factory parity remain later acceptance work.
+
+A separately prepared [3.7 tracing candidate](../firmware/candidates/3.7.0/README.md)
+now has its own [future installation/test procedure](upstream-targeted-trace-test.md).
+No 3.7 flash occurred during preparation; this 3.6 failure hold remains intact.

@@ -1,0 +1,47 @@
+{
+  "status": "offline-diagnostic-camera-unqualified",
+  "baseVersion": "3.6.0",
+  "nextVersion": "3.7.0",
+  "baseImageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "inputs": {
+    "firmware/upstream-hardening/followup/33-motion-tracing/apply.py": "c0d8ba0039906d3dd61d2e89a0dbd1683dc38465e90a4557c37137ad16b2feab",
+    "firmware/upstream-hardening/followup/33-motion-tracing/motion_trace.c": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90",
+    "firmware/upstream-hardening/followup/33-motion-tracing/motion_trace.h": "d3b28b9ff5e4c05fee7e0789c5062d7c848e475951af56c9615ddf814ca2155e",
+    "firmware/upstream-hardening/followup/34-capture-tracing/apply.py": "130af3bde590147de2458e75a7be455961ffb431001ca461aca5c06c90aac1db",
+    "firmware/upstream-hardening/followup/34-capture-tracing/trace.inc": "1059cc6664605c35bdf7473e209a316552fbd2002cedc0a64609587fb4a42a92",
+    "firmware/upstream-hardening/followup/35-targeted-trace/apply.py": "572e9079c094e4dd0ccfecd47544b0338768feadcbb15a6f16d6c82e8ae8946a",
+    "firmware/upstream-hardening/followup/35-targeted-trace/startup_trace.c": "096eb2d63947e9e090de4a62f63a477e243b8439ca7108012b5dc6c9c829692d",
+    "firmware/upstream-hardening/followup/35-targeted-trace/startup_trace.h": "7803b5caab6e50c50169aa08ace0c977b1a0f33ea8061cdbe9363dd41abdf9c7",
+    "firmware/upstream-hardening/followup/35-targeted-trace/trace_format.h": "c468eedc44d40cbedefce8d3a29dcaadd9de139ddec58499f16d41efe06b45e3",
+    "firmware/upstream-hardening/followup/35-targeted-trace/schema.json": "0698bd2315d82673b1266478cf3eb8acf86a65627dbdc50732ac34f6a2cf6b0e",
+    "firmware/upstream-hardening/followup/36-trace-footprint/apply.py": "a3b3e1601c5c7a44de7499197008f8974479a1c46e7908b6fbf9fb96572f5058",
+    "firmware/upstream-hardening/followup/37-packet-initializer/apply.py": "0d97d64ea5eb648489385e24a3ad3b21a8ba2b68e12de9a01c68ecf15f7fd0cd"
+  },
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/33-motion-tracing/apply.py",
+      "entry": "apply",
+      "argument": "src"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/34-capture-tracing/apply.py",
+      "entry": "apply",
+      "argument": "src"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/35-targeted-trace/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/36-trace-footprint/apply.py",
+      "entry": "apply",
+      "argument": "src"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/37-packet-initializer/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "version": 3,
+  "magic": "E9S3",
+  "endianness": "little",
+  "pageBytes": 64,
+  "range": [
+    39936,
+    40960
+  ],
+  "pageCount": 16,
+  "header": {
+    "magic": {
+      "offset": 0,
+      "type": "u8",
+      "count": 4
+    },
+    "version": {
+      "offset": 4,
+      "type": "u8",
+      "count": 1
+    },
+    "type": {
+      "offset": 5,
+      "type": "u8",
+      "count": 1
+    },
+    "cohort": {
+      "offset": 6,
+      "type": "u8",
+      "count": 1
+    },
+    "count": {
+      "offset": 7,
+      "type": "u8",
+      "count": 1
+    },
+    "slot": {
+      "offset": 8,
+      "type": "u16",
+      "count": 1
+    },
+    "chunk": {
+      "offset": 10,
+      "type": "u8",
+      "count": 1
+    },
+    "reserved": {
+      "offset": 11,
+      "type": "u8",
+      "count": 1
+    },
+    "payload": {
+      "offset": 12,
+      "type": "u8",
+      "count": 48
+    },
+    "crc32": {
+      "offset": 60,
+      "type": "u32",
+      "count": 1
+    }
+  },
+  "crc": "IEEE CRC32 initial/final xor ffffffff over bytes0:60",
+  "types": {
+    "1": "summary",
+    "2": "focused-events",
+    "3": "motion",
+    "4": "terminal-footer"
+  },
+  "summary": {
+    "ms": {
+      "offset": 0,
+      "type": "u32",
+      "count": 1
+    },
+    "rxBytes": {
+      "offset": 4,
+      "type": "u32",
+      "count": 1
+    },
+    "lastRxMS": {
+      "offset": 8,
+      "type": "u32",
+      "count": 1
+    },
+    "rxCount": {
+      "offset": 12,
+      "type": "u16",
+      "count": 1
+    },
+    "txCount": {
+      "offset": 14,
+      "type": "u16",
+      "count": 1
+    },
+    "rxErrors": {
+      "offset": 16,
+      "type": "u16",
+      "count": 1
+    },
+    "uartStatus": {
+      "offset": 18,
+      "type": "u16",
+      "count": 1
+    },
+    "dropped": {
+      "offset": 20,
+      "type": "u16",
+      "count": 1
+    },
+    "filtered": {
+      "offset": 22,
+      "type": "u16",
+      "count": 1
+    },
+    "stage": {
+      "offset": 24,
+      "type": "u8",
+      "count": 1
+    },
+    "connected": {
+      "offset": 25,
+      "type": "u8",
+      "count": 1
+    },
+    "fault": {
+      "offset": 26,
+      "type": "u8",
+      "count": 1
+    },
+    "pins": {
+      "offset": 27,
+      "type": "u8",
+      "count": 1
+    },
+    "firstRX": {
+      "offset": 28,
+      "type": "u8",
+      "count": 1
+    },
+    "lastRX": {
+      "offset": 29,
+      "type": "u8",
+      "count": 1
+    },
+    "firstTX": {
+      "offset": 30,
+      "type": "u8",
+      "count": 1
+    },
+    "lastTX": {
+      "offset": 31,
+      "type": "u8",
+      "count": 1
+    },
+    "capability": {
+      "offset": 32,
+      "type": "u8",
+      "count": 1
+    },
+    "capabilitySeen": {
+      "offset": 33,
+      "type": "u8",
+      "count": 1
+    },
+    "shutdown": {
+      "offset": 34,
+      "type": "u8",
+      "count": 1
+    },
+    "retained": {
+      "offset": 35,
+      "type": "u8",
+      "count": 1
+    },
+    "planned": {
+      "offset": 36,
+      "type": "u8",
+      "count": 1
+    },
+    "motionChunks": {
+      "offset": 37,
+      "type": "u8",
+      "count": 1
+    },
+    "reserved": {
+      "offset": 38,
+      "type": "u8",
+      "count": 10
+    }
+  },
+  "event": {
+    "bytes": 12,
+    "ms": {
+      "offset": 0,
+      "type": "u32",
+      "count": 1
+    },
+    "kind": {
+      "offset": 4,
+      "type": "u8",
+      "count": 1
+    },
+    "id": {
+      "offset": 5,
+      "type": "u8",
+      "count": 1
+    },
+    "flags": {
+      "offset": 6,
+      "type": "u8",
+      "count": 1
+    },
+    "seq": {
+      "offset": 7,
+      "type": "u8",
+      "count": 1
+    },
+    "lengthOrSessionLow": {
+      "offset": 8,
+      "type": "u16",
+      "count": 1
+    },
+    "operandOrSessionHigh": {
+      "offset": 10,
+      "type": "u16",
+      "count": 1
+    }
+  },
+  "captureKinds": {
+    "11": "owner-cs",
+    "12": "owner-offer",
+    "13": "owner-take",
+    "14": "tx-start",
+    "15": "tx-return",
+    "16": "shutdown-admit",
+    "17": "owner-complete",
+    "18": "owner-phase"
+  },
+  "footer": {
+    "kind": {
+      "offset": 0,
+      "type": "u8",
+      "count": 1
+    },
+    "value": {
+      "offset": 1,
+      "type": "u8",
+      "count": 1
+    },
+    "fault": {
+      "offset": 2,
+      "type": "u8",
+      "count": 1
+    },
+    "ordinal": {
+      "offset": 3,
+      "type": "u8",
+      "count": 1
+    },
+    "ms": {
+      "offset": 4,
+      "type": "u32",
+      "count": 1
+    },
+    "reserved": {
+      "offset": 8,
+      "type": "u8",
+      "count": 40
+    }
+  },
+  "footerKinds": {
+    "1": "VD-two-low",
+    "2": "VD-timeout",
+    "3": "PA23-write-reached",
+    "4": "100ms-tail-delay-returned",
+    "5": "terminal-st-fail"
+  },
+  "retention": {
+    "recentEvents": 32,
+    "motionBytes": 144,
+    "motionChunks": 3,
+    "terminalReservePages": 4,
+    "filteredKinds": [
+      1,
+      2,
+      3,
+      4,
+      10
+    ],
+    "order": "summary then motion chunks then recent chronological events then terminal footers",
+    "capacity": "payload budget=max(0,11-initialSlot); allocate3 motion pages if budget>=3, then min(retained,4*remainingBudget) events; summary first; no claim missing footer means success",
+    "cohort": "initial append slot+1; not physical boot counter",
+    "completeness": "planned counts express intentions only; require contiguous unique slots/chunks, matching cohort and CRC; dropped+retained-planned omits focused events; filtered counts intentional legacy filtering",
+    "conditionalFilters": {
+      "11": "unless flags RAW bit1",
+      "18": "unless flags RAW bit1",
+      "14": "unless CONTROL bit2 or SHUTDOWN bit4",
+      "15": "unless CONTROL bit2 or SHUTDOWN bit4"
+    }
+  }
+}

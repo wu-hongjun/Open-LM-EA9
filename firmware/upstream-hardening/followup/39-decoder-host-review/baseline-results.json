@@ -1,0 +1,2266 @@
+{
+  "checks": 60,
+  "passed": 11,
+  "failed": [
+    "snapshot-1-erased-terminal-association",
+    "snapshot-1-crc-terminal-association",
+    "snapshot-4-erased-terminal-association",
+    "snapshot-4-crc-terminal-association",
+    "snapshot-11-erased-terminal-association",
+    "snapshot-11-crc-terminal-association",
+    "footer-12-erased-must-not-recover-trust",
+    "footer-12-crc-must-not-recover-trust",
+    "footer-12-semantic-must-not-recover-trust",
+    "footer-13-erased-must-not-recover-trust",
+    "footer-13-crc-must-not-recover-trust",
+    "footer-13-semantic-must-not-recover-trust",
+    "footer-14-erased-must-not-recover-trust",
+    "footer-14-crc-must-not-recover-trust",
+    "footer-14-semantic-must-not-recover-trust",
+    "new-cohort-breaks-previous-terminal-chain",
+    "extra-child-outside-plan-is-not-complete",
+    "filtered-kind-11-flags-0",
+    "filtered-kind-18-flags-0",
+    "filtered-kind-14-flags-0",
+    "filtered-kind-15-flags-0",
+    "filtered-kind-14-flags-1",
+    "filtered-kind-15-flags-1",
+    "unsaturated-count-4-cursor-1",
+    "unsaturated-count-4-cursor-2",
+    "unsaturated-count-4-cursor-3",
+    "unsaturated-count-5-cursor-0",
+    "unsaturated-count-5-cursor-2",
+    "unsaturated-count-5-cursor-3",
+    "unsaturated-count-6-cursor-0",
+    "unsaturated-count-6-cursor-1",
+    "unsaturated-count-6-cursor-3",
+    "unsaturated-count-65534-cursor-0",
+    "unsaturated-count-65534-cursor-1",
+    "unsaturated-count-65534-cursor-3",
+    "sample-invalid-state",
+    "unused-sample-nonzero",
+    "last-sample-ms-disagrees",
+    "sequence-label-14-2",
+    "sequence-label-15-2",
+    "sequence-label-14-4",
+    "sequence-label-15-4",
+    "complete-session-label-0",
+    "complete-session-label-2",
+    "complete-session-label-128",
+    "complete-session-label-130",
+    "admission-label-12-0",
+    "admission-label-12-128",
+    "admission-label-16-132"
+  ],
+  "decoderSHA256": "53bbd85b90964fa108c3b0eb65e09455123789c528d9562c04b94bc2de5c5a57",
+  "fixtureSHA256": "5ebc0a86d83da1b9b0f6d2322b744a4acefd851d2f97e1c0bf2072e868ee0d5b",
+  "syntheticDataOnly": true,
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "cases": [
+    {
+      "case": "compiled-writer-positive",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-0-erased-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-0-crc-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-1-erased-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": false,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "snapshot-1-crc-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": false,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "snapshot-4-erased-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": false,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "snapshot-4-crc-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": false,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "snapshot-11-erased-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": false,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "snapshot-11-crc-terminal-association",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": false,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-12-erased-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-12-crc-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-12-semantic-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-13-erased-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-13-crc-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-13-semantic-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-14-erased-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-14-crc-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "footer-14-semantic-must-not-recover-trust",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "new-cohort-breaks-previous-terminal-chain",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "partial",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": false,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "extra-child-outside-plan-is-not-complete",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": []
+      }
+    },
+    {
+      "case": "filtered-kind-11-flags-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "filtered-kind-18-flags-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "filtered-kind-14-flags-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "filtered-kind-15-flags-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "filtered-kind-14-flags-1",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "filtered-kind-15-flags-1",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-4-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-4-cursor-1",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-4-cursor-2",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-4-cursor-3",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-5-cursor-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-5-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-5-cursor-2",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-5-cursor-3",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-6-cursor-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-6-cursor-1",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-6-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-6-cursor-3",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-1",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-3",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "saturated-count-wrap-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sample-invalid-state",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "unused-sample-nonzero",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "last-sample-ms-disagrees",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "sequence-label-14-2",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "sequence-label-15-2",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "sequence-label-14-4",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "sequence-label-15-4",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "complete-session-label-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "complete-session-label-2",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "complete-session-label-128",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "complete-session-label-130",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "admission-label-12-0",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "admission-label-12-128",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    },
+    {
+      "case": "admission-label-16-132",
+      "passed": false,
+      "detail": {
+        "snapshotStatus": "complete",
+        "eventSnapshotComplete": true,
+        "motionSnapshotComplete": true,
+        "terminalFooters": [
+          {
+            "kindID": 1,
+            "kind": "VD-two-low",
+            "value": 2,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 1,
+            "uptimeMS": 2050
+          },
+          {
+            "kindID": 3,
+            "kind": "PA23-write-reached",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 2,
+            "uptimeMS": 2051
+          },
+          {
+            "kindID": 4,
+            "kind": "100ms-tail-delay-returned",
+            "value": 0,
+            "faultID": 15,
+            "fault": "servo-wrong-way",
+            "ordinal": 3,
+            "uptimeMS": 2151
+          },
+          {
+            "kindID": 5,
+            "kind": "terminal-st-fail",
+            "value": 7,
+            "faultID": 7,
+            "fault": "tick-wait",
+            "ordinal": 4,
+            "uptimeMS": 2200
+          }
+        ]
+      }
+    }
+  ]
+}

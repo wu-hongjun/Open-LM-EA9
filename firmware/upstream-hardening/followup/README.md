@@ -76,3 +76,13 @@ failing controls are indexed in the
 [campaign](../../../docs/audits/astra-hardening-campaign-2026-10-15.md).
 No interrupted or root-only scope is counted as another completed Astra lane.
 Published images/recovery stay frozen; physical camera qualification is pending.
+
+## Separately authorized targeted tracing after the closed campaign
+
+Lanes33–39 are the subsequent [3.7 milestone](../../../docs/firmware-targeted-tracing-2026-10-15.md),
+not an extension of the expired eight-hour heartbeat. They cover motion context,
+capture ownership, v3 terminal storage, trace footprint, lossless packet reset
+initialization, exact compiled composition and independent host decoder trust.
+The [3.7 workbench](../next37/README.md) binds the accepted production applicators
+and explicit regression rebindings. No hardware was accessed; camera stability,
+the wrong-way cause, capture reliability and factory parity remain unresolved.

@@ -1,0 +1,312 @@
+{
+  "checks": 60,
+  "passed": 60,
+  "failed": [],
+  "decoderSHA256": "7662e1472dfd4db179368d46d8cff64cdb5462a587d11b66ee3dda1ee9c2cb83",
+  "fixtureSHA256": "5ebc0a86d83da1b9b0f6d2322b744a4acefd851d2f97e1c0bf2072e868ee0d5b",
+  "syntheticDataOnly": true,
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "cases": [
+    {
+      "case": "compiled-writer-positive",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-0-erased-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-0-crc-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-1-erased-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-1-crc-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-4-erased-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-4-crc-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-11-erased-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "snapshot-11-crc-terminal-association",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-12-erased-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-12-crc-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-12-semantic-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-13-erased-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-13-crc-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-13-semantic-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-14-erased-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-14-crc-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "footer-14-semantic-must-not-recover-trust",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "new-cohort-breaks-previous-terminal-chain",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "extra-child-outside-plan-is-not-complete",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-11-flags-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-18-flags-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-14-flags-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-15-flags-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-14-flags-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "filtered-kind-15-flags-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-4-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-4-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-4-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-4-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-5-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-5-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-5-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-5-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-6-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-6-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-6-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-6-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unsaturated-count-65534-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "saturated-count-wrap-cursor-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sample-invalid-state",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "unused-sample-nonzero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "last-sample-ms-disagrees",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sequence-label-14-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sequence-label-15-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sequence-label-14-4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "sequence-label-15-4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "complete-session-label-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "complete-session-label-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "complete-session-label-128",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "complete-session-label-130",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "admission-label-12-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "admission-label-12-128",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "case": "admission-label-16-132",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

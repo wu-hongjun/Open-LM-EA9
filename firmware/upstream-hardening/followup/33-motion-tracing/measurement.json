@@ -1,0 +1,191 @@
+{
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 14.2.1 20241119",
+  "baseManifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+  "booleanWriteInventory": [
+    [
+      "holding",
+      "0"
+    ],
+    [
+      "rebase",
+      "0"
+    ],
+    [
+      "rebase",
+      "1"
+    ],
+    [
+      "holding",
+      "1"
+    ],
+    [
+      "holding",
+      "0"
+    ],
+    [
+      "rebase",
+      "0"
+    ]
+  ],
+  "packingEquivalenceCases": 2048,
+  "units": {
+    "frozen": {
+      "servo": {
+        "textBytes": 1716,
+        "dataBytes": 0,
+        "bssBytes": 0,
+        "stackUsage": [
+          "src/servo.c:81:6:servo_move_from\t136\tstatic",
+          "src/servo.c:492:6:servo_move_rel\t16\tstatic"
+        ],
+        "objectSHA256": "fd96c0be5ff6f8e0a3576e20097e1096bd70c0a67e7465cf91dceb7560ff627c",
+        "sourceSHA256": "5eadc1bf93f62a1369187e54b8fb7b3a148155802fd94767e56c2c602a8ef21b"
+      },
+      "main": {
+        "textBytes": 3230,
+        "dataBytes": 0,
+        "bssBytes": 71,
+        "stackUsage": [
+          "src/main.c:549:13:motion_shutdown_inhibit\t8\tstatic",
+          "src/main.c:866:13:powerdown_signal\t48\tstatic",
+          "src/main.c:556:16:home_command\t40\tstatic",
+          "src/main.c:1033:13:focus_report_at\t24\tstatic",
+          "src/main.c:1107:13:focus_report\t8\tstatic",
+          "src/main.c:1180:16:focus_invalid\t8\tstatic",
+          "src/main.c:1191:16:focus_abort\t8\tstatic",
+          "src/main.c:1185:13:focus_event\t16\tstatic",
+          "src/main.c:1071:13:focus_answer_queries\t48\tstatic",
+          "src/main.c:506:13:pump\t8\tstatic",
+          "src/main.c:1126:16:focus_cmd_target\t16\tstatic",
+          "src/main.c:1200:16:focus_retarget\t40\tstatic",
+          "src/main.c:572:16:home_cancel_requested\t8\tstatic",
+          "src/main.c:1249:16:focus_run.isra\t112\tstatic",
+          "src/main.c:1480:13:focus_exec\t96\tstatic",
+          "src/main.c:1581:5:main\t104\tstatic"
+        ],
+        "objectSHA256": "bd8c889d9a8dfdfeb3a741200859d0a7f83c9805577024f98883597039564f69",
+        "sourceSHA256": "982c1beb7dca621fd2c403e1f7bc670f2859003c960265bad936c6f348c9b3b3"
+      }
+    },
+    "ternary-observation": {
+      "servo": {
+        "textBytes": 2392,
+        "dataBytes": 0,
+        "bssBytes": 0,
+        "stackUsage": [
+          "src/servo.c:82:6:servo_move_from\t136\tstatic",
+          "src/servo.c:506:6:servo_move_rel\t16\tstatic"
+        ],
+        "objectSHA256": "d3e3d617f25932621766470532a31d2c1e43e806a2c7665f590bf10be00d6489",
+        "sourceSHA256": "a5594b907d473cbe57563cd75c0db2bb40cfc6ba780b3d7e5e06098adf16b88b"
+      },
+      "main": {
+        "textBytes": 3332,
+        "dataBytes": 0,
+        "bssBytes": 71,
+        "stackUsage": [
+          "src/main.c:550:13:motion_shutdown_inhibit\t8\tstatic",
+          "src/main.c:867:13:powerdown_signal\t48\tstatic",
+          "src/main.c:557:16:home_command\t40\tstatic",
+          "src/main.c:1034:13:focus_report_at\t24\tstatic",
+          "src/main.c:1108:13:focus_report\t8\tstatic",
+          "src/main.c:1181:16:focus_invalid\t8\tstatic",
+          "src/main.c:1195:16:focus_abort\t8\tstatic",
+          "src/main.c:1072:13:focus_answer_queries\t48\tstatic",
+          "src/main.c:507:13:pump\t8\tstatic",
+          "src/main.c:1186:13:focus_event\t16\tstatic",
+          "src/main.c:1127:16:focus_cmd_target\t16\tstatic",
+          "src/main.c:1204:16:focus_retarget\t40\tstatic",
+          "src/main.c:573:16:home_cancel_requested\t8\tstatic",
+          "src/main.c:1255:16:focus_run.isra\t104\tstatic",
+          "src/main.c:1489:13:focus_exec\t104\tstatic",
+          "src/main.c:1593:5:main\t104\tstatic"
+        ],
+        "objectSHA256": "f5e44078d8fa404c6b36f7eb902a799d35789cdc489d4a70727c44154fdc8acd",
+        "sourceSHA256": "07d5e4703da9cab038a6dd6b09a4dba611de3e1065b0ecc0be36149c44b0871b"
+      },
+      "motion_trace": {
+        "textBytes": 492,
+        "dataBytes": 0,
+        "bssBytes": 147,
+        "stackUsage": [
+          "src/motion_trace.c:8:6:st_motion_command\t0\tstatic",
+          "src/motion_trace.c:12:6:st_motion_begin\t32\tstatic",
+          "src/motion_trace.c:25:6:st_motion_sample\t16\tstatic",
+          "src/motion_trace.c:35:6:st_motion_leg\t16\tstatic",
+          "src/motion_trace.c:52:6:st_motion_drive\t0\tstatic",
+          "src/motion_trace.c:56:6:st_motion_finish\t0\tstatic",
+          "src/motion_trace.c:68:6:st_motion_completion\t16\tstatic",
+          "src/motion_trace.c:74:16:st_motion_data\t0\tstatic"
+        ],
+        "objectSHA256": "7eb87bcd3564019dd64e0e8d4e9285fd8075b23bb00dc971acd9461a68b3e7c5",
+        "sourceSHA256": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90"
+      },
+      "motionUndefinedSymbols": [
+        "memset",
+        "millis"
+      ]
+    },
+    "packed-observation": {
+      "servo": {
+        "textBytes": 1628,
+        "dataBytes": 0,
+        "bssBytes": 0,
+        "stackUsage": [
+          "src/servo.c:82:6:servo_move_from\t128\tstatic",
+          "src/servo.c:506:6:servo_move_rel\t16\tstatic"
+        ],
+        "objectSHA256": "c831d676cf9937897ece5e75982d4ceeea4453ff6735827bd0d3ca3e1966f4f8",
+        "sourceSHA256": "6a291a61dec72a42ada5f143e5122eb903b32b42b59af22d90b49bd4456c38f5"
+      },
+      "main": {
+        "textBytes": 3332,
+        "dataBytes": 0,
+        "bssBytes": 71,
+        "stackUsage": [
+          "src/main.c:550:13:motion_shutdown_inhibit\t8\tstatic",
+          "src/main.c:867:13:powerdown_signal\t48\tstatic",
+          "src/main.c:557:16:home_command\t40\tstatic",
+          "src/main.c:1034:13:focus_report_at\t24\tstatic",
+          "src/main.c:1108:13:focus_report\t8\tstatic",
+          "src/main.c:1181:16:focus_invalid\t8\tstatic",
+          "src/main.c:1195:16:focus_abort\t8\tstatic",
+          "src/main.c:1072:13:focus_answer_queries\t48\tstatic",
+          "src/main.c:507:13:pump\t8\tstatic",
+          "src/main.c:1186:13:focus_event\t16\tstatic",
+          "src/main.c:1127:16:focus_cmd_target\t16\tstatic",
+          "src/main.c:1204:16:focus_retarget\t40\tstatic",
+          "src/main.c:573:16:home_cancel_requested\t8\tstatic",
+          "src/main.c:1255:16:focus_run.isra\t104\tstatic",
+          "src/main.c:1489:13:focus_exec\t104\tstatic",
+          "src/main.c:1593:5:main\t104\tstatic"
+        ],
+        "objectSHA256": "3598ab81c76f21043e5ddddd39243839f1ba1a51500640d12816e155128a740b",
+        "sourceSHA256": "07d5e4703da9cab038a6dd6b09a4dba611de3e1065b0ecc0be36149c44b0871b"
+      },
+      "motion_trace": {
+        "textBytes": 492,
+        "dataBytes": 0,
+        "bssBytes": 147,
+        "stackUsage": [
+          "src/motion_trace.c:8:6:st_motion_command\t0\tstatic",
+          "src/motion_trace.c:12:6:st_motion_begin\t32\tstatic",
+          "src/motion_trace.c:25:6:st_motion_sample\t16\tstatic",
+          "src/motion_trace.c:35:6:st_motion_leg\t16\tstatic",
+          "src/motion_trace.c:52:6:st_motion_drive\t0\tstatic",
+          "src/motion_trace.c:56:6:st_motion_finish\t0\tstatic",
+          "src/motion_trace.c:68:6:st_motion_completion\t16\tstatic",
+          "src/motion_trace.c:74:16:st_motion_data\t0\tstatic"
+        ],
+        "objectSHA256": "0b18eafeb970b1bf47d189ff91139c3183288c0417660ad36798a93caea18d2a",
+        "sourceSHA256": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90"
+      },
+      "motionUndefinedSymbols": [
+        "memset",
+        "millis"
+      ]
+    }
+  },
+  "wholeImageFit": "Owned by lane35/root; these are relocatable object sizes, not a link-layout gate.",
+  "hardwareTimingMeasured": false
+}

@@ -1,0 +1,263 @@
+{
+  "status": "offline-staged-observation-only",
+  "baseImageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+  "baseManifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+  "sourceHashes": {
+    "src/emount.c": "57fe9dfe08068db6a2f4596faf27371b74881f84573b79facca4d728cd349d41",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02"
+  },
+  "proposalEmountSHA256": "2e469f4a7f30e93ad4431bb2505ebc5ba5a0d1c66644a04c0dc34fcb49f5aa59",
+  "cases": {
+    "frozen": [
+      {
+        "case": "ordinary",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 75: offer>=0 && take>offer && start>take && ret>start && complete>ret",
+        "parity": {
+          "case": "ordinary",
+          "wireAndSideEffectsFNV32": "83727498",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "raw",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 75: offer>=0 && take>offer && start>take && ret>start && complete>ret",
+        "parity": {
+          "case": "raw",
+          "wireAndSideEffectsFNV32": "53612e1c",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "session-irq",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 87: start>=0 && rx>start && ret>rx && done>ret",
+        "parity": {
+          "case": "session-irq",
+          "wireAndSideEffectsFNV32": "c97e4d0c",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "shutdown-irq",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 87: start>=0 && rx>start && ret>rx && done>ret",
+        "parity": {
+          "case": "shutdown-irq",
+          "wireAndSideEffectsFNV32": "693b5029",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "pending",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 98: a>=0 && b>a && t>b && (log_events[a].flags&128) && !(log_events[b].flags&128)",
+        "parity": {
+          "case": "pending",
+          "wireAndSideEffectsFNV32": "d2848b6c",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "session-high",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 103: a>=0 && t>a && r>t && log_events[a].session==0xa1b2c3d4u && log_events[t].session==0xa1b2c3d4u && log_events[r].session==0xa1b2c3d4u",
+        "parity": {
+          "case": "session-high",
+          "wireAndSideEffectsFNV32": "bfc81a0d",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "failed-tx",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 106: find(0,ST_TX_START,0x0a)>=0 && find(0,ST_TX_RETURN,0x0a)<0",
+        "parity": {
+          "case": "failed-tx",
+          "wireAndSideEffectsFNV32": "83727498",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "shutdown",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 113: a>=0 && s>a && r>s && find(0,ST_RX,0x16)<0 && log_events[s].seq==0x44",
+        "parity": {
+          "case": "shutdown",
+          "wireAndSideEffectsFNV32": "ca67175b",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "queue",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 117: completion_n==4 && completion_state[0]==ST_MC_QUEUED && completion_state[1]==ST_MC_QUEUED && completion_state[2]==ST_MC_QUEUE_FULL && completion_state[3]==ST_MC_TX_RETURN",
+        "parity": {
+          "case": "queue",
+          "wireAndSideEffectsFNV32": "7b486815",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "phase",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 122: a>=0 && b>a && (log_events[a].flags&8) && log_events[b].flags==0",
+        "parity": {
+          "case": "phase",
+          "wireAndSideEffectsFNV32": "3e0854fb",
+          "txCount": 2
+        }
+      }
+    ],
+    "proposal": [
+      {
+        "case": "ordinary",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "ordinary",
+          "wireAndSideEffectsFNV32": "83727498",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "raw",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "raw",
+          "wireAndSideEffectsFNV32": "53612e1c",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "session-irq",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "session-irq",
+          "wireAndSideEffectsFNV32": "c97e4d0c",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "shutdown-irq",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "shutdown-irq",
+          "wireAndSideEffectsFNV32": "693b5029",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "pending",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "pending",
+          "wireAndSideEffectsFNV32": "d2848b6c",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "session-high",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "session-high",
+          "wireAndSideEffectsFNV32": "bfc81a0d",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "failed-tx",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "failed-tx",
+          "wireAndSideEffectsFNV32": "83727498",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "shutdown",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "shutdown",
+          "wireAndSideEffectsFNV32": "ca67175b",
+          "txCount": 1
+        }
+      },
+      {
+        "case": "queue",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "queue",
+          "wireAndSideEffectsFNV32": "7b486815",
+          "txCount": 2
+        }
+      },
+      {
+        "case": "phase",
+        "traceAssertionsExit": 0,
+        "assertion": "",
+        "parity": {
+          "case": "phase",
+          "wireAndSideEffectsFNV32": "3e0854fb",
+          "txCount": 2
+        }
+      }
+    ],
+    "live-return-mutant": [
+      {
+        "case": "session-irq",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 88: log_events[start].session==0 && log_events[ret].session==0 && log_events[ret].seq==0x41"
+      }
+    ],
+    "raw-bit-mutant": [
+      {
+        "case": "raw",
+        "traceAssertionsExit": 1,
+        "assertion": "FAIL line 76: (log_events[offer].flags&129)==(128|raw)"
+      }
+    ]
+  },
+  "objectSizes": {
+    "frozen": {
+      "text": 4321,
+      "data": 3,
+      "bss": 1604
+    },
+    "proposal": {
+      "text": 4875,
+      "data": 3,
+      "bss": 1604
+    }
+  },
+  "textDelta": 554,
+  "selectedStackBytes": {
+    "frozen": [
+      "em_transmit:304",
+      "em_pump_status:40",
+      "em_poll:56"
+    ],
+    "proposal": [
+      "em_trace_flags:12",
+      "em_trace:40",
+      "em_transmit:312",
+      "em_pump_status:40",
+      "em_poll:56"
+    ]
+  },
+  "hardwareAccess": false,
+  "factoryParityClaimed": false,
+  "captureFixClaimed": false,
+  "abiCollectorOnly": true
+}

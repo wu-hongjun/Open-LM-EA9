@@ -1,0 +1,208 @@
+{
+  "status": "prepared-offline-not-flashed-camera-unqualified",
+  "baseCommit": "d65662a69aed606009eb3cd043c063ddbc113e89",
+  "firmwareVersion": "3.7.0",
+  "imageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+  "manifestSHA256": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b",
+  "imageBytes": 20480,
+  "loadedCodeDataEnd": 39608,
+  "codeMarginBeforeDiagnostics": 328,
+  "minimumCodeMargin": 256,
+  "staticRAMBytes": 3044,
+  "reservedStackBytes": 8192,
+  "conditionalCompiledStackBytes": 1516,
+  "physicalStackHighWaterMeasured": false,
+  "diagnosticRange": [
+    39936,
+    40960
+  ],
+  "diagnosticFormat": 3,
+  "motionSnapshotBytes": 144,
+  "recentFocusedEvents": 32,
+  "reservedTerminalPagesWhenCapacityAllows": 4,
+  "exactSourceFilesVerified": 49,
+  "repeatBuildIdenticalImageRawManifestPatch": true,
+  "normalizedCompiledInstructionsSymbolsProgramHeadersEqual": true,
+  "acceptanceGroups": [
+    {
+      "name": "coordinate",
+      "exitCode": 0
+    },
+    {
+      "name": "query-ownership",
+      "exitCode": 0
+    },
+    {
+      "name": "query-flow",
+      "exitCode": 0
+    },
+    {
+      "name": "absolute-target",
+      "exitCode": 0
+    },
+    {
+      "name": "time-contract",
+      "exitCode": 0
+    },
+    {
+      "name": "target-time-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "exact-counter-parity",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-commits",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-session",
+      "exitCode": 0
+    },
+    {
+      "name": "home-inhibit",
+      "exitCode": 0
+    },
+    {
+      "name": "query-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "motion-tracing",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-retention",
+      "exitCode": 0
+    },
+    {
+      "name": "startup-handoff",
+      "exitCode": 0
+    },
+    {
+      "name": "trace-core",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-compaction",
+      "exitCode": 0
+    },
+    {
+      "name": "packet-reset",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-writer",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-v3",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-adversarial",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-legacy",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-composition",
+      "exitCode": 0
+    }
+  ],
+  "acceptanceSummarySHA256": "71cd0166157026e2388d0deb6fae3817df48c8ab47c9e3771a73cf75a02e6749",
+  "compiledStackRejections": 41,
+  "compiledStackExactBoundAccepted": true,
+  "swiftTests": {
+    "LensCore": 7,
+    "DeviceKit": 35,
+    "AppWorkflow": 11,
+    "total": 53,
+    "passed": true
+  },
+  "nativePrepareAndPackaging": {
+    "status": "passed-native-prepare-only-and-packaging",
+    "appVersion": "0.20.0",
+    "appBuild": 25,
+    "cliSHA256": "b9c9f77f80ef80e0fd59c97de0d878d62ef68fd5a30b7d1fe4995479a4cf8e67",
+    "prepared": [
+      {
+        "command": "prepare-trace-upstream",
+        "version": "3.7.0",
+        "imageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-handoff-upstream",
+        "version": "3.6.0",
+        "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-absolute-upstream",
+        "version": "3.5.0",
+        "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-bounded-upstream",
+        "version": "3.4.0",
+        "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-hardened-upstream",
+        "version": "3.3.0",
+        "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-startup",
+        "version": "3.2.0",
+        "imageSHA256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "hardwareReportsSent": 0
+      },
+      {
+        "command": "prepare-upstream",
+        "version": "3.1.0",
+        "imageSHA256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "hardwareReportsSent": 0
+      }
+    ],
+    "wrongProfileRejected": true,
+    "appLaunched": false,
+    "canonicalUSBStateAccessed": false,
+    "hardwareReportsSent": 0
+  },
+  "preservedReleaseRecoveryAndPinFiles": 131,
+  "historicalRegistryEntriesUnchanged": true,
+  "stockRecoveryApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "astraCompletedLanes": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "controllerBasis": "Pinned upstream C; existing control law retained",
+  "firmwareIdentityIntentionallyChanged": "BCD 0x36 to 0x37",
+  "shutterFreezeFixEstablished": false,
+  "wrongWayRootCauseEstablished": false,
+  "factoryFirmwareFullyReverseEngineered": false,
+  "cameraQualified": false,
+  "hardwareReportsSent": 0,
+  "adapterEnumeratedOrOpened": false,
+  "appLaunched": false,
+  "canonicalApplicationSupportStateReadOrWritten": false,
+  "heartbeatResumed": false,
+  "limits": "Finite supplied inputs, instruction execution and software contracts do not establish physical timing, encoder polarity, optical AF, capture/shutdown reliability or factory parity."
+}

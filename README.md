@@ -8,12 +8,22 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
+The current offline candidate is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
+for the original Contax Zeiss 50mm f/1.4. Seven additional Astra lanes prepared
+motion fault snapshots, capture/TX ownership and post-flush shutdown tracing,
+with strict partial-record interpretation. A lossless packet initializer and
+compact diagnostics retain the flash margin without changing the controller or
+wire layout. The firmware identity intentionally changes to 3.7. **3.7 has not been flashed or camera-qualified; a fix for
+the shutter freeze is not established.** [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)
+and the [separate future test procedure](docs/upstream-targeted-trace-test.md)
+record the next gate. The adapter remains untouched during this offline work.
+
 The [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
 has closed and its heartbeat is paused. [Final results and remaining gates](docs/evidence/firmware-hardening-final-2026-10-15.md)
 record source improvements and the failed 3.6 camera trial; stable firmware and
 factory parity remain unachieved. The first eleven Astra
 lanes produced frozen [upstream C 3.3](firmware/candidates/3.3.0/README.md).
-Follow-up audits now produce [3.6 offline](firmware/candidates/3.6.0/README.md):
+Earlier follow-up audits produced [3.6 offline](firmware/candidates/3.6.0/README.md):
 a scoped startup EIC handoff prevents competing receive producers while keeping
 UART reception active, retaining 3.5's target/time and 3.4's encoder/query fixes.
 It retains the upstream C controller and aperture policy. Exact repeat builds,
@@ -36,12 +46,13 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.19.1, build 24) refreshes
+upload/read-back path for lens metadata. The current app (0.20.0, build 25) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
 It marks installed 3.6 as held and disables ordinary installation of that image.
+The separate explicit 3.7 tracing action preserves that hold and older command meanings.
 The upstream candidates use the original fixed 50mm profile; they cannot apply
 runtime lens edits. [Factory reconstruction remains partial](docs/reverse-engineering/status-2026-10-15.md).
 The **historical upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4
@@ -177,26 +188,29 @@ startup, no observed startup movement without input, quiet idle and normal motor
 shutdown. Homing and measured timing remain unverified. The converter is now
 available for a controlled loaded-lens baseline.
 The Biotar is 58mm f/2, as confirmed by the owner. For current offline firmware
-reproduction, first follow the pinned toolchain and exact 3.5 source prerequisites
-in the [3.6 workbench](firmware/upstream-hardening/next36/README.md). Existing
+reproduction, first follow the pinned toolchain and exact 3.6 source prerequisites
+in the [3.7 workbench](firmware/upstream-hardening/next37/README.md). Existing
 materializations are preserved; choose fresh private output paths:
 
 ```sh
-python3 scripts/build-upstream-handoff.py --output artifacts/private/recheck36
-python3 scripts/test-upstream-handoff.py --build artifacts/private/recheck36 --output artifacts/private/recheck36-tests
+python3 scripts/build-upstream-targeted.py --output artifacts/private/recheck37
+python3 scripts/test-upstream-targeted.py --build artifacts/private/recheck37 --output artifacts/private/recheck37-tests
 ./scripts/swift-local.sh test
 ./scripts/build-macos-app.sh
 ```
 
 The earlier `build-firmware.py` and `build-upstream-baseline.py` reproduce/check
-historical metadata/custom firmware and 3.1 respectively; they do not build 3.6.
+historical metadata/custom firmware and 3.1 respectively; they do not build 3.7.
 On a fresh checkout, restore the ignored photographed assets as described in
 [photo provenance](references/visuals/README.md) before packaging the app.
 For interactive app use, open `dist/Open LM-EA9.app` after the build. Keep it
 closed during CLI USB operations and offline runs; normal app refresh enumerates
 connected devices. Building or passing tests does not authorize a flash.
 
-- [Current fixed 50mm AF 3.6 candidate and exact pins](firmware/candidates/3.6.0/README.md)
+- [Current fixed 50mm AF 3.7 tracing candidate](firmware/candidates/3.7.0/README.md)
+- [AF 3.7 build/test workbench](firmware/upstream-hardening/next37/README.md)
+- [AF 3.7 future installation and one-cycle log procedure](docs/upstream-targeted-trace-test.md)
+- [Held 50mm AF 3.6 candidate and exact pins](firmware/candidates/3.6.0/README.md)
 - [AF 3.6 build/test workbench and prerequisites](firmware/upstream-hardening/next36/README.md)
 - [AF 3.6 coordinated install, camera cycle and log retrieval](docs/upstream-handoff-test.md)
 - [Direct upstream baseline and validation](docs/evidence/upstream-baseline-2026-10-14.md)

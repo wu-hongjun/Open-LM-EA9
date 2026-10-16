@@ -1,0 +1,30 @@
+{
+  "sourceHashes": {
+    "artifacts/private/astra34-capture-retention3/proposal/src/startup_trace.c": "627871052573f0e9f7920bcd8c92576b9e389329c748fac7017b7b6a112bd569",
+    "artifacts/private/astra34-capture-retention3/proposal/src/startup_trace.h": "d78325c0caecf7b8cbf5f08a831866b3f1e4dd1d6e8a6f0fa5054bc8e86e8273",
+    "artifacts/private/astra34-capture-retention3/proposal/src/trace_format.h": "c468eedc44d40cbedefce8d3a29dcaadd9de139ddec58499f16d41efe06b45e3",
+    "artifacts/private/astra34-capture-retention3/proposal/src/motion_trace.c": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90",
+    "artifacts/private/astra34-capture-retention3/proposal/src/motion_trace.h": "d3b28b9ff5e4c05fee7e0789c5062d7c848e475951af56c9615ddf814ca2155e",
+    "artifacts/private/astra34-capture-retention3/proposal/src/emount.c": "2e469f4a7f30e93ad4431bb2505ebc5ba5a0d1c66644a04c0dc34fcb49f5aa59",
+    "artifacts/private/astra34-capture-retention3/proposal/src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "artifacts/private/astra34-capture-retention3/proposal/src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "artifacts/private/astra34-capture-retention3/proposal/src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "firmware/upstream-hardening/followup/34-capture-tracing/apply.py": "130af3bde590147de2458e75a7be455961ffb431001ca461aca5c06c90aac1db",
+    "firmware/upstream-hardening/followup/34-capture-tracing/trace.inc": "1059cc6664605c35bdf7473e209a316552fbd2002cedc0a64609587fb4a42a92",
+    "firmware/upstream-hardening/followup/34-capture-tracing/test_retention.c": "ee151e83ef7a7d5c64f56e9117c1b0f68f934870bd8d176064c5377344717ebf"
+  },
+  "results": {
+    "proposal": {
+      "exit": 0,
+      "output": "{\"statusCycles\":100,\"filtered\":1226,\"retained\":22,\"dropped\":0,\"txCount\":205,\"writesWhileBusActive\":0}",
+      "assertion": ""
+    },
+    "unfiltered-mutant": {
+      "exit": 1,
+      "output": "",
+      "assertion": "FAIL line 61: offer_raw==1 && offer_normal==1 && phase_end==1 && raw_start==1 && raw_return==1 && admit==1 && shutdown_return==1"
+    }
+  },
+  "scope": "production emount + real focused ring/writer + real motion storage; synthetic frames only",
+  "hardwareAccess": false
+}

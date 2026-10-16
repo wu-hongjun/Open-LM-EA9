@@ -1,0 +1,143 @@
+{
+  "checks": 27,
+  "passed": 27,
+  "cases": [
+    {
+      "case": "pristine-synthetic-v3",
+      "passed": true,
+      "expectedAccepted": true
+    },
+    {
+      "case": "matching-native-manifest",
+      "passed": true,
+      "expectedAccepted": true
+    },
+    {
+      "case": "mutable-diagnostic-tail",
+      "passed": true,
+      "expectedAccepted": true
+    },
+    {
+      "case": "immutable-prefix-20480",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "immutable-prefix-39935",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "registry-imageSHA256",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "registry-manifestSHA256",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "registry-immutablePrefixSHA256",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "registry-size-bound",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "missing-registry-version",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "registry-format",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "manifest-byte-pin",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "descriptor-loaderVersion",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "descriptor-diagnosticRange",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "descriptor-imageSHA256",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "candidate-tamper-0",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "candidate-tamper-19455",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "candidate-tamper-19456",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "candidate-tamper-20479",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "candidate-length",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "native-flashReadPasses",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "native-auxiliaryReadPasses",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "native-bytes",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "native-sha256",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "flash-size-0",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "flash-size-131071",
+      "passed": true,
+      "expectedAccepted": false
+    },
+    {
+      "case": "flash-size-131073",
+      "passed": true,
+      "expectedAccepted": false
+    }
+  ],
+  "syntheticDataOnly": true,
+  "hardwareReportsSent": 0
+}

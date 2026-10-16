@@ -1,16 +1,16 @@
 # Firmware development
 
-The latest candidate is [upstream AF 3.6](candidates/3.6.0/README.md), prepared
-offline for the original Contax Zeiss 50mm f/1.4. It builds on pinned upstream C
-with reviewed framing, ownership, homing, query, target/time and startup fixes;
-the controller, optical maps and aperture policy remain upstream. Exact repeat
-builds and production-path regressions pass, with physical camera qualification
-still open. See [3.6 evidence](../docs/evidence/upstream-36-handoff-2026-10-15.md)
-and the [build/test workbench](upstream-hardening/next36/README.md) for prerequisites
-and commands. App 0.19.1/build 24 marks 3.6 held after the
-[reported capture/shutdown failure](../docs/evidence/upstream-36-camera-failure-2026-10-15.md)
-and disables ordinary installation. Preserve the original image for research;
-do not repeat camera testing of 3.6.
+The latest candidate is [upstream AF 3.7 tracing](candidates/3.7.0/README.md), prepared
+offline for the original Contax Zeiss 50mm f/1.4. It retains the upstream C
+controller, guards, optical maps, aperture policy and wire layout, with targeted
+motion/capture/shutdown diagnostics and a lossless packet initializer. It has
+not been flashed or camera-qualified; firmware identity changes to 3.7. It does
+not establish a shutter-freeze
+fix. See [3.7 evidence](../docs/evidence/upstream-37-tracing-2026-10-15.md) and the
+[build/test workbench](upstream-hardening/next37/README.md) for exact prerequisites,
+pins and conditional limits. App 0.20.0/build 25 provides a separately named 3.7
+action while retaining the 3.6 camera-failure hold and older command meanings.
+Preserve the original 3.6 image for research; do not repeat its failed camera test.
 
 **Hardware gate:** [3.2 strict verification passed](../docs/evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect. The separately authorized
@@ -129,7 +129,7 @@ Dependency versions, official source URLs and digests are pinned in
 `dependencies.json`. The local cache is ignored. The packaged Mac app includes
 pinned released templates and separate fixed upstream candidates. The earlier
 custom templates personalize only a reserved profile row; a custom template with
-its zeroed row is intentionally invalid. Upstream 3.1–3.6 images have no runtime
+its zeroed row is intentionally invalid. Upstream 3.1–3.7 images have no runtime
 profile row and reject edited profiles.
 
 Changes from the reference:

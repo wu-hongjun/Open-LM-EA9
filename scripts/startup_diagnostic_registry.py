@@ -21,7 +21,7 @@ def bounded_json(path):
     return json.loads(path.read_text())
 
 def resolve_candidate(root, version):
-    if version not in ('3.2.0', '3.3.0', '3.4.0', '3.5.0', '3.6.0'):
+    if version not in ('3.2.0', '3.3.0', '3.4.0', '3.5.0', '3.6.0', '3.7.0'):
         raise ValueError('Unsupported diagnostic firmware version.')
     path = root/'firmware/candidates'/version/'contax-zeiss-50-f1-4.bin'
     descriptor = bounded_json(path.with_suffix('.manifest.json'))
@@ -49,6 +49,9 @@ def resolve_candidate(root, version):
 def decode_extended_pages(data, decode_v1, version):
     if len(data) != 1024:
         raise ValueError('Expected exactly 1024 diagnostic bytes.')
+    if version == '3.7.0':
+        from startup_diagnostic_v3 import decode_pages
+        return decode_pages(data)
     translated = bytearray(data)
     for index in range(16):
         p = data[index*64:(index+1)*64]
@@ -102,7 +105,7 @@ def decode_extended_pages(data, decode_v1, version):
 
 def main(root, decode_v1):
     import argparse
-    parser = argparse.ArgumentParser(description='Decode pinned 3.2/3.3/3.4/3.5/3.6 diagnostics offline; no device access.')
+    parser = argparse.ArgumentParser(description='Decode pinned 3.2 through 3.7 diagnostics offline; no device access.')
     parser.add_argument('backup', type=Path)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()

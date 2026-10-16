@@ -1,0 +1,24 @@
+{
+  "reviewedPolicySHA256": "82630cd4205588457c1f0ec5ab3089561ac0d78b4de8bf392a68fa62ab165fd2",
+  "referenceELFSHA256": "f7ae647169d14b81495e14c6b061372ed1f135c4fc904e4b1ff2f338d79a873a",
+  "objdumpSHA256": "971eb15db5b2110383b75dc3b8953115c0c11f6cd2ce7f651b0efb44e9aedcf6",
+  "normalizedOutputSHA256": {
+    "-d": "c44aca42a37767bbcaf211fafb136f6177cc57f1ab1d1f7e6bf35fddb46d41af",
+    "-t": "a779af45e426dbe0a626fce70a48abe54e2976aae66153fc42f9064b1d37890e",
+    "-p": "d3dabe485b43e957ec27a0a93449233650dc8218770f89a231c91e3fd5a90f7d"
+  },
+  "allowedRebindings": [
+    "hardened.elf",
+    "hardened.map"
+  ],
+  "unchanged": [
+    "all sources",
+    "full pristine image",
+    "raw load bytes",
+    "manifest",
+    "callback targets",
+    "library/IRQ/order/source gates",
+    "conditional physical caveats"
+  ],
+  "physicalTimingMeasured": false
+}

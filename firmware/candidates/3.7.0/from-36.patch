@@ -1,0 +1,744 @@
+--- frozen36/src/emount.c
++++ targeted37/src/emount.c
+@@ -43,0 +44 @@
++#include "motion_trace.h"
+@@ -293,0 +295,31 @@
++/* RAM-only ownership observations; no whole frame or operand is retained.
++ * The low identity byte is the owning request's sequence for control TX,
++ * and the actual frame sequence for status/shutdown TX. */
++enum em_trace_flag {
++    ET_RAW=1, ET_CONTROL=2, ET_SHUTDOWN=4, ET_PHASE=8,
++    ET_SLOT=16, ET_PENDING=32, ET_STATUS=64, ET_RESULT=128
++};
++static uint16_t em_trace_identity(const uint8_t *p)
++{
++    return (uint16_t)(((uint16_t)p[5] << 8) | p[4]);
++}
++static uint8_t em_trace_flags(void)
++{
++    return (uint8_t)((g_shutdown.state != EM_SD_IDLE ? ET_SHUTDOWN : 0)
++        | (g_owner.phase << 3) | (g_owner.active << 4)
++        | (g_owner.pending << 5)
++        | (g_owner.status_enabled << 6));
++}
++static void em_trace(uint8_t kind, uint16_t identity, uint8_t flags,
++                     uint32_t session)
++{
++    st_record(millis(), (uint32_t)kind | (uint32_t)(identity & 0xff00u)
++            | ((uint32_t)flags << 16) | ((uint32_t)(uint8_t)identity << 24), session);
++}
++static void em_trace_owner(uint8_t kind, const uint8_t *p, uint8_t flags,
++                           uint32_t session)
++{
++    em_trace(kind, em_trace_identity(p), em_trace_flags() | flags, session);
++}
++
++
+@@ -315 +347,3 @@
+-	uint32_t key, generation;
++	uint32_t key, generation, trace_session;
++	uint16_t trace_identity;
++	uint8_t trace_flags;
+@@ -344,0 +379,10 @@
++	/* Capture once inside the existing admission mask. RX may run during
++	 * em_uart_send: RETURN must keep this identity, never reread the owner. */
++	trace_session = g_control_active ? g_control_session : g_session_generation;
++	trace_identity = em_trace_identity(snapshot);
++	trace_flags = em_trace_flags();
++	if (g_control_active) {
++	    trace_identity = (uint16_t)((trace_identity & 0xff00u) | g_req[4]);
++	    trace_flags |= ET_CONTROL | (g_owner.slot[g_owner.active].raw ? ET_RAW : 0);
++	}
++	em_trace(ST_TX_START, trace_identity, trace_flags, trace_session);
+@@ -353,0 +398 @@
++	em_trace(ST_TX_RETURN, trace_identity, trace_flags, trace_session);
+@@ -707,0 +753,2 @@
++	if (level) em_trace(ST_OWNER_CS, 0,
++	    em_trace_flags() | (g_owner.capture ? ET_RAW : 0), g_session_generation);
+@@ -732,0 +780,2 @@
++		em_trace(ST_SHUTDOWN_ADMIT, em_trace_identity(rx),
++		    ET_SHUTDOWN | ET_RESULT, g_session_generation);
+@@ -978,2 +1027,2 @@
+-		if (em_owner_offer(&g_owner, rx, view.length)
+-		    && !g_owner.capture && rx[5] == EM_ID_SESSION) {
++		int admitted = em_owner_offer(&g_owner, rx, view.length);
++		if (admitted && !g_owner.capture && rx[5] == EM_ID_SESSION) {
+@@ -987,0 +1037,2 @@
++		em_trace_owner(ST_OWNER_OFFER, rx, (g_owner.capture ? ET_RAW : 0) | (admitted ? ET_RESULT : 0),
++		    g_session_generation);
+@@ -1152,0 +1204,2 @@
++	st_motion_completion(g_event_n < EM_EVENT_Q ? ST_MC_QUEUED : ST_MC_QUEUE_FULL,
++	    (uint16_t)(code | ((uint16_t)param << 8)));
+@@ -1585 +1638,4 @@
+-		if (ready) g_status_due = 0;
++		if (ready) {
++		    g_status_due = 0;
++		    em_trace(ST_OWNER_PHASE, 0, ET_PHASE | ET_STATUS, g_session_generation);
++		}
+@@ -1612,0 +1669 @@
++		uint16_t trace_event = 0;
+@@ -1614,0 +1672 @@
++			trace_event = (uint16_t)(g_event_code[0] | ((uint16_t)g_event_param[0] << 8));
+@@ -1636,0 +1695 @@
++		if (trace_event) st_motion_completion(ST_MC_TX_RETURN, trace_event);
+@@ -1666,0 +1726,2 @@
++	/* This is the local phase end boundary, not an atomic current-owner snapshot. */
++	em_trace(ST_OWNER_PHASE, 0, g_owner.capture ? ET_RAW : 0, g_session_generation);
+@@ -1701,0 +1763 @@
++            em_trace_owner(ST_OWNER_TAKE, request->bytes, ET_CONTROL | (request->raw ? ET_RAW : 0), session);
+@@ -1714,0 +1777,2 @@
++                em_trace_owner(ST_OWNER_COMPLETE, request->bytes, ET_RAW | (sent ? ET_RESULT : 0)
++                    | (session == g_session_generation ? ET_CONTROL : 0), session);
+@@ -1729,0 +1794,2 @@
++                em_trace_owner(ST_OWNER_COMPLETE, request->bytes, (sent ? ET_RESULT : 0)
++                    | (session == g_session_generation ? ET_CONTROL : 0), session);
+--- frozen36/src/emount.h
++++ targeted37/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x36u
++#define EM_FW_VERSION_BCD   0x37u
+--- frozen36/src/emount_packets.c
++++ targeted37/src/emount_packets.c
+@@ -4,107 +4,14 @@
+-uint8_t ea9_data[EA9_DATA_LEN] = {
+-	0xf0, 0x30, 0x00, 0x01, 0x08, 0x06, 0x00, 0x00, 0x00, 0x10, 0x00, 0x30, 
+-	0x10, 0x30, 0x10, 0x00, 0x16, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x6e, 0x02, 0x55, 
+-	0x01, 0x02, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00, 0xf0, 0x29, 0x00, 0x02, 
+-	0x00, 0x01, 0xff, 0x9f, 0x60, 0x7d, 0x80, 0x07, 0x08, 0x50, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x86, 0x03, 
+-	0x55, 0x00, 0x00, 0x00, 0xf0, 0x2b, 0x00, 0x02, 0x00, 0x07, 0x02, 0x03, 
+-	0x08, 0x01, 0x00, 0x00, 0x18, 0x10, 0xa0, 0xea, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x60, 0x92, 0x86, 0x5e, 0x00, 0x60, 0x00, 0x20, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x89, 0x04, 0x55, 0x00, 
+-	0xf0, 0x00, 0x00, 0x02, 0x00, 0x0c, 0x01, 0x19, 0x00, 0x55, 0x00, 0x00, 
+-	0xf0, 0x0b, 0x00, 0x02, 0x00, 0x0b, 0x60, 0x20, 0x78, 0x00, 0x55, 0x00, 
+-	0xf0, 0x0a, 0x00, 0x02, 0x00, 0x0d, 0x01, 0x1a, 0x00, 0x55, 0x00, 0x00, 
+-	0xf0, 0xd2, 0x00, 0x02, 0x00, 0x08, 0x00, 0x13, 0x00, 0x19, 0x00, 0x00, 
+-	0x00, 0x16, 0x00, 0x02, 0x00, 0x00, 0x10, 0x20, 0x01, 0x00, 0x00, 0x40, 
+-	0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x19, 0x00, 0x00, 0x1c, 0x00, 0x94, 
+-	0x0f, 0x00, 0x00, 0x00, 0x30, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0b, 0xae, 0x00, 
+-	0x01, 0x00, 0x01, 0x80, 0x04, 0x55, 0x00, 0x00, 0xf0, 0x14, 0x00, 0x02, 
+-	0x00, 0x09, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x21, 0x00, 0x55, 0xf0, 0x00, 0x00, 0x02, 0x00, 0x10, 0x00, 0x00, 
+-	0x00, 0x55, 0x00, 0x00, 0xf0, 0x69, 0x00, 0x01, 0x64, 0x05, 0x00, 0x13, 
+-	0x00, 0x13, 0x00, 0x00, 0x10, 0x00, 0x07, 0x2a, 0x00, 0x2a, 0x00, 0x54, 
+-	0x01, 0x54, 0x01, 0x00, 0x00, 0x00, 0x00, 0x07, 0x80, 0xff, 0x90, 0x01, 
+-	0x90, 0x01, 0x0f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x18, 0x00, 0xa0, 0x00, 
+-	0x00, 0x20, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+-	0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x06, 
+-	0x55, 0x00, 0x00, 0x00, 0xf0, 0x10, 0x00, 0x02, 0x00, 0x32, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x44, 0x00, 0x55, 0xf0, 0x10, 0x00, 0x02, 
+-	0x00, 0x4c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5e, 0x00, 0x55, 
+-	0xf0, 0x4a, 0x00, 0x02, 0x00, 0x3f, 0x00, 0x54, 0x45, 0x43, 0x48, 0x41, 
+-	0x52, 0x54, 0x20, 0x4c, 0x4d, 0x2d, 0x45, 0x41, 0x39, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb5, 
+-	0x04, 0x55, 0x00, 0x00, 0xf0, 0x48, 0x00, 0x02, 0x00, 0x3d, 0x01, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x88, 0x00, 0x55, 0xf0, 0x40, 0x00, 0x02, 0x00, 0x5a, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0xa3, 0x00, 0x55, 0xf0, 0x20, 0x00, 0x02, 
+-	0x00, 0x34, 0x00, 0x00, 0x00, 0x7e, 0x52, 0x03, 0x52, 0x03, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x01, 0x02, 0x10, 0x00, 0x25, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0xbc, 0x01, 0x55, 0xf0, 0x00, 0x00, 0x02, 0x00, 0x19, 0x00, 0x00, 
+-	0x00, 0x55, 0x00, 0x00, 0xf0, 0x19, 0x00, 0x02, 0x00, 0x0a, 0xff, 0x7f, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0xe2, 0x01, 0x55, 0x00, 0x00, 0x00, 0xf0, 0x00, 0x00, 0x02, 
+-	0x00, 0x1b, 0x60, 0x11, 0x60, 0x11, 0x00, 0x00, 0x00, 0x0a, 0x0a, 0x01, 
+-	0x00, 0x00, 0x55, 0x00, 0xf0, 0x00, 0x00, 0x02, 0x00, 0x28, 0x00, 0x07, 
+-	0x00, 0xff, 0xf4, 0x01, 0xf4, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x09, 
+-	0x00, 0x00, 0x00, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x0e, 
+-	0x00, 0x56, 0x00, 0x00, 0x16, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 
+-	0x01, 0x00, 0x00, 0x00, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 
+-	0x00, 0x55, 0x00, 0x00, 0xf0, 0x30, 0x00, 0x02, 0x00, 0x35, 0x42, 0x01, 
+-	0x00, 0x7f, 0x21, 0x02, 0x26, 0x02, 0xff, 0x00, 0x00, 0xb0, 0xc8, 0x46, 
+-	0x43, 0x2e, 0x0d, 0x20, 0x42, 0x46, 0x26, 0xe4, 0xf0, 0xf0, 0x24, 0x08, 
+-	0xf4, 0xe8, 0xec, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x35, 0x0b, 0x55, 0xf0, 0x19, 0x00, 0x02, 0x00, 0x0a, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0xe2, 0x01, 0x55, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x42, 
+-	0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x02, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x50, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+-	0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x10, 0x27, 0x00, 0x00, 
+-	0x00, 0x24, 0x00, 0x42, 0x10, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x4c, 0x1d, 0x00, 0x00, 0x00, 0x20, 0x00, 0x42, 0x0f, 0x01, 0x00, 0x00, 
+-	0x7f, 0xbb, 0x00, 0x00, 0xbf, 0x5d, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 
+-	0x79, 0x83, 0x00, 0x00, 0x59, 0x84, 0x00, 0x00, 0xb9, 0x82, 0x00, 0x00, 
+-	0xcb, 0x82, 0x00, 0x00, 0xdd, 0x82, 0x00, 0x00, 0xe9, 0x82, 0x00, 0x00, 
+-	0xf5, 0x82, 0x00, 0x00, 0xdd, 0x84, 0x00, 0x00, 0x55, 0x88, 0x00, 0x00, 
+-	0xa9, 0x87, 0x00, 0x00, 0xf5, 0x86, 0x00, 0x00, 0x03, 0x87, 0x00, 0x00, 
+-	0x0f, 0x87, 0x00, 0x00, 0x41, 0x87, 0x00, 0x00, 0x77, 0x87, 0x00, 0x00, 
+-	0x6d, 0x89, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0xf4, 0x01, 0x00, 0x00, 0x96, 0x00, 0x00, 0x00, 
+-	0x2c, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 
+-	0xc8, 0x00, 0x00, 0x00, 0xc8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
++/* Lossless representation of the pinned upstream packet initializer.
++ * Reset restores every byte after BSS clear and before its VTOR rewrite. */
++uint8_t ea9_data[EA9_DATA_LEN];
++static const uint8_t packet_presence[] = {
++    0x3b, 0x7a, 0x09, 0x08, 0x00, 0xe0, 0x1f, 0xeb, 0x3f, 0x00, 0x00, 0xc0, 0xb1, 0x3e, 0x0f, 0x5e,
++    0x01, 0x70, 0xe9, 0xb2, 0x5e, 0xeb, 0xb2, 0x2a, 0xca, 0x49, 0xa4, 0x31, 0x00, 0x00, 0x00, 0x00,
++    0x00, 0x80, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60,
++    0x3d, 0xeb, 0x00, 0x9a, 0x22, 0xbb, 0xd2, 0x7a, 0xf8, 0x0f, 0x10, 0x54, 0x06, 0x12, 0x00, 0x00,
++    0x00, 0xc0, 0xb1, 0x02, 0xba, 0x02, 0xba, 0xfa, 0xff, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38,
++    0x6b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa0, 0x2b, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00,
++    0xa0, 0x2b, 0x3e, 0xb8, 0xe0, 0x29, 0xb2, 0x0e, 0x04, 0x1c, 0xe9, 0xe3, 0x94, 0xea, 0x87, 0x08,
++    0x2a, 0x83, 0x11, 0x22, 0xeb, 0x7e, 0xfe, 0xff, 0x07, 0xe0, 0x2b, 0x00, 0xc0, 0xa1, 0x81, 0x01,
++    0x21, 0x22, 0xa3, 0x21, 0x00, 0x00, 0x00, 0xa3, 0x33, 0x13, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33,
++    0x33, 0x33, 0x01, 0x08, 0x40, 0x00, 0x04, 0x01, 0x13, 0x03, 0x00, 0x00, 0x00, 0x12, 0x01
+@@ -111,0 +19,36 @@
++static const uint8_t packet_values[] = {
++    0xf0, 0x30, 0x01, 0x08, 0x06, 0x10, 0x30, 0x10, 0x30, 0x10, 0x16, 0x20, 0x10, 0x6e, 0x02, 0x55,
++    0x01, 0x02, 0x03, 0x04, 0x05, 0xf0, 0x29, 0x02, 0x01, 0xff, 0x9f, 0x60, 0x7d, 0x80, 0x07, 0x08,
++    0x50, 0x86, 0x03, 0x55, 0xf0, 0x2b, 0x02, 0x07, 0x02, 0x03, 0x08, 0x01, 0x18, 0x10, 0xa0, 0xea,
++    0x60, 0x92, 0x86, 0x5e, 0x60, 0x20, 0x89, 0x04, 0x55, 0xf0, 0x02, 0x0c, 0x01, 0x19, 0x55, 0xf0,
++    0x0b, 0x02, 0x0b, 0x60, 0x20, 0x78, 0x55, 0xf0, 0x0a, 0x02, 0x0d, 0x01, 0x1a, 0x55, 0xf0, 0xd2,
++    0x02, 0x08, 0x13, 0x19, 0x16, 0x02, 0x10, 0x20, 0x01, 0x40, 0x28, 0x19, 0x1c, 0x94, 0x0f, 0x30,
++    0xff, 0x04, 0x01, 0x0b, 0xae, 0x01, 0x01, 0x80, 0x04, 0x55, 0xf0, 0x14, 0x02, 0x09, 0x01, 0x01,
++    0x21, 0x55, 0xf0, 0x02, 0x10, 0x55, 0xf0, 0x69, 0x01, 0x64, 0x05, 0x13, 0x13, 0x10, 0x07, 0x2a,
++    0x2a, 0x54, 0x01, 0x54, 0x01, 0x07, 0x80, 0xff, 0x90, 0x01, 0x90, 0x01, 0x0f, 0x01, 0x26, 0x20,
++    0x18, 0xa0, 0x20, 0x50, 0x01, 0x01, 0x36, 0x06, 0x55, 0xf0, 0x10, 0x02, 0x32, 0x44, 0x55, 0xf0,
++    0x10, 0x02, 0x4c, 0x5e, 0x55, 0xf0, 0x4a, 0x02, 0x3f, 0x54, 0x45, 0x43, 0x48, 0x41, 0x52, 0x54,
++    0x20, 0x4c, 0x4d, 0x2d, 0x45, 0x41, 0x39, 0xb5, 0x04, 0x55, 0xf0, 0x48, 0x02, 0x3d, 0x01, 0x88,
++    0x55, 0xf0, 0x40, 0x02, 0x5a, 0x07, 0xa3, 0x55, 0xf0, 0x20, 0x02, 0x34, 0x7e, 0x52, 0x03, 0x52,
++    0x03, 0x01, 0x02, 0x10, 0x25, 0xbc, 0x01, 0x55, 0xf0, 0x02, 0x19, 0x55, 0xf0, 0x19, 0x02, 0x0a,
++    0xff, 0x7f, 0x3f, 0xe2, 0x01, 0x55, 0xf0, 0x02, 0x1b, 0x60, 0x11, 0x60, 0x11, 0x0a, 0x0a, 0x01,
++    0x55, 0xf0, 0x02, 0x28, 0x07, 0xff, 0xf4, 0x01, 0xf4, 0x01, 0x01, 0x09, 0x22, 0x16, 0x0e, 0x56,
++    0x16, 0x50, 0x55, 0x01, 0xf0, 0x16, 0x55, 0xf0, 0x30, 0x02, 0x35, 0x42, 0x01, 0x7f, 0x21, 0x02,
++    0x26, 0x02, 0xff, 0xb0, 0xc8, 0x46, 0x43, 0x2e, 0x0d, 0x20, 0x42, 0x46, 0x26, 0xe4, 0xf0, 0xf0,
++    0x24, 0x08, 0xf4, 0xe8, 0xec, 0x35, 0x0b, 0x55, 0xf0, 0x19, 0x02, 0x0a, 0xe2, 0x01, 0x55, 0x20,
++    0x42, 0x0f, 0x03, 0x02, 0x50, 0x01, 0x02, 0x03, 0x10, 0x27, 0x24, 0x42, 0x10, 0x03, 0x4c, 0x1d,
++    0x20, 0x42, 0x0f, 0x01, 0x7f, 0xbb, 0xbf, 0x5d, 0x02, 0x79, 0x83, 0x59, 0x84, 0xb9, 0x82, 0xcb,
++    0x82, 0xdd, 0x82, 0xe9, 0x82, 0xf5, 0x82, 0xdd, 0x84, 0x55, 0x88, 0xa9, 0x87, 0xf5, 0x86, 0x03,
++    0x87, 0x0f, 0x87, 0x41, 0x87, 0x77, 0x87, 0x6d, 0x89, 0x01, 0x10, 0x64, 0x01, 0x01, 0xf4, 0x01,
++    0x96, 0x2c, 0x01, 0x05, 0xc8, 0xc8
++};
++void ea9_packets_init(void)
++{
++    unsigned source=0;
++    for (unsigned dest=0;dest<EA9_DATA_LEN;dest++) {
++        uint8_t value=0;
++        if (packet_presence[dest>>3] & (1u<<(dest&7))) value=packet_values[source++];
++        ea9_data[dest]=value;
++    }
++}
++
+--- frozen36/src/emount_packets.h
++++ targeted37/src/emount_packets.h
+@@ -80,0 +81,3 @@
++/* Called once by Reset_Handler after BSS clear, before main. */
++void ea9_packets_init(void);
++
+--- frozen36/src/main.c
++++ targeted37/src/main.c
+@@ -37,0 +38 @@
++#include "motion_trace.h"
+@@ -905,0 +907 @@
++	st_terminal(low >= 2 ? ST_VD_LOW : ST_VD_TIMEOUT, (uint8_t)low, millis());
+@@ -907,0 +910 @@
++	st_terminal(ST_PA23, 0, g_pa23_at);
+@@ -909,0 +913 @@
++	st_terminal(ST_TAIL_DONE, 0, millis());
+@@ -1188 +1192,4 @@
+-    if (!focus_invalid()) em_post_event(code, param);
++    if (!focus_invalid()) {
++        st_motion_completion(ST_MC_ATTEMPT, code | ((uint16_t)param << 8));
++        em_post_event(code, param);
++    } else st_motion_completion(ST_MC_SUPPRESSED, code | ((uint16_t)param << 8));
+@@ -1236,0 +1244,2 @@
++	st_motion_command(c.op, (c.op == EM_OP_MOVE_REL || c.op == EM_OP_MOVE_DEFOCUS)
++	    ? (uint16_t)c.delta : c.target);
+@@ -1258 +1267 @@
+-	if (focus_invalid()) return SERVO_ABORTED;
++	if (focus_invalid()) { st_motion_completion(ST_MC_SUPPRESSED, 0); return SERVO_ABORTED; }
+@@ -1266,0 +1276,2 @@
++		st_motion_begin(here, want, millis(), cfg->dry);
++		st_motion_finish(SERVO_OK);
+@@ -1275 +1286 @@
+-	if (focus_invalid()) return SERVO_ABORTED;
++	if (focus_invalid()) { st_motion_completion(ST_MC_SUPPRESSED, 0); return SERVO_ABORTED; }
+@@ -1325 +1336,2 @@
+-	return focus_invalid() ? SERVO_ABORTED : r.outcome;
++	if (focus_invalid()) { st_motion_completion(ST_MC_SUPPRESSED, 0); return SERVO_ABORTED; }
++	return r.outcome;
+@@ -1490,0 +1503,2 @@
++	st_motion_command(c->op, (c->op == EM_OP_MOVE_REL || c->op == EM_OP_MOVE_DEFOCUS)
++	    ? (uint16_t)c->delta : c->target);
+@@ -1529,0 +1544 @@
++		st_motion_completion(ST_MC_ABORTED, EM_REC_MOVE);
+--- /dev/null
++++ targeted37/src/motion_trace.c
+@@ -0,0 +1,74 @@
++#include "motion_trace.h"
++#include "servo.h"
++#include "startup_trace.h"
++#include "delay.h"
++static struct st_motion_trace trace;
++static uint8_t pending_op;
++static uint16_t pending_operand;
++void st_motion_command(uint8_t op, uint16_t operand)
++{
++    pending_op=op; pending_operand=operand;
++}
++void st_motion_begin(int32_t start, int32_t target, uint32_t ms, uint8_t dry)
++{
++    if (trace.frozen) return;
++    /* Fixed-size clear, no allocation and no sensor/NVM access. */
++    trace=(struct st_motion_trace){0};
++    trace.version=1; trace.valid=1; trace.flags=dry ? ST_MF_DRY : 0;
++    trace.begin_ms=trace.accepted_ms=trace.last_ms=ms;
++    trace.initial_start=trace.leg_start=start;
++    trace.initial_target=trace.target=target;
++    trace.direction=target>=start ? 1 : -1;
++    trace.command_op=trace.accepted_op=pending_op;
++    trace.command_operand=trace.accepted_operand=pending_operand;
++}
++void st_motion_sample(uint32_t ms, int32_t position)
++{
++    if (!trace.valid || trace.frozen) return;
++    struct st_motion_sample *s=&trace.samples[trace.sample_next];
++    s->ms=ms; s->position=position; s->duty=trace.duty;
++    s->state=trace.state; s->retargets=trace.retargets;
++    trace.last_ms=ms;
++    trace.sample_next=(trace.sample_next+1u)&(ST_MOTION_SAMPLES-1u);
++    if (trace.sample_count!=UINT16_MAX) trace.sample_count++;
++}
++void st_motion_leg(int32_t target, int32_t start, unsigned packed)
++{
++    if (!trace.valid || trace.frozen) return;
++    uint8_t n=(uint8_t)(packed>>8);
++    if (n!=trace.retargets) {
++        trace.accepted_op=pending_op; trace.accepted_operand=pending_operand;
++        trace.accepted_ms=trace.last_ms;
++    }
++    trace.target=target; trace.leg_start=start;
++    trace.direction=(packed&ST_MS_NEGATIVE) ? -1 : 1;
++    trace.retargets=n; trace.state=(uint8_t)packed;
++    /* State interpreted by guards after command/rebase processing at this read. */
++    if (trace.sample_count) {
++        struct st_motion_sample *s=&trace.samples[(trace.sample_next-1u)&3u];
++        s->state=trace.state; s->retargets=n;
++    }
++}
++void st_motion_drive(int16_t duty)
++{
++    if (!trace.frozen) trace.duty=duty;
++}
++void st_motion_finish(uint8_t outcome)
++{
++    if (!trace.valid || trace.frozen) return;
++    trace.outcome=outcome;
++    if (outcome==SERVO_WRONG_WAY || outcome==SERVO_RUNAWAY) {
++        trace.guard_ms=trace.last_ms;
++        if (trace.sample_count)
++            trace.guard_position=trace.samples[(trace.sample_next-1u)&3u].position;
++        trace.fault=outcome==SERVO_RUNAWAY ? ST_SERVO_RUNAWAY : ST_SERVO_WRONG_WAY;
++        trace.frozen=1;
++    }
++}
++void st_motion_completion(uint8_t state, uint16_t event)
++{
++    if (!trace.valid || (trace.frozen && trace.completion_state)) return;
++    trace.completion_ms=millis(); trace.completion_state=state;
++    trace.completion_code=(uint8_t)event; trace.completion_param=(uint8_t)(event>>8);
++}
++const uint8_t *st_motion_data(void) { return (const uint8_t *)&trace; }
+--- /dev/null
++++ targeted37/src/motion_trace.h
+@@ -0,0 +1,61 @@
++/* AF3.7 proposal: main-context, bounded RAM-only motion evidence. */
++#ifndef EA9_MOTION_TRACE_H
++#define EA9_MOTION_TRACE_H
++#include <stdint.h>
++#include <stddef.h>
++#define ST_MOTION_BYTES 144u
++#define ST_MOTION_SAMPLES 4u
++#define ST_MS_REBASE 1u
++#define ST_MS_HOLDING 2u
++#define ST_MS_NEGATIVE 4u
++#define ST_MF_DRY 1u
++enum st_motion_completion {
++    ST_MC_NONE=0, ST_MC_ATTEMPT=1, ST_MC_QUEUED=2, ST_MC_SUPPRESSED=3,
++    ST_MC_QUEUE_FULL=4, ST_MC_TX_RETURN=5, ST_MC_ABORTED=6
++};
++struct st_motion_sample {
++    uint32_t ms;
++    int32_t position;
++    int16_t duty; /* last motor_drive request before this read; zero while braking */
++    uint8_t state, retargets;
++};
++/* Serialized directly only on the little-endian SAMD21. No pointers/padding.
++ * Guard position is the read used by the guard, never the later final read.
++ * Frozen guard fields cannot be replaced by a later leg/command/shutdown.
++ * Completion fields separately record the first subsequent disposition.
++ * All timestamps are wrapping uint32 millis, not a wall-clock/shutter clock. */
++struct st_motion_trace {
++    uint8_t version, valid, frozen, flags;
++    uint32_t begin_ms;
++    int32_t initial_start, initial_target, target, leg_start;
++    uint32_t guard_ms;
++    int32_t guard_position;
++    int16_t duty;
++    uint16_t command_operand;
++    uint8_t command_op, accepted_op;
++    uint16_t accepted_operand;
++    int8_t direction;
++    uint8_t retargets, state, outcome;
++    uint16_t sample_count; /* saturates; ring retains latest min(count,4) */
++    uint8_t sample_next, fault;
++    uint32_t completion_ms;
++    uint8_t completion_code, completion_param, completion_state, completion_reason;
++    uint32_t last_ms, accepted_ms;
++    struct st_motion_sample samples[ST_MOTION_SAMPLES];
++    uint8_t reserved[32];
++};
++_Static_assert(sizeof(struct st_motion_sample)==12, "sample wire size");
++_Static_assert(sizeof(struct st_motion_trace)==ST_MOTION_BYTES, "motion wire size");
++_Static_assert(offsetof(struct st_motion_trace, samples)==64, "sample wire offset");
++_Static_assert(offsetof(struct st_motion_trace, completion_ms)==48, "completion offset");
++_Static_assert(offsetof(struct st_motion_trace, reserved)==112, "reserved offset");
++void st_motion_command(uint8_t op, uint16_t operand);
++void st_motion_begin(int32_t start, int32_t target, uint32_t ms, uint8_t dry);
++void st_motion_sample(uint32_t ms, int32_t position);
++/* packed = retarget count <<8 | ST_MS_*; called after retarget/rebase processing. */
++void st_motion_leg(int32_t target, int32_t start, unsigned packed);
++void st_motion_drive(int16_t duty);
++void st_motion_finish(uint8_t outcome);
++void st_motion_completion(uint8_t state, uint16_t event);
++const uint8_t *st_motion_data(void);
++#endif
+--- frozen36/src/servo.c
++++ targeted37/src/servo.c
+@@ -6,0 +7 @@
++#include "motion_trace.h"
+@@ -143,0 +145,2 @@
++	st_motion_begin(start, target, t0, cfg->dry);
++
+@@ -160,0 +164 @@
++		st_motion_sample(now, pos);
+@@ -261,0 +266 @@
++							st_motion_drive(0);
+@@ -297,0 +303,4 @@
++
++		st_motion_leg(target, leg_start, ((unsigned)n_retarget << 8)
++		    | (unsigned)rebase | ((unsigned)holding << 1)
++		    | ((unsigned)(leg_sign < 0) << 2));
+@@ -442,0 +452 @@
++				st_motion_drive((int16_t)duty);
+@@ -453,0 +464,2 @@
++
++	st_motion_finish(out->outcome);
+@@ -464,0 +477 @@
++		st_motion_drive(0);
+@@ -488,0 +502 @@
++	st_motion_finish(out->outcome);
+--- frozen36/src/startup_samd21.c
++++ targeted37/src/startup_samd21.c
+@@ -219,0 +220,5 @@
++	/* Restore the packet table before this handler rewrites VTOR.
++	 * Boot may already have selected app vectors; IRQ quiescence is inherited. */
++	extern void ea9_packets_init(void);
++	ea9_packets_init();
++
+--- frozen36/src/startup_trace.c
++++ targeted37/src/startup_trace.c
+@@ -0,0 +1 @@
++#define STARTUP_TRACE_IMPLEMENTATION
+@@ -1,0 +3,2 @@
++#include "motion_trace.h"
++#include <stddef.h>
+@@ -4,10 +7,16 @@
+-struct event { uint32_t ms; uint8_t kind, id, cls, seq; uint16_t length, operand; };
+-static struct event events[ST_EVENTS];
+-static uint16_t dropped, rx_count, tx_count, fault;
+-static uint8_t count, flushed, next_page, boot, stage, connected, failed;
+-static uint8_t first_rx, last_rx, first_tx, last_tx, capability, capability_seen;
+-static uint32_t last_rx_ms;
+-static uint8_t tail, sealed, shutdown;
+-
+-static void put16(uint8_t *p, uint16_t v) { p[0]=(uint8_t)v; p[1]=(uint8_t)(v>>8); }
+-static void put32(uint8_t *p, uint32_t v) { for (unsigned i=0;i<4;i++) p[i]=(uint8_t)(v>>(8*i)); }
++#include "trace_format.h"
++static struct {
++    struct summary summary;
++    uint8_t count,tail,sealed,next_page,cohort,failed,terminal_count;
++    struct event events[ST_EVENTS];
++} ram;
++#define s ram.summary
++#define events ram.events
++#define r_count ram.count
++#define r_tail ram.tail
++#define r_sealed ram.sealed
++#define r_next_page ram.next_page
++#define r_cohort ram.cohort
++#define r_failed ram.failed
++#define r_terminal_count ram.terminal_count
++static void inc(uint16_t *p) { if (*p!=65535) ++*p; }
+@@ -16,4 +25 @@
+-    for (unsigned i=0;i<n;i++) {
+-        crc ^= p[i];
+-        for (unsigned k=0;k<8;k++) crc=(crc>>1)^((0u-(crc&1u))&0xedb88320u);
+-    }
++    while (n--) { crc^=*p++; for (unsigned k=0;k<8;k++) crc=(crc>>1)^((0u-(crc&1u))&0xedb88320u); }
+@@ -22,3 +28,9 @@
+-static int erased(const uint8_t *p) {
+-    for (unsigned i=0;i<ST_PAGE_BYTES;i++) if (p[i]!=255) return 0;
+-    return 1;
++static int erased(const uint8_t *p) { for (unsigned i=0;i<64;i++) if (p[i]!=255) return 0; return 1; }
++void st_init(void) {
++    uint8_t p[64];
++    memset(&ram,0,sizeof(ram));
++    for (unsigned i=0;i<16;i++) {
++        if (!st_read_page(ST_FLASH_BASE+i*64,p)) { r_next_page=16; break; }
++        if (!erased(p)) r_next_page=(uint8_t)(i+1);
++    }
++    r_cohort=r_next_page+1;
+@@ -26,11 +38,8 @@
+-void st_init(void) {
+-    uint8_t p[ST_PAGE_BYTES];
+-    count=flushed=next_page=0; dropped=rx_count=tx_count=fault=0;
+-    stage=connected=first_rx=last_rx=first_tx=last_tx=failed=capability_seen=0; capability=0;
+-    last_rx_ms=0; tail=sealed=shutdown=0;
+-    /* Skip every occupied/torn page. Never erase, repair or reprogram it. */
+-    for (unsigned i=0;i<ST_PAGE_COUNT;i++) {
+-        if (!st_read_page(ST_FLASH_BASE+i*ST_PAGE_BYTES,p)) { next_page=ST_PAGE_COUNT; break; }
+-        if (!erased(p)) next_page=(uint8_t)(i+1);
+-    }
+-    boot=(uint8_t)(next_page+1);
++void st_summary(uint8_t kind,uint8_t id,uint32_t ms) {
++    uint32_t key=st_lock();
++    if (kind==ST_STAGE) s.stage=id;
++    if (kind==ST_RX) { if (!s.rx_count) s.first_rx=id; inc(&s.rx_count); s.last_rx=id; s.last_rx_ms=ms; }
++    if (kind==ST_TX) { if (!s.tx_count) s.first_tx=id; inc(&s.tx_count); s.last_tx=id; }
++    if (kind==ST_CAPABILITY) { s.capability=id; s.capability_seen=1; }
++    inc(&s.filtered);
++    st_unlock(key);
+@@ -38,2 +47,2 @@
+-void st_note(uint8_t kind, uint8_t id, uint8_t cls, uint8_t seq,
+-             uint16_t length, uint16_t operand, uint32_t ms) {
++void st_record(uint32_t ms,uint32_t identity,uint32_t payload) {
++    uint8_t kind=identity, id=identity>>8, cls=identity>>16;
+@@ -41,23 +50,10 @@
+-    if (kind==ST_STAGE) stage=id;
+-    if (kind==ST_HANDSHAKE) { connected=1; stage=ST_CONNECTED; }
+-    if (kind==ST_FAULT) fault=id;
+-    if (kind==ST_SHUTDOWN) shutdown=1;
+-    if (kind==ST_RX) {
+-        if (!rx_count) first_rx=id;
+-        if (rx_count!=65535) rx_count++;
+-        last_rx=id; last_rx_ms=ms;
+-
+-    }
+-    if (kind==ST_CAPABILITY) { capability=id; capability_seen=1; }
+-    if (kind==ST_TX) {
+-        if (!tx_count) first_tx=id;
+-        if (tx_count!=65535) tx_count++;
+-        last_tx=id;
+-    }
+-    if (count<ST_EVENTS) events[count++]=(struct event){ms,kind,id,cls,seq,length,operand};
+-    else {
+-        /* Keep initial breadcrumbs and the most recent 24 events. No shift,
+-         * allocation or division on the IRQ path. dropped counts eviction. */
+-        events[24u+tail]=(struct event){ms,kind,id,cls,seq,length,operand};
+-        if (++tail==24u) tail=0;
+-        if (dropped!=65535) dropped++;
++    if (kind==ST_HANDSHAKE) { s.connected=1; s.stage=ST_CONNECTED; }
++    if (kind==ST_FAULT) s.fault=id;
++    if (kind==ST_SHUTDOWN) s.shutdown=1;
++    if (((kind==ST_OWNER_CS || kind==ST_OWNER_PHASE) && !(cls&1u))
++        || ((kind==ST_TX_START || kind==ST_TX_RETURN) && !(cls&6u))) inc(&s.filtered);
++    else if (!r_sealed) {
++        uint32_t words[3]={ms,identity,payload};
++        memcpy(&events[r_tail],words,12);
++        r_tail=(r_tail+1)&31u;
++        if (r_count<32) ++r_count; else inc(&s.dropped);
+@@ -67,12 +63,15 @@
+-static int append(uint8_t p[ST_PAGE_BYTES], uint8_t type, uint8_t n) {
+-    uint8_t old[ST_PAGE_BYTES];
+-    if (failed || next_page>=ST_PAGE_COUNT) return 0;
+-    uint32_t address=ST_FLASH_BASE+next_page*ST_PAGE_BYTES;
+-    if (address<ST_FLASH_BASE || address+ST_PAGE_BYTES>ST_FLASH_END) return 0;
+-    unsigned index=next_page++;
+-    if (!st_read_page(address,old) || !erased(old)) { failed=1; return 0; }
+-    memcpy(p,"E9S2",4); p[4]=2; p[5]=type; p[6]=boot; p[7]=n;
+-    put16(p+8,(uint16_t)index); p[10]=p[11]=0;
+-    put32(p+60,st_crc32(p,60));
+-    /* The slot is consumed even if the write fails. No retry. */
+-    if (!st_write_page(address,p)) { failed=1; return 0; }
++void st_note(uint8_t kind,uint8_t id,uint8_t cls,uint8_t seq,uint16_t length,uint16_t operand,uint32_t ms) {
++    if (kind==ST_STAGE || kind==ST_CS || kind==ST_RX || kind==ST_TX || kind==ST_CAPABILITY)
++        st_summary(kind,id,ms);
++    else st_record(ms,(uint32_t)kind|((uint32_t)id<<8)|((uint32_t)cls<<16)|((uint32_t)seq<<24),
++        (uint32_t)length|((uint32_t)operand<<16));
++}
++static int append(struct page *p) {
++    uint8_t old[64];
++    if (r_failed || r_next_page>=16) return 0;
++    uint32_t address=ST_FLASH_BASE+r_next_page*64u;
++    p->slot=r_next_page++; /* Consume even a r_failed or torn write, never retry. */
++    if (!st_read_page(address,old) || !erased(old)) { r_failed=1; return 0; }
++    memcpy(p->magic,"E9S3",4); p->version=3; p->cohort=r_cohort;
++    p->crc=st_crc32((const uint8_t *)p,60);
++    if (!st_write_page(address,(const uint8_t *)p)) { r_failed=1; return 0; }
+@@ -81,4 +80,2 @@
+-void st_flush(int allowed, uint32_t ms, uint32_t rx_bytes,
+-              uint16_t errors, uint16_t status, uint8_t pins) {
+-    if (!allowed || failed || sealed || next_page>=ST_PAGE_COUNT) return;
+-    uint8_t p[ST_PAGE_BYTES];
++void st_flush(int allowed,uint32_t ms,uint32_t rx_bytes,uint16_t errors,uint16_t status,uint8_t pins) {
++    if (!allowed || r_failed || r_sealed || r_next_page>=16) return;
+@@ -86,26 +83,21 @@
+-    sealed=1;
+-    /* Summary goes first so a later torn event page cannot erase fault facts.
+-     * planned is a budget, not a claim that those writes subsequently succeed. */
+-    unsigned planned=4u*(ST_PAGE_COUNT-next_page-1u);
+-    if (planned>count) planned=count;
+-    unsigned omitted=(unsigned)dropped+count-planned;
+-    memset(p,0,sizeof(p));
+-    uint8_t *q=p+12;
+-    q[0]=stage; q[1]=connected; put16(q+2,fault); put32(q+4,ms);
+-    put16(q+8,rx_count); put16(q+10,tx_count); put32(q+12,rx_bytes);
+-    put16(q+16,errors); put16(q+18,status); put32(q+20,last_rx_ms);
+-    q[24]=first_rx; q[25]=last_rx; q[26]=first_tx; q[27]=last_tx;
+-    q[28]=capability; q[29]=pins;
+-    put16(q+30,(uint16_t)(omitted>65535u ? 65535u : omitted));
+-    q[32]=capability_seen;
+-    q[33]=1; q[34]=count; q[35]=(uint8_t)planned; q[36]=shutdown;
+-    if (!append(p,1,1)) { st_unlock(key); return; }
+-    while (flushed<planned) {
+-        memset(p,0,sizeof(p));
+-        uint8_t n=0;
+-        while (n<4 && flushed<planned) {
+-            unsigned i=flushed++;
+-            if (i>=24u) { i+=tail; if (i>=ST_EVENTS) i-=24u; }
+-            struct event *e=&events[i]; uint8_t *q=p+12+12*n++;
+-            put32(q,e->ms); q[4]=e->kind; q[5]=e->id; q[6]=e->cls; q[7]=e->seq;
+-            put16(q+8,e->length); put16(q+10,e->operand);
++    r_sealed=1;
++    /* Keep four append slots for three shutdown boundaries and a later fault. */
++    unsigned budget=r_next_page<11 ? 11-r_next_page : 0;
++    s.motion_chunks=budget>=3 ? 3 : 0;
++    budget-=s.motion_chunks;
++    s.retained=r_count; s.planned=budget*4<r_count ? budget*4 : r_count;
++    s.ms=ms; s.rx_bytes=rx_bytes; s.errors=errors; s.status=status; s.pins=pins;
++    struct page p={.type=1,.n=1};
++    memcpy(p.data,&s,48);
++    if (!append(&p)) { st_unlock(key); return; }
++    for (unsigned i=0;i<s.motion_chunks;i++) {
++        memset(&p,0,64); p.type=3; p.n=1; p.chunk=i;
++        memcpy(p.data,st_motion_data()+48*i,48);
++        if (!append(&p)) { st_unlock(key); return; }
++    }
++    /* Retain latest planned slice, chronologically; capacity omission is explicit. */
++    for (unsigned i=0;i<s.planned;) {
++        memset(&p,0,64); p.type=2; p.chunk=i/4;
++        while (p.n<4 && i<s.planned) {
++            unsigned slot=(r_tail+32-s.planned+i++)&31u;
++            memcpy(p.data+12*p.n++,&events[slot],12);
+@@ -113 +105 @@
+-        if (!append(p,2,n)) break;
++        if (!append(&p)) break;
+@@ -116,0 +109,10 @@
++void st_terminal(uint8_t kind,uint8_t value,uint32_t ms) {
++    if (!r_sealed) return;
++    uint32_t key=st_lock();
++    struct page p={.type=4,.n=1};
++    p.data[0]=kind; p.data[1]=value; p.data[2]=s.fault; p.data[3]=++r_terminal_count;
++    memcpy(p.data+4,&ms,4);
++    append(&p);
++    st_unlock(key);
++}
++void st_inhibit_fault(uint8_t reason) { uint32_t key=st_lock(); if (!s.fault) s.fault=reason; st_unlock(key); }
+@@ -131,4 +132,0 @@
+-/* First nonterminal inhibit reason; summary only, no NVM or timing guess. */
+-void st_inhibit_fault(uint8_t reason) {
+-    uint32_t key=st_lock(); if (!fault) fault=reason; st_unlock(key);
+-}
+--- frozen36/src/startup_trace.h
++++ targeted37/src/startup_trace.h
+@@ -9 +9 @@
+-#define ST_EVENTS 48u
++#define ST_EVENTS 32u
+@@ -12 +12,3 @@
+-    ST_WINDOW_PRESERVED=7, ST_BAD_RX=8, ST_SHUTDOWN=9, ST_CAPABILITY=10
++    ST_WINDOW_PRESERVED=7, ST_BAD_RX=8, ST_SHUTDOWN=9, ST_CAPABILITY=10,
++    ST_OWNER_CS=11, ST_OWNER_OFFER=12, ST_OWNER_TAKE=13, ST_TX_START=14,
++    ST_TX_RETURN=15, ST_SHUTDOWN_ADMIT=16, ST_OWNER_COMPLETE=17, ST_OWNER_PHASE=18
+@@ -33,0 +36,12 @@
++/* Narrow diagnostic-only paths; payloads retain the exact v3 byte layout. */
++void st_summary(uint8_t kind, uint8_t id, uint32_t ms);
++void st_record(uint32_t ms, uint32_t identity, uint32_t payload);
++#ifndef STARTUP_TRACE_IMPLEMENTATION
++#define st_note(k,id,cls,seq,len,operand,ms) \
++    (__builtin_constant_p(k) ? \
++      ((((uint8_t)(k))==ST_STAGE || ((uint8_t)(k))==ST_CS || ((uint8_t)(k))==ST_RX || ((uint8_t)(k))==ST_TX || ((uint8_t)(k))==ST_CAPABILITY) \
++       ? st_summary((k),(id),(ms)) \
++       : st_record((ms),(uint32_t)(uint8_t)(k)|((uint32_t)(uint8_t)(id)<<8)|((uint32_t)(uint8_t)(cls)<<16)|((uint32_t)(uint8_t)(seq)<<24), \
++           (uint32_t)(uint16_t)(len)|((uint32_t)(uint16_t)(operand)<<16))) \
++      : st_note((k),(id),(cls),(seq),(len),(operand),(ms)))
++#endif
+@@ -48,0 +63,3 @@
++enum st_terminal_kind { ST_VD_LOW=1, ST_VD_TIMEOUT=2, ST_PA23=3, ST_TAIL_DONE=4, ST_TERMINAL_FAULT=5 };
++/* Main terminal context only: UART disabled or emergency motor cutoff already done. */
++void st_terminal(uint8_t kind, uint8_t value, uint32_t ms);
+--- frozen36/src/startup_trace_flash.c
++++ targeted37/src/startup_trace_flash.c
+@@ -54,0 +55 @@
++    st_terminal(ST_TERMINAL_FAULT,fault,millis());
+--- /dev/null
++++ targeted37/src/trace_format.h
+@@ -0,0 +1,19 @@
++#ifndef EA9_TRACE_FORMAT_H
++#define EA9_TRACE_FORMAT_H
++#include <stdint.h>
++#include <stddef.h>
++/* Typed little-endian wire layout; the target and host tests assert it. */
++#if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__
++#error trace_v3_requires_little_endian
++#endif
++struct event { uint32_t ms; uint8_t kind,id,cls,seq; uint16_t length,operand; };
++struct summary {
++    uint32_t ms,rx_bytes,last_rx_ms;
++    uint16_t rx_count,tx_count,errors,status,dropped,filtered;
++    uint8_t stage,connected,fault,pins,first_rx,last_rx,first_tx,last_tx;
++    uint8_t capability,capability_seen,shutdown,retained,planned,motion_chunks,reserved[10];
++};
++struct page { uint8_t magic[4],version,type,cohort,n; uint16_t slot; uint8_t chunk,reserved; uint8_t data[48]; uint32_t crc; };
++typedef char layout[(sizeof(struct event)==12 && sizeof(struct summary)==48 && sizeof(struct page)==64 && offsetof(struct page,data)==12 && offsetof(struct page,crc)==60 && offsetof(struct summary,rx_count)==12 && offsetof(struct summary,stage)==24 && offsetof(struct summary,planned)==36 && offsetof(struct event,length)==8)?1:-1];
++
++#endif

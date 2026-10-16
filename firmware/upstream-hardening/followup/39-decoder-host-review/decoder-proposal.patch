@@ -1,0 +1,124 @@
+--- scripts/startup_diagnostic_v3.py	2026-10-15 20:30:13
++++ firmware/upstream-hardening/followup/39-decoder-host-review/proposed_startup_diagnostic_v3.py	2026-10-15 20:45:14
+@@ -96,6 +96,29 @@
+                     'lengthOrSessionLow': lo, 'operandOrSessionHigh': hi}
+                 if 11 <= kind <= 18:
+                     event['session'] = lo | (hi << 16)
++                if 11 <= kind <= 18:
++                    event['captureFlags'] = {
++                        'rawCapture': bool(flags & 1), 'shutdownActive': bool(flags & 4),
++                        'ownerPhase': bool(flags & 8), 'activeSlot': (flags >> 4) & 1,
++                        'pendingOwner': bool(flags & 32), 'statusEnabled': bool(flags & 64),
++                    }
++                    if kind == 17:
++                        event['captureFlags'].update(sessionStillValid=bool(flags & 2),
++                            sendReturnedSuccess=bool(flags & 128))
++                    elif kind == 12:
++                        event['captureFlags'].update(offerAccepted=bool(flags & 128))
++                    elif kind == 16:
++                        event['captureFlags'].update(shutdownAdmitted=bool(flags & 128))
++                    else:
++                        event['captureFlags'].update(controlContext=bool(flags & 2),
++                            resultBit=bool(flags & 128))
++                    event['sequenceMeaning'] = ('owning-request-sequence' if kind in (14, 15) and flags & 2
++                        else 'transmitted-frame-sequence' if kind in (14, 15)
++                        else 'no-frame-identity' if kind in (11, 18) else 'received-request-sequence')
++                    event['captureFlagsMeaning'] = ('Kind-specific software observations only; owner-phase is a local boundary, '
++                        'not an atomic current-owner snapshot. TX return is not camera acceptance.')
++                if (kind in (11, 18) and not flags & 1) or (kind in (14, 15) and not flags & 6):
++                    issues.append('event-violates-focused-retention-filter')
+                 if kind not in EVENTS:
+                     issues.append('filtered-or-unknown-event-kind')
+                 e['events'].append(event)
+@@ -126,6 +149,7 @@
+         motion_n, event_n = s['plannedMotionChunks'], s['plannedEvents']
+         planned_end = start+1+motion_n+(event_n+3)//4
+         attached = []
++        outside_plan = False
+         for child in pages:
+             if child is origin or child.get('boot') != cohort:
+                 continue
+@@ -136,6 +160,7 @@
+                 'terminal-footer' if slot >= planned_end else None)
+             if child['type'] != expected_type or origin['semanticIssues']:
+                 child['semanticIssues'].append('page-outside-usable-summary-plan')
++                outside_plan = True
+                 continue
+             if child['type'] == 'motion' and child['chunk'] != delta:
+                 child['semanticIssues'].append('motion-chunk-disagrees-with-position')
+@@ -151,6 +176,8 @@
+         def intact(slot, kind):
+             return (slot < 16 and pages[slot].get('type') == kind
+                 and pages[slot].get('boot') == cohort and not pages[slot]['semanticIssues'])
++        if outside_plan:
++            origin['semanticIssues'].append('cohort-has-page-outside-summary-plan')
+         s['persistedEvents'] = sum(len(e.get('events', [])) for e in attached if not e['semanticIssues'])
+         s['eventSnapshotComplete'] = (not origin['semanticIssues'] and all(
+             intact(start+1+motion_n+i, 'events') for i in range((event_n+3)//4)))
+@@ -161,17 +188,30 @@
+             s['motion'] = decode_motion(raw)
+             if s['motion']['writerIssues']:
+                 origin['semanticIssues'].append('motion-payload-inconsistent-with-writer')
++                s['motionSnapshotComplete'] = False
+         s['snapshotStatus'] = ('inconsistent' if origin['semanticIssues'] else
+             'complete' if s['eventSnapshotComplete'] and (motion_n == 0 or s['motionSnapshotComplete']) else 'partial')
+         terminal = [e for e in attached if e['type'] == 'terminal-footer']
+         previous = None
++        expected_slot = planned_end
++        chain_usable = s['snapshotStatus'] == 'complete'
++        trusted_terminal = []
+         for e in terminal:
+             kind = e['footer']['kindID']
+-            if (previous is None and kind not in (1, 2, 5)) or (previous is not None
+-                    and kind not in ({1: (3, 5), 2: (3, 5), 3: (4, 5), 4: (5,), 5: ()}.get(previous, ()))):
+-                e['semanticIssues'].append('terminal-order-disagrees-with-writer')
+-            previous = kind
+-        s['terminalFooters'] = [e['footer'] for e in terminal if not e['semanticIssues']]
++            if not chain_usable or e['slot'] != expected_slot:
++                e.setdefault('associationIssues', []).append('missing-or-inconsistent-preceding-snapshot-or-footer')
++                chain_usable = False
++            if chain_usable:
++                if (previous is None and kind not in (1, 2, 5)) or (previous is not None
++                        and kind not in ({1: (3, 5), 2: (3, 5), 3: (4, 5), 4: (5,), 5: ()}.get(previous, ()))):
++                    e['semanticIssues'].append('terminal-order-disagrees-with-writer')
++                if e['semanticIssues']:
++                    chain_usable = False
++                else:
++                    trusted_terminal.append(e['footer'])
++                    previous = kind
++                    expected_slot += 1
++        s['terminalFooters'] = trusted_terminal
+         s['terminalEvidenceMeaning'] = ('Software boundaries only. VD samples do not prove physical power removal; '
+             'PA23-write-reached does not prove the pin voltage changed; tail-delay return does not prove camera shutdown. '
+             'No footer, missing snapshot or absent event cannot prove success, no fault or no capture.')
+@@ -182,7 +222,7 @@
+             origin = pages[e['boot']-1]
+             if (origin.get('type') != 'summary' or origin.get('boot') != e['boot']
+                     or origin.get('semanticIssues')):
+-                e['associationIssues'] = ['missing-or-inconsistent-cohort-summary']
++                e.setdefault('associationIssues', []).append('missing-or-inconsistent-cohort-summary')
+         e['semanticIssues'] = sorted(set(e['semanticIssues']))
+         e['recordTrust'] = ('inconsistent-with-writer' if e['semanticIssues'] else
+             'unassociated' if e.get('associationIssues') else 'writer-consistent')
+@@ -218,7 +258,7 @@
+             or direction not in (-1, 1) or raw[42] & ~7 or raw[43] > 5
+             or next_slot > 3 or raw[54] > 6 or raw[55] or any(raw[112:])):
+         issues.append('invalid-motion-layout-or-enum')
+-    if count < 4 and next_slot != count:
++    if count < 65535 and next_slot != count % 4:
+         issues.append('sample-cursor-disagrees-with-unsaturated-count')
+     if raw[2] and (raw[43], raw[47]) not in ((3, 14), (4, 15)):
+         issues.append('frozen-guard-outcome-disagrees-with-fault')
+@@ -231,6 +271,12 @@
+             'requestedDuty': i16(at+8), 'stateFlags': raw[at+10], 'retargets': raw[at+11]})
+     n = min(count, 4)
+     ordered = [samples[(next_slot-n+i) % 4] for i in range(n)]
++    if any(sample['stateFlags'] & ~7 for sample in ordered):
++        issues.append('invalid-retained-sample-state-flags')
++    if count < 4 and any(raw[64+12*count:112]):
++        issues.append('nonzero-unused-sample-slots')
++    if ordered and ordered[-1]['uptimeMS'] != u32(raw, 56):
++        issues.append('last-ms-disagrees-with-newest-retained-sample')
+     if raw[2] and (not ordered or ordered[-1]['position'] != i32(28)
+             or ordered[-1]['uptimeMS'] != u32(raw, 24)):
+         issues.append('guard-sample-does-not-match-last-retained-read')

@@ -1,0 +1,212 @@
+[
+  {
+    "case": "unknown-indirect",
+    "status": "rejected",
+    "diagnostic": "unknown indirect call: servo_move_from@74a8"
+  },
+  {
+    "case": "unknown-library",
+    "status": "rejected",
+    "diagnostic": "unknown library frame: memcpy"
+  },
+  {
+    "case": "wrong-elf-pin",
+    "status": "rejected",
+    "diagnostic": "pin mismatch: hardened.elf"
+  },
+  {
+    "case": "wrong-map-pin",
+    "status": "rejected",
+    "diagnostic": "pin mismatch: hardened.map"
+  },
+  {
+    "case": "recursive-callback",
+    "status": "rejected",
+    "diagnostic": "recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_from -> servo_move_from"
+  },
+  {
+    "case": "wrong-callback-owner",
+    "status": "rejected",
+    "diagnostic": "indirect caller mismatch: 74a8"
+  },
+  {
+    "case": "wrong-callback-target",
+    "status": "rejected",
+    "diagnostic": "reviewed call inventory mismatch"
+  },
+  {
+    "case": "understated-library-frame",
+    "status": "rejected",
+    "diagnostic": "reviewed library frame mismatch: memcpy"
+  },
+  {
+    "case": "wrong-library-body",
+    "status": "rejected",
+    "diagnostic": "reviewed library body mismatch: memcpy"
+  },
+  {
+    "case": "wrong-stock-word",
+    "status": "rejected",
+    "diagnostic": "reviewed callback/literal mismatch: 9a70"
+  },
+  {
+    "case": "wrong-static-ram",
+    "status": "rejected",
+    "diagnostic": "reviewed layout mismatch: staticRAMBytes"
+  },
+  {
+    "case": "wrong-call-inventory",
+    "status": "rejected",
+    "diagnostic": "compiled inventory mismatch: callSiteCount"
+  },
+  {
+    "case": "missing-physical-caveats",
+    "status": "rejected",
+    "diagnostic": "physical caveats missing or changed"
+  },
+  {
+    "case": "unresolved-target",
+    "status": "rejected",
+    "diagnostic": "unresolved target/frame: unknown_callback"
+  },
+  {
+    "case": "insufficient-budget",
+    "status": "rejected",
+    "diagnostic": "conditional bound 1516 exceeds budget 1515"
+  },
+  {
+    "case": "changed-source",
+    "status": "rejected",
+    "diagnostic": "source mismatch: src/servo.c"
+  },
+  {
+    "case": "dynamic-frame",
+    "status": "rejected",
+    "diagnostic": "unbounded/dynamic frame: servo_move_from"
+  },
+  {
+    "case": "changed-compiler-frame",
+    "status": "rejected",
+    "diagnostic": "compiler stack usage differs from pinned manifest"
+  },
+  {
+    "case": "elf-raw-inner-check",
+    "status": "rejected",
+    "diagnostic": "ELF/raw image mismatch"
+  },
+  {
+    "case": "raw-image-inner-check",
+    "status": "rejected",
+    "diagnostic": "raw/published image mismatch"
+  },
+  {
+    "case": "missing-EIC-disable",
+    "status": "rejected",
+    "diagnostic": "EIC setup mismatch: 0x68c0"
+  },
+  {
+    "case": "missing-DSB",
+    "status": "rejected",
+    "diagnostic": "EIC setup mismatch: 0x68c2"
+  },
+  {
+    "case": "missing-ISB",
+    "status": "rejected",
+    "diagnostic": "EIC setup mismatch: 0x68c6"
+  },
+  {
+    "case": "missing-EIC-enable",
+    "status": "rejected",
+    "diagnostic": "EIC setup mismatch: 0x6988"
+  },
+  {
+    "case": "wrong-EIC-priority",
+    "status": "rejected",
+    "diagnostic": "EIC priority mismatch: 0x6956"
+  },
+  {
+    "case": "rescue-reset-bypass",
+    "status": "rejected",
+    "diagnostic": "handoff ordering/path mismatch"
+  },
+  {
+    "case": "missing-deferred-start",
+    "status": "rejected",
+    "diagnostic": "handoff ordering/path mismatch"
+  },
+  {
+    "case": "wrong-NVM-vector",
+    "status": "rejected",
+    "diagnostic": "vector target mismatch: 21"
+  },
+  {
+    "case": "STOCK-symbol-misbinding",
+    "status": "rejected",
+    "diagnostic": "STOCK binding mismatch"
+  },
+  {
+    "case": "missing-emergency-cutoff",
+    "status": "rejected",
+    "diagnostic": "emergency cutoff/log ordering mismatch: 0x8e80"
+  },
+  {
+    "case": "logging-before-cutoff",
+    "status": "rejected",
+    "diagnostic": "emergency cutoff/log ordering mismatch: 0x8e64"
+  },
+  {
+    "case": "UART-disable-omitted",
+    "status": "rejected",
+    "diagnostic": "shutdown terminal ordering mismatch: 0x7bea"
+  },
+  {
+    "case": "PA23-write-omitted",
+    "status": "rejected",
+    "diagnostic": "shutdown terminal ordering mismatch: 0x7c5e"
+  },
+  {
+    "case": "packet-init-omitted",
+    "status": "rejected",
+    "diagnostic": "startup packet ordering mismatch: 0x5186"
+  },
+  {
+    "case": "NVM-allowed-gate-removed",
+    "status": "rejected",
+    "diagnostic": "NVM allowed gate missing"
+  },
+  {
+    "case": "PRIMASK-restore-replaced",
+    "status": "rejected",
+    "diagnostic": "PRIMASK restore contract missing"
+  },
+  {
+    "case": "mutable-TX-return-identity",
+    "status": "rejected",
+    "diagnostic": "immutable TX identity mismatch"
+  },
+  {
+    "case": "changed-motor-control",
+    "status": "rejected",
+    "diagnostic": "non-observation control delta: servo.c"
+  },
+  {
+    "case": "changed-wire-terminator",
+    "status": "rejected",
+    "diagnostic": "non-observation control delta: emount.c"
+  },
+  {
+    "case": "changed-terminal-delay",
+    "status": "rejected",
+    "diagnostic": "non-observation control delta: main.c"
+  },
+  {
+    "case": "unconditional-safety",
+    "status": "rejected",
+    "diagnostic": "unconditional safety unavailable"
+  },
+  {
+    "case": "exact-bound-budget",
+    "status": "accepted",
+    "budgetBytes": 1516
+  }
+]
