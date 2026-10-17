@@ -1,0 +1,154 @@
+{
+  "status": "camera-acceptance-failed-further-trials-held",
+  "backupNativeExitCode": 0,
+  "completedAtUTC": "2026-10-17T17:34:38.197797+00:00",
+  "sameQualifiedUnitAndNewConnection": true,
+  "firmwareVersion": "3.7.0",
+  "flashBytes": 131072,
+  "flashReadPasses": 2,
+  "auxiliaryReadPasses": 2,
+  "reportExchanges": 4359,
+  "preCameraFlashSHA256": "15e78dfa658c36e24843d717959a9971d2c801163fed98d48eb5d47bc3e7d115",
+  "postCameraFlashSHA256": "1cab0426a0f96cd10c3a18747e380609d1f7d8806349bb499f49794f99a5691f",
+  "changedFlashBytes": 896,
+  "preservationChecks": {
+    "allFlashOutsideDiagnosticAreaUnchanged": true,
+    "immutableCandidatePrefixMatches": true,
+    "userRowUnchanged": true,
+    "calibrationUnchanged": true,
+    "deviceIDUnchanged": true,
+    "canonical-pending-update.json-unchanged": true,
+    "canonical-applied-lens.json-unchanged": true,
+    "canonical-last-firmware-observation.json-unchanged": true,
+    "canonicalBlockedConnectionSetUnchanged": true
+  },
+  "allPreservationChecksPassed": true,
+  "diagnostics": {
+    "validPages": 14,
+    "invalidPages": 0,
+    "erasedPages": 2,
+    "semanticallyInconsistentPages": 0,
+    "unassociatedPages": 0,
+    "appendablePages": 2,
+    "appendExhausted": false
+  },
+  "summaries": [
+    {
+      "uptimeMS": 10687,
+      "rxFrames": 1076,
+      "txReturns": 1078,
+      "uartErrors": 0,
+      "evictedEvents": 35,
+      "filteredEvents": 8592,
+      "stageID": 14,
+      "handshakeFlag": true,
+      "fault": "home-failed",
+      "shutdownUARTDisabledObserved": true,
+      "bufferedEvents": 32,
+      "plannedEvents": 32,
+      "plannedMotionChunks": 3,
+      "capacityOmittedEvents": 0,
+      "persistedEvents": 32,
+      "eventSnapshotComplete": true,
+      "motionSnapshotComplete": true,
+      "snapshotStatus": "complete",
+      "slot": 0,
+      "recordTrust": "writer-consistent",
+      "terminalFooters": [
+        {
+          "kind": "VD-timeout",
+          "fault": "home-failed"
+        },
+        {
+          "kind": "PA23-write-reached",
+          "fault": "home-failed"
+        }
+      ],
+      "motion": {
+        "valid": false,
+        "writerIssues": []
+      },
+      "focusedEventKinds": {
+        "owner-offer": 5,
+        "owner-take": 5,
+        "tx-start": 6,
+        "tx-return": 6,
+        "owner-complete": 5,
+        "handshake": 1,
+        "owner-cs": 1,
+        "owner-phase": 1,
+        "shutdown-admit": 1,
+        "shutdown-uart-disabled": 1
+      },
+      "rawCaptureOffersAccepted": 1,
+      "shutdownAdmissions": 1
+    }
+  ],
+  "hardwareWrites": 0,
+  "installationVerificationPerformedByDecoder": false,
+  "cameraAcceptancePassed": false,
+  "safetyMarkerSerializationOrderChangedOnly": true,
+  "ownerObservation": "Some motor movement; did not achieve focus; one photo was taken and then freeze.",
+  "unknownOwnerDetails": [
+    "actual MF/AF mode",
+    "Pre-AF",
+    "aperture/exposure settings",
+    "whether photo file saved",
+    "shutdown outcome",
+    "battery removal"
+  ],
+  "privateEvidenceSHA256": {
+    "decoded.json": "0402298dc2d7ad553a5a26200f0b045d6d48ed544f122415ebb163c512c446f9",
+    "backup.stdout.txt": "b9653cd72792bc41e54e44656a473a1a22a04689fa036db82f7e558ee84fddd6",
+    "backup.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4",
+    "backup-result.json": "366802162e7437f2cb83513b848f52ea14c3c7cfe248670eb80c4a5cbfa0e8b4",
+    "backup-audit.json": "4f32abf01dff05952c4af04c205f52647b3deef06f6ebcabd11189b0231dffc9",
+    "audit_backup.py": "0bd508424444fe98ff8e0048c515bb974aef21b3046c315014b1fa540e949b24",
+    "capture-derived-summary.json": "4bccec729263d5cb25cbe964fdb2bde477302d337a7ff6bfe8b7879088bc55fe",
+    "host-hold-result.json": "dbfcfe868aec784d4a76215c4bcbd97afab35fe5fb67568187ad58286c26aa73",
+    "hold-before.stdout.txt": "55345b9b86932a695e56be7f92ed19be89128bb094a94ec5ec799a3d969cd981",
+    "swift-tests.stdout.txt": "8bf43f575d483d67f7723651d2a17468b1bb896f17feaa00c7b78c6c11b74db6",
+    "package.stdout.txt": "bc5f792b65729fc5552c8f5bdf5140a9a0ce4d9c6c84dc89aa6840c2a34ad015",
+    "package.stderr.txt": "63310103138854856216a97651d2a16570406a2cf1fffed0f21a98024de86d2f"
+  },
+  "date": "2026-10-17",
+  "profileID": "contax-zeiss-50-f1-4",
+  "actualAperture": "unknown",
+  "priorStrictInstallationVerificationStillRecorded": true,
+  "sourceManifestSHA256": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b",
+  "manifestSourceDigestsMatched": 49,
+  "astraReviews": [
+    "Astra40: homing readiness",
+    "Astra41: capture/shutdown ownership"
+  ],
+  "captureReview": {
+    "ordinaryOwnersAcceptedTakenCompleted": 4,
+    "rawOwnersAcceptedTakenCompleted": 1,
+    "allOwnerCompletionsSuccessfulAndSessionValid": true,
+    "immutableTXStartReturnPairsMatched": 6,
+    "unmatchedRetainedTXStarts": 0,
+    "rawCompletionPrecedesShutdownAdmission": true,
+    "shutdownEchoReturnedLocally": true,
+    "cameraReceiptOrAcceptanceProven": false
+  },
+  "hostHold": {
+    "version": "0.20.1",
+    "build": 26,
+    "signatureValid": true,
+    "appNotLaunched": true,
+    "cliSHA256": "b9c9f77f80ef80e0fd59c97de0d878d62ef68fd5a30b7d1fe4995479a4cf8e67",
+    "cliByteIdenticalToReadOnlyBackupCLI": true,
+    "swiftTestsPassed": 53,
+    "negativeControlFailures": 4
+  },
+  "nextOfflineExperimentsProposedNotExecuted": [
+    "Exact-source homing with real dispatch under drive/settle deadline and work-budget schedules",
+    "Post-raw-echo status/shutdown replay with session/TX variations"
+  ],
+  "historicalArtifactsRechecked": 131,
+  "originalStockRecoveryUnchanged": true,
+  "furtherCameraTrialsHeld": true,
+  "newFirmwareUploaded": false,
+  "stockRestored": false,
+  "rawDumpsFramesOperandsIdentifiersPrivate": true
+}

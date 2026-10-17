@@ -346,9 +346,9 @@ private actor DiscoveryFixture {
     #expect(model.primaryLensAction == .tools && model.canReadDevice)
     #expect(model.workflowDetail.contains("shutter press") && model.firmwareBehaviorNote.contains("held"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
-    // A separately named next candidate is available only for its compiled
-    // profile; the failed 3.6 action and ordinary profile apply stay blocked.
-    #expect(model.canInstallTargetedTrace && !model.canInstallStartupHandoff && !model.canApplyLens)
+    // Both images have failed camera testing. Neither may be offered as a new
+    // install, including while another failed image is currently installed.
+    #expect(!model.canInstallTargetedTrace && !model.canInstallStartupHandoff && !model.canApplyLens)
     model.chooseDeviceLens("contax-zeiss-85-f1-4")
     #expect(!model.canInstallTargetedTrace)
     model.chooseDeviceLens(profile.id)
@@ -357,8 +357,8 @@ private actor DiscoveryFixture {
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.7.0"))
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallTargetedTrace)
-    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools)
-    #expect(model.workflowTitle == "Targeted trace candidate" && model.workflowDetail.contains("unqualified"))
-    #expect(model.firmwareBehaviorNote.contains("does not establish a fix"))
+    #expect(model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "AF 3.7 camera testing held" && model.workflowDetail.contains("freeze"))
+    #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 }

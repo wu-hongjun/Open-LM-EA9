@@ -6,13 +6,16 @@ controller, guards, optical maps, aperture policy and wire layout, with targeted
 motion/capture/shutdown diagnostics and a lossless packet initializer. It has
 completed its separate upload and strict byte verification after physical
 reconnect, including an independent full-image/protected-data audit; firmware
-identity changes to 3.7. Its first camera cycle/log retrieval remain pending.
-It does not establish a shutter-freeze fix. See the
+identity changes to 3.7. **Camera acceptance failed; further 3.7 trials are held.**
+The owner reports some motor movement, no achieved focus and a freeze after one
+photo. The read-only trace records `home-failed`, local capture/shutdown TX
+returns and VD-timeout/PA23 footers; the failure phase and freeze cause remain
+unresolved. See the [camera evidence](../docs/evidence/upstream-37-camera-failure-2026-10-17.md) and
 [live installation record](../docs/evidence/upstream-37-upload-2026-10-17.md). See [3.7 evidence](../docs/evidence/upstream-37-tracing-2026-10-15.md) and the
 [build/test workbench](upstream-hardening/next37/README.md) for exact prerequisites,
-pins and conditional limits. App 0.20.0/build 25 provides a separately named 3.7
-action while retaining the 3.6 camera-failure hold and older command meanings.
-Preserve the original 3.6 image for research; do not repeat its failed camera test.
+pins and conditional limits. App 0.20.1/build 26 holds both 3.6 and 3.7 and blocks
+ordinary installation while retaining backup/recovery access and historical
+CLI/image meanings. Preserve both images for research; do not repeat their failed camera tests.
 
 **Hardware gate:** [3.2 strict verification passed](../docs/evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect. The separately authorized

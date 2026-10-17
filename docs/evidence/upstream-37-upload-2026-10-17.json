@@ -1,5 +1,5 @@
 {
-  "status": "strict-byte-verification-passed-awaiting-single-camera-cycle-and-log-retrieval",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-further-trials-held",
   "date": "2026-10-17",
   "sourceGitCommit": "2af44ff736d28abe46bbd0313f1469fb353c6f5d",
   "appVersion": "0.20.0",
@@ -68,7 +68,7 @@
     "audit_verification.py": "622112d3aa7066a98dc9bd7684e163a2f5effe632cf8b230c08b2e1a50309c0f"
   },
   "rawBackupsAndIdentifiersPrivate": true,
-  "cameraTestPerformed": false,
+  "cameraTestPerformed": true,
   "singleInitialMFCameraCycleRequested": true,
   "afSCameraCycleRequested": false,
   "postUploadVerification": {
@@ -98,5 +98,7 @@
     "independentFilesystemAuditPassed": true,
     "historicalArtifactsRechecked": 131,
     "originalStockRecoveryUnchanged": true
-  }
+  },
+  "furtherCameraTrialsHeld": true,
+  "cameraFailureEvidence": "upstream-37-camera-failure-2026-10-17.json"
 }

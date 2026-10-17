@@ -1,10 +1,11 @@
 # AF 3.7 upload — October 17, 2026
 
 **AF 3.7 passed strict USB byte verification after the owner-confirmed physical
-reconnect, followed by an independent filesystem audit. One camera cycle has
-been requested; its results and log retrieval remain pending.** The owner
+reconnect, followed by an independent filesystem audit. The later camera cycle
+failed; read-only log retrieval is complete and further trials are held.** The owner
 explicitly accepted uploading the prepared Contax Zeiss 50mm f/1.4 tracing
-candidate. Camera acceptance and a shutter-freeze fix remain unestablished.
+candidate. [Camera observations and retained traces](upstream-37-camera-failure-2026-10-17.md)
+do not establish a shutter-freeze fix.
 
 [Machine-readable receipt](upstream-37-upload-2026-10-17.json) ·
 [Candidate](../../firmware/candidates/3.7.0/README.md) ·
@@ -96,7 +97,7 @@ recovery application remain exact. No firmware, image, manifest or CLI was
 modified for this verification. Private readback/log digests are in the
 machine-readable receipt; raw data and unit identifiers remain private.
 
-## Pending owner camera cycle
+## Subsequent owner camera cycle
 
 After both verification gates passed, the owner was given the separate procedure
 for one loaded-lens MF lifecycle/photo cycle: A mode, confirmed MF, Pre-AF Off
@@ -105,8 +106,12 @@ ten-second idle, at most one photo and one shutdown. If MF cannot be confirmed,
 skip the photo. Stop for freeze or abnormal drive; remove the battery if
 unresponsive and do not restart/retry. AF-S is a later gate.
 
-No camera outcome is recorded yet. Once unpowered and stopped, the owner must
-return the adapter to its cap and explicitly confirm physical reconnect with
-the updater/app closed before read-only log retrieval. The existing 3.6
-capture/shutdown failure hold remains intact; installation verification does not
-establish physical motion, capture, shutdown, optical AF or factory parity.
+The owner subsequently reported some motor movement, failure to achieve focus,
+one photo taken and then a freeze, and returned the adapter to the computer in
+the USB-cap context. Read-only backup/log retrieval and two Astra reviews are
+complete in the [camera failure record](upstream-37-camera-failure-2026-10-17.md).
+Actual MF/Pre-AF, exposure, saved-file status and shutdown/battery action remain
+unknown. Do not repeat this failed image. The 3.6 hold also remains intact;
+installation verification does not establish capture, shutdown, optical AF or
+factory parity, and the pristine pre-camera result is not relabeled as a
+post-camera full-image verification.

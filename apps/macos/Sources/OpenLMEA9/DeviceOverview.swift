@@ -243,7 +243,7 @@ struct DeviceToolsView: View {
                             Button("Install Startup Diagnostic 3.2.0", action: model.installStartupDiagnostic).disabled(!model.canInstallStartupDiagnostic)
                             Text("Upstream AF 3.6.0 is held after a camera freeze on shutter press and shutdown nonresponse. Save a read-only backup for log review; do not repeat camera testing with this image.").font(.callout)
                             Button("Install Upstream AF 3.6.0", action: model.installStartupHandoff).disabled(!model.canInstallStartupHandoff)
-                            Text("Targeted trace 3.7.0 records motion fault context, capture ownership and shutdown progress. It is camera-unqualified and does not establish a fix for the shutter freeze. Flash only for a separately coordinated test, then save a read-only backup before another cycle.").font(.callout)
+                            Text("Targeted trace 3.7.0 is held after the owner reported a camera freeze following one photo. Save a read-only backup for log review; do not repeat camera testing with this image.").font(.callout)
                             Button("Install Targeted Trace 3.7.0", action: model.installTargetedTrace).disabled(!model.canInstallTargetedTrace)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)

@@ -15,11 +15,15 @@ with strict partial-record interpretation. A lossless packet initializer and
 compact diagnostics retain the flash margin without changing the controller or
 wire layout. The firmware identity intentionally changes to 3.7. **3.7 is uploaded
 and strictly byte-verified after physical reconnect, including an independent
-full-image/protected-data audit. The first camera cycle and log retrieval remain
-pending; a shutter-freeze fix is not established.**
+full-image/protected-data audit. Camera acceptance failed: the owner reports
+some movement, no achieved focus and a freeze after one photo. Further 3.7
+camera trials are held.** A read-only backup retained a complete focused
+snapshot with `home-failed`, matching local capture/shutdown TX returns and
+VD-timeout/PA23 footers. The failure phase and freeze cause remain unresolved.
+[Camera evidence and Astra review](docs/evidence/upstream-37-camera-failure-2026-10-17.md).
 [Live installation record](docs/evidence/upstream-37-upload-2026-10-17.md). [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)
-and the [coordinated test procedure](docs/upstream-targeted-trace-test.md)
-record the next gate. Hardware access occurred only during the separately
+and the [held test/log procedure](docs/upstream-targeted-trace-test.md)
+record the completed gates and limits. Hardware access occurred only during the separately
 authorized owner-coordinated installation and verification.
 
 The [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
@@ -50,13 +54,13 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.20.0, build 25) refreshes
+upload/read-back path for lens metadata. The current app (0.20.1, build 26) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
-It marks installed 3.6 as held and disables ordinary installation of that image.
-The separate explicit 3.7 tracing action preserves that hold and older command meanings.
+It marks installed 3.6 and 3.7 as held and disables ordinary installation of both
+failed images. Historical explicit CLI commands and image pins remain preserved.
 The upstream candidates use the original fixed 50mm profile; they cannot apply
 runtime lens edits. [Factory reconstruction remains partial](docs/reverse-engineering/status-2026-10-15.md).
 The **historical upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4

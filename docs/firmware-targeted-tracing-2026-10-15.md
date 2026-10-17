@@ -47,3 +47,14 @@ signed app/native preparation and 131 preserved release/recovery/pin files.
 owner-coordinated flash. The adapter/cap, updater, motor and canonical Application
 Support state were untouched; camera qualification and the failure cause remain
 unresolved.
+
+## October 17 hardware follow-up
+
+The separately authorized 3.7 upload and strict reconnect verification passed.
+The owner then reported some movement, no achieved focus and a freeze after one
+photo. Read-only log retrieval and Astra40–41 review are complete in the
+[camera failure record](evidence/upstream-37-camera-failure-2026-10-17.md).
+The retained snapshot records `home-failed`, completed local capture/shutdown
+transmissions and VD-timeout/PA23 footers. Failure phase and camera-freeze cause
+remain unresolved. Further 3.7 camera trials are held; no replacement firmware
+or timeout/polarity change was made from these observations.

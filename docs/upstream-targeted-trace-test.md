@@ -1,13 +1,19 @@
 # AF 3.7 installation, one cycle and log retrieval
 
+**The completed 3.7 camera cycle failed; further trials are held.** The owner
+reports some movement, no achieved focus and a freeze after one photo. Read-only
+log retrieval and independent review are complete in the
+[camera failure record](evidence/upstream-37-camera-failure-2026-10-17.md).
+The procedure below is retained as the historical coordinated test; it does not
+authorize repeating this failed image.
+
 **No 3.7 upload or camera trial occurred during offline preparation.** The owner
 requested flashing separately. Previously installed 3.6 remains held after capture freeze
 and shutdown nonresponse; a new diagnostic image is not a demonstrated repair.
 
 The separately authorized October 17 upload and strict byte verification have
 passed after the owner-confirmed physical reconnect, followed by an independent
-full-image/protected-data audit. The first owner camera cycle has been requested;
-its results and log retrieval remain pending in the
+full-image/protected-data audit. Its separate pre-camera evidence remains in the
 [live installation record](evidence/upstream-37-upload-2026-10-17.md).
 
 Before a future upload, confirm the adapter is physically on its USB cap, off
