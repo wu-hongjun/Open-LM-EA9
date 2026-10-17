@@ -13,8 +13,10 @@ for the original Contax Zeiss 50mm f/1.4. Seven additional Astra lanes prepared
 motion fault snapshots, capture/TX ownership and post-flush shutdown tracing,
 with strict partial-record interpretation. A lossless packet initializer and
 compact diagnostics retain the flash margin without changing the controller or
-wire layout. The firmware identity intentionally changes to 3.7. **3.7 has not been flashed or camera-qualified; a fix for
-the shutter freeze is not established.** [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)
+wire layout. The firmware identity intentionally changes to 3.7. **The 3.7 upload
+completed; physical reconnect and strict byte verification are pending. It is
+not camera-qualified, and a shutter-freeze fix is not established.**
+[Live installation record](docs/evidence/upstream-37-upload-2026-10-17.md). [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)
 and the [separate future test procedure](docs/upstream-targeted-trace-test.md)
 record the next gate. The adapter remains untouched during this offline work.
 

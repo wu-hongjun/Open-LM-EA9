@@ -4,6 +4,11 @@
 requested flashing separately. Installed 3.6 remains held after capture freeze
 and shutdown nonresponse; a new diagnostic image is not a demonstrated repair.
 
+The separately authorized October 17 upload has now completed. Physical reconnect
+and strict byte verification remain pending in the
+[live installation record](evidence/upstream-37-upload-2026-10-17.md). The procedure
+below does not bypass that gate.
+
 Before a future upload, confirm the adapter is physically on its USB cap, off
 the camera, and the official updater/app are closed. Use the original verified
 50mm f/1.4 profile and explicit `apply-trace-upstream` action. Preserve the fresh

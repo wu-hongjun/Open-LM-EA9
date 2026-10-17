@@ -1,7 +1,9 @@
 # Upstream C AF 3.7 — targeted tracing, fixed 50mm f/1.4
 
-Prepared offline for the original Contax Zeiss 50mm f/1.4 profile. **Not flashed
-or camera-qualified. This image does not establish a shutter-freeze fix.** It
+Prepared offline for the original Contax Zeiss 50mm f/1.4 profile. The separately
+authorized October 17 upload completed and awaits physical reconnect/strict byte
+verification in the [live installation record](../../../docs/evidence/upstream-37-upload-2026-10-17.md).
+**Not camera-qualified; this image does not establish a shutter-freeze fix.** It
 retains 3.6's controller, guards, origin, optical maps, aperture policy and
 protocol replies, with BCD version `0x37` and additional diagnostics.
 
