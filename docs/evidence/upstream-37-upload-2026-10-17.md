@@ -1,9 +1,10 @@
 # AF 3.7 upload — October 17, 2026
 
-**Upload completed; physical reconnect and strict byte verification are pending.
-Keep the adapter off the camera.** The owner reported connecting the adapter to
-the Mac and explicitly accepted uploading the prepared Contax Zeiss 50mm f/1.4
-tracing candidate. No camera test or post-upload USB read has occurred.
+**AF 3.7 passed strict USB byte verification after the owner-confirmed physical
+reconnect, followed by an independent filesystem audit. One camera cycle has
+been requested; its results and log retrieval remain pending.** The owner
+explicitly accepted uploading the prepared Contax Zeiss 50mm f/1.4 tracing
+candidate. Camera acceptance and a shutter-freeze fix remain unestablished.
 
 [Machine-readable receipt](upstream-37-upload-2026-10-17.json) ·
 [Candidate](../../firmware/candidates/3.7.0/README.md) ·
@@ -42,7 +43,8 @@ Transaction: `EEE6BE73-2861-4A3C-B31E-11FB62F67789`.
 The successful pinned engine implies one acknowledged START and 320 acknowledged
 64-byte pages. These are source/native-engine counts, not an independent wire
 capture. No CHECK/READ, retry, end marker or extra padding followed START on the
-armed connection. No reports were sent after the native uploader returned.
+armed connection. No reports were sent after the native uploader returned until
+the owner explicitly confirmed the physical reconnect described below.
 
 Before START, the backup completed two matching 131,072-byte flash reads and two
 auxiliary passes, with 4,359 read/check exchanges. It reports 3.6.0; its full flash
@@ -54,22 +56,57 @@ prefix match; the existing diagnostic pages are preserved in that backup.
 
 After the uploader exited, a filesystem-only audit rechecked all backup sizes/
 digests, unit binding, pending/planned/frozen image equality, expected metadata
-and original 50mm settings. It confirmed the uploaded journal awaits verification
-and the armed upload connection's marker remains retained. No journal or safety
+and original 50mm settings. At that point the uploaded journal awaited verification
+and the armed upload connection's marker remained retained. No journal or safety
 marker was manually altered. Raw backups, unit identifiers, state and logs stay
 private. Earlier images, pins and original stock recovery were not changed.
 
-## Pending reconnect gate
+## Reconnect and strict verification
 
-The owner was asked to physically unplug/reconnect through the USB cap, keep
-TECHART Update and Open LM-EA9 closed, leave the adapter off the camera and reply
-“reconnected.” No further hardware report is permitted before that confirmation.
-The next native verification must require a new connection and the same unit,
-then compare the complete pristine application/log tail, known metadata and
-protected flash/auxiliary data. An independent offline audit follows. Only the
-six established loader scratch bytes `[0x403a,0x4040)` are excluded from metadata
-preservation; a decoder prefix match cannot replace full installation verification.
+The owner explicitly replied “reconnected” to the physical USB-cap reconnect
+request, with the updater/app closed and the adapter off the camera. Before any
+reports, filesystem/process preflight rechecked the signed CLI/image pins,
+uploaded 3.7 journal and absence of competing updater/app/CLI processes.
 
-Camera behavior remains unqualified. The existing 3.6 capture/shutdown failure
-hold remains intact. A camera cycle will be coordinated only after the strict
-verification gate, using the separate test/log procedure.
+`dist/ea9ctl verify --idle` ran once, with canonical state. Native verification
+required a new connection and the same qualified unit, retained exclusive access
+and performed two matching full flash reads and two auxiliary passes (4,359
+read/check exchanges). It exited 0 at **2026-10-17T17:04:42.854458+00:00 UTC**
+(**2026-10-17T13:04:42.854458-04:00 America/New_York**). No firmware writes or
+retries were sent. Full readback flash SHA-256:
+`15e78dfa658c36e24843d717959a9971d2c801163fed98d48eb5d47bc3e7d115`.
+
+An independent filesystem-only audit then confirmed:
+
+- Every native backup file's size/digest, MCU geometry, boot hash and same-unit
+  binding; the reported version and metadata are 3.7.0.
+- Exact equality of all 20,480 application bytes `[0x5000,0xa000)` with the frozen
+  image, including all 1,024 pristine diagnostic bytes `[0x9c00,0xa000)`.
+- Exact expected metadata `[0x4000,0x403a)` and preservation of boot code,
+  `[0x4040,0x5000)`, upper flash `[0xa000,0x20000)`, user row, calibration and
+  device-ID windows. Only the six established loader scratch bytes
+  `[0x403a,0x4040)` are excluded; volatile NVM status is checked for geometry.
+- Native publication of the verified journal, applied original 50mm f/1.4
+  setting and firmware observation. The old armed upload-connection marker is
+  retained; the successful read-connection marker was cleared by the native
+  engine. Neither journal nor safety state was manually changed.
+
+All 131 previously inventoried historical artifacts and the original stock 1.8.0
+recovery application remain exact. No firmware, image, manifest or CLI was
+modified for this verification. Private readback/log digests are in the
+machine-readable receipt; raw data and unit identifiers remain private.
+
+## Pending owner camera cycle
+
+After both verification gates passed, the owner was given the separate procedure
+for one loaded-lens MF lifecycle/photo cycle: A mode, confirmed MF, Pre-AF Off
+where available, EV 0/Auto ISO, physical infinity/f/1.4, normal live preview,
+ten-second idle, at most one photo and one shutdown. If MF cannot be confirmed,
+skip the photo. Stop for freeze or abnormal drive; remove the battery if
+unresponsive and do not restart/retry. AF-S is a later gate.
+
+No camera outcome is recorded yet. Once unpowered and stopped, the owner must
+return the adapter to its cap and explicitly confirm physical reconnect with
+the updater/app closed before read-only log retrieval. The existing 3.6
+capture/shutdown failure hold remains intact; installation verification does not
+establish physical motion, capture, shutdown, optical AF or factory parity.

@@ -1,8 +1,10 @@
 # Upstream C AF 3.7 — targeted tracing, fixed 50mm f/1.4
 
 Prepared offline for the original Contax Zeiss 50mm f/1.4 profile. The separately
-authorized October 17 upload completed and awaits physical reconnect/strict byte
-verification in the [live installation record](../../../docs/evidence/upstream-37-upload-2026-10-17.md).
+authorized October 17 upload and strict byte verification passed after physical
+reconnect, with an independent full-image/protected-data audit, in the
+[live installation record](../../../docs/evidence/upstream-37-upload-2026-10-17.md).
+The first owner camera cycle and read-only log retrieval remain pending.
 **Not camera-qualified; this image does not establish a shutter-freeze fix.** It
 retains 3.6's controller, guards, origin, optical maps, aperture policy and
 protocol replies, with BCD version `0x37` and additional diagnostics.
@@ -42,12 +44,12 @@ exists. Lens ID is 234; nominal reported AV is 4352 (f/1.4). Actual iris is Unkn
 This fixed build has no runtime lens-profile row; library edits remain local.
 
 Use the separately named `prepare-trace-upstream`/`apply-trace-upstream` actions.
-Older commands/pins and the 3.6 camera-failure hold remain separate. A future flash
+Older commands/pins and the 3.6 camera-failure hold remain separate. Any later flash
 requires the existing backup, physical reconnect and complete strict byte/
 protected-data verification. One owner-coordinated camera cycle and read-only
-log retrieval follow only after that gate; no further trial is authorized here.
+log retrieval follow only after that gate, using the coordinated procedure below.
 
 [Build/test prerequisites](../../upstream-hardening/next37/README.md) ·
 [Evidence and limits](../../../docs/evidence/upstream-37-tracing-2026-10-15.md) ·
 [Milestone and Astra scopes](../../../docs/firmware-targeted-tracing-2026-10-15.md) ·
-[Future test/log procedure](../../../docs/upstream-targeted-trace-test.md)
+[Coordinated test/log procedure](../../../docs/upstream-targeted-trace-test.md)

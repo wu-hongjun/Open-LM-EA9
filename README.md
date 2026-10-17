@@ -8,17 +8,19 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The current offline candidate is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
+The current candidate is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
 for the original Contax Zeiss 50mm f/1.4. Seven additional Astra lanes prepared
 motion fault snapshots, capture/TX ownership and post-flush shutdown tracing,
 with strict partial-record interpretation. A lossless packet initializer and
 compact diagnostics retain the flash margin without changing the controller or
-wire layout. The firmware identity intentionally changes to 3.7. **The 3.7 upload
-completed; physical reconnect and strict byte verification are pending. It is
-not camera-qualified, and a shutter-freeze fix is not established.**
+wire layout. The firmware identity intentionally changes to 3.7. **3.7 is uploaded
+and strictly byte-verified after physical reconnect, including an independent
+full-image/protected-data audit. The first camera cycle and log retrieval remain
+pending; a shutter-freeze fix is not established.**
 [Live installation record](docs/evidence/upstream-37-upload-2026-10-17.md). [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)
-and the [separate future test procedure](docs/upstream-targeted-trace-test.md)
-record the next gate. The adapter remains untouched during this offline work.
+and the [coordinated test procedure](docs/upstream-targeted-trace-test.md)
+record the next gate. Hardware access occurred only during the separately
+authorized owner-coordinated installation and verification.
 
 The [eight-hour firmware hardening pass](docs/firmware-hardening-2026-10-15.md)
 has closed and its heartbeat is paused. [Final results and remaining gates](docs/evidence/firmware-hardening-final-2026-10-15.md)
@@ -211,7 +213,7 @@ connected devices. Building or passing tests does not authorize a flash.
 
 - [Current fixed 50mm AF 3.7 tracing candidate](firmware/candidates/3.7.0/README.md)
 - [AF 3.7 build/test workbench](firmware/upstream-hardening/next37/README.md)
-- [AF 3.7 future installation and one-cycle log procedure](docs/upstream-targeted-trace-test.md)
+- [AF 3.7 installation and one-cycle log procedure](docs/upstream-targeted-trace-test.md)
 - [Held 50mm AF 3.6 candidate and exact pins](firmware/candidates/3.6.0/README.md)
 - [AF 3.6 build/test workbench and prerequisites](firmware/upstream-hardening/next36/README.md)
 - [AF 3.6 coordinated install, camera cycle and log retrieval](docs/upstream-handoff-test.md)

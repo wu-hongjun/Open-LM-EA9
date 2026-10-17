@@ -4,9 +4,10 @@ The latest candidate is [upstream AF 3.7 tracing](candidates/3.7.0/README.md), p
 offline for the original Contax Zeiss 50mm f/1.4. It retains the upstream C
 controller, guards, optical maps, aperture policy and wire layout, with targeted
 motion/capture/shutdown diagnostics and a lossless packet initializer. It has
-completed its separate upload and awaits physical reconnect/strict byte verification;
-firmware identity changes to 3.7. It remains camera-unqualified and does not
-establish a shutter-freeze fix. See the
+completed its separate upload and strict byte verification after physical
+reconnect, including an independent full-image/protected-data audit; firmware
+identity changes to 3.7. Its first camera cycle/log retrieval remain pending.
+It does not establish a shutter-freeze fix. See the
 [live installation record](../docs/evidence/upstream-37-upload-2026-10-17.md). See [3.7 evidence](../docs/evidence/upstream-37-tracing-2026-10-15.md) and the
 [build/test workbench](upstream-hardening/next37/README.md) for exact prerequisites,
 pins and conditional limits. App 0.20.0/build 25 provides a separately named 3.7

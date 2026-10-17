@@ -1,13 +1,14 @@
-# AF 3.7 future installation, one cycle and log retrieval
+# AF 3.7 installation, one cycle and log retrieval
 
 **No 3.7 upload or camera trial occurred during offline preparation.** The owner
-requested flashing separately. Installed 3.6 remains held after capture freeze
+requested flashing separately. Previously installed 3.6 remains held after capture freeze
 and shutdown nonresponse; a new diagnostic image is not a demonstrated repair.
 
-The separately authorized October 17 upload has now completed. Physical reconnect
-and strict byte verification remain pending in the
-[live installation record](evidence/upstream-37-upload-2026-10-17.md). The procedure
-below does not bypass that gate.
+The separately authorized October 17 upload and strict byte verification have
+passed after the owner-confirmed physical reconnect, followed by an independent
+full-image/protected-data audit. The first owner camera cycle has been requested;
+its results and log retrieval remain pending in the
+[live installation record](evidence/upstream-37-upload-2026-10-17.md).
 
 Before a future upload, confirm the adapter is physically on its USB cap, off
 the camera, and the official updater/app are closed. Use the original verified
