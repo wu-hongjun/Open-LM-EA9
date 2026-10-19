@@ -7,6 +7,11 @@ log retrieval and independent review are complete in the
 The procedure below is retained as the historical coordinated test; it does not
 authorize repeating this failed image.
 
+The [October 19 owner repeat](evidence/upstream-37-repeat-camera-failure-2026-10-19.md)
+also froze after two reported photos. Read-only retrieval is complete; the final
+two diagnostic pages were consumed. Do not request another cycle to fill in
+missing details or treat the earlier cohort as the later attempt's trace.
+
 **No 3.7 upload or camera trial occurred during offline preparation.** The owner
 requested flashing separately. Previously installed 3.6 remains held after capture freeze
 and shutdown nonresponse; a new diagnostic image is not a demonstrated repair.

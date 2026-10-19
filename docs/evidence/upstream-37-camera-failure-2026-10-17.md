@@ -9,6 +9,12 @@ valid pre-camera result; it did not establish camera compatibility.
 [Sanitized machine-readable evidence](upstream-37-camera-failure-2026-10-17.json) ·
 [Independent Astra reviews](../audits/astra-40-41-af37-camera-trace-2026-10-17.md)
 
+**October 19 follow-up:** the owner independently repeated the trial and reports
+two photos before another freeze. A fresh read-only backup adds a second
+`home-failed` summary and VD-timeout footer in the final two free pages. Details
+for that later cohort were omitted for capacity; the older trace below remains
+separate. [Repeat-cycle evidence and full-storage limit](upstream-37-repeat-camera-failure-2026-10-19.md).
+
 ## Owner observations and remaining unknowns
 
 The first response was “Still very janky, I reconnected the adapter to the
