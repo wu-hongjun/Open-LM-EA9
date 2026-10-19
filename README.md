@@ -22,7 +22,8 @@ snapshot with `home-failed`, matching local capture/shutdown TX returns and
 VD-timeout/PA23 footers. The failure phase and freeze cause remain unresolved.
 [Camera evidence and Astra review](docs/evidence/upstream-37-camera-failure-2026-10-17.md).
 An [October 19 owner repeat](docs/evidence/upstream-37-repeat-camera-failure-2026-10-19.md)
-reports two photos before another freeze. Its new summary again records
+confirms AF mode, two saved photo files before another freeze and battery
+removal required for recovery. Its new summary again records
 `home-failed`; diagnostic storage is now full, so detailed later events were
 omitted. The hold remains in place.
 [Live installation record](docs/evidence/upstream-37-upload-2026-10-17.md). [Evidence](docs/evidence/upstream-37-tracing-2026-10-15.md)

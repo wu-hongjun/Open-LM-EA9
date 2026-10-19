@@ -5,12 +5,11 @@
   "ownerReportedPhotoCountBeforeFreeze": 2,
   "photoFilesIndependentlyVerified": false,
   "unknownOwnerDetails": [
-    "actual focus mode",
+    "AF submode (AF-S/AF-C)",
     "Pre-AF",
     "exposure",
-    "whether both files saved",
-    "shutdown outcome",
-    "battery removal"
+    "exact freeze/shutter stage",
+    "photo EXIF and local file paths"
   ],
   "backupNativeExitCode": 0,
   "completedAtUTC": "2026-10-19T15:08:02.331732+00:00",
@@ -102,5 +101,11 @@
   "newCohortShutdownUARTDisabledObserved": true,
   "oldCohortEventsNotAttributedToRepeat": true,
   "diagnosticStorageFullDoesNotEstablishFreezeCause": true,
-  "appOrFirmwareSourceChanged": false
+  "appOrFirmwareSourceChanged": false,
+  "ownerClarification": "yes, saved, require battery removal, and in af",
+  "ownerConfirmedSavedPhotoFiles": 2,
+  "ownerConfirmedFocusMode": "AF",
+  "ownerConfirmedBatteryRemovalRequired": true,
+  "ownerConfirmedShutdownRecovery": "Battery removal required after camera freeze",
+  "focusAFSubmode": null
 }

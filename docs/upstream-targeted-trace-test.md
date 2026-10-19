@@ -8,7 +8,8 @@ The procedure below is retained as the historical coordinated test; it does not
 authorize repeating this failed image.
 
 The [October 19 owner repeat](evidence/upstream-37-repeat-camera-failure-2026-10-19.md)
-also froze after two reported photos. Read-only retrieval is complete; the final
+also froze after two owner-confirmed saved photos in AF and required battery
+removal. The AF submode is unknown. Read-only retrieval is complete; the final
 two diagnostic pages were consumed. Do not request another cycle to fill in
 missing details or treat the earlier cohort as the later attempt's trace.
 

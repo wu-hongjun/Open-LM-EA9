@@ -1,8 +1,9 @@
 # AF 3.7 — repeat camera freeze, October 19
 
 **Camera acceptance remains failed; further 3.7 camera trials remain held.**
-The owner reports another attempt with two photos taken before a freeze, followed
-by returning the adapter to the computer. A fresh read-only backup contains a
+The owner confirms another attempt in **AF**, with **two photo files saved**
+before a freeze and **battery removal required**, followed by returning the
+adapter to the computer. A fresh read-only backup contains a
 new software `home-failed` summary. The detailed event history for this later
 record was omitted by the writer's remaining-capacity policy. Freeze cause and
 the failing homing phase remain unresolved.
@@ -15,15 +16,19 @@ the failing homing phase remain unresolved.
 
 The owner said: “I tried again and it took two photos before freeze, it is
 connected again.” This is an owner-initiated repeat after the prior hold; no
-additional camera test was requested. The photo count is an owner observation,
-not independent saved-file or EXIF verification. Actual MF/AF, Pre-AF, exposure,
-whether both files saved, exact freeze stage, shutdown and battery removal remain
-unverified. Root asked only for details already known, without another test.
+additional camera test was requested. In response to the retrospective question,
+the owner then confirmed: “yes, saved, require battery removal, and in af.” Both
+files saving, AF selection and required battery removal are owner-confirmed.
+Files/EXIF have not been independently inspected. AF-S versus AF-C, Pre-AF,
+exposure and the exact freeze/shutter stage remain unknown. This was an AF
+attempt, and must not be labeled a controlled MF exposure test or a matched AF-S
+comparison. Root asked only for details already known, without another test.
 
 The existing USB-cap return context and preflight establish a fresh qualified,
 unblocked connection with no competing updater/app/CLI processes. Same-unit
-identity and a new connection are confirmed by the native backup. Camera
-shutdown/battery actions are not inferred from the USB return.
+identity and a new connection are confirmed by the native backup. Battery removal
+is established by the subsequent owner reply, independently of the USB return.
+Motor-stop timing and physical power-down signals were not measured.
 
 ## Native read and independent audit
 
@@ -68,7 +73,7 @@ fully persisted; it does not mean a detailed motion/capture history survived.
 The new record independently repeats the software homing-failure marker; the
 drive, settle or work-budget branch is still unknown. There is no retained new
 motion trajectory, owner sequence or TX pairing with which to explain this
-attempt's two-photo report. The earlier cohort's raw-echo/PA23 observations must
+attempt's two saved photos and subsequent hang. The earlier cohort's raw-echo/PA23 observations must
 not be attributed to the later attempt. The new PA23 and delay-return footers
 could not fit once the final page was consumed; their absence does not locate
 a shutdown hang or prove an electrical power state.
@@ -82,5 +87,6 @@ an observation limit, not an established cause of the camera freeze.
 Keep 3.7 held and leave the adapter on its USB cap. The next source investigation
 remains the exact homing/readiness workload and post-capture status ordering
 described by Astra40–41. This follow-up does not claim those proposed experiments
-were run or a remedy was implemented. Two reported photos before a freeze do
-not establish capture stability, optical AF or factory parity.
+were run or a remedy was implemented. The owner confirms capture completed twice
+before a camera hang requiring battery removal. Stable capture/shutdown behavior,
+optical AF performance and factory parity remain unachieved.
