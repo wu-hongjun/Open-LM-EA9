@@ -15,13 +15,15 @@ keeping the motor inhibited and readiness false. Separate drive/settle/work-budg
 fault labels improve the next observation. REA original-instruction capture
 replay supports retaining the existing status re-arm policy; no independent
 capture/shutdown defect was reproduced. **Physical homing and the A7C II freeze
-remain unresolved. 3.8 is not flashed or camera-qualified.** Exact repeat builds,
+remain unresolved. 3.8 is uploaded; owner-confirmed reconnect and strict byte verification are pending. It is not camera-qualified.** Exact repeat builds,
 production-path regression controls, compiled writer/stack checks and 53 Swift
 tests pass. [Evidence and limits](docs/evidence/upstream-38-readiness-2026-10-19.md) ·
 [Build/test workbench](firmware/upstream-hardening/next38/README.md).
-This work touched no adapter or canonical host state; flashing is separate.
+The offline preparation touched no adapter or canonical host state. The separately
+authorized [3.8 upload](docs/evidence/upstream-38-upload-2026-10-19.md) is complete;
+keep it off the camera until strict verification passes.
 
-The installed, held image is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
+The previous, held image is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
 for the original Contax Zeiss 50mm f/1.4. Seven additional Astra lanes prepared
 motion fault snapshots, capture/TX ownership and post-flush shutdown tracing,
 with strict partial-record interpretation. A lossless packet initializer and

@@ -1,9 +1,11 @@
 # AF 3.8 future owner-coordinated camera check
 
-**Preparation only. No 3.8 upload or camera test has occurred.** The current
-3.7 image remains held after capture freezes requiring battery removal. The
-owner requested flashing separately. This procedure describes future gates;
-it does not ask for a test now or establish that the freeze is fixed.
+**3.8 upload is complete; owner-confirmed reconnect and strict verification
+are pending. No camera test or post-camera log retrieval has occurred.**
+[Live installation record](evidence/upstream-38-upload-2026-10-19.md).
+The owner separately authorized the upload and one post-verification cycle.
+The earlier 3.7 hold remains after capture freezes requiring battery removal.
+The gates below do not establish that 3.8 fixes the physical failure.
 
 [Candidate and pins](../firmware/candidates/3.8.0/README.md) ·
 [Offline evidence](evidence/upstream-38-readiness-2026-10-19.md).
