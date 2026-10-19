@@ -1,0 +1,24 @@
+{
+  "status": "offline-readiness-candidate-camera-unqualified",
+  "baseVersion": "3.7.0",
+  "nextVersion": "3.8.0",
+  "baseImageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+  "inputs": {
+    "firmware/upstream-hardening/followup/42-home-readiness/apply.py": "923df1df92906919ceb3ec57ccc151980720c45b3721a3e9c3dbde12939e88b9",
+    "firmware/upstream-hardening/followup/42-home-readiness/apply_phase.py": "d60921ecceec576ca99e32e674e76609cdd54cc153e8e77298cc2c6cb4f7f613"
+  },
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/42-home-readiness/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/42-home-readiness/apply_phase.py",
+      "entry": "apply_phase_labels",
+      "argument": "work"
+    }
+  ],
+  "additionalUnits": [],
+  "additionalUnitFlags": {}
+}

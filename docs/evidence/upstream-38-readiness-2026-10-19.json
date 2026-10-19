@@ -1,0 +1,298 @@
+{
+  "date": "2026-10-19",
+  "status": "offline-candidate-ready-camera-unqualified",
+  "baseCommit": "17dc6bc",
+  "candidate": "3.8.0",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "profile": {
+    "name": "Contax Zeiss 50mm f/1.4",
+    "lensID": 234,
+    "nominalApertureAV": 4352,
+    "actualAperture": null,
+    "runtimeLensProfilesSupported": false
+  },
+  "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "manifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+  "patchSHA256": "215f5cdb1070e3ff412db0551e0cbf7693e8f8f2611ceeb003e477190fce945a",
+  "productionSourceDelta": [
+    "src/main.c",
+    "src/startup_trace.h",
+    "src/emount.h"
+  ],
+  "verifiedFix": "Operand-only optical queries remain serviceable after failed homing; readiness remains false and motion remains inhibited.",
+  "diagnosticPhaseCodes": {
+    "17": "home-drive-unsettled",
+    "18": "home-settle-unsettled",
+    "19": "home-poll-budget"
+  },
+  "captureShutdownProductionChanges": false,
+  "factoryReplay": {
+    "captureRearmCycles": 7,
+    "source": "original pinned stock instructions with supplied connected state and peripheral boundaries",
+    "physicalParityEstablished": false
+  },
+  "footprint": {
+    "imageBytes": 20480,
+    "codeAndDataEnd": 39600,
+    "codeMarginBytes": 336,
+    "staticRAMBytes": 3044,
+    "reservedStackBytes": 8192,
+    "conditionalCompiledStackBytes": 1516,
+    "physicalStackHighWaterMeasured": false
+  },
+  "acceptance": {
+    "status": "passed-final38-offline-acceptance-camera-unqualified",
+    "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+    "manifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+    "sourceFilesVerified": 49,
+    "checks": [
+      {
+        "name": "coordinate",
+        "exitCode": 0
+      },
+      {
+        "name": "query-ownership",
+        "exitCode": 0
+      },
+      {
+        "name": "query-flow",
+        "exitCode": 0
+      },
+      {
+        "name": "absolute-target",
+        "exitCode": 0
+      },
+      {
+        "name": "time-contract",
+        "exitCode": 0
+      },
+      {
+        "name": "target-time-composition",
+        "exitCode": 0
+      },
+      {
+        "name": "exact-counter-parity",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-commits",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-session",
+        "exitCode": 0
+      },
+      {
+        "name": "home-inhibit",
+        "exitCode": 0
+      },
+      {
+        "name": "query-composition",
+        "exitCode": 0
+      },
+      {
+        "name": "motion-tracing",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-retention",
+        "exitCode": 0
+      },
+      {
+        "name": "startup-handoff",
+        "exitCode": 0
+      },
+      {
+        "name": "home-readiness",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-status",
+        "exitCode": 0
+      },
+      {
+        "name": "shutdown-liveness",
+        "exitCode": 0
+      },
+      {
+        "name": "factory-capture-rearm",
+        "exitCode": 0
+      },
+      {
+        "name": "trace-core",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-compaction",
+        "exitCode": 0
+      },
+      {
+        "name": "packet-reset",
+        "exitCode": 0
+      },
+      {
+        "name": "compiled-writer",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-v3",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-adversarial",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-phase",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-registry38",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-registry37",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-legacy",
+        "exitCode": 0
+      },
+      {
+        "name": "compiled-composition",
+        "exitCode": 0
+      }
+    ],
+    "preservedArtifacts": 136,
+    "historicalRegistryEntriesUnchanged": true,
+    "testInputSHA256": {
+      "scripts/test-upstream-readiness.py": "3480a71d141c701582586a72ea6a890aeead5908fd1e66dd0683bb89f50ab8a4",
+      "firmware/upstream-hardening/next38/accepted-lanes.json": "26e85d02ad2520ba628cf757e9dad80c73b55c00174ebbc1d3194c80f2c57d54",
+      "firmware/upstream-hardening/next38/test-inputs.json": "28f19f3b7b82cfe1af772e06d96d7ef88850cfd202e307f3a5a1708742fad853",
+      "firmware/upstream-hardening/next38/contract-fixtures.json": "0fd242dc6122b0df79f47b75d8e491c002676ae7e981a6944002d01fb4b3938d",
+      "firmware/upstream-hardening/next38/compiled-policy.json": "902b3ad6122932d21e731f2e9dcfa7dd07798f77e77e0a910e15674af667cfb2",
+      "firmware/upstream-hardening/next38/stack-reproduction.json": "ca91de6a5e02dc77e7a41bd8b24dd9a2e31e5830004d34b84b9dcb6a80be39f3",
+      "firmware/upstream-hardening/next38/test_phase_decoder.py": "e6581a940b0cdac779054630a0e5bf85cccc4faf86aa64c0c026ba94d8d1809f",
+      "firmware/upstream-hardening/next38/compiler_compat.py": "d9254117d66a57b2f6fd07095caed986084fb585e36221869f5368acbb75a4c7",
+      "firmware/upstream-hardening/next38/contract_adapters.py": "d19a193ba99899390f4476340baa01b15367a056e2af9005f6f7449874d22053",
+      "firmware/upstream-hardening/next38/replay.py": "7c6db89fbfe09fee55f6c9b1b664ef2b3d4bfc5c0bac57ee9451e4d1644477b2",
+      "firmware/upstream-hardening/next38/compiled_audit.py": "2817a9c69d4dea4e1fb5cd2b01c5f0c5ecf522e0f52b1f92d3d69e46e7ce5c89",
+      "firmware/upstream-hardening/next38/packet_test_init.c": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9",
+      "firmware/upstream-hardening/next38/trace_compat.c": "1b5109712de1be33a9d329260a04de102e661a45fdf54756feb03c0dab7f699e",
+      "firmware/upstream-hardening/followup/42-home-readiness/run.py": "82923252dcd837290b39862ee3d5cd24f175035eb941bc01fe1f765da4007e39",
+      "firmware/upstream-hardening/followup/42-home-readiness/apply_phase.py": "d60921ecceec576ca99e32e674e76609cdd54cc153e8e77298cc2c6cb4f7f613",
+      "firmware/upstream-hardening/followup/42-home-readiness/test_home.c": "cdcfddb39c5ec833507e39726c73394e90979c382c533dd867da2748a74272be",
+      "firmware/upstream-hardening/followup/42-home-readiness/apply.py": "923df1df92906919ceb3ec57ccc151980720c45b3721a3e9c3dbde12939e88b9",
+      "firmware/upstream-hardening/followup/43-capture-status/run.py": "9ef70637ac8c64fdc6231165051bd400fe125ddb3eecc41db90a7ff0b0e73b38",
+      "firmware/upstream-hardening/followup/43-capture-status/factory_replay.py": "127dd4256ea316091d432e98272d162e4629d305cbab2721ee11b4bc31b63a31",
+      "firmware/upstream-hardening/followup/43-capture-status/test_replay.c": "a8506b9d0666a1a3e71fd5f72b15d65a155804183ce7037d33ba4d8019dbc6ad",
+      "firmware/upstream-hardening/followup/43-capture-status/review_compiled.py": "0a93098ebb449eead9c489c965ce55ef3320457af4e29d6f8d665def75f7c07c",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/test_capture.c": "912f4f9c5633bf631f433e03f1c12dda6e7ea8c2afe9aa60fb9a1f7d4e75742e",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/run.py": "e0269e6ed001b833dc2e717b375f2708333e4371b183b8335bfdb96fc06ce009",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/test_waits.inc": "a3eb22f2ef8086583e80b94d4366628d22c882633fb7630eb1a335a295c021fc",
+      "scripts/decode-startup-diagnostics.py": "86357d857408608bb6e6a24cf568d0f67207ddf42109861f58af7d5a88ce5586",
+      "scripts/startup_diagnostic_registry.py": "2aa7423656c57d11d44031fa6f616b1d6e4ab0921361270f4d21bb1c56c651ff",
+      "scripts/startup_diagnostic_v3.py": "8c1632de9f9d2f61dce24fc4e818e187499dba9afda136c495967a28d1cceb8d"
+    },
+    "hardwareReportsSent": 0,
+    "cameraQualified": false,
+    "physicalHomingFailureFixed": false,
+    "cameraFreezeFixEstablished": false,
+    "limits": "Supplied I/O and schedules; no measured motor/IRQ/NVM timing, focus accuracy or camera capture/shutdown acceptance."
+  },
+  "repeatBuild": {
+    "status": "passed-repeat-build-and-compiled-composition",
+    "identicalArtifacts": [
+      "image",
+      "raw",
+      "manifest",
+      "from37patch"
+    ],
+    "normalizedInstructionSymbolProgramHeadersEqual": true,
+    "onlyContainerPinsRebound": {
+      "hardened.elf": {
+        "reviewed": "23f3ddb1a515467db3dc3bed098a1306fbe2e57583c055e0b00856d62c81c713",
+        "reproduced": "679375438e0f63e29074b5d70740ba610f73cb67a73b0306f8a34c0456d34eaa"
+      },
+      "hardened.map": {
+        "reviewed": "fadae545d0385f9111955b959848c3837be2fd97e27391c66ef55a248f0bbbd9",
+        "reproduced": "7b050513d359346acbefda03cdf4f676c4a4f56448720dfa1b161b8dba2979fd"
+      }
+    },
+    "hardwareReportsSent": 0
+  },
+  "automaticCompiledReproduction": {
+    "normalizedCompiledOutputSHA256": {
+      "-d": "11d3ab4c9964d17739fa73cb9f6441ad7712d3386d9265dc17650e650144d720",
+      "-t": "0e482344368059718956ba02e0c7237d66d9ed9b2b5726f17aa485217e434f5a",
+      "-p": "b8ecb0139c95ba2415b299851f8fef0781032572576087cf43ecbb268bd93945"
+    },
+    "onlyContainerPinsRebound": {
+      "hardened.elf": {
+        "reviewed": "23f3ddb1a515467db3dc3bed098a1306fbe2e57583c055e0b00856d62c81c713",
+        "reproduced": "679375438e0f63e29074b5d70740ba610f73cb67a73b0306f8a34c0456d34eaa"
+      },
+      "hardened.map": {
+        "reviewed": "fadae545d0385f9111955b959848c3837be2fd97e27391c66ef55a248f0bbbd9",
+        "reproduced": "7b050513d359346acbefda03cdf4f676c4a4f56448720dfa1b161b8dba2979fd"
+      }
+    },
+    "negativeControlsRejected": 4,
+    "additionalTrustBoundaryControls": [
+      {
+        "case": "noncontainer-policy-edit",
+        "rejected": true
+      },
+      {
+        "case": "changed-compiled-instruction",
+        "rejected": true
+      },
+      {
+        "case": "optimized-compiled-audit",
+        "rejected": true
+      },
+      {
+        "case": "optimized-acceptance",
+        "rejected": true
+      }
+    ]
+  },
+  "host": {
+    "signedAppVersion": "0.21.0",
+    "build": 27,
+    "signatureValid": true,
+    "appNotLaunched": true,
+    "preparedVersions": [
+      "3.1.0",
+      "3.2.0",
+      "3.3.0",
+      "3.4.0",
+      "3.5.0",
+      "3.6.0",
+      "3.7.0",
+      "3.8.0"
+    ],
+    "allPreparedImagesMatchPublishedPins": true,
+    "cliSHA256": "1d993380476f6d7797398d2304f36ea0a6f162a45bb7db73762f13db25194d9c",
+    "hardwareReportsSent": 0,
+    "canonicalStateAccessed": false,
+    "swiftTestsPassed": 53,
+    "swiftFinalPassAfterRestoringLegacyAssertion": true,
+    "negativePrepareCasesRejected": 88
+  },
+  "preservationLedger": "docs/evidence/upstream-38-preserved-2026-10-19.json",
+  "physicalHomingFailureFixed": false,
+  "cameraFreezeFixEstablished": false,
+  "cameraQualified": false,
+  "flashed": false,
+  "adapterEnumerated": false,
+  "hardwareReportsSent": 0,
+  "canonicalApplicationSupportAccessed": false,
+  "remainingLimits": [
+    "Physical homing failure branch and trajectory unknown",
+    "Camera capture/shutdown freeze unresolved",
+    "Supplied clock and peripheral schedules do not measure bus/IRQ/NVM timing",
+    "Factory firmware reconstruction and parity incomplete",
+    "Offline candidate only; separate upload/reconnect/full-byte verification and controlled camera cycle required"
+  ]
+}

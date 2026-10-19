@@ -38,7 +38,7 @@ enum DeviceLensAction {
         if updateStateError != nil || (waitingForVerification && devices.count == 1 && !pendingBelongsToConnectedAdapter) { return .tools }
         if waitingForVerification { return .verify }
         if installedCameraFailureHold { return .tools }
-        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return .tools }
+        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0", "3.8.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return .tools }
         if !stockUploadQualified { return .setup }
         if variantForLensChanges == nil { return .read }
         if variantForLensChanges?.supportsLensProfileChanges == false && !preparedMatchesApplied { return .tools }
@@ -78,6 +78,7 @@ enum DeviceLensAction {
         if let version = currentAppliedLens?.firmwareVersion, Self.cameraFailureHolds[version] != nil {
             return "AF \(version.split(separator: ".").prefix(2).joined(separator: ".")) camera testing held"
         }
+        if currentAppliedLens?.firmwareVersion == "3.8.0" { return "Readiness candidate" }
         if currentAppliedLens?.firmwareVersion == "3.7.0" { return "Targeted trace candidate" }
         if ["3.5.0", "3.6.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "Upstream AF candidate" }
         if currentAppliedLens?.firmwareVersion == "3.4.0" { return "Bounded upstream candidate" }
@@ -107,7 +108,7 @@ enum DeviceLensAction {
         if let reason = Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] {
             return reason + " Keep the camera off; open USB tools to review the verified image and backup."
         }
-        if ["3.5.0", "3.6.0", "3.7.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "Camera compatibility remains unqualified. Save a read-only backup after one coordinated cycle for log review. The compiled lens is the original 50mm f/1.4 profile; actual iris position is unknown." }
+        if ["3.5.0", "3.6.0", "3.7.0", "3.8.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "Camera compatibility remains unqualified. Save a read-only backup after one coordinated cycle for log review. The compiled lens is the original 50mm f/1.4 profile; actual iris position is unknown." }
         if currentAppliedLens?.firmwareVersion == "3.4.0" { return "Camera compatibility remains unqualified. After one coordinated cycle, save a read-only backup for log review. This candidate is compiled for the original 50mm f/1.4 profile; actual iris position is unknown." }
         if currentAppliedLens?.firmwareVersion == "3.3.0" { return "Camera compatibility remains unqualified. After one coordinated camera cycle, save a read-only backup for log review before another trial. Lens library edits stay local in this fixed 50mm build." }
         if currentAppliedLens?.firmwareVersion == "3.2.0" { return "Camera compatibility is unqualified. After one coordinated camera cycle, use USB tools to save a read-only backup for diagnostic decoding." }
@@ -125,7 +126,7 @@ enum DeviceLensAction {
     var workflowSymbol: String {
         if busy { return "arrow.triangle.2.circlepath" }
         if installedCameraFailureHold { return "exclamationmark.triangle.fill" }
-        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "waveform.path.ecg" }
+        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0", "3.8.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "waveform.path.ecg" }
         if preparedMatchesApplied && !waitingForVerification && !reconnectRequired { return "checkmark.circle.fill" }
         return "cable.connector"
     }

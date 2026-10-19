@@ -346,6 +346,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
         case "3.7.0": return "Targeted trace 3.7 is held after the camera froze following one photo. Keep the camera off and preserve a read-only backup for log review. Do not retry this image."
+        case "3.8.0": return "Readiness 3.8 is camera-unqualified. It keeps operand-only lens queries live after a homing fault and records the failing phase. A camera-freeze fix is not established; use only for a separately coordinated test."
         case "3.6.0": return "Upstream AF 3.6 is held after a shutter-press camera freeze and shutdown nonresponse. Keep the camera off and save a read-only backup for log review. Do not retry this image."
         case "3.5.0": return "Upstream AF 3.5 is camera-unqualified. It preserves the resolved focus target and rejects homing completion after an expired phase. Collect a read-only backup after one coordinated camera cycle before another trial."
         case "3.4.0": return "Upstream 3.4 is camera-unqualified. It adds bounded encoder coordinates and preserves query replies during motion and homing. After one coordinated camera cycle, collect a read-only backup before another trial."
@@ -434,6 +435,15 @@ enum AppTab: Hashable { case device, lensLibrary }
     func installTargetedTrace() {
         guard canInstallTargetedTrace else { return }
         applyLens(variant: .autofocusTargetedTrace)
+    }
+    var canInstallReadiness: Bool {
+        guard canChangeFirmware, let profile = preparedLens,
+              currentAppliedLens?.firmwareVersion != "3.8.0" else { return false }
+        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusReadiness)) != nil
+    }
+    func installReadiness() {
+        guard canInstallReadiness else { return }
+        applyLens(variant: .autofocusReadiness)
     }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {

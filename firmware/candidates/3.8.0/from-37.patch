@@ -1,0 +1,41 @@
+--- frozen37/src/emount.h
++++ readiness38/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x37u
++#define EM_FW_VERSION_BCD   0x38u
+--- frozen37/src/main.c
++++ readiness38/src/main.c
+@@ -637,0 +638 @@
++	uint8_t failure = ST_HOME_DRIVE;
+@@ -661 +662 @@
+-		if (++polls >= HOME_POLL_LIMIT) goto failed;
++		if (++polls >= HOME_POLL_LIMIT) goto budget_failed;
+@@ -696,0 +698 @@
++	failure = ST_HOME_SETTLE;
+@@ -700 +702 @@
+-		if (++polls >= HOME_POLL_LIMIT) goto failed;
++		if (++polls >= HOME_POLL_LIMIT) goto budget_failed;
+@@ -775,0 +778,2 @@
++budget_failed:
++	failure = ST_HOME_BUDGET;
+@@ -778 +782 @@
+-	st_inhibit_fault(ST_HOME_FAILED);
++	st_inhibit_fault(failure);
+@@ -1082,2 +1086 @@
+-        if (!em_handshake_done || g_aborted || em_shutdown_requested() ||
+-            motor_is_inhibited()) {
++        if (!em_handshake_done || g_aborted || em_shutdown_requested()) {
+@@ -1103 +1106 @@
+-            !g_aborted && !em_shutdown_requested() && !motor_is_inhibited()) {
++            !g_aborted && !em_shutdown_requested()) {
+@@ -1678,0 +1682,2 @@
++		/* Operand-only queries remain live after motion inhibition. */
++		focus_answer_queries();
+@@ -1822 +1826,0 @@
+-			focus_answer_queries();
+--- frozen37/src/startup_trace.h
++++ readiness38/src/startup_trace.h
+@@ -26 +26,2 @@
+-    ST_SERVO_WRONG_WAY=15, ST_ENCODER_OVERFLOW=16
++    ST_SERVO_WRONG_WAY=15, ST_ENCODER_OVERFLOW=16,
++    ST_HOME_DRIVE=17, ST_HOME_SETTLE=18, ST_HOME_BUDGET=19

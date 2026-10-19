@@ -1,6 +1,17 @@
 # Firmware development
 
-The latest candidate is [upstream AF 3.7 tracing](candidates/3.7.0/README.md), prepared
+The latest prepared candidate is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
+It repairs reproduced operand-query starvation after failed homing and adds
+phase-specific homing diagnostics, retaining motion inhibition and false
+readiness. REA capture re-arm and upstream shutdown comparisons did not justify
+another production change. **Physical homing and camera capture/shutdown remain
+unresolved; 3.8 is offline and unflashed.** App 0.21.0/build 27 adds a separate
+experimental action while retaining the 3.6/3.7 holds. See
+[evidence and limits](../docs/evidence/upstream-38-readiness-2026-10-19.md),
+[build/test reproduction](upstream-hardening/next38/README.md) and the
+[future coordinated procedure](../docs/upstream-readiness-test.md).
+
+The installed, held candidate is [upstream AF 3.7 tracing](candidates/3.7.0/README.md), prepared
 offline for the original Contax Zeiss 50mm f/1.4. It retains the upstream C
 controller, guards, optical maps, aperture policy and wire layout, with targeted
 motion/capture/shutdown diagnostics and a lossless packet initializer. It has
@@ -134,7 +145,7 @@ Dependency versions, official source URLs and digests are pinned in
 `dependencies.json`. The local cache is ignored. The packaged Mac app includes
 pinned released templates and separate fixed upstream candidates. The earlier
 custom templates personalize only a reserved profile row; a custom template with
-its zeroed row is intentionally invalid. Upstream 3.1–3.7 images have no runtime
+its zeroed row is intentionally invalid. Upstream 3.1–3.8 images have no runtime
 profile row and reject edited profiles.
 
 Changes from the reference:

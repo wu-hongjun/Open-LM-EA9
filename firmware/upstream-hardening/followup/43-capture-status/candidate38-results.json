@@ -1,0 +1,161 @@
+{
+  "baseline37ImageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+  "candidateReplay": true,
+  "status": "offline-no-production-fix-justified",
+  "sourceDigestsVerified": 49,
+  "baseImageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "sourceHashes": {
+    "src/abs_encoder.c": "0fa218deffe16bdf1ad08c6cf06f34db034742c60f98d27c407960e94cef17c2",
+    "src/abs_encoder.h": "222b4fd167e64def7a9421dfe452c2bddd071c6cd2116c7914c70fab611c31f7",
+    "src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "src/clock.c": "c6885dc2011cc7f288efda5d22228468659a4a319bb310e50dde58f0c8e31e17",
+    "src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "src/delay.c": "1aad5912b7675622b34968a63b9266b59b00ec12ff6018b0b414c0a9648e5d66",
+    "src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "src/ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "src/em_eic.c": "a92c8e7e846b8a0c01100da875c4f9670cbb042d6e2f0c9e87f478b4aa0e49dd",
+    "src/em_eic.h": "824afdb5724cdf64ba9237e2e4f3db3635b29a39852b4e4ce028b4ab84e96f99",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/em_uart.h": "6353df5d6ab1e5e27c4a60e7824c8019216da9eea7ad805580c69fa463a7d892",
+    "src/emount.c": "c9aab46e79d675fb5e1751ad52560f24372373cc07cc7a55dc04d56069160b24",
+    "src/emount.h": "183b4a04b006be8cd11e4e30c36a888d534a749e4f4ec2ceb2596abdeab48bde",
+    "src/emount_packets.c": "93c2b7ba3917ce348f7c9eb610fb7fd196dbc92fed4a1de65ddfa4b339cd5ea3",
+    "src/emount_packets.h": "5b05771baf9dd7979ea775565f468d8fbb4557b4d94f994c1184379d2f6870ec",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "src/focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "src/focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "src/focus_pred.c": "baa84b9f092fe2ec8730d60b0d5cc3d1b4487dfed6d05da517317f64146e614d",
+    "src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "src/main.c": "e2174bc47f5f056b0111b1c9d97912497330ea1da7cdce7b0a3669e28e35c771",
+    "src/motion_trace.c": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90",
+    "src/motion_trace.h": "d3b28b9ff5e4c05fee7e0789c5062d7c848e475951af56c9615ddf814ca2155e",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/motor.h": "6127d9f2d56be4df2decaca735d273b8a2deb85e6edacd81a4b70438907741ee",
+    "src/servo.c": "6a291a61dec72a42ada5f143e5122eb903b32b42b59af22d90b49bd4456c38f5",
+    "src/servo.h": "3bfb275f4fb5e94638c2312c4aadcd3ddc42ae12eddeb1980563245521081526",
+    "src/startup_samd21.c": "557724674ffbfd2b8a606cd73250e7b703b94b9abb603b0356a955667992e865",
+    "src/startup_trace.c": "096eb2d63947e9e090de4a62f63a477e243b8439ca7108012b5dc6c9c829692d",
+    "src/startup_trace.h": "b5e17f9ff7f9583f895e4eea5b0bd32e8775ee43dec8f43e444f1fc0a58b1bd4",
+    "src/startup_trace_flash.c": "551ce09cc3b1eccf265b55d11b8f07221c377c3542738c994f3c94d702f4f282",
+    "src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "src/trace_format.h": "c468eedc44d40cbedefce8d3a29dcaadd9de139ddec58499f16d41efe06b45e3",
+    "src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "src/vdd.c": "1c196552db7546d2b734a5e698fe95f6a6d4b0136f0163ccab9252d1425d56a4",
+    "src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "pinnedDependencies": {
+    "references/upstream/weiziqian/E-mount-impl-on-Techart-EA9/src/emount.c": "eb4a24fd7b63fa53a92f534642e3284f3bc339c155d7e2bdbe5e9fb704bdca2e",
+    "firmware/upstream-hardening/next37/trace_compat.c": "1b5109712de1be33a9d329260a04de102e661a45fdf54756feb03c0dab7f699e",
+    "firmware/upstream-hardening/next37/packet_test_init.c": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9"
+  },
+  "testSHA256": "a8506b9d0666a1a3e71fd5f72b15d65a155804183ce7037d33ba4d8019dbc6ad",
+  "runnerSHA256": "9ef70637ac8c64fdc6231165051bd400fe125ddb3eecc41db90a7ff0b0e73b38",
+  "testedManifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+  "cases": {
+    "frozen": [
+      {
+        "case": "normal",
+        "passed": true,
+        "txCount": 9,
+        "pairedReturns": true
+      },
+      {
+        "case": "second-status-cut",
+        "passed": true,
+        "txCount": 10,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-failed",
+        "passed": true,
+        "txCount": 9,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-vd",
+        "passed": true,
+        "txCount": 9,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-readiness",
+        "passed": true,
+        "txCount": 9,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-session",
+        "passed": true,
+        "txCount": 10,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-shutdown",
+        "passed": true,
+        "txCount": 3,
+        "pairedReturns": true
+      },
+      {
+        "case": "raw-queued-control",
+        "passed": true,
+        "txCount": 10,
+        "pairedReturns": true
+      },
+      {
+        "case": "readiness-failed",
+        "passed": true,
+        "txCount": 9,
+        "pairedReturns": true
+      },
+      {
+        "case": "readiness-session",
+        "passed": true,
+        "txCount": 11,
+        "pairedReturns": true
+      },
+      {
+        "case": "readiness-shutdown",
+        "passed": true,
+        "txCount": 4,
+        "pairedReturns": true
+      }
+    ],
+    "resume-status-mutant": [
+      {
+        "case": "normal",
+        "rejected": true,
+        "assertion": "FAIL line 91: !test_status()"
+      }
+    ],
+    "lost-rearm-mutant": [
+      {
+        "case": "normal",
+        "rejected": true,
+        "assertion": "FAIL line 116: test_status()&&em_handshake_done&&!test_retry()"
+      }
+    ],
+    "stuck-retry-mutant": [
+      {
+        "case": "normal",
+        "rejected": true,
+        "assertion": "FAIL line 88: !test_retry()"
+      }
+    ]
+  },
+  "productionTextDelta": 0,
+  "productionRAMDelta": 0,
+  "hardwareAccess": false,
+  "cameraAcceptanceClaimed": false
+}

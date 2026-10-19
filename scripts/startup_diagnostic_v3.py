@@ -19,6 +19,8 @@ EVENTS = {5: 'handshake', 6: 'fault', 7: 'first-window-preserved',
 FOOTERS = {1: 'VD-two-low', 2: 'VD-timeout', 3: 'PA23-write-reached',
     4: '100ms-tail-delay-returned', 5: 'terminal-st-fail'}
 TYPES = {1: 'summary', 2: 'events', 3: 'motion', 4: 'terminal-footer'}
+HOME_PHASE_FAULTS = {17: 'home-drive-unsettled', 18: 'home-settle-unsettled',
+    19: 'home-poll-budget'}
 
 
 def u16(p, offset):
@@ -29,9 +31,13 @@ def u32(p, offset):
     return int.from_bytes(p[offset:offset+4], 'little')
 
 
-def decode_pages(data):
+def decode_pages(data, version='3.7.0'):
     if len(data) != 1024:
         raise ValueError('Expected exactly 1024 diagnostic bytes.')
+    if version not in ('3.7.0', '3.8.0'):
+        raise ValueError('Unsupported targeted-trace version.')
+    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version == '3.8.0' else FAULTS
+    maximum_fault = 19 if version == '3.8.0' else 16
     pages = []
     for slot in range(16):
         p = data[64*slot:64*(slot+1)]
@@ -62,7 +68,7 @@ def decode_pages(data):
                 'uartErrors': u16(q, 16), 'uartStatus': u16(q, 18),
                 'evictedEvents': u16(q, 20), 'filteredEvents': u16(q, 22),
                 'stageID': q[24], 'handshakeFlag': bool(q[25]),
-                'faultID': q[26], 'fault': FAULTS.get(q[26], f'unknown-{q[26]}'),
+                'faultID': q[26], 'fault': faults.get(q[26], f'unknown-{q[26]}'),
                 'pins': None if q[27] == 255 else q[27],
                 'firstRxID': q[28], 'lastRxID': q[29],
                 'firstTxID': q[30], 'lastTxID': q[31],
@@ -129,13 +135,13 @@ def decode_pages(data):
             e['motionChunkHex'] = q.hex()
         else:
             e['footer'] = {'kindID': q[0], 'kind': FOOTERS.get(q[0], f'unknown-{q[0]}'),
-                'value': q[1], 'faultID': q[2], 'fault': FAULTS.get(q[2], f'unknown-{q[2]}'),
+                'value': q[1], 'faultID': q[2], 'fault': faults.get(q[2], f'unknown-{q[2]}'),
                 'ordinal': q[3], 'uptimeMS': u32(q, 4)}
             if q[0] not in FOOTERS or not 1 <= q[3] <= 4 or any(q[8:]):
                 issues.append('invalid-terminal-payload')
             if ((q[0] == 1 and q[1] != 2) or (q[0] == 2 and q[1] > 1)
                     or (q[0] in (3, 4) and q[1] != 0)
-                    or (q[0] == 5 and (q[1] != q[2] or not 1 <= q[1] <= 16))):
+                    or (q[0] == 5 and (q[1] != q[2] or not 1 <= q[1] <= maximum_fault))):
                 issues.append('terminal-value-disagrees-with-writer')
 
     # A torn/empty write may be followed by another boot at a later frontier.

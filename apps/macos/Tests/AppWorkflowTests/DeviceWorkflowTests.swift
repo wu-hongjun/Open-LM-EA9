@@ -361,4 +361,16 @@ private actor DiscoveryFixture {
     #expect(model.workflowTitle == "AF 3.7 camera testing held" && model.workflowDetail.contains("freeze"))
     #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    #expect(model.canInstallReadiness && !model.canInstallTargetedTrace && !model.canApplyLens)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(!model.canInstallReadiness)
+    model.chooseDeviceLens(profile.id)
+    let readiness = try ApplicationImage.personalized(profile, variant: .autofocusReadiness)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(readiness.setting), firmwareVersion: "3.8.0", imageSHA256: digest(readiness.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.8.0"))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallReadiness)
+    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "Readiness candidate" && model.workflowDetail.contains("unqualified"))
+    #expect(model.firmwareBehaviorNote.contains("not established") && model.currentAppliedLens?.setting.actualAperture == nil)
 }

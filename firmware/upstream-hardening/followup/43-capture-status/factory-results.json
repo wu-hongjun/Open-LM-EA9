@@ -1,0 +1,30 @@
+{
+  "runnerSHA256": "127dd4256ea316091d432e98272d162e4629d305cbab2721ee11b4bc31b63a31",
+  "status": "pass-bounded-stock-capture-rearm",
+  "stockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "pinnedDependencies": {
+    "firmware/upstream-hardening/lanes/04-factory/test_factory_contracts.py": "d87ce8a7aab8f888c90cc5542b998efc8c978d12258befa0c359e90c5be7c5df",
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597"
+  },
+  "cases": [
+    {
+      "captureRearmCycles": 1,
+      "silentVDPulsesPerCycle": 8,
+      "rearmsConnectedMode": true
+    },
+    {
+      "captureRearmCycles": 2,
+      "silentVDPulsesPerCycle": 8,
+      "rearmsConnectedMode": true
+    },
+    {
+      "captureRearmCycles": 4,
+      "silentVDPulsesPerCycle": 8,
+      "rearmsConnectedMode": true
+    }
+  ],
+  "cuts": "Inherited pinned lane04 oracle; explicit callbacks, UART/DMA/timer stubs and synthetic RAM. No actual ISR timing.",
+  "wrongModelRejected": "Raw echo alone resumes periodic status",
+  "hardwareAccess": false
+}

@@ -1,0 +1,185 @@
+{
+  "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "elfSHA256": "23f3ddb1a515467db3dc3bed098a1306fbe2e57583c055e0b00856d62c81c713",
+  "selectedSymbols": {
+    "main": {
+      "before": {
+        "address": 33976,
+        "bytes": 928
+      },
+      "after": {
+        "address": 33960,
+        "bytes": 936
+      },
+      "deltaBytes": 8
+    },
+    "focus_answer_queries": {
+      "before": {
+        "address": 32288,
+        "bytes": 208
+      },
+      "after": {
+        "address": 31928,
+        "bytes": 192
+      },
+      "deltaBytes": -16
+    },
+    "powerdown_signal": {
+      "before": {
+        "address": 31712,
+        "bytes": 216
+      },
+      "after": {
+        "address": 31712,
+        "bytes": 216
+      },
+      "deltaBytes": 0
+    },
+    "motion_shutdown_inhibit": {
+      "before": {
+        "address": 31692,
+        "bytes": 20
+      },
+      "after": {
+        "address": 31692,
+        "bytes": 20
+      },
+      "deltaBytes": 0
+    },
+    "em_shutdown_ack": {
+      "before": {
+        "address": 22140,
+        "bytes": 104
+      },
+      "after": {
+        "address": 22140,
+        "bytes": 104
+      },
+      "deltaBytes": 0
+    },
+    "on_cs_edge": {
+      "before": {
+        "address": 22244,
+        "bytes": 924
+      },
+      "after": {
+        "address": 22244,
+        "bytes": 924
+      },
+      "deltaBytes": 0
+    },
+    "em_uart_disable": {
+      "before": {
+        "address": 26632,
+        "bytes": 52
+      },
+      "after": {
+        "address": 26632,
+        "bytes": 52
+      },
+      "deltaBytes": 0
+    },
+    "delay_ms": {
+      "before": {
+        "address": 21364,
+        "bytes": 40
+      },
+      "after": {
+        "address": 21364,
+        "bytes": 40
+      },
+      "deltaBytes": 0
+    },
+    "servo_move_from": {
+      "before": {
+        "address": 29032,
+        "bytes": 1602
+      },
+      "after": {
+        "address": 29032,
+        "bytes": 1602
+      },
+      "deltaBytes": 0
+    },
+    "STOCK": {
+      "before": {
+        "address": 39488,
+        "bytes": 80
+      },
+      "after": {
+        "address": 39480,
+        "bytes": 80
+      },
+      "deltaBytes": 0
+    }
+  },
+  "mainCompilerStackFramesUnchanged": {
+    "motion_shutdown_inhibit": [
+      "8",
+      "static"
+    ],
+    "powerdown_signal": [
+      "40",
+      "static"
+    ],
+    "focus_answer_queries": [
+      "48",
+      "static"
+    ],
+    "home_command": [
+      "40",
+      "static"
+    ],
+    "focus_report_at": [
+      "24",
+      "static"
+    ],
+    "pump": [
+      "8",
+      "static"
+    ],
+    "focus_report": [
+      "8",
+      "static"
+    ],
+    "focus_invalid": [
+      "8",
+      "static"
+    ],
+    "focus_abort": [
+      "8",
+      "static"
+    ],
+    "focus_event": [
+      "16",
+      "static"
+    ],
+    "focus_cmd_target": [
+      "16",
+      "static"
+    ],
+    "focus_retarget": [
+      "40",
+      "static"
+    ],
+    "home_cancel_requested": [
+      "8",
+      "static"
+    ],
+    "focus_run.isra": [
+      "104",
+      "static"
+    ],
+    "focus_exec": [
+      "104",
+      "static"
+    ],
+    "main": [
+      "88",
+      "static"
+    ]
+  },
+  "initArrayTarget": "frame_dummy",
+  "preinitArrayEmpty": true,
+  "cloneWeakCallbackLiteralsZero": true
+}

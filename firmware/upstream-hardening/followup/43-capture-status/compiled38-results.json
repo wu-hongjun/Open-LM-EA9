@@ -1,0 +1,83 @@
+{
+  "status": "pass-static-compiled-callback-binding",
+  "runnerSHA256": "0a93098ebb449eead9c489c965ce55ef3320457af4e29d6f8d665def75f7c07c",
+  "baseline": {
+    "imageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+    "manifestSHA256": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b",
+    "elfSHA256": "eac2b648c225f9acb0426fdf6931e91b7133afe0e35eeb4a525910e1296b271a",
+    "callbackMappings": [
+      {
+        "caller": "main",
+        "setter": "em_set_powerdown_handler",
+        "argument": "r0",
+        "callback": "powerdown_signal",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "main",
+        "setter": "em_set_shutdown_inhibit_handler",
+        "argument": "r0",
+        "callback": "motion_shutdown_inhibit",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "em_init",
+        "setter": "em_eic_init",
+        "argument": "r0",
+        "callback": "on_cs_edge",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "em_init",
+        "setter": "em_eic_init",
+        "argument": "r1",
+        "callback": "on_vd_edge",
+        "thumbPointerVerified": true
+      }
+    ],
+    "mainCallsQueryBeforePoll": false
+  },
+  "candidate": {
+    "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+    "manifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+    "elfSHA256": "23f3ddb1a515467db3dc3bed098a1306fbe2e57583c055e0b00856d62c81c713",
+    "callbackMappings": [
+      {
+        "caller": "main",
+        "setter": "em_set_powerdown_handler",
+        "argument": "r0",
+        "callback": "powerdown_signal",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "main",
+        "setter": "em_set_shutdown_inhibit_handler",
+        "argument": "r0",
+        "callback": "motion_shutdown_inhibit",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "em_init",
+        "setter": "em_eic_init",
+        "argument": "r0",
+        "callback": "on_cs_edge",
+        "thumbPointerVerified": true
+      },
+      {
+        "caller": "em_init",
+        "setter": "em_eic_init",
+        "argument": "r1",
+        "callback": "on_vd_edge",
+        "thumbPointerVerified": true
+      }
+    ],
+    "mainCallsQueryBeforePoll": true
+  },
+  "identicalObjectDisassemblyAndRelocations": [
+    "em_eic"
+  ],
+  "emountDifferences": "Only em_init version byte 55 to 56 and compensating addition 179 to 178; final lens ID remains 234. All remaining disassembly and relocations match.",
+  "legacyParkSymbolAbsent": true,
+  "hardwareAccess": false,
+  "limits": "Static pointer/relocation and loop-call placement checks, not IRQ timing or execution coverage."
+}
