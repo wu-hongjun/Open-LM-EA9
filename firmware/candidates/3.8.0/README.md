@@ -1,8 +1,11 @@
 # Upstream C AF 3.8 — homing-query readiness, fixed 50mm f/1.4
 
-Prepared offline October 19, 2026. The separately authorized [upload](../../../docs/evidence/upstream-38-upload-2026-10-19.md) is complete; **physical reconnect and strict byte verification are pending. No camera test has occurred.** This
-candidate repairs a reproduced protocol dead end after failed homing; the
-physical homing failure and A7C II capture/shutdown freeze remain unresolved.
+Prepared offline October 19, 2026. The separately authorized
+[upload and strict byte verification](../../../docs/evidence/upstream-38-upload-2026-10-19.md)
+passed after physical reconnect, including an independent full-image/protected-
+data audit. **One camera cycle and log retrieval are pending; no camera result
+is known.** This candidate repairs a reproduced protocol dead end after failed
+homing; physical homing and the A7C II capture/shutdown freeze remain unqualified.
 The prior 3.7 camera-failure hold remains in place.
 
 The operand-only optical query worker now runs before foreground polling even

@@ -1,12 +1,12 @@
 # Firmware development
 
 The latest prepared candidate is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
-The [3.8 upload record](../docs/evidence/upstream-38-upload-2026-10-19.md) tracks the pending hardware gate.
+The [3.8 upload record](../docs/evidence/upstream-38-upload-2026-10-19.md) tracks completed installation verification and pending camera/log gates.
 It repairs reproduced operand-query starvation after failed homing and adds
 phase-specific homing diagnostics, retaining motion inhibition and false
 readiness. REA capture re-arm and upstream shutdown comparisons did not justify
 another production change. **Physical homing and camera capture/shutdown remain
-unresolved; 3.8 is uploaded and awaits physical reconnect/strict verification.** App 0.21.0/build 27 adds a separate
+unresolved; 3.8 is uploaded and strictly byte-verified; one camera cycle and logs are pending.** App 0.21.0/build 27 adds a separate
 experimental action while retaining the 3.6/3.7 holds. See
 [evidence and limits](../docs/evidence/upstream-38-readiness-2026-10-19.md),
 [build/test reproduction](upstream-hardening/next38/README.md) and the

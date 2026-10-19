@@ -1,9 +1,9 @@
 # AF 3.8 upload — October 19, 2026
 
-**Upload complete; strict verification is pending an owner-confirmed physical
-USB-cap reconnect. Keep the adapter off the camera until verification passes.**
-No 3.8 camera test or post-camera log retrieval has occurred. The physical
-homing failure and capture/shutdown freeze remain unresolved.
+**AF 3.8 passed strict USB byte verification after the owner-confirmed physical
+reconnect, followed by an independent filesystem audit.** One coordinated camera
+cycle and subsequent log retrieval are pending; no 3.8 camera result is known.
+Physical homing and the capture/shutdown freeze remain unqualified.
 
 [Machine-readable receipt](upstream-38-upload-2026-10-19.json) ·
 [Candidate](../../firmware/candidates/3.8.0/README.md) ·
@@ -47,13 +47,39 @@ The independent post-upload audit used files only and confirmed planned/frozen/
 journal image equality, original profile, preserved metadata source and retained
 armed-connection marker. It does not substitute for readback.
 
-## Pending gates
+## Reconnect and strict verification
 
-The next required step is the owner's explicit physical unplug/reconnect
-confirmation, with updater/app closed and adapter off-camera. Only then may
-native strict verification read the complete application, expected metadata,
-pristine diagnostic tail and unchanged protected/factory data. A separate
-offline readback audit follows. A version match alone is insufficient.
+The owner explicitly confirmed physical USB-cap reconnect with the updater/app
+closed and the adapter off the camera. Before reports, preflight rechecked the
+signed CLI and image pins, uploaded journal, absence of competing processes,
+one qualified adapter and a new unblocked connection. Inventory sent no reports.
+
+`dist/ea9ctl verify --idle` ran once and exited 0 at
+**2026-10-19T16:14:45.430257+00:00 UTC**
+(**2026-10-19T12:14:45.430257-04:00 America/New_York**).
+Two matching full-flash reads and two auxiliary passes completed (4,359
+read/check exchanges). No firmware writes or retries were sent.
+
+The independent filesystem audit then confirmed:
+
+- All backup file sizes/digests, MCU geometry, qualified boot hash, same-unit
+  binding and a new registry identity. Reported version and metadata are 3.8.0.
+- Exact equality of all 20,480 application bytes `[0x5000,0xa000)` with the pinned
+  image, including all 1,024 blank log bytes `[0x9c00,0xa000)`.
+- Exact expected metadata `[0x4000,0x403a)` and unchanged boot code,
+  `[0x4040,0x5000)`, upper flash `[0xa000,0x20000)`, user row, calibration and
+  device-ID windows. Only the established six loader scratch bytes
+  `[0x403a,0x4040)` are excluded; volatile NVM status is checked for geometry.
+- Native publication of verified journal, original 50mm f/1.4 setting and
+  firmware observation. The old armed upload marker remains; the native
+  engine cleared the successful read-connection marker. No manual state edits.
+
+Readback full-flash SHA-256:
+`e7874dca81e26825669acc9b3e8b38b19422f7e9de5bdbc2e9223897e8e1f17c`. All 136 historical artifacts, old registry entries
+and original stock recovery remain exact. No image, manifest or CLI changed.
+These checks qualify installation bytes, not camera capture, focus or shutdown.
+
+## Pending camera and log gates
 
 One loaded-lens MF lifecycle/photo cycle is authorized after those gates pass;
 AF-S is a later gate. The runbook requires confirmed MF, Pre-AF Off where

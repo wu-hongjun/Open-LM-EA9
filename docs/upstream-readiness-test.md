@@ -1,7 +1,8 @@
 # AF 3.8 future owner-coordinated camera check
 
-**3.8 upload is complete; owner-confirmed reconnect and strict verification
-are pending. No camera test or post-camera log retrieval has occurred.**
+**3.8 upload and strict verification passed after physical reconnect, including
+an independent full-image/protected-data audit. One camera cycle and log
+retrieval are pending; no camera result is known.**
 [Live installation record](evidence/upstream-38-upload-2026-10-19.md).
 The owner separately authorized the upload and one post-verification cycle.
 The earlier 3.7 hold remains after capture freezes requiring battery removal.
