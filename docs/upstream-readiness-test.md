@@ -1,12 +1,14 @@
-# AF 3.8 future owner-coordinated camera check
+# AF 3.8 camera procedure — held after failure
 
-**3.8 upload and strict verification passed after physical reconnect, including
-an independent full-image/protected-data audit. One camera cycle and log
-retrieval are pending; no camera result is known.**
-[Live installation record](evidence/upstream-38-upload-2026-10-19.md).
-The owner separately authorized the upload and one post-verification cycle.
-The earlier 3.7 hold remains after capture freezes requiring battery removal.
-The gates below do not establish that 3.8 fixes the physical failure.
+**3.8 passed upload/strict verification, but camera acceptance failed; further
+trials are held.** The owner reports hunting, apparent focus for one photo,
+then a motor reset and no further photos. Shutdown was normal. Exposure mode
+was AUTO; actual focus mode and whether a file saved remain unverified.
+[Camera/log evidence](evidence/upstream-38-camera-failure-2026-10-20.md) ·
+[Installation record](evidence/upstream-38-upload-2026-10-19.md).
+The read-only logs identify a drive-phase homing failure. No extra trial was
+requested. The original steps below are retained as historical guidance, not
+an instruction to repeat this failed image. The 3.6/3.7 holds also remain.
 
 [Candidate and pins](../firmware/candidates/3.8.0/README.md) ·
 [Offline evidence](evidence/upstream-38-readiness-2026-10-19.md).

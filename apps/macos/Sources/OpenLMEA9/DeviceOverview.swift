@@ -245,7 +245,7 @@ struct DeviceToolsView: View {
                             Button("Install Upstream AF 3.6.0", action: model.installStartupHandoff).disabled(!model.canInstallStartupHandoff)
                             Text("Targeted trace 3.7.0 is held after the owner reported a camera freeze following one photo. Save a read-only backup for log review; do not repeat camera testing with this image.").font(.callout)
                             Button("Install Targeted Trace 3.7.0", action: model.installTargetedTrace).disabled(!model.canInstallTargetedTrace)
-                            Text("Readiness 3.8.0 repairs lens-query servicing after homing faults and distinguishes the failed homing phase. Camera focus, capture and shutdown remain unqualified. Install only for a separately coordinated test.").font(.callout)
+                            Text("Readiness 3.8.0 is held after hunting and a motor reset followed by blocked further photos. Shutdown was normal; the logs identify a drive-phase homing failure. Do not repeat camera testing with this image.").font(.callout)
                             Button("Install Readiness 3.8.0", action: model.installReadiness).disabled(!model.canInstallReadiness)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)

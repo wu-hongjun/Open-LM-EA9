@@ -1,16 +1,21 @@
 # Firmware development
 
-The latest prepared candidate is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
-The [3.8 upload record](../docs/evidence/upstream-38-upload-2026-10-19.md) tracks completed installation verification and pending camera/log gates.
-It repairs reproduced operand-query starvation after failed homing and adds
-phase-specific homing diagnostics, retaining motion inhibition and false
-readiness. REA capture re-arm and upstream shutdown comparisons did not justify
-another production change. **Physical homing and camera capture/shutdown remain
-unresolved; 3.8 is uploaded and strictly byte-verified; one camera cycle and logs are pending.** App 0.21.0/build 27 adds a separate
-experimental action while retaining the 3.6/3.7 holds. See
-[evidence and limits](../docs/evidence/upstream-38-readiness-2026-10-19.md),
+The latest image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
+Its [upload and strict reconnect verification](../docs/evidence/upstream-38-upload-2026-10-19.md)
+passed. **Camera acceptance failed; further 3.8 trials are held.** Hunting and a
+motor reset were followed by blocked further photos; the owner reports normal
+shutdown. The [read-only camera evidence](../docs/evidence/upstream-38-camera-failure-2026-10-20.md)
+identifies drive-phase homing failure 17 and an uninitialized servo snapshot.
+Code, protected data and all image pins remain unchanged. The physical homing
+cause and shutter-block cause are unresolved. App 0.21.1/build 28 adds the 3.8 hold,
+retains earlier holds and preserves backup/recovery access and explicit CLI pins.
+
+The 3.8 source repairs reproduced operand-query starvation after homing failure
+and adds phase labels, retaining motor inhibition and false readiness. REA
+capture re-arm and upstream shutdown comparisons did not justify another
+production change. See [offline evidence](../docs/evidence/upstream-38-readiness-2026-10-19.md),
 [build/test reproduction](upstream-hardening/next38/README.md) and the
-[future coordinated procedure](../docs/upstream-readiness-test.md).
+[held test/log procedure](../docs/upstream-readiness-test.md).
 
 The previous, held candidate is [upstream AF 3.7 tracing](candidates/3.7.0/README.md), prepared
 offline for the original Contax Zeiss 50mm f/1.4. It retains the upstream C

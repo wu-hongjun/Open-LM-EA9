@@ -1,9 +1,10 @@
 # AF 3.8 upload — October 19, 2026
 
 **AF 3.8 passed strict USB byte verification after the owner-confirmed physical
-reconnect, followed by an independent filesystem audit.** One coordinated camera
-cycle and subsequent log retrieval are pending; no 3.8 camera result is known.
-Physical homing and the capture/shutdown freeze remain unqualified.
+reconnect, followed by an independent filesystem audit.** Camera acceptance
+subsequently failed; read-only log retrieval is complete and further 3.8 trials
+are held. The owner reports normal shutdown, hunting and a motor reset followed
+by blocked further photos. [Camera evidence](upstream-38-camera-failure-2026-10-20.md).
 
 [Machine-readable receipt](upstream-38-upload-2026-10-19.json) ·
 [Candidate](../../firmware/candidates/3.8.0/README.md) ·
@@ -79,9 +80,9 @@ Readback full-flash SHA-256:
 and original stock recovery remain exact. No image, manifest or CLI changed.
 These checks qualify installation bytes, not camera capture, focus or shutdown.
 
-## Pending camera and log gates
+## Historical camera guidance and subsequent result
 
-One loaded-lens MF lifecycle/photo cycle is authorized after those gates pass;
+One loaded-lens MF lifecycle/photo cycle was requested after those gates passed;
 AF-S is a later gate. The runbook requires confirmed MF, Pre-AF Off where
 available, physical infinity/f/1.4, normal preview/motor behavior, ten-second
 idle, at most one photo and one shutdown. Unknown settings remain unknown; a
@@ -94,3 +95,12 @@ remain exact. No firmware/image/manifest/CLI pin changed for this upload; no
 journal or safety record was manually altered. Raw backups, unit identifiers,
 real frames and operands remain private. 3.6/3.7 camera-failure holds persist;
 installation is not camera acceptance or factory parity.
+
+The owner subsequently reported hunting, apparent focus for one photo, then a
+motor reset and no further photos. Shutdown was normal and exposure was AUTO;
+actual focus mode and file-saving status remain unknown. Read-only retrieval
+on October 20 found 14 valid pages and drive-phase homing failure 17, with code
+and protected data unchanged. No further camera attempt is requested. See the
+[full evidence and limits](upstream-38-camera-failure-2026-10-20.md). Historical
+pristine installation verification remains intact; the post-camera diagnostic
+backup is not relabeled as full-image verification.

@@ -22,7 +22,8 @@ enum DeviceLensAction {
         "3.0.0": "AF 3.0 failed capture and shutdown testing with a full-press freeze requiring battery removal.",
         "3.1.0": "Upstream 3.1 failed camera testing: aperture showed -- and the shutter would not release. Shutdown worked.",
         "3.6.0": "Upstream AF 3.6 failed capture and shutdown testing: shutter press froze the camera and it did not shut down.",
-        "3.7.0": "Targeted trace 3.7 failed camera testing: the owner reports a freeze after taking one photo."
+        "3.7.0": "Targeted trace 3.7 failed camera testing: the owner reports a freeze after taking one photo.",
+        "3.8.0": "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. The owner reports normal shutdown."
     ]
     var installedCameraFailureHold: Bool {
         Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] != nil

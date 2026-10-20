@@ -1,20 +1,21 @@
 # macOS prototype
 
-Current app: **0.19.1, build 24**, October 15, 2026. Device opens first, with
+Current app: **0.21.1, build 28**, October 20, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local
 metadata editing and explicit guarded USB operations. The host uses native
 Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
 on upstream C; Rust is deferred while qualifying the camera contract.
 
-The latest packaged candidate is [upstream AF 3.6](evidence/upstream-36-handoff-2026-10-15.md),
-for the original 50mm f/1.4 profile. It has no runtime profile row.
-[3.2 verification passed](evidence/upstream-32-upload-2026-10-15.md) after physical
-reconnect; the separately authorized [3.6 installation](evidence/upstream-36-upload-2026-10-15.md)
-also passed strict verification after its own physical reconnect. The later
-[3.6 camera test failed capture and shutdown](evidence/upstream-36-camera-failure-2026-10-15.md).
-Post-camera logs were preserved; ordinary 3.6 installation and further camera
-trials are held. See the [current Device workflow](macos-device-workflow.md)
-and [coordinated 3.6 procedure](upstream-handoff-test.md). The dated
+The latest packaged image is [upstream AF 3.8](evidence/upstream-38-readiness-2026-10-19.md),
+fixed to the original 50mm f/1.4 with no runtime profile row. Its
+[installation and strict verification](evidence/upstream-38-upload-2026-10-19.md)
+passed after physical reconnect. The later [camera attempt failed](evidence/upstream-38-camera-failure-2026-10-20.md):
+hunting and a motor reset followed by blocked further photos; shutdown was
+normal. Post-camera read-only logs identify drive-phase homing failure.
+Ordinary 3.8 installation and further camera trials are held, alongside 3.6/3.7.
+The app retains read-only backup/recovery and historical explicit CLI pins.
+See the [current Device workflow](macos-device-workflow.md) and
+[held 3.8 procedure](upstream-readiness-test.md). The dated
 [initial prototype record](evidence/macos-prototype-2026-10-10.md) preserves the
 earlier read-only milestone; current capabilities are described below.
 
@@ -85,7 +86,7 @@ Lens** (Command-S). **Revert** restores the saved values. Closing the editor or
 quitting protects unsaved edits with Save/Discard/Cancel. Invalid numeric fields
 show an explanation and disable Save. Editing and saving change the local library;
 **Apply profile** is a separate USB action on variants with a runtime profile row.
-Fixed upstream 3.1–3.6 images accept only the original unedited 50mm profile and
+Fixed upstream 3.1–3.8 images accept only the original unedited 50mm profile and
 route other selections to USB tools rather than silently changing firmware.
 
 The first launch seeds the library from the canonical

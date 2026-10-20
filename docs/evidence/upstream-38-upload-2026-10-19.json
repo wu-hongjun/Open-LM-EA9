@@ -1,6 +1,6 @@
 {
   "date": "2026-10-19",
-  "status": "strict-installation-verification-passed-camera-cycle-pending",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-further-trials-held",
   "sourceGitCommit": "114f0d7693b6d362f50c9402bd4d53623c940602",
   "appVersion": "0.21.0",
   "appBuild": 27,
@@ -53,9 +53,9 @@
   "strictByteVerificationPassed": true,
   "protectedDataReadbackVerifiedAfterUpload": true,
   "cameraAcceptancePassed": false,
-  "cameraTestPerformed": false,
+  "cameraTestPerformed": true,
   "cameraTestingHeldUntilStrictVerification": false,
-  "postCameraLogRetrievalPerformed": false,
+  "postCameraLogRetrievalPerformed": true,
   "prior36And37CameraFailureHoldsRetained": true,
   "preservation": {
     "historicalArtifactsChecked": 136,
@@ -113,5 +113,20 @@
   },
   "singleInitialMFCameraCycleRequested": true,
   "afSCameraCycleRequested": false,
-  "ownerCameraObservationReceived": false
+  "ownerCameraObservationReceived": true,
+  "furtherCameraTrialsHeld": true,
+  "controlledMFCycleConfirmed": false,
+  "cameraFailureEvidence": "upstream-38-camera-failure-2026-10-20.json",
+  "latestCameraObservationDate": "2026-10-20",
+  "postCameraSummary": {
+    "ownerReportsNormalShutdown": true,
+    "ownerReportsNoFurtherPhotosAfterMotorReset": true,
+    "exposureMode": "AUTO",
+    "actualFocusMode": null,
+    "photoFileSaved": null,
+    "diagnosticFault": "home-drive-unsettled",
+    "validDiagnosticPages": 14,
+    "allCodeAndProtectedDataUnchanged": true,
+    "readOnlyBackupFlashSHA256": "479e95c3ff4d3954d75af2afaffb6199846da016ffe9c32ea254b0344594173d"
+  }
 }

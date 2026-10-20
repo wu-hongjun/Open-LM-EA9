@@ -11,6 +11,11 @@ unachieved; the firmware is C on the pinned upstream implementation.
 [Build/test reproduction](../../firmware/upstream-hardening/next38/README.md) ·
 [Future coordinated procedure](../upstream-readiness-test.md).
 
+The separately authorized [installation](upstream-38-upload-2026-10-19.md)
+passed strict verification. Its later [camera attempt failed](upstream-38-camera-failure-2026-10-20.md)
+with drive-phase homing failure and blocked further photos; shutdown was normal.
+The offline results below do not establish a physical remedy.
+
 ## Evidence and integration decision
 
 The latest owner-confirmed 3.7 attempt saved two photos in AF, then froze and

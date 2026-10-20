@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.19.1, build 24
+# Device workflow: prototype 0.21.1, build 28
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -8,32 +8,33 @@ f-number for firmware with a runtime profile row. Upstream candidates instead
 compile the original 50mm f/1.4 profile; library edits stay local on those images.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
-**Upstream AF 3.6.0 camera testing is held after capture and shutdown failure.**
-The app shows that result and disables ordinary 3.6 installation. USB backup and
-recovery remain available. [Failure and surviving diagnostic evidence](evidence/upstream-36-camera-failure-2026-10-15.md).
-Do not repeat this image on the camera. Historical explicit CLI preparation/apply
-commands retain their pinned images for coordinated research/recovery.
+**Upstream AF 3.8 camera testing is held after hunting, a motor reset and blocked
+further photos. Shutdown was normal.** Read-only logs identify drive-phase
+homing failure; code and protected data are unchanged. The app shows that
+outcome and disables ordinary 3.8 installation, including from another version.
+Read-only backup/recovery remain available. [Failure/log evidence](evidence/upstream-38-camera-failure-2026-10-20.md).
+The 3.6/3.7 camera-failure holds also remain. Historical explicit CLI commands
+retain their pinned images for coordinated research/recovery.
 
-The latest packaged firmware is **upstream AF 3.6.0**.
-Its [authorized upload and strict verification](evidence/upstream-36-upload-2026-10-15.md)
-passed after owner-confirmed physical reconnect. The later camera trial failed;
-a read-only post-camera backup and log review followed. USB tools retain the disabled
-**Install Upstream AF 3.6.0** control as a separate
-action; changing the dropdown does not install it. The native CLI equivalents
-are `prepare-handoff-upstream` and `apply-handoff-upstream`. Other/edited profiles
-are rejected. [Build/test evidence](evidence/upstream-36-handoff-2026-10-15.md)
-and the [coordinated installation/camera procedure](upstream-handoff-test.md)
-describe the exact image and its limits.
+The latest packaged firmware is **upstream AF 3.8.0**, fixed to the original
+50mm f/1.4 profile. Its [upload and strict verification](evidence/upstream-38-upload-2026-10-19.md)
+passed after physical reconnect, before the failed camera attempt. USB tools
+retain the disabled **Install Readiness 3.8.0** control; choosing a dropdown
+profile does not install it. Native CLI commands `prepare-readiness-upstream`
+and `apply-readiness-upstream` retain their explicit pinned meaning. Other or
+edited profiles are rejected. [Offline acceptance](evidence/upstream-38-readiness-2026-10-19.md)
+and the [held camera/log procedure](upstream-readiness-test.md) distinguish the
+installation result from physical acceptance.
 
 Startup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4
 profile on October 15. [Strict verification passed](evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect, resolving that transaction before 3.6.
 Do not delete or edit a pending journal or reconnect marker.
 The historical `prepare-startup`/`apply-startup`
-commands still select 3.2. Installed 3.2–3.6 routes the main action to USB tools,
+commands still select 3.2. Installed 3.2–3.8 routes the main action to USB tools,
 labels camera compatibility unqualified and avoids ordinary profile application.
 After one coordinated camera cycle, save a read-only backup and use the offline
-decoder for evidence review. Further 3.6 camera trials remain held.
+decoder for evidence review. Further 3.6/3.7/3.8 camera trials remain held.
 Initial full-image verification includes the blank log area. Later log retrieval
 does not relax that check; ordinary image inspection still rejects changed bytes.
 
@@ -60,7 +61,7 @@ while camera capture/shutdown acceptance is failed.
 ## Choose a lens and apply supported metadata
 
 All eight lenses can be edited and prepared locally. **Apply profile** requires
-verified firmware with a runtime profile row. The upstream 3.1–3.6 candidates
+verified firmware with a runtime profile row. The upstream 3.1–3.8 candidates
 are fixed to the original 50mm f/1.4 and offer USB tools instead. They cannot
 switch to the selected lens or use an aperture override without a new firmware
 candidate. The following apply sequence is for supported runtime-profile images.

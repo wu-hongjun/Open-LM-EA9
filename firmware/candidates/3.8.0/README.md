@@ -3,10 +3,13 @@
 Prepared offline October 19, 2026. The separately authorized
 [upload and strict byte verification](../../../docs/evidence/upstream-38-upload-2026-10-19.md)
 passed after physical reconnect, including an independent full-image/protected-
-data audit. **One camera cycle and log retrieval are pending; no camera result
-is known.** This candidate repairs a reproduced protocol dead end after failed
-homing; physical homing and the A7C II capture/shutdown freeze remain unqualified.
-The prior 3.7 camera-failure hold remains in place.
+data audit. **Camera acceptance subsequently failed; further trials are held.**
+The owner reports hunting and apparent focus for one photo, then a motor reset
+and no further photos; shutdown was normal. Read-only logs identify
+`home-drive-unsettled` and no initialized AF-servo snapshot. Code/protected data
+are unchanged; physical homing and the shutter-block cause remain unresolved.
+[Camera evidence](../../../docs/evidence/upstream-38-camera-failure-2026-10-20.md).
+The prior 3.6/3.7 camera-failure holds remain in place.
 
 The operand-only optical query worker now runs before foreground polling even
 when homing has not completed. It can answer after motion inhibition, while
@@ -40,7 +43,7 @@ only the physical lens ring sets it. This is the original fixed 50mm build with
 no runtime profile row; library edits remain local. No new exposure policy is
 introduced in this milestone.
 
-App 0.21.0/build 27 includes an explicit experimental readiness action.
+App 0.21.1/build 28 marks 3.8 held and disables ordinary readiness installation.
 `prepare-readiness-upstream` prepares this exact image offline;
 `apply-readiness-upstream` remains a separately coordinated USB action. Earlier
 commands, images, pins and original stock recovery remain preserved. No
@@ -48,4 +51,4 @@ hardware action is authorized by running a build or test script.
 
 [Evidence and limits](../../../docs/evidence/upstream-38-readiness-2026-10-19.md) ·
 [Build/test prerequisites](../../upstream-hardening/next38/README.md) ·
-[Future coordinated test procedure](../../../docs/upstream-readiness-test.md)
+[Held test/log procedure](../../../docs/upstream-readiness-test.md)
