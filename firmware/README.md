@@ -1,13 +1,22 @@
 # Firmware development
 
-The latest image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
+The latest prepared image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
+**Offline only; no flash or camera qualification.** It removes an unused blocking
+release ADC dependency and records failed-home phase/timing/work observations
+and later consumed non-Stop requests. The physical homing and shutter-block
+causes remain unresolved. Safety guards and capture re-arm policy remain intact.
+See [integrated evidence](../docs/evidence/upstream-39-homing-2026-10-20.md),
+[reproduction](upstream-hardening/next39/README.md) and the
+[separate test procedure](../docs/upstream-homing-test.md).
+
+The currently installed image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
 Its [upload and strict reconnect verification](../docs/evidence/upstream-38-upload-2026-10-19.md)
 passed. **Camera acceptance failed; further 3.8 trials are held.** Hunting and a
 motor reset were followed by blocked further photos; the owner reports normal
 shutdown. The [read-only camera evidence](../docs/evidence/upstream-38-camera-failure-2026-10-20.md)
 identifies drive-phase homing failure 17 and an uninitialized servo snapshot.
 Code, protected data and all image pins remain unchanged. The physical homing
-cause and shutter-block cause are unresolved. App 0.21.1/build 28 adds the 3.8 hold,
+cause and shutter-block cause are unresolved. App 0.22.0/build 29 retains the 3.8 hold,
 retains earlier holds and preserves backup/recovery access and explicit CLI pins.
 
 The 3.8 source repairs reproduced operand-query starvation after homing failure
@@ -151,7 +160,7 @@ Dependency versions, official source URLs and digests are pinned in
 `dependencies.json`. The local cache is ignored. The packaged Mac app includes
 pinned released templates and separate fixed upstream candidates. The earlier
 custom templates personalize only a reserved profile row; a custom template with
-its zeroed row is intentionally invalid. Upstream 3.1–3.8 images have no runtime
+its zeroed row is intentionally invalid. Upstream 3.1–3.9 images have no runtime
 profile row and reject edited profiles.
 
 Changes from the reference:

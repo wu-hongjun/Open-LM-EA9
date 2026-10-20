@@ -1,0 +1,66 @@
+--- frozen38/src/emount.h
++++ homing39/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x38u
++#define EM_FW_VERSION_BCD   0x39u
+--- frozen38/src/main.c
++++ homing39/src/main.c
+@@ -531,0 +532 @@
++#ifndef EA9_NO_LOG
+@@ -532,0 +534 @@
++#endif
+@@ -567,0 +570,4 @@
++    /* Count requests consumed after a recorded home fault, not motor starts. */
++    uint8_t *home = (uint8_t *)(void *)(st_motion_data() + 112);
++    if (motor_is_inhibited() && home[0] == 0x39 && home[3] != 255)
++        ++home[3];
+@@ -631 +637,4 @@
+-	uint16_t idle_lo, idle_hi, load_lo, load_hi;
++	uint16_t idle_lo, idle_hi;
++#ifndef EA9_NO_LOG
++	uint16_t load_lo, load_hi;
++#endif
+@@ -638,0 +648 @@
++	uint32_t loop_ms, iteration_ms;
+@@ -648,0 +659 @@
++#ifndef EA9_NO_LOG
+@@ -649,0 +661 @@
++#endif
+@@ -655,0 +668 @@
++	iteration_ms = t0;
+@@ -657 +670,2 @@
+-	while ((uint32_t)(millis() - t0) < HOME_MS) {
++	while ((uint32_t)((loop_ms = millis()) - t0) < HOME_MS) {
++		iteration_ms = loop_ms;
+@@ -695,0 +710 @@
++#ifndef EA9_NO_LOG
+@@ -696,0 +712 @@
++#endif
+@@ -699,0 +716 @@
++	iteration_ms = t0;
+@@ -701 +718,2 @@
+-	while ((uint32_t)(millis() - t0) < HOME_SETTLE_MS) {
++	while ((uint32_t)((loop_ms = millis()) - t0) < HOME_SETTLE_MS) {
++		iteration_ms = loop_ms;
+@@ -784,0 +803,17 @@
++	/* motor_inhibit has already detached the drive pins. Record only values
++	 * used by homing; no new encoder/ADC read and no live-drive timestamp. */
++	{
++		/* The backing member is a byte array; GNU may_alias permits word
++		 * stores without violating its declared effective type. */
++		typedef uint32_t home_word __attribute__((may_alias));
++		home_word *home = (home_word *)(void *)(st_motion_data() + 112u);
++		home[1] = t0;
++		home[2] = millis();
++		home[3] = (uint32_t)before;
++		home[4] = (uint32_t)still.at;
++		home[5] = still.t;
++		home[6] = polls;
++		home[7] = iteration_ms;
++		/* 0x39 tag, phase, flags bit0=drive qualified, suppressed count=0. */
++		home[0] = 0x39u | ((uint32_t)failure << 8) | ((uint32_t)drive_ok << 16);
++	}
+@@ -1654,0 +1690 @@
++#ifndef EA9_NO_LOG
+@@ -1656,0 +1693 @@
++#endif

@@ -1,0 +1,25 @@
+{
+  "sourcePinsVerifiedBeforeAndAfter": 49,
+  "measurement": [
+    {
+      "variant": "baseline",
+      "end": 39600,
+      "margin": 336,
+      "staticRAMBytes": 3044,
+      "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+      "mainSHA256": "e2174bc47f5f056b0111b1c9d97912497330ea1da7cdce7b0a3669e28e35c771"
+    },
+    {
+      "variant": "observation",
+      "end": 39684,
+      "margin": 252,
+      "staticRAMBytes": 3044,
+      "imageSHA256": "748b53695b20e69c8bbb66ab2feb44958d7099de10d37346617e2ad365f1dc69",
+      "mainSHA256": "484756cdd760a9b7317cae6b7dda632abd03793df889557248e8e329e6d31ebc"
+    }
+  ],
+  "inputs": {
+    "apply.py": "40ed520f66f9b528375bb257bc6a3a79c65f98f526b06a93e5fe6da2eecc7d4a",
+    "measure.py": "0bba4b39f985188be946a7acbcc48a9a257ec58b2c32823c79358a23470f1a50"
+  }
+}

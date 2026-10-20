@@ -1,0 +1,225 @@
+{
+  "status": "passed-conditional-final39-composition-bound",
+  "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "sourceHashesVerified": 49,
+  "compilerFramesVerified": 149,
+  "functionCount": 148,
+  "callSiteCount": 504,
+  "indirectCallSites": 12,
+  "unresolvedCompiledEdges": [],
+  "unboundedCompiledFrames": [],
+  "recursiveComponents": [],
+  "roots": {
+    "Reset_Handler": {
+      "bytes": 1116,
+      "chain": [
+        "Reset_Handler",
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "main": {
+      "bytes": 1100,
+      "chain": [
+        "main",
+        "focus_exec",
+        "focus_run.isra.0",
+        "servo_move_from",
+        "pump",
+        "em_poll",
+        "em_pump_status",
+        "em_transmit",
+        "delay_us",
+        "st_fail",
+        "st_flush",
+        "append",
+        "st_write_page"
+      ]
+    },
+    "EIC_Handler": {
+      "bytes": 168,
+      "chain": [
+        "EIC_Handler",
+        "on_cs_edge",
+        "em_trace_owner",
+        "em_trace",
+        "st_record",
+        "inc"
+      ]
+    },
+    "SERCOM1_Handler": {
+      "bytes": 32,
+      "chain": [
+        "SERCOM1_Handler",
+        "st_inhibit_fault",
+        "st_lock"
+      ]
+    },
+    "SysTick_Handler": {
+      "bytes": 0,
+      "chain": [
+        "SysTick_Handler"
+      ]
+    },
+    "Dummy_Handler": {
+      "bytes": 0,
+      "chain": [
+        "Dummy_Handler"
+      ]
+    }
+  },
+  "maximumDefaultPriorityBytes": 1388,
+  "maximumThreeActiveIRQBytes": 1424,
+  "maximumAllVectorPriorityBytes": 1532,
+  "budgetBytes": 8192,
+  "reservedStackBytes": 8192,
+  "staticRAMBytes": 3040,
+  "stackStart": "0x20000be0",
+  "stackTop": "0x20002be0",
+  "unknowns": [
+    "Application thread frames require privileged thread mode, CONTROL=0 (MSP), PRIMASK=0 and no active exception on the ordinary reset path. Boot may already select application VTOR before Reset_Handler; packet reconstruction after BSS clear requires inherited IRQ quiescence. Audit37 finite startup fixtures are not physical or asynchronously scheduled entry.",
+    "Boot preserves priorities and non-reset interrupt state, enables NVMCTRL IRQ5 while reset peripheral INTEN remains zero, and runs SysTick with TICKINT clear. App enables UART/SysTick without setting their priorities and sets EIC priority 1; arbitrary inherited pending/active state and vector-transition exception delivery remain unverified.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "stackHighWaterMeasured": false,
+  "normalizedCompiledOutputSHA256": {
+    "-d": "369bbe17ac4c2df945bf69354afa5a0fa5b051f1503f2039474ee6a7c0c81dd3",
+    "-t": "8c9513ae6f68c1ccfc60dd8821adce7522c3d18d4adf1ba673816b9e2543cce9",
+    "-p": "25008b5e7435ca7aeadf7584e6c4fe56eb1470170c234a8191f233a530032999"
+  },
+  "onlyContainerPinsRebound": {
+    "hardened.elf": {
+      "reviewed": "8132862ffb887dc8eeac01d6d5b3e06e15a8d04e7864fcdc0564434402ef4c07",
+      "reproduced": "7e764827578a2a7e26cdaaad06aeafdd753f7ec0913342551a9ab0abae50dc59"
+    },
+    "hardened.map": {
+      "reviewed": "fada0c090e8f34234a2751eea4a02ebd2cd55b4882e2e09c80f9ce5b18538f1d",
+      "reproduced": "38a119d6081c5dfaa0223d35ea4b6b63cc077bbca82222a15c4d09a45e3574c4"
+    }
+  },
+  "exactApplicatorCompositionMatches": true,
+  "productionSourceDelta": [
+    "src/emount.h",
+    "src/main.c"
+  ],
+  "vectors": {
+    "wordsVerified": 45,
+    "initialMSP": "0x20002be0",
+    "NVMCTRL": "Dummy_Handler"
+  },
+  "sourceGates": {
+    "ordinaryTraceNVM": false,
+    "nestedPRIMASKRestored": true,
+    "shutdownInhibitBeforeAdmission": true,
+    "callbackContext": "No opaque ctx/handle ABI. cfg points to STOCK or scalar-modified local copies; focus callbacks use existing globals."
+  },
+  "unchangedIRQSetupAndHandoff": true,
+  "handoffPaths": [
+    [
+      "em_eic_init",
+      "em_uart_rx_reset",
+      "em_eic_start"
+    ],
+    [
+      "em_eic_init",
+      "em_uart_rx_reset",
+      "em_eic_start"
+    ],
+    [
+      "em_eic_init",
+      "on_cs_edge",
+      "em_eic_start"
+    ]
+  ],
+  "failedHomeCompiledStoresAfterCutoff": true,
+  "releaseADCCodeDiscarded": true,
+  "unchangedTerminalAndWaitInstructionOperations": true,
+  "reviewedLibraryStackOperationsUnchanged": true,
+  "compiledNVMCallerGates": {
+    "st_flush": [
+      "powerdown_signal",
+      "st_fail"
+    ],
+    "st_terminal": [
+      "powerdown_signal",
+      "st_fail"
+    ],
+    "append": [
+      "st_flush",
+      "st_terminal"
+    ],
+    "st_write_page": [
+      "append"
+    ],
+    "st_read_page": [
+      "append",
+      "st_init"
+    ]
+  },
+  "negativeControls": [
+    {
+      "case": "unknown-indirect",
+      "rejected": true,
+      "reason": "unknown indirect call: servo_move_from@74a8"
+    },
+    {
+      "case": "unknown-library",
+      "rejected": true,
+      "reason": "unknown library frame: memcpy"
+    },
+    {
+      "case": "recursive-callback",
+      "rejected": true,
+      "reason": "recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_from -> servo_move_from"
+    },
+    {
+      "case": "wrong-image-pin",
+      "rejected": true,
+      "reason": "pin mismatch: contax-zeiss-50-f1-4.bin"
+    }
+  ],
+  "baseAnalyzerSHA256": "ff226db7c6c1aee09ba8d7bcde05c948f56ff082754334fe9b111a5b44e7ab72",
+  "adaptedAnalyzerSHA256": "6bd0b3cd7932298b95d62facb23f4f8ae512190ba503cc162efb4ba6637d7766",
+  "auditRunnerSHA256": "56ab7f5c5607ab54d42aea9c805bbda825f25657cd654de07a2cd9d946223587",
+  "reviewedPolicySHA256": "701af71a2b1733363a1c982ce6b9bd4b85af4489ea90ebb416a56ef254c40cf6",
+  "reproductionContractSHA256": "035a6132b32458933ee4b360ac0f20ca9fd7b2a9d115efded1885fd363262583",
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "externalNegativeControls": [
+    {
+      "case": "graph-policy-mutation",
+      "rejected": true,
+      "reason": "Only ELF/map container pins may differ"
+    },
+    {
+      "case": "compiled-main-instruction-mutation",
+      "rejected": true,
+      "reason": "Reviewed compiled output differs"
+    },
+    {
+      "case": "optimized-python",
+      "rejected": true,
+      "reason": "Optimized Python disables required audit assertions"
+    }
+  ],
+  "privateResultPins": {
+    "astra47-compiled39-final.json": "9a83a43e464d60fd3adc92ed78fbda0f506f475a1b3ae5dff713295a2acf546d",
+    "astra47-compiled39-repeat.json": "48c138398595e0f0c6b6c4c9b99fc6b01b6863bb00a2631d8dc36f699abbbc16",
+    "astra47-compiled39-controls/results.json": "342a886d183acb8938dd18b6fe47b9a62a66c6f40a843392f6441caae7dc2360"
+  },
+  "codeAndDataEnd": 39304,
+  "codeMarginBeforeDiagnostics": 632,
+  "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a"
+}

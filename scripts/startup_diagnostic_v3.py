@@ -34,10 +34,10 @@ def u32(p, offset):
 def decode_pages(data, version='3.7.0'):
     if len(data) != 1024:
         raise ValueError('Expected exactly 1024 diagnostic bytes.')
-    if version not in ('3.7.0', '3.8.0'):
+    if version not in ('3.7.0', '3.8.0', '3.9.0'):
         raise ValueError('Unsupported targeted-trace version.')
-    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version == '3.8.0' else FAULTS
-    maximum_fault = 19 if version == '3.8.0' else 16
+    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version in ('3.8.0', '3.9.0') else FAULTS
+    maximum_fault = 19 if version in ('3.8.0', '3.9.0') else 16
     pages = []
     for slot in range(16):
         p = data[64*slot:64*(slot+1)]
@@ -191,7 +191,7 @@ def decode_pages(data, version='3.7.0'):
             and all(intact(start+1+i, 'motion') for i in range(3)))
         if s['motionSnapshotComplete']:
             raw = b''.join(bytes.fromhex(pages[start+1+i]['motionChunkHex']) for i in range(3))
-            s['motion'] = decode_motion(raw)
+            s['motion'] = decode_motion(raw, version=version)
             if s['motion']['writerIssues']:
                 origin['semanticIssues'].append('motion-payload-inconsistent-with-writer')
                 s['motionSnapshotComplete'] = False
@@ -250,11 +250,15 @@ def decode_pages(data, version='3.7.0'):
         'installationVerificationPerformed': False, 'cameraAcceptanceProven': False, 'pages': pages}
 
 
-def decode_motion(raw):
+def decode_motion(raw, version='3.7.0'):
     """Decode the pinned main-context motion structure; no physical inference."""
     assert len(raw) == 144
+    if version not in ('3.7.0', '3.8.0', '3.9.0'):
+        raise ValueError('Unsupported motion-trace version.')
     if not any(raw):
         return {'valid': False, 'meaning': 'No servo move snapshot initialized; does not exclude motion outside this path.', 'writerIssues': []}
+    if version == '3.9.0' and any(raw[112:]):
+        return decode_failed_home(raw)
     i32 = lambda at: struct.unpack_from('<i', raw, at)[0]
     i16 = lambda at: struct.unpack_from('<h', raw, at)[0]
     direction = struct.unpack_from('<b', raw, 40)[0]
@@ -302,3 +306,46 @@ def decode_motion(raw):
         'completionDisposition': completions.get(raw[54], f'unknown-{raw[54]}'),
         'lastSampleMS': u32(raw, 56), 'acceptedSampleMS': u32(raw, 60), 'writerIssues': issues,
         'meaning': 'Encoder coordinates and requested drive values from existing software reads; not physical displacement, polarity calibration, wire completion or optical focus.'}
+
+
+def decode_failed_home(raw):
+    """3.9-only reserved tail, written after inhibition; not a servo snapshot."""
+    issues = []
+    phase, flags, count = raw[113:116]
+    if raw[112] != 0x39 or phase not in HOME_PHASE_FAULTS or flags & ~1:
+        issues.append('invalid-failed-home-header')
+    if (phase == 17 and flags & 1) or (phase == 18 and not flags & 1):
+        issues.append('failed-home-phase-disagrees-with-drive-qualification')
+    polls = u32(raw, 136)
+    if (phase == 19 and polls != 1000000) or (phase in (17, 18) and polls >= 1000000):
+        issues.append('failed-home-phase-disagrees-with-poll-budget')
+    # The pinned foreground can enter servo only after successful homing, and
+    # cannot home again afterward. A failed-home tail cannot coexist with it.
+    if any(raw[:112]):
+        issues.append('failed-home-tail-with-servo-data')
+    signed = lambda at: struct.unpack_from('<i', raw, at)[0]
+    start, end, threshold_ms, iteration = (u32(raw, at) for at in (116, 120, 132, 140))
+    return {'valid': False, 'writerIssues': issues, 'homeDiagnostic': {
+        'tag': raw[112], 'phaseID': phase,
+        'phase': HOME_PHASE_FAULTS.get(phase, f'unknown-{phase}'),
+        'driveQualified': bool(flags & 1),
+        'consumedNonStopRequestsSaturating': count,
+        'requestCountIsLowerBound': count == 255,
+        'phaseStartMS': start, 'afterInhibitReleaseMS': end,
+        'initialPosition': signed(124),
+        'stillnessAnchorPosition': signed(128),
+        'stillnessAnchorMS': threshold_ms,
+        'sharedPollCount': polls,
+        'lastEnteredIterationStartMS': iteration,
+        'phaseElapsedTicksModulo32': (end-start) & 0xffffffff,
+        'lastIterationToCutoffTicksModulo32': (end-iteration) & 0xffffffff,
+        'meaning': ('Existing homing observations, sealed after motor inhibition. '
+            'The stillness anchor is the initial or last threshold-crossing observation, '
+            'not a final encoder read; positions are software coordinates. '
+            'The last iteration interval includes pump and checks, not UART alone. '
+            'Ticks can wrap or be lost; no physical duration or displacement is established. '
+            'Count covers consumed non-Stop requests while inhibited after this tagged fault, '
+            'not arrivals, retries, motor executions or camera shutter attempts; Stop is excluded. '
+            'Zero does not exclude earlier, unconsumed or unpersisted requests. '
+            'The record may span protocol sessions; it does not identify a shutter request.')},
+        'meaning': 'No servo snapshot initialized; failed-home observations do not establish the physical fault or camera acceptance.'}

@@ -1,0 +1,147 @@
+{
+  "status": "prepared-offline-af39-camera-unqualified",
+  "date": "2026-10-20",
+  "startingCommit": "0acf87e68cbd40fe3566b48ba795d402c66684c6",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "baseVersion": "3.8.0",
+  "version": "3.9.0",
+  "fixedProfile": "Original unedited Contax Zeiss 50mm f/1.4",
+  "runtimeLensProfilesSupported": false,
+  "actualApertureKnown": false,
+  "lensID": 234,
+  "nominalApertureAV": 4352,
+  "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+  "patchSHA256": "578e331d5c2894af29f9b70e11e7c469f4ed5305ca6231919794ed3c83d29da8",
+  "imageBytes": 20480,
+  "codeAndDataEnd": 39304,
+  "codeMarginBeforeDiagnostics": 632,
+  "minimumCodeMargin": 256,
+  "diagnosticRange": [
+    39936,
+    40960
+  ],
+  "diagnosticBytes": 1024,
+  "staticRAMBytes": 3040,
+  "reservedStackBytes": 8192,
+  "conditionalCompiledStackBytes": 1532,
+  "sourceFilesVerified": 49,
+  "sourceDeltaFrom38": [
+    "src/emount.h",
+    "src/main.c"
+  ],
+  "freshBuildImageManifestRawPatchEqual": true,
+  "acceptedLanes": [
+    45,
+    46,
+    48
+  ],
+  "reviewedButExcluded": [
+    "Lane47 full-domain unsigned stillness arithmetic; unnecessary extra production change"
+  ],
+  "productionChanges": [
+    "Omit unused release ADC init/stage/sample/reset/result while preserving full legacy logging behavior",
+    "Record failed-home phase/ticks/existing positions/shared polls after inhibition in32 reserved RAM bytes",
+    "Count consumed non-Stop requests after tagged failure with saturation"
+  ],
+  "unchangedPolicies": [
+    "Reference readiness and sticky motor inhibition",
+    "Drive/settle deadline rechecks, work budget, duty, threshold, retry rules",
+    "Upstream C servo, optical maps, encoder and motor driver",
+    "Capture raw-readiness silent/re-arm policy and shutdown module",
+    "Aperture policy and fixed50mm nominal metadata"
+  ],
+  "astraLanes": [
+    "astra42_home_readiness_fix continued as45",
+    "astra43_capture_status_fix continued as46",
+    "astra44_shutdown_fix continued as47"
+  ],
+  "factoryFindings": {
+    "originalInstructionCases": 24,
+    "rejectedInterpretations": 6,
+    "sensorSetupHoldDifferenceObserved": true,
+    "sensorTimingViolationProven": false,
+    "ordinaryHomeGateEnablerResolved": false,
+    "savedReferenceProvesPhysicalOrigin": false
+  },
+  "softwareDependencyRepairVerified": true,
+  "physicalHomeFaultCauseProven": false,
+  "physicalHomingFailureFixed": false,
+  "shutterBlockFixEstablished": false,
+  "cameraQualified": false,
+  "factoryParityEstablished": false,
+  "firmwareUploaded": false,
+  "tests": {
+    "finalAcceptanceSuites": 33,
+    "finalAcceptanceStatus": "passed-final39-offline-acceptance-camera-unqualified",
+    "compiledAuditSkipped": false,
+    "homeExecutions": 42,
+    "homePositiveCases": 34,
+    "homeNegativeControls": 8,
+    "shutterFrozenContracts": 6,
+    "shutterFrozenMissingCounterRejected": true,
+    "shutterCandidateCases": 10,
+    "shutterMutantsRejected": 7,
+    "adcExecutions": 12,
+    "adcExpectedPasses": 6,
+    "adcExpectedFailures": 6,
+    "decoderHomingChecks": 307,
+    "compiledInternalNegativeControls": 4,
+    "compiledExternalNegativeControls": 3,
+    "swiftNamedTests": 53,
+    "swiftFirmwareVariants": 20,
+    "nativeUpstreamPrepareRoutes": 9,
+    "nativePrepareNegativeControls": [
+      "wrong-lens",
+      "overwrite"
+    ]
+  },
+  "app": {
+    "version": "0.22.0",
+    "build": "29",
+    "appExecutableSHA256": "60988ca2779ed6ebd885d761948d4e1b99436227619e3523141442805dbb3376",
+    "cliSHA256": "4dca65de7efce2ad9689927e585a0143d69306a321bf083b812adcba83e04145",
+    "signatureVerification": "passed",
+    "appLaunched": false
+  },
+  "historicalArtifactsPreserved": 141,
+  "historicalRegistryEntriesUnchanged": true,
+  "originalStockRecoveryPreserved": true,
+  "hardwareEnumerationPerformed": false,
+  "hardwareReportsSent": 0,
+  "motorCommandsSent": 0,
+  "updaterLaunched": false,
+  "appLaunched": false,
+  "canonicalApplicationSupportAccess": false,
+  "privateDataPublished": false,
+  "knownLimits": [
+    "Physical drive-phase homing and camera shutter-block causes remain unresolved",
+    "No measured electrical timing, optical focus, physical stack high-water or camera acceptance",
+    "3.8 normal shutdown is independent of missing terminal footer; actual focus mode/file-save remain unknown",
+    "Synthetic boundary schedules are not measured motor/peripheral/IRQ cadence"
+  ],
+  "discoveryNotes": [
+    "Historical clock/RX/depth coupling to ADC stubs corrected only in pinned private fixture adapters",
+    "Independent review closed exact poll-budget and initial-or-threshold anchor interpretation gaps",
+    "Final acceptance suppresses historical duplicate public receipt writes and rechecks image/manifest/shim/published copies at both boundaries"
+  ],
+  "nextStep": "Separate guarded upload, owner-confirmed physical reconnect, strict complete-image/protected-data verification, one coordinated camera cycle and read-only log review",
+  "receipts": {
+    "firmware/upstream-hardening/next39/acceptance-results.json": "eae1f9b2cd781970e8ce7ddc543192928594a30991bbb5e7c50db2b1bd629f30",
+    "firmware/upstream-hardening/next39/compiled-results.json": "e61bd845fa189796778d6de870f66e2f99a8d2628109efdd038d57f376729fff",
+    "docs/evidence/upstream-39-host-2026-10-20.json": "f8129f205668b95015f250eee442856c51c4f5c0ea57ff8ab37dd8a29e54a1ff",
+    "docs/evidence/upstream-39-preserved-2026-10-20.json": "a75bf06d6487a18b52977d54a6689dc508ef5299e4c06385f53ea649981231a1",
+    "firmware/upstream-hardening/followup/45-home-drive/isolated-results.json": "2196b4e8b58d6b36f2440801d8b4d1d69ee5d04e620510aa727d60a96b83cbd5",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/results.json": "74c508820b724173c4e5a575e3eeb897ff01f1429e790095747d35022adf48d7",
+    "firmware/upstream-hardening/followup/47-factory-origin/factory-results.json": "21d0f436fe99fb9afff59dee51379d8123f6dc63bedacbedafe4a07538b2804f",
+    "firmware/upstream-hardening/followup/48-release-adc/results.json": "ac3cd44a24424a7e544ef89a0b305c71bef1e35844b412652b445cfc116773f9"
+  },
+  "privateReceiptSHA256": {
+    "artifacts/private/final39-acceptance/result.json": "eae1f9b2cd781970e8ce7ddc543192928594a30991bbb5e7c50db2b1bd629f30",
+    "artifacts/private/final39-acceptance/astra45-home/result.json": "d46bbdb7309e7057dce740df66314851748d5eb8bb817f4c1a39c0060fc35ce3",
+    "artifacts/private/final39-acceptance/astra46-readiness/results.json": "9d68f4873973754611e21c661d2049dbbfb4bf0cf55891775e2d1de2e6ae6e3c",
+    "artifacts/private/final39-acceptance/release-adc/result.json": "ac3cd44a24424a7e544ef89a0b305c71bef1e35844b412652b445cfc116773f9",
+    "artifacts/private/final39-acceptance/decoder-homing.json": "917e8f31b5568edf276076da6523890c4a1c05e546e833ebab6366add891eff6",
+    "artifacts/private/final39-acceptance/compiled-composition.json": "48c138398595e0f0c6b6c4c9b99fc6b01b6863bb00a2631d8dc36f699abbbc16"
+  }
+}

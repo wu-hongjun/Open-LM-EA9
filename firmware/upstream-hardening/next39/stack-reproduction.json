@@ -1,0 +1,9 @@
+{
+  "reviewedPolicySHA256": "701af71a2b1733363a1c982ce6b9bd4b85af4489ea90ebb416a56ef254c40cf6",
+  "objdumpSHA256": "971eb15db5b2110383b75dc3b8953115c0c11f6cd2ce7f651b0efb44e9aedcf6",
+  "normalizedOutputSHA256": {
+    "-d": "369bbe17ac4c2df945bf69354afa5a0fa5b051f1503f2039474ee6a7c0c81dd3",
+    "-t": "8c9513ae6f68c1ccfc60dd8821adce7522c3d18d4adf1ba673816b9e2543cce9",
+    "-p": "25008b5e7435ca7aeadf7584e6c4fe56eb1470170c234a8191f233a530032999"
+  }
+}

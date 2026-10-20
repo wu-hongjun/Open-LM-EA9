@@ -247,6 +247,8 @@ struct DeviceToolsView: View {
                             Button("Install Targeted Trace 3.7.0", action: model.installTargetedTrace).disabled(!model.canInstallTargetedTrace)
                             Text("Readiness 3.8.0 is held after hunting and a motor reset followed by blocked further photos. Shutdown was normal; the logs identify a drive-phase homing failure. Do not repeat camera testing with this image.").font(.callout)
                             Button("Install Readiness 3.8.0", action: model.installReadiness).disabled(!model.canInstallReadiness)
+                            Text("Homing Diagnostic 3.9.0 removes an unused ADC dependency and records failed homing and subsequent consumed focus requests. It remains camera-unqualified; a physical homing or shutter fix is unproven. Fixed 50mm f/1.4 build.").font(.callout)
+                            Button("Install Homing Diagnostic 3.9.0", action: model.installHomingDiagnostic).disabled(!model.canInstallHomingDiagnostic)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

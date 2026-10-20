@@ -1,0 +1,184 @@
+{
+  "status": "passed-final39-offline-acceptance-camera-unqualified",
+  "compiledAuditSkipped": false,
+  "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+  "sourceFilesVerified": 49,
+  "checks": [
+    {
+      "name": "coordinate",
+      "exitCode": 0
+    },
+    {
+      "name": "query-ownership",
+      "exitCode": 0
+    },
+    {
+      "name": "query-flow",
+      "exitCode": 0
+    },
+    {
+      "name": "absolute-target",
+      "exitCode": 0
+    },
+    {
+      "name": "time-contract",
+      "exitCode": 0
+    },
+    {
+      "name": "target-time-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "exact-counter-parity",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-commits",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-session",
+      "exitCode": 0
+    },
+    {
+      "name": "home-inhibit",
+      "exitCode": 0
+    },
+    {
+      "name": "query-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "motion-tracing",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-retention",
+      "exitCode": 0
+    },
+    {
+      "name": "startup-handoff",
+      "exitCode": 0
+    },
+    {
+      "name": "home-drive",
+      "exitCode": 0
+    },
+    {
+      "name": "shutter-readiness",
+      "exitCode": 0
+    },
+    {
+      "name": "release-adc",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-status",
+      "exitCode": 0
+    },
+    {
+      "name": "shutdown-liveness",
+      "exitCode": 0
+    },
+    {
+      "name": "factory-capture-rearm",
+      "exitCode": 0
+    },
+    {
+      "name": "trace-core",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-compaction",
+      "exitCode": 0
+    },
+    {
+      "name": "packet-reset",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-writer",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-v3",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-adversarial",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-phase",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-homing",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry39",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry38",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry37",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-legacy",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-composition",
+      "exitCode": 0
+    }
+  ],
+  "preservedArtifacts": 141,
+  "historicalRegistryEntriesUnchanged": true,
+  "testInputSHA256": {
+    "scripts/test-upstream-homing.py": "2605a1bd51fdfa5e5ee5c08e5a6a7e7c8a513a4a752f52bb15211d74e2244efe",
+    "firmware/upstream-hardening/next39/accepted-lanes.json": "d65580746206836a28e990770f5742b6a478a60dd7b354b26207f1aaddc54271",
+    "firmware/upstream-hardening/next39/test-inputs.json": "de69cf00c804df3a714983248da8ad43ebcf6c2a428721f11680e46d60246040",
+    "firmware/upstream-hardening/next39/contract-fixtures.json": "2a672ed56c534f86e3790b40e7e42d6f7c21472c31d675d326e0181af7a2d7b7",
+    "firmware/upstream-hardening/next39/compiled-policy.json": "701af71a2b1733363a1c982ce6b9bd4b85af4489ea90ebb416a56ef254c40cf6",
+    "firmware/upstream-hardening/next39/stack-reproduction.json": "035a6132b32458933ee4b360ac0f20ca9fd7b2a9d115efded1885fd363262583",
+    "firmware/upstream-hardening/next39/compiler_compat.py": "d9254117d66a57b2f6fd07095caed986084fb585e36221869f5368acbb75a4c7",
+    "firmware/upstream-hardening/next39/contract_adapters.py": "0282820c098e28be9ec473213c4268e0afd99544af48e2b2406a4acc5523128a",
+    "firmware/upstream-hardening/next39/replay.py": "78d8c57735e2234198664c074dd0579a9ca5e7aa67b3a2ff08526d225abc05eb",
+    "firmware/upstream-hardening/next39/test_homing_decoder.py": "76f62ff714c7435749b7517acd5e6f53b8b13cdf22f1f114bc4ba87a0d1c23dc",
+    "firmware/upstream-hardening/next39/compiled_audit.py": "56ab7f5c5607ab54d42aea9c805bbda825f25657cd654de07a2cd9d946223587",
+    "firmware/upstream-hardening/next39/packet_test_init.c": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9",
+    "firmware/upstream-hardening/next39/trace_compat.c": "573b3f6b4509c8a1a6fea668d1b121134d08b7e54f15016be3d8af0f51121487",
+    "firmware/upstream-hardening/followup/45-home-drive/measure.py": "0bba4b39f985188be946a7acbcc48a9a257ec58b2c32823c79358a23470f1a50",
+    "firmware/upstream-hardening/followup/45-home-drive/run.py": "193f6c7e2e6146db20c2c9efba88a6ed9004e6f42d707b06286cfc69c0ee1861",
+    "firmware/upstream-hardening/followup/45-home-drive/test_home.c": "c178e6fcee7fb57314ca9386791dcea4a2c45a1909e6cf9d334d02f9aa158d56",
+    "firmware/upstream-hardening/followup/45-home-drive/apply.py": "40ed520f66f9b528375bb257bc6a3a79c65f98f526b06a93e5fe6da2eecc7d4a",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/measure.py": "da11c272e33d22e527c8cbba92925685c53575316eb6c32b4f310ae68d967026",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/run.py": "8ec3dfd3352b6f6e02ece6f48d9ce31c299737c59b24af132890e4034d1fc1a8",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/test_shutter.c": "e7335631a24e6954a9be60e33339e8c191f66962c4789f00bdac87cf2bfe1537",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/apply.py": "b43c9f3b33ed21f9094a717b244cb02ce0164e9630152bfec1bc8095e3667401",
+    "firmware/upstream-hardening/followup/48-release-adc/run.py": "2b2f8df89465aca7804ac63cb7141ef886899bcb04982d527473e012ec7c8428",
+    "firmware/upstream-hardening/followup/48-release-adc/test_adc.c": "97ab221c60fbee3fed748c543cf663e12bf9ff160764b625095912285adb6086",
+    "firmware/upstream-hardening/followup/48-release-adc/apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1",
+    "firmware/upstream-hardening/followup/43-capture-status/run.py": "9ef70637ac8c64fdc6231165051bd400fe125ddb3eecc41db90a7ff0b0e73b38",
+    "firmware/upstream-hardening/followup/43-capture-status/factory_replay.py": "127dd4256ea316091d432e98272d162e4629d305cbab2721ee11b4bc31b63a31",
+    "firmware/upstream-hardening/followup/43-capture-status/test_replay.c": "a8506b9d0666a1a3e71fd5f72b15d65a155804183ce7037d33ba4d8019dbc6ad",
+    "firmware/upstream-hardening/followup/43-capture-status/review_compiled.py": "0a93098ebb449eead9c489c965ce55ef3320457af4e29d6f8d665def75f7c07c",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/test_capture.c": "912f4f9c5633bf631f433e03f1c12dda6e7ea8c2afe9aa60fb9a1f7d4e75742e",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/run.py": "e0269e6ed001b833dc2e717b375f2708333e4371b183b8335bfdb96fc06ce009",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/test_waits.inc": "a3eb22f2ef8086583e80b94d4366628d22c882633fb7630eb1a335a295c021fc",
+    "scripts/decode-startup-diagnostics.py": "86357d857408608bb6e6a24cf568d0f67207ddf42109861f58af7d5a88ce5586",
+    "scripts/startup_diagnostic_registry.py": "5b78b164cac21e86ffb8578d716db98c46c73454ef8052daacb0662780205119",
+    "scripts/startup_diagnostic_v3.py": "807dcff78a9c02d438b63974be6a413f581fb86e1cd3ac069b39603304d6a169"
+  },
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "physicalHomingFailureFixed": false,
+  "cameraFreezeFixEstablished": false,
+  "limits": "Supplied I/O and schedules; no measured motor/IRQ/NVM timing, focus accuracy or camera capture/shutdown acceptance."
+}

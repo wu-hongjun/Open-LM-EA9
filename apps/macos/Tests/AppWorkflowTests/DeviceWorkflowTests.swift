@@ -375,4 +375,23 @@ private actor DiscoveryFixture {
     #expect(model.firmwareBehaviorNote.contains("drive-phase") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    // A held historical image stays held while the new explicit route is available.
+    #expect(model.canInstallHomingDiagnostic && !model.canInstallReadiness)
+    model.idleAcknowledged = false
+    #expect(!model.canInstallHomingDiagnostic)
+    model.idleAcknowledged = true
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(!model.canInstallHomingDiagnostic)
+    model.chooseDeviceLens(profile.id)
+    let homing = try ApplicationImage.personalized(profile, variant: .autofocusHomingDiagnostic)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(homing.setting), firmwareVersion: "3.9.0", imageSHA256: digest(homing.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.9.0"))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallHomingDiagnostic)
+    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "Homing diagnostic candidate")
+    #expect(model.workflowDetail.contains("unqualified") && model.workflowDetail.contains("unproven"))
+    #expect(model.firmwareBehaviorNote.contains("unused ADC dependency") && model.firmwareBehaviorNote.contains("unproven"))
+    #expect(!model.canInstallReadiness && !model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
+    #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 }

@@ -1,0 +1,925 @@
+{
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "diagnosticRange": [
+    39936,
+    40960
+  ],
+  "diagnosticPageBytes": 64,
+  "diagnosticPages": 16,
+  "diagnosticFormatVersion": 3,
+  "diagnosticEventRetention": "latest-32-focused",
+  "diagnosticMotionBytes": 144,
+  "diagnosticTerminalReservePages": 4,
+  "lensID": 234,
+  "nominalApertureAV": 4352,
+  "runtimeLensProfilesSupported": false,
+  "status": "offline-homing-diagnostic-candidate-camera-unqualified",
+  "baseImageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "loaderVersion": [
+    3,
+    9,
+    0
+  ],
+  "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "imageBytes": 20480,
+  "rawBytes": 18824,
+  "codeAndDataEnd": 39304,
+  "codeMarginBeforeDiagnostics": 632,
+  "staticRAMBytes": 3040,
+  "reservedStackBytes": 8192,
+  "cameraQualified": false,
+  "hardwareReportsSent": 0,
+  "publishedFirmwareChanged": false,
+  "acceptedPlanSHA256": "d65580746206836a28e990770f5742b6a478a60dd7b354b26207f1aaddc54271",
+  "baseManifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+  "buildScriptSHA256": "d639c6035262ed053443cf35aa6fc3bac8b98d226652dd69ac3e0055338d3426",
+  "laneInputs": {
+    "firmware/upstream-hardening/followup/45-home-drive/apply.py": "40ed520f66f9b528375bb257bc6a3a79c65f98f526b06a93e5fe6da2eecc7d4a",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/apply.py": "b43c9f3b33ed21f9094a717b244cb02ce0164e9630152bfec1bc8095e3667401",
+    "firmware/upstream-hardening/followup/48-release-adc/apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1"
+  },
+  "units": [
+    "startup_samd21",
+    "system_samd21",
+    "board",
+    "clock",
+    "delay",
+    "emount",
+    "emount_packets",
+    "em_uart",
+    "em_eic",
+    "motor",
+    "abs_encoder",
+    "servo",
+    "focus_map",
+    "focus_dist",
+    "focus_pred",
+    "vdd",
+    "main",
+    "startup_trace",
+    "startup_trace_flash",
+    "em_frame",
+    "em_owner",
+    "em_shutdown",
+    "motion_trace"
+  ],
+  "flags": [
+    "-mthumb",
+    "-mcpu=cortex-m0plus",
+    "-O2",
+    "-DNDEBUG",
+    "-DEA9_NO_LOG",
+    "-D__SAMD21E17A__",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-common",
+    "-fstack-usage",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-std=gnu99",
+    "-g"
+  ],
+  "unitFlags": {
+    "main": [
+      "-Os"
+    ],
+    "emount": [
+      "-Os"
+    ],
+    "em_frame": [
+      "-Os"
+    ],
+    "em_owner": [
+      "-Os"
+    ],
+    "em_shutdown": [
+      "-Os"
+    ],
+    "startup_trace": [
+      "-Os"
+    ],
+    "focus_dist": [
+      "-Os"
+    ],
+    "focus_map": [
+      "-Os"
+    ],
+    "focus_pred": [
+      "-Os"
+    ],
+    "motion_trace": [
+      "-Os"
+    ]
+  },
+  "sources": {
+    "src/abs_encoder.c": "0fa218deffe16bdf1ad08c6cf06f34db034742c60f98d27c407960e94cef17c2",
+    "src/abs_encoder.h": "222b4fd167e64def7a9421dfe452c2bddd071c6cd2116c7914c70fab611c31f7",
+    "src/atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "src/board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "src/board.h": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d",
+    "src/clock.c": "c6885dc2011cc7f288efda5d22228468659a4a319bb310e50dde58f0c8e31e17",
+    "src/clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "src/delay.c": "1aad5912b7675622b34968a63b9266b59b00ec12ff6018b0b414c0a9648e5d66",
+    "src/delay.h": "84ad4de00296016aef35191546c625a0d4c862507c409993ea668e97b61282b9",
+    "src/diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "src/diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "src/ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "src/em_eic.c": "a92c8e7e846b8a0c01100da875c4f9670cbb042d6e2f0c9e87f478b4aa0e49dd",
+    "src/em_eic.h": "824afdb5724cdf64ba9237e2e4f3db3635b29a39852b4e4ce028b4ab84e96f99",
+    "src/em_frame.c": "f7b1a983b02d59fa9699b356bc495ed220062181a58d3c81cb4778b45e5c5f02",
+    "src/em_frame.h": "140e293e1b6a4c50c670cfb3c71201cdcc9653afd76996a91194ae695197912f",
+    "src/em_owner.c": "43c6ff55bdd9283f23081a59e00b85a28326a318f5ad55ee397f6458168a60ab",
+    "src/em_owner.h": "f860f719d61bbbed3ce38ba2da513fd35ab0295e5c61d617797e3f24ade0fa65",
+    "src/em_shutdown.c": "8749c6f797028349c9f8095658441f9345a929f31ea1393f4d373491cc493b51",
+    "src/em_shutdown.h": "44565a7fc2eb65cad16dd24ec5d1028b162c207d5df8be7a5a9a1db22d2768d2",
+    "src/em_uart.c": "2bf37e208fbeae06da09288633dec559ca444e52e84e1f6ec440f753f68ae3ee",
+    "src/em_uart.h": "6353df5d6ab1e5e27c4a60e7824c8019216da9eea7ad805580c69fa463a7d892",
+    "src/emount.c": "c9aab46e79d675fb5e1751ad52560f24372373cc07cc7a55dc04d56069160b24",
+    "src/emount.h": "11725cf18c1750acd466a7f0c899285f8d1e058844c025e7083cd9343f09b7bb",
+    "src/emount_packets.c": "93c2b7ba3917ce348f7c9eb610fb7fd196dbc92fed4a1de65ddfa4b339cd5ea3",
+    "src/emount_packets.h": "5b05771baf9dd7979ea775565f468d8fbb4557b4d94f994c1184379d2f6870ec",
+    "src/focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "src/focus_dist.h": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055",
+    "src/focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "src/focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "src/focus_pred.c": "baa84b9f092fe2ec8730d60b0d5cc3d1b4487dfed6d05da517317f64146e614d",
+    "src/focus_pred.h": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb",
+    "src/main.c": "a75e47f1924619ccf3d91cef4b31f78eea03fe4e956e430bf81959611ceda3ba",
+    "src/motion_trace.c": "c0d76f011184f85ff1881463be8722b2d7cdb9aae911c016e270d7cc87d6fd90",
+    "src/motion_trace.h": "d3b28b9ff5e4c05fee7e0789c5062d7c848e475951af56c9615ddf814ca2155e",
+    "src/motor.c": "748c055eaaa822bbbdcf5fe258b9ea4175538a81cb1d88811adcb7a7d8798f4d",
+    "src/motor.h": "6127d9f2d56be4df2decaca735d273b8a2deb85e6edacd81a4b70438907741ee",
+    "src/servo.c": "6a291a61dec72a42ada5f143e5122eb903b32b42b59af22d90b49bd4456c38f5",
+    "src/servo.h": "3bfb275f4fb5e94638c2312c4aadcd3ddc42ae12eddeb1980563245521081526",
+    "src/startup_samd21.c": "557724674ffbfd2b8a606cd73250e7b703b94b9abb603b0356a955667992e865",
+    "src/startup_trace.c": "096eb2d63947e9e090de4a62f63a477e243b8439ca7108012b5dc6c9c829692d",
+    "src/startup_trace.h": "b5e17f9ff7f9583f895e4eea5b0bd32e8775ee43dec8f43e444f1fc0a58b1bd4",
+    "src/startup_trace_flash.c": "551ce09cc3b1eccf265b55d11b8f07221c377c3542738c994f3c94d702f4f282",
+    "src/system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "src/trace_format.h": "c468eedc44d40cbedefce8d3a29dcaadd9de139ddec58499f16d41efe06b45e3",
+    "src/trail.c": "e9207b49a74480141e501ae26a50f55f2627b9695df3933eaa24292108c4ec85",
+    "src/trail.h": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b",
+    "src/vdd.c": "1c196552db7546d2b734a5e698fe95f6a6d4b0136f0163ccab9252d1425d56a4",
+    "src/vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "from38PatchSHA256": "578e331d5c2894af29f9b70e11e7c469f4ed5305ca6231919794ed3c83d29da8",
+  "hostTestShimSHA256": "5e2a44788045810871c47cd79798bb31baa07a2060bdfe7ed17acef0d804d4ca",
+  "stackHighWaterMeasured": false,
+  "compilerStackUsage": [
+    {
+      "function": "spi_xfer.constprop",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_raw",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_set_reference",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_position",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_track_reset",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "abs_encoder_track",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "board_init_pins",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "clock_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "clock_enable_peripheral",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "delay_init",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "SysTick_Handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "millis",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "delay_ms",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "delay_us",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_pin_level",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_eic_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_eic_start",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "EIC_Handler",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_eic_receive_pending",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_frame_open",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_cs",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_vd",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_offer",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_take",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_cancel",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_status_begin",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "em_owner_status_valid",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_accept",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_begin",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "SERCOM1_Handler",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_reset",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_len",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_rx_buf",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_disable",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_uart_send",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_trace_flags",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "em_trace",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "em_trace_owner",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "on_vd_edge",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_transmit",
+      "bytes": 296,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_ack",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "on_cs_edge",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "em_shutdown_requested",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_shutdown_inhibit_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_session_generation",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_control_overflow",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_park_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_powerdown_handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_shutdown_enabled",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_motion",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_push_velocity",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_subject_distance",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_in_motion",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_focus_position",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_scan_state",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_post_event",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "em_post_query_answer",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_scan_finish",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_focal_length",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_aperture_from_descriptor",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_defocus_scale",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_aperture",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_aperture_to_descriptor",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_aperture_range",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_set_optical_rows",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "em_take_focus_cmd",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "em_take_query",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "em_init",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "em_pump_status",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "em_poll",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "ea9_packets_init",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "distance_mm",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_log2_q6",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_exp2_q6",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_distance_code",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_counts_for_code",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_distance_coarse",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_em06_to_counts",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_counts_to_em06",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_begin",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_retarget",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_end",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_sample",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "focus_pred_ahead",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motion_shutdown_inhibit",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "powerdown_signal",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "focus_answer_queries",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "focus_invalid",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_abort",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "home_command",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "focus_report_at",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "pump",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_report",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_event",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_cmd_target",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "focus_retarget",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "home_cancel_requested",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "focus_run.isra",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "focus_exec",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "main",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_command",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_begin",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_sample",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_leg",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_drive",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_finish",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_completion",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "st_motion_data",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_drive.part.0",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "motor_is_inhibited",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_emergency_release",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_inhibit",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "motor_attach_pins",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_release",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_coast",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_brake",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_drive",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "motor_seek_end",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "servo_move_from",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": "servo_move_rel",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "Dummy_Handler",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "Reset_Handler",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "inc",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_crc32",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "append",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "st_init",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "st_summary",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "st_record",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "st_note",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "st_flush",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "st_terminal",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "st_inhibit_fault",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "st_preserve_first_window",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "st_lock",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_unlock",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "st_read_page",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "st_write_page",
+      "bytes": 28,
+      "kind": "static"
+    },
+    {
+      "function": "st_fail",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "SystemInit",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "SystemCoreClockUpdate",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_read_mv",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_read_burst",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_reset",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_sample",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "vdd_track_result",
+      "bytes": 8,
+      "kind": "static"
+    }
+  ],
+  "homingDiagnosticTail": {
+    "offset": 112,
+    "bytes": 32,
+    "tag": 57,
+    "versionScope": "3.9.0",
+    "failedHomeOnly": true,
+    "observedMotionCount": "saturating consumed non-Stop requests after a tagged failure; not executions"
+  },
+  "releaseADCTelemetryOmitted": true
+}

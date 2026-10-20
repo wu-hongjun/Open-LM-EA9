@@ -8,25 +8,27 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The latest image is [upstream C AF 3.8](firmware/candidates/3.8.0/README.md)
-for the original Contax Zeiss 50mm f/1.4. Its upload and strict physical-reconnect
-verification passed. **Camera acceptance failed and further 3.8 trials are held.**
-The owner reports hunting, apparent focus for one photo, then a motor reset and
-no further photos; shutdown was normal. A read-only backup identifies
-`home-drive-unsettled`, with all code/protected data unchanged. The recorded
-cohort has no initialized AF-servo snapshot. Physical homing and the later
-shutter-block cause remain unresolved.
+The latest prepared image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
+for the original Contax Zeiss 50mm f/1.4. **Prepared offline; not flashed or
+camera-qualified.** Three Astra lanes reviewed drive-phase homing, subsequent
+focus requests and original factory instructions. The release removes an unused
+blocking ADC dependency and adds bounded failed-home observations and a consumed
+request count. The physical homing failure and shutter-block cause remain
+unresolved; no guard is relaxed or completion fabricated.
+[3.9 evidence](docs/evidence/upstream-39-homing-2026-10-20.md) ·
+[Build/test workbench](firmware/upstream-hardening/next39/README.md) ·
+[Separate upload/test procedure](docs/upstream-homing-test.md).
+
+The currently installed [3.8 image](firmware/candidates/3.8.0/README.md) passed
+upload and strict physical-reconnect verification, but **camera acceptance
+failed and further trials are held**. The owner reports hunting, apparent focus
+for one photo, a motor reset and no further photos; shutdown was normal.
+Read-only logs identify `home-drive-unsettled` with code/protected data unchanged
+and no initialized AF-servo snapshot. Actual focus mode and whether a file was
+saved remain unknown. The retained capture/shutdown exchange cannot be mapped
+to the first shutter attempt.
 [Camera/log evidence](docs/evidence/upstream-38-camera-failure-2026-10-20.md) ·
 [Installation record](docs/evidence/upstream-38-upload-2026-10-19.md).
-
-Three Astra lanes prepared 3.8 offline, repairing operand-query starvation after
-failed homing while retaining motor inhibition and false readiness. New phase
-labels now distinguish the drive failure. Original-stock-instruction replay
-supports retaining post-raw-echo status re-arm policy; no separate capture or
-shutdown remedy is established. Exact repeat builds, production-path controls,
-compiled writer/stack checks and 53 host tests pass; these do not qualify camera
-behavior. [Offline evidence](docs/evidence/upstream-38-readiness-2026-10-19.md) ·
-[Build/test workbench](firmware/upstream-hardening/next38/README.md).
 
 The previous, held image is [upstream C AF 3.7](firmware/candidates/3.7.0/README.md)
 for the original Contax Zeiss 50mm f/1.4. Seven additional Astra lanes prepared
@@ -79,13 +81,15 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.21.1, build 28) refreshes
+upload/read-back path for lens metadata. The current app (0.22.0, build 29) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
 It marks installed 3.6, 3.7 and 3.8 as held and disables ordinary installation
-of these failed images. Historical explicit CLI commands and image pins remain preserved.
+of these failed images. A separate guarded 3.9 action and explicit native
+prepare/apply commands select the new diagnostic candidate. Historical explicit
+CLI commands and image pins remain preserved.
 The upstream candidates use the original fixed 50mm profile; they cannot apply
 runtime lens edits. [Factory reconstruction remains partial](docs/reverse-engineering/status-2026-10-15.md).
 The **historical upstream C startup diagnostic 3.2 for Contax Zeiss 50mm f/1.4

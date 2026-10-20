@@ -1,0 +1,215 @@
+{
+  "libraryFrames": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24
+  },
+  "indirectCalls": {
+    "50c4": {
+      "caller": "deregister_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints 0x9984, weak 0x50d0 zero."
+    },
+    "50ec": {
+      "caller": "register_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints 0x9984, weak 0x50f8 zero."
+    },
+    "56c6": {
+      "caller": "em_shutdown_ack",
+      "targets": [
+        "powerdown_signal"
+      ],
+      "evidence": "0x56be loads literal 0x56e0 = g_powerdown; main is sole nonzero registrar."
+    },
+    "5754": {
+      "caller": "on_cs_edge",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ],
+      "evidence": "0x574c loads literal 0x59d4 = g_shutdown_inhibit; main is sole nonzero registrar."
+    },
+    "69b8": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_cs_edge"
+      ],
+      "evidence": "0x699e loads literal 0x69d4 = g_cs_edge; 0x69a0 loads callback into r1, installed by em_init at 0x5fa2."
+    },
+    "69cc": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_vd_edge"
+      ],
+      "evidence": "0x69c4 loads g_vd_edge, installed by em_init at 0x5fa2. Sequential with CS."
+    },
+    "7266": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_retarget"
+      ],
+      "evidence": "cfg in r4; load r3 from cfg+52, pass address of local nt at sp+84. STOCK copies retain pointer."
+    },
+    "733c": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "load r3 from cfg+56 at 0x7336. Multiple source abort checks merged to this emitted site."
+    },
+    "74a8": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "load cfg+48 at 0x74a0, r0=r7 existing position sample."
+    },
+    "7672": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "load cfg+48 at 0x7668, r0=out->end."
+    },
+    "95cc": {
+      "caller": "__libc_init_array",
+      "targets": [],
+      "evidence": "3.9 preinit start=end=0x9970; no preinit target."
+    },
+    "95d6": {
+      "caller": "__libc_init_array",
+      "targets": [
+        "frame_dummy"
+      ],
+      "evidence": "3.9 init array[0x9970,0x9974) contains frame_dummy|1."
+    }
+  },
+  "unknowns": [
+    "Application thread frames require privileged thread mode, CONTROL=0 (MSP), PRIMASK=0 and no active exception on the ordinary reset path. Boot may already select application VTOR before Reset_Handler; packet reconstruction after BSS clear requires inherited IRQ quiescence. Audit37 finite startup fixtures are not physical or asynchronously scheduled entry.",
+    "Boot preserves priorities and non-reset interrupt state, enables NVMCTRL IRQ5 while reset peripheral INTEN remains zero, and runs SysTick with TICKINT clear. App enables UART/SysTick without setting their priorities and sets EIC priority 1; arbitrary inherited pending/active state and vector-transition exception delivery remain unverified.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model."
+  ],
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector.",
+    "qualification": "Audit37 executes this exact 3.7 initializer/reset through main entry under inert boundary assumptions; physical core state, asynchronous arrivals and exception delivery remain unverified.",
+    "followup": "docs/audits/astra-37-packet-initializer-2026-10-15.md"
+  },
+  "pins": {
+    "hardened.elf": "8132862ffb887dc8eeac01d6d5b3e06e15a8d04e7864fcdc0564434402ef4c07",
+    "hardened.map": "fada0c090e8f34234a2751eea4a02ebd2cd55b4882e2e09c80f9ce5b18538f1d",
+    "manifest.json": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+    "raw.bin": "16157f199660a31abefcee12a023bfb7382cee7e604bcffe19721fea6aea59f8",
+    "contax-zeiss-50-f1-4.bin": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44"
+  },
+  "baseAnalyzerSHA256": "ff226db7c6c1aee09ba8d7bcde05c948f56ff082754334fe9b111a5b44e7ab72",
+  "reviewedMainCallbackLiterals": {
+    "86d0": "powerdown_signal",
+    "86d4": "motion_shutdown_inhibit"
+  },
+  "baselineLibraryStackInstructions": {
+    "deregister_tm_clones": [
+      "50b8:\tb510      \tpush\t{r4, lr}",
+      "50c6:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "register_tm_clones": [
+      "50e0:\tb510      \tpush\t{r4, lr}",
+      "50ee:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "__do_global_dtors_aux": [
+      "50fc:\tb510      \tpush\t{r4, lr}",
+      "511a:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "frame_dummy": [
+      "512a:\tb510      \tpush\t{r4, lr}",
+      "513c:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "__gnu_thumb1_case_sqi": [
+      "9388:\tb402      \tpush\t{r1}",
+      "9396:\tbc02      \tpop\t{r1}"
+    ],
+    "__gnu_thumb1_case_uqi": [
+      "939c:\tb402      \tpush\t{r1}",
+      "93aa:\tbc02      \tpop\t{r1}"
+    ],
+    "__udivsi3": [
+      "94b0:\tb501      \tpush\t{r0, lr}",
+      "94b8:\tbd02      \tpop\t{r1, pc}"
+    ],
+    "__aeabi_uidivmod": [],
+    "__divsi3": [
+      "9686:\tb501      \tpush\t{r0, lr}",
+      "968e:\tbd02      \tpop\t{r1, pc}"
+    ],
+    "__aeabi_idivmod": [],
+    "__aeabi_idiv0": [],
+    "memmove": [
+      "969c:\tb510      \tpush\t{r4, lr}",
+      "96be:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "memset": [],
+    "__libc_init_array": [
+      "96d0:\tb570      \tpush\t{r4, r5, r6, lr}",
+      "96f2:\tbd70      \tpop\t{r4, r5, r6, pc}"
+    ],
+    "memcpy": [
+      "971a:\tb510      \tpush\t{r4, lr}",
+      "9720:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "_init": [
+      "9a90:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+      "9a94:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+      "9a96:\tbc08      \tpop\t{r3}"
+    ],
+    "_fini": [
+      "9aa0:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+      "9aa4:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+      "9aa6:\tbc08      \tpop\t{r3}"
+    ]
+  },
+  "sourceDeltaFrom38": [
+    "src/emount.h",
+    "src/main.c"
+  ],
+  "adaptedAnalyzerSHA256": "6bd0b3cd7932298b95d62facb23f4f8ae512190ba503cc162efb4ba6637d7766",
+  "baseSemanticsSHA256": "2ab04e770a933c02ac64994133516f97c66300dc283377e6058264500f02d11c",
+  "base38ManifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+  "reviewedRelocatedLiterals": {
+    "powerdown_signal": {
+      "2000082c": "em_rx_bytes",
+      "20000828": "em_rx_errors",
+      "20000824": "em_rx_status"
+    },
+    "st_fail": {
+      "2000082c": "em_rx_bytes",
+      "20000828": "em_rx_errors",
+      "20000824": "em_rx_status"
+    },
+    "em_uart_disable": {
+      "20000832": "g_disabled"
+    },
+    "delay_ms": {
+      "20000024": "g_millis"
+    }
+  },
+  "base38ELFSHA256": "679375438e0f63e29074b5d70740ba610f73cb67a73b0306f8a34c0456d34eaa"
+}

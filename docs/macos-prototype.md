@@ -1,23 +1,25 @@
 # macOS prototype
 
-Current app: **0.21.1, build 28**, October 20, 2026. Device opens first, with
+Current app: **0.22.0, build 29**, October 20, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local
 metadata editing and explicit guarded USB operations. The host uses native
 Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
 on upstream C; Rust is deferred while qualifying the camera contract.
 
-The latest packaged image is [upstream AF 3.8](evidence/upstream-38-readiness-2026-10-19.md),
-fixed to the original 50mm f/1.4 with no runtime profile row. Its
-[installation and strict verification](evidence/upstream-38-upload-2026-10-19.md)
-passed after physical reconnect. The later [camera attempt failed](evidence/upstream-38-camera-failure-2026-10-20.md):
-hunting and a motor reset followed by blocked further photos; shutdown was
-normal. Post-camera read-only logs identify drive-phase homing failure.
-Ordinary 3.8 installation and further camera trials are held, alongside 3.6/3.7.
-The app retains read-only backup/recovery and historical explicit CLI pins.
-See the [current Device workflow](macos-device-workflow.md) and
-[held 3.8 procedure](upstream-readiness-test.md). The dated
-[initial prototype record](evidence/macos-prototype-2026-10-10.md) preserves the
-earlier read-only milestone; current capabilities are described below.
+The latest packaged image is [upstream AF 3.9](evidence/upstream-39-homing-2026-10-20.md),
+fixed to the original50mm f/1.4 with no runtime profile row. It is prepared offline,
+not flashed or camera-qualified. An explicit guarded install action and native
+prepare/apply route select the pinned candidate. Release ADC telemetry no longer
+blocks startup/pump; failed-home and consumed-request observations improve the
+next investigation. A physical homing/shutter cure remains unproven.
+
+The installed3.8 [strict verification](evidence/upstream-38-upload-2026-10-19.md)
+passed, but its [camera attempt failed](evidence/upstream-38-camera-failure-2026-10-20.md):
+hunting/reset and blocked further photos, with normal shutdown. The3.6/3.7/3.8
+holds, read-only backup/recovery and historical explicit CLI/image pins remain.
+See the [Device workflow](macos-device-workflow.md),
+[separate3.9 procedure](upstream-homing-test.md) and dated
+[initial prototype record](evidence/macos-prototype-2026-10-10.md).
 
 ## Build and open
 
@@ -86,7 +88,7 @@ Lens** (Command-S). **Revert** restores the saved values. Closing the editor or
 quitting protects unsaved edits with Save/Discard/Cancel. Invalid numeric fields
 show an explanation and disable Save. Editing and saving change the local library;
 **Apply profile** is a separate USB action on variants with a runtime profile row.
-Fixed upstream 3.1–3.8 images accept only the original unedited 50mm profile and
+Fixed upstream 3.1–3.9 images accept only the original unedited 50mm profile and
 route other selections to USB tools rather than silently changing firmware.
 
 The first launch seeds the library from the canonical

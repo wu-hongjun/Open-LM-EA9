@@ -1,0 +1,114 @@
+{
+  "status": "passed-offline-unused-adc-dependency-controls",
+  "sourceFilesVerified": 49,
+  "results": [
+    {
+      "variant": "baseline-release",
+      "case": "healthy",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=healthy adc=10 adcstage=1 polls=2 queries=2 ack=1 fault=0 motors=1",
+      "failure": ""
+    },
+    {
+      "variant": "baseline-release",
+      "case": "stalled-capture",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "production ADC fail-stop=3\nFAIL: !fault&&ack==1&&answers==2&&polls==2&&inhibited fault=3 adc=1 polls=1 answers=1 ack=0 motors=0 encoders=0"
+    },
+    {
+      "variant": "baseline-release",
+      "case": "stalled-startup",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "production ADC fail-stop=3\nFAIL: !fault&&motors==1&&encoders==1&&releases==1 fault=3 adc=1 polls=0 answers=0 ack=0 motors=0 encoders=1"
+    },
+    {
+      "variant": "proposal-release",
+      "case": "healthy",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=healthy adc=0 adcstage=0 polls=2 queries=2 ack=1 fault=0 motors=1",
+      "failure": ""
+    },
+    {
+      "variant": "proposal-release",
+      "case": "stalled-capture",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=stalled-capture adc=0 adcstage=0 polls=2 queries=2 ack=1 fault=0 motors=0",
+      "failure": ""
+    },
+    {
+      "variant": "proposal-release",
+      "case": "stalled-startup",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=stalled-startup adc=0 adcstage=0 polls=0 queries=0 ack=0 fault=0 motors=1",
+      "failure": ""
+    },
+    {
+      "variant": "proposal-legacy",
+      "case": "healthy",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=healthy adc=10 adcstage=1 polls=2 queries=2 ack=1 fault=0 motors=1",
+      "failure": ""
+    },
+    {
+      "variant": "proposal-legacy",
+      "case": "stalled-capture",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "production ADC fail-stop=3\nFAIL: !fault&&ack==1&&answers==2&&polls==2&&inhibited fault=3 adc=1 polls=1 answers=1 ack=0 motors=0 encoders=0"
+    },
+    {
+      "variant": "proposal-legacy",
+      "case": "stalled-startup",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "production ADC fail-stop=3\nFAIL: !fault&&motors==1&&encoders==1&&releases==1 fault=3 adc=1 polls=0 answers=0 ack=0 motors=0 encoders=1"
+    },
+    {
+      "variant": "mutant-resample",
+      "case": "healthy",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "FAIL: !conversions&&!stage_adc fault=0 adc=2 polls=2 answers=2 ack=1 motors=1 encoders=1"
+    },
+    {
+      "variant": "mutant-resample",
+      "case": "stalled-capture",
+      "expectedPass": false,
+      "exitCode": 1,
+      "stdout": "",
+      "failure": "production ADC fail-stop=3\nFAIL: !fault&&ack==1&&answers==2&&polls==2&&inhibited fault=3 adc=1 polls=1 answers=1 ack=0 motors=0 encoders=0"
+    },
+    {
+      "variant": "mutant-resample",
+      "case": "stalled-startup",
+      "expectedPass": true,
+      "exitCode": 0,
+      "stdout": "case=stalled-startup adc=0 adcstage=0 polls=0 queries=0 ack=0 fault=0 motors=1",
+      "failure": ""
+    }
+  ],
+  "productionADCConversionAndWaitBody": true,
+  "productionWaitBudget": 4194304,
+  "syntheticBoundary": "RESRDY W1C/start completion or stalled conversion; protocol scheduler supplied, not measured hardware timing",
+  "physicalHomeFaultCauseProven": false,
+  "hardwareReportsSent": 0,
+  "inputSHA256": {
+    "run.py": "2b2f8df89465aca7804ac63cb7141ef886899bcb04982d527473e012ec7c8428",
+    "test_adc.c": "97ab221c60fbee3fed748c543cf663e12bf9ff160764b625095912285adb6086",
+    "apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1"
+  },
+  "candidateManifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+  "candidatePumpAndStartupBodiesMatched": true
+}

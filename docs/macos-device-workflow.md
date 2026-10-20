@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.21.1, build 28
+# Device workflow: prototype 0.22.0, build 29
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -16,22 +16,26 @@ Read-only backup/recovery remain available. [Failure/log evidence](evidence/upst
 The 3.6/3.7 camera-failure holds also remain. Historical explicit CLI commands
 retain their pinned images for coordinated research/recovery.
 
-The latest packaged firmware is **upstream AF 3.8.0**, fixed to the original
-50mm f/1.4 profile. Its [upload and strict verification](evidence/upstream-38-upload-2026-10-19.md)
-passed after physical reconnect, before the failed camera attempt. USB tools
-retain the disabled **Install Readiness 3.8.0** control; choosing a dropdown
-profile does not install it. Native CLI commands `prepare-readiness-upstream`
-and `apply-readiness-upstream` retain their explicit pinned meaning. Other or
-edited profiles are rejected. [Offline acceptance](evidence/upstream-38-readiness-2026-10-19.md)
-and the [held camera/log procedure](upstream-readiness-test.md) distinguish the
-installation result from physical acceptance.
+The latest packaged firmware is **upstream AF 3.9.0**, fixed to the original
+50mm f/1.4 profile. It is prepared offline and not flashed or camera-qualified.
+USB tools offers **Install Homing Diagnostic 3.9.0** as a separate guarded action;
+choosing a dropdown profile does not install it. Native commands
+`prepare-homing-upstream` and `apply-homing-upstream` select its pinned image.
+Other or edited profiles are rejected. The release removes an unused ADC
+telemetry dependency and adds failed-home/request observations. A physical
+homing or shutter fix is unproven.
+[Offline evidence](evidence/upstream-39-homing-2026-10-20.md) and the
+[separate upload/test procedure](upstream-homing-test.md) describe the next gates.
+Historical `prepare-readiness-upstream`/`apply-readiness-upstream` still select
+held3.8 and do not silently select3.9. Its [strict installation verification](evidence/upstream-38-upload-2026-10-19.md)
+remains a historical fact distinct from its failed camera result.
 
 Startup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4
 profile on October 15. [Strict verification passed](evidence/upstream-32-upload-2026-10-15.md)
 after owner-confirmed physical reconnect, resolving that transaction before 3.6.
 Do not delete or edit a pending journal or reconnect marker.
 The historical `prepare-startup`/`apply-startup`
-commands still select 3.2. Installed 3.2–3.8 routes the main action to USB tools,
+commands still select 3.2. Installed 3.2–3.9 routes the main action to USB tools,
 labels camera compatibility unqualified and avoids ordinary profile application.
 After one coordinated camera cycle, save a read-only backup and use the offline
 decoder for evidence review. Further 3.6/3.7/3.8 camera trials remain held.
@@ -61,7 +65,7 @@ while camera capture/shutdown acceptance is failed.
 ## Choose a lens and apply supported metadata
 
 All eight lenses can be edited and prepared locally. **Apply profile** requires
-verified firmware with a runtime profile row. The upstream 3.1–3.8 candidates
+verified firmware with a runtime profile row. The upstream 3.1–3.9 candidates
 are fixed to the original 50mm f/1.4 and offer USB tools instead. They cannot
 switch to the selected lens or use an aperture override without a new firmware
 candidate. The following apply sequence is for supported runtime-profile images.

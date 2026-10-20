@@ -1,0 +1,73 @@
+{
+  "version": [
+    3,
+    9,
+    0
+  ],
+  "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+  "templates": {
+    "coordinate": {
+      "path": "firmware/upstream-hardening/next35/test_coordinate.py",
+      "sha256": "fef390e875d923a15f1f75b847f223c44777d67f8fc743dbbab528920cd36e82"
+    },
+    "query-ownership": {
+      "path": "firmware/upstream-hardening/next35/test_query_ownership.py",
+      "sha256": "dc77e722879f47838c9d878d3fa07a17d281af016b1bd7180eaad2e36a650ccf"
+    },
+    "query-flow": {
+      "path": "firmware/upstream-hardening/next35/test_query_flow.py",
+      "sha256": "cfa2bc819a6a4b874f5a77a4b386fcc654f64b0f9555b198c24f857861782e54"
+    },
+    "absolute-target": {
+      "path": "firmware/upstream-hardening/next35/test_target.py",
+      "sha256": "a3a2fb53902a3780a03e32ae8b1b5388d44c880413725a65363a8c08e6873b15"
+    },
+    "time-contract": {
+      "path": "firmware/upstream-hardening/next35/test_time.py",
+      "sha256": "96123247bee9200d6e27edac0d924b32f8207819e3cb34726a490b7df2e3ab77"
+    },
+    "target-time-composition": {
+      "path": "firmware/upstream-hardening/followup/23-composition35/run.py",
+      "sha256": "ceb0e4e7c5f2b28ea820a0f613200b1ec3ca8c5a11c5d2a22efa344bfa3ce0dd"
+    },
+    "exact-counter-parity": {
+      "path": "firmware/upstream-hardening/followup/23-composition35/run_counter.py",
+      "sha256": "f41aa6014c46745683b87f882e543aa39628a2c5fd12df514ef361d05a4e5cd0"
+    },
+    "capture-commits": {
+      "path": "firmware/upstream-hardening/lanes/10-integration/run.py",
+      "sha256": "2a5054ae12ad95e025df4f93023cfbd54594138515c439d150eb188eb011d7de"
+    },
+    "capture-session": {
+      "path": "firmware/upstream-hardening/lanes/10-integration/regression.py",
+      "sha256": "0cdcf139f0cd810937435fb1bdd35677d3d8d5a74a0eef008a74f8f5e682aea4"
+    },
+    "home-inhibit": {
+      "path": "firmware/upstream-hardening/followup/17-composition/run_home.py",
+      "sha256": "f863505adf25f8e56430e92b88a635398de486b4df78a8c6bf600521a69f1cd1"
+    },
+    "query-composition": {
+      "path": "firmware/upstream-hardening/followup/17-composition/run_composition.py",
+      "sha256": "21a2b65848bea6e8525602b6b7e0217495a3bb3217d162988646b8f6378f36bc"
+    },
+    "motion-tracing": {
+      "path": "firmware/upstream-hardening/followup/33-motion-tracing/run.py",
+      "sha256": "381fce503b58b3365c09c85fc6519f8024c9074feb68baedf09bbde30125fff4"
+    },
+    "capture-retention": {
+      "path": "firmware/upstream-hardening/followup/34-capture-tracing/run_retention.py",
+      "sha256": "e687d4a98af7e560bd4f136663369460fb16e18012a3e75aaa95c7fc11d643e1"
+    },
+    "startup-handoff": {
+      "path": "firmware/upstream-hardening/followup/28-startup-handoff-review/run.py",
+      "sha256": "6dc4354d18858d39aa5db5421d75d9a7bc58871ff1cdc812fa53380f0573facf"
+    }
+  },
+  "compilerCompatibilitySHA256": "d9254117d66a57b2f6fd07095caed986084fb585e36221869f5368acbb75a4c7",
+  "traceCompatibilitySHA256": "573b3f6b4509c8a1a6fea668d1b121134d08b7e54f15016be3d8af0f51121487",
+  "packetInitializerTestAdapterSHA256": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9",
+  "counterFixtureSHA256": "68d44c484a0bc222d97fae1df2ea293fd71eb67496fa63f75da233c4a65ff76b",
+  "contractAdapterSHA256": "0282820c098e28be9ec473213c4268e0afd99544af48e2b2406a4acc5523128a",
+  "contractFixturePinsSHA256": "2a672ed56c534f86e3790b40e7e42d6f7c21472c31d675d326e0181af7a2d7b7"
+}

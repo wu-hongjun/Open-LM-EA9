@@ -1,0 +1,45 @@
+{
+  "status": "bounded-original-instruction-contracts-pass-no-homing-remedy",
+  "baseManifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+  "baseImageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "stockApplicationSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "oraclePins": {
+    "research/stock-1.8/oracle.py": "ea53452f711c84d156e5bc665156fe2a48211014bcc6a59baa595811e2258d1e",
+    "research/stock-1.8/config.py": "07e8ec5648d7cd53a1ee03c1d1c540a8545c2f179b58910cb8d27eab6f2cc597"
+  },
+  "instructionRangeSHA256": {
+    "60cc-611e": "3653fae9f4ba2ac0af25879c0dcf6f3cb2d35e15efab589ae67ec4143f014572",
+    "89a4-8a2c": "79cb3f21ad36c019dd5fd7ae1e3a2eaa66fdf1ea6be6fccebff47d7400b13b00",
+    "6be4-6c60": "8245d72a4ef33c1a92a3dc134e9e7ea575b5ea2264cfbcfb39cf104868eb74e1",
+    "5e00-5fee": "b41e2b5a057ba316e7db9a99ebdbe4386e5ac700b42dd44408769145f99b4950",
+    "8c64-8d94": "9d2f21d3f7b0cc7c02d9a5a7bc8e58fa8fb072c86f36502595f63474f9dd9d14",
+    "8e28-8fc8": "7a4e2dc469ed6a04ffcacecc05fc9da28d178ca90808301f1669cad994491608",
+    "9070-90bc": "4075238c26e335fe902f828a5cda71e3153afa5c719d84b58b90e8683780c32f",
+    "8b70-8bfc": "5334d8addfd4e0c16cdfc98cabeab24e061a5764f58e3af8ad9ea670ebafcee1",
+    "8ae4-8b20": "6cba661925f664e73ebc08444995dd79e6b19a4b6dbd6555e8cece0d010d9b62"
+  },
+  "runnerSHA256": "be2c1a5418688db952680dac09a53a5074d48df5ccdd312cba7ba08dd9c59e42",
+  "hardwareOperations": 0,
+  "cameraQualified": false,
+  "limits": [
+    "Inert MMIO and supplied SPI bytes/statuses; no oscillator or peripheral timing model",
+    "100000 instructions per call, fixed delay arguments recorded without elapsed-time claim",
+    "HAL assertion/enable/transfer, board/timer init and NVM are cut; no physical origin validity",
+    "Gate explicitly supplied; prefix trace does not prove missing enabling writer throughout program"
+  ],
+  "caseCounts": {
+    "sensorCases": 8,
+    "busyLoopCases": 4,
+    "conditionalHomeCases": 8,
+    "startupCases": 4
+  },
+  "rejectedWrongRules": [
+    "sensor-has-no-setup-hold-loop",
+    "same-endian-is-byte-swap",
+    "homing-is-unconditional",
+    "homing-requires-equal-samples",
+    "boot-initialized-origin-survives-restore",
+    "sensor-stop-guarantees-restored-disarmed"
+  ],
+  "privateResultsSHA256": "e35313b0869f3de950d9f208cf9eb31016c24df719c6f2fb89f104027a30737e"
+}

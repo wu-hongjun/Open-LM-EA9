@@ -346,6 +346,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
         case "3.7.0": return "Targeted trace 3.7 is held after the camera froze following one photo. Keep the camera off and preserve a read-only backup for log review. Do not retry this image."
+        case "3.9.0": return "Homing diagnostic 3.9 is camera-unqualified. It removes an unused ADC dependency and records failed-homing details and subsequent consumed focus requests. A physical homing or shutter fix is unproven."
         case "3.8.0": return "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. Shutdown was normal. The trace records a drive-phase homing failure. Do not retry this image."
         case "3.6.0": return "Upstream AF 3.6 is held after a shutter-press camera freeze and shutdown nonresponse. Keep the camera off and save a read-only backup for log review. Do not retry this image."
         case "3.5.0": return "Upstream AF 3.5 is camera-unqualified. It preserves the resolved focus target and rejects homing completion after an expired phase. Collect a read-only backup after one coordinated camera cycle before another trial."
@@ -446,6 +447,16 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard canInstallReadiness else { return }
         applyLens(variant: .autofocusReadiness)
     }
+    var canInstallHomingDiagnostic: Bool {
+        guard Self.cameraFailureHolds[FirmwareVariant.autofocusHomingDiagnostic.versionString] == nil,
+              canChangeFirmware, let profile = preparedLens,
+              currentAppliedLens?.firmwareVersion != "3.9.0" else { return false }
+        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusHomingDiagnostic)) != nil
+    }
+    func installHomingDiagnostic() {
+        guard canInstallHomingDiagnostic else { return }
+        applyLens(variant: .autofocusHomingDiagnostic)
+    }
     func installMetadataOnly() { applyLens(variant: .metadataOnly) }
     private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
         guard canChangeFirmware, let profile = preparedLens else { return }
@@ -454,8 +465,11 @@ enum AppTab: Hashable { case device, lensLibrary }
         let alert = NSAlert()
         alert.messageText = "Apply \(profile.displayName) to the adapter?"
         alert.informativeText = (variant.enablesAutofocus ? "Experimental AF \(variant.versionString) enables motor movement and may move the mount during camera startup. Exposure and focus accuracy with this lens are not yet qualified. A verified backup is saved first. Unplug and reconnect after upload to verify." : "This prototype installs custom firmware and saves a verified backup first. Motor motion is disabled in this metadata test build; use manual focus on the A7C II. It reports the focal length and aperture you choose; it cannot sense the lens’s aperture or zoom rings. Unplug and reconnect afterward to verify the update.")
-        if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace].contains(variant) {
+        if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic].contains(variant) {
             alert.informativeText += " This diagnostic build records at most sixteen flash pages inside its reserved application area, with no runtime erase. Collect the backup after one camera cycle; do not repeat testing before reviewing it."
+        }
+        if variant == .autofocusHomingDiagnostic {
+            alert.informativeText += " AF 3.9 removes an unused ADC dependency and adds failed-homing/request diagnostics. A physical homing or shutter fix is unproven; camera compatibility remains unqualified."
         }
         alert.addButton(withTitle: "Apply"); alert.addButton(withTitle: "Cancel")
         guard alert.runModal() == .alertFirstButtonReturn else { return }

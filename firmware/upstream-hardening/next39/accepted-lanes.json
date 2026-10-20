@@ -1,0 +1,30 @@
+{
+  "status": "offline-homing-diagnostic-candidate-camera-unqualified",
+  "baseVersion": "3.8.0",
+  "nextVersion": "3.9.0",
+  "baseImageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+  "inputs": {
+    "firmware/upstream-hardening/followup/45-home-drive/apply.py": "40ed520f66f9b528375bb257bc6a3a79c65f98f526b06a93e5fe6da2eecc7d4a",
+    "firmware/upstream-hardening/followup/46-shutter-readiness/apply.py": "b43c9f3b33ed21f9094a717b244cb02ce0164e9630152bfec1bc8095e3667401",
+    "firmware/upstream-hardening/followup/48-release-adc/apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1"
+  },
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/45-home-drive/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/46-shutter-readiness/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    },
+    {
+      "path": "firmware/upstream-hardening/followup/48-release-adc/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    }
+  ],
+  "additionalUnits": [],
+  "additionalUnitFlags": {}
+}

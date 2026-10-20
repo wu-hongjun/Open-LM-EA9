@@ -1,0 +1,167 @@
+{
+  "status": "offline-host-integration-validated-camera-unqualified",
+  "date": "2026-10-20",
+  "app": {
+    "version": "0.22.0",
+    "build": "29",
+    "appExecutableSHA256": "60988ca2779ed6ebd885d761948d4e1b99436227619e3523141442805dbb3376",
+    "cliSHA256": "4dca65de7efce2ad9689927e585a0143d69306a321bf083b812adcba83e04145",
+    "signatureVerification": "passed",
+    "appLaunched": false
+  },
+  "firmware": {
+    "variant": "autofocusHomingDiagnostic",
+    "version": "3.9.0",
+    "resource": "ea9-af-homing-upstream",
+    "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+    "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+    "sourceDigestsVerified": 49,
+    "fixedProfile": "Original Contax Zeiss 50mm f/1.4; library edits and other profiles rejected",
+    "physicalHomingFixEstablished": false,
+    "shutterFixEstablished": false,
+    "cameraQualified": false
+  },
+  "swiftTests": {
+    "command": "scripts/swift-local.sh test",
+    "namedTests": 53,
+    "namedTestsByTarget": {
+      "LensCoreTests": 7,
+      "DeviceKitTests": 35,
+      "AppWorkflowTests": 11
+    },
+    "firmwareVariantCount": 20,
+    "fixedUpstreamVariantCount": 9,
+    "allPassed": true,
+    "coverage": [
+      "All variants retain image trust, protected-layout, reconnect verification and journal integrity tests.",
+      "Fixed upstream variants reject another lens and edited settings.",
+      "AF3.9 loader version is accepted; unknown3.10 is rejected.",
+      "AF3.9 explicit UI action respects idle consent and fixed50mm profile, prevents redundant install and keeps tools/backup access.",
+      "Historical3.0/3.1/3.6/3.7/3.8 camera holds remain; AF3.9 wording states unqualified/unproven remedy."
+    ]
+  },
+  "nativePrepare": {
+    "isolatedStateOnly": true,
+    "routes": [
+      {
+        "command": "prepare-upstream",
+        "bytes": 20480,
+        "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-startup",
+        "bytes": 20480,
+        "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-hardened-upstream",
+        "bytes": 20480,
+        "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-bounded-upstream",
+        "bytes": 20480,
+        "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-absolute-upstream",
+        "bytes": 20480,
+        "sha256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-handoff-upstream",
+        "bytes": 20480,
+        "sha256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-trace-upstream",
+        "bytes": 20480,
+        "sha256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-readiness-upstream",
+        "bytes": 20480,
+        "sha256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "command": "prepare-homing-upstream",
+        "bytes": 20480,
+        "sha256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+        "stdout": "Prepared application image: 20480 bytes. No USB reports sent."
+      },
+      {
+        "negativeControl": "wrong-lens",
+        "exitCode": 1,
+        "stderr": "This upstream firmware is compiled for the original Contax Zeiss 50mm f/1.4 profile. Lens edits and other profiles require another firmware build; no USB update was started."
+      },
+      {
+        "negativeControl": "overwrite",
+        "exitCode": 1,
+        "stderr": "The file \u201cprepare-homing-upstream.bin\u201d couldn\u2019t be saved in the folder \u201castra46-host-prepare\u201d because a file with the same name already exists."
+      }
+    ],
+    "bundledResourcesVerified": 2
+  },
+  "productionReplay": {
+    "candidateImageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+    "candidateManifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+    "baselineImageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+    "baselineContractsPassed": 6,
+    "baselineMissingCounterControlRejected": true,
+    "candidateCasesPassed": 10,
+    "mutantsRejected": 7,
+    "baselineReceiptOverwritten": false
+  },
+  "priorPackage": {
+    "preservedPrivately": true,
+    "inventorySHA256": "ed98600ed8ea729e3f1ad12990d411158dfdf35e273f86abcf71747b8f6f7b83"
+  },
+  "inputSHA256": {
+    "apps/macos/Info.plist": "0b007b55de954107e85c0f901ef21b70f3d183b0f0158148808393c6013486ee",
+    "apps/macos/Package.swift": "72002c378ff041622ac4f5792f610251c5c9a3804d8d07daa122711f2a50976f",
+    "apps/macos/Sources/DeviceKit/LensImage.swift": "549bcbdee5f360a351d9e608f2f46bbfe40c67b4a158aa32e07b984e3f0177b2",
+    "apps/macos/Sources/DeviceKit/TrustedHomingUpstream.swift": "f98181eac117e5fa1498b576a163c64463e049811193b29e5026d7e6057ddd06",
+    "apps/macos/Sources/DeviceKit/Resources/ea9-af-homing-upstream.bin": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+    "apps/macos/Sources/EA9CLI/main.swift": "7ad7a871e5a8b6553277480c9081ed4b8eeae7f22dc716cf9850697b92d1ec3a",
+    "apps/macos/Sources/OpenLMEA9/AppModel.swift": "a7848aae9d4754ed00ecb6ff07ae9d72cb69cfb88917b313d5ae6f3772ef5a69",
+    "apps/macos/Sources/OpenLMEA9/DeviceWorkflow.swift": "4e552f4cf18b481fb1c118f7eea20ead4f7f2fd8f20167df98c1fac6f7a0ed4c",
+    "apps/macos/Sources/OpenLMEA9/DeviceOverview.swift": "e104d3096bfa5cecd0e84c6cca3a2560a59073e3cfada733090f076cb3d3596f",
+    "apps/macos/Tests/DeviceKitTests/UploadTests.swift": "5ac47a51139f1821e26b0d509eb39be1b193da983e2e914d683c053ba17002f4",
+    "apps/macos/Tests/AppWorkflowTests/DeviceWorkflowTests.swift": "da5b7d59fb81b83302763588cadee95872580fb2ff5ef31800d6c36844b74b21",
+    "scripts/swift-local.sh": "5b858556152d2cf225e917f47a234ae5273ff2fba01a4e9ab4a16128ae2d4627",
+    "scripts/build-macos-app.sh": "95b7c4d1e492dbeecbdbd12394d6ddf1f01840144eb7f9c20f77718405ebbcfc"
+  },
+  "privateReceiptSHA256": {
+    "artifacts/private/astra46-host-tests.log": "24fc49082843627b05746a48b99a31fbce511692c9732128b1db0c85a1c71351",
+    "artifacts/private/astra46-host-build.log": "02923824f688e9aaf5a2230312643710cc3f178ad7d4e054be4bfddadb7d1ce1",
+    "artifacts/private/astra46-host-prepare/results.json": "4e3cec24150c5b3fd36b147a7deecace8066d9009b0b1afb73ca55648978f85d",
+    "artifacts/private/astra46-final39/results.json": "9d68f4873973754611e21c661d2049dbbfb4bf0cf55891775e2d1de2e6ae6e3c",
+    "artifacts/private/astra46-decoder-review39.json": "917e8f31b5568edf276076da6523890c4a1c05e546e833ebab6366add891eff6"
+  },
+  "hardwareEnumerationPerformed": false,
+  "hardwareReportsSent": 0,
+  "canonicalApplicationSupportAccess": false,
+  "gitMutationsPerformed": false,
+  "limits": "Host mocks and isolated prepare-only execution do not establish physical homing, shutter recovery, optical focus, camera acceptance or upload of this image.",
+  "decoderReview": {
+    "status": "reviewed-source-ABI-and-reran307checks",
+    "decoderSHA256": "807dcff78a9c02d438b63974be6a413f581fb86e1cd3ac069b39603304d6a169",
+    "testSHA256": "76f62ff714c7435749b7517acd5e6f53b8b13cdf22f1f114bc4ba87a0d1c23dc",
+    "checksPassed": 307,
+    "findingsClosed": [
+      "Phase19 requires shared polls exactly1000000; phases17/18 require fewer. Four impossible-poll controls added.",
+      "Stillness anchor names and explanation cover both initial sampling and last threshold crossing; no crossing is inferred."
+    ],
+    "reviewedABI": "Tag/phase/flags/count offsets112..115, seven32-bit fields116..143, signed positions, saturating count semantics, phase qualification, version isolation and complete-cohort requirement match the final source.",
+    "remainingActionableFindings": [],
+    "limits": "Synthetic decoder fixtures and static source review do not establish hardware timing, physical fault or shutter behavior."
+  }
+}
