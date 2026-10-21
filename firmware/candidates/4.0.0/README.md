@@ -1,7 +1,12 @@
 # AF 4.0 — bounded reference qualification
 
 **Upload and strict byte/protected-data verification passed after physical reconnect.
-One camera cycle and log review remain pending; not camera-qualified.** [Installation record](../../../docs/evidence/upstream-40-upload-2026-10-20.md). This candidate is fixed to
+Camera acceptance failed; further 4.0 trials are held.** The owner reports a hard
+crash following two photos and a required power cycle. Saved-file status, actual
+focus mode and recovery details remain unverified. Read-only logs await safe USB-cap
+confirmation; no extra camera attempt is requested.
+[Failure record](../../../docs/evidence/upstream-40-camera-failure-2026-10-21.md) ·
+[Installation record](../../../docs/evidence/upstream-40-upload-2026-10-20.md). This candidate is fixed to
 original Contax Zeiss 50mm f/1.4 metadata: lens ID 234, nominal AV 4352. Actual iris
 position remains unknown; lens-library edits stay local. The version rolls to4.0
 because the camera uses a single BCD byte; this does not indicate factory parity.
@@ -41,5 +46,6 @@ Two additional units use the existing `-Os` policy to retain the 256-byte flash 
 
 All historical images, digests and original stock recovery are preserved.3.9 remains
 held. Upload, physical reconnect and strict complete-image/protected-data verification
-passed. One owner-coordinated A7C II cycle and read-only log review remain pending. Sustained capture,
+passed. The camera attempt failed and further 4.0 trials are held. Post-camera
+log retrieval awaits safe cap confirmation. Sustained capture,
 optical focus, exposure, shutdown and factory parity remain unqualified.

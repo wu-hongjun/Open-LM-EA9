@@ -8,17 +8,25 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The latest candidate is [upstream C AF 4.0](firmware/candidates/4.0.0/README.md),
-fixed to the original Contax Zeiss50mm f/1.4. It tests bounded released reference
-qualification, clears stale PWM before servo handoff and validates the final encoder
-reference. Three Astra audits and new production-path regressions connect the3.9
-late-anchor failure to a software readiness gate. Physical homing, optical AF,
-sustained camera capture and factory parity remain unqualified. **Upload and strict byte/protected-data verification passed after physical reconnect.**
-One owner-coordinated camera cycle and log review remain pending. [Installation record](docs/evidence/upstream-40-upload-2026-10-20.md). The version rolls to4.0 to fit
-the camera's one-byte BCD field, not to signal maturity.
-[Evidence](docs/evidence/upstream-40-reference-2026-10-20.md) ·
+The latest [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
+original Contax Zeiss 50mm f/1.4, passed strict USB installation verification but
+**failed camera acceptance; further 4.0 trials are held**. The owner reports a hard
+crash after two photos requiring a power cycle. Saved-file status, actual focus
+mode, shutdown/recovery details and the fault mechanism are unverified. No extra
+camera attempt is requested. Read-only log retrieval awaits confirmation of safe
+USB-cap reconnect with both apps closed.
+[Failure record](docs/evidence/upstream-40-camera-failure-2026-10-21.md) ·
+[Installation record](docs/evidence/upstream-40-upload-2026-10-20.md).
+
+App 0.23.1/build 32 disables ordinary 4.0 installation from every version and preserves
+backup/recovery. The original image, original stock recovery and all prior pins
+remain unchanged. Three Astra audits, 36 firmware suites and compiled evidence
+remain bounded software results; they did not establish physical homing, reliable
+capture/shutdown, optical AF or factory parity. The version 4.0 rollover only fits
+the camera's one-byte BCD field.
+[Offline evidence](docs/evidence/upstream-40-reference-2026-10-20.md) ·
 [Workbench](firmware/upstream-hardening/next40/README.md) ·
-[Separate install/test procedure](docs/upstream-reference-test.md).
+[Held installation/test procedure](docs/upstream-reference-test.md).
 
 The previously installed image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
 for the original Contax Zeiss 50mm f/1.4. Upload and strict physical-reconnect
@@ -102,13 +110,13 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.23.0, build 31) refreshes
+upload/read-back path for lens metadata. The current app (0.23.1, build 32) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
-It marks installed 3.6, 3.7, 3.8 and 3.9 as held and disables ordinary installation
-of these failed images. The 3.9 install control is disabled while held; explicit native
+It marks installed 3.6, 3.7, 3.8, 3.9 and 4.0 as held and disables ordinary installation
+of these failed images. The 3.9 and 4.0 install controls are disabled while held; explicit native
 prepare/apply commands retain their historical pinned research meaning. Image
 pins and read-only backup/recovery access remain preserved.
 The upstream candidates use the original fixed 50mm profile; they cannot apply

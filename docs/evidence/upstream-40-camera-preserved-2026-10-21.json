@@ -1,0 +1,803 @@
+{
+  "baseCommit": "80e5a71",
+  "checkedArtifacts": 151,
+  "artifacts": [
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-absolute-upstream.bin",
+      "bytes": 20480,
+      "sha256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-arbitrated-template.bin",
+      "bytes": 20480,
+      "sha256": "2cc7b512d9d78c3d39eee8d67589a99e8d8ffa97a302819399833f8c5a1da038"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-audited-template.bin",
+      "bytes": 20480,
+      "sha256": "276a134db2db04e4ea41e6bfb622e0b4f3c5421a6e3bfb6e40428cfce07fe265"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-bounded-upstream.bin",
+      "bytes": 20480,
+      "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-factory-template.bin",
+      "bytes": 20480,
+      "sha256": "db9f9f3575ededbd38cc2366eb9efea15d2af6f43df5ee7b6a67a2e500fb6cdf"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-handoff-upstream.bin",
+      "bytes": 20480,
+      "sha256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-hardened-template.bin",
+      "bytes": 20480,
+      "sha256": "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-observed-template.bin",
+      "bytes": 20480,
+      "sha256": "ac9302fd329ab59b0e47efa5bbcf3e3b0b72de4e3e2033febf006c518ba6a0cc"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-polished-template.bin",
+      "bytes": 20480,
+      "sha256": "da4eaa0f41fe9ff5b2c896ee7d5d2526cfc8fa423f581b5f55f9a1ff3c2059bf"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-readiness-upstream.bin",
+      "bytes": 20480,
+      "sha256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-reconciled-template.bin",
+      "bytes": 20480,
+      "sha256": "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-refined-template.bin",
+      "bytes": 20480,
+      "sha256": "448f827b4766f9ecb96c470d48d706650eb30d2fc41aea620369e22989d714c7"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-serviced-template.bin",
+      "bytes": 20480,
+      "sha256": "657406719f6f911b49b6430015a7c1f1ffa1ff1a4f8b454ec578fe5bf005fa3c"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-startup-diagnostic.bin",
+      "bytes": 20480,
+      "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-targeted-trace.bin",
+      "bytes": 20480,
+      "sha256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-template.bin",
+      "bytes": 20736,
+      "sha256": "6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-upstream-baseline.bin",
+      "bytes": 20480,
+      "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-upstream-hardened.bin",
+      "bytes": 20480,
+      "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-profile-template.bin",
+      "bytes": 20736,
+      "sha256": "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedAFTemplate.swift",
+      "bytes": 183,
+      "sha256": "7177caacb0fd8a4a3e83e85eda6891d9a7257ab544b2d76789fbfb206c158c98"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedAbsoluteUpstream.swift",
+      "bytes": 194,
+      "sha256": "96ab94623f56fa7e7a26a83e992d5a78a9af32c6b12d73baa5c5303e276740ee"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedArbitratedAFTemplate.swift",
+      "bytes": 197,
+      "sha256": "be4da81d9b4065b42818ec5c8234d282bfa310380c6d2672ec976a03a1eef48c"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedAuditedAFTemplate.swift",
+      "bytes": 191,
+      "sha256": "3b1eb12926cfb6f4bcc4cebe38fbf85fe3a62510bf6f08316a586ea2d2ec0df0"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedBoundedUpstream.swift",
+      "bytes": 203,
+      "sha256": "c3d0f98f84252c55e513bf414e1672dba57419a2b91fed90c6b39068dc05500e"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedFactoryAFTemplate.swift",
+      "bytes": 200,
+      "sha256": "42e72c7e63cb4c9b0d0d5fde29123549ca106063c485d6ac28090e64486cba20"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedHandoffUpstream.swift",
+      "bytes": 193,
+      "sha256": "bb8a766533a3f8747c5ee28d724abf89aba71df172091ac86634c7ad4ef2a34c"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedHardenedAFTemplate.swift",
+      "bytes": 193,
+      "sha256": "5f077b6c4ac809d9e3df8d3cd52e56156584ef24d56b42603661f4435156f44e"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedObservedAFTemplate.swift",
+      "bytes": 200,
+      "sha256": "fb66bc5d92f339a552e48b17efb6bf061371c7f5eee9460be56f6dc09f06acb2"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedPolishedAFTemplate.swift",
+      "bytes": 193,
+      "sha256": "5bf18e34d14ef62004c4247652e49944bbd46655ee18589e38f2b66dccd75bf1"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedReadinessUpstream.swift",
+      "bytes": 203,
+      "sha256": "06bcf44161e87c6758d2495b6389cd1d258122f1c5a423c7c772b74e3636a9c6"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedReconciledAFTemplate.swift",
+      "bytes": 197,
+      "sha256": "f3c3fd02a721c3588b4039c64a15e3f13f9878ad4fe381415a2429c3f39b2c65"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedRefinedAFTemplate.swift",
+      "bytes": 191,
+      "sha256": "20a85853974dc5c2f6eb9a535e6278a43d5060cb66bcf325845e4204bd9c1e41"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedServicedAFTemplate.swift",
+      "bytes": 198,
+      "sha256": "4c47a1a41f846b8169d4dae2945c26501fb0b5789d71c6a743f255c8f8cc6231"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedStartupAFTemplate.swift",
+      "bytes": 184,
+      "sha256": "beca7e9b4d59392dc1fda11e7a153d92d3ceab92ee5398be9cc720c886fa54cc"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedTargetedTrace.swift",
+      "bytes": 190,
+      "sha256": "99ade71594c8c6c1e9a2092eddcae1884a7cbc45c9a13f49e2558e90ac873153"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedTemplate.swift",
+      "bytes": 184,
+      "sha256": "ca7c2567a68d7a548b534e3eec0c25ad6f39cb8848e68aedce33c636859fbb30"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedUpstreamBaseline.swift",
+      "bytes": 203,
+      "sha256": "e7c141a8256f67ed5dac5a10db7b03fe5412a1ff7d763da265b40b98c64002f9"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedUpstreamHardened.swift",
+      "bytes": 201,
+      "sha256": "fc59dfe10ac5a308b6a3e045183d18200f5e26bf6ff90e2eebe8800134eaecff"
+    },
+    {
+      "path": "firmware/candidates/2.3.0/README.md",
+      "bytes": 3304,
+      "sha256": "029ff1976196a5ba13fec20752c0441d3e97a44f3e3f61ad293c5a8ff6e57522"
+    },
+    {
+      "path": "firmware/candidates/2.3.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "39222b5f5b232045a7599da1afc45753bb8ea0f12c338501131f49e0dcb854a4"
+    },
+    {
+      "path": "firmware/candidates/2.3.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 761,
+      "sha256": "72f0c19f54cc51a30d9b4c829c18810cf69dcbf03e7cd677fb22d314af134a35"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/README.md",
+      "bytes": 4240,
+      "sha256": "44041981808ec519bee1b060bb93d9e3eb03b3af705744f898b52cb572f80fe4"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "c54739a7930cdf4bc12f395a86d38fde6819633b3420821a6b51d8e0704bf6df"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 569,
+      "sha256": "c719ccd09a42e8d11a4eb3d304bf5c8ff62d52015d171dd6953425795e61f471"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/hosttest/sam.h",
+      "bytes": 1541,
+      "sha256": "c6bd91802928b350f1c844ca2a3e2cc2c9ac1928405c23c4a3230ef2de61fb4d"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/hosttest/sam_servo.h",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/hosttest/shim.c",
+      "bytes": 7972,
+      "sha256": "4f6b2bac4d6af3a55c3be645fae1601e43551575c13163632d583d2278e0603a"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/hosttest/sim_motor.c",
+      "bytes": 12161,
+      "sha256": "14e0a2f579bb079fadd5858bd01dc5367203a248bbdcc74cd85cafd12c938f36"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/abs_encoder.h",
+      "bytes": 1322,
+      "sha256": "ab00553ac0d6df9aaf8bf2e96eecee4a04b219313a8507de996e9c058e83de1c"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_completion.c",
+      "bytes": 579,
+      "sha256": "c244b75deb97cddfa5078ed127be26745f891324d1f9112fa9f20db286ab18bd"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_completion.h",
+      "bytes": 518,
+      "sha256": "4da24284b3dec4fa2caeabefc3dd58796e8340826f23cdf3b6c7c111e1af96da"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_control.c",
+      "bytes": 1708,
+      "sha256": "77a9c02538933e24d2f3820e3eded350fda6849ac38b9d6ddc9214f6093b68e4"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_control.h",
+      "bytes": 1194,
+      "sha256": "ef7a6bab55b0847ea7c5df2e1ffabbc9bf87c02642f8e8b6eb27f1aff579f990"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_reference.h",
+      "bytes": 1317,
+      "sha256": "56d9daa2715c269b80332dceac33b1b2f04a04552abdc697f1d9dd81c4c3cd8c"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/af_timing.h",
+      "bytes": 754,
+      "sha256": "b542fffbfe85d209e2ffc36e02d20e827488973b0dc5bade4d2abea8309280a0"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/atmel_start.h",
+      "bytes": 268,
+      "sha256": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/board.h",
+      "bytes": 6533,
+      "sha256": "0ac0b7f75f4b8d7e4e4297631f410fa537f2b33cf2ea0e6cd7a11d56ffc1ee2d"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/clock.h",
+      "bytes": 149,
+      "sha256": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/delay.h",
+      "bytes": 343,
+      "sha256": "579fb0d795b92dc0b84c2639e7be3af660484b5cfb5b71e2c5db6211d3a5d1ca"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/diag.h",
+      "bytes": 9044,
+      "sha256": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/em_eic.h",
+      "bytes": 541,
+      "sha256": "0565076b6e7e16cd90ea6701f63fcd3a0a091fe53ad77511bf83c7c6f430630f"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/em_uart.h",
+      "bytes": 1895,
+      "sha256": "fc35b5be53c20a8214eac4260fa874ef68ab2b4953eef4bbc7f018f468e3b5b3"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/emount.c",
+      "bytes": 54239,
+      "sha256": "e838afec1a3c37d555d479c6909f8d0954931992e5ba1c4ef3e0a69a026f826b"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/emount.h",
+      "bytes": 39323,
+      "sha256": "afc59f376cabcac400f5509870abc1ef7887df88a5a6c940b58f134a9a9ee699"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/emount_packets.c",
+      "bytes": 8862,
+      "sha256": "89d83f16717a229c2897acf8d3a8fbcf3528bef5345f8e47bca6710d70eb157f"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/emount_packets.h",
+      "bytes": 2292,
+      "sha256": "628a9eb05e0ae2cfbd53d8418d75f900059e67081282b970afb5d078aecf6947"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/factory_af.c",
+      "bytes": 3450,
+      "sha256": "c8dd0628554238964191c233681f42cb4ecdf44d7524baac51fd1208ab77a3dc"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/factory_af.h",
+      "bytes": 1393,
+      "sha256": "97521656884bfe25862a636ebdb151733e7e824de10954c643c88e710b22024e"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/factory_servo.c",
+      "bytes": 7536,
+      "sha256": "66209fcf8e6a0e68a137e1e2cf3cc35913f81493098a2967f5581c4a0253fa5c"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/factory_servo.h",
+      "bytes": 365,
+      "sha256": "e9500041dddf4b054fd550685045caad9459e862cceee0927c68287f74f4099a"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/focus_dist.c",
+      "bytes": 4437,
+      "sha256": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/focus_dist.h",
+      "bytes": 3171,
+      "sha256": "af54b299a020440cc4748f3ea6d6fbf52d8a18dab71f52ea1ce942714cdaa055"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/focus_map.c",
+      "bytes": 890,
+      "sha256": "6ae7793f16ad6cc293e9a85dd9d5c90215e4d6826cd38e810b62f294e6d96415"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/focus_map.h",
+      "bytes": 2630,
+      "sha256": "ea7bda264c0dd0b8cfab080349d48dec6aea10b448ead1abcf235a7a5646d7a4"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/focus_pred.h",
+      "bytes": 3029,
+      "sha256": "57627cf9a3b9d80855d6a61f5154ccb429ac42a22f4bef9f7d23ec05c9138fdb"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/io_guard.c",
+      "bytes": 867,
+      "sha256": "636e3175399b1172540ce6ade4aeecbb5fa438f055c4a021fb903f43b77776f9"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/io_guard.h",
+      "bytes": 1399,
+      "sha256": "c783880bb371f36e1289d5a962b4755a68a9a7ecfa6e2acc75b1e6bb5f21ddab"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/lens_profile.c",
+      "bytes": 2450,
+      "sha256": "38fc124c3c88fada08357c3a04a7a7d11b94ef96bdc80454afad080dcb1bbc6c"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/lens_profile.h",
+      "bytes": 515,
+      "sha256": "ccffa5fccf288564cccb642148706f9d2388cd8bbdae0accccf1c18a19dcba8a"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/motor.h",
+      "bytes": 1628,
+      "sha256": "5abd2171da992dc055675734111686055f24f330afca726424e76178f2d50f2b"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/servo.h",
+      "bytes": 19659,
+      "sha256": "e4be13336482896b2b3de63baf67459a2706f20b61ee8a8f8b58ae728ecc50d7"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/trail.h",
+      "bytes": 3053,
+      "sha256": "bc355c64ebd36e83aeacb7bf732cc2e2904b2e97131af948e549924fbed6953b"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/ea9/src/vdd.h",
+      "bytes": 655,
+      "sha256": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/firmware/tests/test_factory_camera_limits.c",
+      "bytes": 2690,
+      "sha256": "1b03c292813f43d98c51941150d15d90d21ee2f4f67d0cd4ee90f6e07bab33c2"
+    },
+    {
+      "path": "firmware/candidates/2.4.0/counterexample-src/manifest.json",
+      "bytes": 4397,
+      "sha256": "d28ac57ed539e9d1061fb759e3b9905b8dd1d15d1ef4cd3cdd438dc5ee5bb746"
+    },
+    {
+      "path": "firmware/candidates/2.5.0/README.md",
+      "bytes": 3939,
+      "sha256": "19de24dcbc1cb19db287c53e407cc9f59d98253a1f418d36a20a690d493363fd"
+    },
+    {
+      "path": "firmware/candidates/2.5.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "febfa9ff411af46bff225633984e84d4d5ff6d10580514a5bdf429e76f719522"
+    },
+    {
+      "path": "firmware/candidates/2.5.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 569,
+      "sha256": "29833c8b952f4331fdbd1e2314e326a45799a4738915feccab3e58acf9ed5a34"
+    },
+    {
+      "path": "firmware/candidates/2.5.0/regression-inputs.json",
+      "bytes": 4971,
+      "sha256": "635d028520382d8217f882ca897b9cda80e89cdaf5b1686cc7fbd42341cfb8af"
+    },
+    {
+      "path": "firmware/candidates/2.6.0/README.md",
+      "bytes": 4387,
+      "sha256": "f280ef1228f9569105f3d11cd8591dfdf572418f7bbae7158dfe86d939916aa8"
+    },
+    {
+      "path": "firmware/candidates/2.6.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "1447e37e9bd528c072ace96a23449e7399eb011393e78202de907966d69053d6"
+    },
+    {
+      "path": "firmware/candidates/2.6.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 569,
+      "sha256": "55ad3a1c1ce09d24c7ab4cee80ffb56913452d61302f79733c466c6dfdd29648"
+    },
+    {
+      "path": "firmware/candidates/2.6.0/regression-inputs.json",
+      "bytes": 8974,
+      "sha256": "a21163f6d02bc0c23a2d83ddfb351f3809011474c0892bd1d08597da30761acd"
+    },
+    {
+      "path": "firmware/candidates/2.7.0/README.md",
+      "bytes": 3851,
+      "sha256": "5c715432c9fa2b3d7f2d8b9157b8f7ce021dc1ee4d57cd2709c0bfb46b596a8f"
+    },
+    {
+      "path": "firmware/candidates/2.7.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "e124d09ad3eb272fab699035ee1ff941417afa3c6dd900484e11ae44c9c890b4"
+    },
+    {
+      "path": "firmware/candidates/2.7.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 570,
+      "sha256": "d2727e4ac57ff6c5a8f7952aaede3c09b1df7f68c168154a617b2d621b39f251"
+    },
+    {
+      "path": "firmware/candidates/2.7.0/regression-inputs.json",
+      "bytes": 9336,
+      "sha256": "691fcc1eac8bee1a754e32367e47ee593374372b1a8b8273c3e5925fd2a6c841"
+    },
+    {
+      "path": "firmware/candidates/2.8.0/README.md",
+      "bytes": 4705,
+      "sha256": "73bb9b60a9809ef59e1edad52e1af0b004d3893ec493d437c566606b66aaeb94"
+    },
+    {
+      "path": "firmware/candidates/2.8.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "81f959c0b19fb222ee39b49eb7505882c30b25cb765c643e3f33daadf8e92834"
+    },
+    {
+      "path": "firmware/candidates/2.8.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 570,
+      "sha256": "1b41a6ab1f3570854f98ac768c7e031f8045a0708be01816a05a8673b6470a0c"
+    },
+    {
+      "path": "firmware/candidates/2.8.0/regression-inputs.json",
+      "bytes": 8844,
+      "sha256": "e8c5d3ea4729dc289f1ba63e6f420e18ba29a9308be951dee335f44d236d21c8"
+    },
+    {
+      "path": "firmware/candidates/2.9.0/README.md",
+      "bytes": 3664,
+      "sha256": "d5cb4b3a0a2014d4a8bf50fb20483a93704edc06a9c501a313f44aff8c3a599d"
+    },
+    {
+      "path": "firmware/candidates/2.9.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "c5fac2eeb7b8c26833b37555f25598352c850f224dba1d091379c09cd9a6ffc3"
+    },
+    {
+      "path": "firmware/candidates/2.9.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 570,
+      "sha256": "e74a83c55a93ef49ad2a9ea24f8e157d75dbd1c5b017417f290c3c40843af8b9"
+    },
+    {
+      "path": "firmware/candidates/2.9.0/regression-inputs.json",
+      "bytes": 9201,
+      "sha256": "67c44a1436c66352f5f4934f411d5528eb0b26eca5ea292891c240cb4c55865b"
+    },
+    {
+      "path": "firmware/candidates/3.0.0/README.md",
+      "bytes": 3829,
+      "sha256": "9cc580991c0bc5e1bbfb1028ff595a1e2f10a9f8a9718177a749cdd41ddfed06"
+    },
+    {
+      "path": "firmware/candidates/3.0.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "a2ec81cd87be9142da1d4caec3968afff810bfc51e25ebc214f5532b51783b03"
+    },
+    {
+      "path": "firmware/candidates/3.0.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 572,
+      "sha256": "8b7aee985ad51b803ffa7ec3cd59ea0aaa60d7732487b90d264de8278e945bda"
+    },
+    {
+      "path": "firmware/candidates/3.1.0/README.md",
+      "bytes": 3383,
+      "sha256": "2a0ec03fc13f5dd1a9df37b6c0d6fe08c23f3ee8e93dd7fb42d5559bd7ae4669"
+    },
+    {
+      "path": "firmware/candidates/3.1.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "528225e6f6472da0d92479da2b3e475a32f82735347231b6dc7c3d0dc7e8b39f"
+    },
+    {
+      "path": "firmware/candidates/3.1.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 595,
+      "sha256": "53bf577aa8d54bcc39253dfa6389879e545c967f0a0138710d41a367a867bb6a"
+    },
+    {
+      "path": "firmware/candidates/3.2.0/README.md",
+      "bytes": 3044,
+      "sha256": "2990e376eff588afdad8aed11ec1c1181869ca96c2434b4f4943992f9add726b"
+    },
+    {
+      "path": "firmware/candidates/3.2.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "e20f169d9476391a1b988da5122f534411ceecc6b282e7acb92b558256a7c0df"
+    },
+    {
+      "path": "firmware/candidates/3.2.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 4541,
+      "sha256": "677d1f19c82acc9a79281882f1c0b70b2b33ddae189048538e71c18fe2abd6b2"
+    },
+    {
+      "path": "firmware/candidates/3.3.0/README.md",
+      "bytes": 3512,
+      "sha256": "4100b03c93d7d9a229768d070b7df368fd5cdde827674a5583af004f635535eb"
+    },
+    {
+      "path": "firmware/candidates/3.3.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd"
+    },
+    {
+      "path": "firmware/candidates/3.3.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 25412,
+      "sha256": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05"
+    },
+    {
+      "path": "firmware/candidates/3.3.0/from-32.patch",
+      "bytes": 46698,
+      "sha256": "b66ac931c3d97b72cc2995a0c2b47553f0061e656acc18ed036f1b6b8e5b82e6"
+    },
+    {
+      "path": "firmware/candidates/3.4.0/README.md",
+      "bytes": 3502,
+      "sha256": "5cb5a828ccee504e1884abd1b48044297f2d740bbaa56703a55ad38ba2b278b1"
+    },
+    {
+      "path": "firmware/candidates/3.4.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9"
+    },
+    {
+      "path": "firmware/candidates/3.4.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 19811,
+      "sha256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a"
+    },
+    {
+      "path": "firmware/candidates/3.4.0/from-33.patch",
+      "bytes": 3847,
+      "sha256": "68a7098826a5af9b12627fc6ba5eb0bfa9e3a430521dc2f203cf556092a1e957"
+    },
+    {
+      "path": "firmware/candidates/3.5.0/README.md",
+      "bytes": 4334,
+      "sha256": "2f5d9b206523633bfca598adef7b1b80d8cab260621fc5128501b657070ada46"
+    },
+    {
+      "path": "firmware/candidates/3.5.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632"
+    },
+    {
+      "path": "firmware/candidates/3.5.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 19509,
+      "sha256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de"
+    },
+    {
+      "path": "firmware/candidates/3.5.0/from-34.patch",
+      "bytes": 2761,
+      "sha256": "00fdf8c988368dae87f911af3be3862b3da61ee8acd32066cc516c7bcd8776f0"
+    },
+    {
+      "path": "firmware/candidates/3.6.0/README.md",
+      "bytes": 3580,
+      "sha256": "e73a507491033d12bca9709d38e50a414528dbff8dd02b4dfaac5ec98eeed606"
+    },
+    {
+      "path": "firmware/candidates/3.6.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f"
+    },
+    {
+      "path": "firmware/candidates/3.6.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 19330,
+      "sha256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae"
+    },
+    {
+      "path": "firmware/candidates/3.6.0/from-35.patch",
+      "bytes": 916,
+      "sha256": "5901e19b3a2f5ead355b966b6aa18b92b91f7a99d8816551146c5500462724be"
+    },
+    {
+      "path": "firmware/candidates/3.7.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5"
+    },
+    {
+      "path": "firmware/candidates/3.7.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 22331,
+      "sha256": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b"
+    },
+    {
+      "path": "firmware/candidates/3.7.0/from-36.patch",
+      "bytes": 37697,
+      "sha256": "b5c5bbce6b71f58fd133f8962332536e40bff768a0aa804f18bc391d90c6404b"
+    },
+    {
+      "path": "firmware/candidates/3.8.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9"
+    },
+    {
+      "path": "firmware/candidates/3.8.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 20913,
+      "sha256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0"
+    },
+    {
+      "path": "firmware/candidates/3.8.0/from-37.patch",
+      "bytes": 1444,
+      "sha256": "215f5cdb1070e3ff412db0551e0cbf7693e8f8f2611ceeb003e477190fce945a"
+    },
+    {
+      "path": "firmware/recovery/stock-1.8.0/README.md",
+      "bytes": 4296,
+      "sha256": "f1094873be871e87213932f54a603e520832aa1ba762a646a5b3e653520a5eb6"
+    },
+    {
+      "path": "firmware/recovery/stock-1.8.0/application.bin",
+      "bytes": 20172,
+      "sha256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564"
+    },
+    {
+      "path": "firmware/recovery/stock-1.8.0/original-unit-backup.aesgcm",
+      "bytes": 22306,
+      "sha256": "96f920e711580a94dffacc9f0a29bfe2ddd472a9dd88b1732021ea800f1ef0bf"
+    },
+    {
+      "path": "firmware/recovery/stock-1.8.0/recovery.json",
+      "bytes": 1385,
+      "sha256": "791bef4392160c30de4801e3ea18f6716c6acb3ec910bb9fd2ffedafb45317f7"
+    },
+    {
+      "path": "firmware/upstream-baseline/reference-release.bin",
+      "bytes": 20480,
+      "sha256": "0f864e87917f937affdc001dba19a0826756564d01969f507af8c400b4aec179"
+    },
+    {
+      "path": "firmware/candidates/3.9.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44"
+    },
+    {
+      "path": "firmware/candidates/3.9.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 21336,
+      "sha256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a"
+    },
+    {
+      "path": "firmware/candidates/3.9.0/from-38.patch",
+      "bytes": 2064,
+      "sha256": "578e331d5c2894af29f9b70e11e7c469f4ed5305ca6231919794ed3c83d29da8"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedHomingUpstream.swift",
+      "bytes": 215,
+      "sha256": "f98181eac117e5fa1498b576a163c64463e049811193b29e5026d7e6057ddd06"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-homing-upstream.bin",
+      "bytes": 20480,
+      "sha256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44"
+    },
+    {
+      "path": "firmware/candidates/4.0.0/contax-zeiss-50-f1-4.bin",
+      "bytes": 20480,
+      "sha256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae"
+    },
+    {
+      "path": "firmware/candidates/4.0.0/contax-zeiss-50-f1-4.manifest.json",
+      "bytes": 21869,
+      "sha256": "8c55aaeed4cd15849907dae4457cadf6a070392141c95485041d40ddcdb85ffc"
+    },
+    {
+      "path": "firmware/candidates/4.0.0/from-39.patch",
+      "bytes": 3866,
+      "sha256": "18d07f75ba437f29206d9f5e2be5bf140ea27c96659d232d8c85f0350f68cb8d"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/TrustedReferenceUpstream.swift",
+      "bytes": 201,
+      "sha256": "a2234d9175ca0359997d89266267c86568d8f0b345f5663a98bca4481b0beb70"
+    },
+    {
+      "path": "apps/macos/Sources/DeviceKit/Resources/ea9-af-reference-upstream.bin",
+      "bytes": 20480,
+      "sha256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae"
+    }
+  ],
+  "historicalDiagnosticRegistryEntries": {
+    "3.3.0": {
+      "imageSHA256": "adc4b5de9a717b1a573425006ef565962bf5c56ab2233a4eca9192feb7ad11cd",
+      "manifestSHA256": "302b5538ffd47ff72912b550073105f5dfec147db7fc27ec979be15f0a256d05",
+      "immutablePrefixSHA256": "25e095179a5faabfe201ed001cb0e9437e9c8c93861955fb4a57adf44f33e63c"
+    },
+    "3.4.0": {
+      "imageSHA256": "fe6e192162c51ca15836d8431d8c6846f7a95c034ec4d8dc7a2805f3eac2eab9",
+      "manifestSHA256": "8e358720a959a79a4636e1a9310fc23c08af9fa50539396d6946be6194c25a9a",
+      "immutablePrefixSHA256": "58b0fff304929800682ae88ce4d5b975181cd6acaece89611ec3be989e79638c"
+    },
+    "3.5.0": {
+      "imageSHA256": "04a70e2ccfd08badb90da4bccc2a2ac3c2da793078beefb942b50c093c868632",
+      "manifestSHA256": "a44ec01051f50f2bface355d526c083de385be329dc49e3a648e3a7914cb39de",
+      "immutablePrefixSHA256": "1896a3caa8d243ee4b5482f6a68af763aefa6e90ba9108e5b6922255e2e45a07"
+    },
+    "3.6.0": {
+      "imageSHA256": "d8a60e48484d1b48e3aff0da18e6d89453d1284a8b23dca01393b320fdc6651f",
+      "manifestSHA256": "ea2511bbdd7a833095df5b613579d0b69083efe3a44d26078d07efa8d51eccae",
+      "immutablePrefixSHA256": "a09fc3a3a62e61f90265725737cf7c84f47bdbd0459bce0f60db65d82693ffef"
+    },
+    "3.7.0": {
+      "imageSHA256": "6a7faa368ecd83a6af530bba0b8574c70342350313d590329cb0176cca946ba5",
+      "manifestSHA256": "15a3a59c5f5f75553f69f5bcd23f8ecc23178cb50700eeef2b19b18a46ac801b",
+      "immutablePrefixSHA256": "9dc8fdc0decf9f160b63767bdfe644d0d7b4aad78e1c01470e7c69244352e3cd"
+    },
+    "3.8.0": {
+      "imageSHA256": "8864577453c93e4b0eb4d4d29d0d7de80656cbe075a4c7a1090e8083eff299b9",
+      "manifestSHA256": "be9211016ec96539a79389e1d7ef4381a8e61c91a408d66d74dbb8a0ab6a35f0",
+      "immutablePrefixSHA256": "cf24fd4c12018e9557143614ae3533b7e7471f5340d914eca6569383be05d80b"
+    },
+    "3.9.0": {
+      "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+      "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
+      "immutablePrefixSHA256": "bf66a3136122120ec13029dba5cb0cea417cad74fca17bce6ed2f527e1be5f1b"
+    },
+    "4.0.0": {
+      "imageSHA256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae",
+      "manifestSHA256": "8c55aaeed4cd15849907dae4457cadf6a070392141c95485041d40ddcdb85ffc",
+      "immutablePrefixSHA256": "d33319e17c0066079974c162db3c900d54d8b36ee7d9a4a48c332911a436fdf2"
+    }
+  }
+}

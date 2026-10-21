@@ -1,9 +1,15 @@
 # AF 4.0 — separate upload, one camera cycle and logs
 
-**AF 4.0 upload and strict verification passed after physical reconnect.**
-One owner-coordinated camera cycle and log review remain pending. [Installation record](evidence/upstream-40-upload-2026-10-20.md). Do not repeat
-held 3.9 camera trials.4.0 is an experimental fixed Contax Zeiss 50mm f/1.4 candidate,
-not an accepted camera release. [Image and pins](../firmware/candidates/4.0.0/README.md).
+**AF 4.0 camera acceptance failed; further trials are held.** The owner reports a
+hard crash after two photos requiring a power cycle. Strict installation verification
+remains a historical fact. Read-only logs await confirmation that the camera is
+unpowered/stopped and the adapter physically reconnected through its USB cap with
+both apps closed. No extra camera cycle or firmware upload is requested.
+[Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md) ·
+[Installation record](evidence/upstream-40-upload-2026-10-20.md).
+
+The procedure below records the historical authorized installation/test sequence.
+Do not repeat it with held 4.0. Any later production change needs a new candidate.
 
 ## Coordinated installation
 

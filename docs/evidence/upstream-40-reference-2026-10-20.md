@@ -1,7 +1,8 @@
 # AF 4.0 — bounded reference qualification and capture handoff
 
 Subsequent interactive [upload and strict verification](upstream-40-upload-2026-10-20.md)
-passed after physical reconnect. One camera cycle and log review remain pending. The offline evidence below
+passed after physical reconnect. [Camera acceptance subsequently failed](upstream-40-camera-failure-2026-10-21.md);
+further 4.0 trials are held and read-only logs await safe cap confirmation. The offline evidence below
 remains a historical preparation milestone, not an installation or camera result.
 
 **Prepared offline for the original Contax Zeiss 50mm f/1.4; not flashed or camera-qualified.**

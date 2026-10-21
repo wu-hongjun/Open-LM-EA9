@@ -1,6 +1,12 @@
 # Firmware development
 
-Latest candidate: [AF4.0 bounded reference qualification](candidates/4.0.0/README.md). Upload and strict verification passed after physical reconnect. Camera cycle/log review pending; not camera-qualified. [Installation record](../docs/evidence/upstream-40-upload-2026-10-20.md). See the [integrated evidence](../docs/evidence/upstream-40-reference-2026-10-20.md) and [separate installation procedure](../docs/upstream-reference-test.md).
+Latest candidate: [AF 4.0 bounded reference qualification](candidates/4.0.0/README.md).
+Upload/strict verification passed, but **camera acceptance failed; 4.0 is held**
+after a hard crash following two reported photos and a required power cycle.
+Read-only logs await safe USB-cap confirmation. No extra camera attempt is requested.
+[Failure record](../docs/evidence/upstream-40-camera-failure-2026-10-21.md) ·
+[Installation record](../docs/evidence/upstream-40-upload-2026-10-20.md).
+
 
 The previously installed image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
 Upload and strict verification passed after physical reconnect. **Camera

@@ -1,9 +1,11 @@
 # AF 4.0 upload — October 20, 2026
 
-**AF 4.0 passed strict USB byte verification after physical reconnect and an
-independent full-image/protected-data audit. One owner-coordinated camera cycle
-and read-only log retrieval remain pending.** These checks establish installation
-bytes, not camera capture, exposure, focus, shutdown or factory parity.
+**AF 4.0 passed strict USB byte verification after physical reconnect. Camera
+acceptance subsequently failed; further 4.0 trials are held.** The owner reports a
+hard crash after two photos requiring a power cycle. Actual focus mode, saved-file
+status and recovery details are unknown; read-only logs await safe cap confirmation.
+[Camera failure record](upstream-40-camera-failure-2026-10-21.md).
+
 
 [Sanitized receipt](upstream-40-upload-2026-10-20.json) ·
 [Candidate and pins](../../firmware/candidates/4.0.0/README.md) ·
@@ -101,3 +103,14 @@ Only then retrieve one guarded read-only backup and decode/audit saved files.
 Actual settings, preview, motor, saved-file exposure and shutdown remain unknown
 until reported. A later logged read is diagnostic evidence, not pristine full-image
 verification. This remains unqualified for sustained capture/AF and factory parity.
+
+## Subsequent October 21 report
+
+The owner reports a hard crash after two photos and needing a power cycle. Two
+saved files, actual MF/AF/Pre-AF, exposure/preview, motor and recovery method remain
+unverified. The requested single MF cycle is not recorded as confirmed. No new
+camera attempt or flash is requested. App 0.23.1/build 32 holds 4.0 and disables its
+ordinary installation; exact firmware/native command pins and recovery remain.
+Post-camera logs await explicit safe USB-cap reconnect with both apps closed.
+This record retains the successful strict USB readback separately from the failed
+camera milestone; no physical fault mechanism is inferred from the report alone.

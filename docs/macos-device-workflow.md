@@ -1,14 +1,12 @@
-# Device workflow: prototype 0.23.0, build 31
+# Device workflow: prototype 0.23.1, build 32
 
-The new packaged candidate is **AF4.0.0 reference qualification**, fixed to the
-original50mm f/1.4. Upload and strict verification passed after physical reconnect; one coordinated
-camera cycle and read-only log review remain pending.
-It remains camera-unqualified. [Installation record](evidence/upstream-40-upload-2026-10-20.md).
-`prepare-reference-upstream`/`apply-reference-upstream` select its exact pinned image.
-USB tools expose it explicitly; ordinary lens dropdown changes do not install it.
-Read-only operations and all older image/command pins and failure holds remain.
-See the [offline evidence](evidence/upstream-40-reference-2026-10-20.md) and
-[separate test procedure](upstream-reference-test.md).
+The packaged **AF 4.0.0** remains fixed to the original 50mm f/1.4. Its strict USB
+installation verification passed, but **camera acceptance failed and 4.0 is held**
+after a hard crash following two reported photos and a required power cycle.
+App 0.23.1/build 32 disables ordinary 4.0 installation from every installed version,
+while retaining read-only backup/recovery. Native historical prepare/apply commands
+retain their exact image meanings. No additional camera test is requested; logs
+await safe USB-cap confirmation. [Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md).
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.

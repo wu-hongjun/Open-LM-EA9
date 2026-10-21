@@ -394,8 +394,8 @@ private actor DiscoveryFixture {
     #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallReadiness && !model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
-    // A new unqualified candidate is explicit, fixed-profile, and consent-gated.
-    #expect(model.canInstallReferenceQualified)
+    // Failed4.0 is held even when an older image is installed.
+    #expect(!model.canInstallReferenceQualified)
     model.idleAcknowledged = false
     #expect(!model.canInstallReferenceQualified)
     model.idleAcknowledged = true
@@ -407,9 +407,10 @@ private actor DiscoveryFixture {
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.0.0"))
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallReferenceQualified)
-    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools)
-    #expect(model.workflowTitle == "Reference qualification candidate")
-    #expect(model.workflowDetail.contains("unqualified") && model.firmwareBehaviorNote.contains("unqualified"))
+    #expect(model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "AF 4.0 camera testing held")
+    #expect(model.workflowDetail.contains("hard camera crash") && model.workflowDetail.contains("power cycle"))
+    #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
     #expect(!model.canInstallHomingDiagnostic && !model.canInstallReadiness && !model.canInstallTargetedTrace)
 

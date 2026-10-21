@@ -1,6 +1,6 @@
 {
   "date": "2026-10-20",
-  "status": "strict-installation-verification-passed-camera-cycle-pending",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-further-trials-held",
   "sourceGitCommit": "77b3104ce18618ca0856e456b0a2df7d43844447",
   "appVersion": "0.23.0",
   "appBuild": 31,
@@ -55,8 +55,8 @@
   "physicalReconnectAfterUploadConfirmed": true,
   "strictByteVerificationPassed": true,
   "protectedDataReadbackVerifiedAfterUpload": true,
-  "cameraTestPerformed": false,
-  "cameraCyclePending": true,
+  "cameraTestPerformed": true,
+  "cameraCyclePending": false,
   "postCameraLogRetrievalPerformed": false,
   "cameraAcceptancePassed": false,
   "physicalHomingFailureFixed": false,
@@ -125,5 +125,21 @@
     "independentFilesystemAuditPassed": true,
     "historicalArtifactsRechecked": 146,
     "originalStockRecoveryUnchanged": true
+  },
+  "cameraObservationReceived": true,
+  "ownerCameraObservationReceived": true,
+  "furtherCameraTrialsHeld": true,
+  "controlledMFCycleConfirmed": false,
+  "cameraFailureEvidence": "upstream-40-camera-failure-2026-10-21.json",
+  "latestCameraObservationDate": "2026-10-21",
+  "postCameraSummary": {
+    "reportedPhotos": 2,
+    "photoFilesSaved": null,
+    "hardCrashReported": true,
+    "powerCycleRequired": true,
+    "batteryRemovalRequired": null,
+    "normalShutdown": null,
+    "focusMode": null,
+    "postCameraReadOnlyBackupPending": true
   }
 }

@@ -249,7 +249,7 @@ struct DeviceToolsView: View {
                             Button("Install Readiness 3.8.0", action: model.installReadiness).disabled(!model.canInstallReadiness)
                             Text("Homing Diagnostic 3.9.0 is held after blocked further photos. Shutdown was normal. Preserve logs and do not repeat camera testing with this image.").font(.callout)
                             Button("Install Homing Diagnostic 3.9.0", action: model.installHomingDiagnostic).disabled(!model.canInstallHomingDiagnostic)
-                            Text("Reference Qualification 4.0.0 tests bounded released settling, validated reference commit and clean motor handoff. Fixed 50mm f/1.4; camera behavior remains unqualified.").font(.callout)
+                            Text("Reference Qualification 4.0.0 is held after a hard camera crash following two reported photos and a required power cycle. Do not repeat camera testing; preserve a read-only backup for log review.").font(.callout)
                             Button("Install Reference Qualification 4.0.0", action: model.installReferenceQualified).disabled(!model.canInstallReferenceQualified)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
