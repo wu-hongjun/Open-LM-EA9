@@ -208,3 +208,22 @@ build24; meaningful failing controls, all 53 Swift tests and packaging pass.
 No further camera trial, flash or stock restoration followed. The
 [failure record](../evidence/upstream-36-camera-failure-2026-10-15.md) supersedes
 the earlier camera-pending status while preserving strict USB equality.
+
+## Separate October 20 follow-up: reference qualification 4.0
+
+The expired overnight campaign remains closed. In separately authorized offline
+work, Astra49 audited/repaired late home qualification, Astra50 composed actual
+servo/protocol capture and shutdown readiness, and Astra51 independently audited
+upstream/REA contracts and the final compiled artifact. These are three completed
+new lanes, not resumed scheduled hardware work. The 3.9 late-anchor snapshot
+reproduces a stricter software gate absent from upstream's drive-to-settle path.
+
+The new 4.0 candidate retains bounded drive and failure/session/cancellation
+guards, adds released fixed-anchor settling, clears stale PWM while detached,
+and commits only a validated final encoder sample. No separate downstream owner
+defect was reproduced, so capture re-arm and shutdown policy remain unchanged.
+The experimental software-reference fallback has weaker driven corroboration;
+physical endstop, optical AF, sustained capture and factory parity are unproven.
+See the [integrated evidence](../evidence/upstream-40-reference-2026-10-20.md),
+which records final tests, exact pins, preservation and the separate flash plan.
+No adapter enumeration/report/flash or app launch occurred in this follow-up.

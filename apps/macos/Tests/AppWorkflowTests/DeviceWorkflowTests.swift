@@ -394,4 +394,23 @@ private actor DiscoveryFixture {
     #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallReadiness && !model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    // A new unqualified candidate is explicit, fixed-profile, and consent-gated.
+    #expect(model.canInstallReferenceQualified)
+    model.idleAcknowledged = false
+    #expect(!model.canInstallReferenceQualified)
+    model.idleAcknowledged = true
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(!model.canInstallReferenceQualified)
+    model.chooseDeviceLens(profile.id)
+    let reference = try ApplicationImage.personalized(profile, variant: .autofocusReferenceQualified)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(reference.setting), firmwareVersion: "4.0.0", imageSHA256: digest(reference.data), verifiedAt: Date()))
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.0.0"))
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallReferenceQualified)
+    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools)
+    #expect(model.workflowTitle == "Reference qualification candidate")
+    #expect(model.workflowDetail.contains("unqualified") && model.firmwareBehaviorNote.contains("unqualified"))
+    #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    #expect(!model.canInstallHomingDiagnostic && !model.canInstallReadiness && !model.canInstallTargetedTrace)
+
 }

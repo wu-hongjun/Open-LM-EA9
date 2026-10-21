@@ -1,0 +1,194 @@
+{
+  "status": "passed-final40-offline-acceptance-camera-unqualified",
+  "compiledAuditSkipped": false,
+  "imageSHA256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae",
+  "manifestSHA256": "8c55aaeed4cd15849907dae4457cadf6a070392141c95485041d40ddcdb85ffc",
+  "sourceFilesVerified": 49,
+  "checks": [
+    {
+      "name": "coordinate",
+      "exitCode": 0
+    },
+    {
+      "name": "query-ownership",
+      "exitCode": 0
+    },
+    {
+      "name": "query-flow",
+      "exitCode": 0
+    },
+    {
+      "name": "absolute-target",
+      "exitCode": 0
+    },
+    {
+      "name": "time-contract",
+      "exitCode": 0
+    },
+    {
+      "name": "target-time-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "exact-counter-parity",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-commits",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-session",
+      "exitCode": 0
+    },
+    {
+      "name": "home-inhibit",
+      "exitCode": 0
+    },
+    {
+      "name": "query-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "motion-tracing",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-retention",
+      "exitCode": 0
+    },
+    {
+      "name": "startup-handoff",
+      "exitCode": 0
+    },
+    {
+      "name": "historical39-home-inhibit",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-qualification",
+      "exitCode": 0
+    },
+    {
+      "name": "readiness-capture",
+      "exitCode": 0
+    },
+    {
+      "name": "release-adc",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-status",
+      "exitCode": 0
+    },
+    {
+      "name": "shutdown-liveness",
+      "exitCode": 0
+    },
+    {
+      "name": "factory-capture-rearm",
+      "exitCode": 0
+    },
+    {
+      "name": "trace-core",
+      "exitCode": 0
+    },
+    {
+      "name": "capture-compaction",
+      "exitCode": 0
+    },
+    {
+      "name": "packet-reset",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-writer",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-v3",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-adversarial",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-phase",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-reference",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-homing",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry40",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry38",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-registry37",
+      "exitCode": 0
+    },
+    {
+      "name": "decoder-legacy",
+      "exitCode": 0
+    },
+    {
+      "name": "compiled-composition",
+      "exitCode": 0
+    },
+    {
+      "name": "acceptance-guards",
+      "exitCode": 0
+    }
+  ],
+  "preservedArtifacts": 146,
+  "historicalRegistryEntriesUnchanged": true,
+  "testInputSHA256": {
+    "scripts/test-upstream-reference.py": "af590087d18b5d4617b1abdcf6b6255a5093695898d85719bf65fa13c7aedcf5",
+    "firmware/upstream-hardening/next40/accepted-lanes.json": "1a55af0b565c9614f266f27eaa8b4aa5e07767c0bd54b0276ddb5438ffe78c9b",
+    "firmware/upstream-hardening/next40/test-inputs.json": "9d57419486133375a9f5dd7d17a5bbf02066017583d420c8ea5298736c6411fa",
+    "firmware/upstream-hardening/next40/contract-fixtures.json": "2a672ed56c534f86e3790b40e7e42d6f7c21472c31d675d326e0181af7a2d7b7",
+    "firmware/upstream-hardening/next40/compiled-policy.json": "024e2ae89c2aeb33e1918b6e91a3e86600b9e1bb4db3ec7fefbbec0562b3b8e0",
+    "firmware/upstream-hardening/next40/stack-reproduction.json": "a58c0a6996e5ee7a3982ab36ca536f86a5e33c4f34be1a3e3f95ab6215ca6a0e",
+    "firmware/upstream-hardening/next40/test_acceptance_guards.py": "383b0a0a2de34f6f95d54a90914fa42a6dd8d88dbb8c8c0009298972581dd8bf",
+    "firmware/upstream-hardening/next40/compiler_compat.py": "d9254117d66a57b2f6fd07095caed986084fb585e36221869f5368acbb75a4c7",
+    "firmware/upstream-hardening/next40/contract_adapters.py": "a5d84f1ea53500d215b2d9b48454027ddf85357478d7c732c9fd47dd2e7c9473",
+    "firmware/upstream-hardening/next40/replay.py": "47e6995729763c38e922d067c7fc5f0afd2c5921e8b1bcc9afd83398c4d3010a",
+    "firmware/upstream-hardening/next40/test_reference_decoder.py": "fda636c050e880f2cf9c60795b6cea385d134cd0ef8effc2d774d886db88a160",
+    "firmware/upstream-hardening/next40/compiled_audit.py": "4724400d2f19eceecb7e4378671630f69e895d0122e3a8227a68cc73d35f24f1",
+    "firmware/upstream-hardening/next40/packet_test_init.c": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9",
+    "firmware/upstream-hardening/next40/trace_compat.c": "573b3f6b4509c8a1a6fea668d1b121134d08b7e54f15016be3d8af0f51121487",
+    "firmware/upstream-hardening/followup/49-home-qualification/run.py": "192556da2fce1a08f1cba575b37a8170304b7a35fb7a6d4b90cfdf42fcfcc5af",
+    "firmware/upstream-hardening/followup/49-home-qualification/test_home.c": "cdfb407e3f220c5e548896b7144201478fa9323e5ad1bdd1b497bd3a9a6574a7",
+    "firmware/upstream-hardening/followup/49-home-qualification/apply.py": "4df3db15d803c609fcf4d49e9fe705444a58e263712641fd47ad17d9c894cb5e",
+    "firmware/upstream-hardening/followup/50-readiness-capture/run.py": "f3051fe6fdd7bc127c50b39dfc79d34282abce26474322e59bb8595243348283",
+    "firmware/upstream-hardening/followup/50-readiness-capture/test_composed.c": "afb99225ec615a2ed2d29fb17cea3c39df2757e9166573c2ab2a6613cfbc3b48",
+    "firmware/upstream-hardening/followup/48-release-adc/run.py": "2b2f8df89465aca7804ac63cb7141ef886899bcb04982d527473e012ec7c8428",
+    "firmware/upstream-hardening/followup/48-release-adc/test_adc.c": "97ab221c60fbee3fed748c543cf663e12bf9ff160764b625095912285adb6086",
+    "firmware/upstream-hardening/followup/48-release-adc/apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1",
+    "firmware/upstream-hardening/followup/43-capture-status/run.py": "9ef70637ac8c64fdc6231165051bd400fe125ddb3eecc41db90a7ff0b0e73b38",
+    "firmware/upstream-hardening/followup/43-capture-status/factory_replay.py": "127dd4256ea316091d432e98272d162e4629d305cbab2721ee11b4bc31b63a31",
+    "firmware/upstream-hardening/followup/43-capture-status/test_replay.c": "a8506b9d0666a1a3e71fd5f72b15d65a155804183ce7037d33ba4d8019dbc6ad",
+    "firmware/upstream-hardening/followup/43-capture-status/review_compiled.py": "0a93098ebb449eead9c489c965ce55ef3320457af4e29d6f8d665def75f7c07c",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/test_capture.c": "912f4f9c5633bf631f433e03f1c12dda6e7ea8c2afe9aa60fb9a1f7d4e75742e",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/run.py": "e0269e6ed001b833dc2e717b375f2708333e4371b183b8335bfdb96fc06ce009",
+    "firmware/upstream-hardening/followup/44-shutdown-liveness/test_waits.inc": "a3eb22f2ef8086583e80b94d4366628d22c882633fb7630eb1a335a295c021fc",
+    "scripts/decode-startup-diagnostics.py": "86357d857408608bb6e6a24cf568d0f67207ddf42109861f58af7d5a88ce5586",
+    "scripts/startup_diagnostic_registry.py": "284de8a7282afa67bd366d95ab764326befd40759ab3fa567de20be7ab7197fa",
+    "scripts/startup_diagnostic_v3.py": "2364ddb73a6b2cd3152cacc923f8687464120faf4950442e862e2f8556ec6967"
+  },
+  "hardwareReportsSent": 0,
+  "cameraQualified": false,
+  "physicalHomingFailureFixed": false,
+  "cameraFreezeFixEstablished": false,
+  "limits": "Supplied I/O and schedules; no measured motor/IRQ/NVM timing, focus accuracy or camera capture/shutdown acceptance."
+}

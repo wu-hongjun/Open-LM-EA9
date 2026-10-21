@@ -8,7 +8,19 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The latest image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
+The latest offline candidate is [upstream C AF 4.0](firmware/candidates/4.0.0/README.md),
+fixed to the original Contax Zeiss50mm f/1.4. It tests bounded released reference
+qualification, clears stale PWM before servo handoff and validates the final encoder
+reference. Three Astra audits and new production-path regressions connect the3.9
+late-anchor failure to a software readiness gate. Physical homing, optical AF,
+sustained camera capture and factory parity remain unqualified. **Not flashed**;
+installation/testing will be coordinated separately. The version rolls to4.0 to fit
+the camera's one-byte BCD field, not to signal maturity.
+[Evidence](docs/evidence/upstream-40-reference-2026-10-20.md) ·
+[Workbench](firmware/upstream-hardening/next40/README.md) ·
+[Separate install/test procedure](docs/upstream-reference-test.md).
+
+The previously installed image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
 for the original Contax Zeiss 50mm f/1.4. Upload and strict physical-reconnect
 verification passed. **Camera acceptance failed; further 3.9 trials are held.**
 The owner reports two photos followed by blocked further capture, with normal
@@ -90,7 +102,7 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.22.1, build 30) refreshes
+upload/read-back path for lens metadata. The current app (0.23.0, build 31) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
@@ -253,7 +265,7 @@ For interactive app use, open `dist/Open LM-EA9.app` after the build. Keep it
 closed during CLI USB operations and offline runs; normal app refresh enumerates
 connected devices. Building or passing tests does not authorize a flash.
 
-- [Current fixed 50mm AF 3.7 tracing candidate](firmware/candidates/3.7.0/README.md)
+- [Held fixed 50mm AF 3.7 tracing candidate](firmware/candidates/3.7.0/README.md)
 - [AF 3.7 build/test workbench](firmware/upstream-hardening/next37/README.md)
 - [AF 3.7 installation and one-cycle log procedure](docs/upstream-targeted-trace-test.md)
 - [Held 50mm AF 3.6 candidate and exact pins](firmware/candidates/3.6.0/README.md)

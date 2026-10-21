@@ -34,10 +34,10 @@ def u32(p, offset):
 def decode_pages(data, version='3.7.0'):
     if len(data) != 1024:
         raise ValueError('Expected exactly 1024 diagnostic bytes.')
-    if version not in ('3.7.0', '3.8.0', '3.9.0'):
+    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0'):
         raise ValueError('Unsupported targeted-trace version.')
-    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version in ('3.8.0', '3.9.0') else FAULTS
-    maximum_fault = 19 if version in ('3.8.0', '3.9.0') else 16
+    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version in ('3.8.0', '3.9.0', '4.0.0') else FAULTS
+    maximum_fault = 19 if version in ('3.8.0', '3.9.0', '4.0.0') else 16
     pages = []
     for slot in range(16):
         p = data[64*slot:64*(slot+1)]
@@ -253,12 +253,12 @@ def decode_pages(data, version='3.7.0'):
 def decode_motion(raw, version='3.7.0'):
     """Decode the pinned main-context motion structure; no physical inference."""
     assert len(raw) == 144
-    if version not in ('3.7.0', '3.8.0', '3.9.0'):
+    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0'):
         raise ValueError('Unsupported motion-trace version.')
     if not any(raw):
         return {'valid': False, 'meaning': 'No servo move snapshot initialized; does not exclude motion outside this path.', 'writerIssues': []}
-    if version == '3.9.0' and any(raw[112:]):
-        return decode_failed_home(raw)
+    if version in ('3.9.0', '4.0.0') and any(raw[112:]):
+        return decode_failed_home(raw, version)
     i32 = lambda at: struct.unpack_from('<i', raw, at)[0]
     i16 = lambda at: struct.unpack_from('<h', raw, at)[0]
     direction = struct.unpack_from('<b', raw, 40)[0]
@@ -308,13 +308,16 @@ def decode_motion(raw, version='3.7.0'):
         'meaning': 'Encoder coordinates and requested drive values from existing software reads; not physical displacement, polarity calibration, wire completion or optical focus.'}
 
 
-def decode_failed_home(raw):
-    """3.9-only reserved tail, written after inhibition; not a servo snapshot."""
+def decode_failed_home(raw, version='3.9.0'):
+    """Version-scoped failed-home tail; released settling is admitted only by4.0."""
+    if version not in ('3.9.0', '4.0.0'):
+        raise ValueError('Unsupported failed-home version.')
+    tag = 0x40 if version == '4.0.0' else 0x39
     issues = []
     phase, flags, count = raw[113:116]
-    if raw[112] != 0x39 or phase not in HOME_PHASE_FAULTS or flags & ~1:
+    if raw[112] != tag or phase not in HOME_PHASE_FAULTS or flags & ~1:
         issues.append('invalid-failed-home-header')
-    if (phase == 17 and flags & 1) or (phase == 18 and not flags & 1):
+    if (phase == 17 and flags & 1) or (version == '3.9.0' and phase == 18 and not flags & 1):
         issues.append('failed-home-phase-disagrees-with-drive-qualification')
     polls = u32(raw, 136)
     if (phase == 19 and polls != 1000000) or (phase in (17, 18) and polls >= 1000000):
@@ -329,6 +332,8 @@ def decode_failed_home(raw):
         'tag': raw[112], 'phaseID': phase,
         'phase': HOME_PHASE_FAULTS.get(phase, f'unknown-{phase}'),
         'driveQualified': bool(flags & 1),
+        'driveQualificationMeaning': ('Forty driven stillness ticks; false during4.0 released settling does not imply drive-phase failure.'
+            if version == '4.0.0' else 'Forty driven stillness ticks;3.9 cannot enter settling without this qualification.'),
         'consumedNonStopRequestsSaturating': count,
         'requestCountIsLowerBound': count == 255,
         'phaseStartMS': start, 'afterInhibitReleaseMS': end,
@@ -339,9 +344,13 @@ def decode_failed_home(raw):
         'lastEnteredIterationStartMS': iteration,
         'phaseElapsedTicksModulo32': (end-start) & 0xffffffff,
         'lastIterationToCutoffTicksModulo32': (end-iteration) & 0xffffffff,
-        'meaning': ('Existing homing observations, sealed after motor inhibition. '
-            'The stillness anchor is the initial or last threshold-crossing observation, '
-            'not a final encoder read; positions are software coordinates. '
+        'meaning': ('Existing homing observations, sealed after motor inhibition. ' +
+            ('In4.0 released settling, anchor position stays fixed while anchor time resets to released-window start. '
+             'A phase19 fault with driveQualified false cannot distinguish drive-budget exhaustion from released settling. '
+             'Otherwise the anchor is initial or last threshold-crossing observation. '
+             if version == '4.0.0' else
+             'The stillness anchor is the initial or last threshold-crossing observation, ') +
+            'It is not a final encoder read; positions are software coordinates. '
             'The last iteration interval includes pump and checks, not UART alone. '
             'Ticks can wrap or be lost; no physical duration or displacement is established. '
             'Count covers consumed non-Stop requests while inhibited after this tagged fault, '

@@ -1,12 +1,20 @@
 # macOS prototype
 
-Current app: **0.22.1, build 30**, October 20, 2026. Device opens first, with
+The new packaged candidate is **AF4.0.0 reference qualification**, fixed to the
+original50mm f/1.4. It remains camera-unqualified and has not been flashed.
+`prepare-reference-upstream`/`apply-reference-upstream` select its exact pinned image.
+USB tools expose it explicitly; ordinary lens dropdown changes do not install it.
+Read-only operations and all older image/command pins and failure holds remain.
+See the [offline evidence](evidence/upstream-40-reference-2026-10-20.md) and
+[separate test procedure](upstream-reference-test.md).
+
+Current app: **0.23.0, build 31**, October 20, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local
 metadata editing and explicit guarded USB operations. The host uses native
 Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
 on upstream C; Rust is deferred while qualifying the camera contract.
 
-The latest packaged image is [upstream AF 3.9](evidence/upstream-39-homing-2026-10-20.md),
+The previous packaged image is [upstream AF 3.9](evidence/upstream-39-homing-2026-10-20.md),
 fixed to the original 50mm f/1.4 with no runtime profile row. Its
 [upload and strict verification](evidence/upstream-39-upload-2026-10-20.md) passed,
 but [camera acceptance failed](evidence/upstream-39-camera-failure-2026-10-20.md):

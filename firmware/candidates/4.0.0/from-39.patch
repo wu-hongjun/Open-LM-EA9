@@ -1,0 +1,102 @@
+--- frozen39/src/abs_encoder.c
++++ reference40/src/abs_encoder.c
+@@ -116,0 +117,11 @@
++
++/* One sampled coordinate must both qualify and establish the new reference.
++ * track() updates g_track_last; resetting g_track needs no second raw read. */
++uint8_t abs_encoder_home_reset(int32_t anchor, uint16_t tolerance)
++{
++	int64_t delta = (int64_t)abs_encoder_track() - anchor;
++	if (motor_is_inhibited() || delta > tolerance || delta < -(int64_t)tolerance)
++		return 0;
++	g_track = 0;
++	return 1;
++}
+--- frozen39/src/abs_encoder.h
++++ reference40/src/abs_encoder.h
+@@ -38,0 +39 @@
++uint8_t abs_encoder_home_reset(int32_t anchor, uint16_t tolerance);
+--- frozen39/src/emount.h
++++ reference40/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x39u
++#define EM_FW_VERSION_BCD   0x40u
+--- frozen39/src/main.c
++++ reference40/src/main.c
+@@ -572 +572 @@
+-    if (motor_is_inhibited() && home[0] == 0x39 && home[3] != 255)
++    if (motor_is_inhibited() && home[0] == 0x40 && home[3] != 255)
+@@ -646 +646,2 @@
+-	uint8_t drive_ok = 0, settle_ok = 0;
++	uint8_t drive_ok = 0, settle_ok = 0, released = 0;
++	int32_t cutoff_anchor = 0;
+@@ -697 +698,20 @@
+-	if (!drive_ok) goto failed;
++	if (!drive_ok) {
++		/* Expiring the active-drive budget is not itself a reference fault.
++		 * Detach BEFORE any encoder/protocol/synchronized PWM operation. */
++		drive_ms = millis() - t0;
++		motor_home_release();
++		released = 1;
++		int64_t travel = (int64_t)before - still.at;
++		/* A stale/UART-crossed deadline, moving last sample, wrong polarity,
++		 * or implausible net travel cannot enter the released settle path.
++		 * Re-observation of the driven anchor is corroboration, not proof
++		 * of an endpoint: mid-travel stiction remains indistinguishable. */
++		if (drive_ms != HOME_MS ||
++		    (uint32_t)(iteration_ms - still.t) == 0 ||
++		    (uint32_t)(iteration_ms - still.t) >= HOME_MS ||
++		    travel <= HOME_STILL_COUNTS ||
++		    travel > FOCUS_TRAVEL_COUNTS + HOME_STILL_COUNTS)
++			goto failed;
++		cutoff_anchor = still.at;
++		if (home_cancel_requested()) goto cancelled;
++	}
+@@ -703 +723 @@
+-	if (!STOCK.dry) {
++	if (!STOCK.dry && !released) {
+@@ -717 +737,2 @@
+-	home_still_init(&still);
++	if (released) { still.at = cutoff_anchor; still.t = t0; }
++	else home_still_init(&still);
+@@ -723,0 +745,6 @@
++		/* Do not turn post-release movement into a fresh successful anchor. */
++		if (released) {
++			int64_t drift = (int64_t)abs_encoder_track() - cutoff_anchor;
++			if (drift > HOME_STILL_COUNTS || drift < -HOME_STILL_COUNTS)
++				goto failed;
++		}
+@@ -725 +752,2 @@
+-		    && home_still_for(&still, HOME_STILL_MS)
++		    && (released ? (uint32_t)(millis() - t0) >= HOME_STILL_MS
++		                 : home_still_for(&still, HOME_STILL_MS))
+@@ -733,0 +762,3 @@
++	if (released && ((int64_t)after - cutoff_anchor > HOME_STILL_COUNTS ||
++	                 (int64_t)after - cutoff_anchor < -HOME_STILL_COUNTS))
++		goto failed;
+@@ -786 +817,2 @@
+-	abs_encoder_track_reset();
++	/* Commit the reference from the same final validated encoder sample. */
++	if (!abs_encoder_home_reset(still.at, HOME_STILL_COUNTS)) goto failed;
+@@ -817,2 +849,2 @@
+-		/* 0x39 tag, phase, flags bit0=drive qualified, suppressed count=0. */
+-		home[0] = 0x39u | ((uint32_t)failure << 8) | ((uint32_t)drive_ok << 16);
++		/* 0x40 tag, phase, flags bit0=drive qualified, suppressed count=0. */
++		home[0] = 0x40u | ((uint32_t)failure << 8) | ((uint32_t)drive_ok << 16);
+--- frozen39/src/motor.c
++++ reference40/src/motor.c
+@@ -200,0 +201,8 @@
++
++void motor_home_release(void)
++{
++	motor_emergency_release();
++	/* Existing bounded waits may inhibit; no path here reattaches pins. */
++	pair_a(0, 0);
++	pair_b(0, 0);
++}
+--- frozen39/src/motor.h
++++ reference40/src/motor.h
+@@ -35,0 +36,3 @@
++
++/* GPIO detach first, then clear stale PWM while detached. Never remux. */
++void motor_home_release(void);

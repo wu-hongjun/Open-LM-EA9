@@ -1,0 +1,25 @@
+{
+  "status": "offline-reference-qualification-candidate-camera-unqualified",
+  "baseVersion": "3.9.0",
+  "nextVersion": "4.0.0",
+  "baseImageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
+  "inputs": {
+    "firmware/upstream-hardening/followup/49-home-qualification/apply.py": "4df3db15d803c609fcf4d49e9fe705444a58e263712641fd47ad17d9c894cb5e"
+  },
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/49-home-qualification/apply.py",
+      "entry": "apply",
+      "argument": "work"
+    }
+  ],
+  "additionalUnits": [],
+  "additionalUnitFlags": {
+    "abs_encoder": [
+      "-Os"
+    ],
+    "motor": [
+      "-Os"
+    ]
+  }
+}

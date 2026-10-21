@@ -35,6 +35,11 @@
       "imageSHA256": "87b84a835ad6fed1437a975ca422fadec829fc3596425cd68cc570b6fb03fa44",
       "manifestSHA256": "9aa8b48b272db6709f281ecd91caceb675d07d79bba92d445e0e14112ca8c61a",
       "immutablePrefixSHA256": "bf66a3136122120ec13029dba5cb0cea417cad74fca17bce6ed2f527e1be5f1b"
+    },
+    "4.0.0": {
+      "imageSHA256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae",
+      "manifestSHA256": "8c55aaeed4cd15849907dae4457cadf6a070392141c95485041d40ddcdb85ffc",
+      "immutablePrefixSHA256": "d33319e17c0066079974c162db3c900d54d8b36ee7d9a4a48c332911a436fdf2"
     }
   }
 }

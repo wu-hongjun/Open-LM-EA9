@@ -1,0 +1,11 @@
+{
+  "reviewedPolicySHA256": "024e2ae89c2aeb33e1918b6e91a3e86600b9e1bb4db3ec7fefbbec0562b3b8e0",
+  "objdumpSHA256": "971eb15db5b2110383b75dc3b8953115c0c11f6cd2ce7f651b0efb44e9aedcf6",
+  "normalizedOutputSHA256": {
+    "-d": "eb532299961d6a61500fedc745af4903d1a02db4284f403b3b222d2fdbd2355c",
+    "-t": "761e40c0a62482d48da50550527350c3a4473b709b5e43f82eed35d6b29a7df3",
+    "-p": "6e099b56fc26bf3002dbd73c5feef199a55d74ff498f3507fd6cb178cce37b64"
+  },
+  "reviewedBuild": "artifacts/private/reference40d",
+  "version": "4.0.0"
+}

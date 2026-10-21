@@ -1,6 +1,8 @@
 # Firmware development
 
-The latest image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
+Latest offline candidate: [AF4.0 bounded reference qualification](candidates/4.0.0/README.md). Not flashed or camera-qualified. See the [integrated evidence](../docs/evidence/upstream-40-reference-2026-10-20.md) and [separate installation procedure](../docs/upstream-reference-test.md).
+
+The previously installed image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
 Upload and strict verification passed after physical reconnect. **Camera
 acceptance failed; further 3.9 trials are held.** The owner reports two photos,
 then blocked further capture and normal shutdown. A [read-only backup](../docs/evidence/upstream-39-camera-failure-2026-10-20.md)

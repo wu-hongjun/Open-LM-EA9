@@ -1,4 +1,12 @@
-# Device workflow: prototype 0.22.1, build 30
+# Device workflow: prototype 0.23.0, build 31
+
+The new packaged candidate is **AF4.0.0 reference qualification**, fixed to the
+original50mm f/1.4. It remains camera-unqualified and has not been flashed.
+`prepare-reference-upstream`/`apply-reference-upstream` select its exact pinned image.
+USB tools expose it explicitly; ordinary lens dropdown changes do not install it.
+Read-only operations and all older image/command pins and failure holds remain.
+See the [offline evidence](evidence/upstream-40-reference-2026-10-20.md) and
+[separate test procedure](upstream-reference-test.md).
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -16,7 +24,7 @@ version, while preserving read-only backup/recovery.
 [Failure/log evidence](evidence/upstream-39-camera-failure-2026-10-20.md).
 The 3.6/3.7/3.8 holds and historical explicit command/image pins remain.
 
-The latest packaged firmware is **upstream AF 3.9.0**, fixed to the original
+The previous firmware is **upstream AF 3.9.0**, fixed to the original
 50mm f/1.4 profile. Its [strict installation verification](evidence/upstream-39-upload-2026-10-20.md)
 passed, but [camera acceptance failed](evidence/upstream-39-camera-failure-2026-10-20.md):
 two reported photos followed by blocked further capture, with normal shutdown.
