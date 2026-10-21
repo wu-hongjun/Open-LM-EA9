@@ -356,7 +356,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: same, original: original) }
     let current = try fixture(loader, directory, "current", id: 11)
     #expect(try VerificationEngine().verify(pending: pending, current: current, original: original)?.setting == image.setting)
-    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified].contains(variant) {
+    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic].contains(variant) {
         loader.flash[0x9c00] = 0
         let nonblankLog = try fixture(loader, directory, "unexpected-log-before-camera", id: 11)
         #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: nonblankLog, original: original) }
@@ -500,7 +500,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(try VerificationEngine().verify(pending: pending, current: after, original: af)?.firmwareVersion == "2.0.0")
 }
 
-@Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified])
+@Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic])
 func upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant: FirmwareVariant) throws {
     let image = try ApplicationImage.personalized(profile(), variant: variant)
     #expect(image.data == (try ApplicationImage.template(variant)))

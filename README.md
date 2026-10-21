@@ -8,7 +8,22 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The latest [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
+The next [upstream C AF 4.1](firmware/candidates/4.1.0/README.md) is prepared
+**offline and unqualified** for the original Contax Zeiss50mm f/1.4. Three Astra
+lanes added a validated foreground checkpoint, watchdog/system-reset boot record
+and persistent crash/storage latch. Once a record reaches flash it survives
+battery removal; immediate power loss before persistence can still lose it.
+This improves observability and fail-stop behavior, without establishing a fix for
+the camera freeze or factory parity. The adapter was not accessed or flashed.
+[Evidence](docs/evidence/upstream-41-crash-diagnostics-2026-10-21.md) ·
+[Workbench](firmware/upstream-hardening/next41/README.md) ·
+[Separate installation/test procedure](docs/upstream-crash-diagnostic-test.md).
+
+App0.24.0/build33 adds explicit4.1 preparation/installation tooling, preserves
+read-only/recovery guards and keeps4.0 held. Original recovery and all151 historical
+release/recovery/pin artifacts remain exact. Hardware qualification is still pending.
+
+The latest installed [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
 original Contax Zeiss 50mm f/1.4, passed strict USB installation verification but
 **failed camera acceptance; further 4.0 trials are held**. The owner confirms two
 files saved in reported AUTO mode, then a hard crash requiring battery removal.
@@ -111,7 +126,7 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.23.1, build 32) refreshes
+upload/read-back path for lens metadata. The current app (0.24.0, build 33) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.

@@ -1,9 +1,19 @@
-# Device workflow: prototype 0.23.1, build 32
+# Device workflow: prototype 0.24.0, build 33
 
-The packaged **AF 4.0.0** remains fixed to the original 50mm f/1.4. Its strict USB
+App 0.24.0/build 33 adds the explicit **Crash Diagnostic 4.1.0** candidate,
+fixed to the original Contax Zeiss 50mm f/1.4 profile. It adds watchdog reset
+evidence, boot persistence and a crash latch; autofocus and camera compatibility
+remain unqualified. A startup baseline is not final-state evidence, and power
+removal before persistence can still lose the latest checkpoint. Installed 4.1
+opens the USB tools workflow; ordinary profile changes and same-version reinstall
+are unavailable. Preserve a read-only backup before reviewing recovery or another
+trial. Explicit native commands are `prepare-crash-upstream` and
+`apply-crash-upstream`; historical command meanings and image pins are unchanged.
+
+The historical **AF 4.0.0** remains fixed to the original 50mm f/1.4. Its strict USB
 installation verification passed, but **camera acceptance failed and 4.0 is held**
 after two saved photos in reported AUTO mode and a battery-required hard crash.
-App 0.23.1/build 32 disables ordinary 4.0 installation from every installed version,
+App 0.24.0/build 33 continues to disable ordinary 4.0 installation from every installed version,
 while retaining read-only backup/recovery. Native historical prepare/apply commands
 retain their exact image meanings. No additional camera test is requested; logs
 were retrieved read-only: all 16 pages remain erased, with full flash/protected data

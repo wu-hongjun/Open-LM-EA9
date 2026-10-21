@@ -1,0 +1,393 @@
+{
+  "status": "offline41-prepared-final-acceptance-passed-camera-unqualified",
+  "dateLocal": "2026-10-21",
+  "baseCommit": "11a24eb",
+  "version": "4.1.0",
+  "imageSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
+  "manifestSHA256": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
+  "upstreamCommit": "d52ed06cc449918f938e0695fbf29a0c4141f2b2",
+  "fixedLens": "Contax Zeiss 50mm f/1.4",
+  "lensID": 234,
+  "nominalApertureAV": 4352,
+  "actualApertureKnown": false,
+  "runtimeLensProfilesSupported": false,
+  "adapterEnumerated": false,
+  "adapterOpened": false,
+  "hardwareReportsSent": 0,
+  "hardwareWritesSent": 0,
+  "firmwareFlashed": false,
+  "stockRestored": false,
+  "appLaunched": false,
+  "updaterLaunched": false,
+  "canonicalApplicationSupportAccessed": false,
+  "cameraTrialPerformed": false,
+  "cameraQualified": false,
+  "physicalHomingFailureFixed": false,
+  "cameraFreezeFixEstablished": false,
+  "factoryParityEstablished": false,
+  "lastVerifiedInstalledVersion": "4.0.0",
+  "lastVerifiedInstalledVersionHeld": true,
+  "astraLanes": [
+    52,
+    53,
+    54
+  ],
+  "sourceFilesVerified": 49,
+  "translationUnits": 23,
+  "codeAndDataEnd": 39412,
+  "codeMarginBeforeDiagnostics": 524,
+  "minimumCodeMargin": 256,
+  "diagnosticBytes": 1024,
+  "diagnosticPages": 16,
+  "staticRAMBytes": 3048,
+  "retainedBytes": 56,
+  "retainedAddress": "0x20003fc0",
+  "reservedStackBytes": 8192,
+  "conditionalAllVectorStackBoundBytes": 1588,
+  "stackHighWaterMeasured": false,
+  "reproduction": {
+    "freshBuilds": 2,
+    "imageManifestSourcesPatchShimMatch": true,
+    "nativePreparedImageMatches": true,
+    "historicalNative40ImageMatches": true,
+    "normalizedCompiledRepeatPassed": true
+  },
+  "crashDesign": {
+    "recordType": 5,
+    "pageBytes": 64,
+    "checkpointBytes": 48,
+    "retainedAddress": 536887232,
+    "retainedBytes": 56,
+    "noRuntimeErase": true,
+    "crashRecordWritesBeforeProtocolOnly": true,
+    "watchdogNominalSeconds": 4,
+    "healthCheckpointIntervalTicks": 250,
+    "foregroundHealthOnly": true,
+    "coldPowerLossBeforePersistenceCovered": false,
+    "physicalRetentionQualified": false,
+    "resetLatchBeforeMotorAndProtocol": true,
+    "hardFaultExactCrashFrameCaptured": false
+  },
+  "crashLimitations": [
+    "Immediate power removal before reset/append may lose checkpoint",
+    "CPU/foreground stall coverage only; body-only stall with continued foreground health may not trip watchdog",
+    "Stock bootloader can prevent app handoff; ordinary PA23-low path only modeled",
+    "Checkpoint is prior foreground summary, not exact crash frame/time; motion/events not retained",
+    "A valid page does not prove append returned or normal initialization completed",
+    "Flash programming, SRAM retention, oscillator/reset timing and motor state not physically qualified",
+    "Fully erased failed append leaves no durable latch",
+    "Finite diagnostic capacity; no runtime erase or automatic crash retry/rehoming"
+  ],
+  "acceptance": {
+    "status": "passed-final41-offline-acceptance-camera-unqualified",
+    "suiteGroups": 40,
+    "suites": [
+      {
+        "name": "coordinate",
+        "exitCode": 0
+      },
+      {
+        "name": "query-ownership",
+        "exitCode": 0
+      },
+      {
+        "name": "query-flow",
+        "exitCode": 0
+      },
+      {
+        "name": "absolute-target",
+        "exitCode": 0
+      },
+      {
+        "name": "time-contract",
+        "exitCode": 0
+      },
+      {
+        "name": "target-time-composition",
+        "exitCode": 0
+      },
+      {
+        "name": "exact-counter-parity",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-commits",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-session",
+        "exitCode": 0
+      },
+      {
+        "name": "home-inhibit",
+        "exitCode": 0
+      },
+      {
+        "name": "query-composition",
+        "exitCode": 0
+      },
+      {
+        "name": "motion-tracing",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-retention",
+        "exitCode": 0
+      },
+      {
+        "name": "startup-handoff",
+        "exitCode": 0
+      },
+      {
+        "name": "historical39-home-inhibit",
+        "exitCode": 0
+      },
+      {
+        "name": "reference-qualification",
+        "exitCode": 0
+      },
+      {
+        "name": "readiness-capture",
+        "exitCode": 0
+      },
+      {
+        "name": "release-adc",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-status",
+        "exitCode": 0
+      },
+      {
+        "name": "shutdown-liveness",
+        "exitCode": 0
+      },
+      {
+        "name": "factory-capture-rearm",
+        "exitCode": 0
+      },
+      {
+        "name": "trace-core",
+        "exitCode": 0
+      },
+      {
+        "name": "capture-compaction",
+        "exitCode": 0
+      },
+      {
+        "name": "packet-reset",
+        "exitCode": 0
+      },
+      {
+        "name": "compiled-writer",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-v3",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-adversarial",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-phase",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-reference",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-homing",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-registry41",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-registry38",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-registry37",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-legacy",
+        "exitCode": 0
+      },
+      {
+        "name": "compiled-composition",
+        "exitCode": 0
+      },
+      {
+        "name": "watchdog-health",
+        "exitCode": 0
+      },
+      {
+        "name": "legacy-boot-retention",
+        "exitCode": 0
+      },
+      {
+        "name": "crash-powerloss",
+        "exitCode": 0
+      },
+      {
+        "name": "decoder-crash",
+        "exitCode": 0
+      },
+      {
+        "name": "acceptance-guards",
+        "exitCode": 0
+      }
+    ],
+    "compiledAuditSkipped": false,
+    "compiledNegativeControls": [
+      {
+        "case": "unknown-indirect",
+        "rejected": true,
+        "reason": "unknown indirect call: servo_move_from@72ec"
+      },
+      {
+        "case": "unknown-library",
+        "rejected": true,
+        "reason": "unknown library frame: memcpy"
+      },
+      {
+        "case": "recursive-callback",
+        "rejected": true,
+        "reason": "recursive/reentrant call graph: Reset_Handler -> main -> focus_exec -> focus_run.isra.0 -> servo_move_from -> servo_move_from"
+      },
+      {
+        "case": "wrong-image-pin",
+        "rejected": true,
+        "reason": "pin mismatch: contax-zeiss-50-f1-4.bin"
+      }
+    ],
+    "acceptanceIdentityControls": [
+      {
+        "case": "optimized-python",
+        "exitCode": 1,
+        "noAcceptanceReceipt": true
+      },
+      {
+        "case": "wrong-manifest",
+        "exitCode": 1,
+        "noAcceptanceReceipt": true
+      },
+      {
+        "case": "wrong-image",
+        "exitCode": 1,
+        "noAcceptanceReceipt": true
+      }
+    ],
+    "decoderChecks": 681,
+    "powerLossHostSummary": "PASS exact-reset=256 retained-bit-corruption=448 torn-prefix=65 frontier=16 stale-reset=5 read-failure=1 checkpoint-interrupt=5 persisted-latch=256 corrupt-storage=512",
+    "independentCRCChecks": 577,
+    "powerLossMutantsRejected": 6,
+    "watchdogMutantsRejected": 3,
+    "testInputs": {
+      "scripts/test-upstream-crash.py": "62fa3f49ffd072b151e7f143017046658107227025169e4f1a40dc9e0d55415f",
+      "firmware/upstream-hardening/next41/accepted-lanes.json": "9422ad081b5f3400bde43d6f2ecc4cc20ff3b00bfebe0d73b6b004db6915f2f8",
+      "firmware/upstream-hardening/next41/test-inputs.json": "242462e74bde1b491574425851a53092c271273aed34c31268f7760cd5a514e0",
+      "firmware/upstream-hardening/next41/contract-fixtures.json": "2a672ed56c534f86e3790b40e7e42d6f7c21472c31d675d326e0181af7a2d7b7",
+      "firmware/upstream-hardening/next41/compiled-policy.json": "fcb8a9fbafe9edaf455a82db014d87efb7794404d69d258eee6a92d6daf5ecf5",
+      "firmware/upstream-hardening/next41/stack-reproduction.json": "df06b98ae1e27439ec5a2e6b3ac22ee699adf7a0321d0d78c7967d52f0e94045",
+      "firmware/upstream-hardening/next41/test_acceptance_guards.py": "ede8a6fcf55a95fd3639098bc74db0c1de30754e6f563fb399ffbaa1ac337242",
+      "firmware/upstream-hardening/next41/compiler_compat.py": "c7a0197c346ffab8585a85206287ca3243ad143e51368c1e98f69a2e67628afd",
+      "firmware/upstream-hardening/next41/test_crash_decoder.py": "882b47dcf647ed1d557a9a3b645976f9d29e9670a970cf4b27438bc2d9565787",
+      "firmware/upstream-hardening/next41/contract_adapters.py": "e4d2ebb01868846baa7b42fcc5ac3f536d6a853e44b69b137f042a0c49070e35",
+      "firmware/upstream-hardening/next41/replay.py": "a20468d8a85dac04d01d675998943d0036edfcd7e39c99b6105871ee4132490f",
+      "firmware/upstream-hardening/next41/compiled_audit.py": "a454e372ff451f0d979d17ba7d1c429457897681a847aa326cdb03ab3952d019",
+      "firmware/upstream-hardening/next41/packet_test_init.c": "21c84f5f6f62970e37f1398a0bc45f6474d9045a01f22efd1d7bf1293dbe27a9",
+      "firmware/upstream-hardening/next41/trace_compat.c": "07f6f30ecb591f76d54522298ad17e9829816b223c1ad17416f9bdf4b1ff45b1",
+      "firmware/upstream-hardening/followup/49-home-qualification/run.py": "192556da2fce1a08f1cba575b37a8170304b7a35fb7a6d4b90cfdf42fcfcc5af",
+      "firmware/upstream-hardening/followup/49-home-qualification/test_home.c": "cdfb407e3f220c5e548896b7144201478fa9323e5ad1bdd1b497bd3a9a6574a7",
+      "firmware/upstream-hardening/followup/49-home-qualification/apply.py": "4df3db15d803c609fcf4d49e9fe705444a58e263712641fd47ad17d9c894cb5e",
+      "firmware/upstream-hardening/followup/50-readiness-capture/run.py": "f3051fe6fdd7bc127c50b39dfc79d34282abce26474322e59bb8595243348283",
+      "firmware/upstream-hardening/followup/50-readiness-capture/test_composed.c": "afb99225ec615a2ed2d29fb17cea3c39df2757e9166573c2ab2a6613cfbc3b48",
+      "firmware/upstream-hardening/followup/48-release-adc/run.py": "2b2f8df89465aca7804ac63cb7141ef886899bcb04982d527473e012ec7c8428",
+      "firmware/upstream-hardening/followup/48-release-adc/test_adc.c": "97ab221c60fbee3fed748c543cf663e12bf9ff160764b625095912285adb6086",
+      "firmware/upstream-hardening/followup/48-release-adc/apply.py": "b73d9612515d240ad2ddf3f32d20664170de514ca2bab1bcd780ccd7e4f28bf1",
+      "firmware/upstream-hardening/followup/43-capture-status/run.py": "9ef70637ac8c64fdc6231165051bd400fe125ddb3eecc41db90a7ff0b0e73b38",
+      "firmware/upstream-hardening/followup/43-capture-status/factory_replay.py": "127dd4256ea316091d432e98272d162e4629d305cbab2721ee11b4bc31b63a31",
+      "firmware/upstream-hardening/followup/43-capture-status/test_replay.c": "a8506b9d0666a1a3e71fd5f72b15d65a155804183ce7037d33ba4d8019dbc6ad",
+      "firmware/upstream-hardening/followup/43-capture-status/review_compiled.py": "0a93098ebb449eead9c489c965ce55ef3320457af4e29d6f8d665def75f7c07c",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/test_capture.c": "912f4f9c5633bf631f433e03f1c12dda6e7ea8c2afe9aa60fb9a1f7d4e75742e",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/run.py": "e0269e6ed001b833dc2e717b375f2708333e4371b183b8335bfdb96fc06ce009",
+      "firmware/upstream-hardening/followup/44-shutdown-liveness/test_waits.inc": "a3eb22f2ef8086583e80b94d4366628d22c882633fb7630eb1a335a295c021fc",
+      "firmware/upstream-hardening/followup/52-durable-crash/retained.inc": "8a8715b3fecfcaaf6f772473a3505b80c181a29be89f8bfe349ca676251c67d6",
+      "firmware/upstream-hardening/followup/52-durable-crash/test_watchdog.py": "ffd941c90aec25a5ab5e6eda8603f6324b0a7684054565608254d31ed8eff28e",
+      "firmware/upstream-hardening/followup/52-durable-crash/test_watchdog.c": "daa68f76854991d572068a3d52e3a2fdfb0d86036e920977816db26f2907b78f",
+      "firmware/upstream-hardening/followup/52-durable-crash/watchdog.inc": "b89824fe23b61fd1c5f2f7607608da481a13bad57a96acb41587f6e932c7be4f",
+      "firmware/upstream-hardening/followup/52-durable-crash/apply.py": "2cfa2ced502525c280a90be7e36515ec010e44f99835214fa3df5742d30fd1c7",
+      "firmware/upstream-hardening/followup/53-crash-hardware-audit/boot_retention.py": "8a55dbc4487b1199f305af8d1eec645751bc9b44cb97ee874f01fcde22f5b762",
+      "firmware/upstream-hardening/followup/54-crash-powerloss/run.py": "fadc9c3a5d6016805315ea59a8c025c31de4de1c0995b1294eef046c3a0131e0",
+      "firmware/upstream-hardening/followup/54-crash-powerloss/test_powerloss.c": "44535d7430cc0b8f4a5c5325015e3af2751908ef9d17aefe4dab942eefd3035d",
+      "scripts/decode-startup-diagnostics.py": "86357d857408608bb6e6a24cf568d0f67207ddf42109861f58af7d5a88ce5586",
+      "scripts/startup_diagnostic_registry.py": "ea88182a5c2746f1644289db31d065a591d40173b603772d9d073b52e4ae6267",
+      "scripts/startup_diagnostic_v3.py": "acccd46c1d841b624b76904fb6542876a82b2c79c499dab2e659ad023072a569",
+      "scripts/startup_diagnostic_v4.py": "43aae5b35123b88eacc94e1d70fa34fb74faddde968fda17481c390b39cc9999"
+    }
+  },
+  "factoryBootReplay": {
+    "calibrationFixtures": 2,
+    "SRAMWritesEach": 1170,
+    "SRAMWriteHighExclusive": "0x20001690",
+    "top128BytesPreserved": true,
+    "suppliedWDTResetCausePreserved": true,
+    "physicalRetentionProven": false
+  },
+  "host": {
+    "appVersion": "0.24.0",
+    "appBuild": 33,
+    "namedSwiftTests": 53,
+    "signedCLISHA256": "2f24feab2fd010a5950d144ae24e31288fe2589248caaae439b438db609b14bc",
+    "signedAppExecutableSHA256": "39a0fb55b3260b583114d7c93daf81272a275f148f2a9bf1893290f288b967c5",
+    "signaturesVerified": true,
+    "fixedPinnedResourceSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
+    "previousSignedPackageFilesPreserved": 68,
+    "explicitNewCommands": [
+      "prepare-crash-upstream",
+      "apply-crash-upstream"
+    ],
+    "failed40OrdinaryInstallationHeld": true,
+    "strictFullImageBlankTailAndProtectedDataVerificationRetained": true,
+    "nativePrepareReturnedBeforeInventory": true
+  },
+  "preservedArtifacts": 151,
+  "historicalRegistryEntriesUnchanged": true,
+  "originalStockRecoveryUnchanged": true,
+  "historicalReleaseImagesAndPinsUnchanged": true,
+  "rawDumpsKeysIdentifiersAndCameraFramesPrivate": true,
+  "privateReceiptSHA256": {
+    "crash41-final-acceptance/result.json": "c4ae4a32a964f914878535457a579b3a2d8fda1adf14d2f011951856a3f2939b",
+    "crash41-final-acceptance/compiled-composition.json": "671d3e711e00a292d8d4f033233381d3ccae50f19a40db81ef0cfb1f1acf3464",
+    "crash41-final-acceptance/watchdog-health/result.json": "77bdd9c1da8fd5d6b15bc901413547afb8161105c6ec6ab1f07742c1985cf6eb",
+    "crash41-final-acceptance/astra54-powerloss/results.json": "39c0a05c4b86a7fa155aa0d8e6b3b7b66f281a9b73f12e0d7f6b1be4649e2efa",
+    "crash41-final-acceptance/decoder-crash.json": "d6ae919542685ca77b7c1b61b8c9a396d868aaa7845ac864c4707ebbd3c7c05d",
+    "crash41-final-acceptance/acceptance-guards/result.json": "6e6b55dfdf8a8955fbd2eebe4146359e550a3ec74d5db20f96fcdba7efeeec1f",
+    "crash41-package.log": "7abd18d85b0f8c92d7308cb2b2aa8c57fc0a839e6c28e8f73d118dbcc61627ed",
+    "astra52-host-swift-test.log": "6380fd5706aff0852cb50af73f9562f2f1802c2d27d88015cd345d2dff07171c",
+    "crash41-repeat-compiled.json": "671d3e711e00a292d8d4f033233381d3ccae50f19a40db81ef0cfb1f1acf3464",
+    "crash41-host-before-0.23.1-build32/preservation.json": "7c8967642398cebe8f21d8a6ffaf34fe96e2a1cb5b321a1826b921e8fdaf37fd"
+  },
+  "integrationSourceSHA256": {
+    "scripts/build-upstream-crash.py": "f7a9690f9c9669b56ecf3853c5c75e00c2e74e4e7d133dbdb332d3d236d24849",
+    "scripts/test-upstream-crash.py": "62fa3f49ffd072b151e7f143017046658107227025169e4f1a40dc9e0d55415f",
+    "scripts/startup_diagnostic_v3.py": "acccd46c1d841b624b76904fb6542876a82b2c79c499dab2e659ad023072a569",
+    "scripts/startup_diagnostic_v4.py": "43aae5b35123b88eacc94e1d70fa34fb74faddde968fda17481c390b39cc9999",
+    "scripts/startup_diagnostic_registry.py": "ea88182a5c2746f1644289db31d065a591d40173b603772d9d073b52e4ae6267",
+    "firmware/upstream-hardening/next41/accepted-lanes.json": "9422ad081b5f3400bde43d6f2ecc4cc20ff3b00bfebe0d73b6b004db6915f2f8",
+    "firmware/upstream-hardening/next41/compiled-policy.json": "fcb8a9fbafe9edaf455a82db014d87efb7794404d69d258eee6a92d6daf5ecf5",
+    "firmware/upstream-hardening/next41/stack-reproduction.json": "df06b98ae1e27439ec5a2e6b3ac22ee699adf7a0321d0d78c7967d52f0e94045",
+    "apps/macos/Sources/DeviceKit/LensImage.swift": "d10b9c491c49cace8273682d552bcadbe94c181593c709777351b39fc5065df3",
+    "apps/macos/Sources/DeviceKit/TrustedCrashUpstream.swift": "5e95d52001ac36cd35d1e81cbcccaf3badcaf44fe71155dd3a0c45b17ca9463b",
+    "apps/macos/Sources/EA9CLI/main.swift": "bc6102d9695055fcdedc253ae39bd33fd133fadcb76831e6a9aa6ea79c5d9dc7",
+    "apps/macos/Sources/OpenLMEA9/AppModel.swift": "9d8d9650ed9d21ce5c94fd3e42b404821b345dbce6a65022659023a70252b4c9",
+    "apps/macos/Sources/OpenLMEA9/DeviceOverview.swift": "b228a5bb23453441f6178eee242ec986fb03282d4117ad246d456b665e864942",
+    "apps/macos/Sources/OpenLMEA9/DeviceWorkflow.swift": "6c64c1befce77a559316274de678a44f1dd8e1bf47a69b512dd6eb3612592806"
+  }
+}

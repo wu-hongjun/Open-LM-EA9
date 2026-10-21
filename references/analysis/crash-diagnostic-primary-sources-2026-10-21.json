@@ -1,0 +1,35 @@
+{
+  "dateLocal": "2026-10-21",
+  "purpose": "Version-bound SAM D21 reset/watchdog/flash ownership review for AF4.1; no physical qualification.",
+  "sources": [
+    {
+      "title": "Microchip SAM D21/DA1 datasheet DS40001882L",
+      "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf",
+      "sha256": "cd6d39e3e5c2f2116cf99224a102f707444e0395f6faa7ddec75093bd249e394",
+      "retrieval": "Full PDF privately archived by Astra lane53; not redistributed.",
+      "sections": [
+        "8.3.3 reset vectors",
+        "16.6.2.7 reset domains",
+        "18.5.3 watchdog clocks",
+        "18.6.2 watchdog configuration",
+        "18.6.3.1 ALWAYSON",
+        "18.6.5 synchronization",
+        "22.6.4.1/3 NVM read/write"
+      ],
+      "scope": "Primary reset, independent watchdog, synchronization and single-bank flash stall contracts."
+    },
+    {
+      "title": "Pinned Microchip SAMD21 DFP 2.0.4",
+      "localIndex": "../build-dependencies.json",
+      "headers": {
+        "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/wdt.h": "b59936c913adfe85dbe8d439be9f5842ae4c0158f008af8da22c6358cd2d0375",
+        "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/gclk.h": "9f1fc2ef7f9ab92fb6a938529cabf87be7562ffa3a2a8d2c799d2814b8cb068c",
+        "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/pm.h": "575053cb2d135582a5205dc8425f25e201c2b062db6639e5778c3cbf6479c6bd",
+        "tools/firmware-deps/samd21-dfp-2/samd21a/include/component/nvmctrl.h": "07d5a14d439b5de802b6ecb06c883545649efbe40e48fb85a3ed542bd17166f0"
+      },
+      "scope": "Actual SAM D21 register masks and offsets; no substitutions from other MCU families."
+    }
+  ],
+  "originalFactoryBootEvidence": "Private original unit backup; bounded normal PA23-low original-instruction replay only. See docs/audits/astra-53-crash-hardware-2026-10-21.md.",
+  "rawUnitDataPublished": false
+}

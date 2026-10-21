@@ -1,0 +1,8 @@
+{
+  "firmware/upstream-hardening/followup/12-query/test_query.c": "0ed25bf46ddaa335c4ac02196e31edf0d33e54974ffe45caad2c9ea4d05a4b3d",
+  "firmware/upstream-hardening/followup/16-query-flow/test_flow.c": "45bbe9d1ae4cc8369ba70a2027a8889fc91069d70751590371f7375921ec93ca",
+  "firmware/upstream-hardening/followup/17-composition/test_composition.c": "b18c98ce2ae8d81b8506036a4c923d6b97e9d2cafc00d9b708bfcdfc22583013",
+  "firmware/upstream-hardening/followup/23-composition35/test_composition.c": "af330c88878d8fef9d85ee8e323782c7a249b601402fa16766e299a0981c6ef1",
+  "firmware/upstream-hardening/next35/test_time.c": "7e32749195474e52b4563ef0e79a2824993212421c0f69b69d6a248130aa807b",
+  "firmware/upstream-hardening/followup/17-composition/test_home.c": "942fb97a79fa53ec2ec266f3876f8c9ab8653e11f4e4516f15672c2cfa513258"
+}

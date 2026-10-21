@@ -1,0 +1,36 @@
+{
+  "boot_sha256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+  "cases": [
+    {
+      "calibration": "0x0",
+      "writes": 1170,
+      "min_write": "0x20000000",
+      "max_exclusive": "0x20001690",
+      "retained_range": [
+        "0x20003f80",
+        "0x20004000"
+      ],
+      "sentinel_preserved": true,
+      "wdt_reset_cause_preserved": true,
+      "boot_reads_rcause": false,
+      "app_entry_apbamask": "0x7f",
+      "app_entry_apbbmask": "0x7f"
+    },
+    {
+      "calibration": "0xffffffff",
+      "writes": 1170,
+      "min_write": "0x20000000",
+      "max_exclusive": "0x20001690",
+      "retained_range": [
+        "0x20003f80",
+        "0x20004000"
+      ],
+      "sentinel_preserved": true,
+      "wdt_reset_cause_preserved": true,
+      "boot_reads_rcause": false,
+      "app_entry_apbamask": "0x7f",
+      "app_entry_apbbmask": "0x7f"
+    }
+  ],
+  "limitations": "Ordinary PA23-low finite lane24 model. No timing, IRQ delivery, DMA, power or hardware validation. Stops at old application reset entry, before its CRT."
+}

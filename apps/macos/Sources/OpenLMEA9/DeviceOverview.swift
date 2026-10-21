@@ -251,6 +251,8 @@ struct DeviceToolsView: View {
                             Button("Install Homing Diagnostic 3.9.0", action: model.installHomingDiagnostic).disabled(!model.canInstallHomingDiagnostic)
                             Text("Reference Qualification 4.0.0 is held after a hard camera crash following two reported photos and a required power cycle. Do not repeat camera testing; preserve a read-only backup for log review.").font(.callout)
                             Button("Install Reference Qualification 4.0.0", action: model.installReferenceQualified).disabled(!model.canInstallReferenceQualified)
+                            Text("Crash Diagnostic 4.1.0 is camera-unqualified. It adds watchdog reset evidence and a persistent crash latch; no AF or camera-crash fix is established. Preserve a backup before any further trial.").font(.callout)
+                            Button("Install Crash Diagnostic 4.1.0", action: model.installCrashDiagnostic).disabled(!model.canInstallCrashDiagnostic)
                             Button("Install Metadata Only for Prepared Lens", action: model.installMetadataOnly).disabled(!model.canChangeFirmware)
                         }.padding(.top, 12)
                     }.padding(20).modifier(Surface())

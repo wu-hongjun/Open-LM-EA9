@@ -31,13 +31,63 @@ def u32(p, offset):
     return int.from_bytes(p[offset:offset+4], 'little')
 
 
+def decode_checkpoint(q, recovered, cause, faults, issues):
+    """Standalone 4.1 boot record; no event/motion assembly from retained RAM."""
+    if cause & ~0x77:
+        issues.append('unknown-reset-cause-bits')
+    result = {
+        'resetCauseRaw': cause,
+        'resetCauses': [name for bit, name in ((1, 'power-on'), (2, 'brownout-12'),
+            (4, 'brownout-33'), (16, 'external'), (32, 'watchdog'), (64, 'system')) if cause & bit],
+        'crashResetObserved': bool(cause & 96),
+        'snapshotRecovered': bool(recovered),
+        'kind': 'retained-foreground-checkpoint' if recovered else 'baseline-or-cause-only',
+        'meaning': ('Last validated foreground checkpoint, not an exact crash-time snapshot. '
+            'System reset does not uniquely identify HardFault. A baseline has no retained telemetry. '
+            'Persistence occurs before motor/protocol initialization; it does not prove camera acceptance.'),
+        'telemetryAvailability': ('Live stage, frame counters/IDs, capability, last-RX time, event evictions, '
+            'shutdown flag and sticky fault come from the existing summary collector. UART byte/error/status, '
+            'pins and buffered/planned counts are populated or sealed at terminal flush; '
+            'their earlier zero/stale values are not measured absence. Events and motion are not retained.'),
+    }
+    if not recovered:
+        if any(q):
+            issues.append('nonzero-baseline-payload')
+        return result
+    if cause not in (32, 64):
+        issues.append('retained-checkpoint-with-ineligible-reset-cause')
+    if q[25] > 1 or q[33] > 1 or q[34] > 1:
+        issues.append('nonboolean-checkpoint-flag')
+    if q[24] > 14 or q[26] > 19 or q[27] not in (0, 1, 2, 3, 255):
+        issues.append('invalid-checkpoint-state')
+    if q[35] > 32 or q[36] > q[35] or q[37] not in (0, 3):
+        issues.append('invalid-checkpoint-retention-count')
+    if any(q[38:]):
+        issues.append('nonzero-checkpoint-reserved')
+    result['lastForeground'] = {
+        'uptimeMS': u32(q, 0), 'uartBytes': u32(q, 4), 'lastRxMS': u32(q, 8),
+        'rxFrames': u16(q, 12), 'txReturns': u16(q, 14),
+        'uartErrors': u16(q, 16), 'uartStatus': u16(q, 18),
+        'evictedEvents': u16(q, 20), 'filteredEvents': u16(q, 22),
+        'stageID': q[24], 'handshakeFlag': bool(q[25]),
+        'faultID': q[26], 'fault': faults.get(q[26], f'unknown-{q[26]}'),
+        'pins': None if q[27] == 255 else q[27],
+        'firstRxID': q[28], 'lastRxID': q[29], 'firstTxID': q[30], 'lastTxID': q[31],
+        'observedMessage08CapabilityByte': q[32] if q[33] else None,
+        'shutdownUARTDisabledObserved': bool(q[34]), 'bufferedEvents': q[35],
+        'plannedEvents': q[36], 'plannedMotionChunks': q[37],
+    }
+    return result
+
+
 def decode_pages(data, version='3.7.0'):
     if len(data) != 1024:
         raise ValueError('Expected exactly 1024 diagnostic bytes.')
-    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0'):
+    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0', '4.1.0'):
         raise ValueError('Unsupported targeted-trace version.')
-    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version in ('3.8.0', '3.9.0', '4.0.0') else FAULTS
-    maximum_fault = 19 if version in ('3.8.0', '3.9.0', '4.0.0') else 16
+    faults = {**FAULTS, **HOME_PHASE_FAULTS} if version in ('3.8.0', '3.9.0', '4.0.0', '4.1.0') else FAULTS
+    maximum_fault = 19 if version in ('3.8.0', '3.9.0', '4.0.0', '4.1.0') else 16
+    types = {**TYPES, 5: 'boot-checkpoint'} if version == '4.1.0' else TYPES
     pages = []
     for slot in range(16):
         p = data[64*slot:64*(slot+1)]
@@ -46,22 +96,27 @@ def decode_pages(data, version='3.7.0'):
         if p == b'\xff'*64:
             e['state'] = 'erased'
             continue
-        if (p[:4] != b'E9S3' or p[4] != 3 or p[5] not in TYPES
-                or not 1 <= p[6] <= 16 or p[11] != 0 or u16(p, 8) != slot
+        if (p[:4] != b'E9S3' or p[4] != 3 or p[5] not in types
+                or not 1 <= p[6] <= 16 or (p[5] != 5 and p[11] != 0) or u16(p, 8) != slot
                 or zlib.crc32(p[:60]) != u32(p, 60)
                 or (p[5] != 2 and p[7] != 1)
                 or (p[5] == 2 and not 1 <= p[7] <= 4)
                 or (p[5] in (1, 4) and p[10] != 0)
                 or (p[5] == 2 and p[10] > 7)
-                or (p[5] == 3 and p[10] > 2)):
+                or (p[5] == 3 and p[10] > 2)
+                or (p[5] == 5 and p[10] > 1)):
             continue
         q = p[12:60]
         e.update(state='valid', recordVersion=3, boot=p[6],
-            type=TYPES[p[5]], chunk=p[10], semanticIssues=[])
+            type=types[p[5]], chunk=p[10], semanticIssues=[])
         issues = e['semanticIssues']
         if p[6] > slot+1:
             issues.append('cohort-start-after-record-slot')
-        if p[5] == 1:
+        if p[5] == 5:
+            e['checkpoint'] = decode_checkpoint(q, p[10], p[11], faults, issues)
+            if p[6] != slot+1:
+                issues.append('boot-record-not-at-cohort-start')
+        elif p[5] == 1:
             summary = {
                 'uptimeMS': u32(q, 0), 'uartBytes': u32(q, 4), 'lastRxMS': u32(q, 8),
                 'rxFrames': u16(q, 12), 'txReturns': u16(q, 14),
@@ -144,6 +199,22 @@ def decode_pages(data, version='3.7.0'):
                     or (q[0] == 5 and (q[1] != q[2] or not 1 <= q[1] <= maximum_fault))):
                 issues.append('terminal-value-disagrees-with-writer')
 
+    if version == '4.1.0':
+        blocked = False
+        for e in pages:
+            if blocked and e['state'] == 'valid':
+                e['semanticIssues'].append('record-after-persistent-crash-or-storage-latch')
+            # Match st_init's latch exactly. A CRC-valid foreign/unknown page
+            # consumes storage but is not by itself the firmware storage latch.
+            slot = e['slot']
+            raw = data[64*slot:64*(slot+1)]
+            crc_ok = zlib.crc32(raw[:60]) == u32(raw, 60)
+            bad_storage = raw != b'\xff'*64 and not crc_ok
+            crash_latch = (raw[:4] == b'E9S3' and raw[4] == 3 and raw[5] == 5
+                and raw[7] == 1 and raw[6] == slot+1 and u16(raw, 8) == slot
+                and raw[10] <= 1 and raw[11] & 96 and crc_ok)
+            blocked = blocked or bad_storage or crash_latch
+
     # A torn/empty write may be followed by another boot at a later frontier.
     # Never count that boot's pages as survivors of this summary's plan.
     for origin in pages:
@@ -224,7 +295,7 @@ def decode_pages(data, version='3.7.0'):
     for e in pages:
         if e['state'] != 'valid':
             continue
-        if e['type'] != 'summary':
+        if e['type'] not in ('summary', 'boot-checkpoint'):
             origin = pages[e['boot']-1]
             if (origin.get('type') != 'summary' or origin.get('boot') != e['boot']
                     or origin.get('semanticIssues')):
@@ -253,11 +324,11 @@ def decode_pages(data, version='3.7.0'):
 def decode_motion(raw, version='3.7.0'):
     """Decode the pinned main-context motion structure; no physical inference."""
     assert len(raw) == 144
-    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0'):
+    if version not in ('3.7.0', '3.8.0', '3.9.0', '4.0.0', '4.1.0'):
         raise ValueError('Unsupported motion-trace version.')
     if not any(raw):
         return {'valid': False, 'meaning': 'No servo move snapshot initialized; does not exclude motion outside this path.', 'writerIssues': []}
-    if version in ('3.9.0', '4.0.0') and any(raw[112:]):
+    if version in ('3.9.0', '4.0.0', '4.1.0') and any(raw[112:]):
         return decode_failed_home(raw, version)
     i32 = lambda at: struct.unpack_from('<i', raw, at)[0]
     i16 = lambda at: struct.unpack_from('<h', raw, at)[0]
@@ -310,9 +381,9 @@ def decode_motion(raw, version='3.7.0'):
 
 def decode_failed_home(raw, version='3.9.0'):
     """Version-scoped failed-home tail; released settling is admitted only by4.0."""
-    if version not in ('3.9.0', '4.0.0'):
+    if version not in ('3.9.0', '4.0.0', '4.1.0'):
         raise ValueError('Unsupported failed-home version.')
-    tag = 0x40 if version == '4.0.0' else 0x39
+    tag = 0x40 if version in ('4.0.0', '4.1.0') else 0x39
     issues = []
     phase, flags, count = raw[113:116]
     if raw[112] != tag or phase not in HOME_PHASE_FAULTS or flags & ~1:
@@ -333,7 +404,7 @@ def decode_failed_home(raw, version='3.9.0'):
         'phase': HOME_PHASE_FAULTS.get(phase, f'unknown-{phase}'),
         'driveQualified': bool(flags & 1),
         'driveQualificationMeaning': ('Forty driven stillness ticks; false during4.0 released settling does not imply drive-phase failure.'
-            if version == '4.0.0' else 'Forty driven stillness ticks;3.9 cannot enter settling without this qualification.'),
+            if version in ('4.0.0', '4.1.0') else 'Forty driven stillness ticks;3.9 cannot enter settling without this qualification.'),
         'consumedNonStopRequestsSaturating': count,
         'requestCountIsLowerBound': count == 255,
         'phaseStartMS': start, 'afterInhibitReleaseMS': end,
@@ -348,7 +419,7 @@ def decode_failed_home(raw, version='3.9.0'):
             ('In4.0 released settling, anchor position stays fixed while anchor time resets to released-window start. '
              'A phase19 fault with driveQualified false cannot distinguish drive-budget exhaustion from released settling. '
              'Otherwise the anchor is initial or last threshold-crossing observation. '
-             if version == '4.0.0' else
+             if version in ('4.0.0', '4.1.0') else
              'The stillness anchor is the initial or last threshold-crossing observation, ') +
             'It is not a final encoder read; positions are software coordinates. '
             'The last iteration interval includes pump and checks, not UART alone. '

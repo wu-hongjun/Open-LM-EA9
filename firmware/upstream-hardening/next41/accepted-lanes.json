@@ -1,0 +1,24 @@
+{
+  "status": "offline-crash-diagnostic-candidate-camera-unqualified",
+  "baseVersion": "4.0.0",
+  "nextVersion": "4.1.0",
+  "baseImageSHA256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae",
+  "inputs": {
+    "firmware/upstream-hardening/followup/52-durable-crash/apply.py": "2cfa2ced502525c280a90be7e36515ec010e44f99835214fa3df5742d30fd1c7",
+    "firmware/upstream-hardening/followup/52-durable-crash/retained.inc": "8a8715b3fecfcaaf6f772473a3505b80c181a29be89f8bfe349ca676251c67d6",
+    "firmware/upstream-hardening/followup/52-durable-crash/watchdog.inc": "b89824fe23b61fd1c5f2f7607608da481a13bad57a96acb41587f6e932c7be4f"
+  },
+  "applicators": [
+    {
+      "path": "firmware/upstream-hardening/followup/52-durable-crash/apply.py",
+      "entry": "apply",
+      "argument": "src"
+    }
+  ],
+  "additionalUnits": [],
+  "additionalUnitFlags": {
+    "servo": [
+      "-Os"
+    ]
+  }
+}

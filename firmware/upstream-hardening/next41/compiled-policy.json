@@ -1,0 +1,227 @@
+{
+  "libraryFrames": {
+    "deregister_tm_clones": 8,
+    "register_tm_clones": 8,
+    "__do_global_dtors_aux": 8,
+    "frame_dummy": 8,
+    "__gnu_thumb1_case_sqi": 4,
+    "__gnu_thumb1_case_uqi": 4,
+    "__udivsi3": 8,
+    "__aeabi_uidivmod": 0,
+    "__divsi3": 8,
+    "__aeabi_idivmod": 0,
+    "__aeabi_idiv0": 0,
+    "memmove": 8,
+    "memset": 0,
+    "__libc_init_array": 16,
+    "memcpy": 8,
+    "_init": 24,
+    "_fini": 24,
+    "memcmp": 12
+  },
+  "unknowns": [
+    "Application thread frames require privileged thread mode, CONTROL=0 (MSP), PRIMASK=0 and no active exception on the ordinary reset path. Boot may already select application VTOR before Reset_Handler; packet reconstruction after BSS clear requires inherited IRQ quiescence. Audit37 finite startup fixtures are not physical or asynchronously scheduled entry.",
+    "Boot preserves priorities and non-reset interrupt state, enables NVMCTRL IRQ5 while reset peripheral INTEN remains zero, and runs SysTick with TICKINT clear. App enables UART/SysTick without setting their priorities and sets EIC priority 1; arbitrary inherited pending/active state and vector-transition exception delivery remain unverified.",
+    "No physical stack high-water, stack guard/canary, ISR-duration or NVM timing measurement exists.",
+    "Bounds assume valid control flow, intact callback/configuration data and ARMv6-M execution; memory corruption, bootloader execution and failed exception stacking are outside the model.",
+    "Retained SRAM and WDT clock/reset/bootloader/power continuity are conditional; reset latch cannot create flash evidence after an all-erased failed write. HardFault handler has zero software frame but exception entry can fail."
+  ],
+  "establishedEntryEvidence": {
+    "source": "docs/reverse-engineering/stock-boot-reconstruction.md#startup-and-architecture",
+    "inventory": "docs/reverse-engineering/stock-boot-inventory.csv",
+    "entry": "0x2510",
+    "evidenceID": "ev_af84eb17e704f414c6a70060f43666c376cc40e1828175a44552db137154b0c6",
+    "confidence": "high static reconstruction; physical execution not validated",
+    "behavior": "Stock PA23-low launch path loads MSP from the application vector at 0x5000, sets VTOR to 0x5000, then calls the application reset vector.",
+    "qualification": "Audit37 executes this exact 3.7 initializer/reset through main entry under inert boundary assumptions; physical core state, asynchronous arrivals and exception delivery remain unverified.",
+    "followup": "docs/audits/astra-37-packet-initializer-2026-10-15.md"
+  },
+  "baseAnalyzerSHA256": "ff226db7c6c1aee09ba8d7bcde05c948f56ff082754334fe9b111a5b44e7ab72",
+  "baselineLibraryStackInstructions": {
+    "deregister_tm_clones": [
+      "50b8:\tb510      \tpush\t{r4, lr}",
+      "50c6:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "register_tm_clones": [
+      "50e0:\tb510      \tpush\t{r4, lr}",
+      "50ee:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "__do_global_dtors_aux": [
+      "50fc:\tb510      \tpush\t{r4, lr}",
+      "511a:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "frame_dummy": [
+      "512a:\tb510      \tpush\t{r4, lr}",
+      "513c:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "__gnu_thumb1_case_sqi": [
+      "9388:\tb402      \tpush\t{r1}",
+      "9396:\tbc02      \tpop\t{r1}"
+    ],
+    "__gnu_thumb1_case_uqi": [
+      "939c:\tb402      \tpush\t{r1}",
+      "93aa:\tbc02      \tpop\t{r1}"
+    ],
+    "__udivsi3": [
+      "94b0:\tb501      \tpush\t{r0, lr}",
+      "94b8:\tbd02      \tpop\t{r1, pc}"
+    ],
+    "__aeabi_uidivmod": [],
+    "__divsi3": [
+      "9686:\tb501      \tpush\t{r0, lr}",
+      "968e:\tbd02      \tpop\t{r1, pc}"
+    ],
+    "__aeabi_idivmod": [],
+    "__aeabi_idiv0": [],
+    "memmove": [
+      "969c:\tb510      \tpush\t{r4, lr}",
+      "96be:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "memset": [],
+    "__libc_init_array": [
+      "96d0:\tb570      \tpush\t{r4, r5, r6, lr}",
+      "96f2:\tbd70      \tpop\t{r4, r5, r6, pc}"
+    ],
+    "memcpy": [
+      "971a:\tb510      \tpush\t{r4, lr}",
+      "9720:\tbd10      \tpop\t{r4, pc}"
+    ],
+    "_init": [
+      "9a90:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+      "9a94:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+      "9a96:\tbc08      \tpop\t{r3}"
+    ],
+    "_fini": [
+      "9aa0:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+      "9aa4:\tbcf8      \tpop\t{r3, r4, r5, r6, r7}",
+      "9aa6:\tbc08      \tpop\t{r3}"
+    ],
+    "memcmp": [
+      "95b8:\tb530      \tpush\t{r4, r5, lr}",
+      "95d2:\tbd30      \tpop\t{r4, r5, pc}"
+    ]
+  },
+  "pins": {
+    "manifest.json": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
+    "hardened.elf": "c2f2cec1d0a319a844ef6f30151b375240d7c34d8d4a3d1d0a36db14f2502d29",
+    "hardened.map": "a9735c864c7f605e19cf9b40d060c70f94199b010f84dcc5995d5d5711e402c1",
+    "raw.bin": "0d8dff344b6cf7d1de78b2a658d99f84bdbb2e0940c01fa08919ef8722be3c4e",
+    "contax-zeiss-50-f1-4.bin": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641"
+  },
+  "adaptedAnalyzerSHA256": "b78f66e0080d3df4a027b269f92b3ee9690f85490aa9f1bfd7aeefc26bcfb592",
+  "indirectCalls": {
+    "50c4": {
+      "caller": "deregister_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints __TMC_END__ checked against compiled literals; weak target zero."
+    },
+    "50ec": {
+      "caller": "register_tm_clones",
+      "targets": [],
+      "evidence": "Equal endpoints __TMC_END__ checked against compiled literals; weak target zero."
+    },
+    "56c6": {
+      "caller": "em_shutdown_ack",
+      "targets": [
+        "powerdown_signal"
+      ],
+      "evidence": "AF4.0 exact compiled review; 0x56be loads literal 0x56e0 = g_powerdown; main is sole nonzero registrar."
+    },
+    "5754": {
+      "caller": "on_cs_edge",
+      "targets": [
+        "motion_shutdown_inhibit"
+      ],
+      "evidence": "AF4.0 exact compiled review; 0x574c loads literal 0x59d4 = g_shutdown_inhibit; main is sole nonzero registrar."
+    },
+    "69b8": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_cs_edge"
+      ],
+      "evidence": "AF4.0 exact compiled review; 0x699e loads literal 0x69d4 = g_cs_edge; 0x69a0 loads callback into r1, installed by em_init at 0x5fa2."
+    },
+    "69cc": {
+      "caller": "EIC_Handler",
+      "targets": [
+        "on_vd_edge"
+      ],
+      "evidence": "AF4.0 exact compiled review; 0x69c4 loads g_vd_edge, installed by em_init at 0x5fa2. Sequential with CS."
+    },
+    "6fd6": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_retarget"
+      ],
+      "evidence": "AF4.1 -Os compiled cfg register r4, field offset52; null-guarded callback loaded into r3. STOCK fields independently bound."
+    },
+    "70f2": {
+      "caller": "servo_move_from",
+      "targets": [
+        "focus_abort"
+      ],
+      "evidence": "AF4.1 -Os compiled cfg register r4, field offset56; null-guarded callback loaded into r3. STOCK fields independently bound."
+    },
+    "72ec": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "AF4.1 -Os compiled cfg register r4, field offset48; null-guarded callback loaded into r3. STOCK fields independently bound."
+    },
+    "736c": {
+      "caller": "servo_move_from",
+      "targets": [
+        "pump"
+      ],
+      "evidence": "AF4.1 -Os compiled cfg register r4, field offset48; null-guarded callback loaded into r3. STOCK fields independently bound."
+    },
+    "9630": {
+      "caller": "__libc_init_array",
+      "targets": [],
+      "evidence": "Compiled preinit start=end; no target."
+    },
+    "963a": {
+      "caller": "__libc_init_array",
+      "targets": [
+        "frame_dummy"
+      ],
+      "evidence": "Single four-byte init entry independently checked against frame_dummy|1."
+    }
+  },
+  "reviewedFunctionDisassemblySHA256": {
+    "Reset_Handler": "ee42a2ce7fae6507b7ffedc11c75361ff664cc72240e9e9cc44b7ac74ae4187c",
+    "main": "8f59a1381b0f5f3fdc63a6ab1a08f6e233b3dca947faa55929750b95a0a5ee8f",
+    "servo_move_from": "4e5203f75a39c5c90837b7799c288586a2b2db8e8536656e235fc85fc7c1aa24",
+    "st_crash_boot": "811bf2a5992cf45fdca7e6a95112e217e8e39d1e9ddc41f93c1c2be415a335a5",
+    "st_watchdog_start": "02af2f513dbf83c0535309b5d7e78ccbaf99c86989023aa26722960e8dae7eb3",
+    "st_watchdog_arm": "719f2f8bf1dbe9b66c7ce6da67999e74326b19b91caaf503b4e560ab57c390ba",
+    "st_health": "0de3f1212acc701ca322a31ff7344ecb71404a1db51d58d83b4df4cc007d6ec2",
+    "HardFault_Handler": "f201bff8ba1b72c69d4771002a9ee1a5d0c04f339ac55309b5e8d21d12d16f42",
+    "st_checkpoint": "b9fdb8861cc56a7236d83cdc1fa41159789ba4e13dd0e99504ecbf3dc7f9babe",
+    "st_boot_record": "b772dbd1b987e02247a24f25f01110556104c70ac1cfd1d75e6849a75e0e5fb9",
+    "st_init": "7d3a257bfba8cfd39d3c51641f7d66fcc80ab8db1b7a559eef873e7151547dcf",
+    "append": "495fc30d5f474b7964601b713cc7cdb55775e0da004a69176ed6469509460d4f",
+    "st_write_page": "1496243df175d19f46665a5bf6e54fd0aff2a4207205348c45c93571b30dad29",
+    "st_read_page": "7ca2eff7198edf999856baa8d485c5360f26dd5ff8566573e9a5bb32f3eebd84",
+    "st_fail": "fd1e2d5b1d4dab82d9134ea047bca9234c2e7eeb6b92bcf6d0f5f79abc0f62b4",
+    "powerdown_signal": "548023a31216bbf356e94a02b2eeb53ec79f822719bb08f40356e6f1370c7a27",
+    "motor_emergency_release": "4e79493505853be5a89ba670704077c7e16ce527cfb4bea9d94cc4b008f55bd4",
+    "motor_home_release": "6595ba7df818228c520fe9f266b7a7851bec61e139485e98a16033c9509f6dbb",
+    "motor_drive": "08babc923ae6a5acad0ee984d29ab31262230044fe0a0b0201cacfb7b3975574",
+    "motor_attach_pins": "c49da77e788cdadc22b1d1971e5060ac4f7338140b37ac4cd530ef4283efe80c",
+    "motor_release": "59e696bae9f2fdd49c98d44efb0e344ce8bfbc21f75b67a08f474be56ef48705",
+    "abs_encoder_track": "0fa0c19c95cf15f759edb92ca3bc17baa099f72be5e7f8b52f6b4dbc9b17f797",
+    "abs_encoder_home_reset": "edf31952bf2f98949536fbefb7d15dfd73242311d92afa9d3945d128e1e23480",
+    "st_halt": "31b60f3715dbbe4edfcb760884bed8cb0e1572d1e667acbb43a438f24f0e5f17"
+  },
+  "sourceDeltaFrom40": [
+    "src/ea9.ld",
+    "src/emount.h",
+    "src/main.c",
+    "src/servo.c",
+    "src/startup_trace.c",
+    "src/startup_trace.h",
+    "src/startup_trace_flash.c"
+  ]
+}

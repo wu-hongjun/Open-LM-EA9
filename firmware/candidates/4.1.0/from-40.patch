@@ -1,0 +1,184 @@
+--- frozen40/src/ea9.ld
++++ crash41/src/ea9.ld
+@@ -39 +39,2 @@
+-  ram      (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00004000
++  ram      (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00003fc0
++  retained (rw)  : ORIGIN = 0x20003fc0, LENGTH = 0x00000040
+@@ -130,0 +132,8 @@
++    /* Outside both startup BSS and the original bootloader stack. */
++    .noinit (NOLOAD) :
++    {
++        . = ALIGN(4);
++        KEEP(*(.noinit.st_retained))
++        . = ALIGN(4);
++    } > retained
++
+--- frozen40/src/emount.h
++++ crash41/src/emount.h
+@@ -88 +88 @@
+-#define EM_FW_VERSION_BCD   0x40u
++#define EM_FW_VERSION_BCD   0x41u
+--- frozen40/src/main.c
++++ crash41/src/main.c
+@@ -1694,0 +1695 @@
++	st_crash_boot();
+@@ -1696 +1696,0 @@
+-	st_init();
+@@ -1701,0 +1702 @@
++	st_watchdog_start();
+@@ -1748,0 +1750 @@
++	st_watchdog_arm();
+@@ -1750,0 +1753 @@
++		st_health(millis());
+--- frozen40/src/servo.c
++++ crash41/src/servo.c
+@@ -462,0 +463,2 @@
++		/* Completed bounded sensor/control/protocol iteration. */
++		st_health(millis());
+--- frozen40/src/startup_trace.c
++++ crash41/src/startup_trace.c
+@@ -7,0 +8 @@
++static uint8_t crash_latched;
+@@ -31,0 +33 @@
++    crash_latched=0;
+@@ -34,0 +37,6 @@
++        uint32_t crc; memcpy(&crc,p+60,4);
++        uint32_t actual=st_crc32(p,60);
++        if (!erased(p) && actual!=crc) crash_latched=1;
++        if (!memcmp(p,"E9S3",4) && p[4]==3 && p[5]==5 && p[7]==1
++            && p[6]==i+1 && p[8]==i && !p[9] && p[10]<=1 && (p[11]&96u)
++            && actual==crc) crash_latched=1;
+@@ -132,0 +141,48 @@
++
++/* Included by startup_trace.c: no hardware/NVM operations during checkpoint.
++ * Only a completed foreground checkpoint, NOT an exact crash-time snapshot.
++ * Schema 1 binds the existing 48-byte v3 summary layout. */
++#define ST_RETAINED_MAGIC 0x31523945u
++static struct {
++    uint32_t magic, crc;
++    struct summary summary;
++} retained
++#ifndef ST_HOST
++    __attribute__((section(".noinit.st_retained"), aligned(4)))
++#endif
++;
++
++void st_checkpoint(uint32_t ms)
++{
++    uint32_t key=st_lock();
++    retained.magic=0;
++    __asm__ volatile ("" ::: "memory");
++    retained.summary=s;
++    retained.summary.ms=ms;
++    st_unlock(key);
++    retained.crc=st_crc32((const uint8_t *)&retained.summary,48);
++    __asm__ volatile ("" ::: "memory");
++    retained.magic=ST_RETAINED_MAGIC;
++}
++
++/* Call once after st_init, before enabling protocol or motor hardware.
++ * SAM D21 RCAUSE: POR=1, BOD12=2, BOD33=4, EXT=16, WDT=32, SYST=64.
++ * Mixed cold/external causes never authorize retained RAM. The caller owns
++ * fail-stop disposition on watchdog/system reset, even with invalid RAM. */
++int st_boot_record(uint8_t reset_cause)
++{
++    struct page p={.type=5,.n=1,.reserved=reset_cause};
++    if (crash_latched) { retained.magic=0; return 1; }
++    if ((reset_cause==32 || reset_cause==64)
++        && retained.magic==ST_RETAINED_MAGIC
++        && retained.crc==st_crc32((const uint8_t *)&retained.summary,48)) {
++        p.chunk=1;
++        memcpy(p.data,&retained.summary,48);
++    }
++    /* Consumed before any NVM access: failed/torn writes cannot replay it. */
++    retained.magic=0;
++    __asm__ volatile ("" ::: "memory");
++    if (!append(&p)) return 1;
++    r_cohort=r_next_page+1;
++    return (reset_cause & (32u|64u)) != 0;
++}
+--- frozen40/src/startup_trace.h
++++ crash41/src/startup_trace.h
+@@ -70,0 +71,8 @@
++
++/* Foreground checkpoint; boot record before protocol activation. */
++void st_checkpoint(uint32_t ms);
++int st_boot_record(uint8_t reset_cause);
++void st_crash_boot(void);
++void st_watchdog_start(void);
++void st_watchdog_arm(void);
++void st_health(uint32_t now);
+--- frozen40/src/startup_trace_flash.c
++++ crash41/src/startup_trace_flash.c
+@@ -57,0 +58,71 @@
++
++#include "motor.h"
++/* Target-only, included by startup_trace_flash.c. Independent OSCULP32K
++ * source; no IRQ pet and no flash operations in a foreground health sample. */
++static void st_halt(void) __attribute__((noreturn));
++static void st_halt(void) { __disable_irq(); for (;;) __WFI(); }
++static void st_wdt_sync(void)
++{
++    uint32_t budget=4194304u;
++    while (WDT->STATUS.bit.SYNCBUSY) if (!--budget) st_halt();
++}
++static void st_gclk_sync(void)
++{
++    uint32_t budget=4194304u;
++    while (GCLK->STATUS.bit.SYNCBUSY) if (!--budget) st_halt();
++}
++void st_crash_boot(void)
++{
++    motor_emergency_release();
++    uint8_t cause=PM->RCAUSE.reg;
++    PM->APBAMASK.reg |= PM_APBAMASK_WDT;
++    /* An always-on fuse is incompatible with this fail-stop design. */
++    if (WDT->CTRL.bit.ALWAYSON) st_halt();
++    st_wdt_sync();
++    WDT->CTRL.reg=0;
++    st_wdt_sync();
++    st_init();
++    if (st_boot_record(cause)) st_halt();
++}
++void st_watchdog_start(void)
++{
++    GCLK->GENDIV.reg=GCLK_GENDIV_ID(4)|GCLK_GENDIV_DIV(32);
++    st_gclk_sync();
++    GCLK->GENCTRL.reg=GCLK_GENCTRL_ID(4)|GCLK_GENCTRL_SRC_OSCULP32K
++        |GCLK_GENCTRL_GENEN;
++    st_gclk_sync();
++    GCLK->CLKCTRL.reg=GCLK_CLKCTRL_ID(WDT_GCLK_ID)|GCLK_CLKCTRL_GEN_GCLK4
++        |GCLK_CLKCTRL_CLKEN;
++    st_gclk_sync();
++    WDT->CONFIG.reg=WDT_CONFIG_PER_4K;
++}
++void st_watchdog_arm(void)
++{
++    /* Configuration was completed before protocol activation; enabling is
++     * asynchronous, without an active-protocol synchronization wait. */
++    if (WDT->STATUS.bit.SYNCBUSY) st_halt();
++    WDT->CTRL.reg=WDT_CTRL_ENABLE;
++}
++void st_health(uint32_t now)
++{
++    static uint32_t last;
++    if ((uint32_t)(now-last)<250u || WDT->STATUS.bit.SYNCBUSY) return;
++    last=now;
++    st_checkpoint(now);
++    /* Asynchronous clear: never wait on synchronization in protocol flow. */
++    WDT->CLEAR.reg=WDT_CLEAR_CLEAR_KEY;
++}
++/* No C prologue, no exception-stack dereference, no flash attempt in fault
++ * context. System-reset cause does not uniquely identify a HardFault. */
++void HardFault_Handler(void) __attribute__((naked));
++void HardFault_Handler(void)
++{
++    __asm__ volatile (
++        "cpsid i\n"
++        "dsb\n"
++        "ldr r0, =0xe000ed0c\n"
++        "ldr r1, =0x05fa0004\n"
++        "str r1, [r0]\n"
++        "dsb\n"
++        "1: b 1b\n");
++}
