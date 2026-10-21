@@ -1,7 +1,8 @@
 # Device workflow: prototype 0.23.0, build 31
 
 The new packaged candidate is **AF4.0.0 reference qualification**, fixed to the
-original50mm f/1.4. Upload completed; physical reconnect and strict verification are pending.
+original50mm f/1.4. Upload and strict verification passed after physical reconnect; one coordinated
+camera cycle and read-only log review remain pending.
 It remains camera-unqualified. [Installation record](evidence/upstream-40-upload-2026-10-20.md).
 `prepare-reference-upstream`/`apply-reference-upstream` select its exact pinned image.
 USB tools expose it explicitly; ordinary lens dropdown changes do not install it.

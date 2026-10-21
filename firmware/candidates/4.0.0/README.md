@@ -1,7 +1,7 @@
 # AF 4.0 — bounded reference qualification
 
-**Uploaded; physical reconnect and strict byte/protected-data verification are pending.
-Not camera-qualified.** [Installation record](../../../docs/evidence/upstream-40-upload-2026-10-20.md). This candidate is fixed to
+**Upload and strict byte/protected-data verification passed after physical reconnect.
+One camera cycle and log review remain pending; not camera-qualified.** [Installation record](../../../docs/evidence/upstream-40-upload-2026-10-20.md). This candidate is fixed to
 original Contax Zeiss 50mm f/1.4 metadata: lens ID 234, nominal AV 4352. Actual iris
 position remains unknown; lens-library edits stay local. The version rolls to4.0
 because the camera uses a single BCD byte; this does not indicate factory parity.
@@ -40,6 +40,6 @@ Two additional units use the existing `-Os` policy to retain the 256-byte flash 
 [Separate upload and one-cycle procedure](../../../docs/upstream-reference-test.md).
 
 All historical images, digests and original stock recovery are preserved.3.9 remains
-held. Upload, physical reconnect, strict complete-image/protected-data verification
-and one owner-coordinated A7C II cycle are separate future steps. Sustained capture,
+held. Upload, physical reconnect and strict complete-image/protected-data verification
+passed. One owner-coordinated A7C II cycle and read-only log review remain pending. Sustained capture,
 optical focus, exposure, shutdown and factory parity remain unqualified.

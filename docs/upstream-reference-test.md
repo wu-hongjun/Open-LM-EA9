@@ -1,7 +1,7 @@
 # AF 4.0 — separate upload, one camera cycle and logs
 
-**AF 4.0 upload completed; physical reconnect and strict verification are pending.**
-Keep the adapter off the camera. [Installation record](evidence/upstream-40-upload-2026-10-20.md). Do not repeat
+**AF 4.0 upload and strict verification passed after physical reconnect.**
+One owner-coordinated camera cycle and log review remain pending. [Installation record](evidence/upstream-40-upload-2026-10-20.md). Do not repeat
 held 3.9 camera trials.4.0 is an experimental fixed Contax Zeiss 50mm f/1.4 candidate,
 not an accepted camera release. [Image and pins](../firmware/candidates/4.0.0/README.md).
 

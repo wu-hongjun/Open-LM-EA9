@@ -1,6 +1,6 @@
 # Firmware development
 
-Latest candidate: [AF4.0 bounded reference qualification](candidates/4.0.0/README.md). Uploaded; physical reconnect and strict verification pending. Not camera-qualified. [Installation record](../docs/evidence/upstream-40-upload-2026-10-20.md). See the [integrated evidence](../docs/evidence/upstream-40-reference-2026-10-20.md) and [separate installation procedure](../docs/upstream-reference-test.md).
+Latest candidate: [AF4.0 bounded reference qualification](candidates/4.0.0/README.md). Upload and strict verification passed after physical reconnect. Camera cycle/log review pending; not camera-qualified. [Installation record](../docs/evidence/upstream-40-upload-2026-10-20.md). See the [integrated evidence](../docs/evidence/upstream-40-reference-2026-10-20.md) and [separate installation procedure](../docs/upstream-reference-test.md).
 
 The previously installed image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
 Upload and strict verification passed after physical reconnect. **Camera

@@ -1,8 +1,9 @@
 # AF 4.0 upload — October 20, 2026
 
-**Upload completed; physical USB-cap reconnect and strict byte/protected-data
-verification are pending. Keep the adapter off the camera.** No readback reports
-were sent after upload. Camera testing and log retrieval require later owner steps.
+**AF 4.0 passed strict USB byte verification after physical reconnect and an
+independent full-image/protected-data audit. One owner-coordinated camera cycle
+and read-only log retrieval remain pending.** These checks establish installation
+bytes, not camera capture, exposure, focus, shutdown or factory parity.
 
 [Sanitized receipt](upstream-40-upload-2026-10-20.json) ·
 [Candidate and pins](../../firmware/candidates/4.0.0/README.md) ·
@@ -50,27 +51,53 @@ filesystem-only checks. Prior marker membership is preserved; applied-lens,
 firmware-observation, stock-qualification and library records remain unchanged
 pending verification. No canonical journal or safety marker was manually edited.
 
-## Remaining steps
+## Physical reconnect and strict verification
 
-A physical unplug/reconnect and explicit owner confirmation are required before
-post-upload reports. Native strict verification must check all 20,480 application
-bytes, including the blank 1K diagnostic tail, plus known metadata and protected
-flash/user-row/calibration/device-ID data. The six established loader scratch
-bytes remain the only flash exclusion. A version read or code-prefix comparison
-alone is insufficient. An independent saved-file audit follows native verification.
+The owner explicitly confirmed physical USB-cap reconnect with both apps closed
+and the adapter off-camera. Preflight rechecked signed CLI/image/manifest pins,
+the unchanged uploaded journal, absence of competing processes and one qualified
+adapter on a new, unblocked connection. Inventory sent no reports.
 
-Only then guide one loaded-lens cycle: start without shutter input, check normal
-live preview/motor behavior, confirm **MF separately from A exposure mode** and
-Pre-AF Off, wait 10 quiet seconds, take at most one photo if all prerequisites hold,
-and shut down once. If MF cannot be confirmed, skip the photo. Freeze or abnormal
-drive means stop, switch off, remove the battery if unresponsive, and do not retry.
-The camera menu can be set after the single startup; no setup restart is requested.
-After camera power-off/unpower and stopped motor, the owner must explicitly confirm
-USB-cap reconnect with both apps closed before guarded read-only backup/log retrieval.
-Leave unobserved settings/outcomes unknown. AF-S is a later gate after review.
+`dist/ea9ctl verify --idle` ran once, exiting 0 at **2026-10-21T02:36:18.725905+00:00 UTC**
+(**2026-10-20T22:36:18.725905-04:00 America/New_York**). Two matching 131,072-byte flash
+passes and two auxiliary passes completed, totaling 4,359 CHECK/READ exchanges.
+No firmware writes or retries were sent. Independent filesystem checks confirmed:
 
-All 146 historical release/recovery/pin artifacts and older registry entries remain
-exact. The current 4.0 image/manifest/resource/CLI pins match. Raw backups, keys,
-unit identifiers and real frames remain private. 3.9 and earlier failed camera images
-remain held. This upload is not strict readback verification, a physical homing/
-shutter remedy, camera acceptance or factory parity.
+- Every backup file size/digest, known boot code, MCU/geometry, new connection
+  and same qualified unit, with reported firmware/version metadata 4.0.0.
+- All 20,480 application bytes `[0x5000,0xa000)` exactly match the pinned image,
+  including all 1,024 blank diagnostic bytes; this is full-image verification.
+- Expected metadata `[0x4000,0x403a)` and unchanged boot, gap `[0x4040,0x5000)`,
+  upper flash `[0xa000,0x20000)`, user row, calibration and device-ID windows.
+  Only loader scratch `[0x403a,0x4040)` is excluded; NVM status is checked for
+  geometry rather than volatile-status byte identity.
+- Native publication of the verified journal, original 50mm f/1.4 setting and
+  firmware observation. Old blocked-connection membership, stock qualification
+  and library bytes are preserved. The successful read marker clears through
+  the native engine; no canonical state or safety marker was manually edited.
+
+Readback full-flash SHA256:
+`46c4d45590e03f9deb6bc325aaec531cef6511ee4a443a2b91e157cfcc815248`.
+The complete pristine application remains identical to the reviewed 4.0 release.
+All 146 historical artifacts, older registry entries and original stock 1.8 recovery
+remain exact. Raw backups, keys, unit identifiers and real frames stay private.
+
+## One initial camera cycle, then read-only logs
+
+The owner is guided through one loaded-lens cycle after strict verification:
+with the A7C II OFF and USB cable disconnected, mount the adapter, C/Y-to-M converter
+and 50mm f/1.4, physical infinity/f/1.4. Switch on once without shutter/AF-ON input;
+check normal live preview/motor behavior. Then confirm **MF separately from A
+exposure mode** and Pre-AF Off in powered-on menus, with EV 0/Auto ISO where available.
+After movement stops, wait 10 quiet seconds. Take at most one photo only when MF
+and normal preview/aperture/motor behavior are confirmed; otherwise skip it.
+Shut down once and leave it off; no restart or AF-S attempt is requested yet.
+
+For freeze, grinding, repeated stop impacts or abnormal drive for about 2 seconds,
+stop, switch off, remove the battery if unresponsive or motion continues, and do
+not retry. After camera power-off/unpower and stopped motor, return the adapter
+to its USB cap and explicitly confirm physical reconnect with both apps closed.
+Only then retrieve one guarded read-only backup and decode/audit saved files.
+Actual settings, preview, motor, saved-file exposure and shutdown remain unknown
+until reported. A later logged read is diagnostic evidence, not pristine full-image
+verification. This remains unqualified for sustained capture/AF and factory parity.
