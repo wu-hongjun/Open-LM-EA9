@@ -9,17 +9,19 @@ system audit. All flashed firmware is C. The [updated working recommendation](do
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 The latest prepared image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
-for the original Contax Zeiss 50mm f/1.4. **Prepared offline; not flashed or
-camera-qualified.** Three Astra lanes reviewed drive-phase homing, subsequent
+for the original Contax Zeiss 50mm f/1.4. **Uploaded; owner-confirmed reconnect
+and strict byte verification are pending. No 3.9 camera test has occurred.**
+Three Astra lanes reviewed drive-phase homing, subsequent
 focus requests and original factory instructions. The release removes an unused
 blocking ADC dependency and adds bounded failed-home observations and a consumed
 request count. The physical homing failure and shutter-block cause remain
 unresolved; no guard is relaxed or completion fabricated.
-[3.9 evidence](docs/evidence/upstream-39-homing-2026-10-20.md) ·
+[3.9 upload record](docs/evidence/upstream-39-upload-2026-10-20.md) ·
+[Offline evidence](docs/evidence/upstream-39-homing-2026-10-20.md) ·
 [Build/test workbench](firmware/upstream-hardening/next39/README.md) ·
 [Separate upload/test procedure](docs/upstream-homing-test.md).
 
-The currently installed [3.8 image](firmware/candidates/3.8.0/README.md) passed
+The previously verified [3.8 image](firmware/candidates/3.8.0/README.md) passed
 upload and strict physical-reconnect verification, but **camera acceptance
 failed and further trials are held**. The owner reports hunting, apparent focus
 for one photo, a motor reset and no further photos; shutdown was normal.

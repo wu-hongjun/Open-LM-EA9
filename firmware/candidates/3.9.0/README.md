@@ -1,6 +1,6 @@
 # AF 3.9 — homing observations and release ADC dependency removal
 
-**Prepared offline; not flashed or camera-qualified.** Fixed to the original
+Prepared offline. The separately authorized [upload](../../../docs/evidence/upstream-39-upload-2026-10-20.md) is complete; **owner-confirmed reconnect and strict byte verification are pending. No camera test has occurred; compatibility remains unqualified.** Fixed to the original
 Contax Zeiss 50mm f/1.4 profile (lens ID 234, nominal AV 4352). Actual physical iris
 position is unknown; no runtime lens-profile row is supported.
 

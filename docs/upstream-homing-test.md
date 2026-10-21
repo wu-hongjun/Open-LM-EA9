@@ -1,10 +1,11 @@
 # AF 3.9 — separate upload, one camera cycle and log retrieval
 
-AF 3.9 is prepared offline and not camera-qualified. Its ADC dependency removal
-is verified in software; a physical homing or shutter cure is unproven.
-**No upload or camera test was performed during preparation.** Existing3.8
-camera testing remains held. This procedure is for a later owner-coordinated
-session, not an instruction to run another test now.
+AF 3.9 upload is complete; **owner-confirmed reconnect and strict byte verification
+are pending. No camera test has occurred.** [Upload record](evidence/upstream-39-upload-2026-10-20.md).
+The ADC dependency repair is source-verified, but a physical homing or shutter
+cure remains unproven. The owner has separately authorized this upload,
+verification and one test cycle. Keep the adapter off-camera until verification
+passes; existing 3.8 camera testing remains held.
 
 [Candidate/pins](../firmware/candidates/3.9.0/README.md) ·
 [Evidence and limits](evidence/upstream-39-homing-2026-10-20.md).

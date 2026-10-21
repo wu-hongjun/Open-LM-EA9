@@ -1,7 +1,8 @@
 # Firmware development
 
 The latest prepared image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
-**Offline only; no flash or camera qualification.** It removes an unused blocking
+**Upload complete; owner-confirmed reconnect and strict byte verification are
+pending. No camera test has occurred.** [Upload record](../docs/evidence/upstream-39-upload-2026-10-20.md). It removes an unused blocking
 release ADC dependency and records failed-home phase/timing/work observations
 and later consumed non-Stop requests. The physical homing and shutter-block
 causes remain unresolved. Safety guards and capture re-arm policy remain intact.
@@ -9,7 +10,7 @@ See [integrated evidence](../docs/evidence/upstream-39-homing-2026-10-20.md),
 [reproduction](upstream-hardening/next39/README.md) and the
 [separate test procedure](../docs/upstream-homing-test.md).
 
-The currently installed image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
+The previously verified image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
 Its [upload and strict reconnect verification](../docs/evidence/upstream-38-upload-2026-10-19.md)
 passed. **Camera acceptance failed; further 3.8 trials are held.** Hunting and a
 motor reset were followed by blocked further photos; the owner reports normal

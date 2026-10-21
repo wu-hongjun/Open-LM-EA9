@@ -17,7 +17,9 @@ The 3.6/3.7 camera-failure holds also remain. Historical explicit CLI commands
 retain their pinned images for coordinated research/recovery.
 
 The latest packaged firmware is **upstream AF 3.9.0**, fixed to the original
-50mm f/1.4 profile. It is prepared offline and not flashed or camera-qualified.
+50mm f/1.4 profile. Its [upload](evidence/upstream-39-upload-2026-10-20.md) is complete;
+owner-confirmed reconnect and strict verification are pending. No camera test has
+occurred; compatibility remains unqualified.
 USB tools offers **Install Homing Diagnostic 3.9.0** as a separate guarded action;
 choosing a dropdown profile does not install it. Native commands
 `prepare-homing-upstream` and `apply-homing-upstream` select its pinned image.
