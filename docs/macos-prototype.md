@@ -1,25 +1,29 @@
 # macOS prototype
 
-Current app: **0.22.0, build 29**, October 20, 2026. Device opens first, with
+Current app: **0.22.1, build 30**, October 20, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local
 metadata editing and explicit guarded USB operations. The host uses native
 Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
 on upstream C; Rust is deferred while qualifying the camera contract.
 
 The latest packaged image is [upstream AF 3.9](evidence/upstream-39-homing-2026-10-20.md),
-fixed to the original 50mm f/1.4 with no runtime profile row. It was prepared
-offline and is now uploaded and strictly byte-verified after physical reconnect,
-including protected data. One camera cycle and logs are pending. An explicit guarded install action and native
-prepare/apply route select the pinned candidate. Release ADC telemetry no longer
-blocks startup/pump; failed-home and consumed-request observations improve the
-next investigation. A physical homing/shutter cure remains unproven.
+fixed to the original 50mm f/1.4 with no runtime profile row. Its
+[upload and strict verification](evidence/upstream-39-upload-2026-10-20.md) passed,
+but [camera acceptance failed](evidence/upstream-39-camera-failure-2026-10-20.md):
+two reported photos, then blocked further capture and normal shutdown. Read-only
+logs show failed drive qualification and 17 consumed requests without servo
+execution; physical cause and shutter decision remain unresolved. The app holds
+3.9 and disables its ordinary install control, including from another version.
+Read-only tools, original stock recovery and all explicit historical CLI/image
+pins remain. The prior signed app is retained privately; the held package passes
+53 host tests and signature checks without launch.
 
-The installed3.8 [strict verification](evidence/upstream-38-upload-2026-10-19.md)
+The previous 3.8 [strict verification](evidence/upstream-38-upload-2026-10-19.md)
 passed, but its [camera attempt failed](evidence/upstream-38-camera-failure-2026-10-20.md):
-hunting/reset and blocked further photos, with normal shutdown. The3.6/3.7/3.8
+hunting/reset and blocked further photos, with normal shutdown. The 3.6/3.7/3.8/3.9
 holds, read-only backup/recovery and historical explicit CLI/image pins remain.
 See the [Device workflow](macos-device-workflow.md),
-[separate3.9 procedure](upstream-homing-test.md) and dated
+[held 3.9 procedure](upstream-homing-test.md) and dated
 [initial prototype record](evidence/macos-prototype-2026-10-10.md).
 
 ## Build and open

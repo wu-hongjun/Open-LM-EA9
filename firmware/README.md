@@ -1,14 +1,20 @@
 # Firmware development
 
-The latest prepared image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
-**Upload and strict byte verification passed after physical reconnect. One
-camera cycle and logs are pending; no camera result is known.** [Upload record](../docs/evidence/upstream-39-upload-2026-10-20.md). It removes an unused blocking
-release ADC dependency and records failed-home phase/timing/work observations
-and later consumed non-Stop requests. The physical homing and shutter-block
-causes remain unresolved. Safety guards and capture re-arm policy remain intact.
-See [integrated evidence](../docs/evidence/upstream-39-homing-2026-10-20.md),
+The latest image is [upstream AF 3.9 homing diagnostics](candidates/3.9.0/README.md).
+Upload and strict verification passed after physical reconnect. **Camera
+acceptance failed; further 3.9 trials are held.** The owner reports two photos,
+then blocked further capture and normal shutdown. A [read-only backup](../docs/evidence/upstream-39-camera-failure-2026-10-20.md)
+retains a drive-phase failure: only 20 ticks of stillness-anchor age at the
+300-tick cap, with 17 later consumed requests and no AF-servo snapshot. All code
+and protected data remain exact. Physical cause and shutter decision are unresolved.
+App 0.22.1/build 30 disables ordinary 3.9 installation and retains prior holds,
+read-only tools, explicit historical commands and all firmware/recovery pins.
+
+See [installation](../docs/evidence/upstream-39-upload-2026-10-20.md),
+[offline preparation](../docs/evidence/upstream-39-homing-2026-10-20.md),
 [reproduction](upstream-hardening/next39/README.md) and the
-[separate test procedure](../docs/upstream-homing-test.md).
+[held procedure](../docs/upstream-homing-test.md). The release ADC dependency
+repair remains source-verified; it did not resolve the observed drive failure.
 
 The previously verified image is [upstream AF 3.8 readiness](candidates/3.8.0/README.md).
 Its [upload and strict reconnect verification](../docs/evidence/upstream-38-upload-2026-10-19.md)

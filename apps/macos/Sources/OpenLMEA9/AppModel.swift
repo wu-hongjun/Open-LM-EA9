@@ -346,7 +346,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
         case "3.7.0": return "Targeted trace 3.7 is held after the camera froze following one photo. Keep the camera off and preserve a read-only backup for log review. Do not retry this image."
-        case "3.9.0": return "Homing diagnostic 3.9 is camera-unqualified. It removes an unused ADC dependency and records failed-homing details and subsequent consumed focus requests. A physical homing or shutter fix is unproven."
+        case "3.9.0": return "Homing diagnostic 3.9 is held after two reported photos followed by blocked further capture. Shutdown was normal. Do not retry this image; preserve a read-only backup for log review."
         case "3.8.0": return "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. Shutdown was normal. The trace records a drive-phase homing failure. Do not retry this image."
         case "3.6.0": return "Upstream AF 3.6 is held after a shutter-press camera freeze and shutdown nonresponse. Keep the camera off and save a read-only backup for log review. Do not retry this image."
         case "3.5.0": return "Upstream AF 3.5 is camera-unqualified. It preserves the resolved focus target and rejects homing completion after an expired phase. Collect a read-only backup after one coordinated camera cycle before another trial."

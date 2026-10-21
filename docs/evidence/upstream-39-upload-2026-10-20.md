@@ -1,9 +1,10 @@
 # AF 3.9 upload — October 20, 2026
 
-**AF 3.9 passed strict USB byte verification after the owner-confirmed physical
-reconnect, followed by an independent full-image/protected-data audit.** One
-coordinated camera cycle and subsequent log retrieval are pending. No 3.9 camera
-result is known; physical homing and shutter acceptance remain unqualified.
+**AF 3.9 passed strict USB byte verification after physical reconnect and an
+independent full-image/protected-data audit. Camera acceptance subsequently
+failed; read-only log retrieval is complete and further trials are held.** The
+owner reports two photos followed by blocked further capture and normal shutdown.
+[Camera/log evidence](upstream-39-camera-failure-2026-10-20.md).
 
 [Sanitized receipt](upstream-39-upload-2026-10-20.json) ·
 [Candidate and pins](../../firmware/candidates/3.9.0/README.md) ·
@@ -86,7 +87,7 @@ All 141 historical release/recovery artifacts and original stock recovery remain
 exact, as do candidate/manifest/CLI pins. These checks establish installation
 bytes, not camera focus, capture, exposure, shutdown or factory parity.
 
-## Pending camera and log gates
+## Historical camera guidance and subsequent result
 
 The menu sequence was clarified before camera results: switch on once without
 shutter/AF-ON input, check normal initial preview/motor behavior, then use the
@@ -108,3 +109,11 @@ stock 1.8 recovery remain exact. Candidate 3.9 image/manifest/resource/CLI pins 
 unchanged. Raw backups, keys, unit identifiers, camera frames and operands remain
 private. The 3.6/3.7/3.8 holds remain. This upload is not camera acceptance,
 a physical homing/shutter cure or factory parity.
+
+The subsequent report records two photos followed by blocked further capture,
+with normal shutdown. AF-S is tentatively recalled with explicit uncertainty;
+focus mode remains unconfirmed and saved-file status is unknown.
+One read-only backup confirms phase 17 with a 300-tick drive phase, 20-tick stillness
+anchor age and 17 later consumed requests, with code/protected data unchanged.
+See the [camera evidence](upstream-39-camera-failure-2026-10-20.md); installation
+verification remains a historical fact, distinct from failed camera acceptance.

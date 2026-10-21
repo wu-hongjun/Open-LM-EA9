@@ -375,8 +375,8 @@ private actor DiscoveryFixture {
     #expect(model.firmwareBehaviorNote.contains("drive-phase") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
-    // A held historical image stays held while the new explicit route is available.
-    #expect(model.canInstallHomingDiagnostic && !model.canInstallReadiness)
+    // Every failed camera image is held, including installation from another version.
+    #expect(!model.canInstallHomingDiagnostic && !model.canInstallReadiness)
     model.idleAcknowledged = false
     #expect(!model.canInstallHomingDiagnostic)
     model.idleAcknowledged = true
@@ -388,10 +388,10 @@ private actor DiscoveryFixture {
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "3.9.0"))
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallHomingDiagnostic)
-    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
-    #expect(model.workflowTitle == "Homing diagnostic candidate")
-    #expect(model.workflowDetail.contains("unqualified") && model.workflowDetail.contains("unproven"))
-    #expect(model.firmwareBehaviorNote.contains("unused ADC dependency") && model.firmwareBehaviorNote.contains("unproven"))
+    #expect(model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "AF 3.9 camera testing held")
+    #expect(model.workflowDetail.contains("blocked further capture") && model.workflowDetail.contains("normal shutdown"))
+    #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallReadiness && !model.canInstallTargetedTrace && !model.canInstallStartupHandoff)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 }

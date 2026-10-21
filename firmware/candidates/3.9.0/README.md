@@ -1,8 +1,15 @@
 # AF 3.9 — homing observations and release ADC dependency removal
 
-Prepared offline. The separately authorized [upload](../../../docs/evidence/upstream-39-upload-2026-10-20.md) and strict byte verification passed after physical reconnect, including an independent full-image/protected-data audit. **One camera cycle and logs are pending; compatibility remains unqualified.** Fixed to the original
-Contax Zeiss 50mm f/1.4 profile (lens ID 234, nominal AV 4352). Actual physical iris
-position is unknown; no runtime lens-profile row is supported.
+Prepared offline. [Upload and strict byte verification](../../../docs/evidence/upstream-39-upload-2026-10-20.md)
+passed after physical reconnect, including an independent protected-data audit.
+**Camera acceptance failed; further trials are held.** The owner reports two
+photos followed by blocked further capture and normal shutdown. A
+[read-only backup](../../../docs/evidence/upstream-39-camera-failure-2026-10-20.md)
+retains drive-phase failure with a stillness-anchor age of only 20 ticks at the
+300-tick cap and 17 later consumed requests.
+
+Fixed to the original Contax Zeiss 50mm f/1.4 profile (lens ID 234, nominal AV 4352).
+Actual physical iris position is unknown; no runtime lens-profile row is supported.
 
 This builds on pinned upstream C commit
 `d52ed06cc449918f938e0695fbf29a0c4141f2b2` and frozen 3.8. It removes an unused
@@ -25,7 +32,7 @@ the pristine image. Compiled stack analysis and offline controls are described
 in the integrated evidence; they do not measure physical execution.
 
 Preserve these published bytes and all historical releases/recovery. Any later
-production change requires another candidate version. Do not resume held 3.8
+production change requires another candidate version. Do not resume held 3.8 or 3.9
 camera trials. Separate owner-coordinated upload requires a fresh backup,
 durable journal, physical reconnect and strict complete-image/protected-data
 verification before the [one-cycle camera procedure](../../../docs/upstream-homing-test.md).

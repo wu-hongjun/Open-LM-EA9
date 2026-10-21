@@ -1,6 +1,6 @@
 {
   "date": "2026-10-20",
-  "status": "strict-installation-verification-passed-camera-cycle-pending",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-further-trials-held",
   "sourceGitCommit": "d47003e72f87433b26c1e69f4aa991b273c07a0d",
   "appVersion": "0.22.0",
   "appBuild": 29,
@@ -57,9 +57,9 @@
   "strictByteVerificationPassed": true,
   "protectedDataReadbackVerifiedAfterUpload": true,
   "cameraAcceptancePassed": false,
-  "cameraTestPerformed": false,
+  "cameraTestPerformed": true,
   "cameraTestingHeldUntilStrictVerification": false,
-  "postCameraLogRetrievalPerformed": false,
+  "postCameraLogRetrievalPerformed": true,
   "prior36And37And38CameraFailureHoldsRetained": true,
   "preservation": {
     "historicalArtifactsChecked": 141,
@@ -88,7 +88,7 @@
     "offline-verification-audit.json": "113f5ed7c5ac6066b46eac0369ad2e9301cc03c05ebbcad060c2ff234f8a2fb5",
     "audit_verification.py": "8cdf82bba9f7ac8826cb57b3045125da847ec564c16d643db91b81e3a0bf0e2e"
   },
-  "cameraCyclePending": true,
+  "cameraCyclePending": false,
   "postUploadVerification": {
     "status": "passed-independent-offline-full-readback-audit",
     "nativeVerificationPassed": true,
@@ -124,9 +124,28 @@
   },
   "singleInitialMFCameraCycleRequested": true,
   "afSCameraCycleRequested": false,
-  "ownerCameraObservationReceived": false,
+  "ownerCameraObservationReceived": true,
   "focusModeAtStartup": null,
   "requiredFocusModeBeforePhoto": "MF",
   "cameraMenuSequenceClarified": "One power-on without shutter/AF-ON; normal initial preview/motor behavior first, then powered-on MF/Pre-AF menu settings before any shutter press. No extra restart.",
-  "cameraObservationReceived": false
+  "cameraObservationReceived": true,
+  "furtherCameraTrialsHeld": true,
+  "controlledMFCycleConfirmed": false,
+  "cameraFailureEvidence": "upstream-39-camera-failure-2026-10-20.json",
+  "latestCameraObservationDate": "2026-10-20",
+  "postCameraSummary": {
+    "reportedPhotos": 2,
+    "photoFilesSaved": null,
+    "focusMode": null,
+    "normalShutdown": true,
+    "furtherCaptureBlocked": true,
+    "diagnosticFault": "home-drive-unsettled",
+    "stillnessAnchorAgeAtCutoffTicks": 20,
+    "drivePhaseElapsedTicks": 300,
+    "consumedRequestsAfterFailure": 17,
+    "allCodeAndProtectedDataUnchanged": true,
+    "readOnlyBackupFlashSHA256": "3a98241ee1d6b031fed4656ca1b5bb12d7b62730c849027c5eaf29a22e911791",
+    "focusModeRecollection": "AF-S, uncertain",
+    "focusModeConfirmed": false
+  }
 }

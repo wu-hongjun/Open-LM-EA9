@@ -1,12 +1,17 @@
 # AF 3.9 — separate upload, one camera cycle and log retrieval
 
-AF 3.9 upload and **strict complete-image/protected-data verification passed after
-physical reconnect. One camera cycle and log retrieval are pending; no camera
-result is known.** [Upload record](evidence/upstream-39-upload-2026-10-20.md).
-The ADC dependency repair is source-verified, but a physical homing or shutter
-cure remains unproven. The owner has separately authorized this upload,
-verification and one test cycle. Steps 1–3 below are complete; the next gate is
-a single lifecycle/capture cycle with MF confirmed before the photo. Existing 3.8 camera testing remains held.
+**AF 3.9 upload and strict complete-image/protected-data verification passed,
+but camera acceptance subsequently failed. Further 3.9 camera trials are held.**
+The owner reports two photos followed by blocked further capture and normal
+shutdown. [Read-only logs](evidence/upstream-39-camera-failure-2026-10-20.md) retain
+a drive-phase failure with insufficient stillness before the cap and later
+consumed requests. No repeat, restart or further camera cycle is requested.
+[Installation record](evidence/upstream-39-upload-2026-10-20.md).
+
+The steps below preserve the historical requested one-cycle procedure. Actual
+focus/Pre-AF, saved-file status and adherence remain unknown. The owner reported
+two photos; this is not relabeled a controlled MF or AF-S comparison. A later
+reviewed candidate needs its own separate authorization and verification gates.
 
 [Candidate/pins](../firmware/candidates/3.9.0/README.md) ·
 [Evidence and limits](evidence/upstream-39-homing-2026-10-20.md).
@@ -57,7 +62,8 @@ stillness anchor is the initial or last threshold-crossing observation, not a
 final encoder sample. A successful local TX
 return or complete planned log snapshot does not establish camera acceptance.
 
-Only after reviewing this result should a separately agreed AF-S comparison be
-considered. A single photograph cannot establish sustained capture or factory
-parity. Preserve original stock 1.8 recovery and every historical image; no stock
-restoration is part of this offline preparation.
+AF-S is not a next gate for held 3.9. A later reviewed candidate needs separate
+installation/verification and test authorization. A single photograph cannot
+establish sustained capture or factory parity. Preserve original stock 1.8
+recovery and every historical image; no stock restoration was performed during
+this read-only analysis.

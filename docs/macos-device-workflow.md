@@ -1,4 +1,4 @@
-# Device workflow: prototype 0.22.0, build 29
+# Device workflow: prototype 0.22.1, build 30
 
 Open `dist/Open LM-EA9.app`. The **Device** tab shows the adapter photo,
 connection, dated firmware read and the last USB-verified lens setting.
@@ -8,28 +8,27 @@ f-number for firmware with a runtime profile row. Upstream candidates instead
 compile the original 50mm f/1.4 profile; library edits stay local on those images.
 The secondary **Lens Library** tab retains the photographs and metadata editor.
 
-**Upstream AF 3.8 camera testing is held after hunting, a motor reset and blocked
-further photos. Shutdown was normal.** Read-only logs identify drive-phase
-homing failure; code and protected data are unchanged. The app shows that
-outcome and disables ordinary 3.8 installation, including from another version.
-Read-only backup/recovery remain available. [Failure/log evidence](evidence/upstream-38-camera-failure-2026-10-20.md).
-The 3.6/3.7 camera-failure holds also remain. Historical explicit CLI commands
-retain their pinned images for coordinated research/recovery.
+**Upstream AF 3.9 camera testing is held after two reported photos followed by
+blocked further capture. Shutdown was normal.** Read-only logs identify failed
+drive qualification with later consumed requests; code/protected data are
+unchanged. The app disables ordinary 3.9 installation, including from another
+version, while preserving read-only backup/recovery.
+[Failure/log evidence](evidence/upstream-39-camera-failure-2026-10-20.md).
+The 3.6/3.7/3.8 holds and historical explicit command/image pins remain.
 
 The latest packaged firmware is **upstream AF 3.9.0**, fixed to the original
-50mm f/1.4 profile. Its [upload and strict verification](evidence/upstream-39-upload-2026-10-20.md)
-passed after physical reconnect, including protected data. One camera cycle and
-log retrieval are pending; compatibility remains unqualified.
-USB tools offers **Install Homing Diagnostic 3.9.0** as a separate guarded action;
-choosing a dropdown profile does not install it. Native commands
-`prepare-homing-upstream` and `apply-homing-upstream` select its pinned image.
-Other or edited profiles are rejected. The release removes an unused ADC
-telemetry dependency and adds failed-home/request observations. A physical
-homing or shutter fix is unproven.
-[Offline evidence](evidence/upstream-39-homing-2026-10-20.md) and the
-[separate upload/test procedure](upstream-homing-test.md) describe the next gates.
+50mm f/1.4 profile. Its [strict installation verification](evidence/upstream-39-upload-2026-10-20.md)
+passed, but [camera acceptance failed](evidence/upstream-39-camera-failure-2026-10-20.md):
+two reported photos followed by blocked further capture, with normal shutdown.
+The app now holds 3.9 and disables **Install Homing Diagnostic 3.9.0** even from
+another installed version. Read-only backup/recovery remain available. Native
+`prepare-homing-upstream` and `apply-homing-upstream` retain their exact pinned
+meaning for explicit research/recovery, and reject other or edited lens profiles.
+The dropdown does not install firmware. Further 3.9 camera testing is held;
+new logs narrow the failed drive qualification without establishing its physical
+cause or the shutter decision. See the [held procedure](upstream-homing-test.md).
 Historical `prepare-readiness-upstream`/`apply-readiness-upstream` still select
-held3.8 and do not silently select3.9. Its [strict installation verification](evidence/upstream-38-upload-2026-10-19.md)
+held 3.8 and do not silently select 3.9. Its [strict installation verification](evidence/upstream-38-upload-2026-10-19.md)
 remains a historical fact distinct from its failed camera result.
 
 Startup diagnostic **3.2.0** was uploaded for the original 50mm f/1.4
@@ -40,7 +39,7 @@ The historical `prepare-startup`/`apply-startup`
 commands still select 3.2. Installed 3.2–3.9 routes the main action to USB tools,
 labels camera compatibility unqualified and avoids ordinary profile application.
 After one coordinated camera cycle, save a read-only backup and use the offline
-decoder for evidence review. Further 3.6/3.7/3.8 camera trials remain held.
+decoder for evidence review. Further 3.6/3.7/3.8/3.9 camera trials remain held.
 Initial full-image verification includes the blank log area. Later log retrieval
 does not relax that check; ordinary image inspection still rejects changed bytes.
 
