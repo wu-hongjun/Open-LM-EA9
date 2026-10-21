@@ -9,8 +9,9 @@ system audit. All flashed firmware is C. The [updated working recommendation](do
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 The latest prepared image is [upstream C AF 3.9](firmware/candidates/3.9.0/README.md)
-for the original Contax Zeiss 50mm f/1.4. **Uploaded; owner-confirmed reconnect
-and strict byte verification are pending. No 3.9 camera test has occurred.**
+for the original Contax Zeiss 50mm f/1.4. **Uploaded and strictly byte-verified after
+physical reconnect, including a protected-data audit. One camera cycle and logs
+are pending; no 3.9 camera result is known.**
 Three Astra lanes reviewed drive-phase homing, subsequent
 focus requests and original factory instructions. The release removes an unused
 blocking ADC dependency and adds bounded failed-home observations and a consumed

@@ -1,11 +1,12 @@
 # AF 3.9 — separate upload, one camera cycle and log retrieval
 
-AF 3.9 upload is complete; **owner-confirmed reconnect and strict byte verification
-are pending. No camera test has occurred.** [Upload record](evidence/upstream-39-upload-2026-10-20.md).
+AF 3.9 upload and **strict complete-image/protected-data verification passed after
+physical reconnect. One camera cycle and log retrieval are pending; no camera
+result is known.** [Upload record](evidence/upstream-39-upload-2026-10-20.md).
 The ADC dependency repair is source-verified, but a physical homing or shutter
 cure remains unproven. The owner has separately authorized this upload,
-verification and one test cycle. Keep the adapter off-camera until verification
-passes; existing 3.8 camera testing remains held.
+verification and one test cycle. Steps 1–3 below are complete; the next gate is
+a single lifecycle/capture cycle with MF confirmed before the photo. Existing 3.8 camera testing remains held.
 
 [Candidate/pins](../firmware/candidates/3.9.0/README.md) ·
 [Evidence and limits](evidence/upstream-39-homing-2026-10-20.md).
@@ -23,16 +24,17 @@ passes; existing 3.8 camera testing remains held.
    protected flash/auxiliary data before camera use. Do not substitute a
    diagnostic-prefix comparison for initial complete-image verification.
 4. With the A7C II off and its USB cable disconnected, mount the LM-EA9,
-   C/Y-to-M converter and50mm f/1.4. Set the physical focus ring to infinity
-   and iris to f/1.4. Choose still-photo A exposure, EV0 and AutoISO. Separately
-   choose **MF** in Focus→AF/MF→Focus Mode and Pre-AF Off if available. A or
-   AUTO exposure does not establish the focus mode. If MF cannot be confirmed,
-   skip the photo.
-5. Switch on without shutter/AF-ON input. Note live preview updates, brightness,
-   aperture display (expected f/1.4), movement and whether it stops. Wait ten
-   seconds after movement stops. Only if preview/aperture/motor behavior is
-   normal and MF is confirmed, take one photo. Switch off once and leave off.
-   Do not restart or add AF attempts before reviewing this cycle's evidence.
+   C/Y-to-M converter and 50mm f/1.4. Set the physical focus ring to infinity
+   and iris to f/1.4. Select still-photo A on the exposure dial.
+5. Switch on once without shutter/AF-ON input. Check live preview updates,
+   brightness, aperture (expected f/1.4) and whether movement stops. If normal,
+   use the powered-on menus to select **MF** in Focus→AF/MF→Focus Mode, Pre-AF
+   Off if available, EV 0 and Auto ISO. Do not press shutter/AF-ON before MF is
+   confirmed. A or AUTO exposure does not establish focus mode; inherited
+   startup focus mode remains unknown unless observed. Wait ten seconds after
+   any movement stops. Only if preview/aperture/motor behavior is normal and
+   MF is confirmed, take one photo. Otherwise skip it. Switch off once and
+   leave off; do not restart or add AF attempts before evidence review.
 6. Stop for frozen preview, grinding, repeated stop impacts or abnormal
    continuous drive for about two seconds. Switch off; remove the battery if
    unresponsive or motion continues. No retry. Report saved-file presence,

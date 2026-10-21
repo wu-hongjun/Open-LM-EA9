@@ -8,8 +8,8 @@ on upstream C; Rust is deferred while qualifying the camera contract.
 
 The latest packaged image is [upstream AF 3.9](evidence/upstream-39-homing-2026-10-20.md),
 fixed to the original 50mm f/1.4 with no runtime profile row. It was prepared
-offline and is now uploaded, with owner-confirmed reconnect/strict verification pending and
-no camera test yet. An explicit guarded install action and native
+offline and is now uploaded and strictly byte-verified after physical reconnect,
+including protected data. One camera cycle and logs are pending. An explicit guarded install action and native
 prepare/apply route select the pinned candidate. Release ADC telemetry no longer
 blocks startup/pump; failed-home and consumed-request observations improve the
 next investigation. A physical homing/shutter cure remains unproven.

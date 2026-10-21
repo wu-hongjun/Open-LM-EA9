@@ -1,9 +1,9 @@
 # AF 3.9 upload — October 20, 2026
 
-**Upload complete; strict verification awaits an owner-confirmed physical USB-cap
-reconnect. Keep the adapter off the camera until verification passes.** No AF 3.9
-camera cycle or post-camera log retrieval has occurred. The physical homing and
-shutter-block causes remain unresolved.
+**AF 3.9 passed strict USB byte verification after the owner-confirmed physical
+reconnect, followed by an independent full-image/protected-data audit.** One
+coordinated camera cycle and subsequent log retrieval are pending. No 3.9 camera
+result is known; physical homing and shutter acceptance remain unqualified.
 
 [Sanitized receipt](upstream-39-upload-2026-10-20.json) ·
 [Candidate and pins](../../firmware/candidates/3.9.0/README.md) ·
@@ -53,15 +53,48 @@ connection marker. The prior marker set is preserved; applied lens, firmware
 observation, stock qualification and lens library remain unchanged pending
 verification. No canonical journal or safety marker was manually edited.
 
-## Pending verification and camera gates
+## Physical reconnect and strict verification
 
-The owner must physically unplug/reconnect the USB cap, keeping both apps closed
-and the adapter off-camera, then explicitly confirm. Only then may the native
-verification path read the whole pristine application, expected metadata,
-1 KiB blank log tail and protected flash/auxiliary data. A filesystem audit follows.
-Acknowledgements and a firmware version string do not substitute for readback.
+The owner explicitly confirmed physical USB-cap reconnect with both apps closed
+and the adapter off-camera. Preflight rechecked the signed CLI/image/manifest,
+unchanged uploaded journal, absence of competing processes and one qualified
+adapter on a new unblocked connection. Inventory sent no reports.
 
-After verification, the agreed test is one loaded-lens MF lifecycle/photo cycle:
+`dist/ea9ctl verify --idle` ran once and exited 0 at
+**2026-10-21T01:12:24.166263+00:00 UTC** (**2026-10-20T21:12:24.166263-04:00 America/New_York**).
+Two matching 131,072-byte flash passes and two auxiliary passes completed,
+4,359 CHECK/READ exchanges. No firmware writes or retries were sent.
+
+The independent filesystem audit confirmed:
+
+- Every backup file's size/digest, recognized boot code and MCU/geometry, same
+  unit binding and the new connection identity; firmware/version metadata 3.9.0.
+- All 20,480 application bytes `[0x5000,0xa000)` match the pinned image, including
+  all 1,024 blank diagnostic bytes. This is complete-image verification, not a
+  log-prefix comparison or a version-string check.
+- Exact expected metadata `[0x4000,0x403a)`; unchanged boot, gap `[0x4040,0x5000)`,
+  upper flash `[0xa000,0x20000)`, user row, calibration and device-ID windows.
+  Only the established loader scratch `[0x403a,0x4040)` is excluded. Volatile NVM
+  status is validated for geometry, not required to be byte-identical.
+- Native publication of the verified journal, original 50mm f/1.4 setting and
+  firmware observation. The prior blocked-connection set is retained exactly;
+  the native engine clears the successful read-connection marker. Stock upload
+  qualification and library bytes remain unchanged. No manual state edits.
+
+Readback full-flash SHA-256: `be84ddc1c99e618280175af8af44b12e632abb5ab311edbb4d49a60dbe6a1798`.
+All 141 historical release/recovery artifacts and original stock recovery remain
+exact, as do candidate/manifest/CLI pins. These checks establish installation
+bytes, not camera focus, capture, exposure, shutdown or factory parity.
+
+## Pending camera and log gates
+
+The menu sequence was clarified before camera results: switch on once without
+shutter/AF-ON input, check normal initial preview/motor behavior, then use the
+powered-on menus to confirm MF and Pre-AF Off before any shutter press. No extra
+power cycle is needed for menu setup. Startup focus mode remains unknown unless
+observed; the MF gate applies before the photo.
+
+The agreed test is one loaded-lens lifecycle/photo cycle with MF confirmed:
 physical infinity/f/1.4, still-photo A, confirmed MF separately from exposure
 mode, Pre-AF Off if available, EV0/AutoISO, normal live preview/motor behavior,
 ten-second quiet idle, at most one photo and one shutdown. If MF is unknown,
