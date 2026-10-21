@@ -10,11 +10,12 @@ is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 The latest [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
 original Contax Zeiss 50mm f/1.4, passed strict USB installation verification but
-**failed camera acceptance; further 4.0 trials are held**. The owner reports a hard
-crash after two photos requiring a power cycle. Saved-file status, actual focus
-mode, shutdown/recovery details and the fault mechanism are unverified. No extra
-camera attempt is requested. Read-only log retrieval awaits confirmation of safe
-USB-cap reconnect with both apps closed.
+**failed camera acceptance; further 4.0 trials are held**. The owner confirms two
+files saved in reported AUTO mode, then a hard crash requiring battery removal.
+Actual focus mode remains unknown. One read-only backup matches the pristine
+installed flash/protected data exactly; all 16 diagnostic pages remain erased.
+The crash left no persisted trace, so its location is unresolved. No extra camera
+attempt is requested; improve crash persistence before another physical trial.
 [Failure record](docs/evidence/upstream-40-camera-failure-2026-10-21.md) ·
 [Installation record](docs/evidence/upstream-40-upload-2026-10-20.md).
 

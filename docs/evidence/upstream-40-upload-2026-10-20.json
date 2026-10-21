@@ -57,7 +57,7 @@
   "protectedDataReadbackVerifiedAfterUpload": true,
   "cameraTestPerformed": true,
   "cameraCyclePending": false,
-  "postCameraLogRetrievalPerformed": false,
+  "postCameraLogRetrievalPerformed": true,
   "cameraAcceptancePassed": false,
   "physicalHomingFailureFixed": false,
   "shutterBlockFixEstablished": false,
@@ -134,12 +134,21 @@
   "latestCameraObservationDate": "2026-10-21",
   "postCameraSummary": {
     "reportedPhotos": 2,
-    "photoFilesSaved": null,
+    "photoFilesSaved": true,
+    "exposureMode": null,
+    "focusMode": null,
     "hardCrashReported": true,
     "powerCycleRequired": true,
-    "batteryRemovalRequired": null,
-    "normalShutdown": null,
-    "focusMode": null,
-    "postCameraReadOnlyBackupPending": true
+    "batteryRemovalRequired": true,
+    "normalShutdown": false,
+    "postCameraReadOnlyBackupPending": false,
+    "postCameraReadOnlyBackupComplete": true,
+    "postCameraFullFlashSHA256": "46c4d45590e03f9deb6bc325aaec531cef6511ee4a443a2b91e157cfcc815248",
+    "wholeFlashUnchanged": true,
+    "protectedAuxiliaryDataUnchanged": true,
+    "persistedDiagnosticPages": 0,
+    "erasedDiagnosticPages": 16,
+    "rootCauseEstablished": false,
+    "modeReported": "AUTO"
   }
 }

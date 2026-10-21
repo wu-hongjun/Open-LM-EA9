@@ -2,8 +2,9 @@
 
 Latest candidate: [AF 4.0 bounded reference qualification](candidates/4.0.0/README.md).
 Upload/strict verification passed, but **camera acceptance failed; 4.0 is held**
-after a hard crash following two reported photos and a required power cycle.
-Read-only logs await safe USB-cap confirmation. No extra camera attempt is requested.
+after two saved photos in reported AUTO mode and a battery-required hard crash.
+Read-only backup is complete: full flash/protected data unchanged, all 16 diagnostic
+pages erased. No crash location is established; no extra camera attempt is requested.
 [Failure record](../docs/evidence/upstream-40-camera-failure-2026-10-21.md) ·
 [Installation record](../docs/evidence/upstream-40-upload-2026-10-20.md).
 

@@ -1,9 +1,10 @@
 # AF 4.0 upload — October 20, 2026
 
 **AF 4.0 passed strict USB byte verification after physical reconnect. Camera
-acceptance subsequently failed; further 4.0 trials are held.** The owner reports a
-hard crash after two photos requiring a power cycle. Actual focus mode, saved-file
-status and recovery details are unknown; read-only logs await safe cap confirmation.
+acceptance subsequently failed; further 4.0 trials are held.** Two files saved in
+reported AUTO mode before a hard crash requiring battery removal. Actual focus mode
+is unknown. Read-only retrieval is complete: full flash/protected data unchanged,
+all 16 diagnostic pages erased, no persisted crash record.
 [Camera failure record](upstream-40-camera-failure-2026-10-21.md).
 
 
@@ -104,13 +105,22 @@ Actual settings, preview, motor, saved-file exposure and shutdown remain unknown
 until reported. A later logged read is diagnostic evidence, not pristine full-image
 verification. This remains unqualified for sustained capture/AF and factory parity.
 
-## Subsequent October 21 report
+## Subsequent October 21 report and read-only retrieval
 
-The owner reports a hard crash after two photos and needing a power cycle. Two
-saved files, actual MF/AF/Pre-AF, exposure/preview, motor and recovery method remain
-unverified. The requested single MF cycle is not recorded as confirmed. No new
-camera attempt or flash is requested. App 0.23.1/build 32 holds 4.0 and disables its
-ordinary installation; exact firmware/native command pins and recovery remain.
-Post-camera logs await explicit safe USB-cap reconnect with both apps closed.
-This record retains the successful strict USB readback separately from the failed
-camera milestone; no physical fault mechanism is inferred from the report alone.
+The owner confirms two files saved in reported AUTO mode, followed by a hard crash
+requiring battery removal to turn the camera off. Actual MF/AF/Pre-AF, aperture,
+preview/exposure and motor behavior remain unknown. The requested single MF cycle
+is not recorded as confirmed. No new camera attempt, flash or stock restoration
+followed. App 0.23.1/build 32 continues to hold 4.0 and disable ordinary installation;
+exact firmware/native command pins and recovery remain.
+
+After powered-off USB-cap return and both apps absent by process check, one guarded
+native backup completed two matching full-flash and auxiliary passes. The entire
+131,072-byte flash, including all 1,024 diagnostic bytes, equals the pristine verified
+readback; protected auxiliary data and canonical records are unchanged. All16 pages
+are erased, with no torn/invalid records. The runtime recorder collects in RAM and
+flushes only through terminal shutdown/fault paths; battery removal can lose the
+unflushed evidence. Blank storage does not identify which path failed or prove
+that a handler or flash write was never entered/attempted. The cause remains unknown.
+[Completed evidence analysis](upstream-40-camera-failure-2026-10-21.md) retains the
+successful strict USB verification separately from failed camera acceptance.

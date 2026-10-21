@@ -2,11 +2,12 @@
 
 The packaged **AF 4.0.0** remains fixed to the original 50mm f/1.4. Its strict USB
 installation verification passed, but **camera acceptance failed and 4.0 is held**
-after a hard crash following two reported photos and a required power cycle.
+after two saved photos in reported AUTO mode and a battery-required hard crash.
 App 0.23.1/build 32 disables ordinary 4.0 installation from every installed version,
 while retaining read-only backup/recovery. Native historical prepare/apply commands
 retain their exact image meanings. No additional camera test is requested; logs
-await safe USB-cap confirmation. [Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md).
+were retrieved read-only: all 16 pages remain erased, with full flash/protected data
+unchanged. The crash location and actual focus mode remain unknown. [Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md).
 
 Current app: **0.23.1, build 32**, October 21, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local

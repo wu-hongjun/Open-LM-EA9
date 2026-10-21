@@ -1,10 +1,11 @@
 # AF 4.0 — separate upload, one camera cycle and logs
 
 **AF 4.0 camera acceptance failed; further trials are held.** The owner reports a
-hard crash after two photos requiring a power cycle. Strict installation verification
-remains a historical fact. Read-only logs await confirmation that the camera is
-unpowered/stopped and the adapter physically reconnected through its USB cap with
-both apps closed. No extra camera cycle or firmware upload is requested.
+hard crash after two saved photos in reported AUTO mode, requiring battery removal.
+Strict installation verification remains a historical fact. Post-camera read-only
+backup/analysis is complete: full flash/protected data unchanged, all 16 log pages
+erased. No crash location is established. No extra camera cycle or firmware upload
+is requested.
 [Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md) ·
 [Installation record](evidence/upstream-40-upload-2026-10-20.md).
 
