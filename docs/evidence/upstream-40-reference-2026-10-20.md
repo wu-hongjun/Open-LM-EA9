@@ -1,5 +1,9 @@
 # AF 4.0 — bounded reference qualification and capture handoff
 
+Subsequent interactive [upload](upstream-40-upload-2026-10-20.md) completed with
+physical reconnect and strict verification pending. The offline evidence below
+remains a historical preparation milestone, not an installation or camera result.
+
 **Prepared offline for the original Contax Zeiss 50mm f/1.4; not flashed or camera-qualified.**
 The owner authorized Astra audits, modular fixes, tests, documentation and publication,
 with flashing separate. No adapter enumeration/open, USB/HID report, motor operation,

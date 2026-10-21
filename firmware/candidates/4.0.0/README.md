@@ -1,6 +1,7 @@
 # AF 4.0 — bounded reference qualification
 
-**Prepared offline; not flashed or camera-qualified.** This candidate is fixed to
+**Uploaded; physical reconnect and strict byte/protected-data verification are pending.
+Not camera-qualified.** [Installation record](../../../docs/evidence/upstream-40-upload-2026-10-20.md). This candidate is fixed to
 original Contax Zeiss 50mm f/1.4 metadata: lens ID 234, nominal AV 4352. Actual iris
 position remains unknown; lens-library edits stay local. The version rolls to4.0
 because the camera uses a single BCD byte; this does not indicate factory parity.

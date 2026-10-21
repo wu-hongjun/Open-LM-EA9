@@ -1,6 +1,7 @@
 # AF 4.0 — separate upload, one camera cycle and logs
 
-**Offline preparation only. Nothing was flashed in this milestone.** Do not repeat
+**AF 4.0 upload completed; physical reconnect and strict verification are pending.**
+Keep the adapter off the camera. [Installation record](evidence/upstream-40-upload-2026-10-20.md). Do not repeat
 held 3.9 camera trials.4.0 is an experimental fixed Contax Zeiss 50mm f/1.4 candidate,
 not an accepted camera release. [Image and pins](../firmware/candidates/4.0.0/README.md).
 
@@ -30,9 +31,11 @@ verification. If any check fails, stop and preserve evidence.
 ## One initial cycle, after verification
 
 With A7C II OFF and its USB cable disconnected, mount the adapter, C/Y-to-M converter
-and 50mm f/1.4. Set physical focus to infinity and iris to f/1.4. Select still-photo A,
-EV 0 and Auto ISO; separately confirm **MF** and Pre-AF Off. A exposure mode is not MF.
-If MF cannot be confirmed, skip the photo and record the focus mode as unknown.
+and 50mm f/1.4. Set physical focus to infinity and iris to f/1.4. After the single startup and
+normal preview/motor checks below, use the powered-on menus to select still-photo A,
+EV 0 and Auto ISO; separately confirm **MF** and Pre-AF Off before any shutter input.
+A exposure mode is not MF. If MF cannot be confirmed, skip the photo and record
+the focus mode as unknown. No setup restart is requested.
 
 Switch on without shutter or AF-ON input. Check live preview, brightness and aperture
 (expected f/1.4), then wait 10 seconds after any movement stops. Only if these are

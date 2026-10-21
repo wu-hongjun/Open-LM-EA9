@@ -8,13 +8,13 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The latest offline candidate is [upstream C AF 4.0](firmware/candidates/4.0.0/README.md),
+The latest candidate is [upstream C AF 4.0](firmware/candidates/4.0.0/README.md),
 fixed to the original Contax Zeiss50mm f/1.4. It tests bounded released reference
 qualification, clears stale PWM before servo handoff and validates the final encoder
 reference. Three Astra audits and new production-path regressions connect the3.9
 late-anchor failure to a software readiness gate. Physical homing, optical AF,
-sustained camera capture and factory parity remain unqualified. **Not flashed**;
-installation/testing will be coordinated separately. The version rolls to4.0 to fit
+sustained camera capture and factory parity remain unqualified. **Upload completed; physical reconnect and strict verification are pending.**
+Keep it off the camera until verification passes. [Installation record](docs/evidence/upstream-40-upload-2026-10-20.md). The version rolls to4.0 to fit
 the camera's one-byte BCD field, not to signal maturity.
 [Evidence](docs/evidence/upstream-40-reference-2026-10-20.md) ·
 [Workbench](firmware/upstream-hardening/next40/README.md) ·
