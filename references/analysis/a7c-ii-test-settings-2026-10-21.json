@@ -1,0 +1,18 @@
+{
+  "dateLocal": "2026-10-21",
+  "purpose": "Primary camera menu sources for one owner-coordinated AF4.1 MF capture/shutdown cycle; no camera outcome inferred.",
+  "sources": [
+    {
+      "title": "Sony ILCE-7CM2 Help Guide: Selecting the focus method (Focus Mode)",
+      "url": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html",
+      "access": "Web-read official English help page",
+      "authoredSummary": "Focus mode is selected through the Focus / AF-MF menu independently of exposure mode. Manual Focus is the requested initial test setting; DMF includes autofocus and is a separate choice."
+    },
+    {
+      "title": "Sony ILCE-7CM2 Help Guide: Pre-AF",
+      "url": "https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html",
+      "access": "Web-read official English help page",
+      "authoredSummary": "Pre-AF controls automatic focusing before a half-press. The test requests Off if the setting is available."
+    }
+  ]
+}

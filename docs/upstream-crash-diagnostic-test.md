@@ -1,10 +1,11 @@
 # AF 4.1 — separate installation and crash-log procedure
 
-AF 4.1 upload finished on October 21. **Physical reconnect and strict complete-image /
-protected-data verification are pending; keep the adapter off the camera.** The
-[installation record](evidence/upstream-41-upload-2026-10-21.md) tracks the guarded
-upload and remaining gates. The following procedure continues only after the
-owner confirms the required physical reconnect. Camera compatibility is unqualified.
+AF 4.1 upload and strict complete-image/protected-data verification passed on
+October 21 after owner-confirmed physical reconnect. The
+[installation record](evidence/upstream-41-upload-2026-10-21.md) tracks these
+completed gates. Camera compatibility remains unqualified. The next step is the
+setup part of one camera cycle: confirm actual MF, live preview and quiet idle
+before asking for the single photo/shutdown. No camera result is assumed.
 
 [Candidate and pins](../firmware/candidates/4.1.0/README.md) ·
 [Implementation and limits](evidence/upstream-41-crash-diagnostics-2026-10-21.md).
@@ -25,15 +26,18 @@ images. Never use apply, inventory, inspect or verify as an offline build check.
 The state-directory option does not isolate the canonical hardware guard/lock.
 
 After upload, stop sending reports until the owner physically unplugs/reconnects
-and explicitly confirms. Strict verification must compare the entire20,480-byte
-application including the pristine1024-byte diagnostic tail, known metadata and
+and explicitly confirms. Strict verification must compare the entire 20,480-byte
+application including the pristine 1024-byte diagnostic tail, known metadata and
 protected flash/auxiliary windows against the prior backup. Use only established
 metadata scratch exclusions. Independently audit saved files before camera use.
 A decoded log or matching version is not installation verification.
 
 ## One owner-coordinated cycle, after verification
 
-A later test prompt should request one cycle and capture actual menu settings.
+The test prompt requests one cycle and captures actual menu settings in two
+steps within that same power cycle. First confirm actual MF, preview and idle
+without shutter/AF-ON input; only after review request the single photo/shutdown.
+Do not restart for the second step.
 The prior owner's word AUTO does not establish exposure or focus mode. With the
 A7C II off and its USB cable disconnected, mount the LM-EA9, C/Y-to-M converter and
 50mm f/1.4; physical focus infinity and physical iris f/1.4. Switch on without

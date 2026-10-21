@@ -1,10 +1,10 @@
 # AF 4.1 — crash diagnostics
 
-**Upload finished; physical reconnect and strict byte/protected-data verification
-are pending. Camera compatibility is unqualified.**
+**Upload and strict complete-image/protected-data verification passed after
+physical reconnect. Camera compatibility remains unqualified; one setup-confirmed
+camera cycle and read-only logs are pending.**
 [Live installation record](../../../docs/evidence/upstream-41-upload-2026-10-21.md).
-Fixed to the original
-Contax Zeiss 50mm f/1.4, lens ID 234, nominal AV 4352. Physical iris remains unknown;
+Fixed to the original Contax Zeiss 50mm f/1.4, lens ID 234, nominal AV 4352. Physical iris remains unknown;
 lens-library edits stay local. This adds evidence and fail-stop behavior, not a
 proven homing, shutter-freeze, optical AF or factory-parity fix. The upstream C
 controller, capture/shutdown policies and 4.0 homing qualification remain inherited.
@@ -41,8 +41,9 @@ standalone type 5 record under the image/manifest registry pins.
 [Build/test workbench](../../upstream-hardening/next41/README.md) ·
 [Later installation/test/log procedure](../../../docs/upstream-crash-diagnostic-test.md).
 
-All151 historical release/recovery/pin artifacts and older registry entries remain
+All 151 historical release/recovery/pin artifacts and older registry entries remain
 exact. Original stock 1.8 recovery is preserved. App 0.24.0/build 33 exposes an explicit
-4.1 research action;4.0 remains held. The offline preparation accessed no adapter, launched no app and changed no
-canonical host state. The later guarded upload is recorded separately; camera
-use must wait for physical reconnect and strict verification.
+4.1 research action; 4.0 remains held. The offline preparation accessed no adapter,
+launched no app and changed no canonical host state. The later guarded upload is
+recorded separately; one camera cycle and logs remain owner-coordinated after
+completed verification.

@@ -1,10 +1,11 @@
 # AF 4.1 upload — October 21, 2026
 
-**Upload finished; owner-confirmed physical reconnect, strict byte/protected-data
-verification, one camera cycle and log retrieval are pending.** Keep the adapter
-off the camera until verification passes. This installs the existing crash-diagnostic
-candidate for the original Contax Zeiss 50mm f/1.4; it does not establish a shutter
-freeze, physical homing, exposure or optical AF fix.
+**AF 4.1 passed strict complete-image and protected-data verification after the
+owner confirmed physical reconnect. Camera acceptance remains unqualified.**
+One loaded-lens cycle is now guided in two steps within the same power cycle:
+confirm actual MF/preview/idle first, then request at most one photo and shutdown
+only if that setup is normal. No camera observation or log retrieval is yet reported.
+This installs the existing diagnostic candidate, not a proven shutter-freeze fix.
 
 [Sanitized receipt](upstream-41-upload-2026-10-21.json) ·
 [Candidate and pins](../../firmware/candidates/4.1.0/README.md) ·
@@ -62,27 +63,51 @@ No canonical journal or safety marker was manually edited. All 156 release/recov
 pin artifacts, all registry entries and original stock recovery remain exact. Raw
 backups, keys, unit identifiers and real traffic stay private.
 
-## Required physical reconnect and strict verification
+## Physical reconnect and strict verification passed
 
-The owner must physically unplug/reconnect through the USB cap, keep both apps
-closed and explicitly confirm before further USB reports. The loader remains in
-upload mode and the native guard prohibits reports on that armed connection.
-After confirmation, recheck process/image/journal/new-connection state, then run
-strict native verification once. It must compare all 20,480 application bytes,
-including the pristine 1K diagnostic tail, expected metadata and protected flash /
-auxiliary windows. Only established loader scratch exclusions are permitted.
-Independently audit the saved readback before camera use. A reported version or
-matching file pin does not prove installed bytes.
+The owner explicitly replied “reconnected” to the USB-cap / both-apps-closed /
+off-camera question. Process and descriptor preflight confirmed both apps and any
+competing CLI absent, unchanged signed CLI/image/manifest pins, the unchanged
+uploaded journal, and one qualified adapter on a new, unblocked connection.
+Descriptor inventory sent no reports. No safety guard was bypassed.
+
+`dist/ea9ctl verify --idle` ran once and exited 0 at
+**2026-10-21T18:51:33.139498+00:00 UTC**
+(**14:51:33.139498 America/New_York**). Two matching full-flash passes and two
+auxiliary passes completed, totaling 4,359 CHECK/READ exchanges. No firmware writes,
+retry or post-return reports were sent.
+
+The independent filesystem audit validates every file size/digest, known boot code,
+MCU/geometry, same-unit binding, new connection and reported firmware 4.1.0.
+All **20,480 application bytes** `[0x5000,0xa000)` match the complete pinned image,
+including all **1,024 pristine diagnostic bytes**. Expected metadata `[0x4000,0x403a)`
+matches. Boot code, gap `[0x4040,0x5000)`, upper flash `[0xa000,0x20000)`, user row,
+calibration and device-ID windows match the original fresh pre-upload backup.
+Only established loader scratch `[0x403a,0x4040)` is excluded; NVM status is checked
+for geometry rather than volatile byte identity.
+
+Native publication of the verified journal, original 50mm f/1.4 applied setting
+and firmware observation passes independent checks. Old blocked-connection
+membership, stock qualification and library bytes remain unchanged. The successful
+read connection is unblocked through the normal native workflow; no canonical
+journal or safety marker was manually edited.
+
+Readback full-flash SHA256:
+`9dd187a9259879010d59ce4cca6d1aaff562b8d2a02b688524ce8a6d6da1f9f0`.
+All 156 release/recovery/pin artifacts and every registry entry remain exact.
+Raw backups, keys, identifiers and real traffic remain private. This proves the
+installed bytes, not physical autofocus, capture or shutdown compatibility.
 
 ## Camera cycle and log retrieval remain pending
 
-After strict verification, guide one loaded-lens cycle: camera off and USB cable
-disconnected, physical infinity/f/1.4, live-preview/startup check, then use powered-on
+The owner is now guided through the setup part of one loaded-lens cycle: camera
+off and USB cable disconnected, physical infinity/f/1.4, live-preview/startup check, then use powered-on
 menus to confirm MF separately from still-photo A and Pre-AF Off if available.
 The earlier AUTO wording does not establish actual focus mode. Wait ten quiet
-seconds after movement stops, take at most one photo only with confirmed MF and
-normal preview/aperture/motor behavior, then switch off once. Skip the photo if
-these conditions cannot be confirmed. No restart or AF-S attempt is requested yet.
+seconds after movement stops and report the actual MF/Pre-AF, preview, f-number
+and motor state before any shutter input. After that review, request at most one
+photo only with confirmed MF and normal preview/aperture/motor behavior, then
+switch off once. Skip the photo if these conditions cannot be confirmed. No restart or AF-S attempt is requested yet.
 
 For freeze or abnormal drive, stop input, switch off, remove the battery if
 unresponsive or movement continues, and do not retry. Do not leave a moving fault
@@ -97,3 +122,11 @@ diagnostic-tail differences under 4.1 pins. A valid baseline is not proof normal
 initialization or capture completed; a recovered page is an earlier foreground
 summary, not exact crash registers/time. Camera acceptance remains unqualified until
 actual observations and saved logs are reviewed.
+
+The exact menu selections were checked against Sony’s primary A7C II
+[Focus Mode help](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html)
+and [Pre-AF help](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html).
+The initial prompt requests no shutter or AF-ON input and asks for actual settings;
+missing values remain unknown. The camera can be switched off if the owner needs
+to leave the setup unattended. A subsequent photo/shutdown prompt must not request
+a setup restart or an extra cycle.

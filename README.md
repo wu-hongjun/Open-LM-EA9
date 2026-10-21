@@ -9,10 +9,13 @@ system audit. All flashed firmware is C. The [updated working recommendation](do
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
 [Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax
-Zeiss 50mm f/1.4 has finished uploading. **Physical reconnect and strict full-image /
-protected-data verification are pending; keep it off the camera.** The fresh backup
-matches the prior 4.0 post-camera flash and protected data. No post-START read was
-sent on the armed connection. [Live installation record](docs/evidence/upstream-41-upload-2026-10-21.md).
+Zeiss 50mm f/1.4 is uploaded and **strictly byte/protected-data verified after
+physical reconnect**. All 20,480 application bytes and the pristine 1K diagnostic
+tail match; protected flash and factory data are unchanged. Camera acceptance is
+unqualified. The owner is guided through one cycle, confirming MF and normal
+preview/idle before one photo, followed by shutdown and read-only log retrieval.
+Actual settings/outcomes remain unknown until reported.
+[Live installation record](docs/evidence/upstream-41-upload-2026-10-21.md).
 
 Three Astra lanes prepared validated foreground checkpoints, watchdog/system-reset
 boot records and a persistent crash/storage latch. All 40 offline firmware suites,
