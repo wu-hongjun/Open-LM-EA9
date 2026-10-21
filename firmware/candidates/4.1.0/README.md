@@ -1,6 +1,9 @@
 # AF 4.1 — crash diagnostics
 
-**Prepared offline; not uploaded or camera-qualified.** Fixed to the original
+**Upload finished; physical reconnect and strict byte/protected-data verification
+are pending. Camera compatibility is unqualified.**
+[Live installation record](../../../docs/evidence/upstream-41-upload-2026-10-21.md).
+Fixed to the original
 Contax Zeiss 50mm f/1.4, lens ID 234, nominal AV 4352. Physical iris remains unknown;
 lens-library edits stay local. This adds evidence and fail-stop behavior, not a
 proven homing, shutter-freeze, optical AF or factory-parity fix. The upstream C
@@ -40,5 +43,6 @@ standalone type 5 record under the image/manifest registry pins.
 
 All151 historical release/recovery/pin artifacts and older registry entries remain
 exact. Original stock 1.8 recovery is preserved. App 0.24.0/build 33 exposes an explicit
-4.1 research action;4.0 remains held. No adapter access, canonical host-state edit,
-app launch or new camera observation belongs to this offline milestone.
+4.1 research action;4.0 remains held. The offline preparation accessed no adapter, launched no app and changed no
+canonical host state. The later guarded upload is recorded separately; camera
+use must wait for physical reconnect and strict verification.

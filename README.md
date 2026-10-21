@@ -8,22 +8,24 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-The next [upstream C AF 4.1](firmware/candidates/4.1.0/README.md) is prepared
-**offline and unqualified** for the original Contax Zeiss50mm f/1.4. Three Astra
-lanes added a validated foreground checkpoint, watchdog/system-reset boot record
-and persistent crash/storage latch. Once a record reaches flash it survives
-battery removal; immediate power loss before persistence can still lose it.
-This improves observability and fail-stop behavior, without establishing a fix for
-the camera freeze or factory parity. The adapter was not accessed or flashed.
-[Evidence](docs/evidence/upstream-41-crash-diagnostics-2026-10-21.md) ·
+[Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax
+Zeiss 50mm f/1.4 has finished uploading. **Physical reconnect and strict full-image /
+protected-data verification are pending; keep it off the camera.** The fresh backup
+matches the prior 4.0 post-camera flash and protected data. No post-START read was
+sent on the armed connection. [Live installation record](docs/evidence/upstream-41-upload-2026-10-21.md).
+
+Three Astra lanes prepared validated foreground checkpoints, watchdog/system-reset
+boot records and a persistent crash/storage latch. All 40 offline firmware suites,
+681 crash-decoder checks and 53 app tests pass. Once a record reaches flash it can
+survive battery removal; immediate power loss before persistence can still lose
+it. This improves observability without establishing a shutter-freeze fix or
+factory parity. App 0.24.0/build 33 retains the 4.0 hold and guarded backup/recovery.
+All 156 release/recovery/pin artifacts and registry entries remain exact.
+[Offline evidence](docs/evidence/upstream-41-crash-diagnostics-2026-10-21.md) ·
 [Workbench](firmware/upstream-hardening/next41/README.md) ·
-[Separate installation/test procedure](docs/upstream-crash-diagnostic-test.md).
+[Installation/test procedure](docs/upstream-crash-diagnostic-test.md).
 
-App0.24.0/build33 adds explicit4.1 preparation/installation tooling, preserves
-read-only/recovery guards and keeps4.0 held. Original recovery and all151 historical
-release/recovery/pin artifacts remain exact. Hardware qualification is still pending.
-
-The latest installed [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
+The previously verified [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
 original Contax Zeiss 50mm f/1.4, passed strict USB installation verification but
 **failed camera acceptance; further 4.0 trials are held**. The owner confirms two
 files saved in reported AUTO mode, then a hard crash requiring battery removal.

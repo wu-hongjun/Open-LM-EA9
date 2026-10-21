@@ -1,9 +1,10 @@
 # AF 4.1 — separate installation and crash-log procedure
 
-This is a prepared procedure, **not an instruction to flash now**. AF 4.1 is an
-offline, unqualified crash-diagnostic candidate for the original Contax Zeiss 50mm
-f/1.4. AF 4.0 remains installed according to the last verified record and held after
-a battery-required camera crash. This task did not access the adapter.
+AF 4.1 upload finished on October 21. **Physical reconnect and strict complete-image /
+protected-data verification are pending; keep the adapter off the camera.** The
+[installation record](evidence/upstream-41-upload-2026-10-21.md) tracks the guarded
+upload and remaining gates. The following procedure continues only after the
+owner confirms the required physical reconnect. Camera compatibility is unqualified.
 
 [Candidate and pins](../firmware/candidates/4.1.0/README.md) ·
 [Implementation and limits](evidence/upstream-41-crash-diagnostics-2026-10-21.md).
