@@ -1,6 +1,6 @@
 {
   "date": "2026-10-21",
-  "status": "strict-installation-verification-passed-camera-setup-confirmation-pending",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-stock-uploaded-awaiting-reconnect",
   "sourceGitCommit": "12ef4e46cdd9959bd0edf0ccae8e2bfa1c8b8d45",
   "appVersion": "0.24.0",
   "appBuild": 33,
@@ -52,9 +52,9 @@
   "physicalReconnectAfterUploadConfirmed": true,
   "strictByteVerificationPassed": true,
   "protectedDataReadbackVerifiedAfterUpload": true,
-  "cameraTestPerformed": false,
-  "cameraCyclePending": true,
-  "postCameraLogRetrievalPerformed": false,
+  "cameraTestPerformed": true,
+  "cameraCyclePending": false,
+  "postCameraLogRetrievalPerformed": true,
   "cameraAcceptancePassed": false,
   "physicalHomingFailureFixed": false,
   "shutterBlockFixEstablished": false,
@@ -127,5 +127,14 @@
   "cameraSetupConfirmationRequested": true,
   "actualFocusMode": null,
   "actualPreAF": null,
-  "postVerificationReportsSent": 0
+  "postVerificationReportsSent": 0,
+  "further41CameraTrialsHeld": true,
+  "ownerReportedApproximateShutterDelaySeconds": 60,
+  "ownerConfirmedPhotoFileSaved": true,
+  "ownerReportedShutdownWorkedAfterFreeze": true,
+  "ownerExplicitlyRequestedStockRestore": true,
+  "stockRestorationUploadCompleted": true,
+  "stockRestorationStrictVerificationPending": true,
+  "cameraFailureEvidence": "upstream-41-camera-failure-2026-10-21.json",
+  "stockRestorationEvidence": "stock-18-af41-recovery-2026-10-21.json"
 }

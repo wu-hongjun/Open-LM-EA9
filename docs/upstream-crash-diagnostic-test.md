@@ -1,11 +1,15 @@
 # AF 4.1 — separate installation and crash-log procedure
 
-AF 4.1 upload and strict complete-image/protected-data verification passed on
-October 21 after owner-confirmed physical reconnect. The
-[installation record](evidence/upstream-41-upload-2026-10-21.md) tracks these
-completed gates. Camera compatibility remains unqualified. The next step is the
-setup part of one camera cycle: confirm actual MF, live preview and quiet idle
-before asking for the single photo/shutdown. No camera result is assumed.
+**AF 4.1 camera acceptance failed; further trials are held.** Strict installation
+verification remains a historical fact. The owner confirms a photo saved after a
+reported one-minute shutter delay/freeze, with shutdown working afterward. Actual
+focus mode remains unknown. Read-only logs are preserved; the owner requested stock.
+[Failure evidence](evidence/upstream-41-camera-failure-2026-10-21.md) ·
+[Stock restoration](evidence/stock-18-af41-recovery-2026-10-21.md).
+
+The procedure below records the historical guided test. Do not repeat it with
+held 4.1. Original stock upload is complete; its physical reconnect and strict
+verification are tracked separately. No additional camera test is requested.
 
 [Candidate and pins](../firmware/candidates/4.1.0/README.md) ·
 [Implementation and limits](evidence/upstream-41-crash-diagnostics-2026-10-21.md).

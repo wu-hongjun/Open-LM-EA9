@@ -8,25 +8,31 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-[Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax
-Zeiss 50mm f/1.4 is uploaded and **strictly byte/protected-data verified after
-physical reconnect**. All 20,480 application bytes and the pristine 1K diagnostic
-tail match; protected flash and factory data are unchanged. Camera acceptance is
-unqualified. The owner is guided through one cycle, confirming MF and normal
-preview/idle before one photo, followed by shutdown and read-only log retrieval.
-Actual settings/outcomes remain unknown until reported.
-[Live installation record](docs/evidence/upstream-41-upload-2026-10-21.md).
+**The owner requested original stock 1.8.0 restoration. Its upload is complete;
+physical reconnect and strict full-slot/protected-data verification are pending.**
+Keep the adapter off the camera until verification passes. The original same-unit
+source and fresh backup validate, and the custom-firmware camera logs are preserved.
+[Stock recovery record](docs/evidence/stock-18-af41-recovery-2026-10-21.md).
 
-Three Astra lanes prepared validated foreground checkpoints, watchdog/system-reset
-boot records and a persistent crash/storage latch. All 40 offline firmware suites,
-681 crash-decoder checks and 53 app tests pass. Once a record reaches flash it can
-survive battery removal; immediate power loss before persistence can still lose
-it. This improves observability without establishing a shutter-freeze fix or
-factory parity. App 0.24.0/build 33 retains the 4.0 hold and guarded backup/recovery.
-All 156 release/recovery/pin artifacts and registry entries remain exact.
+[Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax
+Zeiss 50mm f/1.4 passed strict installation verification but **failed camera
+acceptance; further trials are held**. The owner confirms one photo saved after
+a reported one-minute shutter delay/freeze; shutdown worked afterward. Actual
+focus mode remains unknown. Read-only logs retain five power-on baselines,
+a handshake/shutdown snapshot and a later startup `cs-rise-wait` failure. All 16 pages
+are full, with code/protected data unchanged; the physical shutter cause remains
+unresolved. App 0.24.1/build 34 disables ordinary 4.1 installation from any version,
+while preserving read-only backup/recovery and all firmware pins.
+[Camera evidence](docs/evidence/upstream-41-camera-failure-2026-10-21.md) ·
+[Installation record](docs/evidence/upstream-41-upload-2026-10-21.md).
+
+Three Astra lanes prepared the 4.1 checkpoint/watchdog/latch design. All 40 offline
+firmware suites, 681 crash-decoder checks and 53 app tests passed; they did not
+establish camera stability, physical homing or factory parity. Original recovery,
+all 156 release/recovery/pin artifacts and every registry entry remain exact.
 [Offline evidence](docs/evidence/upstream-41-crash-diagnostics-2026-10-21.md) ·
 [Workbench](firmware/upstream-hardening/next41/README.md) ·
-[Installation/test procedure](docs/upstream-crash-diagnostic-test.md).
+[Held test/log procedure](docs/upstream-crash-diagnostic-test.md).
 
 The previously verified [upstream C AF 4.0](firmware/candidates/4.0.0/README.md), fixed to the
 original Contax Zeiss 50mm f/1.4, passed strict USB installation verification but
@@ -131,12 +137,12 @@ Earlier released images and original recovery remain exact.
 
 The prototype includes all eight requested lens profiles, local metadata editing,
 versioned JSON import/export, verified USB backup, and a staged application
-upload/read-back path for lens metadata. The current app (0.24.0, build 33) refreshes
+upload/read-back path for lens metadata. The current app (0.24.1, build 34) refreshes
 connection and local verification history automatically. Device shows product
 photos, connection, dated firmware and the last verified lens, with a dropdown
 to choose and apply another profile on firmware that supports runtime profiles.
 Lens Library remains a secondary gallery/editor.
-It marks installed 3.6, 3.7, 3.8, 3.9 and 4.0 as held and disables ordinary installation
+It marks installed 3.6, 3.7, 3.8, 3.9, 4.0 and 4.1 as held and disables ordinary installation
 of these failed images. The 3.9 and 4.0 install controls are disabled while held; explicit native
 prepare/apply commands retain their historical pinned research meaning. Image
 pins and read-only backup/recovery access remain preserved.

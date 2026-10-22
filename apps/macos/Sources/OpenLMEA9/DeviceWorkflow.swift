@@ -25,7 +25,8 @@ enum DeviceLensAction {
         "3.7.0": "Targeted trace 3.7 failed camera testing: the owner reports a freeze after taking one photo.",
         "3.8.0": "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. The owner reports normal shutdown.",
         "3.9.0": "Homing diagnostic 3.9 is held after two reported photos followed by blocked further capture. The owner reports normal shutdown.",
-        "4.0.0": "AF 4.0 is held after a hard camera crash following two reported photos. The owner reports needing a power cycle."
+        "4.0.0": "AF 4.0 is held after a hard camera crash following two reported photos. The owner reports needing a power cycle.",
+        "4.1.0": "Crash diagnostic 4.1 is held after a reported one-minute shutter delay and freeze before a photo saved. The owner reports shutdown worked."
     ]
     var installedCameraFailureHold: Bool {
         Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] != nil

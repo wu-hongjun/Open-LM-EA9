@@ -1,0 +1,269 @@
+{
+  "dateLocal": "2026-10-21",
+  "status": "camera-acceptance-failed-delayed-capture-logs-preserved-stock-restoration-uploaded-pending-verification",
+  "firmwareVersion": "4.1.0",
+  "imageSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
+  "manifestSHA256": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
+  "strictInstallationVerificationPreviouslyPassed": true,
+  "ownerObservation": {
+    "verbatim": "it doesn't work still. It takes ~1 min from pressing down the shutter and photo is taken, but I was ablke to shut down after the freeze. I connected the adapter back to the computer",
+    "recordedAtUTC": "2026-10-22T01:46:31.812262+00:00",
+    "approximateShutterDelaySecondsReported": 60,
+    "delayIndependentlyMeasured": false,
+    "photoTakenReported": true,
+    "photoFilesSaved": true,
+    "freezeReported": true,
+    "shutdownWorkedReported": true,
+    "batteryRemovalRequired": null,
+    "focusMode": null,
+    "preAF": null,
+    "exposureMode": null,
+    "displayedAperture": null,
+    "previewBrightness": null,
+    "motorBehavior": null,
+    "shutterHalfOrFullPress": null,
+    "controlledMFCycleConfirmed": false,
+    "adapterReturnedToComputerReported": true,
+    "additionalCameraAttemptRequested": false,
+    "ownerExplicitlyRequestedStockRestore": true
+  },
+  "cameraAcceptancePassed": false,
+  "further41CameraTrialsHeld": true,
+  "cameraLogRetrievalPerformed": true,
+  "rootCauseEstablished": false,
+  "homingPhysicallyQualified": false,
+  "factoryParityEstablished": false,
+  "sourceFilesVerified": 49,
+  "preservedArtifacts": 156,
+  "historicalRegistryEntriesUnchanged": true,
+  "originalStockRecoveryUnchanged": true,
+  "backupNativeExitCode": 0,
+  "completedAtUTC": "2026-10-22T01:48:27.531260+00:00",
+  "sameQualifiedUnitAndNewConnection": true,
+  "bothAppsClosedByProcessCheck": true,
+  "flashBytes": 131072,
+  "flashReadPasses": 2,
+  "auxiliaryReadPasses": 2,
+  "reportExchanges": 4359,
+  "hardwareWritesSentDuringRetrieval": 0,
+  "preCameraFlashSHA256": "9dd187a9259879010d59ce4cca6d1aaff562b8d2a02b688524ce8a6d6da1f9f0",
+  "postCameraFlashSHA256": "490aee27c5dcfb639f62a5108b346ec1bfa430ce911e4bb1b80d23a2d59ff7b5",
+  "changedFlashBytes": 1023,
+  "changedDiagnosticPages": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "preservationChecks": {
+    "allFlashOutsideDiagnosticsUnchanged": true,
+    "immutableCandidatePrefixMatches": true,
+    "user-row.bin-unchanged": true,
+    "calibration.bin-unchanged": true,
+    "device-id.bin-unchanged": true,
+    "canonical-pending-update.json-unchanged": true,
+    "canonical-applied-lens.json-unchanged": true,
+    "canonical-last-firmware-observation.json-unchanged": true,
+    "canonical-stock-upload-qualification.json-unchanged": true,
+    "canonical-profiles.json-unchanged": true,
+    "canonicalBlockedMembershipUnchanged": true
+  },
+  "allPreservationChecksPassed": true,
+  "diagnostics": {
+    "validPages": 16,
+    "invalidPages": 0,
+    "erasedPages": 0,
+    "semanticallyInconsistentPages": 0,
+    "unassociatedPages": 0,
+    "appendablePages": 0,
+    "appendExhausted": true
+  },
+  "bootRecords": [
+    {
+      "slot": 0,
+      "recordTrust": "writer-consistent",
+      "resetCauseRaw": 1,
+      "resetCauses": [
+        "power-on"
+      ],
+      "snapshotRecovered": false,
+      "crashResetObserved": false
+    },
+    {
+      "slot": 1,
+      "recordTrust": "writer-consistent",
+      "resetCauseRaw": 1,
+      "resetCauses": [
+        "power-on"
+      ],
+      "snapshotRecovered": false,
+      "crashResetObserved": false
+    },
+    {
+      "slot": 2,
+      "recordTrust": "writer-consistent",
+      "resetCauseRaw": 1,
+      "resetCauses": [
+        "power-on"
+      ],
+      "snapshotRecovered": false,
+      "crashResetObserved": false
+    },
+    {
+      "slot": 3,
+      "recordTrust": "writer-consistent",
+      "resetCauseRaw": 1,
+      "resetCauses": [
+        "power-on"
+      ],
+      "snapshotRecovered": false,
+      "crashResetObserved": false
+    },
+    {
+      "slot": 14,
+      "recordTrust": "writer-consistent",
+      "resetCauseRaw": 1,
+      "resetCauses": [
+        "power-on"
+      ],
+      "snapshotRecovered": false,
+      "crashResetObserved": false
+    }
+  ],
+  "summaryRecords": [
+    {
+      "slot": 4,
+      "cohort": 5,
+      "recordTrust": "writer-consistent",
+      "uptimeMS": 2355,
+      "rxFrames": 228,
+      "txReturns": 230,
+      "uartErrors": 0,
+      "stageID": 14,
+      "handshakeFlag": true,
+      "faultID": 0,
+      "fault": "none",
+      "shutdownUARTDisabledObserved": true,
+      "bufferedEvents": 32,
+      "plannedEvents": 16,
+      "persistedEvents": 16,
+      "plannedMotionChunks": 3,
+      "motionSnapshotComplete": true,
+      "eventSnapshotComplete": true,
+      "snapshotStatus": "complete",
+      "capacityOmittedEvents": 16,
+      "evictedEvents": 35,
+      "filteredEvents": 1807,
+      "terminalFooters": [
+        {
+          "kind": "VD-timeout",
+          "fault": "none",
+          "uptimeMS": 2856
+        },
+        {
+          "kind": "PA23-write-reached",
+          "fault": "none",
+          "uptimeMS": 2856
+        }
+      ],
+      "motion": {
+        "valid": false,
+        "meaning": "No servo move snapshot initialized; does not exclude motion outside this path.",
+        "writerIssues": []
+      },
+      "focusedEventKinds": {
+        "owner-take": 2,
+        "tx-start": 3,
+        "tx-return": 3,
+        "handshake": 1,
+        "owner-complete": 2,
+        "owner-cs": 1,
+        "owner-offer": 1,
+        "owner-phase": 1,
+        "shutdown-admit": 1,
+        "shutdown-uart-disabled": 1
+      },
+      "rawCaptureOffersAccepted": 1,
+      "shutdownAdmissions": 1
+    },
+    {
+      "slot": 15,
+      "cohort": 16,
+      "recordTrust": "writer-consistent",
+      "uptimeMS": 8000,
+      "rxFrames": 0,
+      "txReturns": 0,
+      "uartErrors": 1,
+      "stageID": 8,
+      "handshakeFlag": false,
+      "faultID": 8,
+      "fault": "cs-rise-wait",
+      "shutdownUARTDisabledObserved": false,
+      "bufferedEvents": 1,
+      "plannedEvents": 0,
+      "persistedEvents": 0,
+      "plannedMotionChunks": 0,
+      "motionSnapshotComplete": false,
+      "eventSnapshotComplete": true,
+      "snapshotStatus": "complete",
+      "capacityOmittedEvents": 1,
+      "evictedEvents": 0,
+      "filteredEvents": 7,
+      "terminalFooters": [],
+      "motion": {},
+      "focusedEventKinds": {},
+      "rawCaptureOffersAccepted": 0,
+      "shutdownAdmissions": 0
+    }
+  ],
+  "bootRecordPhysicalCycleCountProven": false,
+  "watchdogOrSystemResetRecordRetained": false,
+  "exactOneMinuteDelayReconstructed": false,
+  "stockRestorationExplicitlyRequested": true,
+  "stockUploadCompleted": true,
+  "stockRestorationStrictVerificationPending": true,
+  "firmwareSourceOrExistingImagesChanged": false,
+  "rawDumpsKeysIdentifiersAndRealFramesPrivate": true,
+  "hostHold": {
+    "appVersion": "0.24.1",
+    "appBuild": 34,
+    "ordinary41InstallationDisabledFromAnyVersion": true,
+    "readOnlyBackupRecoveryRetained": true,
+    "historicalNativeCommandPinsUnchanged": true,
+    "firmwareResourceUnchanged": true,
+    "namedSwiftTestsPassed": 53,
+    "oldHostIntendedFailingAssertions": 5,
+    "signedCLISHA256": "2f24feab2fd010a5950d144ae24e31288fe2589248caaae439b438db609b14bc",
+    "readerByteIdentical": true,
+    "signaturesVerified": true,
+    "previousSignedPackagePreserved": true,
+    "appLaunched": false
+  },
+  "privateEvidenceSHA256": {
+    "preflight.json": "b76c6050c5773cfb86dfb6da317c225b8dbbf1f4ddf842cf488a331d39387cca",
+    "preflight.py": "4f38b04971a76a141f548e7de2a9885f941d5a3309b141e89f723460e82059ed",
+    "run_backup.py": "3f9c07cfe257de1761690074953b43e2f3426a27d7054d4a879a9aa95a72f9d7",
+    "backup-result.json": "392eee4c607c0930f410421b63563edc0e92d6f80c4ec102e47a9b3663708eb8",
+    "backup.stdout.txt": "8fb667e61a20d3c456c39df0c608fcf06eda14e814b46c213b8342afa545f9e8",
+    "backup.progress.txt": "0779fa6b03a310d09b68d8ba026c8d28c2fa8650d4e6596419f19e59eddfdcb4",
+    "decoded.json": "d773e3be52c56036250660bfa3cd7f73f131a008f5126faaca776bcc2994bef3",
+    "audit_backup.py": "b4a0360a1b089d19cf2f3caa8d78ec0226b90753e258d3c4435cbb574f62d773",
+    "backup-audit.json": "a2abfd7161a77185d85eb377e4806e2134bd3989d858cdb404d0917d3b4a05e5",
+    "owner-observation.json": "64e7509ab91ac51bad7eb7731007c34f3fc9f5cb039955270fe86280911f0b6f",
+    "hold-failing-control.log": "f0ca0621386c8a5981be6720edcabf8f38bc9d30914363b7f98dc974191d93f3",
+    "host-tests.log": "38bb1f70f48f67c1bd940102e4e9fac39786aa0470050b12d5eb87f936828b74",
+    "package.log": "2e24adf2402f9937a3c8dce4877d36557d0b7b294d9a0027574ac1484a98e904"
+  }
+}

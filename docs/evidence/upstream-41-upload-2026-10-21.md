@@ -1,11 +1,13 @@
 # AF 4.1 upload — October 21, 2026
 
-**AF 4.1 passed strict complete-image and protected-data verification after the
-owner confirmed physical reconnect. Camera acceptance remains unqualified.**
-One loaded-lens cycle is now guided in two steps within the same power cycle:
-confirm actual MF/preview/idle first, then request at most one photo and shutdown
-only if that setup is normal. No camera observation or log retrieval is yet reported.
-This installs the existing diagnostic candidate, not a proven shutter-freeze fix.
+**AF 4.1 passed strict complete-image/protected-data installation verification,
+but camera acceptance failed and further trials are held.** The owner confirms a
+photo saved after a reported one-minute shutter delay/freeze; shutdown worked.
+Actual focus mode remains unknown. Read-only logs are preserved and the owner
+requested original stock restoration. Its upload is complete; physical reconnect
+and strict verification are pending.
+[Camera/log evidence](upstream-41-camera-failure-2026-10-21.md) ·
+[Stock restoration](stock-18-af41-recovery-2026-10-21.md).
 
 [Sanitized receipt](upstream-41-upload-2026-10-21.json) ·
 [Candidate and pins](../../firmware/candidates/4.1.0/README.md) ·
@@ -98,35 +100,25 @@ All 156 release/recovery/pin artifacts and every registry entry remain exact.
 Raw backups, keys, identifiers and real traffic remain private. This proves the
 installed bytes, not physical autofocus, capture or shutdown compatibility.
 
-## Camera cycle and log retrieval remain pending
+## Subsequent camera result and return to stock
 
-The owner is now guided through the setup part of one loaded-lens cycle: camera
-off and USB cable disconnected, physical infinity/f/1.4, live-preview/startup check, then use powered-on
-menus to confirm MF separately from still-photo A and Pre-AF Off if available.
-The earlier AUTO wording does not establish actual focus mode. Wait ten quiet
-seconds after movement stops and report the actual MF/Pre-AF, preview, f-number
-and motor state before any shutter input. After that review, request at most one
-photo only with confirmed MF and normal preview/aperture/motor behavior, then
-switch off once. Skip the photo if these conditions cannot be confirmed. No restart or AF-S attempt is requested yet.
+The owner reports approximately one minute from pressing the shutter until a
+photo was taken, a freeze, and successful shutdown afterward. A later clarification
+confirms the photo file saved and explicitly requests stock restoration. Actual
+MF/AF, Pre-AF, exposure, displayed aperture, preview and motor behavior remain
+unverified; the requested setup is not recorded as a confirmed MF cycle.
 
-For freeze or abnormal drive, stop input, switch off, remove the battery if
-unresponsive or movement continues, and do not retry. Do not leave a moving fault
-powered to obtain logs. Power loss before persistence can still lose the retained
-checkpoint; watchdog timing/reset/retention remain physically unqualified. A crash
-latch intentionally blocks later motor/protocol initialization.
+One guarded read-only backup retained 16 valid diagnostic pages. Code and all
+flash outside the reserved tail, protected auxiliary data and canonical records
+are unchanged. Five power-on baseline pages, one handshake/shutdown snapshot,
+and a later startup `cs-rise-wait` summary survived. Storage is full. These software
+records do not reconstruct the owner’s one-minute wall time or establish the shutter
+root cause. No extra camera attempt is requested to obtain missing settings.
+[Completed analysis](upstream-41-camera-failure-2026-10-21.md).
 
-After camera off/unpowered and stopped motor, the owner returns it to the USB cap
-and explicitly confirms reconnect with both apps closed. Only then retrieve one
-guarded two-pass read-only backup. Audit protected data/code and decode the permitted
-diagnostic-tail differences under 4.1 pins. A valid baseline is not proof normal
-initialization or capture completed; a recovered page is an earlier foreground
-summary, not exact crash registers/time. Camera acceptance remains unqualified until
-actual observations and saved logs are reviewed.
-
-The exact menu selections were checked against Sony’s primary A7C II
-[Focus Mode help](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405C_focus_mode.html)
-and [Pre-AF help](https://helpguide.sony.net/ilc/2360/v1/en/contents/0405_pre_af.html).
-The initial prompt requests no shutter or AF-ON input and asks for actual settings;
-missing values remain unknown. The camera can be switched off if the owner needs
-to leave the setup unattended. A subsequent photo/shutdown prompt must not request
-a setup restart or an extra cycle.
+At the owner’s request, original same-unit stock 1.8.0 upload completed after
+preserving the camera logs and another matching fresh backup. The
+[recovery record](stock-18-af41-recovery-2026-10-21.md) tracks required physical
+reconnect and strict complete-slot/protected-data verification. No source/image
+change or verification exception was used for restoration. App 0.24.1/build 34 holds
+ordinary 4.1 installation, retains backup/recovery and leaves original pins intact.

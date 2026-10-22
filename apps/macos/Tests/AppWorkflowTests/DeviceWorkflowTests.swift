@@ -413,8 +413,8 @@ private actor DiscoveryFixture {
     #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
     #expect(!model.canInstallHomingDiagnostic && !model.canInstallReadiness && !model.canInstallTargetedTrace)
-    // 4.1 is an explicit unqualified candidate; failed 4.0 stays held.
-    #expect(model.canInstallCrashDiagnostic && !model.canInstallReferenceQualified)
+    // Failed 4.1 is held even when 4.0 is installed.
+    #expect(!model.canInstallCrashDiagnostic && !model.canInstallReferenceQualified)
     model.idleAcknowledged = false
     #expect(!model.canInstallCrashDiagnostic)
     model.idleAcknowledged = true
@@ -426,10 +426,10 @@ private actor DiscoveryFixture {
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.1.0"))
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.preparedMatchesApplied && !model.canApplyLens && !model.canInstallCrashDiagnostic)
-    #expect(!model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
-    #expect(model.workflowTitle == "Crash diagnostic 4.1 candidate")
-    #expect(model.workflowDetail.contains("unqualified") && model.workflowDetail.contains("persistent crash latch"))
-    #expect(model.firmwareBehaviorNote.contains("does not establish") && model.firmwareBehaviorNote.contains("baseline"))
+    #expect(model.installedCameraFailureHold && model.primaryLensAction == .tools && model.canReadDevice)
+    #expect(model.workflowTitle == "AF 4.1 camera testing held")
+    #expect(model.workflowDetail.contains("one-minute") && model.workflowDetail.contains("shutdown"))
+    #expect(model.firmwareBehaviorNote.contains("held") && model.firmwareBehaviorNote.contains("Do not retry"))
     #expect(!model.canInstallReferenceQualified && !model.canInstallHomingDiagnostic)
     #expect(model.currentAppliedLens?.setting.actualAperture == nil)
 

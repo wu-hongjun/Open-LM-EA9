@@ -1,9 +1,12 @@
 # AF 4.1 — crash diagnostics
 
-**Upload and strict complete-image/protected-data verification passed after
-physical reconnect. Camera compatibility remains unqualified; one setup-confirmed
-camera cycle and read-only logs are pending.**
-[Live installation record](../../../docs/evidence/upstream-41-upload-2026-10-21.md).
+**Upload and strict installation verification passed. Camera acceptance failed;
+further 4.1 trials are held.** The owner confirms one photo saved after a reported
+one-minute shutter delay/freeze, with shutdown working afterward. Actual focus mode
+remains unknown. Logs are preserved; the owner requested original stock restoration.
+[Camera/log evidence](../../../docs/evidence/upstream-41-camera-failure-2026-10-21.md) ·
+[Stock recovery](../../../docs/evidence/stock-18-af41-recovery-2026-10-21.md) ·
+[Installation record](../../../docs/evidence/upstream-41-upload-2026-10-21.md).
 Fixed to the original Contax Zeiss 50mm f/1.4, lens ID 234, nominal AV 4352. Physical iris remains unknown;
 lens-library edits stay local. This adds evidence and fail-stop behavior, not a
 proven homing, shutter-freeze, optical AF or factory-parity fix. The upstream C
@@ -41,9 +44,10 @@ standalone type 5 record under the image/manifest registry pins.
 [Build/test workbench](../../upstream-hardening/next41/README.md) ·
 [Later installation/test/log procedure](../../../docs/upstream-crash-diagnostic-test.md).
 
-All 151 historical release/recovery/pin artifacts and older registry entries remain
-exact. Original stock 1.8 recovery is preserved. App 0.24.0/build 33 exposes an explicit
-4.1 research action; 4.0 remains held. The offline preparation accessed no adapter,
-launched no app and changed no canonical host state. The later guarded upload is
-recorded separately; one camera cycle and logs remain owner-coordinated after
-completed verification.
+All 156 release/recovery/pin artifacts and every registry entry remain exact.
+Original stock 1.8 recovery is preserved. App 0.24.1/build 34 disables ordinary 4.1
+installation from any version and retains read-only/recovery tools. Historical
+explicit native commands and exact resource pins remain. The original stock upload
+has completed; physical reconnect/strict verification are pending. No more 4.1
+camera cycle is requested. The offline preparation’s passing software tests remain
+separate from this failed camera milestone.

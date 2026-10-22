@@ -1,25 +1,24 @@
 # macOS prototype
 
-App 0.24.0/build 33 adds the explicit **Crash Diagnostic 4.1.0** candidate,
-fixed to the original Contax Zeiss 50mm f/1.4 profile. It adds watchdog reset
-evidence, boot persistence and a crash latch; autofocus and camera compatibility
-remain unqualified. A startup baseline is not final-state evidence, and power
-removal before persistence can still lose the latest checkpoint. Installed 4.1
-opens the USB tools workflow; ordinary profile changes and same-version reinstall
-are unavailable. Preserve a read-only backup before reviewing recovery or another
-trial. Explicit native commands are `prepare-crash-upstream` and
-`apply-crash-upstream`; historical command meanings and image pins are unchanged.
+App 0.24.1/build 34 holds **Crash Diagnostic 4.1.0** after the owner reports a
+one-minute shutter delay/freeze before a photo saved; shutdown worked afterward.
+Actual focus mode is unknown. Ordinary4.1 installation is disabled from every
+installed version. Read-only backup/recovery and historical command/image pins
+remain unchanged. Logs were preserved before the owner-requested original stock
+upload; its reconnect/strict-verification gate is tracked in the
+[stock recovery record](evidence/stock-18-af41-recovery-2026-10-21.md).
+[Camera/log evidence](evidence/upstream-41-camera-failure-2026-10-21.md).
 
 The historical **AF 4.0.0** remains fixed to the original 50mm f/1.4. Its strict USB
 installation verification passed, but **camera acceptance failed and 4.0 is held**
 after two saved photos in reported AUTO mode and a battery-required hard crash.
-App 0.24.0/build 33 continues to disable ordinary 4.0 installation from every installed version,
+App 0.24.1/build 34 continues to disable ordinary 4.0 installation from every installed version,
 while retaining read-only backup/recovery. Native historical prepare/apply commands
 retain their exact image meanings. No additional camera test is requested; logs
 were retrieved read-only: all 16 pages remain erased, with full flash/protected data
 unchanged. The crash location and actual focus mode remain unknown. [Failure evidence](evidence/upstream-40-camera-failure-2026-10-21.md).
 
-Current app: **0.24.0, build 33**, October 21, 2026. Device opens first, with
+Current app: **0.24.1, build 34**, October 21, 2026. Device opens first, with
 automatic descriptor/history refresh, eight photographed lens profiles, local
 metadata editing and explicit guarded USB operations. The host uses native
 Swift 6, SwiftUI, selective AppKit, IOHID and CryptoKit. Firmware currently builds
