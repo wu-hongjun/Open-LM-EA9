@@ -2,10 +2,11 @@
 
 App 0.24.1/build 34 holds **Crash Diagnostic 4.1.0** after the owner reports a
 one-minute shutter delay/freeze before a photo saved; shutdown worked afterward.
-Actual focus mode is unknown. Ordinary4.1 installation is disabled from every
+Actual focus mode is unknown. Ordinary 4.1 installation is disabled from every
 installed version. Read-only backup/recovery and historical command/image pins
 remain unchanged. Logs were preserved before the owner-requested original stock
-upload; its reconnect/strict-verification gate is tracked in the
+restoration, which passed strict full-slot/protected-data verification after
+physical reconnect. Native state now reports stock; see the
 [stock recovery record](evidence/stock-18-af41-recovery-2026-10-21.md).
 [Camera/log evidence](evidence/upstream-41-camera-failure-2026-10-21.md).
 

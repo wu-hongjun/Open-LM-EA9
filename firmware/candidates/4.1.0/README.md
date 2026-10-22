@@ -47,7 +47,7 @@ standalone type 5 record under the image/manifest registry pins.
 All 156 release/recovery/pin artifacts and every registry entry remain exact.
 Original stock 1.8 recovery is preserved. App 0.24.1/build 34 disables ordinary 4.1
 installation from any version and retains read-only/recovery tools. Historical
-explicit native commands and exact resource pins remain. The original stock upload
-has completed; physical reconnect/strict verification are pending. No more 4.1
+explicit native commands and exact resource pins remain. Original stock restoration
+and strict full-slot/protected-data verification passed after physical reconnect. No more 4.1
 camera cycle is requested. The offline preparation’s passing software tests remain
 separate from this failed camera milestone.

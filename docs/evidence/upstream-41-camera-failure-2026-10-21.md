@@ -77,8 +77,9 @@ this is not relabeled a controlled MF cycle or AF-S test.
 ## Disposition
 
 No further custom-firmware camera test is requested. At the owner’s explicit
-request, the original same-unit stock 1.8.0 upload completed; physical reconnect
-and strict restoration verification are tracked separately. The camera backup was
+request, the original same-unit stock 1.8.0 restoration and strict complete-slot /
+protected-data verification passed after physical reconnect. The completed
+[recovery record](stock-18-af41-recovery-2026-10-21.md) retains the evidence. The camera backup was
 preserved first and the native uploader saved another matching fresh backup before
 START. Stock restoration does not diagnose the custom runtime failure or resolve
 previous stock aperture/exposure limitations.

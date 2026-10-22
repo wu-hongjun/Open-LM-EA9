@@ -1,10 +1,10 @@
 # Original stock 1.8 recovery after AF 4.1 — October 21, 2026
 
-**Original stock upload finished; owner-confirmed physical reconnect and strict
-byte/protected-data verification are pending.** Keep the adapter off the camera
-until that verification passes. The owner explicitly requested stock after a
-reported one-minute shutter delay/freeze before one photo saved on 4.1; shutdown
-worked afterward. No additional custom camera trial is requested.
+**Original stock 1.8.0 is restored and strictly byte/protected-data verified after
+owner-confirmed physical reconnect.** The complete original application slot and
+known metadata match, and boot code, saved records and factory data are preserved.
+The owner requested this restoration after the failed 4.1 camera attempt. Its logs
+are saved; no further custom-firmware camera trial or new stock test is requested.
 
 [Sanitized receipt](stock-18-af41-recovery-2026-10-21.json) ·
 [Preserved 4.1 camera/log evidence](upstream-41-camera-failure-2026-10-21.md) ·
@@ -48,19 +48,47 @@ by native recovery, and applied setting, observation, qualification and library
 remain unchanged until verification. No journal, safety marker or guard was manually
 changed. All 156 release/recovery/pin artifacts and registry entries remain exact.
 
-## Required final verification
+## Completed physical reconnect and strict verification
 
-The owner must physically unplug/reconnect through the USB cap, keep both apps
-closed and explicitly confirm before further reports. Then use normal native
-`verify --idle` once on the new connection, followed by an independent filesystem
-audit. It must match the **entire original 110,592-byte slot and 58 known stock
-metadata bytes**, preserve boot code and `[0x4040,0x5000)` against the fresh pre-restore
-backup, and preserve checked factory auxiliary data. Only established six-byte
-loader scratch is excluded; no relaxed verification exception is planned.
+The owner replied “reconnected” to the USB-cap / both-apps-closed / off-camera
+question. Process checks found no competing app/updater/CLI. The signed CLI and
+original source pins matched, the uploaded stock journal was unchanged, and
+one qualified adapter appeared on a new unblocked connection. Descriptor-only
+inventory sent no reports.
 
-After success, native workflow should verify the stock journal, publish 1.8.0,
-refresh stock qualification and clear the custom applied-lens record. Retain all
-backups and existing markers through that native process. No new stock camera test
-or additional 4.1 attempt is required for this restoration request. Stock camera
-behavior and the earlier aperture/exposure limitations are not established by USB
-readback alone.
+Normal native `verify --idle` ran once and exited 0 at
+**2026-10-22T02:19:39.461618+00:00 UTC**
+(**October 21, 22:19:39.461618 America/New_York**). Two matching 131,072-byte flash
+passes and two auxiliary passes completed, totaling 4,359 CHECK/READ exchanges.
+No write, retry or post-return report was sent.
+
+The independent filesystem audit checks every file size/digest, boot code,
+MCU/geometry, same-unit identity and new connection, then verifies:
+
+- All **110,592 bytes** `[0x5000,0x20000)` match the original stock slot exactly,
+  including the 20,172-byte vendor application and all original upper-flash data.
+- All **58 known stock metadata bytes** `[0x4000,0x403a)` match the original source.
+- Boot code `[0,0x4000)` and the protected saved-record/gap `[0x4040,0x5000)`
+  match the fresh pre-restoration backup; checked user row, calibration and
+  device-ID windows match both fresh and original backups.
+- Only the established six adjacent loader scratch bytes `[0x403a,0x4040)` are
+  excluded. NVM status is checked for geometry, not volatile byte identity.
+- Native workflow publishes the verified stock journal and 1.8.0 observation,
+  refreshes same-unit stock qualification, and clears the custom applied-lens
+  record. The local lens library and previous blocked-connection membership
+  remain unchanged; the successful read connection is unblocked normally.
+
+No verification exception, manual journal edit or marker bypass was used.
+Readback full-flash SHA256:
+`862ae4577fea347cf5fe94344028bb29e3856f787876a8550d814d0d8bba23da`.
+This matches the [previous strictly verified stock readback](stock-18-af28-recovery-2026-10-12.json).
+The only differences from the earliest untouched original full flash are 12
+bytes in the preserved saved-record/gap; loader scratch happens to match too.
+Those 12 bytes match the fresh pre-restoration backup. The original stock slot
+and known metadata match completely.
+
+All 156 release/recovery/pin artifacts, registry entries, original recovery and
+4.1 camera evidence remain preserved. Raw backups, keys, identifiers and real
+frames remain private. This completes the requested restoration. No new camera
+test is required, and the earlier stock aperture/exposure limitations are not
+claimed resolved by USB byte verification.

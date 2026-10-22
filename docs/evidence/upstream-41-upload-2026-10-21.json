@@ -1,6 +1,6 @@
 {
   "date": "2026-10-21",
-  "status": "strict-installation-verification-passed-camera-acceptance-failed-stock-uploaded-awaiting-reconnect",
+  "status": "strict-installation-verification-passed-camera-acceptance-failed-original-stock-restored-and-verified",
   "sourceGitCommit": "12ef4e46cdd9959bd0edf0ccae8e2bfa1c8b8d45",
   "appVersion": "0.24.0",
   "appBuild": 33,
@@ -134,7 +134,9 @@
   "ownerReportedShutdownWorkedAfterFreeze": true,
   "ownerExplicitlyRequestedStockRestore": true,
   "stockRestorationUploadCompleted": true,
-  "stockRestorationStrictVerificationPending": true,
+  "stockRestorationStrictVerificationPending": false,
   "cameraFailureEvidence": "upstream-41-camera-failure-2026-10-21.json",
-  "stockRestorationEvidence": "stock-18-af41-recovery-2026-10-21.json"
+  "stockRestorationEvidence": "stock-18-af41-recovery-2026-10-21.json",
+  "stockRestorationStrictVerificationPassed": true,
+  "stockRestorationVerifiedAtUTC": "2026-10-22T02:19:39.461618+00:00"
 }

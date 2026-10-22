@@ -8,8 +8,9 @@ focus mode remains unknown. Read-only logs are preserved; the owner requested st
 [Stock restoration](evidence/stock-18-af41-recovery-2026-10-21.md).
 
 The procedure below records the historical guided test. Do not repeat it with
-held 4.1. Original stock upload is complete; its physical reconnect and strict
-verification are tracked separately. No additional camera test is requested.
+held 4.1. Original stock restoration and strict full-slot/protected-data verification
+passed after physical reconnect, as recorded separately. No additional camera test
+is requested.
 
 [Candidate and pins](../firmware/candidates/4.1.0/README.md) ·
 [Implementation and limits](evidence/upstream-41-crash-diagnostics-2026-10-21.md).

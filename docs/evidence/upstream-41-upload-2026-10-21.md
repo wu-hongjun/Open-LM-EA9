@@ -4,8 +4,8 @@
 but camera acceptance failed and further trials are held.** The owner confirms a
 photo saved after a reported one-minute shutter delay/freeze; shutdown worked.
 Actual focus mode remains unknown. Read-only logs are preserved and the owner
-requested original stock restoration. Its upload is complete; physical reconnect
-and strict verification are pending.
+requested original stock restoration. The complete original stock slot and protected
+data are now strictly verified after physical reconnect.
 [Camera/log evidence](upstream-41-camera-failure-2026-10-21.md) ·
 [Stock restoration](stock-18-af41-recovery-2026-10-21.md).
 
@@ -118,7 +118,7 @@ root cause. No extra camera attempt is requested to obtain missing settings.
 
 At the owner’s request, original same-unit stock 1.8.0 upload completed after
 preserving the camera logs and another matching fresh backup. The
-[recovery record](stock-18-af41-recovery-2026-10-21.md) tracks required physical
+[recovery record](stock-18-af41-recovery-2026-10-21.md) records completed physical
 reconnect and strict complete-slot/protected-data verification. No source/image
 change or verification exception was used for restoration. App 0.24.1/build 34 holds
 ordinary 4.1 installation, retains backup/recovery and leaves original pins intact.

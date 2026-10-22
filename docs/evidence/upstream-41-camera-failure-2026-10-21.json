@@ -1,6 +1,6 @@
 {
   "dateLocal": "2026-10-21",
-  "status": "camera-acceptance-failed-delayed-capture-logs-preserved-stock-restoration-uploaded-pending-verification",
+  "status": "camera-acceptance-failed-logs-preserved-original-stock-restored-and-verified",
   "firmwareVersion": "4.1.0",
   "imageSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
   "manifestSHA256": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
@@ -233,7 +233,7 @@
   "exactOneMinuteDelayReconstructed": false,
   "stockRestorationExplicitlyRequested": true,
   "stockUploadCompleted": true,
-  "stockRestorationStrictVerificationPending": true,
+  "stockRestorationStrictVerificationPending": false,
   "firmwareSourceOrExistingImagesChanged": false,
   "rawDumpsKeysIdentifiersAndRealFramesPrivate": true,
   "hostHold": {
@@ -265,5 +265,8 @@
     "hold-failing-control.log": "f0ca0621386c8a5981be6720edcabf8f38bc9d30914363b7f98dc974191d93f3",
     "host-tests.log": "38bb1f70f48f67c1bd940102e4e9fac39786aa0470050b12d5eb87f936828b74",
     "package.log": "2e24adf2402f9937a3c8dce4877d36557d0b7b294d9a0027574ac1484a98e904"
-  }
+  },
+  "stockRestorationStrictVerificationPassed": true,
+  "stockRestorationVerifiedAtUTC": "2026-10-22T02:19:39.461618+00:00",
+  "stockRestorationReadbackFlashSHA256": "862ae4577fea347cf5fe94344028bb29e3856f787876a8550d814d0d8bba23da"
 }

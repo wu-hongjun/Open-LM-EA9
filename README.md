@@ -8,10 +8,11 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
-**The owner requested original stock 1.8.0 restoration. Its upload is complete;
-physical reconnect and strict full-slot/protected-data verification are pending.**
-Keep the adapter off the camera until verification passes. The original same-unit
-source and fresh backup validate, and the custom-firmware camera logs are preserved.
+**Original stock 1.8.0 is restored and strictly byte/protected-data verified after
+physical reconnect, as requested by the owner.** The entire 110,592-byte original
+application slot and known metadata match. Boot code, saved records and factory
+data are preserved; native state now reports stock. Custom-firmware camera logs
+remain saved, and no further camera test is requested.
 [Stock recovery record](docs/evidence/stock-18-af41-recovery-2026-10-21.md).
 
 [Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax
