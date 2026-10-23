@@ -1,6 +1,23 @@
 # Recommended LM-EA9 system design
 
-## Updated working recommendation — October 15, 2026
+## Current working recommendation — October 23, 2026
+
+The development direction remains **upstream C firmware and the native Swift
+macOS host**. Original stock 1.8.0 is the last strictly verified installed image,
+following the owner's requested [restoration](evidence/stock-18-af41-recovery-2026-10-21.md).
+The latest custom candidate, 4.1, passed byte verification but
+[failed camera acceptance](evidence/upstream-41-camera-failure-2026-10-21.md).
+App 0.24.1/build 34 holds ordinary 4.1 installation. No custom release has a
+repeatable A7C II capture/shutdown baseline or demonstrated factory parity.
+
+The [October 23 review](audits/firmware-reassessment-2026-10-23.md) separates
+reproduced software defects, test gaps and unresolved camera failures. Further
+development should first close a specific lifecycle contract with a failing
+control, preserving exact release identities. Camera qualification and any
+future flash remain separate owner-coordinated steps. Rust migration, added
+features and controller tuning remain deferred until that baseline exists.
+
+## Historical working recommendation — October 15, 2026
 
 The owner subsequently authorized the upstream C direction for the
 [3.2 startup/handshake milestone](evidence/upstream-32-startup-diagnostic-2026-10-15.md).
@@ -9,7 +26,7 @@ after owner-confirmed physical reconnect. The [October 15 hardening campaign](fi
 then prepared separately versioned offline candidates with reproduced software
 fault fixes, most recently [3.6](evidence/upstream-36-handoff-2026-10-15.md).
 App 0.19/build 23 introduced its separate explicit installation action;
-current app0.19.1/build24 disables that ordinary action after the reported failure.
+app 0.19.1/build 24 disabled that ordinary action after the reported failure.
 Its [owner-authorized 3.6 installation](evidence/upstream-36-upload-2026-10-15.md)
 passed strict verification after its own physical reconnect. The later
 [camera trial failed capture/shutdown](evidence/upstream-36-camera-failure-2026-10-15.md),
@@ -31,7 +48,7 @@ the direct 3.1 build also failed this A7C II check, showing aperture `--` and a
 blocked shutter with normal shutdown. See [the failure and five-case startup
 investigation](evidence/upstream-31-camera-failure-2026-10-14.md).
 
-The next firmware milestone is startup/handshake, nominal lens information,
+The qualification milestone is startup/handshake, nominal lens information,
 MF capture and shutdown on this body, then bounded AF-S and saved-photo checks.
 Only after that baseline succeeds should metadata persistence or controller
 changes be added, one independently testable step at a time. Preserve the
@@ -79,7 +96,7 @@ qualified snapshots still match. Continue host/offline firmware prototypes
 within the [USB-only boundary](usb-only-next-steps.md); independent restoration
 and electrical measurements remain unqualified.
 
-## Recommended direction
+## Historical October 10 direction
 
 **Prototype Rust `no_std` firmware, a native SwiftUI/AppKit macOS app, and a
 language-neutral management protocol.** Use a small shared Rust library for
@@ -327,7 +344,7 @@ RPC stacks, filesystem-based settings and a new bootloader are not leading
 choices for the evidenced requirements. These are practical rankings, not
 language/toolkit performance measurements.
 
-## Next work and production selection gates
+## Historical October 10 production selection gates
 
 1. **Read-only hardware evidence, partly complete:** descriptors, CHECK, exact
    chip/capacity/protection, user fuses/calibration and complete main-flash

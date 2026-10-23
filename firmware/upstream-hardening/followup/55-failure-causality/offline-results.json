@@ -1,0 +1,77 @@
+{
+  "status": "offline-behavior-confirmed-availability-requirement-fails",
+  "hardwareAccess": false,
+  "candidateManifestSHA256": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
+  "candidateImageSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
+  "baseManifestSHA256": "8c55aaeed4cd15849907dae4457cadf6a070392141c95485041d40ddcdb85ffc",
+  "baseImageSHA256": "06385c36f0971f870bf9cfa402895d3e67310ed67ab2ca1578d1f0dfcf30aeae",
+  "sourcePinsVerifiedBeforeAndAfterPerImage": 49,
+  "callerOrderingAsserted": true,
+  "results": {
+    "exact": {
+      "clean16": {
+        "exitCode": 0,
+        "stdout": "PASS clean POR boots 1..16 return; boot17 halts before board/protocol; no crash latch, no WDT\n",
+        "stderr": ""
+      },
+      "fulltail": {
+        "exitCode": 0,
+        "stdout": "PASS initially full valid POR-only tail refuses first boot with zero writes\n",
+        "stderr": ""
+      },
+      "crash-latch": {
+        "exitCode": 0,
+        "stdout": "PASS WDT-cause record still latches subsequent POR without new writes\n",
+        "stderr": ""
+      },
+      "observed-shape": {
+        "exitCode": 0,
+        "stdout": "PASS synthetic observed page shape: four boots + summary/motion/events/two footers -> 14; boot -> 15; stage8 fault -> 16; next boot halted\n",
+        "stderr": ""
+      },
+      "stage8": {
+        "exitCode": 0,
+        "stdout": "PASS actual em_init -> st_fail at 8000 synthetic ticks, stage8, no handshake, watchdog disabled, no retained checkpoint, 7 pages\n",
+        "stderr": ""
+      },
+      "healthy-shutdown": {
+        "exitCode": 0,
+        "stdout": "PASS clean terminal trace workload -> 15 pages; next boot consumes last page; subsequent clean boot halts; physical shutdown not modeled\n",
+        "stderr": ""
+      },
+      "availability": {
+        "exitCode": 23,
+        "stdout": "FAIL availability: clean POR boot 17 never returns from st_crash_boot; 16 clean baseline pages, no crash\n",
+        "stderr": ""
+      }
+    },
+    "mutant-ignore-boot-failure": {
+      "clean16": {
+        "exitCode": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (boot()), function main, file test.c, line 33.\n"
+      },
+      "crash-latch": {
+        "exitCode": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (!\"crash boot returned\"), function main, file test.c, line 43.\n"
+      }
+    },
+    "old40-control": {
+      "exitCode": 0,
+      "stdout": "PASS actual4.0 st_init returns with empty/full tail and consumes no pages; main caller has no boot-record gate\n"
+    }
+  },
+  "harnessPins": {
+    "run.py": "572e89287f5a6d1bb6e89b6b663baf2a7be64cbda8f989b8dea2cd90175849b0",
+    "test_old40.c": "23b6a8e220073346c7706721ac287b433e2188a98708e02c748f5afe3872643e",
+    "watchdog_mock.h": "ee81f00938f3af4ba4f42d649a22f103f377d86e50aca40b6e814e8026450871",
+    "test_causality.c": "2d92de4afd6223d6c9dd02f37a2ffb9b8e2917c197aa3b9cf29fcbc722b6ec5a"
+  },
+  "limits": [
+    "Memory-backed flash and inert registers; no physical elapsed time or pin behavior",
+    "Actual trace C/em_init execute; terminal/watchdog bodies extracted exactly; whole main not executed",
+    "Synthetic slot shape only; no camera frames, operands, identifiers or secrets",
+    "Observed hardware shutter-delay causal attribution remains unresolved"
+  ]
+}

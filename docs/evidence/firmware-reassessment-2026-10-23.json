@@ -1,0 +1,141 @@
+{
+  "status": "completed-offline-reassessment-firmware-still-held",
+  "reviewDate": "2026-10-23",
+  "referenceCommit": "bd2ad4a",
+  "astraLanes": [
+    {
+      "lane": 55,
+      "scope": "production diagnostic/startup causality",
+      "completed": true
+    },
+    {
+      "lane": 56,
+      "scope": "public documentation consistency",
+      "completed": true,
+      "initialRuntimeTask": "stopped-by-automated-safety-flag; no retry of that operation"
+    },
+    {
+      "lane": 57,
+      "scope": "validation gaps and prospective corrected homing replay",
+      "completed": true
+    }
+  ],
+  "lastVerifiedInstalledState": {
+    "version": "1.8.0",
+    "receipt": "docs/evidence/stock-18-af41-recovery-2026-10-21.json",
+    "receiptSHA256": "1232031d20c92c1fddad147b1aa0cf8f40e9bc51c7bf888daae08d58cf82cbc2",
+    "newDeviceAccess": false
+  },
+  "reviewedCustomCandidate": {
+    "version": "4.1.0",
+    "held": true,
+    "imageSHA256": "fb59950b7d332a7f07749bda4d1604859b2361899ef220cb23bc10a383207641",
+    "manifestSHA256": "557cceed31b13655b52bb786d1e2df80e6fb4016381f11c81d4dfe95a071fa6b",
+    "verifiedSources": 49,
+    "runtimePolicyChanged": false
+  },
+  "findings": [
+    {
+      "id": "diagnostic-capacity-availability",
+      "established": "clean boot appends can exhaust storage and halt before camera protocol",
+      "cameraFirstShutterCausality": "unproven"
+    },
+    {
+      "id": "home-gate-test-substitution",
+      "established": "historical fixture masks a closed source gate; corrected fixture rejects it",
+      "releasedGateClosed": false,
+      "masterBypassEstablished": false
+    },
+    {
+      "id": "timed-lifecycle-composition",
+      "established": "component suites supply time/peripherals and omit or mock key combined boundaries",
+      "physicalFreezeCauseEstablished": false
+    },
+    {
+      "id": "factory-reconstruction",
+      "status": "partial",
+      "upstreamControllerIsRecoveredFactoryPID": false
+    }
+  ],
+  "rootReruns": {
+    "diagnosticCausality": {
+      "receipt": "firmware/upstream-hardening/followup/55-failure-causality/offline-results.json",
+      "receiptSHA256": "479cce3647a9bc8b54b83c3a271b0b0fca971ace116a006f97c8a2be99f48095",
+      "behaviorCases": 6,
+      "availabilityRequirementExitCode": 23,
+      "expectedMutationFailures": 2,
+      "old40ControlPassed": true
+    },
+    "readinessReplay": {
+      "receipt": "firmware/upstream-hardening/followup/57-validation-gap/results.json",
+      "receiptSHA256": "c2dac5aebbeb3ce5a4bed1b83d67cb51822815c3a2f09ed30854f1f956863517",
+      "exact41Passed": true,
+      "historicalClosedGateFalseGreenReproduced": true,
+      "correctedClosedGateRejected": true,
+      "compiledMacroDelayTicks": [
+        0,
+        25
+      ],
+      "thresholdAndUnsignedWrapChecked": true,
+      "wholeDelayedStartupQualified": false
+    },
+    "optimizedPythonRejection": [
+      {
+        "script": "firmware/upstream-hardening/followup/55-failure-causality/run.py",
+        "exitCode": 1,
+        "rejectedBeforeOutput": true
+      },
+      {
+        "script": "firmware/upstream-hardening/followup/57-validation-gap/run.py",
+        "exitCode": 1,
+        "rejectedBeforeOutput": true
+      },
+      {
+        "script": "firmware/upstream-hardening/followup/57-validation-gap/test.py",
+        "exitCode": 1,
+        "rejectedBeforeOutput": true
+      }
+    ]
+  },
+  "preservation": {
+    "ledger": "docs/evidence/upstream-41-upload-preserved-2026-10-21.json",
+    "ledgerSHA256": "b6d6657c4e79b2d5ecc2e72ce9abb4ef2c613431776d9b8cc7b185d8370c7ccd",
+    "artifactsVerified": 156,
+    "registryEntriesUnchanged": 9,
+    "originalRecoveryPreserved": true
+  },
+  "reviewInputSHA256": {
+    "README.md": "8ff8cf3733dda309668ae6ef3c7b846be806e78297bbcfdd7ae064a20699fed6",
+    "docs/audits/astra-55-failure-causality-2026-10-23.md": "5accb8177ffbe1f9d99dd9efae2370130e9eb5a20cea5191f4e3da7365af4080",
+    "docs/audits/astra-56-protocol-baseline-2026-10-23.md": "d44fa44c9114571ddd214eee69ac376e612ca8ee3677f8bb1a3e069a4504b142",
+    "docs/audits/astra-57-validation-gap-2026-10-23.md": "2d8a88eb0bf7837802d72be1ca66c46cdf1b5504f6ec6b2936c8dc20b4f2ed70",
+    "docs/audits/firmware-reassessment-2026-10-23.md": "edcbaa634c6217a1d3c984226946ff2d1441b1654e9caef99e42ffdd40e2a8b7",
+    "docs/reverse-engineering/status-2026-10-15.md": "d8a0246fca36b84393300692d7d0a32461bf0bad95cc5d02d2b85de3a551255d",
+    "docs/system-design-recommendation.md": "de2f8b517020fb743478e9e3dc6b4118eb18366129c1e7c5d40988b08e29289e",
+    "firmware/upstream-hardening/followup/55-failure-causality/README.md": "0f3d5db415daaed70127f61e6104184e33c6983cdf665ae0657c361a6cb5fdeb",
+    "firmware/upstream-hardening/followup/55-failure-causality/offline-results.json": "479cce3647a9bc8b54b83c3a271b0b0fca971ace116a006f97c8a2be99f48095",
+    "firmware/upstream-hardening/followup/55-failure-causality/run.py": "572e89287f5a6d1bb6e89b6b663baf2a7be64cbda8f989b8dea2cd90175849b0",
+    "firmware/upstream-hardening/followup/55-failure-causality/test_causality.c": "2d92de4afd6223d6c9dd02f37a2ffb9b8e2917c197aa3b9cf29fcbc722b6ec5a",
+    "firmware/upstream-hardening/followup/55-failure-causality/test_old40.c": "23b6a8e220073346c7706721ac287b433e2188a98708e02c748f5afe3872643e",
+    "firmware/upstream-hardening/followup/55-failure-causality/watchdog_mock.h": "ee81f00938f3af4ba4f42d649a22f103f377d86e50aca40b6e814e8026450871",
+    "firmware/upstream-hardening/followup/57-validation-gap/README.md": "0ac8e92fd7d9d64eed9a6fec5f1803a059a53440a0a69556ae96f4d025ca3720",
+    "firmware/upstream-hardening/followup/57-validation-gap/results.json": "c2dac5aebbeb3ce5a4bed1b83d67cb51822815c3a2f09ed30854f1f956863517",
+    "firmware/upstream-hardening/followup/57-validation-gap/run.py": "7aeea607633ba3a01d07adab1e1ecf077a1fe65df06c1e14ae3567fd3fc1e9e9",
+    "firmware/upstream-hardening/followup/57-validation-gap/test.py": "dbd23c3b7fa3d6532598e0f3608fe674045ca3b04779704c8ce8d856d6351cc8"
+  },
+  "boundaries": {
+    "hardwareAccess": false,
+    "USBReportsSent": 0,
+    "firmwareImagePrepared": false,
+    "cameraTestRequested": false,
+    "canonicalHostStateAccess": false,
+    "cameraQualified": false,
+    "cameraFreezeFixEstablished": false,
+    "factoryParityEstablished": false
+  },
+  "limits": [
+    "Source-bound host execution with supplied I/O/time; no physical scheduling, electrical or timing proof",
+    "Whole main ordering is checked; full reset-to-capture-to-shutdown program is not executed by the new causality probe",
+    "No raw camera frames, dumps, keys or device identifiers are public; stock restoration state is the last verified record, not a new observation"
+  ]
+}

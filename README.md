@@ -8,6 +8,11 @@ The **macOS prototype uses native SwiftUI/AppKit and Swift IOHID**, following th
 system audit. All flashed firmware is C. The [updated working recommendation](docs/system-design-recommendation.md)
 is to build on upstream C and defer Rust while qualifying A7C II compatibility.
 
+The [October 23 Astra reassessment](docs/audits/firmware-reassessment-2026-10-23.md)
+explains the remaining failures, reproduces diagnostic-storage boot refusal,
+and corrects a homing-test substitution. These are offline findings; the shutter
+freeze cause remains unresolved, and no replacement image is prepared by this pass.
+
 **Original stock 1.8.0 is restored and strictly byte/protected-data verified after
 physical reconnect, as requested by the owner.** The entire 110,592-byte original
 application slot and known metadata match. Boot code, saved records and factory
@@ -281,26 +286,31 @@ motor movement and proper shutdown. For 2.2, the owner reports normal camera
 startup, no observed startup movement without input, quiet idle and normal motor
 shutdown. Homing and measured timing remain unverified. The converter is now
 available for a controlled loaded-lens baseline.
-The Biotar is 58mm f/2, as confirmed by the owner. For current offline firmware
-reproduction, first follow the pinned toolchain and exact 3.6 source prerequisites
-in the [3.7 workbench](firmware/upstream-hardening/next37/README.md). Existing
+The Biotar is 58mm f/2, as confirmed by the owner. To reproduce the latest held
+custom release, 4.1, follow the pinned toolchain and exact 4.0 source prerequisites
+in the [4.1 workbench](firmware/upstream-hardening/next41/README.md). Existing
 materializations are preserved; choose fresh private output paths:
 
 ```sh
-python3 scripts/build-upstream-targeted.py --output artifacts/private/recheck37
-python3 scripts/test-upstream-targeted.py --build artifacts/private/recheck37 --output artifacts/private/recheck37-tests
+python3 scripts/build-upstream-crash.py --output artifacts/private/recheck41
+python3 scripts/test-upstream-crash.py --build artifacts/private/recheck41 --output artifacts/private/recheck41-tests
 ./scripts/swift-local.sh test
 ./scripts/build-macos-app.sh
 ```
 
 The earlier `build-firmware.py` and `build-upstream-baseline.py` reproduce/check
-historical metadata/custom firmware and 3.1 respectively; they do not build 3.7.
+historical metadata/custom firmware and 3.1 respectively; they do not build 4.1.
+Historical 3.7 reproduction remains in its
+[version-specific workbench](firmware/upstream-hardening/next37/README.md).
 On a fresh checkout, restore the ignored photographed assets as described in
 [photo provenance](references/visuals/README.md) before packaging the app.
 For interactive app use, open `dist/Open LM-EA9.app` after the build. Keep it
 closed during CLI USB operations and offline runs; normal app refresh enumerates
 connected devices. Building or passing tests does not authorize a flash.
 
+- [Latest held 50mm AF 4.1 candidate](firmware/candidates/4.1.0/README.md)
+- [AF 4.1 build/test workbench](firmware/upstream-hardening/next41/README.md)
+- [Current stock recovery and verification](docs/evidence/stock-18-af41-recovery-2026-10-21.md)
 - [Held fixed 50mm AF 3.7 tracing candidate](firmware/candidates/3.7.0/README.md)
 - [AF 3.7 build/test workbench](firmware/upstream-hardening/next37/README.md)
 - [AF 3.7 installation and one-cycle log procedure](docs/upstream-targeted-trace-test.md)
