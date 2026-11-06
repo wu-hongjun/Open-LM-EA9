@@ -26,6 +26,10 @@ On the A7C II it reached normal traffic, then stopped on a transmit fault
 about 16 seconds into the recorded boot.
 [Verified installation and trace](docs/evidence/startup-probe-43-2026-11-06.md).
 
+The [4.4.0 upstream comparison](firmware/candidates/4.4.0/README.md)
+isolates the 750 kbaud fallback in the November trial and is ready for a
+separate camera test.
+
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original
 application slot and known metadata match. Boot code, saved records and factory

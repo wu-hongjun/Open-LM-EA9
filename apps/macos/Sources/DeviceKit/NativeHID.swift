@@ -198,6 +198,12 @@ public final class DeviceService: @unchecked Sendable {
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
     }
+    public func applyUpstreamStockSpeed(device: DeviceIdentity, idleAcknowledged: Bool,
+                                        cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
+        guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
+        return try await upload(image: ApplicationImage.upstreamStockSpeed(), device: device, idleAcknowledged: idleAcknowledged,
+                                cancellation: cancellation, recovering: false, fixedSource: .stockSpeed, progress: progress)
+    }
     public func applyStartupProbe(device: DeviceIdentity, idleAcknowledged: Bool,
                                   cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
@@ -222,7 +228,7 @@ public final class DeviceService: @unchecked Sendable {
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: true, progress: progress)
     }
-    private enum FixedUploadSource { case stock, stockOrNovemberTrial }
+    private enum FixedUploadSource { case stock, stockOrNovemberTrial, stockSpeed }
 
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
@@ -244,6 +250,7 @@ public final class DeviceService: @unchecked Sendable {
             switch fixedSource {
             case .stock: _ = try ApplicationImage.stockRestoration(backup)
             case .stockOrNovemberTrial: try ApplicationImage.requireStartupProbeSource(backup)
+            case .stockSpeed: try ApplicationImage.requireUpstreamStockSpeedSource(backup)
             case nil: break
             }
             if let variant {

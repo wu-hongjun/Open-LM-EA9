@@ -1,0 +1,34 @@
+--- a/tools/hosttest/test_emount.c
++++ b/tools/hosttest/test_emount.c
+@@ -254,2 +254 @@
+-	/* Message 0x0C: answer 01 and switch to 1.5 Mbaud -- once, and only
+-	 * after the reply itself has gone out at the old speed. */
++	/* The fixed-speed variant declines 0x0C and leaves the link alone. */
+@@ -265,21 +264,6 @@
+-		if (idx < 0) {
+-			fail("no 0x0C reply sent");
+-		} else if (sent[idx][6] != 0x01) {
+-			fail("the 0x0C reply is %#04x, expected 01",
+-			     sent[idx][6]);
+-		}
+-		if (host_baud_changes != 1 || host_baud != EM_BAUD_FAST) {
+-			fail("baud changed %d time(s), now %#06x; expected one "
+-			     "switch to %#06x", host_baud_changes, host_baud,
+-			     EM_BAUD_FAST);
+-		}
+-		if (idx >= 0 && host_baud_at_sent_n != idx + 1) {
+-			fail("baud switched after %d frame(s), expected right "
+-			     "after the 0x0C reply (frame %d)",
+-			     host_baud_at_sent_n, idx + 1);
+-		}
+-		/* Both waits must have seen their edge: the rise and the fall
+-		 * of the body's pulse are the last two reads of the script. */
+-		if (host_cs_seq_i != host_cs_seq_n) {
+-			fail("0x0C chip-select handshake: %u of %u body CS "
+-			     "reads used", host_cs_seq_i, host_cs_seq_n);
++		if (idx < 0 || sent[idx][6] != 0) {
++			fail("expected the 0x0C reply to decline the speed switch");
++		}
++		if (host_baud_changes != 0 || host_baud != EM_BAUD ||
++		    host_baud_at_sent_n != -1 || host_cs_seq_i != 0) {
++			fail("0x0C must retain the startup baud and skip the switching pulse");

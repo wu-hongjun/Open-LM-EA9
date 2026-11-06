@@ -8,6 +8,7 @@ private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfil
 }
 private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
     if variant == .startupProbe { return try ApplicationImage.startupProbe() }
+    if variant == .upstreamStockSpeed { return try ApplicationImage.upstreamStockSpeed() }
     if variant == .upstreamNovemberTrial { return try ApplicationImage.upstreamNovemberTrial() }
     return try ApplicationImage.personalized(profile(), variant: variant)
 }
@@ -43,6 +44,26 @@ private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationIm
     loader.flash.replaceSubrange(0x5000..<0xa000, with: probe.data)
     let priorProbe = try fixture(loader, directory, "prior-probe", id: 13)
     #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(priorProbe) }
+    #expect(loader.reports == 0 && !loader.armed)
+}
+@Test func upstreamStockSpeedTrialPreservesOpticsAndRequiresPinnedStartupProbePrefix() throws {
+    let probe = try ApplicationImage.startupProbe(), stockSpeed = try ApplicationImage.upstreamStockSpeed()
+    let upstream = try ApplicationImage.upstreamNovemberTrial()
+    #expect(stockSpeed.version == [4,4,0] && stockSpeed.setting == upstream.setting && stockSpeed.data != upstream.data)
+    #expect(stockSpeed.data == (try FirmwareImageBuilder.prepareUpstreamStockSpeed()))
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: .upstreamStockSpeed) }
+
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader()
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: probe.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: probe.data)
+    loader.flash[0x9c00] = 0
+    try ApplicationImage.requireUpstreamStockSpeedSource(fixture(loader, directory, "logged-probe", id: 11))
+    loader.flash[0x9bff] ^= 1
+    let altered = try fixture(loader, directory, "altered-probe", id: 12)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireUpstreamStockSpeedSource(altered) }
     #expect(loader.reports == 0 && !loader.armed)
 }
 private func device(_ id: UInt64 = 10) -> DeviceIdentity {

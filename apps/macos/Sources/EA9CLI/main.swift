@@ -29,6 +29,12 @@ import LensCore
                 state = URL(fileURLWithPath: args[index + 1], isDirectory: true)
                 args.removeSubrange(index...index + 1)
             }
+            if args.count == 2, args[0] == "prepare-upstream-stock-speed" {
+                let data = try FirmwareImageBuilder.prepareUpstreamStockSpeed()
+                try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
+                print("Prepared pinned upstream 750 kbaud trial: \(data.count) bytes. No USB reports sent.")
+                return
+            }
             if args.count == 2, args[0] == "prepare-startup-probe" {
                 let data = try FirmwareImageBuilder.prepareStartupProbe()
                 try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
@@ -43,9 +49,9 @@ import LensCore
             }
             let usage = "Crash diagnostic 4.1 (camera-unqualified): prepare-crash-upstream PROFILE-ID NEW.bin | apply-crash-upstream PROFILE-ID --idle. Reference qualification 4.0 (camera-unqualified): prepare-reference-upstream PROFILE-ID NEW.bin | apply-reference-upstream PROFILE-ID --idle. Homing diagnostic 3.9 (camera-unqualified): prepare-homing-upstream PROFILE-ID NEW.bin | apply-homing-upstream PROFILE-ID --idle. Readiness 3.8: prepare-readiness-upstream PROFILE-ID NEW.bin | apply-readiness-upstream PROFILE-ID --idle. Targeted trace 3.7: prepare-trace-upstream PROFILE-ID NEW.bin | apply-trace-upstream PROFILE-ID --idle. Startup handoff: prepare-handoff-upstream PROFILE-ID NEW.bin | apply-handoff-upstream PROFILE-ID --idle. Absolute upstream: prepare-absolute-upstream PROFILE-ID NEW.bin | apply-absolute-upstream PROFILE-ID --idle. Bounded upstream: prepare-bounded-upstream PROFILE-ID NEW.bin | apply-bounded-upstream PROFILE-ID --idle. Hardened upstream: prepare-hardened-upstream PROFILE-ID NEW.bin | apply-hardened-upstream PROFILE-ID --idle. Startup diagnostic: prepare-startup PROFILE-ID NEW.bin | apply-startup PROFILE-ID --idle. Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin | prepare-upstream PROFILE-ID NEW.bin | apply-upstream PROFILE-ID --idle"
             guard args == ["inventory"] || (args.count == 3 && ["backup","apply","apply-af","apply-upstream","apply-startup","apply-hardened-upstream","apply-bounded-upstream","apply-absolute-upstream","apply-handoff-upstream","apply-trace-upstream","apply-readiness-upstream","apply-homing-upstream","apply-reference-upstream","apply-crash-upstream","restore-stock"].contains(args[0]) && args[2] == "--idle")
-                || (args.count == 2 && ["verify","inspect","qualify-stock","apply-upstream-november","apply-startup-probe"].contains(args[0]) && args[1] == "--idle")
+                || (args.count == 2 && ["verify","inspect","qualify-stock","apply-upstream-november","apply-startup-probe","apply-upstream-stock-speed"].contains(args[0]) && args[1] == "--idle")
                 || (args.count == 3 && ["prepare","prepare-af","prepare-upstream","prepare-startup","prepare-hardened-upstream","prepare-bounded-upstream","prepare-absolute-upstream","prepare-handoff-upstream","prepare-trace-upstream","prepare-readiness-upstream","prepare-homing-upstream","prepare-reference-upstream","prepare-crash-upstream"].contains(args[0]))
-                || (args.count == 3 && args[0] == "resolve-stock-after-camera" && args[2] == "--idle") else { throw DeviceError.failure(usage + " | prepare-startup-probe NEW.bin | apply-startup-probe --idle | prepare-upstream-november NEW.bin | apply-upstream-november --idle | resolve-stock-after-camera REVIEWED.ea9backup --idle") }
+                || (args.count == 3 && args[0] == "resolve-stock-after-camera" && args[2] == "--idle") else { throw DeviceError.failure(usage + " | prepare-upstream-stock-speed NEW.bin | apply-upstream-stock-speed --idle | prepare-startup-probe NEW.bin | apply-startup-probe --idle | prepare-upstream-november NEW.bin | apply-upstream-november --idle | resolve-stock-after-camera REVIEWED.ea9backup --idle") }
             if ["prepare","prepare-af","prepare-upstream","prepare-startup","prepare-hardened-upstream","prepare-bounded-upstream","prepare-absolute-upstream","prepare-handoff-upstream","prepare-trace-upstream","prepare-readiness-upstream","prepare-homing-upstream","prepare-reference-upstream","prepare-crash-upstream"].contains(args[0]) {
                 let library = try LibraryStore(directory: state).loadOrSeed()
                 guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
@@ -70,6 +76,9 @@ import LensCore
                 }
             }
             switch args[0] {
+            case "apply-upstream-stock-speed":
+                let pending = try await service.applyUpstreamStockSpeed(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
+                print("Uploaded \(pending.image.count) bytes of pinned upstream 750 kbaud trial (USB 4.4.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
             case "apply-startup-probe":
                 let pending = try await service.applyStartupProbe(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
                 print("Uploaded \(pending.image.count) bytes of pinned startup probe (USB 4.3.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")

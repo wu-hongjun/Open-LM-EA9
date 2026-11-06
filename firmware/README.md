@@ -1,6 +1,10 @@
 # Firmware development
 
-Latest candidate is the [4.3.0 motor-disabled startup probe](candidates/4.3.0/README.md).
+The [4.4.0 upstream comparison](candidates/4.4.0/README.md) changes the
+November trial's speed negotiation to stay at 750 kbaud. Offline checks
+passed. Camera testing is pending.
+
+The [4.3.0 motor-disabled startup probe](candidates/4.3.0/README.md) isolates startup.
 The camera side reports stock identity at 750 kbaud. The probe records
 validated init traffic, local reply completion and the first normal receive.
 The build, decoder and guarded native loader path were tested offline.
