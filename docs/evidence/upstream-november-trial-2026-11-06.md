@@ -1,6 +1,6 @@
 # November upstream trial — November 6, 2026
 
-**Upload completed; physical reconnect and strict readback are pending.** The
+**Upload and strict readback passed after physical reconnect.** The
 owner requested the latest upstream build for a camera trial. The remote `main`
 resolved to [e054db9](https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/commit/e054db90cfae5d67fac67a7e0db4bb100f5893ae)
 immediately before the transfer. [Pinned build](../../firmware/candidates/4.2.0/README.md) ·
@@ -29,9 +29,14 @@ The earlier 156 artifact pins, all nine diagnostic registry entries and the
 original stock recovery remain intact. Raw backup and USB identifiers stay
 private.
 
-After physical reconnect, run the native `verify --idle` check before camera
-use. It compares the complete application, the expected loader metadata and
-protected flash/factory data. Use the camera only after that check passes.
+After the owner confirmed physical reconnect, the signed native CLI verified
+the same adapter on a new USB connection at **2:25 PM Eastern**. Two matching
+full-flash and auxiliary passes completed with 4,359 read exchanges and no
+writes. The native check and separate file audit matched all 20,480 application
+bytes, the expected 58 metadata bytes, boot code, saved records, upper flash,
+user row, calibration and device ID. Only the established six loader scratch
+bytes were excluded from the flash comparison. The verified stock backup and
+original recovery remain available. Camera behavior has not been tested.
 
 For the first camera cycle, power off before mounting, then use confirmed MF
 and Pre-AF Off. Check that live view and aperture display respond. If normal,

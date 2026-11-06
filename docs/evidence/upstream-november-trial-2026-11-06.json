@@ -1,5 +1,5 @@
 {
-  "status": "uploaded-pending-physical-reconnect",
+  "status": "strict-installation-verification-passed",
   "imageSHA256": "2a11822d47672355455dc4415db95f1487527e4f9865270ea368f24fc0ceaa7b",
   "preUploadVersion": "1.8.0",
   "freshStockBackupValid": true,
@@ -12,8 +12,30 @@
   },
   "applicationBytes": 20480,
   "writePages": 320,
-  "verificationComplete": false,
+  "verificationComplete": true,
   "cameraQualified": false,
+  "nativeVerification": {
+    "startedUTC": "2026-11-06T19:24:15.523422+00:00",
+    "completedUTC": "2026-11-06T19:25:58.373816+00:00",
+    "exitCode": 0
+  },
+  "postUploadFlashSHA256": "7c306b88bcded77cca60dc95d524b80a6d0cffef9db6fb863be499829e302982",
+  "postUploadReadExchanges": 4359,
+  "sameUnitAndNewConnection": true,
+  "strictChecks": {
+    "completeApplication": true,
+    "expectedMetadata": true,
+    "bootCode": true,
+    "savedRecordAndGap": true,
+    "retainedUpperFlash": true,
+    "user-row.bin": true,
+    "calibration.bin": true,
+    "device-id.bin": true
+  },
+  "excludedLoaderScratchRange": [
+    "0x403a",
+    "0x4040"
+  ],
   "preservedArtifacts": 156,
   "preservedRegistryEntries": 9
 }
