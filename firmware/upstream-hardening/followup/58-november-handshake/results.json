@@ -1,0 +1,60 @@
+{
+  "upstreamCommit": "e054db90cfae5d67fac67a7e0db4bb100f5893ae",
+  "imageSHA256": "2a11822d47672355455dc4415db95f1487527e4f9865270ea368f24fc0ceaa7b",
+  "manifestSHA256": "863699a3d6f8391144ce482cef1daf8955bf5aa69e23d165ae7c5d4448ca58d6",
+  "boundSourceFiles": 37,
+  "hostInputSHA256": {
+    "sam.h": "9a4dd262e06a05e1056c85001445f082570d066c76da0d915108cc9cc3d0bea0",
+    "shim.c": "a73d59c9763c50dc10dcff6a6ef4c20b066f8e5dfbd9016a8abf3e9378584b57"
+  },
+  "runnerSHA256": "fd8e260ff8fd330673388af2d5f329c3a960a409e70fc825f6620a1355ff6f00",
+  "fixtureSHA256": "6c5e9670f421aab43985f6382edd548580909465af3fb5f0e731b3254f8a652d",
+  "hostFlags": [
+    "-std=gnu99",
+    "-Os",
+    "-DNDEBUG",
+    "-DEA9_NO_LOG",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "-fno-sanitize-recover=all"
+  ],
+  "cases": {
+    "opener-buffered-at-open": {
+      "firstOpenerReplies": 0,
+      "retryReplies": 1,
+      "statusBeforeReadiness": 0
+    },
+    "opener-after-reset": {
+      "firstOpenerReplies": 1,
+      "retryReplies": 1,
+      "statusBeforeReadiness": 0
+    },
+    "baud-no-rise": {
+      "acceptedSpeedReply": 1,
+      "switchedWithoutEdge": true,
+      "missingEdge": "rise"
+    },
+    "baud-no-fall": {
+      "acceptedSpeedReply": 1,
+      "switchedWithoutEdge": true,
+      "missingEdge": "fall"
+    },
+    "declared-init": {
+      "initReplies": 11,
+      "handshakeFlag": true,
+      "statusFrames": 2,
+      "statusApertureAV": 4544
+    },
+    "invalid-readiness": {
+      "readinessEchoes": 0,
+      "handshakeFlag": true,
+      "statusFrames": 2
+    }
+  },
+  "cameraTrafficReplayed": false,
+  "rootCauseEstablishedOnCamera": false,
+  "usbReportsSent": 0,
+  "scope": "Exact protocol C, synthetic input, stubbed pins/UART/time; not a camera acceptance or electrical timing model."
+}

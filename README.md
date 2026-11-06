@@ -15,7 +15,9 @@ freeze cause remains unresolved, and no replacement image is prepared by this pa
 
 The [November upstream trial](firmware/candidates/4.2.0/README.md) was uploaded
 at the owner's request. It uses upstream `e054db9` with the original 50 mm f/1.8
-settings. [Installation status and camera check](docs/evidence/upstream-november-trial-2026-11-06.md).
+settings. USB readback passed; the owner reported a failed A7C II trial.
+[Installation record](docs/evidence/upstream-november-trial-2026-11-06.md) ·
+[Handshake investigation](docs/audits/a7c-ii-november-handshake-2026-11-06.md).
 
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original

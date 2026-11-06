@@ -6,6 +6,11 @@ resolved to [e054db9](https://github.com/weiziqian/E-mount-impl-on-Techart-EA9/c
 immediately before the transfer. [Pinned build](../../firmware/candidates/4.2.0/README.md) ·
 [Sanitized receipt](upstream-november-trial-2026-11-06.json).
 
+**The owner later reported that the camera trial did not work.** The exact
+failed step remains unknown. The [handshake investigation](../audits/a7c-ii-november-handshake-2026-11-06.md)
+records the maintainer's compatibility report and the reproduced software gaps.
+No follow-up camera attempt or flash was made.
+
 The local build retains the upstream application behavior and 50 mm f/1.8
 defaults. The DFP startup spelling and ROM limit are adapted for this build;
 size optimization keeps the image within the established upload range. The
@@ -36,9 +41,9 @@ writes. The native check and separate file audit matched all 20,480 application
 bytes, the expected 58 metadata bytes, boot code, saved records, upper flash,
 user row, calibration and device ID. Only the established six loader scratch
 bytes were excluded from the flash comparison. The verified stock backup and
-original recovery remain available. Camera behavior has not been tested.
+original recovery remain available. This USB result does not qualify camera behavior.
 
-For the first camera cycle, power off before mounting, then use confirmed MF
+The original camera procedure was to power off before mounting, then use confirmed MF
 and Pre-AF Off. Check that live view and aperture display respond. If normal,
 save one photo, release the shutter fully, then save a second photo and shut
 down. Record whether both files saved and whether shutdown responded. This
