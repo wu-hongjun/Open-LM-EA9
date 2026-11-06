@@ -28,6 +28,18 @@ scratch bytes are outside the metadata comparison.
 
 ## Camera comparison
 
-The owner was asked for one startup and shutdown cycle on the A7C II with
-the shutter and AF-ON untouched. Live preview, aperture, motor behavior
-and shutdown observations are pending.
+The owner reports that the A7C II displays a fixed f/1.8 and autofocus
+works in both still-photo and video modes. The displayed f-number matches
+the upstream image's nominal aperture. The report covers autofocus in
+each mode. Saved stills, recorded video, exposure, shutdown behavior,
+and the camera firmware version are unverified.
+
+The November 4.2.0 trial failed on this body. The only behavioral change
+in 4.4.0 is that the `0x0C` reply declines the speed offer and skips the
+switch to 1.5 Mbaud. The upstream lens ID `0xC540`, advertised speed,
+startup parser, optical defaults and motor controller are identical at
+the source level. This comparison supports the speed negotiation path
+as a compatibility factor on this setup. The earlier failure was
+reported without a wire trace or matching camera settings, so the exact
+failing edge or exchange remains unknown. [Firmware patch](../../firmware/candidates/4.4.0/stock-speed.patch) ·
+[Earlier trial](upstream-november-trial-2026-11-06.md).

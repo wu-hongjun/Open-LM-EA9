@@ -7,7 +7,7 @@ switching pulse and reconfigures the UART to 1.5 Mbaud. The comparison
 answers `00` and stays at 750 kbaud. It preserves upstream's identity
 `0xC540`, advertised speed, startup and receive admission, nominal
 50 mm f/1.8 optics, and motor/AF implementation. USB 4.4.0 identifies this
-image separately. It is motor-enabled and camera-unqualified.
+image separately. The build is motor-enabled.
 
 - [Image](upstream-stock-speed.bin) is 20,480 bytes in `[0x5000,0xa000)`.
 - [Manifest](manifest.json) pins the image, original 4.2.0 digest and build inputs.
@@ -19,8 +19,10 @@ The [A7C II trace](../../../docs/evidence/startup-probe-43-2026-11-06.md)
 showed that a separate stock-identity probe reached normal traffic at
 750 kbaud. That probe changed several variables and did not establish which
 difference mattered. This build controls the code difference against 4.2.0.
-The earlier 4.2.0 camera result was a coarse failure report. A matched
-camera A/B still needs the same setup and documented observations.
+The 4.2.0 trial failed on the owner's A7C II. With 4.4.0 the owner
+reported f/1.8 display and working autofocus in both still-photo and
+video modes. A matched repeat of the control and a wire trace are
+still missing. [Camera result](../../../docs/evidence/upstream-stock-speed-44-2026-11-06.md).
 
 ## Offline checks
 
@@ -67,7 +69,8 @@ compiled nominal value is f/1.8), any movement, and shutdown. Stop after
 a freeze, grinding, repeated impacts, or sustained drive. Use the power
 switch and remove the battery if the camera is unresponsive.
 
-An improvement would support investigating the speed negotiation path.
-A failure can still occur before `0x0C` because the upstream startup
-transport is retained. Capture and AF are separate checks after a normal
-startup. This candidate records no persistent startup trace.
+The result supports investigating the speed negotiation path. The
+upstream startup transport is retained, including the earlier buffered
+opener and readiness findings. This candidate records no persistent
+startup trace. Capture, recording, exposure and shutdown are separate
+checks.

@@ -1,8 +1,9 @@
 # Firmware development
 
 The [4.4.0 upstream comparison](candidates/4.4.0/README.md) changes the
-November trial's speed negotiation to stay at 750 kbaud. Offline checks
-passed. Camera testing is pending.
+November trial's speed negotiation to stay at 750 kbaud. The owner reported
+a fixed f/1.8 display and autofocus in still-photo and video modes on the
+A7C II. [Camera result](../docs/evidence/upstream-stock-speed-44-2026-11-06.md).
 
 The [4.3.0 motor-disabled startup probe](candidates/4.3.0/README.md) isolates startup.
 The camera side reports stock identity at 750 kbaud. The probe records

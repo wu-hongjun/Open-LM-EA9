@@ -27,8 +27,9 @@ about 16 seconds into the recorded boot.
 [Verified installation and trace](docs/evidence/startup-probe-43-2026-11-06.md).
 
 The [4.4.0 upstream comparison](firmware/candidates/4.4.0/README.md)
-isolates the 750 kbaud fallback in the November trial and is ready for a
-separate camera test.
+isolates the 750 kbaud fallback in the November trial. On the A7C II,
+the owner reported f/1.8 display and working autofocus in still-photo
+and video modes. [Camera result](docs/evidence/upstream-stock-speed-44-2026-11-06.md).
 
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original
