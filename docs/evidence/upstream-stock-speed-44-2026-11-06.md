@@ -17,5 +17,17 @@ One START and 320 application pages were acknowledged. The upload ended
 at 21:51:51 UTC on November 6. The pinned 20,480-byte application SHA-256 is
 `cf442fa02e4854914b602b4646c689984e9b12de2595adf20a0a1cebaa738a27`.
 
-The image is awaiting physical reconnect and strict byte verification.
-Camera observations are pending.
+## Strict verification
+
+After the owner physically reconnected, two matching flash and auxiliary
+passes completed at 21:54:24 UTC using 4,359 read exchanges. Native
+verification and an independent file comparison matched all application
+bytes, the expected 58 metadata bytes, boot code, saved records, upper
+flash, user row, calibration and device ID. The established six loader
+scratch bytes are outside the metadata comparison.
+
+## Camera comparison
+
+The owner was asked for one startup and shutdown cycle on the A7C II with
+the shutter and AF-ON untouched. Live preview, aperture, motor behavior
+and shutdown observations are pending.
