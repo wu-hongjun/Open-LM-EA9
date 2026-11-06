@@ -198,6 +198,12 @@ public final class DeviceService: @unchecked Sendable {
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
     }
+    public func applyUpstreamNovemberTrial(device: DeviceIdentity, idleAcknowledged: Bool,
+                                           cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
+        guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
+        return try await upload(image: ApplicationImage.upstreamNovemberTrial(), device: device, idleAcknowledged: idleAcknowledged,
+                                cancellation: cancellation, recovering: false, requireRestorableStockSource: true, progress: progress)
+    }
     public func qualifyStockUpload(device: DeviceIdentity, idleAcknowledged: Bool, cancellation: CancellationToken,
                                    progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         return try await upload(image: nil, device: device, idleAcknowledged: idleAcknowledged,
@@ -213,6 +219,7 @@ public final class DeviceService: @unchecked Sendable {
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
                         preserving variant: FirmwareVariant? = nil,
+                        requireRestorableStockSource: Bool = false,
                         progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         let store = UpdateStore(directory: stateDirectory)
         if !recovering, let pending = try store.load(), pending.needsVerification {
@@ -226,6 +233,7 @@ public final class DeviceService: @unchecked Sendable {
             _ = try BackupEngine(allowRecoveryVersion: recovering).run(transport: transport, identity: device, destination: backupURL, cancellation: cancellation, progress: progress)
             let backup = try VerifiedBackup(url: backupURL, device: device, allowRecoveryVersion: recovering)
             try backup.synchronizeRecoveryEvidence()
+            if requireRestorableStockSource { _ = try ApplicationImage.stockRestoration(backup) }
             if let variant {
                 do { try ApplicationImage.requirePreservedFirmware(variant, in: backup) }
                 catch {

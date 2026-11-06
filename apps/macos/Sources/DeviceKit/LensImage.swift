@@ -2,20 +2,20 @@ import Foundation
 import LensCore
 
 public enum FirmwareVariant: String, CaseIterable, Sendable {
-    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened, autofocusFactoryBaseline, autofocusFactoryRefined, autofocusAuditedAperture, autofocusPolished, autofocusObservedMotion, autofocusServicedCamera, autofocusArbitratedCamera, autofocusUpstreamBaseline, autofocusStartupDiagnostic, autofocusUpstreamHardened, autofocusBoundedUpstream, autofocusAbsoluteUpstream, autofocusStartupHandoff, autofocusTargetedTrace, autofocusReadiness, autofocusHomingDiagnostic, autofocusReferenceQualified, autofocusCrashDiagnostic
+    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened, autofocusFactoryBaseline, autofocusFactoryRefined, autofocusAuditedAperture, autofocusPolished, autofocusObservedMotion, autofocusServicedCamera, autofocusArbitratedCamera, autofocusUpstreamBaseline, autofocusStartupDiagnostic, autofocusUpstreamHardened, autofocusBoundedUpstream, autofocusAbsoluteUpstream, autofocusStartupHandoff, autofocusTargetedTrace, autofocusReadiness, autofocusHomingDiagnostic, autofocusReferenceQualified, autofocusCrashDiagnostic, upstreamNovemberTrial
     var version: [UInt8] {
-        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0]; case .autofocusFactoryBaseline: [2,4,0]; case .autofocusFactoryRefined: [2,5,0]; case .autofocusAuditedAperture: [2,6,0]; case .autofocusPolished: [2,7,0]; case .autofocusObservedMotion: [2,8,0]; case .autofocusServicedCamera: [2,9,0]; case .autofocusArbitratedCamera: [3,0,0]; case .autofocusUpstreamBaseline: [3,1,0]; case .autofocusStartupDiagnostic: [3,2,0]; case .autofocusUpstreamHardened: [3,3,0]; case .autofocusBoundedUpstream: [3,4,0]; case .autofocusAbsoluteUpstream: [3,5,0]; case .autofocusStartupHandoff: [3,6,0]; case .autofocusTargetedTrace: [3,7,0]; case .autofocusReadiness: [3,8,0]; case .autofocusHomingDiagnostic: [3,9,0]; case .autofocusReferenceQualified: [4,0,0]; case .autofocusCrashDiagnostic: [4,1,0] }
+        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0]; case .autofocusFactoryBaseline: [2,4,0]; case .autofocusFactoryRefined: [2,5,0]; case .autofocusAuditedAperture: [2,6,0]; case .autofocusPolished: [2,7,0]; case .autofocusObservedMotion: [2,8,0]; case .autofocusServicedCamera: [2,9,0]; case .autofocusArbitratedCamera: [3,0,0]; case .autofocusUpstreamBaseline: [3,1,0]; case .autofocusStartupDiagnostic: [3,2,0]; case .autofocusUpstreamHardened: [3,3,0]; case .autofocusBoundedUpstream: [3,4,0]; case .autofocusAbsoluteUpstream: [3,5,0]; case .autofocusStartupHandoff: [3,6,0]; case .autofocusTargetedTrace: [3,7,0]; case .autofocusReadiness: [3,8,0]; case .autofocusHomingDiagnostic: [3,9,0]; case .autofocusReferenceQualified: [4,0,0]; case .autofocusCrashDiagnostic: [4,1,0]; case .upstreamNovemberTrial: [4,2,0] }
     }
     public var versionString: String { version.map(String.init).joined(separator: ".") }
     var resource: String {
-        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template"; case .autofocusFactoryBaseline: "ea9-af-factory-template"; case .autofocusFactoryRefined: "ea9-af-refined-template"; case .autofocusAuditedAperture: "ea9-af-audited-template"; case .autofocusPolished: "ea9-af-polished-template"; case .autofocusObservedMotion: "ea9-af-observed-template"; case .autofocusServicedCamera: "ea9-af-serviced-template"; case .autofocusArbitratedCamera: "ea9-af-arbitrated-template"; case .autofocusUpstreamBaseline: "ea9-af-upstream-baseline"; case .autofocusStartupDiagnostic: "ea9-af-startup-diagnostic"; case .autofocusUpstreamHardened: "ea9-af-upstream-hardened"; case .autofocusBoundedUpstream: "ea9-af-bounded-upstream"; case .autofocusAbsoluteUpstream: "ea9-af-absolute-upstream"; case .autofocusStartupHandoff: "ea9-af-handoff-upstream"; case .autofocusTargetedTrace: "ea9-af-targeted-trace"; case .autofocusReadiness: "ea9-af-readiness-upstream"; case .autofocusHomingDiagnostic: "ea9-af-homing-upstream"; case .autofocusReferenceQualified: "ea9-af-reference-upstream"; case .autofocusCrashDiagnostic: "ea9-af-crash-upstream" }
+        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template"; case .autofocusFactoryBaseline: "ea9-af-factory-template"; case .autofocusFactoryRefined: "ea9-af-refined-template"; case .autofocusAuditedAperture: "ea9-af-audited-template"; case .autofocusPolished: "ea9-af-polished-template"; case .autofocusObservedMotion: "ea9-af-observed-template"; case .autofocusServicedCamera: "ea9-af-serviced-template"; case .autofocusArbitratedCamera: "ea9-af-arbitrated-template"; case .autofocusUpstreamBaseline: "ea9-af-upstream-baseline"; case .autofocusStartupDiagnostic: "ea9-af-startup-diagnostic"; case .autofocusUpstreamHardened: "ea9-af-upstream-hardened"; case .autofocusBoundedUpstream: "ea9-af-bounded-upstream"; case .autofocusAbsoluteUpstream: "ea9-af-absolute-upstream"; case .autofocusStartupHandoff: "ea9-af-handoff-upstream"; case .autofocusTargetedTrace: "ea9-af-targeted-trace"; case .autofocusReadiness: "ea9-af-readiness-upstream"; case .autofocusHomingDiagnostic: "ea9-af-homing-upstream"; case .autofocusReferenceQualified: "ea9-af-reference-upstream"; case .autofocusCrashDiagnostic: "ea9-af-crash-upstream"; case .upstreamNovemberTrial: "ea9-upstream-november-trial" }
     }
     var sha256: String {
-        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256; case .autofocusFactoryBaseline: TrustedFactoryAFTemplate.sha256; case .autofocusFactoryRefined: TrustedRefinedAFTemplate.sha256; case .autofocusAuditedAperture: TrustedAuditedAFTemplate.sha256; case .autofocusPolished: TrustedPolishedAFTemplate.sha256; case .autofocusObservedMotion: TrustedObservedAFTemplate.sha256; case .autofocusServicedCamera: TrustedServicedAFTemplate.sha256; case .autofocusArbitratedCamera: TrustedArbitratedAFTemplate.sha256; case .autofocusUpstreamBaseline: TrustedUpstreamBaseline.sha256; case .autofocusStartupDiagnostic: TrustedStartupAFTemplate.sha256; case .autofocusUpstreamHardened: TrustedUpstreamHardened.sha256; case .autofocusBoundedUpstream: TrustedBoundedUpstream.sha256; case .autofocusAbsoluteUpstream: TrustedAbsoluteUpstream.sha256; case .autofocusStartupHandoff: TrustedHandoffUpstream.sha256; case .autofocusTargetedTrace: TrustedTargetedTrace.sha256; case .autofocusReadiness: TrustedReadinessUpstream.sha256; case .autofocusHomingDiagnostic: TrustedHomingUpstream.sha256; case .autofocusReferenceQualified: TrustedReferenceUpstream.sha256; case .autofocusCrashDiagnostic: TrustedCrashUpstream.sha256 }
+        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256; case .autofocusFactoryBaseline: TrustedFactoryAFTemplate.sha256; case .autofocusFactoryRefined: TrustedRefinedAFTemplate.sha256; case .autofocusAuditedAperture: TrustedAuditedAFTemplate.sha256; case .autofocusPolished: TrustedPolishedAFTemplate.sha256; case .autofocusObservedMotion: TrustedObservedAFTemplate.sha256; case .autofocusServicedCamera: TrustedServicedAFTemplate.sha256; case .autofocusArbitratedCamera: TrustedArbitratedAFTemplate.sha256; case .autofocusUpstreamBaseline: TrustedUpstreamBaseline.sha256; case .autofocusStartupDiagnostic: TrustedStartupAFTemplate.sha256; case .autofocusUpstreamHardened: TrustedUpstreamHardened.sha256; case .autofocusBoundedUpstream: TrustedBoundedUpstream.sha256; case .autofocusAbsoluteUpstream: TrustedAbsoluteUpstream.sha256; case .autofocusStartupHandoff: TrustedHandoffUpstream.sha256; case .autofocusTargetedTrace: TrustedTargetedTrace.sha256; case .autofocusReadiness: TrustedReadinessUpstream.sha256; case .autofocusHomingDiagnostic: TrustedHomingUpstream.sha256; case .autofocusReferenceQualified: TrustedReferenceUpstream.sha256; case .autofocusCrashDiagnostic: TrustedCrashUpstream.sha256; case .upstreamNovemberTrial: TrustedUpstreamNovemberTrial.sha256 }
     }
     public var enablesAutofocus: Bool { self != .metadataOnly }
     // 2.2 and later stop before the retained factory prefix/copy. Legacy pins retain their layout.
-    public var supportsLensProfileChanges: Bool { ![.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic].contains(self) }
+    public var supportsLensProfileChanges: Bool { ![.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic, .upstreamNovemberTrial].contains(self) }
     var profileAddress: Int { [.autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture, .autofocusPolished, .autofocusObservedMotion, .autofocusServicedCamera, .autofocusArbitratedCamera].contains(self) ? 0x9f00 : 0xa000 }
     var profileOffset: Int { profileAddress - ApplicationImage.base }
     var applicationBytes: Int { profileOffset + (supportsLensProfileChanges ? 256 : 0) }
@@ -25,6 +25,7 @@ public enum FirmwareVariant: String, CaseIterable, Sendable {
 
 public enum FirmwareImageBuilder {
     public static func prepare(profile: LensProfile, variant: FirmwareVariant = .metadataOnly) throws -> Data { try ApplicationImage.personalized(profile, variant: variant).data }
+    public static func prepareUpstreamNovemberTrial() throws -> Data { try ApplicationImage.upstreamNovemberTrial().data }
 }
 
 /// Stored camera report settings, not a sensor reading of the attached passive lens.
@@ -135,6 +136,10 @@ struct ApplicationImage: Sendable {
     let version: [UInt8]
     let setting: AdapterLensSetting?
     var metadataOverride: Data? = nil
+    static func upstreamNovemberTrial() throws -> Self {
+        let variant = FirmwareVariant.upstreamNovemberTrial
+        return Self(data: try template(variant), version: variant.version, setting: fixedUpstreamSetting(variant))
+    }
     static func template(_ variant: FirmwareVariant = .metadataOnly) throws -> Data {
         guard let url = Bundle.module.url(forResource: variant.resource, withExtension: "bin") else {
             throw DeviceError.failure("The bundled firmware template is missing.")
@@ -149,9 +154,9 @@ struct ApplicationImage: Sendable {
     static func personalized(_ profile: LensProfile, variant: FirmwareVariant = .metadataOnly) throws -> Self {
         var data = try template(variant); let setting = try AdapterLensSetting(profile: profile)
         if !variant.supportsLensProfileChanges {
-            let fixed = try upstreamBaselineSetting()
+            let fixed = fixedUpstreamSetting(variant)
             guard setting == fixed else {
-                throw DeviceError.failure("This upstream firmware is compiled for the original Contax Zeiss 50mm f/1.4 profile. Lens edits and other profiles require another firmware build; no USB update was started.")
+                throw DeviceError.failure("This upstream firmware is compiled for \(fixed.name). Lens edits and other profiles require another firmware build; no USB update was started.")
             }
             return Self(data: data, version: variant.version, setting: fixed)
         }
@@ -186,9 +191,13 @@ struct ApplicationImage: Sendable {
         guard flash[base..<variant.profileAddress] == (try template(variant)).prefix(variant.profileOffset) else { return nil }
         return variant
     }
-    private static func upstreamBaselineSetting() throws -> AdapterLensSetting {
+    private static func fixedUpstreamSetting(_ variant: FirmwareVariant) -> AdapterLensSetting {
+        if variant == .upstreamNovemberTrial {
+            return AdapterLensSetting(id: "upstream-november-50-f1-8", name: "Upstream 50mm f/1.8",
+                                      focalMM10: 500, maximumAV: 4544, reportedAV: 4544, revision: 1)
+        }
         // Frozen with this image; future library-seed edits cannot reinterpret it.
-        AdapterLensSetting(id: "contax-zeiss-50-f1-4", name: "Contax Zeiss 50mm f/1.4",
+        return AdapterLensSetting(id: "contax-zeiss-50-f1-4", name: "Contax Zeiss 50mm f/1.4",
                            focalMM10: 500, maximumAV: 4352, reportedAV: 4352, revision: 1)
     }
     static func setting(in image: Data, variant: FirmwareVariant) throws -> AdapterLensSetting {
@@ -196,7 +205,7 @@ struct ApplicationImage: Sendable {
               image.prefix(variant.profileOffset) == (try template(variant)).prefix(variant.profileOffset) else {
             throw DeviceError.failure("Unrecognized application bytes.")
         }
-        if !variant.supportsLensProfileChanges { return try upstreamBaselineSetting() }
+        if !variant.supportsLensProfileChanges { return fixedUpstreamSetting(variant) }
         return try AdapterLensSetting.decode(Data(image.suffix(256)))
     }
     static func installedSetting(_ flash: Data) throws -> AdapterLensSetting? {

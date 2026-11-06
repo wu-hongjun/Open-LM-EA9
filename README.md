@@ -13,11 +13,15 @@ explains the remaining failures, reproduces diagnostic-storage boot refusal,
 and corrects a homing-test substitution. These are offline findings; the shutter
 freeze cause remains unresolved, and no replacement image is prepared by this pass.
 
-**Original stock 1.8.0 is restored and strictly byte/protected-data verified after
-physical reconnect, as requested by the owner.** The entire 110,592-byte original
+The [November upstream trial](firmware/candidates/4.2.0/README.md) was uploaded
+at the owner's request. It uses upstream `e054db9` with the original 50 mm f/1.8
+settings. [Installation status and camera check](docs/evidence/upstream-november-trial-2026-11-06.md).
+
+**Original stock 1.8.0 was restored and strictly byte/protected-data verified after
+physical reconnect on October 21.** The entire 110,592-byte original
 application slot and known metadata match. Boot code, saved records and factory
-data are preserved; native state now reports stock. Custom-firmware camera logs
-remain saved, and no further camera test is requested.
+data were preserved; verification recorded the stock version. Custom-firmware camera logs
+remain saved.
 [Stock recovery record](docs/evidence/stock-18-af41-recovery-2026-10-21.md).
 
 [Upstream C AF 4.1](firmware/candidates/4.1.0/README.md) for the original Contax

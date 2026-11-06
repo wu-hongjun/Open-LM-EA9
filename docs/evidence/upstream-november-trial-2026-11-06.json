@@ -1,0 +1,19 @@
+{
+  "status": "uploaded-pending-physical-reconnect",
+  "imageSHA256": "2a11822d47672355455dc4415db95f1487527e4f9865270ea368f24fc0ceaa7b",
+  "preUploadVersion": "1.8.0",
+  "freshStockBackupValid": true,
+  "preUploadFlashSHA256": "d7224b0ccd1259173f263288439dadb3595b23edee077771510add4d4547366b",
+  "preUploadReadExchanges": 4359,
+  "nativeUpload": {
+    "startedUTC": "2026-11-06T19:19:26.694775+00:00",
+    "completedUTC": "2026-11-06T19:21:19.553844+00:00",
+    "exitCode": 0
+  },
+  "applicationBytes": 20480,
+  "writePages": 320,
+  "verificationComplete": false,
+  "cameraQualified": false,
+  "preservedArtifacts": 156,
+  "preservedRegistryEntries": 9
+}

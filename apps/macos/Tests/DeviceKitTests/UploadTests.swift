@@ -6,6 +6,20 @@ import LensCore
 private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfile {
     try #require(LensLibrary.seeds().profiles.first { $0.id == id })
 }
+private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
+    if variant == .upstreamNovemberTrial { return try ApplicationImage.upstreamNovemberTrial() }
+    return try ApplicationImage.personalized(profile(), variant: variant)
+}
+@Test func novemberTrialUsesPinnedUpstreamDefaults() throws {
+    let variant = FirmwareVariant.upstreamNovemberTrial
+    let image = try ApplicationImage.upstreamNovemberTrial()
+    let setting = try #require(image.setting)
+    #expect(image.version == [4,2,0])
+    #expect(image.data == (try FirmwareImageBuilder.prepareUpstreamNovemberTrial()))
+    #expect(setting.focalMM10 == 500 && setting.reportedAV == 4544 && setting.actualAperture == nil)
+    #expect(!variant.supportsLensProfileChanges)
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
+}
 private func device(_ id: UInt64 = 10) -> DeviceIdentity {
     DeviceIdentity(id: id, product: "LM-EA9", manufacturer: "TECHART", serial: "SIMULATED-UPLOAD", location: 0, qualifiedDescriptor: true)
 }
@@ -105,7 +119,7 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
 }
 
 @Test(arguments: FirmwareVariant.allCases) func uploadWritesExactBoundedImageAndNeverSendsPostUploadCommands(variant: FirmwareVariant) throws {
-    let loader = Loader(), image = try ApplicationImage.personalized(profile(), variant: variant)
+    let loader = Loader(), image = try trialAwareImage(variant)
     let before = loader.flash
     try UploadEngine().run(transport: loader, image: image, metadata: Data(before[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
     #expect(loader.reports == 1 + variant.applicationBytes/64 && loader.readsWhileArmed == 0 && loader.armed)
@@ -118,7 +132,7 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
 }
 
 @Test(arguments: FirmwareVariant.allCases) func uploadStopsAtLostAcknowledgementOrCancellationWithoutRetry(variant: FirmwareVariant) throws {
-    let image = try ApplicationImage.personalized(profile(), variant: variant)
+    let image = try trialAwareImage(variant)
     let loader = Loader(); loader.failAt = 9
     #expect(throws: DeviceError.self) {
         try UploadEngine().run(transport: loader, image: image, metadata: Data(loader.flash[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
@@ -306,7 +320,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: directory) }
-    let loader = Loader(), image = try ApplicationImage.personalized(profile(), variant: variant)
+    let loader = Loader(), image = try trialAwareImage(variant)
     loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
     loader.flash.replaceSubrange(ApplicationImage.base..<variant.applicationEnd, with: image.data)
     let current = try fixture(loader, directory, "supported", id: 61)
@@ -344,7 +358,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: directory) }
-    let loader = Loader(), image = try ApplicationImage.personalized(profile(), variant: variant)
+    let loader = Loader(), image = try trialAwareImage(variant)
     let original = try fixture(loader, directory, "original", id: 10)
     var expected = Data(loader.flash[0x4000..<0x403a]); expected.replaceSubrange(0..<3, with: image.version)
     let pending = PendingUpdate(transactionID: UUID(), device: device(), backupURL: original.result.url, image: image.data,
@@ -376,7 +390,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
 @Test(arguments: FirmwareVariant.allCases) func journalSurvivesArmedCrashAndRejectsImageTampering(variant: FirmwareVariant) throws {
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: directory) }
-    let store = UpdateStore(directory: directory), image = try ApplicationImage.personalized(profile(), variant: variant)
+    let store = UpdateStore(directory: directory), image = try trialAwareImage(variant)
     var metadata = Data(repeating: 0, count: 58); metadata.replaceSubrange(0..<3, with: image.version)
     let pending = PendingUpdate(transactionID: UUID(), device: device(), backupURL: directory.appendingPathComponent("original.ea9backup"),
                                 image: image.data, version: image.version, setting: image.setting, createdAt: Date(), uploadedAt: nil, verifiedAt: nil,
@@ -502,7 +516,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
 
 @Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic])
 func upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant: FirmwareVariant) throws {
-    let image = try ApplicationImage.personalized(profile(), variant: variant)
+    let image = try trialAwareImage(variant)
     #expect(image.data == (try ApplicationImage.template(variant)))
     #expect(image.data.count == 20480 && variant.applicationEnd == 0xa000)
     #expect(!variant.supportsLensProfileChanges)

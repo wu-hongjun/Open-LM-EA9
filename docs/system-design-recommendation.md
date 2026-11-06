@@ -1,5 +1,10 @@
 # Recommended LM-EA9 system design
 
+The November 6 [upstream trial](evidence/upstream-november-trial-2026-11-06.md)
+is a separate owner-requested camera comparison. See its receipt for current
+installation status. The October reassessment below describes the earlier
+development line and stock restoration.
+
 ## Current working recommendation — October 23, 2026
 
 The development direction remains **upstream C firmware and the native Swift

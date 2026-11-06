@@ -1,0 +1,21 @@
+--- upstream/src/startup_samd21.c
++++ build/src/startup_samd21.c
+@@ -30 +30 @@
+-#include "samd21.h"
++#include "sam.h"
+@@ -114 +114 @@
+-    .pfnNMI_Handler       = (void *)NMI_Handler,
++    .pfnNonMaskableInt_Handler       = (void *)NMI_Handler,
+@@ -123 +123 @@
+-    .pfnSVC_Handler       = (void *)SVC_Handler,
++    .pfnSVCall_Handler       = (void *)SVC_Handler,
+--- upstream/src/system_samd21.c
++++ build/src/system_samd21.c
+@@ -30 +30 @@
+-#include "samd21.h"
++#include "sam.h"
+--- upstream/src/ea9.ld
++++ build/src/ea9.ld
+@@ -38 +38 @@
+-  rom      (rx)  : ORIGIN = 0x00005000, LENGTH = 0x0001b000
++  rom      (rx)  : ORIGIN = 0x00005000, LENGTH = 0x00005000

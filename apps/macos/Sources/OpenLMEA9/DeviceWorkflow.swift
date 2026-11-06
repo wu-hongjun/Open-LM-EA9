@@ -128,7 +128,7 @@ enum DeviceLensAction {
         if primaryLensAction == .read { return "Read the adapter once to identify its installed firmware and lens setting. Profile changes will preserve that firmware." }
         if !stockUploadQualified { return "A verified backup and stock upload check prepare this adapter for profile changes." }
         if preparedLens == nil { return "Choose a profile from the dropdown. The saved adapter setting stays visible above." }
-        if variantForLensChanges?.supportsLensProfileChanges == false { return "This baseline is compiled for Contax Zeiss 50mm f/1.4. Library edits stay local; changing the adapter setting requires another firmware build." }
+        if variantForLensChanges?.supportsLensProfileChanges == false { return "This build uses fixed settings for \(currentAppliedLens?.setting.name ?? "the upstream profile"). Library edits stay local; changing the adapter setting requires another firmware build." }
         if preparedMatchesApplied { return "The selected profile matches the last USB-verified setting. You can disconnect and use it on your camera." }
         if !idleAcknowledged { return "Close TECHART Update, reconnect the cap, then confirm the checkbox below." }
         return "Apply the selected profile, then reconnect to verify. The installed firmware is preserved."
