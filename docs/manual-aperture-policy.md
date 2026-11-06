@@ -17,9 +17,10 @@ A7C II tests.
 ## November 6 check on the 750 kbaud baseline
 
 The owner reported a fixed f/1.8 display and working still-photo and video AF
-with upstream-based 4.4.0. The displayed aperture is a declaration. Captured
-exposure while stopping down on the lens remains unmeasured on this image.
-The earlier overexposure report concerned stock firmware. The AF 2.4 report
+with upstream-based 4.4.0, then reported that it works when stopped down
+on the lens. The displayed aperture is a declaration. The stop-down report
+is qualitative and the saved exposure has not been measured. The earlier
+overexposure report concerned stock firmware. The AF 2.4 report
 of a missing f-number also involved a dark preview and a blocked shutter,
 while that image still contained a fixed numerical aperture. Treat that
 run as a failure, rather than an accepted unknown-aperture encoding.

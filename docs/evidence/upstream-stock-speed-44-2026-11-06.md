@@ -30,9 +30,11 @@ scratch bytes are outside the metadata comparison.
 
 The owner reports that the A7C II displays a fixed f/1.8 and autofocus
 works in both still-photo and video modes. The displayed f-number matches
-the upstream image's nominal aperture. The report covers autofocus in
-each mode. Saved stills, recorded video, exposure, shutdown behavior,
-and the camera firmware version are unverified.
+the upstream image's nominal aperture. In a follow-up about exposure,
+the owner reported that it also works when stopped down on the lens.
+This is a qualitative observation. The shooting mode, iris setting,
+saved-file details, shutter speed, ISO, shutdown and camera firmware
+version were not supplied.
 
 The November 4.2.0 trial failed on this body. The only behavioral change
 in 4.4.0 is that the `0x0C` reply declines the speed offer and skips the
