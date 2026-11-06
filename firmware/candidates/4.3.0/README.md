@@ -130,5 +130,6 @@ because the diagnostic tail may differ from the verified installation. Report
 the latest valid slot and any torn pages. A completed local echo followed by
 `0x03` or `0x04` would move the compatibility investigation beyond startup.
 A stalled last exchange identifies the point to compare with stock on the
-same body. This image was prepared and tested offline, with no adapter access
-or camera observations.
+same body. The later [camera evidence](../../../docs/evidence/startup-probe-43-2026-11-06.md)
+records a completed final echo, a normal body frame, and a subsequent
+transmit fault. The image itself remains pinned to the offline build.

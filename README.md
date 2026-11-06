@@ -22,7 +22,9 @@ settings. USB readback passed; the owner reported a failed A7C II trial.
 The [motor-disabled 4.3.0 startup probe](firmware/candidates/4.3.0/README.md)
 keeps stock camera identity and 750 kbaud. It records the last valid init
 request, the last completed reply and the first subsequent normal traffic.
-The image and native loader path were tested offline. Camera testing is pending.
+On the A7C II it reached normal traffic, then stopped on a transmit fault
+about 16 seconds into the recorded boot.
+[Verified installation and trace](docs/evidence/startup-probe-43-2026-11-06.md).
 
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original
