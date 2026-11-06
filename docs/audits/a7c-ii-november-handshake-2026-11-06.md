@@ -75,7 +75,10 @@ Keep stock identity and 750 kbaud in the first comparison. Measure the last
 valid RX, TX completion and readiness before enabling either native identity
 or the high-speed exchange. The persisted record must never be required for
 boot; [4.1's full diagnostic storage could prevent startup](firmware-reassessment-2026-10-23.md).
-This is an evidence plan, not a new firmware candidate or a claimed fix.
+The [4.3.0 startup probe](../../firmware/candidates/4.3.0/README.md) implements
+that experiment. Its offline evidence separates validated RX, local TXC and
+CS release, and the first normal RX. The A7C II boundary still needs a camera
+observation.
 
 Reproduce after materializing the pinned build using the
 [November builder](../../scripts/build-upstream-november-trial.py):

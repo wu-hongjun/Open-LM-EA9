@@ -1,0 +1,54 @@
+{
+  "loaderVersion": [
+    4,
+    3,
+    0
+  ],
+  "cameraVersionBCD": "0x18",
+  "cameraLensID": "0x00ea",
+  "cameraIdentity": "TECHART LM-EA9",
+  "cameraBusBaud": 750000,
+  "cameraQualified": false,
+  "motorDrive": false,
+  "upstreamStartupCommit": "e054db90cfae5d67fac67a7e0db4bb100f5893ae",
+  "stockPacketSourceSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564",
+  "imageBytes": 20480,
+  "rawBytes": 6408,
+  "imageSHA256": "58e5eb9578732e6fa8113a28f8b1732a6edc30706333871bbc207ae66e20abac",
+  "immutablePrefixSHA256": "232a217376f6868b629ad8aa2c24836a8595ba6a9fd0226a78e23c1629c27b1d",
+  "codeAndDataEnd": "0x6908",
+  "diagnosticRange": [
+    "0x9c00",
+    "0xa000"
+  ],
+  "diagnosticPageBytes": 64,
+  "diagnosticFormat": 1,
+  "stackBytes": 8192,
+  "staticRAMBytes": 880,
+  "flags": [
+    "-mthumb",
+    "-mcpu=cortex-m0plus",
+    "-O2",
+    "-std=gnu11",
+    "-D__SAMD21E17A__",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fstack-usage"
+  ],
+  "sourceSHA256": {
+    "flash.c": "49d0fbbaca56722a53ce1e652d23219bc0fc991198c02a7c578b5782b8acb0df",
+    "main.c": "2c09c74c2d5c51712d4d38cc21c799fc42f87ebe8afea49d56752a4c82e7495f",
+    "probe.c": "ce70bbb5ecfd95012228a83e5d5f7c283706e01ba76f652001edfb1c302c2ae0",
+    "probe.h": "4c174d17af12925260649760649937d90823da7f078bdc67b68fa356989ec369"
+  },
+  "generatedSHA256": {
+    "startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "ea9.ld": "edf950a23a0401286fa722749fabd94504ae15d14d86460608c57f7323fe4849",
+    "stock_packets.h": "1999ebdbac2a42864f3fcb3f29d5fd50dac9be80504fa20b11c3b6b20cd89147"
+  },
+  "builderSHA256": "f00ac3e0c661b533ce66a227224d1ea45caf631882f0475c13e70fefc0c9e763"
+}

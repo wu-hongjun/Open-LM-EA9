@@ -198,11 +198,17 @@ public final class DeviceService: @unchecked Sendable {
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
     }
+    public func applyStartupProbe(device: DeviceIdentity, idleAcknowledged: Bool,
+                                  cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
+        guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
+        return try await upload(image: ApplicationImage.startupProbe(), device: device, idleAcknowledged: idleAcknowledged,
+                                cancellation: cancellation, recovering: false, fixedSource: .stockOrNovemberTrial, progress: progress)
+    }
     public func applyUpstreamNovemberTrial(device: DeviceIdentity, idleAcknowledged: Bool,
                                            cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
         return try await upload(image: ApplicationImage.upstreamNovemberTrial(), device: device, idleAcknowledged: idleAcknowledged,
-                                cancellation: cancellation, recovering: false, requireRestorableStockSource: true, progress: progress)
+                                cancellation: cancellation, recovering: false, fixedSource: .stock, progress: progress)
     }
     public func qualifyStockUpload(device: DeviceIdentity, idleAcknowledged: Bool, cancellation: CancellationToken,
                                    progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
@@ -216,10 +222,12 @@ public final class DeviceService: @unchecked Sendable {
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: true, progress: progress)
     }
+    private enum FixedUploadSource { case stock, stockOrNovemberTrial }
+
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
                         preserving variant: FirmwareVariant? = nil,
-                        requireRestorableStockSource: Bool = false,
+                        fixedSource: FixedUploadSource? = nil,
                         progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         let store = UpdateStore(directory: stateDirectory)
         if !recovering, let pending = try store.load(), pending.needsVerification {
@@ -233,7 +241,11 @@ public final class DeviceService: @unchecked Sendable {
             _ = try BackupEngine(allowRecoveryVersion: recovering).run(transport: transport, identity: device, destination: backupURL, cancellation: cancellation, progress: progress)
             let backup = try VerifiedBackup(url: backupURL, device: device, allowRecoveryVersion: recovering)
             try backup.synchronizeRecoveryEvidence()
-            if requireRestorableStockSource { _ = try ApplicationImage.stockRestoration(backup) }
+            switch fixedSource {
+            case .stock: _ = try ApplicationImage.stockRestoration(backup)
+            case .stockOrNovemberTrial: try ApplicationImage.requireStartupProbeSource(backup)
+            case nil: break
+            }
             if let variant {
                 do { try ApplicationImage.requirePreservedFirmware(variant, in: backup) }
                 catch {
@@ -282,7 +294,9 @@ public final class DeviceService: @unchecked Sendable {
             if let applied { try store.saveApplied(applied) }
             else {
                 if FileManager.default.fileExists(atPath: store.appliedFile.path) { try FileManager.default.removeItem(at: store.appliedFile) }
-                try store.saveQualification(device: device, transactionID: pending.transactionID)
+                if pending.version == [1,8,0] {
+                    try store.saveQualification(device: device, transactionID: pending.transactionID)
+                }
             }
             pending.verifiedAt = Date(); try store.save(pending)
             return applied

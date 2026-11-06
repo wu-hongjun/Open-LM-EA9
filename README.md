@@ -19,6 +19,11 @@ settings. USB readback passed; the owner reported a failed A7C II trial.
 [Installation record](docs/evidence/upstream-november-trial-2026-11-06.md) ·
 [Handshake investigation](docs/audits/a7c-ii-november-handshake-2026-11-06.md).
 
+The [motor-disabled 4.3.0 startup probe](firmware/candidates/4.3.0/README.md)
+keeps stock camera identity and 750 kbaud. It records the last valid init
+request, the last completed reply and the first subsequent normal traffic.
+The image and native loader path were tested offline. Camera testing is pending.
+
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original
 application slot and known metadata match. Boot code, saved records and factory

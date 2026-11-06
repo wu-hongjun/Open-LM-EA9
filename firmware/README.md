@@ -1,6 +1,11 @@
 # Firmware development
 
-Latest candidate: [AF 4.0 bounded reference qualification](candidates/4.0.0/README.md).
+Latest candidate is the [4.3.0 motor-disabled startup probe](candidates/4.3.0/README.md).
+The camera side reports stock identity at 750 kbaud. The probe records
+validated init traffic, local reply completion and the first normal receive.
+The build, decoder and guarded native loader path were tested offline.
+
+Earlier candidate is [AF 4.0 bounded reference qualification](candidates/4.0.0/README.md).
 Upload/strict verification passed, but **camera acceptance failed; 4.0 is held**
 after two saved photos in reported AUTO mode and a battery-required hard crash.
 Read-only backup is complete: full flash/protected data unchanged, all 16 diagnostic

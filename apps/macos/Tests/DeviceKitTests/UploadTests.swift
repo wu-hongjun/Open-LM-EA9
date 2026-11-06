@@ -7,6 +7,7 @@ private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfil
     try #require(LensLibrary.seeds().profiles.first { $0.id == id })
 }
 private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
+    if variant == .startupProbe { return try ApplicationImage.startupProbe() }
     if variant == .upstreamNovemberTrial { return try ApplicationImage.upstreamNovemberTrial() }
     return try ApplicationImage.personalized(profile(), variant: variant)
 }
@@ -19,6 +20,30 @@ private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationIm
     #expect(setting.focalMM10 == 500 && setting.reportedAV == 4544 && setting.actualAperture == nil)
     #expect(!variant.supportsLensProfileChanges)
     #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
+}
+@Test func startupProbeHasNoProfileAndRequiresExactReviewedSource() throws {
+    let variant = FirmwareVariant.startupProbe, probe = try ApplicationImage.startupProbe()
+    #expect(probe.version == [4,3,0] && probe.setting == nil)
+    #expect(probe.data == (try FirmwareImageBuilder.prepareStartupProbe()))
+    #expect(probe.data.suffix(1024) == Data(repeating: 0xff, count: 1024))
+    #expect(!variant.supportsLensProfileChanges && !variant.enablesAutofocus)
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
+
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader(), november = try ApplicationImage.upstreamNovemberTrial()
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: november.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: november.data)
+    try ApplicationImage.requireStartupProbeSource(fixture(loader, directory, "november", id: 11))
+    loader.flash[0x9fff] ^= 1
+    let altered = try fixture(loader, directory, "altered-november", id: 12)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(altered) }
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: probe.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: probe.data)
+    let priorProbe = try fixture(loader, directory, "prior-probe", id: 13)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(priorProbe) }
+    #expect(loader.reports == 0 && !loader.armed)
 }
 private func device(_ id: UInt64 = 10) -> DeviceIdentity {
     DeviceIdentity(id: id, product: "LM-EA9", manufacturer: "TECHART", serial: "SIMULATED-UPLOAD", location: 0, qualifiedDescriptor: true)
@@ -324,7 +349,11 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
     loader.flash.replaceSubrange(ApplicationImage.base..<variant.applicationEnd, with: image.data)
     let current = try fixture(loader, directory, "supported", id: 61)
-    try ApplicationImage.requirePreservedFirmware(variant, in: current)
+    if variant == .startupProbe {
+        #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: current) }
+    } else {
+        try ApplicationImage.requirePreservedFirmware(variant, in: current)
+    }
     let other = try #require(FirmwareVariant.allCases.first { $0 != variant })
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(other, in: current) }
     loader.flash[0x6000] ^= 1 // A version string cannot admit altered code.
@@ -347,10 +376,12 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash.replaceSubrange(ApplicationImage.base..<(ApplicationImage.base + stock.count), with: stock)
     let current = try fixture(loader, directory, "stock", id: 64)
     try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: current)
+    try ApplicationImage.requireStartupProbeSource(current)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.autofocusHardened, in: current) }
     loader.flash[0x6000] ^= 1
     let altered = try fixture(loader, directory, "altered-stock", id: 65)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: altered) }
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(altered) }
     #expect(loader.reports == 0 && !loader.armed)
 }
 
@@ -370,7 +401,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: same, original: original) }
     let current = try fixture(loader, directory, "current", id: 11)
     #expect(try VerificationEngine().verify(pending: pending, current: current, original: original)?.setting == image.setting)
-    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic].contains(variant) {
+    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic, .startupProbe].contains(variant) {
         loader.flash[0x9c00] = 0
         let nonblankLog = try fixture(loader, directory, "unexpected-log-before-camera", id: 11)
         #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: nonblankLog, original: original) }
