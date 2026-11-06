@@ -14,6 +14,35 @@ by Sony's AF protocol are separate facts. A camera display of **F-- while AF
 continues working has not been established** by the current references or our
 A7C II tests.
 
+## November 6 check on the 750 kbaud baseline
+
+The owner reported a fixed f/1.8 display and working still-photo and video AF
+with upstream-based 4.4.0. The displayed aperture is a declaration. Captured
+exposure while stopping down on the lens remains unmeasured on this image.
+The earlier overexposure report concerned stock firmware. The AF 2.4 report
+of a missing f-number also involved a dark preview and a blocked shutter,
+while that image still contained a fixed numerical aperture. Treat that
+run as a failure, rather than an accepted unknown-aperture encoding.
+[4.4.0 camera record](evidence/upstream-stock-speed-44-2026-11-06.md) ·
+[AF 2.4 camera record](evidence/af-24-camera-comparison-2026-10-11.md).
+
+In the exact 4.4.0 sources, the recurring `0x05` aperture words and the
+`0x08` range still describe f/1.8. The optional `0x28` and `0x35`
+aperture words are already zero when bit 7 of the body's `0x08` request
+payload byte 1 is set. The upstream host suite exercised both settings
+and passed against the pinned 4.4.0 sources. The A7C II's actual request
+bit remains uncaptured. Zeroing this optional field is distinct from
+hiding the recurring aperture report. The author's metering correction
+for this bit was observed on an a9 II. [Capture-time aperture field](https://github.com/weiziqian/E-mount-protocol-RE/blob/main/docs/msg_0x28.md#pl910-must-follow-the-bodys-request-and-must-not-be-volunteered).
+
+A controlled stop-down check on 4.4.0 can separate display and metering.
+Use the same evenly lit, stationary subject in A mode with fixed ISO
+and EV 0. Change only the lens ring between f/1.4 and f/4. Compare the
+saved exposures and actual shutter speeds. Repeat in the mode that shows
+a fault if it differs. A fixed display is expected in both exposures.
+Qualifying a future unknown-aperture mode requires its own AF, capture
+and saved-exposure comparison. [Sony A7C II aperture-priority guide](https://helpguide.sony.net/ilc/2360/v1/en/contents/0302B_aperture_priority.html).
+
 ## What stock and the current candidate actually do
 
 The [official Techart manual](https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf)
