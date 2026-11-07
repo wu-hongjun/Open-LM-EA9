@@ -35,8 +35,9 @@ The offline [4.5.0 Biotar aperture trial](firmware/candidates/4.5.0/README.md)
 adds a camera-selected reported f/2–f/16 range for the owner's current
 Zeiss Jena Biotar 58mm f/2. The physical lens ring still controls the iris.
 It starts at f/2; app 0.25.0 labels that USB-visible startup setting separately
-from the volatile Sony selection. Offline tests pass; camera qualification
-and a separately coordinated upload remain pending.
+from the volatile Sony selection. Offline tests pass and the authorized
+upload completed November 7; physical-reconnect verification and camera
+qualification remain pending. [Installation record](docs/evidence/biotar-45-install-2026-11-07.md).
 
 **Original stock 1.8.0 was restored and strictly byte/protected-data verified after
 physical reconnect on October 21.** The entire 110,592-byte original

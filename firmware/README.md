@@ -3,8 +3,10 @@
 The offline [4.5.0 Biotar camera-aperture trial](candidates/4.5.0/README.md)
 builds on 4.4.0 and adds validated aperture requests, a reported f/2–f/16
 range and 58mm metadata. The physical iris remains manual. Firmware/native
-regression tests pass; Sony dial, saved exposure and AF behavior need a
-separately coordinated camera test. The installed 4.4.0 image is preserved.
+regression tests pass. The authorized upload completed November 7; physical
+reconnect and byte verification are pending. Sony dial, saved exposure and
+AF behavior need a separately coordinated camera test. The previous 4.4.0
+image is preserved. [Installation record](../docs/evidence/biotar-45-install-2026-11-07.md).
 
 The [4.4.0 upstream comparison](candidates/4.4.0/README.md) changes the
 November trial's speed negotiation to stay at 750 kbaud. The owner reported
