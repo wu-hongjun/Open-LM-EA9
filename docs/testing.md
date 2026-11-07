@@ -44,4 +44,7 @@ Device, Library and USB panel previews are reviewed with all USB operations
 inhibited. These software checks do not qualify camera acceptance. The owner
 confirms AF, photos, aperture dial and shutdown on 4.5; exact mode/settings,
 quantitative exposure/EXIF, extended endurance and other setups are unverified.
-4.6 needs a separate flash/reconnect/full-byte check and camera test.
+4.6 passed its separately authorized upload, physical reconnect and full-byte/
+protected-data checks on November 7. The owner reports increased AF hunting;
+actual settings and remaining dial/capture/shutdown observations are pending.
+[Installation record](evidence/biotar-46-install-2026-11-07.md).

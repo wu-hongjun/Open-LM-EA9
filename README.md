@@ -13,10 +13,11 @@ data were verified after USB reconnect. The Sony dial selects a reported
 f/2–f/16; the physical iris is controlled by the lens ring.
 [Camera and installation record](docs/evidence/biotar-45-install-2026-11-07.md).
 
-**4.6.0 is prepared offline** with the requested reported f/1.2–f/22 range,
-starting at f/2. It retains the Biotar's nominal 58mm/f/2 profile and the
-working motor/handshake implementation. It needs a separate upload and camera
-check. [Candidate notes](firmware/releases/4.6.0/README.md).
+**4.6.0 is installed and byte-verified** with the requested reported f/1.2–f/22
+range, starting at f/2. It retains the Biotar's nominal 58mm/f/2 profile and the
+working motor/handshake implementation. The owner reports increased AF hunting;
+the dial/capture check is incomplete, and 4.5.0 remains the working baseline.
+[Installation record](docs/evidence/biotar-46-install-2026-11-07.md).
 
 The native app opens on Device: connection, verified firmware and compiled
 lens information. Lens Library is the secondary tab. USB tools provide guarded
@@ -49,6 +50,8 @@ make app       # Build and sign dist/OpenLensAdapter.app and dist/ea9ctl locally
 
 See [development](docs/development.md) for the pinned compiler/header dependencies,
 [USB protocol and workflow](docs/usb-protocol.md), and [testing](docs/testing.md).
+Retired local builds and scratch files are kept outside the checkout under the
+[artifact retention policy](docs/artifact-retention.md).
 
 ## Customize
 

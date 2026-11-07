@@ -1,0 +1,105 @@
+{
+  "status": "strict-post-reconnect-verification-passed",
+  "version": "4.6.0",
+  "imageSHA256": "feeef5558f053f150923791af935953df112350519e08bad86712fde6901c318",
+  "applicationBytesMatched": 20480,
+  "expectedMetadataBytesMatched": 58,
+  "loaderScratchBytesExcluded": 6,
+  "newConnectionSameUnitConfirmed": true,
+  "verifiedFlashPasses": 2,
+  "verificationExchanges": 4359,
+  "protectedRangesMatch": {
+    "bootCode": true,
+    "savedRecords": true,
+    "upperFlash": true
+  },
+  "userRowMatches": true,
+  "calibrationMatches": true,
+  "deviceIDMatches": true,
+  "nvmGeometryQualified": true,
+  "nvmStatusSnapshotMatches": true,
+  "uploadedAtUTC": "2026-11-07T17:31:12.088775+00:00",
+  "verifiedAtUTC": "2026-11-07T17:33:58.616723+00:00",
+  "focalMM10": 580,
+  "startupReportedAV": 4608,
+  "reportedApertureRangeAV": [
+    4224,
+    6400
+  ],
+  "runtimeDialSelectionObservableOverUSB": false,
+  "cameraTestStatus": "owner-reported-increased-AF-hunting; acceptance-incomplete",
+  "cleanup": {
+    "status": "retired-artifacts-archived-intact",
+    "entries": 973,
+    "files": 195460,
+    "bytes": 3019779881,
+    "backupDirectories": 42,
+    "keyFiles": 0,
+    "archiveOutsideRepository": true,
+    "sameFilesystemAtomicMoves": true,
+    "permanentDeletions": 0,
+    "canonicalApplicationSupportUntouched": true,
+    "remainingArtifactScope": "Current 4.6 installation/verification/cleanup evidence only",
+    "buildCacheArchived": true,
+    "existingProfileBackupAndKeyFilesUnchanged": 308,
+    "standalonePreparationAfterCacheArchivePassed": true
+  },
+  "cameraObservations": {
+    "increasedAFHuntingReported": true,
+    "intended": false,
+    "actualFocusMode": null,
+    "displayedAperture": null,
+    "physicalRingAperture": null,
+    "dialEndpointsConfirmed": null,
+    "savedPhotoCount": null,
+    "shutdownResult": null,
+    "controlledComparison": false
+  },
+  "rangeDifferenceAudit": {
+    "changedSourceFiles": [
+      "emount.h"
+    ],
+    "imageBytesChanged": 13,
+    "flashAddressesChanged": [
+      "0x8850",
+      "0x8858",
+      "0x8859",
+      "0x8884",
+      "0x8885",
+      "0x9c0e",
+      "0x9c0f",
+      "0x9c11",
+      "0x9c22",
+      "0x9d6f",
+      "0x9d71",
+      "0x9d76",
+      "0x9d77"
+    ],
+    "changedInputs": [
+      "EM_APERTURE_MAX: 0x1200 -> 0x1080",
+      "EM_APERTURE_MIN: 0x1800 -> 0x1900"
+    ],
+    "unchangedSourceDomains": [
+      "AF command handling",
+      "motor",
+      "servo",
+      "focus mapping",
+      "capture/shutdown",
+      "timing",
+      "handshake"
+    ],
+    "affectedDerivedFields": [
+      "0x08 maximum/minimum aperture and BCD maximum f-number",
+      "0x05 maximum/minimum descriptors",
+      "accepted reported-aperture command range"
+    ],
+    "cameraEffect": "Owner reports more autofocus hunting; causal link to wider range unproven",
+    "affectedCodeSymbols": [
+      "reported_aperture_offer"
+    ],
+    "affectedDataSymbols": [
+      "em_msg_05",
+      "em_msg_08"
+    ]
+  }
+}

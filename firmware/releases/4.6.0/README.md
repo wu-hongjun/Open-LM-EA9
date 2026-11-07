@@ -2,7 +2,10 @@
 
 Prepared offline at the owner's request for **reported f/1.2–f/22**, starting
 at f/2. The working [4.5.0](../4.5.0/README.md) remains unchanged and available
-for direct rollback. This candidate has not been flashed or camera-tested.
+for direct rollback. The owner authorized installation on November 7, 2026;
+upload and strict reconnect verification passed. The owner reports increased
+AF hunting; remaining camera observations are pending. 4.5.0 remains the working baseline.
+[Installation record](../../../docs/evidence/biotar-46-install-2026-11-07.md).
 
 The builder changes only `EM_APERTURE_MAX` from `0x1200` to `0x1080` and
 `EM_APERTURE_MIN` from `0x1800` to `0x1900` in its build copy of `emount.h`.
@@ -37,7 +40,7 @@ The native installation path admits only an exact fresh 4.5 backup after the
 existing same-unit qualification. It preserves the shared lock, pre-upload
 backup/journal, bounded pages and mandatory physical reconnect. Native tests
 reject altered source bytes and verify direct 4.6 → 4.5 rollback admission.
-A separately authorized upload, full-image/protected-data verification and
-camera check remain required. The broader advertised maximum can affect the
+A separately authorized upload and full-image/protected-data verification have
+passed; the camera check remains pending. The broader advertised maximum can affect the
 body's optical/metering assumptions; saved exposure, AF, capture and shutdown
 must be checked on the real camera. No factory parity is claimed.
