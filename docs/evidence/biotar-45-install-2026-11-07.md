@@ -28,27 +28,31 @@ changed to 4.5.0.
 One START and all 320 application pages were acknowledged. The 20,480-byte
 upload finished at **06:01:28 UTC on November 7, 2026** (1:01:28 AM EST).
 The durable journal records the expected image, Biotar startup profile and
-completed upload. No post-upload CHECK, READ or other USB report was sent.
-Raw backups, identities and transaction state remain private.
+completed upload. No post-upload CHECK, READ or other USB report was sent
+before the owner-confirmed physical reconnect. Raw backups, identities and
+transaction state remain private.
 
-## Reconnect verification: pending
+## Reconnect verification: passed
 
-The owner has been asked to physically unplug and reconnect the cap before
-any further USB reports. Complete-image and protected-data verification
-has not yet run. The upload acknowledgement alone does not establish the
-installed bytes or authorize camera testing.
+The owner confirmed a physical unplug/reconnect with both apps closed.
+`ea9ctl verify --idle` then completed two matching flash/auxiliary passes
+using 4,359 read exchanges on the new connection. Strict verification passed
+at **06:04:40 UTC on November 7, 2026** (1:04:40 AM EST). The native verifier
+published firmware 4.5.0 and the Biotar's compiled 58mm/f/2 startup setting.
 
-After the confirmed reconnect, run the guarded native verifier and independently
-compare all application bytes, expected metadata, boot code, saved records,
-upper flash, user row, calibration and device ID. The six established loader
-scratch bytes at `0x403a..0x403f` remain outside the metadata comparison.
-NVM register snapshots are non-atomic; qualify their geometry and record any
-observed differences separately from immutable factory data.
+An independent offline audit of both published backups confirmed the same
+unit on a different USB connection, all 20,480 pinned application bytes, all
+58 expected metadata bytes, unchanged boot code, saved records, upper flash,
+user row, calibration and device ID. The six established loader scratch
+bytes at `0x403a..0x403f` remain outside the metadata comparison. NVM geometry
+qualified and its snapshot also matched; these register reads remain
+non-atomic observations, not a lock-state restoration guarantee.
+[Sanitized verification result](biotar-45-install-2026-11-07.json).
 
 ## A7C II aperture-dial test: pending
 
-No camera observation is recorded for 4.5.0. Once byte verification passes,
-guide one startup/shutdown cycle with the Biotar. Confirm still-photo A,
+No camera observation is recorded for 4.5.0. After successful byte verification,
+the owner was guided through one startup/shutdown cycle with the Biotar. Confirm still-photo A,
 actual MF and Pre-AF Off where available. Check live view and boot f/2, then
 whether the camera dial accepts f/2.8 and f/4. Set the physical ring to match
 f/4 before one MF photograph if the camera and motor are behaving normally.

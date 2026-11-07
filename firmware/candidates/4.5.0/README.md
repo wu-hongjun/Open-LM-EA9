@@ -6,9 +6,9 @@ the Sony camera dial. The attached lens is now confirmed as a Zeiss Jena Biotar
 keeping its native lens ID `0xC540`, 750 kbaud operation and upstream motor,
 servo and capture/shutdown code. Camera qualification is pending.
 
-The owner-authorized upload completed on November 7. Physical reconnect
-and complete-image/protected-data verification are pending; keep it off the
-camera until verification passes. [Installation record](../../../docs/evidence/biotar-45-install-2026-11-07.md).
+The owner-authorized upload and physical-reconnect verification completed
+on November 7. The complete application and protected data match. The
+aperture-dial camera test is pending. [Installation record](../../../docs/evidence/biotar-45-install-2026-11-07.md).
 
 The boot profile is **58mm, f/2**, with a **reported range f/2–f/16**. The upper
 f-number is an initial product choice, not a measurement of this particular

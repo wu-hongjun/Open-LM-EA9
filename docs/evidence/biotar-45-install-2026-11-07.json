@@ -1,0 +1,26 @@
+{
+  "status": "strict-post-reconnect-verification-passed",
+  "version": "4.5.0",
+  "imageSHA256": "8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35",
+  "applicationBytesMatched": 20480,
+  "expectedMetadataBytesMatched": 58,
+  "loaderScratchBytesExcluded": 6,
+  "newConnectionSameUnitConfirmed": true,
+  "verifiedFlashPasses": 2,
+  "verificationExchanges": 4359,
+  "protectedRangesMatch": {
+    "bootCode": true,
+    "savedRecords": true,
+    "upperFlash": true
+  },
+  "userRowMatches": true,
+  "calibrationMatches": true,
+  "deviceIDMatches": true,
+  "nvmGeometryQualified": true,
+  "nvmStatusSnapshotMatches": true,
+  "verifiedAtUTC": "2026-11-07T06:04:40.789257+00:00",
+  "focalMM10": 580,
+  "startupReportedAV": 4608,
+  "cameraQualified": false,
+  "runtimeDialSelectionObservableOverUSB": false
+}
