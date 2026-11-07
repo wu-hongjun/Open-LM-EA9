@@ -3,8 +3,10 @@
 Prepared offline at the owner's request for **reported f/1.2–f/22**, starting
 at f/2. The working [4.5.0](../4.5.0/README.md) remains unchanged and available
 for direct rollback. The owner authorized installation on November 7, 2026;
-upload and strict reconnect verification passed. The owner reports increased
-AF hunting; remaining camera observations are pending. 4.5.0 remains the working baseline.
+upload and strict reconnect verification passed. The owner initially reported
+more hunting, then improvement, and disclosed a heavier 35mm Distagon substitution.
+This is not a controlled Biotar regression result. Remaining camera observations
+are pending. 4.5.0 remains the working baseline.
 [Installation record](../../../docs/evidence/biotar-46-install-2026-11-07.md).
 
 The builder changes only `EM_APERTURE_MAX` from `0x1200` to `0x1080` and

@@ -32,7 +32,7 @@ loader-scratch bytes at `0x403a..0x403f` are excluded. NVM geometry qualified an
 its observed status snapshot also matched; the register snapshot does not prove
 restoration of lock state. [Sanitized result](biotar-46-install-2026-11-07.json).
 
-## Camera test: increased AF hunting reported
+## Camera test: improvement reported; lens substitution disclosed
 
 After verification, the owner was guided through one powered cycle: A exposure
 mode, explicit MF/Pre-AF Off where available, dial through f/1.2, f/2, f/5.6 and
@@ -45,6 +45,21 @@ camera f-number, physical ring position, focus mode, saved photo and shutdown
 result, without requiring another attempt. Those details and the actual dial
 endpoints remain unknown. This is a possible regression, not a controlled A/B
 comparison or a successful acceptance test. 4.5.0 remains the working baseline.
+
+The owner subsequently reported that it "works better now" and attributed the
+earlier behavior to trying a heavier 35mm f/1.4 Distagon. This discloses a lens
+substitution during the trial. The earlier provisional regression label is
+therefore not established by a controlled same-lens comparison. Improvement is
+accepted as a qualitative observation; the exact lens mounted when it improved,
+camera/ring settings, dial endpoints, saved-file count and shutdown result remain
+unspecified. The owner attribution to lens weight is not a measured causal result.
+
+Installed 4.6.0 still compiles a 58mm Biotar model. That value feeds transmitted
+focal fields, subject-distance reporting and distance-code target conversion.
+The Distagon trial therefore also has a lens-model mismatch; position, relative,
+Scan and Drive commands are not all transformed by this focal-length calculation.
+No new image, servo tuning or hardware operation was performed for this follow-up.
+[Heavy-lens review and next steps](../../references/analysis/heavy-lens-review-2026-11-07.md).
 
 An offline source and ELF/binary comparison found exactly 13 changed image bytes.
 Only `emount.h` differs in the release source manifests. The changed instruction

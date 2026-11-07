@@ -15,8 +15,10 @@ f/2–f/16; the physical iris is controlled by the lens ring.
 
 **4.6.0 is installed and byte-verified** with the requested reported f/1.2–f/22
 range, starting at f/2. It retains the Biotar's nominal 58mm/f/2 profile and the
-working motor/handshake implementation. The owner reports increased AF hunting;
-the dial/capture check is incomplete, and 4.5.0 remains the working baseline.
+working motor/handshake implementation. After initially reporting more hunting,
+the owner reported improvement and disclosed a heavier 35mm Distagon substitution.
+This was not a controlled Biotar comparison; the full dial/capture check is
+incomplete, and 4.5.0 remains the working baseline.
 [Installation record](docs/evidence/biotar-46-install-2026-11-07.md).
 
 The native app opens on Device: connection, verified firmware and compiled

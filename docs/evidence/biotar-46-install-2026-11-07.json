@@ -27,7 +27,7 @@
     6400
   ],
   "runtimeDialSelectionObservableOverUSB": false,
-  "cameraTestStatus": "owner-reported-increased-AF-hunting; acceptance-incomplete",
+  "cameraTestStatus": "owner-reported-improvement; heavier-lens-substitution-disclosed; acceptance-incomplete",
   "cleanup": {
     "status": "retired-artifacts-archived-intact",
     "entries": 973,
@@ -53,7 +53,15 @@
     "dialEndpointsConfirmed": null,
     "savedPhotoCount": null,
     "shutdownResult": null,
-    "controlledComparison": false
+    "controlledComparison": false,
+    "improvementSubsequentlyReported": true,
+    "heavierLensSubstitutionReported": "Contax Zeiss Distagon 35mm f/1.4",
+    "ownerSuspectsHeavierLensContribution": true,
+    "weightCauseEstablished": false,
+    "lensAtImprovementUnspecified": true,
+    "firmwareRegressionEstablished": false,
+    "installedFocalMM10": 580,
+    "lensModelMismatchDuringDistagonUse": true
   },
   "rangeDifferenceAudit": {
     "changedSourceFiles": [
@@ -93,7 +101,7 @@
       "0x05 maximum/minimum descriptors",
       "accepted reported-aperture command range"
     ],
-    "cameraEffect": "Owner reports more autofocus hunting; causal link to wider range unproven",
+    "cameraEffect": "Initial hunting report followed by improvement and disclosure of a heavier 35mm lens substitution; no controlled same-lens regression or mass-related cause established.",
     "affectedCodeSymbols": [
       "reported_aperture_offer"
     ],

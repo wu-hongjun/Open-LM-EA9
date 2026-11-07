@@ -66,7 +66,8 @@ or use real device identifiers in fixtures.
 
 Keep 4.5 byte-for-byte as the working reference. New camera behavior gets a
 new version/image/digest and its own tests and owner-coordinated camera check.
-4.6 is installed and byte-verified; the owner reports increased AF hunting and
-the camera check is incomplete. The small legacy compatibility catalog
+4.6 is installed and byte-verified; the owner reports improvement after an initial
+hunting report involving a substituted heavier lens. The camera check is incomplete.
+The small legacy compatibility catalog
 validates archived journals only; it cannot create retired write plans.
 [Architecture](architecture.md) · [USB workflow](usb-protocol.md) · [Archive](history.md).
