@@ -1,34 +1,38 @@
 import Foundation
 import LensCore
 
+/// Installable images. Retired experiments have read-only compatibility pins.
 public enum FirmwareVariant: String, CaseIterable, Sendable {
-    case metadataOnly, autofocusExperimental, autofocusReconciled, autofocusHardened, autofocusFactoryBaseline, autofocusFactoryRefined, autofocusAuditedAperture, autofocusPolished, autofocusObservedMotion, autofocusServicedCamera, autofocusArbitratedCamera, autofocusUpstreamBaseline, autofocusStartupDiagnostic, autofocusUpstreamHardened, autofocusBoundedUpstream, autofocusAbsoluteUpstream, autofocusStartupHandoff, autofocusTargetedTrace, autofocusReadiness, autofocusHomingDiagnostic, autofocusReferenceQualified, autofocusCrashDiagnostic, upstreamNovemberTrial, startupProbe, upstreamStockSpeed, cameraDialAperture
+    case upstreamStockSpeed, cameraDialAperture, wideCameraAperture
     var version: [UInt8] {
-        switch self { case .metadataOnly: [2,0,0]; case .autofocusExperimental: [2,1,0]; case .autofocusReconciled: [2,2,0]; case .autofocusHardened: [2,3,0]; case .autofocusFactoryBaseline: [2,4,0]; case .autofocusFactoryRefined: [2,5,0]; case .autofocusAuditedAperture: [2,6,0]; case .autofocusPolished: [2,7,0]; case .autofocusObservedMotion: [2,8,0]; case .autofocusServicedCamera: [2,9,0]; case .autofocusArbitratedCamera: [3,0,0]; case .autofocusUpstreamBaseline: [3,1,0]; case .autofocusStartupDiagnostic: [3,2,0]; case .autofocusUpstreamHardened: [3,3,0]; case .autofocusBoundedUpstream: [3,4,0]; case .autofocusAbsoluteUpstream: [3,5,0]; case .autofocusStartupHandoff: [3,6,0]; case .autofocusTargetedTrace: [3,7,0]; case .autofocusReadiness: [3,8,0]; case .autofocusHomingDiagnostic: [3,9,0]; case .autofocusReferenceQualified: [4,0,0]; case .autofocusCrashDiagnostic: [4,1,0]; case .upstreamNovemberTrial: [4,2,0]; case .startupProbe: [4,3,0]; case .upstreamStockSpeed: [4,4,0]; case .cameraDialAperture: [4,5,0] }
+        switch self { case .upstreamStockSpeed: [4,4,0]; case .cameraDialAperture: [4,5,0]; case .wideCameraAperture: [4,6,0] }
     }
     public var versionString: String { version.map(String.init).joined(separator: ".") }
     var resource: String {
-        switch self { case .metadataOnly: "ea9-profile-template"; case .autofocusExperimental: "ea9-af-template"; case .autofocusReconciled: "ea9-af-reconciled-template"; case .autofocusHardened: "ea9-af-hardened-template"; case .autofocusFactoryBaseline: "ea9-af-factory-template"; case .autofocusFactoryRefined: "ea9-af-refined-template"; case .autofocusAuditedAperture: "ea9-af-audited-template"; case .autofocusPolished: "ea9-af-polished-template"; case .autofocusObservedMotion: "ea9-af-observed-template"; case .autofocusServicedCamera: "ea9-af-serviced-template"; case .autofocusArbitratedCamera: "ea9-af-arbitrated-template"; case .autofocusUpstreamBaseline: "ea9-af-upstream-baseline"; case .autofocusStartupDiagnostic: "ea9-af-startup-diagnostic"; case .autofocusUpstreamHardened: "ea9-af-upstream-hardened"; case .autofocusBoundedUpstream: "ea9-af-bounded-upstream"; case .autofocusAbsoluteUpstream: "ea9-af-absolute-upstream"; case .autofocusStartupHandoff: "ea9-af-handoff-upstream"; case .autofocusTargetedTrace: "ea9-af-targeted-trace"; case .autofocusReadiness: "ea9-af-readiness-upstream"; case .autofocusHomingDiagnostic: "ea9-af-homing-upstream"; case .autofocusReferenceQualified: "ea9-af-reference-upstream"; case .autofocusCrashDiagnostic: "ea9-af-crash-upstream"; case .upstreamNovemberTrial: "ea9-upstream-november-trial"; case .startupProbe: "ea9-startup-probe"; case .upstreamStockSpeed: "ea9-upstream-stock-speed"; case .cameraDialAperture: "ea9-biotar-camera-aperture" }
+        switch self { case .upstreamStockSpeed: "ea9-upstream-stock-speed"; case .cameraDialAperture: "ea9-biotar-camera-aperture"; case .wideCameraAperture: "ea9-biotar-wide-aperture" }
     }
+    public var compiledLens: AdapterLensSetting { ApplicationImage.fixedUpstreamSetting(self) }
+    public var imageSHA256: String { sha256 }
     var sha256: String {
-        switch self { case .metadataOnly: TrustedTemplate.sha256; case .autofocusExperimental: TrustedAFTemplate.sha256; case .autofocusReconciled: TrustedReconciledAFTemplate.sha256; case .autofocusHardened: TrustedHardenedAFTemplate.sha256; case .autofocusFactoryBaseline: TrustedFactoryAFTemplate.sha256; case .autofocusFactoryRefined: TrustedRefinedAFTemplate.sha256; case .autofocusAuditedAperture: TrustedAuditedAFTemplate.sha256; case .autofocusPolished: TrustedPolishedAFTemplate.sha256; case .autofocusObservedMotion: TrustedObservedAFTemplate.sha256; case .autofocusServicedCamera: TrustedServicedAFTemplate.sha256; case .autofocusArbitratedCamera: TrustedArbitratedAFTemplate.sha256; case .autofocusUpstreamBaseline: TrustedUpstreamBaseline.sha256; case .autofocusStartupDiagnostic: TrustedStartupAFTemplate.sha256; case .autofocusUpstreamHardened: TrustedUpstreamHardened.sha256; case .autofocusBoundedUpstream: TrustedBoundedUpstream.sha256; case .autofocusAbsoluteUpstream: TrustedAbsoluteUpstream.sha256; case .autofocusStartupHandoff: TrustedHandoffUpstream.sha256; case .autofocusTargetedTrace: TrustedTargetedTrace.sha256; case .autofocusReadiness: TrustedReadinessUpstream.sha256; case .autofocusHomingDiagnostic: TrustedHomingUpstream.sha256; case .autofocusReferenceQualified: TrustedReferenceUpstream.sha256; case .autofocusCrashDiagnostic: TrustedCrashUpstream.sha256; case .upstreamNovemberTrial: TrustedUpstreamNovemberTrial.sha256; case .startupProbe: TrustedStartupProbe.sha256; case .upstreamStockSpeed: TrustedUpstreamStockSpeed.sha256; case .cameraDialAperture: TrustedCameraDialAperture.sha256 }
+        switch self { case .upstreamStockSpeed: TrustedUpstreamStockSpeed.sha256; case .cameraDialAperture: TrustedCameraDialAperture.sha256; case .wideCameraAperture: TrustedWideCameraAperture.sha256 }
     }
-    public var enablesAutofocus: Bool { self != .metadataOnly && self != .startupProbe }
-    // 2.2 and later stop before the retained factory prefix/copy. Legacy pins retain their layout.
-    public var supportsLensProfileChanges: Bool { ![.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic, .upstreamNovemberTrial, .startupProbe, .upstreamStockSpeed, .cameraDialAperture].contains(self) }
-    var profileAddress: Int { [.autofocusReconciled, .autofocusHardened, .autofocusFactoryBaseline, .autofocusFactoryRefined, .autofocusAuditedAperture, .autofocusPolished, .autofocusObservedMotion, .autofocusServicedCamera, .autofocusArbitratedCamera].contains(self) ? 0x9f00 : 0xa000 }
-    var profileOffset: Int { profileAddress - ApplicationImage.base }
-    var applicationBytes: Int { profileOffset + (supportsLensProfileChanges ? 256 : 0) }
-    var applicationEnd: Int { profileAddress + (supportsLensProfileChanges ? 256 : 0) }
+    public var apertureRangeLabel: String {
+        switch self { case .upstreamStockSpeed: "f/1.8"; case .cameraDialAperture: "f/2–f/16"; case .wideCameraAperture: "f/1.2–f/22" }
+    }
+    public var enablesAutofocus: Bool { true }
+    public var supportsLensProfileChanges: Bool { false }
+    var profileAddress: Int { 0xa000 }
+    var profileOffset: Int { 0x5000 }
+    var applicationBytes: Int { 0x5000 }
+    var applicationEnd: Int { 0xa000 }
     static func from(version: [UInt8]) -> Self? { allCases.first { $0.version == version } }
 }
 
 public enum FirmwareImageBuilder {
-    public static func prepare(profile: LensProfile, variant: FirmwareVariant = .metadataOnly) throws -> Data { try ApplicationImage.personalized(profile, variant: variant).data }
-    public static func prepareCameraDialAperture() throws -> Data { try ApplicationImage.cameraDialAperture().data }
+    public static func prepare(profile: LensProfile, variant: FirmwareVariant = .cameraDialAperture) throws -> Data { try ApplicationImage.personalized(profile, variant: variant).data }
     public static func prepareUpstreamStockSpeed() throws -> Data { try ApplicationImage.upstreamStockSpeed().data }
-    public static func prepareStartupProbe() throws -> Data { try ApplicationImage.startupProbe().data }
-    public static func prepareUpstreamNovemberTrial() throws -> Data { try ApplicationImage.upstreamNovemberTrial().data }
+    public static func prepareCameraDialAperture() throws -> Data { try ApplicationImage.cameraDialAperture().data }
+    public static func prepareWideCameraAperture() throws -> Data { try ApplicationImage.wideCameraAperture().data }
 }
 
 /// Stored camera report settings, not a sensor reading of the attached passive lens.
@@ -132,92 +136,63 @@ func profileCRC(_ b: Data) -> UInt32 {
     return crc ^ 0xffffffff
 }
 
-/// Only a pinned built-in application or a verified unit backup can create a plan.
+/// Pinned application plans only; no arbitrary firmware file input.
 struct ApplicationImage: Sendable {
     static let base = 0x5000
     let data: Data
     let version: [UInt8]
     let setting: AdapterLensSetting?
     var metadataOverride: Data? = nil
-    static func startupProbe() throws -> Self {
-        let variant = FirmwareVariant.startupProbe
-        return Self(data: try template(variant), version: variant.version, setting: nil)
+    static func cameraDialAperture() throws -> Self { try builtIn(.cameraDialAperture) }
+    static func wideCameraAperture() throws -> Self { try builtIn(.wideCameraAperture) }
+    static func upstreamStockSpeed() throws -> Self { try builtIn(.upstreamStockSpeed) }
+    private static func builtIn(_ variant: FirmwareVariant) throws -> Self {
+        Self(data: try template(variant), version: variant.version, setting: fixedUpstreamSetting(variant))
     }
-    static func cameraDialAperture() throws -> Self {
-        let variant = FirmwareVariant.cameraDialAperture
-        return Self(data: try template(variant), version: variant.version, setting: fixedUpstreamSetting(variant))
-    }
-    static func upstreamStockSpeed() throws -> Self {
-        let variant = FirmwareVariant.upstreamStockSpeed
-        return Self(data: try template(variant), version: variant.version, setting: fixedUpstreamSetting(variant))
-    }
-    static func upstreamNovemberTrial() throws -> Self {
-        let variant = FirmwareVariant.upstreamNovemberTrial
-        return Self(data: try template(variant), version: variant.version, setting: fixedUpstreamSetting(variant))
-    }
-    static func template(_ variant: FirmwareVariant = .metadataOnly) throws -> Data {
+    static func template(_ variant: FirmwareVariant = .cameraDialAperture) throws -> Data {
         guard let url = Bundle.module.url(forResource: variant.resource, withExtension: "bin") else {
-            throw DeviceError.failure("The bundled firmware template is missing.")
+            throw DeviceError.failure("The bundled firmware image is missing.")
         }
         let image = try Data(contentsOf: url)
-        guard image.count == variant.applicationBytes, digest(image) == variant.sha256 else { throw DeviceError.failure("Firmware template checksum failed.") }
+        guard image.count == variant.applicationBytes, digest(image) == variant.sha256 else { throw DeviceError.failure("Firmware image checksum failed.") }
         let sp = little32(image,0), reset = little32(image,4)
         guard (0x20000000...0x20004000).contains(sp), sp % 8 == 0, reset & 1 == 1,
               reset & ~1 >= UInt32(base), reset & ~1 < UInt32(variant.profileAddress) else { throw DeviceError.failure("Invalid application vectors.") }
         return image
     }
-    static func personalized(_ profile: LensProfile, variant: FirmwareVariant = .metadataOnly) throws -> Self {
-        guard variant != .startupProbe else {
-            throw DeviceError.failure("The startup probe has no configurable lens profile.")
+    static func personalized(_ profile: LensProfile, variant: FirmwareVariant = .cameraDialAperture) throws -> Self {
+        let fixed = fixedUpstreamSetting(variant), selected = try AdapterLensSetting(profile: profile)
+        guard selected == fixed else {
+            throw DeviceError.failure("This release is compiled for \(fixed.name). Library edits stay on this Mac; changing firmware lens metadata requires another build.")
         }
-        var data = try template(variant); let setting = try AdapterLensSetting(profile: profile)
-        if !variant.supportsLensProfileChanges {
-            let fixed = fixedUpstreamSetting(variant)
-            guard setting == fixed else {
-                throw DeviceError.failure("This upstream firmware is compiled for \(fixed.name). Lens edits and other profiles require another firmware build; no USB update was started.")
-            }
-            return Self(data: data, version: variant.version, setting: fixed)
-        }
-        data.replaceSubrange(variant.profileOffset..<variant.applicationBytes, with: try setting.encoded())
-        return Self(data: data, version: variant.version, setting: setting)
+        return try builtIn(variant)
     }
-    /// The main profile action preserves firmware based on its fresh backup,
-    /// not just a cached version. Explicit install/restore actions choose a variant.
     static func requirePreservedFirmware(_ variant: FirmwareVariant, in backup: VerifiedBackup) throws {
-        if variant == .metadataOnly && backup.result.manifest.reportedFirmwareVersion == "1.8.0",
-           backup.flash[0x4000..<0x4003] == Data([1,8,0]),
-           digest(Data(backup.flash[base..<(base + 20172)])) == "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564" {
-            return // The reviewed initial stock-to-metadata setup.
-        }
         guard backup.result.manifest.reportedFirmwareVersion == variant.versionString,
-              try installedVariant(backup.flash) == variant,
-              try installedSetting(backup.flash) != nil else {
-            throw DeviceError.failure("Current firmware does not match your last verified setting. No update was started. Review the adapter’s settings and try again.")
-        }
-    }
-    static func requireStartupProbeSource(_ backup: VerifiedBackup) throws {
-        if backup.result.manifest.reportedFirmwareVersion == "1.8.0" {
-            _ = try stockRestoration(backup)
-        } else {
-            try requirePreservedFirmware(.upstreamNovemberTrial, in: backup)
+              try installedVariant(backup.flash) == variant else {
+            throw DeviceError.failure("The installed application differs from the expected pinned image. No update was started.")
         }
     }
     static func requireCameraDialApertureSource(_ backup: VerifiedBackup) throws {
-        try requirePreservedFirmware(.upstreamStockSpeed, in: backup)
+        if backup.result.manifest.reportedFirmwareVersion == "1.8.0" {
+            _ = try stockRestoration(backup)
+        } else if backup.result.manifest.reportedFirmwareVersion == "4.6.0" {
+            try requirePreservedFirmware(.wideCameraAperture, in: backup)
+        } else {
+            try requirePreservedFirmware(.upstreamStockSpeed, in: backup)
+        }
+    }
+    static func requireWideCameraApertureSource(_ backup: VerifiedBackup) throws {
+        try requirePreservedFirmware(.cameraDialAperture, in: backup)
     }
     static func requireUpstreamStockSpeedSource(_ backup: VerifiedBackup) throws {
-        if backup.result.manifest.reportedFirmwareVersion == FirmwareVariant.cameraDialAperture.versionString {
-            return try requirePreservedFirmware(.cameraDialAperture, in: backup)
+        if backup.result.manifest.reportedFirmwareVersion == "1.8.0" {
+            _ = try stockRestoration(backup)
+        } else if backup.result.manifest.reportedFirmwareVersion == "4.5.0" {
+            try requirePreservedFirmware(.cameraDialAperture, in: backup)
+        } else {
+            try requirePreservedFirmware(.wideCameraAperture, in: backup)
         }
-        guard backup.result.manifest.reportedFirmwareVersion == FirmwareVariant.startupProbe.versionString else {
-            return try requireStartupProbeSource(backup)
-        }
-        let diagnosticStart = 0x9c00
-        guard backup.flash[base..<diagnosticStart] ==
-                (try template(.startupProbe)).prefix(diagnosticStart - base) else {
-            throw DeviceError.failure("The startup probe's immutable bytes differ from the pinned application.")
-        }
-        // The fresh full backup preserves the mutable tail before any upload.
     }
     static func stockRestoration(_ backup: VerifiedBackup) throws -> Self {
         guard backup.result.manifest.reportedFirmwareVersion == "1.8.0",
@@ -230,36 +205,23 @@ struct ApplicationImage: Sendable {
     static func installedVariant(_ flash: Data) throws -> FirmwareVariant? {
         guard flash.count == 0x20000 else { throw DeviceError.failure("Invalid full-flash read.") }
         guard let variant = FirmwareVariant.from(version: Array(flash[0x4000..<0x4003])) else { return nil }
-        guard flash[base..<variant.profileAddress] == (try template(variant)).prefix(variant.profileOffset) else { return nil }
-        return variant
+        return flash[base..<variant.applicationEnd] == (try template(variant)) ? variant : nil
     }
-    private static func fixedUpstreamSetting(_ variant: FirmwareVariant) -> AdapterLensSetting {
-        if variant == .cameraDialAperture {
-            // USB identifies the compiled boot setting. The live camera-dial
-            // selection is volatile and cannot be observed after power-off.
-            return AdapterLensSetting(id: "zeiss-jena-biotar-55-f2", name: "Zeiss Jena Biotar 58mm f/2",
-                                      focalMM10: 580, maximumAV: 4608, reportedAV: 4608, revision: 1)
-        }
-        if variant == .upstreamNovemberTrial || variant == .upstreamStockSpeed {
+    fileprivate static func fixedUpstreamSetting(_ variant: FirmwareVariant) -> AdapterLensSetting {
+        if variant == .upstreamStockSpeed {
             return AdapterLensSetting(id: "upstream-november-50-f1-8", name: "Upstream 50mm f/1.8",
                                       focalMM10: 500, maximumAV: 4544, reportedAV: 4544, revision: 1)
         }
-        // Frozen with this image; future library-seed edits cannot reinterpret it.
-        return AdapterLensSetting(id: "contax-zeiss-50-f1-4", name: "Contax Zeiss 50mm f/1.4",
-                           focalMM10: 500, maximumAV: 4352, reportedAV: 4352, revision: 1)
+        // Lens specification and boot report; selectable camera range is separate.
+        return AdapterLensSetting(id: "zeiss-jena-biotar-55-f2", name: "Zeiss Jena Biotar 58mm f/2",
+                                  focalMM10: 580, maximumAV: 4608, reportedAV: 4608, revision: 1)
     }
     static func setting(in image: Data, variant: FirmwareVariant) throws -> AdapterLensSetting? {
-        guard image.count == variant.applicationBytes,
-              image.prefix(variant.profileOffset) == (try template(variant)).prefix(variant.profileOffset) else {
-            throw DeviceError.failure("Unrecognized application bytes.")
-        }
-        if variant == .startupProbe { return nil }
-        if !variant.supportsLensProfileChanges { return fixedUpstreamSetting(variant) }
-        return try AdapterLensSetting.decode(Data(image.suffix(256)))
+        guard image == (try template(variant)) else { throw DeviceError.failure("Unrecognized application bytes.") }
+        return fixedUpstreamSetting(variant)
     }
     static func installedSetting(_ flash: Data) throws -> AdapterLensSetting? {
-        guard flash.count == 0x20000 else { throw DeviceError.failure("Invalid full-flash read.") }
         guard let variant = try installedVariant(flash) else { return nil }
-        return try setting(in: Data(flash[base..<variant.applicationEnd]), variant: variant)
+        return fixedUpstreamSetting(variant)
     }
 }

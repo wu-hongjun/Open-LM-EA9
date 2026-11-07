@@ -23,6 +23,17 @@ cp -R "$ea9_bin/OpenLMEA9_DeviceKit.bundle" "$ea9_app/Contents/Resources/"
 cp -R "$ea9_bin/OpenLMEA9_LensCore.bundle" "$ea9_app/Contents/Resources/"
 cp -R "$ea9_bin/OpenLMEA9_OpenLMEA9.bundle" "$ea9_app/Contents/Resources/"
 cp "$ea9_root/apps/macos/Info.plist" "$ea9_app/Contents/Info.plist"
+# Retired firmware must never remain in a stale SwiftPM resource bundle.
+python3 - "$ea9_root" "$ea9_app/Contents/Resources/OpenLMEA9_DeviceKit.bundle" <<'PY'
+from pathlib import Path
+import hashlib
+import sys
+root, bundle = map(Path, sys.argv[1:])
+source = root / 'apps/macos/Sources/DeviceKit/Resources'
+expected = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source.glob('*.bin')}
+actual = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in bundle.rglob('*.bin')}
+assert len(expected) == 3 and actual == expected, 'Packaged firmware differs from the active resource set.'
+PY
 # Publish a signed new inode, preserving any running CLI's mapped executable.
 cp "$ea9_bin/ea9ctl" "$ea9_root/dist/.ea9ctl-next"
 codesign --force --sign - "$ea9_root/dist/.ea9ctl-next"

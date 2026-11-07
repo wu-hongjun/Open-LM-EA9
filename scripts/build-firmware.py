@@ -1,105 +1,90 @@
 #!/usr/bin/env python3
-"""Pinned release build; bootstrap official dependencies only when absent."""
+"""Reproduce working 4.5.0 from checked-in C sources. No USB access."""
 import argparse
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
 import shutil
 import subprocess
-import tarfile
-import urllib.request
-import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--variant", choices=("metadata", "upstream-af", "reconciled-af", "hardened-af", "factory-af", "refined-af", "audited-af", "polished-af", "observed-af", "serviced-af", "arbitrated-af"), default="metadata")
-variant = parser.parse_args().variant
-FROZEN = {
-    "serviced-af": ("ea9-af-serviced-template", 0x5000, "657406719f6f911b49b6430015a7c1f1ffa1ff1a4f8b454ec578fe5bf005fa3c"),
-    "observed-af": ("ea9-af-observed-template", 0x5000, "ac9302fd329ab59b0e47efa5bbcf3e3b0b72de4e3e2033febf006c518ba6a0cc"),
-    "polished-af": ("ea9-af-polished-template", 0x5000, "da4eaa0f41fe9ff5b2c896ee7d5d2526cfc8fa423f581b5f55f9a1ff3c2059bf"),
-    "audited-af": ("ea9-af-audited-template", 0x5000, "276a134db2db04e4ea41e6bfb622e0b4f3c5421a6e3bfb6e40428cfce07fe265"),
-    "refined-af": ("ea9-af-refined-template", 0x5000, "448f827b4766f9ecb96c470d48d706650eb30d2fc41aea620369e22989d714c7"),
-    "factory-af": ("ea9-af-factory-template", 0x5000, "db9f9f3575ededbd38cc2366eb9efea15d2af6f43df5ee7b6a67a2e500fb6cdf"),
-    "hardened-af": ("ea9-af-hardened-template", 0x5000, "8996767bfc8e8625739e1c7619a54db1dd0b8da8150526b9afa4c9a490434e88"),
-    "metadata": ("ea9-profile-template", 0x5100, "d7f85bb53897d6b83f30c528d7790ec37e7164090d882251b917060cc300f293"),
-    "upstream-af": ("ea9-af-template", 0x5100, "6e48fcdd48df13ec529badd4626ee99120e005e4cd011ad664c683720b006552"),
-    "reconciled-af": ("ea9-af-reconciled-template", 0x5000, "e3614dfb8482644ba5b6114b591352669187e8ebd01a1344718f580ca12c3b36"),
-}
-if variant in FROZEN:
-    name, size, expected = FROZEN[variant]
-    data = (ROOT / f"apps/macos/Sources/DeviceKit/Resources/{name}.bin").read_bytes()
-    if len(data) != size or hashlib.sha256(data).hexdigest() != expected:
-        raise SystemExit(f"Frozen {variant} template failed length/digest verification; no resource was changed.")
-    print(f"Verified frozen {variant} template; use --variant arbitrated-af to build current source.")
-    raise SystemExit(0)
-DEPS = ROOT / "tools/firmware-deps"
-DEPS.mkdir(parents=True, exist_ok=True)
-records = json.loads((ROOT / "firmware/dependencies.json").read_text())
-destinations = {
-    "arm": DEPS / "arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi",
-    "dfp": DEPS / "samd21-dfp-2",
-    "cmsis": DEPS / "CMSIS_5-5.9.0",
-}
-for name, record in records.items():
-    archive_name = "CMSIS_5-5.9.0.tar.gz" if name == "cmsis" else record["url"].rsplit("/", 1)[-1]
-    archive = DEPS / archive_name
-    if not archive.exists():
-        with urllib.request.urlopen(record["url"], timeout=60) as response, archive.open("wb") as output:
-            shutil.copyfileobj(response, output)
-    if archive.stat().st_size != record["bytes"] or hashlib.sha256(archive.read_bytes()).hexdigest() != record["sha256"]:
-        raise SystemExit(f"Dependency size/checksum mismatch: {name}; no template was changed.")
-    if not destinations[name].exists():
-        if name == "dfp":
-            with zipfile.ZipFile(archive) as package:
-                package.extractall(destinations[name])
-        else:
-            with tarfile.open(archive) as package:
-                package.extractall(DEPS, filter="data")
-subprocess.run(["make", "-C", str(ROOT / "firmware/ea9"), "arbitrated-af"], check=True)
-binary = ROOT / "firmware/ea9/build/arbitrated/ea9-af-arbitrated-template.bin"
-data = binary.read_bytes()
-if len(data) != 0x5000 or data[-256:] != bytes(256):
-    raise SystemExit("Unexpected template span/profile row; resources were not changed.")
-# Measure the linked layout, not file padding. Keep a positive release margin
-# and the full reserved stack; per-function stack estimates are not high-water.
-nm = destinations['arm'] / 'bin/arm-none-eabi-nm'
-symbols = {}
-for line in subprocess.check_output([str(nm), str(binary.with_suffix('.elf'))], text=True).splitlines():
-    parts = line.split()
-    if len(parts) == 3: symbols[parts[2]] = int(parts[0], 16)
-relocate_bytes = symbols['_erelocate'] - symbols['_srelocate']
-flash_end = symbols['_etext'] + relocate_bytes
-layout = {'initializedFlashEnd': flash_end, 'flashMarginBytes': 0x9f00 - flash_end,
-          'staticRAMBytes': symbols['_ebss'] - 0x20000000,
-          'reservedStackBytes': symbols['_estack'] - symbols['_sstack'],
-          'stackBottom': symbols['_sstack'], 'stackTop': symbols['_estack'],
-          'stackHighWaterMeasured': False}
-if layout['flashMarginBytes'] < 256 or layout['reservedStackBytes'] != 8192:
-    raise SystemExit('Release margin/stack reservation failed; resource was not changed.')
-for name in symbols:
-    if name.startswith(('diag_', 'trail_')) or name in ('servo_move_to', 'malloc', '_malloc_r'):
-        raise SystemExit('Unexpected logger/legacy servo/heap linked: ' + name)
-sha = hashlib.sha256(data).hexdigest()
-resource = ROOT / "apps/macos/Sources/DeviceKit/Resources/ea9-af-arbitrated-template.bin"
-shutil.copyfile(binary, resource)
-(resource.parent.parent / "TrustedArbitratedAFTemplate.swift").write_text(
-    '// Generated by scripts/build-firmware.py; arbitrated AF 3.0.0 template.\n'
-    f'enum TrustedArbitratedAFTemplate {{ static let sha256 = "{sha}" }}\n'
-)
-sources = sorted((ROOT / "firmware/ea9/src").rglob("*")) + [ROOT / "firmware/ea9/Makefile"]
-manifest = {
-    "variant": variant, "status": "offline-candidate-not-camera-qualified",
-    "templateSHA256": sha, "bytes": len(data), "applicationOrigin": 0x5000,
-    "profileAddress": 0x9f00, "profileBytes": 256, "applicationEnd": 0xa000, "cameraVersionBCD": "0x30",
-    "proposedLoaderVersion": [3, 0, 0], "motorMotionEnabled": True,
-    "diagnosticFlashWritesEnabled": False, "cameraQualified": False,
-    "hardwareReportsSentByBuild": 0, "layout": layout,
-    "controller": "independent stock-derived incremental PID with bounded hardware wrapper",
-    "nominalCallbackCycles48MHz": 60008, "controlDivider": 11,
-    "factoryInstructionOracleSHA256": "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564", "dependencies": records,
-    "sources": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                for p in sources if p.is_file()},
-}
-binary.with_suffix(".manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-print(f"{variant} template: {len(data)} bytes, SHA-256 {sha}")
+DEPS = ROOT / 'tools/firmware-deps'
+ARM = str(DEPS / 'arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-')
+RELEASE = ROOT / 'firmware/releases/4.5.0'
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    if not __debug__:
+        raise SystemExit('Build assertions require Python without optimization.')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path)
+    parser.add_argument('--wide-aperture', action='store_true', help='Prepare separate 4.6.0 f/1.2–f/22 candidate.')
+    args = parser.parse_args()
+    work = (args.output or ROOT / 'artifacts/private' /
+            ('firmware-build-' + datetime.now().strftime('%Y%m%d-%H%M%S'))).resolve()
+    assert work.is_relative_to(ROOT / 'artifacts/private')
+    manifest = json.loads((RELEASE / 'manifest.json').read_text())
+    for name, expected in manifest['sources'].items():
+        assert sha(ROOT / 'firmware/src' / name) == expected, name
+    assert sha(RELEASE / 'biotar-camera-aperture.bin') == manifest['imageSHA256']
+    if not Path(ARM + 'gcc').exists():
+        raise SystemExit('Install the pinned ARM toolchain and CMSIS/SAMD21 headers; see docs/development.md.')
+    work.mkdir(parents=True, exist_ok=False)
+    shutil.copytree(ROOT / 'firmware/src', work / 'src')
+    shutil.copytree(ROOT / 'firmware/hosttest', work / 'tools/hosttest')
+    if args.wide_aperture:
+        header = work / 'src/emount.h'
+        text = header.read_text()
+        assert text.count('#define EM_APERTURE_MAX  0x1200u') == 1
+        assert text.count('#define EM_APERTURE_MIN  0x1800u') == 1
+        header.write_text(text.replace('#define EM_APERTURE_MAX  0x1200u', '#define EM_APERTURE_MAX  0x1080u')
+                         .replace('#define EM_APERTURE_MIN  0x1800u', '#define EM_APERTURE_MIN  0x1900u'))
+    for name in ['release.mk', 'optimizations.mk']:
+        shutil.copy2(ROOT / 'firmware' / name, work / name)
+    includes = f'-Isrc -I{DEPS}/samd21-dfp-2/samd21a/include -I{DEPS}/CMSIS_5-5.9.0/CMSIS/Core/Include'
+    with (work / 'build.log').open('w') as log:
+        subprocess.run(['make', '-f', 'optimizations.mk', 'BUILD=release', 'OPT=-Os',
+                        f'TOOLCHAIN={ARM}', f'INCLUDES={includes}', 'build/ea9-rebuild-release.elf'],
+                       cwd=work, check=True, stdout=log, stderr=subprocess.STDOUT)
+    elf = work / 'build/ea9-rebuild-release.elf'
+    symbols = {}
+    for line in subprocess.check_output([ARM + 'nm', str(elf)], text=True).splitlines():
+        fields = line.split()
+        if len(fields) == 3:
+            symbols[fields[2]] = int(fields[0], 16)
+    assert not any(n.startswith(('diag_', 'trail_')) for n in symbols)
+    assert 'em_uart_set_baud' not in symbols
+    end = symbols['_etext'] + symbols['_erelocate'] - symbols['_srelocate']
+    assert end <= 0x9f00 and symbols['_estack'] <= 0x20004000
+    raw = work / 'raw.bin'
+    subprocess.run([ARM + 'objcopy', '-O', 'binary', '--gap-fill=0xff', str(elf), str(raw)], check=True)
+    data = raw.read_bytes()
+    assert len(data) == end - 0x5000
+    image = work / ('biotar-wide-aperture.bin' if args.wide_aperture else 'biotar-camera-aperture.bin')
+    image.write_bytes(data.ljust(0x5000, b'\xff'))
+    if args.wide_aperture:
+        baseline = manifest['imageSHA256']
+        manifest.update(loaderVersion=[4,6,0], apertureMaximumAV=4224, apertureMinimumAV=6400,
+                        baselineImageSHA256=baseline, imageSHA256=sha(image), rawBytes=len(data),
+                        codeAndDataEnd=hex(end), cameraQualified=False,
+                        sources={p.name:sha(p) for p in sorted((work/'src').iterdir()) if p.is_file()},
+                        builderSHA256=sha(Path(__file__)))
+        manifest.pop('from44PatchSHA256',None)
+        (work/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    else:
+        assert sha(image) == manifest['imageSHA256'], 'Build differs from the working release; use a new version for behavior changes.'
+        shutil.copy2(RELEASE / 'manifest.json', work / 'manifest.json')
+    evidence = dict(imageSHA256=sha(image), imageBytes=image.stat().st_size,
+                    codeAndDataEnd=hex(end), builderSHA256=sha(Path(__file__)),
+                    sourcePinsMatch=True, publishedImageMatches=not args.wide_aperture, hardwareAccess=False)
+    (work / 'build-evidence.json').write_text(json.dumps(evidence, indent=2) + '\n')
+    print(f"{'.'.join(map(str,manifest['loaderVersion']))}: {sha(image)}\nBuild: {work}")
+
+
+if __name__ == '__main__':
+    main()

@@ -1,114 +1,165 @@
 #!/usr/bin/env python3
-"""Run inherited behavioral checks and cross-language profile/frame checks."""
-from pathlib import Path
+"""Test camera-dial aperture metadata through the production protocol sources."""
 import argparse
-import subprocess
+import hashlib
 import json
-import sys
+from pathlib import Path
+import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--af", action="store_true", help="Also validate the separate AF template/profile fixtures")
-with_af = parser.parse_args().af
-BASE = ROOT / "firmware/ea9"
-OUT = ROOT / "artifacts/firmware-milestone/hosttests"
-OUT.mkdir(parents=True, exist_ok=True)
-COMMON = ["cc", "-std=gnu99", "-Wall", "-Wextra", "-O1", "-Ihosttest", "-Isrc"]
-tests = {
-    "stock_query": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "../tests/test_stock_query.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
-    "factory_servo": ["-fsanitize=undefined,address", "-fno-sanitize-recover=all", "hosttest/test_factory_servo.c", "src/factory_servo.c", "src/factory_af.c", "src/io_guard.c", "src/focus_map.c"],
-    "emount": ["hosttest/test_emount.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
-    "servo": ["hosttest/test_servo.c", "hosttest/sim_motor.c", "src/servo.c", "src/io_guard.c"],
-    "nobody": ["hosttest/test_nobody.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
-    "init": ["hosttest/test_init.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
-    "focus": ["hosttest/test_focus.c", "src/focus_map.c"],
-    "focus_dist": ["hosttest/test_focus_dist.c", "src/focus_dist.c", "-lm"],
-    "focus_pred": ["hosttest/test_focus_pred.c", "src/focus_pred.c", "src/focus_motion.c"],
-    "af_control": ["../tests/test_af_control.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
-    "io_guard": ["hosttest/test_io_guard.c", "src/io_guard.c"],
-    "af_reconciliation": ["../tests/test_af_reconciliation.c", "src/af_reference.c", "src/af_completion.c", "src/af_control.c", "src/focus_map.c", "src/focus_dist.c"],
-    "af_lifecycle": ["-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_lifecycle.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c", "src/focus_motion.c"],
-    "af_hardening": ["-DEA9_HOST_IRQ_TEST", "-DEA9_SIM_MOTOR", "-DEA9_NO_LOG", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "hosttest/test_af_hardening.c", "hosttest/sim_motor.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c", "src/servo.c", "src/af_control.c", "src/af_reference.c", "src/af_completion.c", "src/io_guard.c", "src/focus_map.c", "src/focus_dist.c", "src/focus_pred.c", "src/focus_motion.c"],
-    "profile": ["../tests/test_profile.c", "hosttest/shim.c", "src/emount.c", "src/emount_packets.c", "src/lens_profile.c", "src/lens_aperture.c"],
-}
-# Reuse the production-main lifecycle/dispatch checks with the new backend.
-for old, new in [("af_lifecycle", "factory_lifecycle"), ("af_hardening", "factory_hardening")]:
-    tests[new] = ["-DEA9_FACTORY_AF", "-DUPSTREAM_PROFILE=FACTORY_PROFILE"] + [
-        part if part != "src/servo.c" else "src/factory_servo.c" for part in tests[old]
-    ] + ["src/factory_af.c"]
-tests['af_queue_retarget'] = [part if part != 'hosttest/test_af_lifecycle.c'
-                            else 'hosttest/test_af_queue_retarget.c' for part in tests['factory_lifecycle']]
-tests['event_queue'] = ['-DEA9_NO_LOG', '-fsanitize=address,undefined', '-fno-sanitize-recover=all',
-                        'hosttest/test_event_queue.c', 'hosttest/shim.c', 'src/emount_packets.c',
-                        'src/lens_profile.c', 'src/lens_aperture.c']
-tests['factory_retarget'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=all',
-                            'hosttest/test_factory_retarget.c', 'src/factory_servo.c',
-                            'src/factory_af.c', 'src/io_guard.c', 'src/focus_map.c']
-tests['focus_motion'] = ['-fsanitize=address,undefined', '-fno-sanitize-recover=all',
-                         'hosttest/test_focus_motion.c', 'src/focus_motion.c']
-tests['motion_telemetry'] = [part if part != 'hosttest/test_af_lifecycle.c'
-                           else 'hosttest/test_motion_telemetry.c' for part in tests['factory_lifecycle']]
-for files in tests.values():
-    if "src/emount.c" in files or "src/lens_aperture.c" in files:
-        files.append("src/em_arbitration.c")
-for name, files in tests.items():
-    binary = OUT / f"test_{name}"
-    subprocess.run(COMMON + files + ["-o", str(binary)], cwd=BASE, check=True)
-    if name == "profile":
-        continue
-    variants = [["nobody"], ["slowbody"]] if name == "nobody" else [[]]
-    if name == 'af_queue_retarget': variants = [[x] for x in ['stop-fifo', 'stop-pending', 'stop-coalesce', 'stop-reordered', 'repeat', 'single']]
-    if name == 'factory_retarget': variants = [[str(x)] for x in range(4)]
-    if name == 'focus_motion': variants = [[x] for x in ['coast','slow','reversal','stale','vd-gap','no-vd','wrap','limits','reset','burst','resume-history','sub-resolution-jitter','slow-frames']]
-    if name == 'motion_telemetry': variants = [[x] for x in ['coast40','coast5952','reverse-stop','gap-reset']]
-    if name == "io_guard": variants = [[x] for x in ["ready", "timeout", "wrap", "frozen"]]
-    if name == "af_lifecycle": variants = [[str(x)] for x in range(13)]
-    if name == "af_hardening": variants = [[str(x)] for x in range(21)]
-    if name == "factory_hardening": variants = [[str(x)] for x in range(21)]
-    # Legacy cases 11/12 assert speed/dwell/band arrival, which factory replaces
-    # with crossing; the new scripted wrapper suite tests its arrival guards.
-    if name == "factory_lifecycle": variants = [[str(x)] for x in range(11)]
-    if name == "factory_servo": variants = [[x] for x in ["success", "wrap", "retarget", "stop", "stop-cross", "late-stop", "early-fault", "late-fault", "gap", "frozen", "runaway", "final-drift", "wrong-way", "stall", "timeout", "dry", "invalid-positive", "invalid-negative", "resolution", "resolution-stop", "progress-timeout", "deadline-stop", "retarget-limit-stop", "runaway-stop", "wrong-way-stop", "mid-invalid", "final-invalid", "repeat-quantized", "repeat-stop", "retarget-budget"]]
-    for args in variants:
-        subprocess.run([str(binary)] + args, check=True)
-# Compile actual sensor and PWM drivers against DFP-shaped register memory.
-mmio = OUT / "test_mmio_faults"
-subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_faults.c", "src/io_guard.c", "src/motor.c", "src/abs_encoder.c", "src/vdd.c", "src/em_uart.c", "-o", str(mmio)], cwd=BASE, check=True)
-for case in ["encoder", "encoder-reset", "adc", "burst-frozen", "uart", "uart-rx", "pwm", "release", "irq", "irq-masked", "frozen"]:
-    subprocess.run([str(mmio), case], check=True)
-delays = OUT / "test_mmio_delays"
-subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_delays.c", "src/io_guard.c", "src/motor.c", "src/delay.c", "-o", str(delays)], cwd=BASE, check=True)
-for case in ["us", "ms", "cycles", "adc-us", "adc-ms"]:
-    subprocess.run([str(delays), case], check=True)
-startup = OUT / "test_mmio_startup"
-subprocess.run(["cc", "-std=gnu99", "-O1", "-Wall", "-Wextra", "-ffunction-sections", "-fdata-sections", "-Wl,-dead_strip", "-DEA9_AF_BUILD", "-D__SAMD21E17A__", "-Isrc", "-I../../tools/firmware-deps/samd21-dfp-2/samd21a/include", "-I../../tools/firmware-deps/CMSIS_5-5.9.0/CMSIS/Core/Include", "-include", "hosttest/mmio/registers.h", "hosttest/mmio/test_startup.c", "src/io_guard.c", "src/motor.c", "src/clock.c", "src/em_eic.c", "src/em_uart.c", "-o", str(startup)], cwd=BASE, check=True)
-for case in range(14):
-    subprocess.run([str(startup), str(case)], check=True)
-inventory = json.loads((ROOT / "profiles/requested-lenses.json").read_text())["lenses"]
-cli = ROOT / "apps/macos/.build/out/Products/Debug/ea9ctl"
-if with_af:
-    subprocess.run(COMMON + ["-DEM_FW_VERSION_BCD=0x30u", "-DEA9_PROFILE_ADDRESS=0x9f00u"] + tests["profile"]
-                   + ["-o", str(OUT / "test_af_profile")], cwd=BASE, check=True)
-# This isolated generated library is never the owner's normal app state.
-# Materialize it offline, then select 50mm for the zoom fixture as well.
-state = OUT / 'state'
-seed = OUT / 'seed.bin'
-if seed.exists(): seed.unlink()
-subprocess.run([str(cli), '--state-directory', str(state), 'prepare', 'contax-zeiss-50-f1-4', str(seed)], check=True)
-profile_file = state / 'profiles.json'
-library = json.loads(profile_file.read_text())
-for p in library['profiles']:
-    if p['kind'] == 'zoom': p['activeFocalLengthMM'] = 50
-profile_file.write_text(json.dumps(library, indent=2) + '\n')
-for lens in inventory:
-    image = OUT / f'{lens["id"]}.bin'
-    if image.exists():
-        image.unlink() # Generated fixture only; never hardware backups.
-    subprocess.run([str(cli), "--state-directory", str(OUT / "state"), "prepare", lens["id"], str(image)], check=True)
-    subprocess.run([str(OUT / "test_profile"), str(image)], check=True)
-    if with_af:
-        candidate = OUT / f'{lens["id"]}-af.bin'
-        for path in (candidate, candidate.with_suffix(".manifest.json")):
-            if path.exists(): path.unlink() # Generated fixtures only.
-        subprocess.run([sys.executable, str(ROOT / "scripts/prepare-af.py"), str(image), str(candidate)], check=True)
-        subprocess.run([str(OUT / "test_af_profile"), str(candidate)], check=True)
+HERE = ROOT / 'firmware/hosttest'
+FIELDS = ('emount.c', 'emount_packets.c', 'optical_file.c', 'reported_aperture.c')
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    if not __debug__:
+        raise SystemExit('Run without Python optimization.')
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--build', type=Path)
+    p.add_argument('--output', type=Path)
+    a = p.parse_args()
+    from datetime import datetime
+    stamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+    if a.build is None:
+        a.build = ROOT / 'artifacts/private' / ('firmware-test-build-' + stamp)
+        subprocess.run(['python3', str(ROOT / 'scripts/build-firmware.py'), '--output', str(a.build)], check=True)
+    if a.output is None:
+        a.output = ROOT / 'artifacts/private' / ('firmware-tests-' + stamp)
+    build, out = a.build.resolve(), a.output.resolve()
+    assert out.is_relative_to(ROOT / 'artifacts/private')
+    manifest = json.loads((build / 'manifest.json').read_text())
+    wide = manifest['loaderVersion'] == [4,6,0]
+    image_name = 'biotar-wide-aperture.bin' if wide else 'biotar-camera-aperture.bin'
+    assert sha(build / image_name) == manifest['imageSHA256']
+    for name, digest in manifest['sources'].items():
+        assert sha(build / 'src' / name) == digest, name
+    out.mkdir(exist_ok=False)
+
+    host = out / 'host'
+    shutil.copytree(build / 'tools/hosttest', host)
+    sam = host / 'sam.h'
+    s = sam.read_text()
+    assert s.count('static inline void __disable_irq(void) {}') == 1
+    s = s.replace('static inline void __disable_irq(void) {}', '''#include <stdint.h>
+extern uint32_t host_primask;
+static inline void __disable_irq(void) { host_primask = 1; }
+static inline uint32_t __get_PRIMASK(void) { return host_primask; }
+static inline void __set_PRIMASK(uint32_t key) { host_primask = key; }''')
+    s = s.replace('static inline void __enable_irq(void) {}',
+                  'static inline void __enable_irq(void) { host_primask = 0; }')
+    sam.write_text(s)
+    shim = host / 'shim.c'
+    s = shim.read_text()
+    marker = 'void em_uart_send(const uint8_t *buf, uint16_t len)\n{'
+    assert s.count(marker) == 1
+    s = s.replace(marker, '''uint32_t host_primask;
+void (*host_tx_hook)(void);
+void em_uart_send(const uint8_t *buf, uint16_t len)
+{
+    if (host_tx_hook) {
+        void (*callback)(void) = host_tx_hook;
+        host_tx_hook = 0;
+        callback();
+    }''')
+    shim.write_text(s)
+
+    flags = ['-std=gnu99', '-Os', '-DNDEBUG', '-DEA9_NO_LOG', '-Wall', '-Wextra',
+             '-Werror', '-fsanitize=address,undefined', '-fno-sanitize-recover=all']
+    results = []
+    for case in ('production', 'missing-input-hook', 'publish-from-irq'):
+        src = out / case
+        shutil.copytree(build / 'src', src)
+        if case == 'missing-input-hook':
+            path = src / 'emount.c'
+            s = path.read_text()
+            assert s.count('\t\treported_aperture_offer(rx, n);') == 1
+            path.write_text(s.replace('\t\treported_aperture_offer(rx, n);', '\t\t(void)rx;'))
+        elif case == 'publish-from-irq':
+            path = src / 'reported_aperture.c'
+            s = path.read_text()
+            old = 'if (value >= EM_APERTURE_MAX && value <= EM_APERTURE_MIN) pending = value;'
+            assert s.count(old) == 1
+            path.write_text(s.replace(old, 'if (value >= EM_APERTURE_MAX && value <= EM_APERTURE_MIN) {\n'
+                                          '        pending = value;\n        reported_aperture_commit();\n    }'))
+        binary = out / (case + '-test')
+        subprocess.run(['clang', *flags, f'-I{host}', f'-I{src}', str(HERE / 'test_camera_aperture.c'),
+                        str(shim), *(str(src / name) for name in FIELDS), '-o', str(binary)], check=True)
+        r = subprocess.run([str(binary)], capture_output=True, text=True, timeout=20)
+        assert (r.returncode == 0) == (case == 'production'), (case, r.stdout, r.stderr)
+        if case == 'production':
+            assert not r.stderr, r.stderr
+            print(r.stdout, end='')
+        else:
+            expected = ('sent_n == start + 1 && u16(sent[start] + 6) == 5120'
+                        if case == 'missing-input-hook' else
+                        'u16(em_msg_05 + 6) == value && u16(em_msg_05 + 8) == value')
+            assert r.returncode == 2 and r.stderr.rstrip().endswith(expected), (case, r.stderr)
+        results.append({'case': case, 'exitCode': r.returncode,
+                        'expected': 'passes' if case == 'production' else 'rejected',
+                        'failedAssertion': None if case == 'production' else expected})
+
+    # Keep the upstream broad protocol/servo/focus tests, adjusting profile literals.
+    suite = host / 'test_emount.c'
+    s = suite.read_text()
+    replacements = {
+        'const uint8_t MAXD = 0x16, MIND = 0x16;': ('const uint8_t MAXD = 0x0c, MIND = 0x50;' if wide else 'const uint8_t MAXD = 0x18, MIND = 0x48;'),
+        'em_msg_08[0x17] != 0x50': 'em_msg_08[0x17] != 0x58',
+        '{ 0x32, 0x16 }, { 0x34, 0x16 }': ('{ 0x32, 0x0c }, { 0x34, 0x0c }' if wide else '{ 0x32, 0x18 }, { 0x34, 0x18 }'),
+        '{ 0x39, 0x16 }, { 0x3A, 0x16 }': ('{ 0x39, 0x0c }, { 0x3A, 0x50 }' if wide else '{ 0x39, 0x18 }, { 0x3A, 0x48 }'),
+    }
+    for old, new in replacements.items():
+        assert s.count(old) == 1, old
+        s = s.replace(old, new)
+    suite.write_text(s)
+    binary = out / 'broad-protocol-test'
+    subprocess.run(['clang', *flags, f'-I{host}', f'-I{build / "src"}', str(suite), str(shim),
+                    *(str(build / 'src' / name) for name in FIELDS), '-o', str(binary)], check=True)
+    r = subprocess.run([str(binary)], capture_output=True, text=True, timeout=20)
+    assert r.returncode == 0, (r.stdout, r.stderr)
+    print(r.stdout, end='')
+
+    for test, sources in [
+        ('test_servo', ['tools/hosttest/sim_motor.c', 'src/servo.c']),
+        ('test_focus', ['src/focus_map.c']),
+        ('test_focus_dist', ['src/focus_dist.c']),
+    ]:
+        binary = out / test
+        subprocess.run(['clang', *flags, f'-I{host}', f'-I{build / "src"}',
+                        str(build / f'tools/hosttest/{test}.c'),
+                        *(str(build / source) for source in sources), '-lm', '-o', str(binary)], check=True)
+        r = subprocess.run([str(binary)], capture_output=True, text=True, timeout=30)
+        assert r.returncode == 0, (test, r.stdout, r.stderr)
+    # This release, like 4.4, compiles diagnostic flash writes out. The
+    # upstream no-body fixture expects a persistent tally; keep its wait/
+    # frame-sync assertions, but require no tally from this release build.
+    nobody = host / 'test_nobody.c'
+    s = nobody.read_text()
+    old = '''ok(host_tally_n == 1, "exactly one tally mark");
+\t\tok(host_tally_n == 1 && host_tally_code == 0xB6,
+\t\t   "and it is the NO BODY mark");'''
+    assert s.count(old) == 1
+    nobody.write_text(s.replace(old, '''ok(host_tally_n == 0, "diagnostic-free release writes no tally");
+\t\tok(host_millis >= 3000, "waited until chip select rose");'''))
+    for name, cases in [('test_nobody', ('nobody', 'slowbody')), ('test_init', ('',))]:
+        binary = out / name
+        subprocess.run(['clang', *flags, f'-I{host}', f'-I{build / "src"}',
+                        str(host / f'{name}.c'), str(shim),
+                        *(str(build / 'src' / source) for source in FIELDS), '-o', str(binary)], check=True)
+        for case in cases:
+            command = [str(binary)] + ([case] if case else [])
+            r = subprocess.run(command, capture_output=True, text=True, timeout=10)
+            assert r.returncode == 0, (name, case, r.stdout, r.stderr)
+    result = {'status': 'passed-offline-camera-aperture-tests', 'candidateSHA256': manifest['imageSHA256'],
+              'productionAndControls': results, 'hardwareReportsSent': 0,
+              'scope': 'Synthetic frames, supplied UART/CS/time and simulated motor; camera dial, exposure and autofocus remain hardware checks.'}
+    (out / 'results.json').write_text(json.dumps(result, indent=2)+'\n')
+    print('Broad protocol, servo, focus mapping and focus distance tests passed.')
+
+
+if __name__ == '__main__':
+    main()

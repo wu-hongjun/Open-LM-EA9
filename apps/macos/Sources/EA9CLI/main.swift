@@ -1,25 +1,7 @@
 import Foundation
 import DeviceKit
-import LensCore
 
 @main struct EA9CLI {
-    private static func variant(for command: String) -> FirmwareVariant {
-        switch command {
-        case "prepare-crash-upstream", "apply-crash-upstream": .autofocusCrashDiagnostic
-        case "prepare-reference-upstream", "apply-reference-upstream": .autofocusReferenceQualified
-        case "prepare-homing-upstream", "apply-homing-upstream": .autofocusHomingDiagnostic
-        case "prepare-readiness-upstream", "apply-readiness-upstream": .autofocusReadiness
-        case "prepare-trace-upstream", "apply-trace-upstream": .autofocusTargetedTrace
-        case "prepare-handoff-upstream", "apply-handoff-upstream": .autofocusStartupHandoff
-        case "prepare-absolute-upstream", "apply-absolute-upstream": .autofocusAbsoluteUpstream
-        case "prepare-bounded-upstream", "apply-bounded-upstream": .autofocusBoundedUpstream
-        case "prepare-hardened-upstream", "apply-hardened-upstream": .autofocusUpstreamHardened
-        case "prepare-startup", "apply-startup": .autofocusStartupDiagnostic
-        case "prepare-upstream", "apply-upstream": .autofocusUpstreamBaseline
-        case "prepare-af", "apply-af": .autofocusArbitratedCamera
-        default: .metadataOnly
-        }
-    }
     static func main() async {
         do {
             var args = Array(CommandLine.arguments.dropFirst())
@@ -29,103 +11,62 @@ import LensCore
                 state = URL(fileURLWithPath: args[index + 1], isDirectory: true)
                 args.removeSubrange(index...index + 1)
             }
-            if args.count == 2, args[0] == "prepare-camera-aperture" {
-                let data = try FirmwareImageBuilder.prepareCameraDialAperture()
+            let prepare: [String: () throws -> Data] = [
+                "prepare-camera-aperture": FirmwareImageBuilder.prepareCameraDialAperture,
+                "prepare-wide-aperture": FirmwareImageBuilder.prepareWideCameraAperture,
+                "prepare-upstream-stock-speed": FirmwareImageBuilder.prepareUpstreamStockSpeed]
+            if args.count == 2, let builder = prepare[args[0]] {
+                let data = try builder()
                 try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
-                print("Prepared Biotar 58mm camera-dial aperture trial (4.5.0): \(data.count) bytes. No USB reports sent.")
+                print("Prepared pinned image: \(data.count) bytes. No USB access.")
                 return
             }
-            if args.count == 2, args[0] == "prepare-upstream-stock-speed" {
-                let data = try FirmwareImageBuilder.prepareUpstreamStockSpeed()
-                try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
-                print("Prepared pinned upstream 750 kbaud trial: \(data.count) bytes. No USB reports sent.")
-                return
-            }
-            if args.count == 2, args[0] == "prepare-startup-probe" {
-                let data = try FirmwareImageBuilder.prepareStartupProbe()
-                try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
-                print("Prepared pinned 4.3.0 startup probe: \(data.count) bytes. No USB reports sent.")
-                return
-            }
-            if args.count == 2, args[0] == "prepare-upstream-november" {
-                let data = try FirmwareImageBuilder.prepareUpstreamNovemberTrial()
-                try data.write(to: URL(fileURLWithPath: args[1]), options: .withoutOverwriting)
-                print("Prepared pinned November upstream trial: \(data.count) bytes. No USB reports sent.")
-                return
-            }
-            let usage = "Crash diagnostic 4.1 (camera-unqualified): prepare-crash-upstream PROFILE-ID NEW.bin | apply-crash-upstream PROFILE-ID --idle. Reference qualification 4.0 (camera-unqualified): prepare-reference-upstream PROFILE-ID NEW.bin | apply-reference-upstream PROFILE-ID --idle. Homing diagnostic 3.9 (camera-unqualified): prepare-homing-upstream PROFILE-ID NEW.bin | apply-homing-upstream PROFILE-ID --idle. Readiness 3.8: prepare-readiness-upstream PROFILE-ID NEW.bin | apply-readiness-upstream PROFILE-ID --idle. Targeted trace 3.7: prepare-trace-upstream PROFILE-ID NEW.bin | apply-trace-upstream PROFILE-ID --idle. Startup handoff: prepare-handoff-upstream PROFILE-ID NEW.bin | apply-handoff-upstream PROFILE-ID --idle. Absolute upstream: prepare-absolute-upstream PROFILE-ID NEW.bin | apply-absolute-upstream PROFILE-ID --idle. Bounded upstream: prepare-bounded-upstream PROFILE-ID NEW.bin | apply-bounded-upstream PROFILE-ID --idle. Hardened upstream: prepare-hardened-upstream PROFILE-ID NEW.bin | apply-hardened-upstream PROFILE-ID --idle. Startup diagnostic: prepare-startup PROFILE-ID NEW.bin | apply-startup PROFILE-ID --idle. Usage: ea9ctl [--state-directory PATH] inventory | backup NEW.ea9backup --idle | apply PROFILE-ID --idle | apply-af PROFILE-ID --idle | qualify-stock --idle | verify --idle | inspect --idle | restore-stock ORIGINAL.ea9backup --idle | prepare PROFILE-ID NEW.bin | prepare-af PROFILE-ID NEW.bin | prepare-upstream PROFILE-ID NEW.bin | apply-upstream PROFILE-ID --idle"
-            guard args == ["inventory"] || (args.count == 3 && ["backup","apply","apply-af","apply-upstream","apply-startup","apply-hardened-upstream","apply-bounded-upstream","apply-absolute-upstream","apply-handoff-upstream","apply-trace-upstream","apply-readiness-upstream","apply-homing-upstream","apply-reference-upstream","apply-crash-upstream","restore-stock"].contains(args[0]) && args[2] == "--idle")
-                || (args.count == 2 && ["verify","inspect","qualify-stock","apply-upstream-november","apply-startup-probe","apply-upstream-stock-speed","apply-camera-aperture"].contains(args[0]) && args[1] == "--idle")
-                || (args.count == 3 && ["prepare","prepare-af","prepare-upstream","prepare-startup","prepare-hardened-upstream","prepare-bounded-upstream","prepare-absolute-upstream","prepare-handoff-upstream","prepare-trace-upstream","prepare-readiness-upstream","prepare-homing-upstream","prepare-reference-upstream","prepare-crash-upstream"].contains(args[0]))
-                || (args.count == 3 && args[0] == "resolve-stock-after-camera" && args[2] == "--idle") else { throw DeviceError.failure(usage + " | prepare-camera-aperture NEW.bin | apply-camera-aperture --idle | prepare-upstream-stock-speed NEW.bin | apply-upstream-stock-speed --idle | prepare-startup-probe NEW.bin | apply-startup-probe --idle | prepare-upstream-november NEW.bin | apply-upstream-november --idle | resolve-stock-after-camera REVIEWED.ea9backup --idle") }
-            if ["prepare","prepare-af","prepare-upstream","prepare-startup","prepare-hardened-upstream","prepare-bounded-upstream","prepare-absolute-upstream","prepare-handoff-upstream","prepare-trace-upstream","prepare-readiness-upstream","prepare-homing-upstream","prepare-reference-upstream","prepare-crash-upstream"].contains(args[0]) {
-                let library = try LibraryStore(directory: state).loadOrSeed()
-                guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let data = try FirmwareImageBuilder.prepare(profile: profile, variant: variant(for: args[0]))
-                try data.write(to: URL(fileURLWithPath: args[2]), options: .withoutOverwriting)
-                print("Prepared application image: \(data.count) bytes. No USB reports sent.")
-                return
+            let simple = ["verify","inspect","qualify-stock","apply-camera-aperture","apply-wide-aperture","apply-upstream-stock-speed"]
+            let fileCommands = ["backup","restore-stock","resolve-stock-after-camera"]
+            guard args == ["inventory"] || (args.count == 2 && simple.contains(args[0]) && args[1] == "--idle") ||
+                    (args.count == 3 && fileCommands.contains(args[0]) && args[2] == "--idle") else {
+                throw DeviceError.failure("Usage: ea9ctl [--state-directory PATH] inventory | inspect --idle | backup NEW.ea9backup --idle | apply-camera-aperture --idle | apply-wide-aperture --idle | apply-upstream-stock-speed --idle | verify --idle | qualify-stock --idle | restore-stock ORIGINAL.ea9backup --idle | prepare-camera-aperture NEW.bin | prepare-wide-aperture NEW.bin | prepare-upstream-stock-speed NEW.bin")
             }
             let service = DeviceService(stateDirectory: state)
             let devices = try await service.inventory()
             if args[0] == "inventory" {
-                // Inventory never sends CHECK; omit serial/location from terminal output.
-                for device in devices { print("\(device.product) · connection \(device.id) · descriptor \(device.qualifiedDescriptor ? "qualified" : "unrecognized")") }
                 print("\(devices.count) matching adapter(s); no reports sent.")
                 return
             }
             guard devices.count == 1 else { throw DeviceError.failure("Connect exactly one adapter.") }
             let device = devices[0], token = CancellationToken()
-            let reportProgress: @Sendable (BackupProgress) -> Void = { p in
+            let progress: @Sendable (BackupProgress) -> Void = { p in
                 if p.completed == 0 || p.completed == p.total || p.completed % 8192 == 64 {
                     FileHandle.standardError.write(Data("\(p.phase) · \(Int(p.fraction * 100))%\n".utf8))
                 }
             }
+            var pending: PendingUpdate?
             switch args[0] {
-            case "apply-camera-aperture":
-                let pending = try await service.applyCameraDialAperture(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Uploaded \(pending.image.count) bytes of Biotar 58mm camera-dial aperture trial (USB 4.5.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
-            case "apply-upstream-stock-speed":
-                let pending = try await service.applyUpstreamStockSpeed(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Uploaded \(pending.image.count) bytes of pinned upstream 750 kbaud trial (USB 4.4.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
-            case "apply-startup-probe":
-                let pending = try await service.applyStartupProbe(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Uploaded \(pending.image.count) bytes of pinned startup probe (USB 4.3.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
-            case "apply-upstream-november":
-                let pending = try await service.applyUpstreamNovemberTrial(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Uploaded \(pending.image.count) bytes of pinned November upstream trial (USB 4.2.0).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
-            case "resolve-stock-after-camera":
-                let result = try await service.resolveStockAfterCamera(reviewedBackupURL: URL(fileURLWithPath: args[1]),
-                    device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Stock restoration resolved by explicit reviewed motion-record policy.\nStrict verification remains recorded as failed; \(result.changedMotionAddresses.count) motion bytes accepted against the retained review.\nFresh flash SHA-256: \(result.freshFlashSHA256)\nApplication slot SHA-256: \(result.applicationSlotSHA256)\nFresh backup: \(result.freshBackupURL.path)\nNo writes were sent.")
-            case "qualify-stock":
-                let pending = try await service.qualifyStockUpload(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Stock application re-uploaded: \(pending.image.count) bytes.\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect, then run verify --idle. This does not qualify bootloader restoration or power-loss recovery.")
-            case "apply", "apply-af", "apply-upstream","apply-startup","apply-hardened-upstream","apply-bounded-upstream","apply-absolute-upstream","apply-handoff-upstream","apply-trace-upstream","apply-readiness-upstream","apply-homing-upstream","apply-reference-upstream","apply-crash-upstream":
-                let library = try LibraryStore(directory: state).loadOrSeed()
-                guard let profile = library.profiles.first(where: { $0.id == args[1] }) else { throw DeviceError.failure("Unknown lens profile.") }
-                let pending = try await service.apply(profile: profile, variant: variant(for: args[0]), device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Firmware: \(pending.version.map(String.init).joined(separator: "."))\nUploaded \(pending.image.count) bytes for \(profile.displayName).\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug and reconnect the adapter, then run verify --idle. No read-back yet.")
+            case "apply-camera-aperture": pending = try await service.applyCameraDialAperture(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
+            case "apply-wide-aperture": pending = try await service.applyWideCameraAperture(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
+            case "apply-upstream-stock-speed": pending = try await service.applyUpstreamStockSpeed(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
+            case "qualify-stock": pending = try await service.qualifyStockUpload(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
+            case "restore-stock": pending = try await service.restoreStock(backupURL: URL(fileURLWithPath: args[1]), device: device, idleAcknowledged: true, cancellation: token, progress: progress)
             case "verify", "inspect":
-                let verifyingProbe = try args[0] == "verify" && service.pendingUpdate()?.version == [4,3,0]
                 let applied = args[0] == "verify" ?
-                    try await service.verifyUpdate(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress) :
-                    try await service.readLens(device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
+                    try await service.verifyUpdate(device: device, idleAcknowledged: true, cancellation: token, progress: progress) :
+                    try await service.readLens(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
                 if let applied {
-                    print("USB byte verification complete: \(applied.setting.name) · \(applied.setting.focalLengthMM) mm · reported AV \(applied.setting.reportedAV)\nFirmware: \(applied.firmwareVersion)\nSHA-256: \(applied.imageSHA256)\nCamera behavior still needs a physical camera check.")
-                } else if verifyingProbe {
-                    print("Startup probe 4.3.0 verified against the complete upload and protected data. Camera behavior remains unverified.")
-                } else { print(args[0] == "verify" ? "Stock restoration verified." : "No supported custom lens profile found.") }
-            case "restore-stock":
-                let pending = try await service.restoreStock(backupURL: URL(fileURLWithPath: args[1]), device: device, idleAcknowledged: true, cancellation: token, progress: reportProgress)
-                print("Stock application uploaded: \(pending.image.count) bytes. Physically reconnect, then run verify --idle.")
-            default:
-                let result = try await service.backup(device: device, to: URL(fileURLWithPath: args[1]), idleAcknowledged: true,
-                                                     cancellation: token, progress: reportProgress)
-                print("Verified backup: \(result.url.path)\nFlash: \(result.manifest.flashBytes) bytes · 2 matching passes\nSHA-256: \(result.manifest.files["flash.bin"]!.sha256)\nExchanges: \(result.manifest.reportExchanges)")
+                    print("Firmware: \(applied.firmwareVersion)\nLens: \(applied.setting.name)\nStartup report: \(applied.setting.focalLengthMM) mm · f/\(applied.setting.apertureLabel)\nSHA-256: \(applied.imageSHA256)")
+                } else { print("Read complete; no supported custom lens setting.") }
+            case "backup":
+                let result = try await service.backup(device: device, to: URL(fileURLWithPath: args[1]), idleAcknowledged: true, cancellation: token, progress: progress)
+                print("Backup verified: \(result.url.path)")
+            case "resolve-stock-after-camera":
+                let result = try await service.resolveStockAfterCamera(reviewedBackupURL: URL(fileURLWithPath: args[1]), device: device, idleAcknowledged: true, cancellation: token, progress: progress)
+                print("Reviewed stock resolution saved; strict verification remains recorded separately. Changed motion bytes: \(result.changedMotionAddresses.count). No writes sent.")
+            default: break
+            }
+            if let pending {
+                print("Uploaded \(pending.image.count) bytes. Firmware: \(pending.version.map(String.init).joined(separator: "."))\nSHA-256: \(pending.imageSHA256)\nBackup: \(pending.backupURL.path)\nPhysically unplug/reconnect, then run verify --idle. No post-upload reports sent.")
             }
         } catch {
-            FileHandle.standardError.write(Data("\(error.localizedDescription)\n".utf8))
+            FileHandle.standardError.write(Data("Stopped: \(error.localizedDescription)\n".utf8))
             exit(1)
         }
     }

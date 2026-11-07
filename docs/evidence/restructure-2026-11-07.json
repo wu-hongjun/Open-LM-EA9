@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-07",
+  "recordedAtUTC": "2026-11-07T16:50:45.785422+00:00",
+  "workingFirmware": "4.5.0",
+  "workingImageSHA256": "8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35",
+  "workingSourcePinsMatch": true,
+  "originalRecoveryPayloadsMatch": true,
+  "archiveTag": "archive/pre-4.5-baseline",
+  "archiveCommit": "9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e",
+  "nativeNamedTests": 49,
+  "stockRecoveryTests": 7,
+  "publicReferenceFilesVerified": 3160,
+  "firmwareTests": "passed-offline-camera-aperture-tests",
+  "wideCandidateTests": "passed-offline-camera-aperture-tests",
+  "wideCandidateVersion": "4.6.0",
+  "wideCandidateSHA256": "feeef5558f053f150923791af935953df112350519e08bad86712fde6901c318",
+  "wideCandidateFlashed": false,
+  "bundledFirmwareImages": [
+    "ea9-biotar-camera-aperture.bin",
+    "ea9-biotar-wide-aperture.bin",
+    "ea9-upstream-stock-speed.bin"
+  ],
+  "appVersion": "0.26.0",
+  "appBuild": 37,
+  "nativeVisualReview": "Final two-card Device, native segmented tabs and compact USB panel inspected in isolated light/dark previews with all USB actions disabled.",
+  "claudeUIAudit": {
+    "completed": true,
+    "runner": "Claude Code --print; all tools disabled; strict empty MCP configuration",
+    "suppliedSourceOnly": true,
+    "auditReport": "docs/audits/claude-ui-2026-11-07.md",
+    "rootReview": "docs/ui-review-2026-11-07.md"
+  },
+  "hardwareReportsSentDuringRestructure": 0,
+  "releaseRulesSHA256": {
+    "release.mk": "aa3bff9eb965f3f0527d5b2c1e7ef54819cdf4c20de6b65914a8ba9912f68208",
+    "optimizations.mk": "232ef4eb23c36122bc93a29ee803aae1476bc5919e2059b112367c1454bfdbcb"
+  }
+}

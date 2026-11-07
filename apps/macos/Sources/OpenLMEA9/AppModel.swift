@@ -77,6 +77,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     @Published var busy = false
     @Published var progress: BackupProgress?
     @Published var lastBackup: BackupResult?
+    let isPreview: Bool
     let store: LibraryStore
     let deviceService: DeviceService
     let firmwareStore: FirmwareObservationStore
@@ -88,9 +89,10 @@ enum AppTab: Hashable { case device, lensLibrary }
     private let inventoryProvider: @Sendable () async throws -> [DeviceIdentity]
     private let reconnectProvider: @Sendable (UInt64) async throws -> Bool
 
-    init(directory: URL,
+    init(directory: URL, preview: Bool = false,
          inventory: (@Sendable () async throws -> [DeviceIdentity])? = nil,
          reconnect: (@Sendable (UInt64) async throws -> Bool)? = nil) {
+        isPreview = preview
         store = LibraryStore(directory: directory)
         let service = DeviceService(stateDirectory: directory)
         deviceService = service
@@ -157,7 +159,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var canSave: Bool { isDirty && loadError == nil && validationMessage == nil }
     var canReadDevice: Bool {
-        !busy && !isRefreshing && idleAcknowledged && !reconnectRequired && !discoveryError
+        !isPreview && !busy && !isRefreshing && idleAcknowledged && !reconnectRequired && !discoveryError
             && devices.count == 1 && devices.first?.qualifiedDescriptor == true
     }
     var currentFirmwareObservation: FirmwareObservation? {
@@ -305,7 +307,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         guard let preparedLens, let currentAppliedLens else { return false }
         return (try? AdapterLensSetting(profile: preparedLens)) == currentAppliedLens.setting
     }
-    var canApplyLens: Bool { canChangeFirmware && !installedCameraFailureHold && variantForLensChanges?.supportsLensProfileChanges == true && !preparedMatchesApplied }
+    var canApplyLens: Bool { false } // Current releases compile their lens profile; library edits stay local.
     var canVerifyUpdate: Bool {
         canReadDevice && pendingUpdateError == nil && waitingForVerification && pendingUpdate?.device.id != devices.first?.id
             && pendingUpdate?.device.serial == devices.first?.serial
@@ -340,176 +342,41 @@ enum AppTab: Hashable { case device, lensLibrary }
             self.deviceMessage = "Stock application uploaded. Reconnect and verify before using the camera."
         }
     }
+    var currentFirmwareVariant: FirmwareVariant? {
+        FirmwareVariant.allCases.first { $0.versionString == currentAppliedLens?.firmwareVersion }
+    }
+    var variantForLensChanges: FirmwareVariant? { currentFirmwareVariant }
+    var usesExperimentalAF: Bool { false }
+    var canChangeFirmware: Bool { canReadDevice && updateStateError == nil && stockUploadQualified && !waitingForVerification && !isDirty }
+    var canInstallBaseline: Bool {
+        canChangeFirmware && ["1.8.0", "4.4.0", "4.6.0"].contains(currentFirmwareObservation?.version ?? "")
+    }
+    var canInstallWideAperture: Bool { canChangeFirmware && currentFirmwareVariant == .cameraDialAperture }
     var firmwareBehaviorNote: String {
-        switch currentAppliedLens?.firmwareVersion {
-        case "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0": return "This AF firmware is designed to move the mount. Focus accuracy still needs a camera test with the mounted lens."
-        case "3.0.0": return "AF 3.0 is held after a full-press camera freeze requiring battery removal. Do not retry this image."
-        case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
-        case "3.7.0": return "Targeted trace 3.7 is held after the camera froze following one photo. Keep the camera off and preserve a read-only backup for log review. Do not retry this image."
-        case "4.1.0": return "Crash diagnostic 4.1 is held after a reported one-minute shutter delay and freeze before a photo saved. Shutdown reportedly worked. Do not retry this image; preserve a read-only backup for log review."
-        case "4.5.0": return "Biotar 58 mm aperture-reporting trial. The Sony dial selects the reported f/2–f/16 value; match it with the lens ring. Reporting resets to f/2 at startup. Camera validation is pending."
-        case "4.4.0": return "Upstream 750 kbaud comparison. The owner reports autofocus in stills and video and successful stop-down use; the reported aperture stays at f/1.8."
-        case "4.2.0": return "November upstream trial. It reports the upstream 50 mm f/1.8 defaults; A7C II behavior still needs a camera test."
-        case "4.0.0": return "AF 4.0 is held after a hard camera crash following two reported photos and a required power cycle. Do not retry this image; preserve a read-only backup for log review."
-        case "3.9.0": return "Homing diagnostic 3.9 is held after two reported photos followed by blocked further capture. Shutdown was normal. Do not retry this image; preserve a read-only backup for log review."
-        case "3.8.0": return "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. Shutdown was normal. The trace records a drive-phase homing failure. Do not retry this image."
-        case "3.6.0": return "Upstream AF 3.6 is held after a shutter-press camera freeze and shutdown nonresponse. Keep the camera off and save a read-only backup for log review. Do not retry this image."
-        case "3.5.0": return "Upstream AF 3.5 is camera-unqualified. It preserves the resolved focus target and rejects homing completion after an expired phase. Collect a read-only backup after one coordinated camera cycle before another trial."
-        case "3.4.0": return "Upstream 3.4 is camera-unqualified. It adds bounded encoder coordinates and preserves query replies during motion and homing. After one coordinated camera cycle, collect a read-only backup before another trial."
-        case "3.3.0": return "Upstream hardening 3.3 is camera-unqualified. It adds capture/shutdown ownership and guarded homing. After one coordinated camera cycle, collect a read-only backup before another trial."
-        case "3.2.0": return "Startup diagnostic 3.2 is a camera-unqualified 50mm f/1.4 candidate. After one coordinated camera cycle, collect a read-only USB backup for diagnostic decoding."
-        case "2.9.0": return "AF 2.9 is held after capture freeze and shutdown failure. Use a separately verified replacement before camera testing."
-        case "2.8.0": return "AF 2.8 is held after preview and shutdown failures. Restore stock or use a separately reviewed replacement."
-        case "2.0.0": return "Verified metadata-only firmware disables motor motion. Use manual focus."
-        default: return "Installed firmware and motor behavior have not been verified for this connection."
+        switch currentFirmwareVariant {
+        case .cameraDialAperture: "Working 4.5 baseline · Sony dial f/2–f/16. Set the physical iris on the lens."
+        case .wideCameraAperture: "Wide aperture candidate · Sony dial f/1.2–f/22. Camera validation is pending."
+        case .upstreamStockSpeed: "750 kbaud fallback · compiled 50mm f/1.8 camera metadata."
+        case nil: "Read the adapter to identify its firmware and compiled lens."
         }
     }
-    var variantForLensChanges: FirmwareVariant? {
-        if let applied = currentAppliedLens {
-            return FirmwareVariant.allCases.first { $0.versionString == applied.firmwareVersion }
-        }
-        // An unknown custom image must never silently become a metadata-only upload.
-        // Stock has no profile row; its separately qualified version permits initial setup.
-        return currentFirmwareObservation?.version == "1.8.0" ? .metadataOnly : nil
-    }
-    var usesExperimentalAF: Bool { variantForLensChanges?.enablesAutofocus == true }
-    var canChangeFirmware: Bool { canReadDevice && updateStateError == nil && stockUploadQualified && preparedLens != nil && preparedLensIssue == nil && !waitingForVerification && !isDirty }
-    func applyLens() {
-        guard canApplyLens, let variant = variantForLensChanges else { return }
-        applyLens(variant: variant, preservingFirmware: true)
-    }
-    var canInstallUpstreamBaseline: Bool {
-        guard !upstreamBaselineCameraFailureHold, canChangeFirmware, let profile = preparedLens else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusUpstreamBaseline)) != nil
-    }
-    func installAutofocus() {
-        guard canInstallUpstreamBaseline else { return }
-        applyLens(variant: .autofocusUpstreamBaseline)
-    }
-    var canInstallStartupDiagnostic: Bool {
-        guard canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.2.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusStartupDiagnostic)) != nil
-    }
-    func installStartupDiagnostic() {
-        guard canInstallStartupDiagnostic else { return }
-        applyLens(variant: .autofocusStartupDiagnostic)
-    }
-    var canInstallHardenedUpstream: Bool {
-        guard canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.3.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusUpstreamHardened)) != nil
-    }
-    func installHardenedUpstream() {
-        guard canInstallHardenedUpstream else { return }
-        applyLens(variant: .autofocusUpstreamHardened)
-    }
-    var canInstallBoundedUpstream: Bool {
-        guard canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.4.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusBoundedUpstream)) != nil
-    }
-    func installBoundedUpstream() {
-        guard canInstallBoundedUpstream else { return }
-        applyLens(variant: .autofocusBoundedUpstream)
-    }
-    var canInstallAbsoluteUpstream: Bool {
-        guard canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.5.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusAbsoluteUpstream)) != nil
-    }
-    func installAbsoluteUpstream() {
-        guard canInstallAbsoluteUpstream else { return }
-        applyLens(variant: .autofocusAbsoluteUpstream)
-    }
-    var canInstallStartupHandoff: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusStartupHandoff.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.6.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusStartupHandoff)) != nil
-    }
-    func installStartupHandoff() {
-        guard canInstallStartupHandoff else { return }
-        applyLens(variant: .autofocusStartupHandoff)
-    }
-    var canInstallTargetedTrace: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusTargetedTrace.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.7.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusTargetedTrace)) != nil
-    }
-    func installTargetedTrace() {
-        guard canInstallTargetedTrace else { return }
-        applyLens(variant: .autofocusTargetedTrace)
-    }
-    var canInstallReadiness: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusReadiness.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.8.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusReadiness)) != nil
-    }
-    func installReadiness() {
-        guard canInstallReadiness else { return }
-        applyLens(variant: .autofocusReadiness)
-    }
-    var canInstallHomingDiagnostic: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusHomingDiagnostic.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "3.9.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusHomingDiagnostic)) != nil
-    }
-    func installHomingDiagnostic() {
-        guard canInstallHomingDiagnostic else { return }
-        applyLens(variant: .autofocusHomingDiagnostic)
-    }
-    var canInstallReferenceQualified: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusReferenceQualified.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "4.0.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusReferenceQualified)) != nil
-    }
-    func installReferenceQualified() {
-        guard canInstallReferenceQualified else { return }
-        applyLens(variant: .autofocusReferenceQualified)
-    }
-    var canInstallCrashDiagnostic: Bool {
-        guard Self.cameraFailureHolds[FirmwareVariant.autofocusCrashDiagnostic.versionString] == nil,
-              canChangeFirmware, let profile = preparedLens,
-              currentAppliedLens?.firmwareVersion != "4.1.0" else { return false }
-        return (try? FirmwareImageBuilder.prepare(profile: profile, variant: .autofocusCrashDiagnostic)) != nil
-    }
-    func installCrashDiagnostic() {
-        guard canInstallCrashDiagnostic else { return }
-        applyLens(variant: .autofocusCrashDiagnostic)
-    }
-    func installMetadataOnly() { applyLens(variant: .metadataOnly) }
-    private func applyLens(variant: FirmwareVariant, preservingFirmware: Bool = false) {
-        guard canChangeFirmware, let profile = preparedLens else { return }
-        do { _ = try FirmwareImageBuilder.prepare(profile: profile, variant: variant) }
-        catch { errorMessage = error.localizedDescription; return }
+    func installBaseline() { guard canInstallBaseline else { return }; installFirmware(.cameraDialAperture) }
+    func installWideAperture() { guard canInstallWideAperture else { return }; installFirmware(.wideCameraAperture) }
+    private func installFirmware(_ variant: FirmwareVariant) {
         let alert = NSAlert()
-        alert.messageText = "Apply \(profile.displayName) to the adapter?"
-        alert.informativeText = (variant.enablesAutofocus ? "Experimental AF \(variant.versionString) enables motor movement and may move the mount during camera startup. Exposure and focus accuracy with this lens are not yet qualified. A verified backup is saved first. Unplug and reconnect after upload to verify." : "This prototype installs custom firmware and saves a verified backup first. Motor motion is disabled in this metadata test build; use manual focus on the A7C II. It reports the focal length and aperture you choose; it cannot sense the lens’s aperture or zoom rings. Unplug and reconnect afterward to verify the update.")
-        if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic].contains(variant) {
-            alert.informativeText += " This diagnostic build records at most sixteen flash pages inside its reserved application area, with no runtime erase. Collect the backup after one camera cycle; do not repeat testing before reviewing it."
-        }
-        if variant == .autofocusCrashDiagnostic {
-            alert.informativeText += " AF 4.1 adds crash diagnostics and stops after a recorded crash or damaged diagnostic storage. It does not establish a homing, autofocus or camera-crash fix. Power removal before persistence may leave only a startup baseline. Preserve a backup before reviewing recovery or another trial."
-        }
-        if variant == .autofocusReferenceQualified {
-            alert.informativeText += " AF 4.0 tests bounded released reference qualification. Physical homing, sustained capture and camera compatibility remain unqualified."
-        }
-        if variant == .autofocusHomingDiagnostic {
-            alert.informativeText += " AF 3.9 removes an unused ADC dependency and adds failed-homing/request diagnostics. A physical homing or shutter fix is unproven; camera compatibility remains unqualified."
-        }
-        alert.addButton(withTitle: "Apply"); alert.addButton(withTitle: "Cancel")
+        alert.messageText = "Install firmware \(variant.versionString)?"
+        alert.informativeText = "Biotar 58mm f/2 · reported range \(variant.apertureRangeLabel). The physical iris stays manual. A verified backup is saved first. Physically reconnect after upload, then verify before camera use."
+        alert.addButton(withTitle: "Install"); alert.addButton(withTitle: "Cancel")
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         runLensOperation(writing: true) { device, token in
-            _ = try await self.deviceService.apply(profile: profile, variant: variant, device: device, idleAcknowledged: self.idleAcknowledged,
-                    preserveInstalledFirmware: preservingFirmware,
-                    cancellation: token, progress: { update in Task { @MainActor in self.progress = update } })
+            let progress: @Sendable (BackupProgress) -> Void = { update in Task { @MainActor in self.progress = update } }
+            if variant == .wideCameraAperture {
+                _ = try await self.deviceService.applyWideCameraAperture(device: device, idleAcknowledged: self.idleAcknowledged, cancellation: token, progress: progress)
+            } else {
+                _ = try await self.deviceService.applyCameraDialAperture(device: device, idleAcknowledged: self.idleAcknowledged, cancellation: token, progress: progress)
+            }
             self.pendingUpdate = try self.deviceService.pendingUpdate()
-            self.deviceMessage = "Uploaded. Unplug and reconnect the USB cap, then verify."
+            self.deviceMessage = "Upload complete. Unplug and reconnect the USB cap, then verify."
         }
     }
     func verifyLensUpdate() {
@@ -518,8 +385,8 @@ enum AppTab: Hashable { case device, lensLibrary }
             self.appliedLens = try await self.deviceService.verifyUpdate(device: device, idleAcknowledged: self.idleAcknowledged,
                     cancellation: token, progress: { update in Task { @MainActor in self.progress = update } })
             self.pendingUpdate = try self.deviceService.pendingUpdate()
-            self.rememberFirmware(FirmwareObservation(device: device, version: self.appliedLens?.firmwareVersion ?? "1.8.0"))
-            self.deviceMessage = self.appliedLens == nil ? "Stock restoration verified." : "Lens setting verified on the adapter. Camera behavior needs a camera check."
+            self.rememberFirmware(FirmwareObservation(device: device, version: self.appliedLens?.firmwareVersion ?? self.pendingUpdate?.version.map(String.init).joined(separator: ".") ?? "1.8.0"))
+            self.deviceMessage = self.appliedLens == nil ? "Stock restoration verified." : "Firmware and lens metadata verified on the adapter."
         }
     }
     func readAdapterLens() {

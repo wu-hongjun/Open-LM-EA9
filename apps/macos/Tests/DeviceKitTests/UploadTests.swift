@@ -7,11 +7,9 @@ private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfil
     try #require(LensLibrary.seeds().profiles.first { $0.id == id })
 }
 private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
-    if variant == .startupProbe { return try ApplicationImage.startupProbe() }
     if variant == .cameraDialAperture { return try ApplicationImage.cameraDialAperture() }
     if variant == .upstreamStockSpeed { return try ApplicationImage.upstreamStockSpeed() }
-    if variant == .upstreamNovemberTrial { return try ApplicationImage.upstreamNovemberTrial() }
-    return try ApplicationImage.personalized(profile(), variant: variant)
+    return try ApplicationImage.wideCameraAperture()
 }
 @Test func cameraDialApertureUsesBiotarBootProfileAndRequiresExactBaseline() throws {
     let variant = FirmwareVariant.cameraDialAperture
@@ -46,60 +44,9 @@ private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationIm
     #expect(throws: DeviceError.self) { try ApplicationImage.requireUpstreamStockSpeedSource(changedCandidate) }
     #expect(loader.reports == 0 && !loader.armed)
 }
-@Test func novemberTrialUsesPinnedUpstreamDefaults() throws {
-    let variant = FirmwareVariant.upstreamNovemberTrial
-    let image = try ApplicationImage.upstreamNovemberTrial()
-    let setting = try #require(image.setting)
-    #expect(image.version == [4,2,0])
-    #expect(image.data == (try FirmwareImageBuilder.prepareUpstreamNovemberTrial()))
-    #expect(setting.focalMM10 == 500 && setting.reportedAV == 4544 && setting.actualAperture == nil)
-    #expect(!variant.supportsLensProfileChanges)
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
-}
-@Test func startupProbeHasNoProfileAndRequiresExactReviewedSource() throws {
-    let variant = FirmwareVariant.startupProbe, probe = try ApplicationImage.startupProbe()
-    #expect(probe.version == [4,3,0] && probe.setting == nil)
-    #expect(probe.data == (try FirmwareImageBuilder.prepareStartupProbe()))
-    #expect(probe.data.suffix(1024) == Data(repeating: 0xff, count: 1024))
-    #expect(!variant.supportsLensProfileChanges && !variant.enablesAutofocus)
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
 
-    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-    defer { try? FileManager.default.removeItem(at: directory) }
-    let loader = Loader(), november = try ApplicationImage.upstreamNovemberTrial()
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: november.version)
-    loader.flash.replaceSubrange(0x5000..<0xa000, with: november.data)
-    try ApplicationImage.requireStartupProbeSource(fixture(loader, directory, "november", id: 11))
-    loader.flash[0x9fff] ^= 1
-    let altered = try fixture(loader, directory, "altered-november", id: 12)
-    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(altered) }
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: probe.version)
-    loader.flash.replaceSubrange(0x5000..<0xa000, with: probe.data)
-    let priorProbe = try fixture(loader, directory, "prior-probe", id: 13)
-    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(priorProbe) }
-    #expect(loader.reports == 0 && !loader.armed)
-}
-@Test func upstreamStockSpeedTrialPreservesOpticsAndRequiresPinnedStartupProbePrefix() throws {
-    let probe = try ApplicationImage.startupProbe(), stockSpeed = try ApplicationImage.upstreamStockSpeed()
-    let upstream = try ApplicationImage.upstreamNovemberTrial()
-    #expect(stockSpeed.version == [4,4,0] && stockSpeed.setting == upstream.setting && stockSpeed.data != upstream.data)
-    #expect(stockSpeed.data == (try FirmwareImageBuilder.prepareUpstreamStockSpeed()))
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: .upstreamStockSpeed) }
 
-    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-    defer { try? FileManager.default.removeItem(at: directory) }
-    let loader = Loader()
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: probe.version)
-    loader.flash.replaceSubrange(0x5000..<0xa000, with: probe.data)
-    loader.flash[0x9c00] = 0
-    try ApplicationImage.requireUpstreamStockSpeedSource(fixture(loader, directory, "logged-probe", id: 11))
-    loader.flash[0x9bff] ^= 1
-    let altered = try fixture(loader, directory, "altered-probe", id: 12)
-    #expect(throws: DeviceError.self) { try ApplicationImage.requireUpstreamStockSpeedSource(altered) }
-    #expect(loader.reports == 0 && !loader.armed)
-}
+
 private func device(_ id: UInt64 = 10) -> DeviceIdentity {
     DeviceIdentity(id: id, product: "LM-EA9", manufacturer: "TECHART", serial: "SIMULATED-UPLOAD", location: 0, qualifiedDescriptor: true)
 }
@@ -151,9 +98,6 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
         #expect(try AdapterLensSetting.decode(setting.encoded()) == setting)
         #expect(setting.focalLengthMM == p.minimumFocalLengthMM)
         #expect(setting.apertureLabel == p.maximumAperture.formatted())
-        let data = try FirmwareImageBuilder.prepare(profile: p)
-        #expect(data.count == 20736)
-        #expect(try AdapterLensSetting.decode(Data(data.suffix(256))) == setting)
     }
     #expect(try AdapterLensSetting(profile: profile()).reportedAV == 4352) // f/1.4 nominal -> one stop
     #expect(try AdapterLensSetting(profile: profile("contax-zeiss-28-f2")).reportedAV == 4608)
@@ -229,27 +173,6 @@ private final class Loader: ReadOnlyTransport, UploadTransport {
     #expect(unopened.reports == 0)
 }
 
-@Test(arguments: [FirmwareVariant.autofocusReconciled, .autofocusHardened])
-func reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(variant: FirmwareVariant) throws {
-    let loader = Loader()
-    // Synthetic retained header/copy bytes, deliberately non-FF. Never embed unit data.
-    let retained = Data((0..<0x5080).map { UInt8(truncatingIfNeeded: $0 * 17 + 3) })
-    loader.flash.replaceSubrange(0xa000..<0xf080, with: retained)
-    let image = try ApplicationImage.personalized(profile("contax-zeiss-85-f1-4"), variant: variant)
-    #expect(image.data.count == 20480 && variant.profileAddress == 0x9f00)
-    try UploadEngine().run(transport: loader, image: image, metadata: Data(loader.flash[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
-    #expect(loader.pointer == 0xa000 && loader.reports == 321 && loader.readsWhileArmed == 0)
-    #expect(loader.flash[0xa000..<0xf080] == retained)
-    #expect(try ApplicationImage.installedVariant(loader.flash) == variant)
-    #expect(try ApplicationImage.installedSetting(loader.flash)?.id == "contax-zeiss-85-f1-4")
-    // An older installation may leave its different lens at a000. Newer variants decode 9f00.
-    let legacy = try ApplicationImage.personalized(profile(), variant: .autofocusExperimental)
-    loader.flash.replaceSubrange(0xa000..<0xa100, with: legacy.data.suffix(256))
-    #expect(try ApplicationImage.installedSetting(loader.flash)?.id == "contax-zeiss-85-f1-4")
-    #expect(try ApplicationImage.template(.autofocusExperimental).count == 20736)
-    #expect(try ApplicationImage.template(.metadataOnly).count == 20736)
-}
-
 @Test func stockSizedUploadEndsAtLastFlashByteWithoutExtraPadding() throws {
     let loader = Loader()
     let data = Data(repeating: 0x33, count: 0x1b000)
@@ -267,10 +190,10 @@ func reconciledLayoutStopsBeforeRetainedFactoryRegionAndIgnoresLegacyProfile(var
         try await service.apply(profile: profile(), device: device(), idleAcknowledged: true, cancellation: CancellationToken(), progress: { _ in })
     }
     #expect(!FileManager.default.fileExists(atPath: directory.path))
-    let image = try ApplicationImage.personalized(profile())
-    var metadata = Data(repeating: 0, count: 58); metadata.replaceSubrange(0..<3, with: [2,0,0])
+    let image = try ApplicationImage.cameraDialAperture()
+    var metadata = Data(repeating: 0, count: 58); metadata.replaceSubrange(0..<3, with: image.version)
     let pending = PendingUpdate(transactionID: UUID(), device: device(), backupURL: directory.appendingPathComponent("missing"),
-                                image: image.data, version: [2,0,0], setting: image.setting, createdAt: Date(), uploadedAt: Date(),
+                                image: image.data, version: image.version, setting: image.setting, createdAt: Date(), uploadedAt: Date(),
                                 verifiedAt: nil, imageSHA256: digest(image.data), expectedMetadata: metadata)
     try UpdateStore(directory: directory).save(pending)
     await #expect(throws: DeviceError.self) {
@@ -367,11 +290,11 @@ private func fixture(_ loader: Loader, _ directory: URL, _ name: String, id: UIn
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: directory) }
     let loader = Loader(), store = UpdateStore(directory: directory)
-    let image = try ApplicationImage.personalized(profile(), variant: .autofocusReconciled)
+    let image = try ApplicationImage.cameraDialAperture()
     loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
-    loader.flash.replaceSubrange(ApplicationImage.base..<FirmwareVariant.autofocusReconciled.applicationEnd, with: image.data)
+    loader.flash.replaceSubrange(ApplicationImage.base..<FirmwareVariant.cameraDialAperture.applicationEnd, with: image.data)
     let custom = try fixture(loader, directory, "custom", id: 51)
-    #expect(try LensInspection.publish(custom, to: store)?.firmwareVersion == "2.2.0")
+    #expect(try LensInspection.publish(custom, to: store)?.firmwareVersion == "4.5.0")
     let originalHistory = try Data(contentsOf: store.appliedFile)
     // The committed official application is the same pinned oracle used by REA.
     let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
@@ -393,7 +316,7 @@ private func fixture(_ loader: Loader, _ directory: URL, _ name: String, id: UIn
     let unsupported = try fixture(loader, directory, "unsupported", id: 53)
     #expect(throws: DeviceError.self) { try LensInspection.publish(unsupported, to: store) }
     #expect(try store.loadApplied() == nil)
-    #expect(try FirmwareObservationStore(directory: directory).load()?.version == "2.2.0")
+    #expect(try FirmwareObservationStore(directory: directory).load()?.version == "4.5.0")
 }
 @Test(arguments: FirmwareVariant.allCases)
 func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVariant) throws {
@@ -404,11 +327,7 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
     loader.flash.replaceSubrange(ApplicationImage.base..<variant.applicationEnd, with: image.data)
     let current = try fixture(loader, directory, "supported", id: 61)
-    if variant == .startupProbe {
-        #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: current) }
-    } else {
-        try ApplicationImage.requirePreservedFirmware(variant, in: current)
-    }
+    try ApplicationImage.requirePreservedFirmware(variant, in: current)
     let other = try #require(FirmwareVariant.allCases.first { $0 != variant })
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(other, in: current) }
     loader.flash[0x6000] ^= 1 // A version string cannot admit altered code.
@@ -430,13 +349,12 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     let stock = try Data(contentsOf: root.appendingPathComponent("firmware/recovery/stock-1.8.0/application.bin"))
     loader.flash.replaceSubrange(ApplicationImage.base..<(ApplicationImage.base + stock.count), with: stock)
     let current = try fixture(loader, directory, "stock", id: 64)
-    try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: current)
-    try ApplicationImage.requireStartupProbeSource(current)
-    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.autofocusHardened, in: current) }
+    try ApplicationImage.requireCameraDialApertureSource(current)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireWideCameraApertureSource(current) }
     loader.flash[0x6000] ^= 1
     let altered = try fixture(loader, directory, "altered-stock", id: 65)
-    #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(.metadataOnly, in: altered) }
-    #expect(throws: DeviceError.self) { try ApplicationImage.requireStartupProbeSource(altered) }
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireCameraDialApertureSource(altered) }
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireCameraDialApertureSource(altered) }
     #expect(loader.reports == 0 && !loader.armed)
 }
 
@@ -456,12 +374,6 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: same, original: original) }
     let current = try fixture(loader, directory, "current", id: 11)
     #expect(try VerificationEngine().verify(pending: pending, current: current, original: original)?.setting == image.setting)
-    if [.autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic, .startupProbe].contains(variant) {
-        loader.flash[0x9c00] = 0
-        let nonblankLog = try fixture(loader, directory, "unexpected-log-before-camera", id: 11)
-        #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: nonblankLog, original: original) }
-        loader.flash[0x9c00] = 0xff
-    }
     loader.flash[0x6000] ^= 1
     let badImage = try fixture(loader, directory, "bad-image", id: 11)
     #expect(throws: DeviceError.self) { try VerificationEngine().verify(pending: pending, current: badImage, original: original) }
@@ -506,115 +418,72 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     #expect(throws: DeviceError.self) { try VerifiedBackup(url: url, device: device(), expectedBootHash: "wrong", allowRecoveryVersion: true) }
 }
 
-@Test func afVersionCannotMasqueradeAsMetadataAndHistoryRetainsVersion() throws {
-    let image = try ApplicationImage.personalized(profile(), variant: .autofocusExperimental)
-    let loader = Loader()
-    loader.flash.replaceSubrange(0x5000..<0xa100, with: image.data)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
-    #expect(try ApplicationImage.installedVariant(loader.flash) == .autofocusExperimental)
-    #expect(try ApplicationImage.installedSetting(loader.flash) == image.setting)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,0,0])
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,3,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.3.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil) // Version alone cannot admit another image.
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,5,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.5.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,6,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.6.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,7,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.7.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,8,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.8.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,9,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "2.9.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,0,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.0.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,1,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.1.0")
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,2,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.2.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,3,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.3.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,4,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.4.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,5,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.5.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,6,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.6.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,7,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.7.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,8,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.8.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,9,0])
-    #expect(try qualifiedFirmwareVersion(loader.exchange(.check)) == "3.9.0")
-    #expect(try ApplicationImage.installedSetting(loader.flash) == nil)
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [3,10,0])
-    #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
-    loader.flash.replaceSubrange(0x4000..<0x4003, with: [2,10,0])
-    #expect(throws: DeviceError.self) { try qualifiedFirmwareVersion(loader.exchange(.check)) }
-    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    defer { try? FileManager.default.removeItem(at: directory) }
-    let store = UpdateStore(directory: directory)
-    let applied = AppliedLens(device: device(), setting: try #require(image.setting), firmwareVersion: "2.1.0", imageSHA256: digest(image.data), verifiedAt: Date())
-    try store.saveApplied(applied)
-    #expect(try store.loadApplied()?.firmwareVersion == "2.1.0")
-    let history = FirmwareObservationStore(directory: directory)
-    try history.save(FirmwareObservation(device: device(), version: "2.1.0"))
-    #expect(try history.load()?.version == "2.1.0")
-}
 
-@Test func afBackupIsReadableButCannotBeUsedAsOriginalStockSource() throws {
+
+@Test func customBackupIsReadableButCannotBecomeStockRecovery() throws {
     let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: directory) }
-    let loader = Loader(), image = try ApplicationImage.personalized(profile(), variant: .autofocusExperimental)
+    let loader = Loader(), image = try ApplicationImage.cameraDialAperture()
     let before = try fixture(loader, directory, "stock", id: 10)
     try UploadEngine().run(transport: loader, image: image, metadata: Data(before.flash[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
     loader.armed = false
     let af = try fixture(loader, directory, "af", id: 11)
-    #expect(af.result.manifest.reportedFirmwareVersion == "2.1.0")
+    #expect(af.result.manifest.reportedFirmwareVersion == "4.5.0")
     #expect(throws: DeviceError.self) { try ApplicationImage.stockRestoration(af) }
-    // Metadata-only fallback uses the same protected loader and reconnect rules.
-    let fallback = try ApplicationImage.personalized(profile())
-    loader.pointer = 0x5000
-    var expected = Data(af.flash[0x4000..<0x403a]); expected.replaceSubrange(0..<3, with: fallback.version)
-    let pending = PendingUpdate(transactionID: UUID(), device: device(11), backupURL: af.result.url, image: fallback.data, version: fallback.version, setting: fallback.setting, createdAt: Date(), uploadedAt: nil, verifiedAt: nil, imageSHA256: digest(fallback.data), expectedMetadata: expected)
-    try UploadEngine().run(transport: loader, image: fallback, metadata: Data(af.flash[0x4000..<0x403a]), cancellation: CancellationToken(), progress: { _ in })
-    #expect(loader.armed && loader.readsWhileArmed == 0 && loader.pointer == 0xa100)
-    loader.armed = false
-    let after = try fixture(loader, directory, "fallback", id: 12)
-    #expect(try VerificationEngine().verify(pending: pending, current: after, original: af)?.firmwareVersion == "2.0.0")
+
 }
 
-@Test(arguments: [FirmwareVariant.autofocusUpstreamBaseline, .autofocusStartupDiagnostic, .autofocusUpstreamHardened, .autofocusBoundedUpstream, .autofocusAbsoluteUpstream, .autofocusStartupHandoff, .autofocusTargetedTrace, .autofocusReadiness, .autofocusHomingDiagnostic, .autofocusReferenceQualified, .autofocusCrashDiagnostic])
-func upstreamBaselineIsAFullPinnedImageWithFixedCompiledSettings(variant: FirmwareVariant) throws {
-    let image = try trialAwareImage(variant)
-    #expect(image.data == (try ApplicationImage.template(variant)))
-    #expect(image.data.count == 20480 && variant.applicationEnd == 0xa000)
-    #expect(!variant.supportsLensProfileChanges)
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile("contax-zeiss-85-f1-4"), variant: variant) }
-    var edited = try profile(); edited.currentAperture = 2
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(edited, variant: variant) }
-    edited = try profile(); edited.displayName = "Renamed"
-    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(edited, variant: variant) }
-    var flash = Data(repeating: 0xff, count: 0x20000)
-    flash.replaceSubrange(0x4000..<0x4003, with: image.version)
-    flash.replaceSubrange(0x5000..<0xa000, with: image.data)
-    #expect(try ApplicationImage.installedSetting(flash) == image.setting)
-    flash[0x9ffc] ^= 1
-    #expect(try ApplicationImage.installedVariant(flash) == nil)
+
+@Test func wideApertureCandidateKeepsNominalLensAndAllowsExactBaselineRollback() throws {
+    let image = try ApplicationImage.wideCameraAperture()
+    #expect(image.version == [4,6,0] && image.data.count == 20480)
+    #expect(image.data == (try FirmwareImageBuilder.prepareWideCameraAperture()))
+    #expect(image.setting?.focalMM10 == 580 && image.setting?.maximumAV == 4608 && image.setting?.reportedAV == 4608)
+    #expect(image.setting?.actualAperture == nil)
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let loader = Loader(), baseline = try ApplicationImage.cameraDialAperture()
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: baseline.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: baseline.data)
+    try ApplicationImage.requireWideCameraApertureSource(fixture(loader, folder, "baseline", id: 11))
+    loader.flash[0x6000] ^= 1
+    let altered = try fixture(loader, folder, "altered", id: 12)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireWideCameraApertureSource(altered) }
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: image.data)
+    try ApplicationImage.requireCameraDialApertureSource(fixture(loader, folder, "rollback", id: 13))
+    loader.flash[0x6000] ^= 1
+    let damaged = try fixture(loader, folder, "damaged", id: 14)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireCameraDialApertureSource(damaged) }
+    #expect(loader.reports == 0 && !loader.armed)
+}
+
+@Test func archivedJournalRemainsVerifiableWithoutBundledRetiredImage() throws {
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let process = Process(), pipe = Pipe()
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/git")
+    process.currentDirectoryURL = root
+    process.arguments = ["show", "archive/pre-4.5-baseline:apps/macos/Sources/DeviceKit/Resources/ea9-profile-template.bin"]
+    process.standardOutput = pipe
+    try process.run()
+    var bytes = pipe.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()
+    #expect(process.terminationStatus == 0 && bytes.count == 20736)
+    let setting = try AdapterLensSetting(profile: profile())
+    bytes.replaceSubrange(0x5000..<0x5100, with: try setting.encoded())
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    var metadata = Data(repeating: 0, count: 58); metadata.replaceSubrange(0..<3, with: [2,0,0])
+    let pending = PendingUpdate(transactionID: UUID(), device: device(), backupURL: folder.appendingPathComponent("archived"), image: bytes,
+        version: [2,0,0], setting: setting, createdAt: Date(), imageSHA256: digest(bytes), expectedMetadata: metadata)
+    let store = UpdateStore(directory: folder); try store.save(pending)
+    #expect(try store.load()?.version == [2,0,0])
+    #expect(FirmwareVariant.from(version: [2,0,0]) == nil) // No retired write plan exists.
+    #expect(throws: DeviceError.self) { try UploadReport.start(metadata: metadata, version: [2,0,0]).encoded() }
+    var object = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: store.file)) as? [String: Any])
+    bytes[0x100] ^= 1; object["image"] = bytes.base64EncodedString(); object["imageSHA256"] = digest(bytes)
+    try JSONSerialization.data(withJSONObject: object).write(to: store.file)
+    #expect(throws: DeviceError.self) { try store.load() }
 }

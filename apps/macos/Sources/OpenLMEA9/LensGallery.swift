@@ -7,12 +7,7 @@ struct LensLibraryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 26) {
                 HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 9) {
-                        Eyebrow("Your collection · \(model.library.profiles.count) lenses")
-                        Text("Good glass. Ready to go.").font(.system(size: 32, weight: .medium, design: .serif))
-                        Text("Choose a profile to prepare on this Mac. Edit the details only when you need to.")
-                            .font(.system(size: 13)).foregroundStyle(Palette.muted)
-                    }
+                    Text("Lens Library").font(.system(size: 24, weight: .semibold))
                     Spacer()
                     Menu {
                         Button("Import Library…", action: model.importLibrary).disabled(model.isDirty || model.busy)
@@ -25,8 +20,6 @@ struct LensLibraryView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 260, maximum: 380), spacing: 18)], spacing: 18) {
                     ForEach(model.library.profiles) { profile in LensCard(model: model, profile: profile) }
                 }
-                Text("Local choices are not applied to the adapter. Reference photos may show a different production variant.")
-                    .font(.system(size: 11)).foregroundStyle(Palette.muted)
             }.padding(32).frame(maxWidth: 1130).frame(maxWidth: .infinity)
         }
     }
@@ -36,32 +29,16 @@ private struct LensCard: View {
     @ObservedObject var model: AppModel
     let profile: LensProfile
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Button { model.editLens(profile) } label: {
+        Button { model.editLens(profile) } label: {
+            VStack(alignment: .leading, spacing: 0) {
                 ProductPhoto(id: profile.id, height: 176).padding(.horizontal, 16).padding(.top, 14)
-            }.buttonStyle(.plain).accessibilityLabel("View \(profile.displayName)")
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Eyebrow(PhotoCatalog.family(profile))
-                    Spacer()
-                    if model.preparedLensID == profile.id {
-                        Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.accent).accessibilityLabel("Prepared on this Mac")
-                    }
-                }
-                LensNumbers(profile: profile)
-                Text(profile.displayName).font(.system(size: 11)).foregroundStyle(Palette.muted).lineLimit(2).frame(height: 30, alignment: .top)
-                HStack {
-                    Button(model.preparedLensID == profile.id ? "Prepared locally" : "Prepare lens") { model.prepareLens(profile) }
-                        .buttonStyle(PrimaryButtonStyle()).disabled(model.loadError != nil)
-                        .accessibilityLabel("Prepare \(profile.displayName) on this Mac")
-                    Spacer()
-                    Button { model.editLens(profile) } label: { Image(systemName: "slider.horizontal.3").padding(8) }
-                        .buttonStyle(.plain).foregroundStyle(Palette.muted).help("Edit lens details")
-                        .accessibilityLabel("Edit metadata for \(profile.displayName)")
-                }
-            }.padding(20)
-        }.modifier(Surface())
-            .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(model.preparedLensID == profile.id ? Palette.accent : .clear, lineWidth: 1.5))
+                VStack(alignment: .leading, spacing: 10) {
+                    LensNumbers(profile: profile)
+                    Text(profile.displayName).font(.caption).foregroundStyle(Palette.muted)
+                        .lineLimit(2).frame(height: 30, alignment: .top)
+                }.padding(20)
+            }.modifier(Surface())
+        }.buttonStyle(.plain).accessibilityLabel("Edit \(profile.displayName)")
     }
 }
 
@@ -79,11 +56,8 @@ struct LensEditor: View {
             HStack(alignment: .top, spacing: 0) {
                 VStack(alignment: .leading, spacing: 18) {
                     ProductPhoto(id: profile.id, height: 210).clipShape(RoundedRectangle(cornerRadius: 14))
-                    Eyebrow(PhotoCatalog.family(profile))
                     LensNumbers(profile: profile, large: true)
-                    Text(profile.displayName).font(.system(size: 18, weight: .medium, design: .serif))
                     if let note = PhotoCatalog.note(profile.id) { Text(note).font(.caption).foregroundStyle(Palette.muted) }
-                    Text("Your saved metadata stays on this Mac.").font(.callout).foregroundStyle(Palette.muted)
                     Spacer()
                 }.padding(24).frame(width: 300)
                 Form {
@@ -93,11 +67,10 @@ struct LensEditor: View {
                         if profile.kind == .zoom { TextField("Maximum focal length (mm)", text: model.binding(\.maximum)) }
                         TextField("Maximum aperture (f-number)", text: model.binding(\.aperture))
                     }
-                    Section {
-                        if profile.kind == .zoom { TextField("Current zoom setting (mm)", text: model.binding(\.active), prompt: Text("Unknown")) }
-                        TextField("Fixed camera aperture (f-number)", text: model.binding(\.currentAperture), prompt: Text("Use maximum aperture"))
-                    } header: { Text("Manual settings") } footer: {
-                        Text("Actual aperture: Unknown. Set the iris on the lens. This optional value changes camera metadata only; leave it blank to report the maximum aperture. Zoom position must also be supplied manually.")
+                    if profile.kind == .zoom {
+                        Section("Zoom setting") {
+                            TextField("Current focal length (mm)", text: model.binding(\.active), prompt: Text("Unknown"))
+                        }
                     }
                     Section("Notes") {
                         TextEditor(text: model.binding(\.notes)).frame(minHeight: 80).accessibilityLabel("Lens notes")
@@ -112,7 +85,7 @@ struct LensEditor: View {
                     .font(.system(size: 12)).foregroundStyle(model.isDirty ? Color.orange : Palette.accent)
                 Spacer()
                 Button("Revert", action: model.revert).disabled(!model.isDirty)
-                Button("Save Lens", action: { model.save() }).buttonStyle(PrimaryButtonStyle()).keyboardShortcut("s").disabled(!model.canSave)
+                Button("Save Lens", action: { model.save() }).buttonStyle(.borderedProminent).keyboardShortcut("s").disabled(!model.canSave)
             }.padding(24)
         }.frame(width: 810, height: 640).background(Palette.canvas).foregroundStyle(Palette.ink)
     }

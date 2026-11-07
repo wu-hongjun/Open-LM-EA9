@@ -1,79 +1,26 @@
 import Foundation
 import DeviceKit
 
-enum DeviceLensAction {
-    case setup, read, apply, verify, upToDate, tools
-    var title: String {
-        switch self {
-        case .setup: "Set up adapter"
-        case .read: "Read lens settings"
-        case .apply: "Apply profile"
-        case .verify: "Verify lens"
-        case .upToDate: "Up to date"
-        case .tools: "Open USB tools"
-        }
-    }
-}
-
-/// Product guidance derived from the same guards used by explicit USB actions.
-/// Evaluating this state never reads or writes the adapter.
+/// Pure presentation state. Evaluating it never opens USB or issues a report.
 @MainActor extension AppModel {
-    static let cameraFailureHolds = [
-        "3.0.0": "AF 3.0 failed capture and shutdown testing with a full-press freeze requiring battery removal.",
-        "3.1.0": "Upstream 3.1 failed camera testing: aperture showed -- and the shutter would not release. Shutdown worked.",
-        "3.6.0": "Upstream AF 3.6 failed capture and shutdown testing: shutter press froze the camera and it did not shut down.",
-        "3.7.0": "Targeted trace 3.7 failed camera testing: the owner reports a freeze after taking one photo.",
-        "3.8.0": "Readiness 3.8 is held after hunting and a motor reset followed by blocked further photos. The owner reports normal shutdown.",
-        "3.9.0": "Homing diagnostic 3.9 is held after two reported photos followed by blocked further capture. The owner reports normal shutdown.",
-        "4.0.0": "AF 4.0 is held after a hard camera crash following two reported photos. The owner reports needing a power cycle.",
-        "4.1.0": "Crash diagnostic 4.1 is held after a reported one-minute shutter delay and freeze before a photo saved. The owner reports shutdown worked."
-    ]
-    var installedCameraFailureHold: Bool {
-        Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] != nil
-    }
-    var upstreamBaselineCameraFailureHold: Bool {
-        Self.cameraFailureHolds[FirmwareVariant.autofocusUpstreamBaseline.versionString] != nil
-    }
     var pendingBelongsToConnectedAdapter: Bool {
-        guard let pendingUpdate, let device = devices.first, devices.count == 1 else { return false }
+        guard let pendingUpdate, devices.count == 1, let device = devices.first else { return false }
         return !device.serial.isEmpty && pendingUpdate.device.serial == device.serial
     }
-    var primaryLensAction: DeviceLensAction {
-        if updateStateError != nil || (waitingForVerification && devices.count == 1 && !pendingBelongsToConnectedAdapter) { return .tools }
-        if waitingForVerification { return .verify }
-        if installedCameraFailureHold { return .tools }
-        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0", "3.8.0", "3.9.0", "4.0.0", "4.1.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return .tools }
-        if !stockUploadQualified { return .setup }
-        if variantForLensChanges == nil { return .read }
-        if variantForLensChanges?.supportsLensProfileChanges == false && !preparedMatchesApplied { return .tools }
-        return preparedMatchesApplied ? .upToDate : .apply
+    var firmwareHistoryCaption: String? {
+        if let applied = currentAppliedLens { return "Verified " + applied.verifiedAt.formatted(date: .abbreviated, time: .shortened) }
+        if let observation = currentFirmwareObservation { return "Read " + observation.readAt.formatted(date: .abbreviated, time: .shortened) }
+        return nil
     }
-    var canPerformPrimaryLensAction: Bool {
-        switch primaryLensAction {
-        case .setup: canReadDevice && updateStateError == nil
-        case .read: canReadDevice && updateStateError == nil && !waitingForVerification
-        case .apply: canApplyLens
-        case .verify: canVerifyUpdate
-        case .upToDate: false
-        case .tools: !busy
-        }
+    var emptyLensMessage: String {
+        if waitingForVerification { return "Verify the uploaded firmware first." }
+        return adapterConnected ? "Read the adapter in USB tools." : "Connect the adapter through its USB cap."
     }
-    func performPrimaryLensAction() {
-        guard canPerformPrimaryLensAction else { return }
-        switch primaryLensAction {
-        case .setup: prepareAdapter()
-        case .read: readAdapterLens()
-        case .apply: applyLens()
-        case .verify: verifyLensUpdate()
-        case .upToDate: break
-        case .tools: showDeviceTools = true
-        }
-    }
-    func cameraMetadataSummary(_ setting: AdapterLensSetting) -> String {
-        if currentAppliedLens?.firmwareVersion == "4.5.0" {
-            return "\(setting.focalLengthMM.formatted()) mm · startup f/\(setting.apertureLabel) · Sony dial f/2–f/16"
-        }
-        return "\(setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(setting.apertureLabel)"
+    var canCancelRead: Bool { busy && !isUploadingFirmware }
+    var adapterConnected: Bool { devices.count == 1 && devices.first?.qualifiedDescriptor == true && !discoveryError }
+    var isArchivedFirmware: Bool {
+        guard let version = currentFirmwareObservation?.version else { return false }
+        return version != "1.8.0" && !FirmwareVariant.allCases.contains { $0.versionString == version }
     }
     var workflowTitle: String {
         if busy { return isUploadingFirmware ? "Updating your adapter" : "Reading your adapter" }
@@ -81,71 +28,41 @@ enum DeviceLensAction {
         if devices.isEmpty { return "Connect your adapter" }
         if devices.count != 1 { return "Connect one adapter" }
         if devices.first?.qualifiedDescriptor != true { return "Adapter not recognized" }
-        if updateStateError != nil { return "Review recovery options" }
+        if updateStateError != nil { return "Review USB history" }
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Another adapter has an unfinished update" }
         if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Reconnect the USB cap" }
-        if waitingForVerification { return "Verify your lens change" }
-        if let version = currentAppliedLens?.firmwareVersion, Self.cameraFailureHolds[version] != nil {
-            return "AF \(version.split(separator: ".").prefix(2).joined(separator: ".")) camera testing held"
-        }
-        if currentAppliedLens?.firmwareVersion == "4.1.0" { return "Crash diagnostic 4.1 candidate" }
-        if currentAppliedLens?.firmwareVersion == "4.0.0" { return "Reference qualification candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.9.0" { return "Homing diagnostic candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.8.0" { return "Readiness candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.7.0" { return "Targeted trace candidate" }
-        if ["3.5.0", "3.6.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "Upstream AF candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.4.0" { return "Bounded upstream candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.3.0" { return "Upstream hardening candidate" }
-        if currentAppliedLens?.firmwareVersion == "3.2.0" { return "Startup diagnostic candidate" }
-        if isDirty { return "Save your lens edits" }
-        if loadError != nil { return "Recover your lens library" }
-        if preparedLensIssue != nil { return "Finish this lens profile" }
-        if primaryLensAction == .read { return "Read the saved lens settings" }
-        if !stockUploadQualified { return "Set up this adapter once" }
-        if preparedLens == nil { return "Choose your lens" }
-        if currentAppliedLens?.firmwareVersion == "4.5.0" { return "Biotar 58mm camera aperture" }
-        if variantForLensChanges?.supportsLensProfileChanges == false { return "Fixed 50mm upstream baseline" }
-        if preparedMatchesApplied { return "Your lens profile is up to date" }
-        if !idleAcknowledged { return "Confirm the USB connection" }
-        return "Ready to switch lenses"
+        if waitingForVerification { return "Verify the uploaded firmware" }
+        if isArchivedFirmware { return "Archived firmware detected" }
+        if currentFirmwareVariant == .cameraDialAperture { return "Your adapter is ready" }
+        if currentFirmwareVariant == .wideCameraAperture { return "Wide aperture candidate installed" }
+        if currentFirmwareVariant == .upstreamStockSpeed { return "Ready for the 4.5 baseline" }
+        return "Read your adapter once"
     }
     var workflowDetail: String {
         if busy { return progress?.phase ?? "Keep the USB cap connected until this operation finishes." }
         if discoveryError { return deviceMessage }
-        if devices.isEmpty { return "Connect the LM-EA9 through its USB cap. Connection status updates automatically." }
-        if devices.count != 1 { return "Disconnect the extra adapters before reading or changing settings." }
-        if devices.first?.qualifiedDescriptor != true { return "This connection does not match the supported LM-EA9. USB actions are unavailable." }
-        if updateStateError != nil { return "Local update history needs attention. Open USB tools to review the error and restore from a verified backup." }
-        if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Connect the adapter used for that update, or review its saved backup in USB tools." }
-        if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Physically unplug and reconnect the cap. The app will detect the new connection." }
-        if waitingForVerification { return "Confirm the updater is closed, then verify the uploaded settings before using the camera." }
-        if let reason = Self.cameraFailureHolds[currentAppliedLens?.firmwareVersion ?? ""] {
-            return reason + " Keep the camera off; open USB tools to review the verified image and backup."
-        }
-        if currentAppliedLens?.firmwareVersion == "4.1.0" { return "Camera compatibility remains unqualified. This fixed 50mm f/1.4 candidate adds watchdog reset evidence and a persistent crash latch; it does not establish a camera-crash or autofocus fix. Power loss can leave only a startup baseline. Preserve a read-only backup for review; actual iris position is unknown." }
-        if currentAppliedLens?.firmwareVersion == "4.0.0" { return "Camera compatibility remains unqualified. This fixed 50mm f/1.4 candidate tests bounded reference qualification and motor handoff; collect a backup after one coordinated camera cycle. Actual iris position is unknown." }
-        if currentAppliedLens?.firmwareVersion == "3.9.0" { return "Camera compatibility remains unqualified; a physical homing or shutter fix is unproven. This diagnostic candidate removes an unused ADC dependency and records failed homing and subsequent consumed focus requests. It is fixed to the original 50mm f/1.4 profile; actual iris position is unknown." }
-        if ["3.5.0", "3.6.0", "3.7.0", "3.8.0", "3.9.0", "4.0.0", "4.1.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "Camera compatibility remains unqualified. Save a read-only backup after one coordinated cycle for log review. The compiled lens is the original 50mm f/1.4 profile; actual iris position is unknown." }
-        if currentAppliedLens?.firmwareVersion == "3.4.0" { return "Camera compatibility remains unqualified. After one coordinated cycle, save a read-only backup for log review. This candidate is compiled for the original 50mm f/1.4 profile; actual iris position is unknown." }
-        if currentAppliedLens?.firmwareVersion == "3.3.0" { return "Camera compatibility remains unqualified. After one coordinated camera cycle, save a read-only backup for log review before another trial. Lens library edits stay local in this fixed 50mm build." }
-        if currentAppliedLens?.firmwareVersion == "3.2.0" { return "Camera compatibility is unqualified. After one coordinated camera cycle, use USB tools to save a read-only backup for diagnostic decoding." }
-        if isDirty { return "Save or discard the changes in the lens editor before applying a profile." }
-        if loadError != nil { return "The saved library was preserved. Import a valid library from Lens Library to recover it." }
-        if let issue = preparedLensIssue { return issue }
-        if primaryLensAction == .read { return "Read the adapter once to identify its installed firmware and lens setting. Profile changes will preserve that firmware." }
-        if !stockUploadQualified { return "A verified backup and stock upload check prepare this adapter for profile changes." }
-        if preparedLens == nil { return "Choose a profile from the dropdown. The saved adapter setting stays visible above." }
-        if currentAppliedLens?.firmwareVersion == "4.5.0" { return "The Sony dial selects reported f/2–f/16; match the physical lens ring. USB shows the startup f/2 setting, not the live camera selection. Lens library edits stay local. Camera validation is pending." }
-        if variantForLensChanges?.supportsLensProfileChanges == false { return "This build uses fixed settings for \(currentAppliedLens?.setting.name ?? "the upstream profile"). Library edits stay local; changing the adapter setting requires another firmware build." }
-        if preparedMatchesApplied { return "The selected profile matches the last USB-verified setting. You can disconnect and use it on your camera." }
-        if !idleAcknowledged { return "Close TECHART Update, reconnect the cap, then confirm the checkbox below." }
-        return "Apply the selected profile, then reconnect to verify. The installed firmware is preserved."
+        if devices.isEmpty { return "Connect the LM-EA9 through its USB update cap. Connection status refreshes automatically." }
+        if devices.count != 1 { return "Disconnect the extra adapters before using USB tools." }
+        if devices.first?.qualifiedDescriptor != true { return "This USB connection does not match the supported LM-EA9." }
+        if updateStateError != nil { return "Saved history was preserved. Open USB tools to review it or restore a verified stock backup." }
+        if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Connect the adapter used for that upload." }
+        if reconnectRequired || (waitingForVerification && pendingUpdate?.device.id == devices.first?.id) { return "Physically unplug and reconnect the cap before reading it again." }
+        if waitingForVerification { return "Verify the complete image before moving the adapter to your camera." }
+        if isArchivedFirmware { return "Earlier experiments are retired. Backup and stock recovery remain available; no retired image can be installed here." }
+        if currentFirmwareVariant != nil { return firmwareBehaviorNote }
+        return "Open USB tools to read firmware and lens information."
     }
     var workflowSymbol: String {
         if busy { return "arrow.triangle.2.circlepath" }
-        if installedCameraFailureHold { return "exclamationmark.triangle.fill" }
-        if ["3.2.0", "3.3.0", "3.4.0", "3.5.0", "3.6.0", "3.7.0", "3.8.0", "3.9.0", "4.0.0", "4.1.0"].contains(currentAppliedLens?.firmwareVersion ?? "") { return "waveform.path.ecg" }
-        if preparedMatchesApplied && !waitingForVerification && !reconnectRequired { return "checkmark.circle.fill" }
-        return "cable.connector"
+        if reconnectRequired || waitingForVerification { return "cable.connector" }
+        if currentFirmwareVariant == .cameraDialAperture { return "checkmark.circle.fill" }
+        return adapterConnected ? "info.circle" : "cable.connector"
+    }
+    var needsWorkflowBanner: Bool { busy || reconnectRequired || waitingForVerification || updateStateError != nil || discoveryError || isArchivedFirmware }
+    func cameraMetadataSummary(_ setting: AdapterLensSetting) -> String {
+        if let variant = currentFirmwareVariant, variant != .upstreamStockSpeed {
+            return "\(setting.focalLengthMM.formatted()) mm · startup f/\(setting.apertureLabel) · Sony dial \(variant.apertureRangeLabel)"
+        }
+        return "\(setting.focalLengthMM.formatted()) mm · reported f/\(setting.apertureLabel)"
     }
 }

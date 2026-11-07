@@ -72,9 +72,9 @@ upper-row changes. Bootloader, fuse and calibration writes are not performed.
 Stock restoration/readback passed on this adapter after the AF 2.4 failure and
 again after the AF 2.8 failure. The latter's full restored flash also matches the
 stock snapshot immediately before AF 2.8 installation. See
-[the strict 2.8-to-stock recovery record](../../../docs/evidence/stock-18-af28-recovery-2026-10-12.md).
+[the strict 2.8-to-stock recovery record](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/stock-18-af28-recovery-2026-10-12.md).
 Interrupted transfer/power-loss and bootloader recovery remain unqualified. See the
-[AF installation/restoration runbook](../../../docs/af-s-test.md).
+[AF installation/restoration runbook](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/af-s-test.md).
 
 The vendor binary is attributed to Techart and is not covered by the custom
 firmware's MIT license. It is committed at the owner's request for restoration.

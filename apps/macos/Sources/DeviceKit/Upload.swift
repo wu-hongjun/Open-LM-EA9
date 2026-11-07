@@ -115,7 +115,7 @@ struct UpdateStore: Sendable {
               digest(record.image) == record.imageSHA256, record.device.qualifiedDescriptor,
               !record.device.serial.isEmpty, record.expectedMetadata.count == 58,
               record.expectedMetadata.prefix(3) == Data(record.version),
-              record.version == [1,8,0] || FirmwareVariant.from(version: record.version) != nil else {
+              recognizedFirmwareVersion(record.version.map(String.init).joined(separator: ".")) else {
             throw DeviceError.failure("Invalid update journal. Preserve it and its backup for recovery.")
         }
         if let variant = FirmwareVariant.from(version: record.version) {
@@ -124,6 +124,8 @@ struct UpdateStore: Sendable {
                   try ApplicationImage.setting(in: record.image, variant: variant) == record.setting else {
                 throw DeviceError.failure("Update journal contains an unrecognized application.")
             }
+        } else if ArchivedFirmware.entries[record.version.map(String.init).joined(separator: ".")] != nil {
+            try ArchivedFirmware.validate(record)
         } else {
             guard record.setting == nil, record.image.count == 0x1b000,
                   digest(Data(record.image.prefix(20172))) == "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564" else {
@@ -164,7 +166,7 @@ struct UpdateStore: Sendable {
         guard data.count <= 16384 else { throw DeviceError.failure("Applied-lens history is too large.") }
         let value = try JSONDecoder().decode(AppliedLens.self, from: data)
         _ = try value.setting.encoded()
-        guard FirmwareVariant.allCases.contains(where: { $0.versionString == value.firmwareVersion }), value.device.qualifiedDescriptor, !value.device.serial.isEmpty,
+        guard recognizedFirmwareVersion(value.firmwareVersion), value.device.qualifiedDescriptor, !value.device.serial.isEmpty,
               value.imageSHA256.count == 64 else { throw DeviceError.failure("Invalid applied-lens history.") }
         return value
     }
@@ -195,7 +197,7 @@ struct VerifiedBackup {
         guard manifest.schemaVersion == 1, manifest.flashReadPasses == 2, manifest.auxiliaryReadPasses == 2,
               manifest.flashBytes == 0x20000, manifest.bootCodeSHA256 == expectedBootHash,
               manifest.device.qualifiedDescriptor, !device.serial.isEmpty, manifest.device.serial == device.serial,
-              allowRecoveryVersion || manifest.reportedFirmwareVersion == "1.8.0" || FirmwareVariant.allCases.contains(where: { $0.versionString == manifest.reportedFirmwareVersion }),
+              allowRecoveryVersion || recognizedFirmwareVersion(manifest.reportedFirmwareVersion),
               Set(manifest.files.keys) == names else { throw DeviceError.failure("Backup format, loader or adapter identity does not match.") }
         for name in names {
             let expected = manifest.files[name]!
@@ -242,6 +244,11 @@ struct VerificationEngine {
             }
         }
         guard let setting = pending.setting else { return nil }
+        if ArchivedFirmware.entries[pending.version.map(String.init).joined(separator: ".")] != nil {
+            try ArchivedFirmware.validate(pending)
+            return AppliedLens(device: current.result.manifest.device, setting: setting,
+                firmwareVersion: pending.version.map(String.init).joined(separator: "."), imageSHA256: pending.imageSHA256, verifiedAt: Date())
+        }
         guard let variant = FirmwareVariant.from(version: pending.version),
               current.result.manifest.reportedFirmwareVersion == variant.versionString,
               try ApplicationImage.installedVariant(actual) == variant,

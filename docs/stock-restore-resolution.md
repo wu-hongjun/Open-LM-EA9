@@ -5,7 +5,7 @@ comparison, where the camera was used before the USB restore readback. It is
 separate from normal upload verification and runs only when requested through
 the CLI. It does not alter `VerificationEngine` or clear a blocked connection.
 
-The [original comparison record](evidence/stock-18-comparison-2026-10-11.md)
+The [original comparison record](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/stock-18-comparison-2026-10-11.md)
 retains the strict failure: 13 bytes changed in recovered stock motion fields,
 while the full original application slot and protected/factory data matched.
 Stock's save routine copies its live motion/settings record to flash; this is
@@ -60,5 +60,5 @@ The offline tests classify every byte of the 44-byte record, reject same
 connections, fresh drift, outside-gap/application/metadata changes and altered
 factory data, and verify durable receipt retention without marking the failed
 journal verified. Existing strict upload verification tests remain unchanged.
-The [AF 2.4 hardware record](evidence/af-24-upload-2026-10-11.md) reports actual
+The [AF 2.4 hardware record](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/af-24-upload-2026-10-11.md) reports actual
 resolution/upload/readback results separately from this policy.

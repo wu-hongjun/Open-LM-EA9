@@ -43,7 +43,7 @@ public struct FirmwareObservationStore: Sendable {
         try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: fileURL.path)
     }
     private func validate(_ observation: FirmwareObservation) throws {
-        guard observation.version == "1.8.0" || FirmwareVariant.allCases.contains(where: { $0.versionString == observation.version }), observation.device.qualifiedDescriptor,
+        guard recognizedFirmwareVersion(observation.version), observation.device.qualifiedDescriptor,
               observation.device.product == "LM-EA9", observation.device.manufacturer == "TECHART",
               observation.readAt > Date(timeIntervalSince1970: 0), observation.readAt <= Date().addingTimeInterval(60) else {
             throw DeviceError.failure("Invalid firmware history.")
@@ -56,7 +56,7 @@ func qualifiedFirmwareVersion(_ reply: Data, allowRecoveryVersion: Bool = false)
         throw DeviceError.failure("The adapter did not return an idle CHECK response. Reconnect the USB cap.")
     }
     let version = Array(reply[6..<9])
-    guard allowRecoveryVersion || version == [1,8,0] || FirmwareVariant.from(version: version) != nil else {
+    guard allowRecoveryVersion || recognizedFirmwareVersion(version.map(String.init).joined(separator: ".")) else {
         throw DeviceError.failure("Unrecognized firmware version. No memory reads were sent. Reconnect the USB cap.")
     }
     return version.map(String.init).joined(separator: ".")

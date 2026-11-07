@@ -2,7 +2,7 @@
 
 ## Installation
 
-The [4.4.0 comparison](../../firmware/candidates/4.4.0/README.md) was uploaded
+The [4.4.0 comparison](../../firmware/releases/4.4.0/README.md) was uploaded
 to test the speed negotiation change against the November upstream trial.
 It declines `0x0C` and keeps the UART at 750 kbaud. The original upstream
 identity, optics and motor code are preserved.
@@ -41,7 +41,7 @@ Jena Biotar 58mm f/2** and requested live reported-aperture selection with the
 Sony camera dial. The 4.4.0 image still advertises its compiled 50mm f/1.8
 defaults. This lens clarification does not retroactively identify the lens
 used in every earlier trial. The separately prepared
-[4.5.0 candidate](../../firmware/candidates/4.5.0/README.md) targets the Biotar;
+[4.5.0 candidate](../../firmware/releases/4.5.0/README.md) targets the Biotar;
 its camera behavior remains untested.
 
 The November 4.2.0 trial failed on this body. The only behavioral change
@@ -51,5 +51,5 @@ startup parser, optical defaults and motor controller are identical at
 the source level. This comparison supports the speed negotiation path
 as a compatibility factor on this setup. The earlier failure was
 reported without a wire trace or matching camera settings, so the exact
-failing edge or exchange remains unknown. [Firmware patch](../../firmware/candidates/4.4.0/stock-speed.patch) ·
-[Earlier trial](upstream-november-trial-2026-11-06.md).
+failing edge or exchange remains unknown. [Firmware patch](../../firmware/releases/4.4.0/stock-speed.patch) ·
+[Earlier trial](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/upstream-november-trial-2026-11-06.md).

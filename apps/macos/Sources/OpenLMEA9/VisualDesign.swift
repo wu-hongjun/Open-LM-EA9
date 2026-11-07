@@ -3,30 +3,18 @@ import AppKit
 import LensCore
 
 enum Palette {
-    static let canvas = Color(red: 0.96, green: 0.95, blue: 0.93)
-    static let ink = Color(red: 0.13, green: 0.15, blue: 0.16)
-    static let muted = Color(red: 0.40, green: 0.43, blue: 0.43)
-    static let line = Color(red: 0.87, green: 0.87, blue: 0.84)
-    static let accent = Color(red: 0.17, green: 0.39, blue: 0.34)
-    static let softAccent = Color(red: 0.91, green: 0.95, blue: 0.92)
+    static let canvas = Color(nsColor: .windowBackgroundColor)
+    static let ink = Color.primary
+    static let muted = Color.secondary
+    static let line = Color(nsColor: .separatorColor)
+    static let accent = Color(nsColor: .controlAccentColor)
+    static let softAccent = accent.opacity(0.08)
 }
 
-struct Eyebrow: View {
-    let text: String
-    init(_ text: String) { self.text = text }
-    var body: some View { Text(text.uppercased()).font(.system(size: 10, weight: .semibold)).tracking(1.5).foregroundStyle(Palette.muted) }
-}
 struct Surface: ViewModifier {
     func body(content: Content) -> some View {
-        content.background(.white, in: RoundedRectangle(cornerRadius: 22))
-            .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(Palette.line.opacity(0.7), lineWidth: 0.7))
-    }
-}
-struct PrimaryButtonStyle: ButtonStyle {
-    @Environment(\.isEnabled) private var enabled
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label.font(.system(size: 13, weight: .semibold)).padding(.horizontal, 20).padding(.vertical, 11)
-            .foregroundStyle(.white).background(Palette.ink.opacity(enabled ? (configuration.isPressed ? 0.8 : 1) : 0.35), in: RoundedRectangle(cornerRadius: 10))
+        content.background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
+            .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Palette.line, lineWidth: 0.5))
     }
 }
 struct StatusPill: View {
@@ -89,7 +77,7 @@ struct ProductPhoto: View {
             } else {
                 Image(systemName: "camera.aperture").resizable().scaledToFit().padding(40).foregroundStyle(Palette.muted)
             }
-        }.frame(maxWidth: .infinity).frame(height: height).background(.white).accessibilityHidden(true)
+        }.frame(maxWidth: .infinity).frame(height: height).background(.white).clipShape(RoundedRectangle(cornerRadius: 8)).accessibilityHidden(true)
     }
 }
 struct LensNumbers: View {
@@ -111,26 +99,11 @@ struct LensNumbers: View {
 struct AppHeader: View {
     @ObservedObject var model: AppModel
     var body: some View {
-        HStack {
-            HStack(spacing: 10) {
-                Image(systemName: "camera.aperture").font(.system(size: 22, weight: .light))
-                Text("Open LM-EA9").font(.system(size: 15, weight: .semibold))
-            }.frame(maxWidth: .infinity, alignment: .leading)
-            HStack(spacing: 4) {
-                tab("Device", image: "cable.connector", value: .device)
-                tab("Lens Library", image: "camera.aperture", value: .lensLibrary)
-            }.padding(4).background(.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 12))
-            Label(model.library.targetCamera, systemImage: "camera")
-                .font(.system(size: 12)).foregroundStyle(Palette.muted).frame(maxWidth: .infinity, alignment: .trailing)
-        }.padding(.horizontal, 32).padding(.vertical, 16)
-    }
-    private func tab(_ title: String, image: String, value: AppTab) -> some View {
-        Button { model.requestTab(value) } label: {
-            Label(title, systemImage: image).font(.system(size: 12, weight: .medium))
-                .padding(.horizontal, 15).padding(.vertical, 9)
-                .background(model.selectedTab == value ? Palette.ink : .clear, in: RoundedRectangle(cornerRadius: 9))
-                .foregroundStyle(model.selectedTab == value ? .white : Palette.muted)
-        }.buttonStyle(.plain).accessibilityAddTraits(model.selectedTab == value ? .isSelected : [])
+        Picker("Section", selection: Binding(get: { model.selectedTab }, set: { model.requestTab($0) })) {
+            Text("Device").tag(AppTab.device)
+            Text("Lens Library").tag(AppTab.lensLibrary)
+        }.pickerStyle(.segmented).labelsHidden().frame(width: 260).padding(16)
+            .frame(maxWidth: .infinity)
     }
 }
 

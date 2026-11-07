@@ -23,19 +23,29 @@ import DeviceKit
             directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
                 .appendingPathComponent("org.openlmea9.prototype", isDirectory: true)
         }
-        _model = StateObject(wrappedValue: AppModel(directory: directory))
+        let previewMode: String? = {
+            if let index = args.firstIndex(of: "--preview"), index + 1 < args.count { return args[index + 1] }
+            return Bundle.main.object(forInfoDictionaryKey: "EA9PreviewMode") as? String
+        }()
+        if let mode = previewMode {
+            let previewDirectory = args.contains("--library-directory") ? directory :
+                FileManager.default.temporaryDirectory.appendingPathComponent("ea9-preview-" + UUID().uuidString)
+            _model = StateObject(wrappedValue: AppPreview.make(mode, directory: previewDirectory))
+        } else {
+            _model = StateObject(wrappedValue: AppModel(directory: directory))
+        }
     }
     var body: some Scene {
         Window("Open LM-EA9", id: "main") {
             ContentView(model: model)
-                .frame(minWidth: 920, minHeight: 680)
+                .frame(minWidth: 860, minHeight: 590)
                 .onAppear { delegate.model = model }
                 .task { await model.monitorDevices() }
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
                     Task { await model.refreshDevices(silent: true) }
                 }
         }
-        .defaultSize(width: 1130, height: 780)
+        .defaultSize(width: 990, height: 660)
         .commands {
             CommandGroup(after: .appInfo) {
                 Button("Photo Credits…") { model.showPhotoCredits = true }
@@ -57,12 +67,15 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             AppHeader(model: model)
+            if model.isPreview {
+                Text("OFFLINE PREVIEW · USB DISABLED").font(.system(size: 9, weight: .semibold)).tracking(1.5)
+                    .foregroundStyle(Palette.muted).padding(.bottom, 8)
+            }
             Rectangle().fill(Palette.line).frame(height: 1)
             if model.selectedTab == .device { DeviceView(model: model) }
             else { LensLibraryView(model: model) }
         }
         .background(Palette.canvas).foregroundStyle(Palette.ink).tint(Palette.accent)
-        .preferredColorScheme(.light)
         .toolbar(.hidden, for: .windowToolbar)
         .sheet(isPresented: Binding(get: { model.showLensEditor }, set: { if !$0 { model.closeLensEditor() } })) {
             if let profile = model.selectedProfile {

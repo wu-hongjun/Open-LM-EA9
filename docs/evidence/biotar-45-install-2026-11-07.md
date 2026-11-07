@@ -1,6 +1,6 @@
 # Biotar 58mm aperture-dial trial: 4.5.0 installation
 
-The owner authorized uploading [4.5.0](../../firmware/candidates/4.5.0/README.md)
+The owner authorized uploading [4.5.0](../../firmware/releases/4.5.0/README.md)
 with the LM-EA9 on its USB cap and both TECHART Update and Open LM-EA9 closed.
 The target is a Zeiss Jena Biotar 58mm f/2 on the Sony A7C II. This build
 declares 58mm, boots at f/2, and accepts camera-requested reported values
@@ -49,18 +49,18 @@ qualified and its snapshot also matched; these register reads remain
 non-atomic observations, not a lock-state restoration guarantee.
 [Sanitized verification result](biotar-45-install-2026-11-07.json).
 
-## A7C II aperture-dial test: pending
+## A7C II camera result: owner-confirmed working
 
-No camera observation is recorded for 4.5.0. After successful byte verification,
-the owner was guided through one startup/shutdown cycle with the Biotar. Confirm still-photo A,
-actual MF and Pre-AF Off where available. Check live view and boot f/2, then
-whether the camera dial accepts f/2.8 and f/4. Set the physical ring to match
-f/4 before one MF photograph if the camera and motor are behaving normally.
-Record actual settings, displayed values, saved-file/exposure result and
-shutdown; leave unknown details unverified. A numeric display is not proof
-of actual iris position or correct exposure. Stop after a freeze or abnormal
-drive rather than repeating a failed trial.
+On November 7 the owner reported that this firmware works well and explicitly
+confirmed **AF, photos, aperture-dial control and shutdown work**. This is the
+working baseline for the owner's A7C II and Biotar 58mm f/2 setup.
 
-The existing [offline checks](../../firmware/candidates/4.5.0/offline-evidence.json)
-remain unchanged. This installation does not establish Sony dial acceptance,
-saved exposure/EXIF, autofocus quality or camera stability.
+The actual focus/exposure mode, Pre-AF setting, selected aperture values,
+saved-photo path/EXIF, quantitative exposure and endurance counts were not
+supplied. Those details remain unverified; the general positive report is
+accepted without requiring another test. This does not establish all-camera,
+all-lens compatibility or factory parity.
+
+The owner subsequently requested a wider virtual f/1.2–f/22 range. It is
+prepared as separate [4.6.0](../../firmware/releases/4.6.0/README.md), while the
+working 4.5 application and original USB/offline evidence remain unchanged.
