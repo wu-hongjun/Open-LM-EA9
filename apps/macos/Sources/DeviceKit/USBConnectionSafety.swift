@@ -4,8 +4,7 @@ import Darwin
 /// Hardware safety belongs to the user, independently of the selected lens library.
 struct USBConnectionSafety: Sendable {
     static var canonicalDirectory: URL {
-        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("org.openlmea9.prototype", isDirectory: true)
+        AdapterStorage.defaultDirectory
     }
     let directory: URL
     var file: URL { directory.appendingPathComponent("usb-reconnect-required.json") }

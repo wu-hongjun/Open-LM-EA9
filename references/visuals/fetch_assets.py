@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
     base = Path(__file__).resolve().parent
     root = base.parents[1]
-    resources = root / 'apps/macos/Sources/OpenLMEA9/Resources'
+    resources = root / 'apps/macos/Sources/OpenLensAdapter/Resources'
     manifest = base / 'assets.json'
     assets = json.loads(manifest.read_text())['assets']
     for asset in assets:

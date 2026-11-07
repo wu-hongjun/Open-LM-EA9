@@ -20,6 +20,9 @@ python3 scripts/test-firmware.py --build artifacts/private/my-46-build \
   --output artifacts/private/my-46-tests
 scripts/swift-local.sh test
 python3 tools/test_stock_recovery.py --key PRIVATE_KEY
+# After building the custom example and default baseline:
+python3 scripts/test-firmware-config.py --build artifacts/private/my-custom-firmware \
+  --negative-control-build artifacts/private/my-45-build
 ```
 
 Native tests exercise bounded upload, no reads after START, lost acknowledgements
@@ -28,6 +31,13 @@ verification, protected data, exact-source admission and rollback, read-only
 legacy compatibility, local library persistence, automatic discovery, preview
 inhibition and truthful lens/range presentation. The archived journal test reads
 its original fixture from the archive tag; it does not bundle retired images.
+
+The rename adds a legacy-storage/shared-lock compatibility check. Custom recipe
+checks reject malformed names, invalid ranges, overflow, unknown fields and
+published-version collisions. The custom example is ARM-built and its real C
+responder is exercised under ASan/UBSan for name/checksum, focal fields, boot/range
+and all 65536 aperture operands. Running it against the unmodified Biotar is a
+failing control. No custom image is automatically admitted to the uploader.
 
 Two clean builds reproduce working 4.5 and the separate 4.6 candidate. Native
 Device, Library and USB panel previews are reviewed with all USB operations

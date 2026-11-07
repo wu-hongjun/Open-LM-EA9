@@ -151,7 +151,7 @@ motor instructions or optical-calibration inputs.
 
 ## How to use this for the eventual stack
 
-The stack is undecided; the [product direction](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/product-direction.md)
+The stack is undecided; the [product direction](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/product-direction.md)
 defines the product and selection process. These findings apply across languages.
 
 1. Use the validated frame records as an initial host-side codec corpus.

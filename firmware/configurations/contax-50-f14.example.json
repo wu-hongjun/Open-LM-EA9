@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "version": [4, 7, 0],
+  "target": "lm-ea9",
+  "lens": {
+    "name": "Contax Zeiss Planar 50mm f/1.4",
+    "focalMM10": 500,
+    "nominalMaximumFNumber": 1.4
+  },
+  "reportedAperture": {
+    "maximumAV": 4224,
+    "minimumAV": 6400,
+    "initialAV": 4352
+  }
+}

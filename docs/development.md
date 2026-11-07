@@ -3,6 +3,10 @@
 The firmware is C; the native companion is SwiftUI/AppKit with Swift IOHID.
 Use macOS 14+ with Xcode command-line tools and Python 3.9+.
 
+Shared firmware lives in `firmware/core/`; LM-EA9 hardware source and build rules
+live in `firmware/targets/lm-ea9/`. The builder assembles an isolated flat source
+directory, preserving the working source bytes and link order.
+
 ## Pinned firmware dependencies
 
 The reproducible local toolchain layout is:
@@ -23,6 +27,10 @@ make firmware
 python3 scripts/build-firmware.py --output artifacts/private/my-45-build
 # Separate wider-range candidate:
 python3 scripts/build-firmware.py --wide-aperture --output artifacts/private/my-46-build
+# Editable custom recipe, with an unpublished version:
+python3 scripts/build-firmware.py --config firmware/configurations/contax-50-f14.example.json \
+  --output artifacts/private/my-custom-firmware
+python3 scripts/test-firmware-config.py --build artifacts/private/my-custom-firmware
 make test
 make app
 ```
@@ -32,15 +40,20 @@ checks flash/RAM bounds, excludes diagnostic/baud-switch symbols, and verifies
 that the default result matches the immutable 4.5 image. Motor/peripheral units
 retain their original `-O2`; the remaining units use `-Os`. No build command
 accesses the adapter. Build evidence and logs stay in the new output directory.
+Custom mode records the chosen target, edited source and generated lens metadata
+instead of requiring baseline source hashes. It never replaces a published image
+or adds one to the uploader. [Customization guide](customization.md).
 
-`make app` creates `dist/Open LM-EA9.app` and `dist/ea9ctl`, signs and verifies
+`make app` creates `dist/OpenLensAdapter.app` and `dist/ea9ctl`, signs and verifies
 both locally, and verifies reference-photo digests before packaging. Photos
 remain local assets with tracked credits. This is not a notarized distribution.
+The icon is an original Opus 5.5 Swift/AppKit drawing, regenerated during packaging.
+Its source and provenance are in [branding](../assets/branding/README.md).
 
 ## Offline app preview
 
 ```sh
-open -n -a "$PWD/dist/Open LM-EA9.app" --args --preview connected
+open -n -a "$PWD/dist/OpenLensAdapter.app" --args --preview connected
 # Other fixtures: disconnected, reconnect, wide, dark
 ```
 

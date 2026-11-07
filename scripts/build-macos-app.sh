@@ -3,12 +3,12 @@ set -euo pipefail
 ea9_root="$(cd "$(dirname "$0")/.." && pwd)"
 # The canonical inventory is reviewed outside the application. Packaging must not silently use a stale copy.
 cmp "$ea9_root/profiles/requested-lenses.json" "$ea9_root/apps/macos/Sources/LensCore/Resources/requested-lenses.json"
-cmp "$ea9_root/references/visuals/assets.json" "$ea9_root/apps/macos/Sources/OpenLMEA9/Resources/photo-credits.json"
+cmp "$ea9_root/references/visuals/assets.json" "$ea9_root/apps/macos/Sources/OpenLensAdapter/Resources/photo-credits.json"
 python3 "$ea9_root/references/visuals/fetch_assets.py" --verify-only
 "$ea9_root/scripts/swift-local.sh" build -c release
 ea9_bin="$("$ea9_root/scripts/swift-local.sh" build -c release --show-bin-path)"
 mkdir -p "$ea9_root/dist"
-ea9_destination="$ea9_root/dist/Open LM-EA9.app"
+ea9_destination="$ea9_root/dist/OpenLensAdapter.app"
 ea9_stage="$(mktemp -d "$ea9_root/dist/.ea9-app.XXXXXX")"
 # Build and verify the complete bundle before replacing the last usable build.
 trap 'if [[ -d "$ea9_stage/previous.app" && ! -e "$ea9_destination" ]]; then
@@ -16,15 +16,15 @@ trap 'if [[ -d "$ea9_stage/previous.app" && ! -e "$ea9_destination" ]]; then
 else
     rm -rf "$ea9_stage"
 fi' EXIT
-ea9_app="$ea9_stage/Open LM-EA9.app"
+ea9_app="$ea9_stage/OpenLensAdapter.app"
 mkdir -p "$ea9_app/Contents/MacOS" "$ea9_app/Contents/Resources"
-cp "$ea9_bin/OpenLMEA9" "$ea9_app/Contents/MacOS/OpenLMEA9"
-cp -R "$ea9_bin/OpenLMEA9_DeviceKit.bundle" "$ea9_app/Contents/Resources/"
-cp -R "$ea9_bin/OpenLMEA9_LensCore.bundle" "$ea9_app/Contents/Resources/"
-cp -R "$ea9_bin/OpenLMEA9_OpenLMEA9.bundle" "$ea9_app/Contents/Resources/"
+cp "$ea9_bin/OpenLensAdapter" "$ea9_app/Contents/MacOS/OpenLensAdapter"
+cp -R "$ea9_bin/OpenLensAdapter_DeviceKit.bundle" "$ea9_app/Contents/Resources/"
+cp -R "$ea9_bin/OpenLensAdapter_LensCore.bundle" "$ea9_app/Contents/Resources/"
+cp -R "$ea9_bin/OpenLensAdapter_OpenLensAdapter.bundle" "$ea9_app/Contents/Resources/"
 cp "$ea9_root/apps/macos/Info.plist" "$ea9_app/Contents/Info.plist"
 # Retired firmware must never remain in a stale SwiftPM resource bundle.
-python3 - "$ea9_root" "$ea9_app/Contents/Resources/OpenLMEA9_DeviceKit.bundle" <<'PY'
+python3 - "$ea9_root" "$ea9_app/Contents/Resources/OpenLensAdapter_DeviceKit.bundle" <<'PY'
 from pathlib import Path
 import hashlib
 import sys
@@ -41,7 +41,7 @@ codesign --verify --strict "$ea9_root/dist/.ea9ctl-next"
 mv -f "$ea9_root/dist/.ea9ctl-next" "$ea9_root/dist/ea9ctl"
 # SwiftPM's standalone CLI resolves bundles beside its executable. Keep the
 # DeviceKit template and LensCore seeds available outside the app bundle too.
-for ea9_bundle in OpenLMEA9_DeviceKit.bundle OpenLMEA9_LensCore.bundle; do
+for ea9_bundle in OpenLensAdapter_DeviceKit.bundle OpenLensAdapter_LensCore.bundle; do
     if [[ -e "$ea9_root/dist/$ea9_bundle" ]]; then
         rm -rf "$ea9_root/dist/$ea9_bundle"
     fi

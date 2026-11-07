@@ -1,7 +1,7 @@
 # Biotar 58mm aperture-dial trial: 4.5.0 installation
 
 The owner authorized uploading [4.5.0](../../firmware/releases/4.5.0/README.md)
-with the LM-EA9 on its USB cap and both TECHART Update and Open LM-EA9 closed.
+with the LM-EA9 on its USB cap and both TECHART Update and OpenLensAdapter closed.
 The target is a Zeiss Jena Biotar 58mm f/2 on the Sony A7C II. This build
 declares 58mm, boots at f/2, and accepts camera-requested reported values
 through f/16. The physical iris remains controlled by the lens ring.

@@ -11,7 +11,7 @@ import DeviceKit
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
 }
 
-@main struct OpenLMEA9App: App {
+@main struct OpenLensAdapterApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @StateObject private var model: AppModel
     init() {
@@ -20,8 +20,7 @@ import DeviceKit
         if let index = args.firstIndex(of: "--library-directory"), index + 1 < args.count {
             directory = URL(fileURLWithPath: args[index + 1], isDirectory: true)
         } else {
-            directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-                .appendingPathComponent("org.openlmea9.prototype", isDirectory: true)
+            directory = AdapterStorage.defaultDirectory
         }
         let previewMode: String? = {
             if let index = args.firstIndex(of: "--preview"), index + 1 < args.count { return args[index + 1] }
@@ -36,7 +35,7 @@ import DeviceKit
         }
     }
     var body: some Scene {
-        Window("Open LM-EA9", id: "main") {
+        Window("OpenLensAdapter", id: "main") {
             ContentView(model: model)
                 .frame(minWidth: 860, minHeight: 590)
                 .onAppear { delegate.model = model }

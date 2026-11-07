@@ -3,7 +3,7 @@
 Firmware build dependencies are indexed in [build-dependencies.json](build-dependencies.json),
 with official source URLs, pinned versions and archive digests. Their local tool
 cache is outside the immutable research snapshots. The [working C firmware](../firmware/README.md)
-and [USB application-write analysis](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-metadata-milestone.md) build on
+and [USB application-write analysis](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-metadata-milestone.md) build on
 the archived source without modifying it.
 
 Collected October 10, 2026 for modular LM-EA9 firmware, a host communication
@@ -67,12 +67,12 @@ are preserved; the original PDF and product-page HTML are not local copies.
 
 ## Analysis and verification
 
-Start with the [product direction](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/product-direction.md),
+Start with the [product direction](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/product-direction.md),
 [prior-work-analysis.md](analysis/prior-work-analysis.md), and broader
-[firmware research](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/reference-research.md). The
-[Rust feasibility study](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/rust-architecture.md) is a candidate design.
-The [parallel option audits](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/audits/README.md) and
-[system design recommendation](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/system-design-recommendation.md) compare
+[firmware research](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/reference-research.md). The
+[Rust feasibility study](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/rust-architecture.md) is a candidate design.
+The [parallel option audits](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/audits/README.md) and
+[system design recommendation](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/system-design-recommendation.md) compare
 firmware, management protocol and app alternatives. Their primary citations
 are catalogued in [audit-sources.json](audit-sources.json). That catalogue records
 all 57 citation URLs, the document that uses each, and either a dated local document,
@@ -81,26 +81,26 @@ a pinned source file, or the download failure. Additional snapshots are in
 shells, and eight download failures retain the original links. The collected
 Microchip datasheet, USB application note and silicon errata are complete PDF downloads.
 
-The [USB-cap investigation](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-cap-investigation.md) adds actual device
+The [USB-cap investigation](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-cap-investigation.md) adds actual device
 evidence and static updater/bootloader analysis. Installed application bytes
 match the recovered 1.8.0 image. Native CHECK/READ works, while the inspected
 stock USB boot path supplies no supported application-launch operation. Raw
 device identity, transcripts, dumps and extracted updater/disassembly text
 remain private, Git-ignored reference material.
 
-The [USB-cap follow-up](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-cap-followup.md) adds the complete main-flash
+The [USB-cap follow-up](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-cap-followup.md) adds the complete main-flash
 backup and exact chip/protection measurements. The
-[management-entry design](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/management-entry-design.md) records the
+[management-entry design](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/management-entry-design.md) records the
 launch-extension proposal and physical/recovery checks still needed. The
-offline [backup verifier](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/tools/verify_ea9_backup.py) checks command bytes,
+offline [backup verifier](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/tools/verify_ea9_backup.py) checks command bytes,
 transcripts and dump equality without accessing hardware. Raw binaries and
 physical identity remain private; decoded results and hashes are in
-[the public evidence summary](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/usb-cap-followup-2026-10-10.json).
+[the public evidence summary](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/usb-cap-followup-2026-10-10.json).
 
 The user-reported unplug event was followed by a new registry entry and another
 complete matching flash read. The
-[reconnect summary](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/usb-cap-reconnect-2026-10-10.json) and
-[USB-only development boundary](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-only-next-steps.md) record the result
+[reconnect summary](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/usb-cap-reconnect-2026-10-10.json) and
+[USB-only development boundary](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-only-next-steps.md) record the result
 and equipment constraint. Its raw traces and verification-script copies are
 private. Earlier evidence retains the limitations that applied to those runs.
 

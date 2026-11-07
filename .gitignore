@@ -29,7 +29,7 @@ __pycache__/
 # Downloaded reference photos remain local; their sources and digests are tracked.
 /references/visuals/photos/
 /references/visuals/*.html
-/apps/macos/Sources/OpenLMEA9/Resources/Photos/*.jpg
+/apps/macos/Sources/OpenLensAdapter/Resources/Photos/*.jpg
 
 # Recovery keys and decrypted same-unit backups never belong in public Git.
 /.venv-recovery/

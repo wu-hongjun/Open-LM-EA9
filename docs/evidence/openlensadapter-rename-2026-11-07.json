@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "dateUTC": "2026-11-07T17:24:08.049388+00:00",
+  "repository": "https://github.com/wu-hongjun/OpenLensAdapter",
+  "baseCommit": "a953222",
+  "app": {
+    "name": "OpenLensAdapter",
+    "version": "0.27.0",
+    "build": "38",
+    "legacyBundleIdentityPreserved": true,
+    "signatureVerified": true,
+    "offlinePreviewReviewed": true
+  },
+  "icon": {
+    "model": "claude-opus-5-5",
+    "provenance": "assets/branding/provenance.json",
+    "renditions": 10,
+    "packagedICNSVerified": true
+  },
+  "sourceLayout": {
+    "core": "firmware/core",
+    "target": "firmware/targets/lm-ea9",
+    "configurations": "firmware/configurations",
+    "workingSourceFiles": 39,
+    "sourceBytesPreserved": true
+  },
+  "builds": {
+    "working45": "8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35",
+    "wide46": "feeef5558f053f150923791af935953df112350519e08bad86712fde6901c318",
+    "customExample": "c26491b5a453b43235310639e050cb7b3d7799c140f65423aa888bb9dee3475e",
+    "publishedImagesUnchanged": true,
+    "customUploadQualified": false,
+    "customCameraQualified": false
+  },
+  "tests": {
+    "native": 50,
+    "stockRecovery": 7,
+    "referenceFiles": 3160,
+    "referenceFailures": 0,
+    "productionProtocol45": true,
+    "productionProtocol46": true,
+    "protocolFailureControls": true,
+    "custom65536ApertureOperands": true,
+    "customProfileWireFields": true,
+    "customUnmodifiedBaselineFailureControl": true,
+    "invalidConfigControls": 9
+  },
+  "preservation": {
+    "storageFilesUnchanged": 312,
+    "trackedProfileReleaseRecoveryAndFirmwareResourcesUnchanged": 19,
+    "hardwareAccess": false
+  },
+  "hardwareAccess": false,
+  "cameraQualificationChanged": false,
+  "limits": [
+    "Only LM-EA9 hardware implemented",
+    "4.6.0 and custom example remain offline",
+    "Optical tables inherited; custom lenses are not newly calibrated",
+    "Custom images require explicit uploader registration and qualification"
+  ]
+}

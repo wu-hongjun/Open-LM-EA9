@@ -20,6 +20,7 @@ DEFAULT_BUNDLE = ROOT / 'firmware/recovery/stock-1.8.0'
 APPLICATION_SHA256 = 'f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564'
 FLASH_SHA256 = '1aa89de1e58ab993fc28a201fc1c651ce1c333df0dc6f16b548294030bf5cd01'
 MAGIC = b'EA9REC01'
+# Cryptographic format identifier: retain the original spelling to decrypt existing recovery archives.
 AAD = b'Open-LM-EA9 original stock backup v1\0' + bytes.fromhex(FLASH_SHA256)
 EXPECTED = {'flash.bin': 131072, 'user-row.bin': 64, 'calibration.bin': 64,
             'device-id.bin': 64, 'nvm-status.bin': 64, 'manifest.json': None}

@@ -1,0 +1,16 @@
+{
+  "name": "OpenLensAdapter",
+  "model": "claude-opus-5-5",
+  "provider": "Anthropic Claude Code",
+  "method": "Original Swift/AppKit vector drawing; inspected and rendered locally",
+  "source": "scripts/create-app-icon.swift",
+  "sourceSHA256": "60d26e78d76da8098ff1f8c367dd01d8c4da59d1f38038c34e830c9eb115d594",
+  "master": "assets/branding/OpenLensAdapter.png",
+  "masterSHA256": "44f4b8b4e12a03548a46c8e2c53e3b3c389b3fa8052068112a3e6da3d010ea54",
+  "masterPixels": [
+    1024,
+    1024
+  ],
+  "concept": "Two silver lens-mount rings connected by three teal bayonet lugs on a charcoal squircle",
+  "externalAssets": false
+}

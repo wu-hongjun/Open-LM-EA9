@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "lm-ea9",
+  "name": "Techart LM-EA9",
+  "mcu": "SAMD21E17A",
+  "applicationStart": 20480,
+  "applicationBytes": 20480,
+  "codeAndDataLimit": 40704,
+  "ramEnd": 536887296,
+  "buildRules": ["release.mk", "optimizations.mk"],
+  "makefile": "optimizations.mk",
+  "elf": "build/ea9-rebuild-release.elf",
+  "includeDirectories": ["samd21-dfp-2/samd21a/include", "CMSIS_5-5.9.0/CMSIS/Core/Include"]
+}

@@ -20,7 +20,7 @@ fresh session opener. It adds no persistent settings or diagnostic writes.
 - [Application image](biotar-camera-aperture.bin): 20,480 bytes in `[0x5000,0xa000)`.
 - SHA-256: `8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35`.
 - [Manifest](manifest.json) pins all generated source files and the builder.
-- [Patch against 4.4](from-44.patch), plus the new [reporting module](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/firmware/camera-aperture).
+- [Patch against 4.4](from-44.patch), plus the new [reporting module](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/firmware/camera-aperture).
 - Linked code/data end: `0x9dd4` (19,924 bytes); 300 bytes before the `0x9f00`
   build guard. The image has no linked baud setter or persistent diagnostic code.
 
@@ -91,7 +91,8 @@ No USB access or canonical application-state changes occurred in preparation.
 
 ## Current build
 
-The exact source files are now checked in under `firmware/src/`. The default
+The exact source files are now checked in under `firmware/core/` and
+`firmware/targets/lm-ea9/src/`. The default
 builder reproduces the published image without an upstream scratch checkout:
 
 ```sh

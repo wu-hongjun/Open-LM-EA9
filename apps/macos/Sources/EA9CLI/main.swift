@@ -5,8 +5,7 @@ import DeviceKit
     static func main() async {
         do {
             var args = Array(CommandLine.arguments.dropFirst())
-            var state = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-                .appendingPathComponent("org.openlmea9.prototype", isDirectory: true)
+            var state = AdapterStorage.defaultDirectory
             if let index = args.firstIndex(of: "--state-directory"), index + 1 < args.count {
                 state = URL(fileURLWithPath: args[index + 1], isDirectory: true)
                 args.removeSubrange(index...index + 1)

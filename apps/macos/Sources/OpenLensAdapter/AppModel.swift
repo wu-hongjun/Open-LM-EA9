@@ -218,7 +218,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     func importLibrary() {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.json]; panel.canChooseDirectories = false; panel.allowsMultipleSelection = false
-        panel.message = "Choose an Open LM-EA9 lens library. You can review before replacing the local library."
+        panel.message = "Choose an OpenLensAdapter lens library. You can review before replacing the local library."
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do { pendingImport = try LensLibrary.decode(store.readBounded(url)); showImportConfirmation = true }
         catch { errorMessage = error.localizedDescription }

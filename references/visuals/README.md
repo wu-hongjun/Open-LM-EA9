@@ -8,7 +8,7 @@ generated replacement was applied.
 
 [assets.json](assets.json) records each source page, image URL, depicted model,
 author/source credit, retrieval date, byte count, SHA-256 and license observation.
-The app bundles an identical `photo-credits.json` and exposes **Open LM-EA9 →
+The app bundles an identical `photo-credits.json` and exposes **OpenLensAdapter →
 Photo Credits…**, also available in the Lens Library options menu.
 
 | Photograph | Source |
@@ -39,7 +39,7 @@ HTML research snapshots are Git-ignored. Attribution and hashes are tracked.
 ## Local copies and reproduction
 
 Original files live in `references/visuals/photos/`. Identical copies are bundled
-from `apps/macos/Sources/OpenLMEA9/Resources/Photos/`. To reconstruct missing
+from `apps/macos/Sources/OpenLensAdapter/Resources/Photos/`. To reconstruct missing
 downloads on a checkout with network access, run from the repository root:
 
 ```sh

@@ -52,4 +52,4 @@ the source level. This comparison supports the speed negotiation path
 as a compatibility factor on this setup. The earlier failure was
 reported without a wire trace or matching camera settings, so the exact
 failing edge or exchange remains unknown. [Firmware patch](../../firmware/releases/4.4.0/stock-speed.patch) ·
-[Earlier trial](https://github.com/wu-hongjun/Open-LM-EA9/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/upstream-november-trial-2026-11-06.md).
+[Earlier trial](https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/evidence/upstream-november-trial-2026-11-06.md).

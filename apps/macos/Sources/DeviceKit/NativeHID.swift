@@ -121,7 +121,7 @@ private final class NativeTransport: ReadOnlyTransport, UploadTransport {
 
 /// NSLock reserves the entire operation, including every await in callers. The worker owns all CF/HID objects.
 public final class DeviceService: @unchecked Sendable {
-    private let worker = DispatchQueue(label: "org.openlmea9.usb", qos: .userInitiated)
+    private let worker = DispatchQueue(label: "org.openlensadapter.usb", qos: .userInitiated)
     private let lock = NSLock()
     private var busy = false
     private let stateDirectory: URL

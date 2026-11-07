@@ -2,7 +2,7 @@ import Foundation
 import Testing
 import LensCore
 @testable import DeviceKit
-@testable import OpenLMEA9
+@testable import OpenLensAdapter
 
 private actor DiscoveryFixture {
     var devices: [DeviceIdentity] = []
