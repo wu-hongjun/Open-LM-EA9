@@ -36,6 +36,16 @@ legacy compatibility, local library persistence, automatic discovery, preview
 inhibition and truthful lens/range presentation. The archived journal test reads
 its original fixture from the archive tag; it does not bundle retired images.
 
+The 4.8 bank suite also runs in make test, or separately with make test-profile-bank.
+It tests the actual C journal and boot consumer under ASan/UBSan, corruption,
+prefix-cut erase/program models followed by reboot/retry, replay/no-op behavior,
+uniform sixteen-row wear rotation and eight lens fixtures through the production
+protocol. Broken record-CRC, erase-target and startup-aperture variants must fail
+specific assertions. The compiled ARM NVM/startup and saved-loader instruction
+checks are optional Unicorn tests, documented in the
+[profile-bank record](profile-bank-2026-11-07.md). They use synthetic registers
+and flash; they do not establish real power-loss behavior or camera stability.
+
 The rename adds a legacy-storage/shared-lock compatibility check. Custom recipe
 checks reject malformed names, invalid ranges, overflow, unknown fields and
 published-version collisions. The custom example is ARM-built and its real C

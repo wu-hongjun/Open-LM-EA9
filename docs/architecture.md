@@ -37,6 +37,11 @@ validates every readback byte. That fallback remains a complete application
 rewrite, explicitly labeled in the UI. Lightweight profile selection instead
 needs a bank, wear-leveled settings and a qualified transport, as described in
 [the persistence design](lens-profile-persistence.md).
+The separate 4.8 sparse-package builder now integrates a portable bank/journal,
+a SAMD21 NVM port and boot-time optical metadata application. It uses a new
+upper-flash ownership contract without replacing existing unit data. Its offline
+host planner has no transport; native source admission remains unchanged.
+[Module/layout details and qualification limits](profile-bank-2026-11-07.md).
 Older journals use read-only code pins rather
 than bundling retired executable firmware.
 

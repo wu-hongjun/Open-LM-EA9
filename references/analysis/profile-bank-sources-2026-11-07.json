@@ -1,0 +1,22 @@
+{
+  "retrievedOn": "2026-11-07",
+  "sources": [
+    {
+      "title": "Microchip SAM D21/DA1 Family Data Sheet DS40001882",
+      "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf",
+      "use": "Four-page erase rows, manual page programming, finite endurance and consecutive-write restrictions"
+    },
+    {
+      "title": "Microchip SAM D21 NVMCTRL Overview",
+      "url": "https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/32bit-mcu/sam/samd21-mcu-overview/peripherals/nvmctrl/",
+      "use": "Page/row addressing and explicit page-program behavior"
+    },
+    {
+      "title": "Original loader contract and erase-footprint study",
+      "url": "https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-metadata-milestone.md",
+      "use": "START metadata write, armed upload state and per-report row merge; rechecked using saved instructions in the new offline test"
+    }
+  ],
+  "privateEvidence": "Pinned same-unit boot prefix and original full backup remain private; public results contain no dump, key, identifier or camera frame.",
+  "hardwareAccess": false
+}

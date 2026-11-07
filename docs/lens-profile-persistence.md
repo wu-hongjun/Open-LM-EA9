@@ -7,6 +7,12 @@ each explicitly requested update. Choosing the app dropdown writes only its loca
 choice on the Mac. USB discovery, CHECK, READ and verification do not erase flash.
 No new profile firmware or settings operation was sent to hardware for this work.
 
+The subsequent [4.8 offline milestone](profile-bank-2026-11-07.md) implements the
+bank and a sixteen-row rotating journal, plus an offline mailbox planner. It
+executes the saved loader instructions to test START-only behavior and its
+unsafe follow-up control. Metadata field ownership and installation remain
+unqualified; the native app still has no settings-only transmitter.
+
 ## Endurance evidence
 
 [Microchip's SAM D21/DA1 data sheet, DS40001882](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf)

@@ -52,6 +52,36 @@ remain local assets with tracked credits. This is not a notarized distribution.
 The icon is an original Opus 5.5 Swift/AppKit drawing, regenerated during packaging.
 Its source and provenance are in [branding](../assets/branding/README.md).
 
+## Profile-bank experiment
+
+4.8.0 is a separate offline sparse package. It keeps existing upper-flash data
+out of its segments and is not admitted to the updater. Build and exercise its
+actual portable C and protocol paths without USB:
+
+```sh
+make test-profile-bank
+python3 scripts/build-profile-bank.py --output artifacts/private/my-bank
+python3 scripts/test-profile-bank.py --build artifacts/private/my-bank --output artifacts/private/my-bank-tests
+# Custom bank: copy the inventory, choose a zoom focal length if including it,
+# and use an unpublished version. Name payloads must fit 63 ASCII characters.
+python3 scripts/build-profile-bank.py --inventory /absolute/path/my-lenses.json \
+  --version 4.9.1 --default-profile contax-zeiss-50-f1-4 --output artifacts/private/my-custom-bank
+```
+
+The standalone selection planner accepts snapshots from this bank format only;
+it cannot read or write the adapter. It validates the package and refuses a
+foreign metadata extension. Its output contains private metadata:
+
+```sh
+python3 scripts/plan-profile-selection.py --package artifacts/private/my-bank \
+  --journal /absolute/path/private-settings.bin --metadata /absolute/path/private-metadata58.bin \
+  --profile-id contax-zeiss-50-f1-4 --output artifacts/private/my-selection-plan.json
+```
+
+The current adapter does not contain this journal. These commands do not make
+the experimental metadata allocation or installation path hardware-qualified.
+See [design, storage formats and remaining gates](profile-bank-2026-11-07.md).
+
 ## Offline app preview
 
 ```sh

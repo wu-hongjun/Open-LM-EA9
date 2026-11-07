@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "version": [
+    4,
+    8,
+    0
+  ],
+  "target": "lm-ea9",
+  "format": "offline-sparse-package",
+  "hardwareAccess": false,
+  "uploadQualified": false,
+  "cameraQualified": false,
+  "transmissionEnabled": false,
+  "baselineVersion": "4.6.0",
+  "baselineImageSHA256": "feeef5558f053f150923791af935953df112350519e08bad86712fde6901c318",
+  "baseCodeAndDataEnd": "0x9ef8",
+  "extensionUsedBytes": 2072,
+  "segments": [
+    {
+      "address": 20480,
+      "bytes": 20480,
+      "file": "application.bin",
+      "sha256": "201d8a52d5bcf130afe164da6215985deb30c3538f0c6464b6235cf64b92e87b"
+    },
+    {
+      "address": 65536,
+      "bytes": 8192,
+      "file": "extension.bin",
+      "sha256": "463b17a13b05e72c5c032412817b7df31d034ee2fde20ca9dd40c7a27877ee41"
+    },
+    {
+      "address": 73728,
+      "bytes": 4096,
+      "file": "bank.bin",
+      "sha256": "6030199e944c879579c03095cf8951680ec3c975faad1269ffb4f5f4c410cc5c"
+    },
+    {
+      "address": 77824,
+      "bytes": 4096,
+      "file": "settings.bin",
+      "sha256": "792e624b04946aaaf1f941982ced204c8b77843b17477ba609c1c8cee177f762"
+    }
+  ],
+  "preserveRanges": [
+    [
+      0,
+      20480
+    ],
+    [
+      40960,
+      65536
+    ],
+    [
+      81920,
+      131072
+    ]
+  ],
+  "requiredBlankBeforeFirstInstall": [
+    65536,
+    81920
+  ],
+  "profiles": [
+    "contax-zeiss-28-f2",
+    "contax-zeiss-35-f1-4",
+    "contax-zeiss-50-f1-4",
+    "contax-zeiss-85-f1-4",
+    "contax-zeiss-100-f2-8-macro",
+    "contax-zeiss-135-f2-8",
+    "zeiss-jena-biotar-55-f2"
+  ],
+  "omittedProfiles": [
+    {
+      "profileID": "contax-zeiss-28-70-f3-5",
+      "reason": "Choose the actual zoom focal length first."
+    }
+  ],
+  "defaultSlot": 6,
+  "inventorySHA256": "2a4ea0d4f3e68099bf5be241d1f2035e1feb1b25146395c69c9984195abc675d",
+  "sources": {
+    "abs_encoder.c": "ee681727a302a1a9163558db21cbca480ef3ff99329af80fe9c1140e9d6c3a38",
+    "abs_encoder.h": "271a3812014b3cbb37cc0886c1b109e1d96e1eb40693d35f274665a6e92e6ef0",
+    "atmel_start.h": "320724c3b6595be2b74b38bd16be4638b47743c08d378fa7e55a92834bca5743",
+    "board.c": "3a390c3b39e08812a0f29bca84d99f1b82057498cbc8e15b34ac709a7d845814",
+    "board.h": "beb93de0c771768d754bf29c4ce24d61d3cb06d2c2fe73f1153afb77c9d0a237",
+    "clock.c": "650c3fde1d016593804d3990de015a12f0a879147b8d73e6c0bc7b03559e6346",
+    "clock.h": "fc1c88a85846c812822448bed7b5167a39463c20ae31f55d54c3548aff2f1d15",
+    "delay.c": "028797625937471e9bae9e45c45a549ef6cee547bb8f994e8ce7ac71d694cdc3",
+    "delay.h": "797f716165022961b7a1db6fb6bb67d03152cb90bc4b626d5f77212d18deeaef",
+    "diag.c": "7e74b4837db6f2021d64931f66489b635a50dc9bec933ca17b92701ff56cfd28",
+    "diag.h": "5e232a1845432fe1f11204dadaad89fc7b580626903287d68aeea0f9dd7adb6d",
+    "ea9.ld": "b92038557dfa4bb3ddf271eab2cf3c99470462aed6bf580ae1742631115a1085",
+    "em_eic.c": "2f1c50c83f3b9277dcd7907453a6962cbd7b7f8fa28026845dbcb0ab729b8b48",
+    "em_eic.h": "0565076b6e7e16cd90ea6701f63fcd3a0a091fe53ad77511bf83c7c6f430630f",
+    "em_uart.c": "b58fc16d28b3fe0ab1f8845444393979cab8f0443e3cc130f661e8b310a74c94",
+    "em_uart.h": "e5b933969f583c0ff47277af32a5d10f636d5b964380f6dc6e3efb62f17ea078",
+    "emount.c": "0e018499c028ead2e91cea9d28f8fc8a9d2071fcd0b8f5c966b6bd90f554e721",
+    "emount.h": "e1ed0fc0bb84d45d19186b966825954faca6374f7b193fa367e159c3f0b868d1",
+    "emount_packets.c": "028d5258119fe6cf615f7e5362bda478fa6e9412b3e4885895628637beec7dc7",
+    "emount_packets.h": "21cffe0f644d33da901083a25e39fd75d72b3323ae4e3ccd3ea150f091ce7d2e",
+    "focus_dist.c": "6d63867abd5859cd1a07806fefe9710143bae11a1b2f2118e37bde763c31782b",
+    "focus_dist.h": "fd6aa6395c91de4ea01cee534890c8164e76476867d22880ff52db4c67ac9b7c",
+    "focus_map.c": "679b436520b61313344ede75c757313b25cd7e7170b996cf408a74b69c72db27",
+    "focus_map.h": "2f3590d1be527309cca53da4b29a0e58204639788f74fd157d2bdf3e2d78e21f",
+    "main.c": "5d6934c5f266cbc06d6a7606ea9e0a1717285bc6e07b0d4f28df5e70d1c540a3",
+    "motor.c": "d1f8cf52d05b21bce91125dbfc9c14a06d0da04c0de75153d2b1a33d0197496b",
+    "motor.h": "7d53b26985a74a252b7a691af23f273421acae9c1720ef633d5873d007be1421",
+    "optical_file.c": "3db3c2f84000ecc57e3396ce9b3a41b12fa5cbe56cec8cdd4bd192a96d7518b2",
+    "optical_file.h": "3c2dd98d106a8ed8ac63d281029668175657ab1a7f707fe42b848bb2673f79de",
+    "profile_bank.c": "a606b2dd3963ca68717aaaf17703f51a5653f9ed219852a32e5a9d873465a76a",
+    "profile_bank.h": "444d3caa418f7ab575f79455524a3d583ec0128cadbb9f3506095e9e698d4742",
+    "profile_layout.h": "b71d27115777698f7d4bc19aa81d1ba9b7403e971330fbf4b00534a0fcbdb376",
+    "profile_nvm.c": "2d57df32690f5e136d5e2c17651a04c6e42e03f6c3395da2235e716e0151e860",
+    "profile_nvm.h": "c6ac26d3b5d657939bb69e2a68ab4c83167c1db866fb08a319f77e9d430f4f39",
+    "profile_runtime.c": "0bbf70046e9c903e51f2a566b7ce621f935674d045d409c504b381b7fed97124",
+    "profile_runtime.h": "d7689ba4e4660c0c4a58dbca06983a73fe0662f32a55fe38ea1255178587d4ba",
+    "reported_aperture.c": "90b1caf35ea7fdbf6a9db08aa3e0b0dd605f17b17e3956fdc19341a78a46845e",
+    "reported_aperture.h": "6e356424382c3513ef0f168c0b53a98501800c2de45e0f5c0e4623cf73944c96",
+    "servo.c": "1b94a373ca1c90caab0b51d2a26b13dc0efd5dd5eb1be235591e1441582966b8",
+    "servo.h": "e45f04ef5ef2e35d84011179a0313d9a095ffd262790e205d8fa8704dc2bbfb6",
+    "startup_samd21.c": "662ef9d4db6dc51f98885e480a5fb21f13d8a2e59f4f896b615cf917380aea79",
+    "system_samd21.c": "f76c1b4ddd7998742a81a2f67183060880f08e2eba8bb673a6369dd7ca5a9a4c",
+    "trail.c": "8c6b5a2093fb43ce50881ee90330f5a40a065d1719064b873efbc37cd847ef4b",
+    "trail.h": "feb0dd79d35d27e86f0e28b07a48b1111eecb496540e2bf3bba0531b505cfa14",
+    "vdd.c": "e09808b8574fda819ca5eb7ed6e1261cbe965349ee6d24c973c31ca8ad706fa6",
+    "vdd.h": "4593b57610594ad8a0f69b466649605c2f0d8e32c154d365a49969a29090028f"
+  },
+  "buildRules": {
+    "release.mk": "aa3bff9eb965f3f0527d5b2c1e7ef54819cdf4c20de6b65914a8ba9912f68208",
+    "optimizations.mk": "c69bbb66d1b6371cafe6ab67d9e145d898b1dcd4c32518d3407a979fef0dfb7f"
+  },
+  "builderSHA256": "400e6605242573de7a2a3c80198a4e1496d1e712e11299018f2c0cd3e13d3ee4",
+  "codecSHA256": "fc32e2dd9131a898e40fa41d5c35c9bcc3b6a02371a26ef3b055a021aff732fe",
+  "installation": "Not accepted by current updater. Requires fresh full backup, ownership checks and a gap-preserving installer."
+}

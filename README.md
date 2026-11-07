@@ -34,6 +34,11 @@ the application. The preferred design is a profile bank plus small, wear-leveled
 settings. [Endurance and transport design](docs/lens-profile-persistence.md).
 The physical iris is always shown as unknown.
 
+**4.8.0 implements the bank and a 16-row settings journal offline.** Its sparse
+package preserves existing unit data; it is not accepted by the updater. The
+metadata-only USB route remains disabled pending field-ownership, migration and
+hardware qualification. [Design and test evidence](docs/profile-bank-2026-11-07.md).
+
 ## Project layout
 
 | Path | Purpose |
@@ -41,6 +46,7 @@ The physical iris is always shown as unknown.
 | [firmware/core](firmware/core/) | E-mount protocol, focus mapping, optical data and aperture reporting |
 | [firmware/targets](firmware/targets/) | Hardware-specific source, linker, build rules and memory layout |
 | [firmware/configurations](firmware/configurations/) | Editable lens/build recipe examples |
+| [firmware/features](firmware/features/) | Separately built profile-bank/settings modules |
 | [firmware/hosttest](firmware/hosttest/) | Production-path protocol and simulated motor tests |
 | [firmware/releases](firmware/releases/) | Immutable image, manifest and evidence pins |
 | [firmware/recovery](firmware/recovery/) | Original stock 1.8.0 and encrypted same-unit recovery |

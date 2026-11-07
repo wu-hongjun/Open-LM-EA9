@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-07T20:07:51.645586+00:00",
+  "hardwareAccess": false,
+  "baseCommit": "115819e980d5eca038d949464c917162821d188a",
+  "packageVersion": [
+    4,
+    8,
+    0
+  ],
+  "packageManifestSHA256": "7ccc3da4a9bfa597c9468a23921018a70d22c957d3bef9abb8c1d0b4b0457a31",
+  "segments": [
+    {
+      "address": 20480,
+      "bytes": 20480,
+      "file": "application.bin",
+      "sha256": "201d8a52d5bcf130afe164da6215985deb30c3538f0c6464b6235cf64b92e87b"
+    },
+    {
+      "address": 65536,
+      "bytes": 8192,
+      "file": "extension.bin",
+      "sha256": "463b17a13b05e72c5c032412817b7df31d034ee2fde20ca9dd40c7a27877ee41"
+    },
+    {
+      "address": 73728,
+      "bytes": 4096,
+      "file": "bank.bin",
+      "sha256": "6030199e944c879579c03095cf8951680ec3c975faad1269ffb4f5f4c410cc5c"
+    },
+    {
+      "address": 77824,
+      "bytes": 4096,
+      "file": "settings.bin",
+      "sha256": "792e624b04946aaaf1f941982ced204c8b77843b17477ba609c1c8cee177f762"
+    }
+  ],
+  "cleanReproduction": true,
+  "integratedMakeTestPassed": true,
+  "nativeTests": {
+    "library": 7,
+    "device": 40,
+    "app": 9,
+    "total": 56
+  },
+  "existingFirmware": "4.5/4.7 pinned rebuilds, protocol/aperture/motor models and required failing controls passed",
+  "bank": {
+    "hardwareAccess": false,
+    "portableC": [
+      {
+        "case": "production",
+        "passed": true,
+        "expectedExit": 0
+      },
+      {
+        "case": "ignore-record-crc",
+        "passed": true,
+        "expectedExit": 2
+      },
+      {
+        "case": "erase-current-row",
+        "passed": true,
+        "expectedExit": 2
+      }
+    ],
+    "productionProtocolProfiles": 8,
+    "bankSingleBitCorruptions": 32768,
+    "journalLatestRecordBitCorruptions": 512,
+    "semanticInvalidBanksWithRecomputedChecksums": 12,
+    "tornOperationBoundariesPerBank": 322,
+    "banksTested": 2,
+    "hostPlanner": "no-op, pending/cancel, binding, foreign bytes, exhaustion; no transmission",
+    "startupFailingControl": true,
+    "cliControls": "offline proposal; existing output and foreign metadata refused"
+  },
+  "compiledARM": {
+    "hardwareAccess": false,
+    "compiledCandidate": true,
+    "tests": [
+      "unchanged boot makes no NVM commands",
+      "startup mailbox commits before metadata apply",
+      "RAM execution while synthetic NVM busy",
+      "PRIMASK restored",
+      "full flash outside journal/mailbox invariant",
+      "next boot consumes no extra writes",
+      "out-of-range/unaligned operations rejected",
+      "locked journal readable but unwritable",
+      "wrong NVM geometry rejected",
+      "initial READY timeout bounded",
+      "NVM command error preserves committed selection and latches write fault"
+    ],
+    "limitations": "Synthetic page buffer/register completion; no real power-loss, bus-stall, cache or camera qualification."
+  },
+  "savedLoader": {
+    "hardwareAccess": false,
+    "bootSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+    "actualInstructionEntries": [
+      "0x257c dispatcher",
+      "0x0e78 row merge"
+    ],
+    "stubs": "NVM page read/erase/program and USB send/rearm; no electrical or USB timing model",
+    "startOnly": {
+      "metadataBytes": 58,
+      "scratchOverreadBytes": 6,
+      "rowErases": 1,
+      "pagePrograms": 4,
+      "logicalChangedRange": [
+        16384,
+        16448
+      ],
+      "applicationWrites": 0,
+      "stateAfter": 2
+    },
+    "unsafeControl": "CHECK while armed programmed 0x5000 and advanced pointer; detected",
+    "resetControl": "Fresh initial RAM state admits read-only CHECK",
+    "fieldOwnership": "Not established for every boot/application path; 0x4020..0x4039 remains experimental",
+    "transmissionEnabled": false,
+    "remainingQualification": [
+      "real zero-page START/reset behavior",
+      "metadata extension ownership",
+      "full application/protected-data invariance after reconnect",
+      "ambiguous/lost ACK recovery",
+      "new sparse-package installer and upper-region ownership"
+    ]
+  },
+  "preservation": {
+    "canonicalLibraryBackupKeyFilesChecked": 308,
+    "canonicalChanged": 0,
+    "publishedReleaseRecoveryFilesChecked": 20,
+    "publishedChanged": 0,
+    "hardwareAccess": false
+  },
+  "originalStockRecoveryTests": 7,
+  "referenceCollection": {
+    "schema_version": 1,
+    "checked_files": 3163,
+    "scope": "Pinned public references; private vendor material and local caches excluded",
+    "failure_count": 0,
+    "failures": []
+  },
+  "customBuilds": [
+    "4.9.0 example with production C/exhaustive aperture and failing control",
+    "4.9.1 custom bank/default profile; offline and not published"
+  ],
+  "testAndBuilderSHA256": {
+    "scripts/build-profile-bank.py": "400e6605242573de7a2a3c80198a4e1496d1e712e11299018f2c0cd3e13d3ee4",
+    "scripts/profile_bank.py": "fc32e2dd9131a898e40fa41d5c35c9bcc3b6a02371a26ef3b055a021aff732fe",
+    "scripts/plan-profile-selection.py": "bed75e9f1a16f2d2546f2b33e5ef4f0493b19e1ab755fe97be799311d9dda630",
+    "scripts/run-profile-bank-tests.py": "a77e60517c66680edc28761800f64f22959a4d1e6f8bca2d4ddc26e4a581922c",
+    "scripts/test-profile-bank.py": "a2a29e78721ad8865f93736dac3875420d27e4e4ad14a071b7e11adf15507ef0",
+    "scripts/test-profile-nvm-arm.py": "fcdd9953a12875076957f5d717ed6652941b033b3aad90c85ea5732e3471f8d3",
+    "scripts/test-metadata-only-loader.py": "f8d3e41c5445aba587e52f1b62ce2ada6a4c7e27cfc15bd54b61888b24506109",
+    "firmware/hosttest/test_profile_bank.c": "3096b0fc8aee70e9a03c3b078db3d71ef768884348a6fb2c13972b07a06b762a",
+    "firmware/hosttest/test_banked_runtime.c": "19dd56cb37e06ed9d96be6af643d0202c606cb84757a5b15a673fd19cd5fc011"
+  },
+  "currentHardware": "Untouched; no 4.8 installation or camera test performed",
+  "enabledUSBSelection": false,
+  "openGates": [
+    "metadata bytes 32\u201357 ownership and explicit migration; original region is not blank",
+    "qualified fresh full backup, upper-region ownership and gap-preserving sequential installer",
+    "same-unit reconnect/full application and protected-data invariance for zero-page START",
+    "lost-ACK/reconnect handling without another armed-loader report",
+    "native admission/status for committed versus pending profiles",
+    "real NVM timing/power-loss and camera startup/capture/shutdown qualification"
+  ]
+}
