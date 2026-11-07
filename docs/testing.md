@@ -19,6 +19,10 @@ python3 scripts/test-firmware.py
 python3 scripts/test-firmware.py --build artifacts/private/my-46-build \
   --output artifacts/private/my-46-tests
 scripts/swift-local.sh test
+# Offline 4.7 template and per-lens startup checks:
+python3 scripts/build-firmware.py --lens-profile-template --output artifacts/private/my-47-template
+python3 scripts/test-firmware.py --build artifacts/private/my-47-template --output artifacts/private/my-47-tests
+python3 scripts/test-lens-profile-template.py --build artifacts/private/my-47-template --output artifacts/private/my-47-profile-tests
 python3 tools/test_stock_recovery.py --key PRIVATE_KEY
 # After building the custom example and default baseline:
 python3 scripts/test-firmware-config.py --build artifacts/private/my-custom-firmware \

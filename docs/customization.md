@@ -78,6 +78,14 @@ application format. Extend it explicitly for a different architecture or loader.
 The native app's `DeviceKit` transport, descriptors, flash layout, protected-data
 checks and recovery qualification must also be implemented for another adapter.
 
+## Native app lens selection
+
+The Lens card can prepare a library profile using the offline 4.7 template. This
+changes the name, focal/startup fields and profile record without a compiler,
+but its explicit firmware-update fallback still rewrites the complete image.
+It is not the low-write profile-bank/settings design. Zooms require a saved
+current focal length. [App workflow](app-lens-card-2026-11-07.md).
+
 ## Adding a custom image to the app
 
 Custom output is not accepted as an arbitrary flash file. Register a new immutable

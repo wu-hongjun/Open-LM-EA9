@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "baseCommit": "ef1c0eb",
+  "appVersion": "0.28.0",
+  "appBuild": "39",
+  "ui": {
+    "lensDropdown": true,
+    "installedAndSelectedSeparate": true,
+    "readAndVerifyOnHome": true,
+    "automaticDescriptorRefresh": true,
+    "automaticHIDReports": false,
+    "previewSelectionReviewed": true,
+    "firmwareUpdateExplicitlyLabeled": true,
+    "minimumWindowPoints": [
+      900,
+      720
+    ],
+    "defaultWindowPoints": [
+      1000,
+      760
+    ],
+    "unknownStockProfileLabeledUnavailable": true,
+    "previewOperationHelperGuarded": true
+  },
+  "tests": {
+    "native": 56,
+    "nativeBreakdown": {
+      "library": 7,
+      "deviceKit": 40,
+      "appWorkflow": 9
+    },
+    "productionProtocolAndControls": true,
+    "allEightProfileRuntimeFixtures": true,
+    "ignoredStartupWordFailureControl": true,
+    "cliPreparationAndNegativeControls": true,
+    "stockRecovery": 7,
+    "referenceFiles": 3162,
+    "referenceFailures": 0
+  },
+  "firmware": {
+    "templateVersion": "4.7.0",
+    "templateSHA256": "5b5267d8a25e0fbad0de2f5072455dc838bf217e9cbcb602c8985c2d24537344",
+    "applicationBytes": 20480,
+    "codeAndDataEnd": "0x9dd8",
+    "patchSlots": {
+      "focalMM10": 15786,
+      "startupAV": 15784,
+      "lensName": 19115,
+      "profileRecord": 20224
+    },
+    "cleanRebuildMatched": true,
+    "published45And46Reproduced": true,
+    "cameraQualified": false,
+    "uploaded": false,
+    "settingsOnlyTransportImplemented": false,
+    "builtInProfileBankImplemented": false
+  },
+  "preservation": {
+    "localProfileBackupAndKeyFilesUnchanged": 308,
+    "existingPublishedProfileReleaseAndRecoveryPayloadsUnchanged": 14,
+    "lastHardwareJournalVersion": "4.6.0",
+    "nativeTests": 56,
+    "hardwareReportsSent": 0,
+    "newFirmwareUploaded": false
+  },
+  "signaturesVerified": true,
+  "hardwareReportsSent": 0,
+  "designDecision": "Profile bank plus wear-leveled settings is preferred; 4.7 remains an explicit whole-image update fallback, not routine parameter-only switching."
+}

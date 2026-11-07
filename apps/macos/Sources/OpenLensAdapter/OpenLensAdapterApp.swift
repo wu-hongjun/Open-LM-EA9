@@ -37,14 +37,14 @@ import DeviceKit
     var body: some Scene {
         Window("OpenLensAdapter", id: "main") {
             ContentView(model: model)
-                .frame(minWidth: 860, minHeight: 590)
+                .frame(minWidth: 900, minHeight: 720)
                 .onAppear { delegate.model = model }
                 .task { await model.monitorDevices() }
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
                     Task { await model.refreshDevices(silent: true) }
                 }
         }
-        .defaultSize(width: 990, height: 660)
+        .defaultSize(width: 1000, height: 760)
         .commands {
             CommandGroup(after: .appInfo) {
                 Button("Photo Credits…") { model.showPhotoCredits = true }

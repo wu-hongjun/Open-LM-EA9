@@ -16,47 +16,92 @@ struct DeviceView: View {
         }
     }
     private var adapterCard: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Adapter").font(.headline)
                 Spacer()
                 StatusPill(text: model.connectionLabel, connected: model.adapterConnected)
             }.frame(height: 32)
-            ProductPhoto(id: "lm-ea9", height: 190).padding(.vertical, 6)
+            ProductPhoto(id: "lm-ea9", height: 132).padding(.vertical, 4)
             Text("Techart LM-EA9").font(.system(size: 23, weight: .medium))
             Divider()
-            infoRow("Firmware", model.currentAppliedLens?.firmwareVersion ?? model.currentFirmwareObservation?.version ?? "Not read")
+            infoRow("Status", model.adapterStateText)
+            infoRow("Firmware", model.adapterFirmwareText)
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Profile on adapter").font(.caption).foregroundStyle(Palette.muted)
+                Text(model.installedProfileText).font(.callout.weight(.medium)).fixedSize(horizontal: false, vertical: true)
+            }
             if let caption = model.firmwareHistoryCaption {
-                Text(caption).font(.caption).foregroundStyle(Palette.muted)
+                Text("Last " + caption.prefix(1).lowercased() + caption.dropFirst())
+                    .font(.caption).foregroundStyle(Palette.muted)
             }
-            Spacer(minLength: 4)
-            if !model.needsWorkflowBanner || model.busy {
-                Button("USB tools") { model.showDeviceTools = true }.buttonStyle(.bordered).controlSize(.large)
-            }
-        }.padding(24).frame(maxWidth: .infinity, alignment: .leading).frame(minHeight: 460).modifier(Surface())
+            Spacer(minLength: 0)
+            HStack {
+                if model.waitingForVerification {
+                    Button("Verify profile", action: model.verifyFromCard)
+                        .buttonStyle(.borderedProminent).disabled(!model.canRequestVerification)
+                } else {
+                    Button("Read adapter", action: model.readAdapterFromCard)
+                        .buttonStyle(.borderedProminent)
+                        .disabled(!model.canRequestDeviceRead || model.updateStateError != nil)
+                }
+                Spacer()
+                Button { model.showDeviceTools = true } label: { Image(systemName: "ellipsis") }
+                    .buttonStyle(.bordered).help("Backups, firmware and recovery").accessibilityLabel("USB tools")
+            }.controlSize(.large)
+            Text("Connection refreshes automatically. Read refreshes adapter information.")
+                .font(.caption).foregroundStyle(Palette.muted)
+        }.padding(24).frame(maxWidth: .infinity, alignment: .leading).frame(minHeight: 540).modifier(Surface())
     }
     private var lensCard: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            HStack { Text("Lens").font(.headline); Spacer() }.frame(height: 32)
-            if let applied = model.currentAppliedLens {
-                ProductPhoto(id: applied.setting.id, height: 190).padding(.vertical, 6)
-                Text(applied.setting.name).font(.system(size: 23, weight: .medium)).lineLimit(2)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Lens").font(.headline)
+                Spacer()
+                Text(model.selectedLensState).font(.caption).foregroundStyle(Palette.muted)
+            }.frame(height: 32)
+            ProductPhoto(id: model.deviceLensPreview?.id ?? "", height: 132).padding(.vertical, 4)
+            Picker("Lens profile", selection: Binding(
+                get: { model.deviceLensSelectionID },
+                set: { model.chooseDeviceLens($0) })) {
+                Text("Choose a lens…").tag(String?.none)
+                ForEach(model.library.profiles) { profile in
+                    Text(profile.displayName).tag(Optional(profile.id))
+                }
+            }.pickerStyle(.menu).labelsHidden().controlSize(.large)
+                .frame(maxWidth: .infinity).accessibilityLabel("Lens profile")
+                .disabled(model.busy || model.isDirty || model.waitingForVerification)
+            if let profile = model.deviceLensPreview {
+                LensNumbers(profile: profile)
+                if profile.kind == .zoom {
+                    infoRow("Zoom setting", profile.activeFocalLengthMM.map { "\($0.formatted()) mm" } ?? "Choose in Edit")
+                }
                 Divider()
-                infoRow("Sony aperture dial", model.currentFirmwareVariant?.apertureRangeLabel ?? "Unknown")
+                infoRow("Sony aperture dial", model.preparedMatchesApplied || model.preparedLensID == nil
+                    ? model.currentFirmwareVariant?.apertureRangeLabel ?? "f/1.2–f/22" : "f/1.2–f/22")
                 infoRow("Physical aperture", "Unknown")
-                Text("Set the iris with the lens ring.").font(.caption).foregroundStyle(Palette.muted)
+                Text("Use the lens ring to control the iris.").font(.caption).foregroundStyle(Palette.muted)
             } else {
-                Text("Lens information not read").font(.system(size: 20, weight: .medium)).padding(.top, 24)
-                Text(model.emptyLensMessage).font(.callout).foregroundStyle(Palette.muted)
+                Text("Choose the lens you mounted.").font(.callout).foregroundStyle(Palette.muted)
+                    .padding(.vertical, 20)
             }
-            Spacer(minLength: 4)
-        }.padding(24).frame(maxWidth: .infinity, alignment: .leading).frame(minHeight: 460).modifier(Surface())
+            Spacer(minLength: 0)
+            HStack {
+                Button(model.preparedMatchesApplied ? "Applied" : "Update lens firmware…", action: model.applyPreparedLens)
+                    .buttonStyle(.borderedProminent).disabled(!model.canApplyLens)
+                if let profile = model.deviceLensPreview {
+                    Button("Edit…") { model.editLens(profile) }.buttonStyle(.bordered).disabled(model.busy || model.isDirty)
+                }
+            }.controlSize(.large)
+            Text(model.lensActionHint).font(.caption).foregroundStyle(Palette.muted)
+                .fixedSize(horizontal: false, vertical: true)
+        }.padding(24).frame(maxWidth: .infinity, alignment: .leading).frame(minHeight: 540).modifier(Surface())
     }
     private func infoRow(_ label: String, _ value: String) -> some View {
-        HStack {
+        HStack(alignment: .firstTextBaseline) {
             Text(label).foregroundStyle(Palette.muted)
-            Spacer()
-            Text(value).fontWeight(.medium).monospacedDigit()
+            Spacer(minLength: 16)
+            Text(value).fontWeight(.medium).multilineTextAlignment(.trailing).monospacedDigit()
         }.font(.callout)
     }
     private var statusBanner: some View {
@@ -69,7 +114,11 @@ struct DeviceView: View {
                 if model.busy, let p = model.progress { ProgressView(value: p.fraction) }
             }
             Spacer()
-            if !model.busy { Button("USB tools") { model.showDeviceTools = true }.buttonStyle(.bordered) }
+            if model.canRequestVerification {
+                Button("Verify profile", action: model.verifyFromCard).buttonStyle(.borderedProminent)
+            } else if model.canCancelRead {
+                Button("Cancel read", action: model.cancelBackup).buttonStyle(.bordered)
+            }
         }.padding(15).background(Palette.softAccent, in: RoundedRectangle(cornerRadius: 12))
     }
 }

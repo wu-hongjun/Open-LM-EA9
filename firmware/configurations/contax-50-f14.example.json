@@ -1,6 +1,10 @@
 {
   "schemaVersion": 1,
-  "version": [4, 7, 0],
+  "version": [
+    4,
+    8,
+    0
+  ],
   "target": "lm-ea9",
   "lens": {
     "name": "Contax Zeiss Planar 50mm f/1.4",

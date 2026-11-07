@@ -1,5 +1,6 @@
 import Foundation
 import DeviceKit
+import LensCore
 
 @main struct EA9CLI {
     static func main() async {
@@ -20,11 +21,24 @@ import DeviceKit
                 print("Prepared pinned image: \(data.count) bytes. No USB access.")
                 return
             }
+            func lens(_ id: String) throws -> LensCore.LensProfile {
+                let library = try LensCore.LibraryStore(directory: state).loadOrSeed()
+                guard let profile = library.profiles.first(where: { $0.id == id }) else {
+                    throw DeviceError.failure("Choose a saved lens profile ID from the library.")
+                }
+                return profile
+            }
+            if args.count == 3, args[0] == "prepare-lens" {
+                let data = try FirmwareImageBuilder.prepare(profile: lens(args[1]))
+                try data.write(to: URL(fileURLWithPath: args[2]), options: .withoutOverwriting)
+                print("Prepared selected-lens image: \(data.count) bytes. No USB access.")
+                return
+            }
             let simple = ["verify","inspect","qualify-stock","apply-camera-aperture","apply-wide-aperture","apply-upstream-stock-speed"]
-            let fileCommands = ["backup","restore-stock","resolve-stock-after-camera"]
+            let fileCommands = ["backup","restore-stock","resolve-stock-after-camera","apply-lens-firmware"]
             guard args == ["inventory"] || (args.count == 2 && simple.contains(args[0]) && args[1] == "--idle") ||
                     (args.count == 3 && fileCommands.contains(args[0]) && args[2] == "--idle") else {
-                throw DeviceError.failure("Usage: ea9ctl [--state-directory PATH] inventory | inspect --idle | backup NEW.ea9backup --idle | apply-camera-aperture --idle | apply-wide-aperture --idle | apply-upstream-stock-speed --idle | verify --idle | qualify-stock --idle | restore-stock ORIGINAL.ea9backup --idle | prepare-camera-aperture NEW.bin | prepare-wide-aperture NEW.bin | prepare-upstream-stock-speed NEW.bin")
+                throw DeviceError.failure("Usage: ea9ctl [--state-directory PATH] inventory | inspect --idle | backup NEW.ea9backup --idle | apply-lens-firmware PROFILE_ID --idle | apply-camera-aperture --idle | apply-wide-aperture --idle | apply-upstream-stock-speed --idle | verify --idle | qualify-stock --idle | restore-stock ORIGINAL.ea9backup --idle | prepare-lens PROFILE_ID NEW.bin | prepare-camera-aperture NEW.bin | prepare-wide-aperture NEW.bin | prepare-upstream-stock-speed NEW.bin")
             }
             let service = DeviceService(stateDirectory: state)
             let devices = try await service.inventory()
@@ -41,6 +55,7 @@ import DeviceKit
             }
             var pending: PendingUpdate?
             switch args[0] {
+            case "apply-lens-firmware": pending = try await service.apply(profile: lens(args[1]), device: device, idleAcknowledged: true, cancellation: token, progress: progress)
             case "apply-camera-aperture": pending = try await service.applyCameraDialAperture(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
             case "apply-wide-aperture": pending = try await service.applyWideCameraAperture(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
             case "apply-upstream-stock-speed": pending = try await service.applyUpstreamStockSpeed(device: device, idleAcknowledged: true, cancellation: token, progress: progress)

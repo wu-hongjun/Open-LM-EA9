@@ -116,7 +116,8 @@ private actor DiscoveryFixture {
     #expect(setting.actualAperture == nil)
     model.chooseDeviceLens("contax-zeiss-50-f1-4")
     #expect(model.preparedLensID == "contax-zeiss-50-f1-4" && model.currentAppliedLens?.setting == setting)
-    #expect(!model.canApplyLens)
+    #expect(model.canApplyLens && model.selectedLensState == "Selected · not applied")
+    #expect(model.installedProfileText == setting.name)
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "1.8.0", readAt: Date().addingTimeInterval(1)))
     await model.refreshDevices(silent: true)
     #expect(model.currentAppliedLens == nil && !model.canInstallWideAperture)
@@ -153,6 +154,9 @@ private actor DiscoveryFixture {
     let model = AppModel(directory: folder, preview: true, inventory: { await fixture.inventory() }, reconnect: { _ in false })
     await model.refreshDevices(silent: true); model.idleAcknowledged = true
     #expect(model.adapterConnected && !model.canReadDevice && !model.canChangeFirmware)
+    var invoked = false
+    model.runLensOperation { _, _ in invoked = true }
+    #expect(!invoked && !model.busy)
     let device = try #require(model.devices.first)
     try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.1.0"))
     await model.refreshDevices(silent: true)
@@ -184,4 +188,62 @@ private actor DiscoveryFixture {
     #expect(model.currentAppliedLens == nil && model.firmwareHistoryCaption?.hasPrefix("Read ") == true)
     model.busy = true; model.isUploadingFirmware = false; #expect(model.canCancelRead)
     model.isUploadingFirmware = true; #expect(!model.canCancelRead)
+    model.busy = false
+    try history.save(FirmwareObservation(device: device, version: "1.8.0", readAt: now.addingTimeInterval(2)))
+    await model.refreshDevices(silent: true)
+    #expect(model.installedProfileText == "Stock lens settings are not decoded")
+    #expect(model.adapterStateText == "Profile unavailable" && model.adapterFirmwareText == "1.8.0")
+}
+
+@Test @MainActor func selectedProfileNeverReplacesInstalledStatusBeforeVerification() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([71])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first), store = UpdateStore(directory: folder)
+    let first = try #require(model.library.profiles.first { $0.id == "contax-zeiss-35-f1-4" })
+    let image = try ApplicationImage.personalized(first, variant: .lensProfiles)
+    try store.saveApplied(AppliedLens(device: device, setting: try #require(image.setting), firmwareVersion: "4.7.0", imageSHA256: digest(image.data), verifiedAt: Date()))
+    try store.saveQualification(device: device, transactionID: UUID())
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.7.0"))
+    await model.refreshDevices(silent: true)
+    model.chooseDeviceLens(first.id)
+    #expect(model.preparedMatchesApplied && !model.canApplyLens)
+    model.chooseDeviceLens("contax-zeiss-85-f1-4")
+    #expect(model.canApplyLens && !model.idleAcknowledged) // Button asks for explicit consent.
+    #expect(model.selectedLensState == "Selected · not applied")
+    #expect(model.installedProfileText == first.displayName && model.adapterFirmwareText == "4.7.0")
+    #expect(model.lensActionHint.contains("reflashes"))
+    #expect(!FileManager.default.fileExists(atPath: folder.appendingPathComponent("USBBackups").path))
+    #expect(try store.load() == nil)
+    await fixture.set([]); await model.refreshDevices(silent: true)
+    #expect(!model.canApplyLens && model.installedProfileText == "Not read")
+    #expect(model.deviceLensPreview?.id == "contax-zeiss-85-f1-4")
+}
+
+@Test @MainActor func homeVerificationRequiresNewConnectionAndHidesUnverifiedProfile() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([71])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let profile = try #require(model.library.profiles.first { $0.id == "contax-zeiss-35-f1-4" })
+    model.chooseDeviceLens(profile.id)
+    let image = try ApplicationImage.personalized(profile, variant: .lensProfiles)
+    let pending = PendingUpdate(transactionID: UUID(), device: device,
+        backupURL: folder.appendingPathComponent("unused.ea9backup"), image: image.data,
+        version: image.version, setting: image.setting, createdAt: Date(), uploadedAt: Date(),
+        verifiedAt: nil, imageSHA256: digest(image.data),
+        expectedMetadata: Data([4,7,0] + [UInt8](repeating: 0, count: 55)))
+    try UpdateStore(directory: folder).save(pending)
+    await model.refreshDevices(silent: true)
+    #expect(model.selectedLensState == "Uploaded · verification needed")
+    #expect(model.installedProfileText == "Awaiting verification" && model.currentAppliedLens == nil)
+    #expect(!model.canApplyLens && !model.canRequestVerification)
+    await fixture.set([72]); await model.refreshDevices(silent: true)
+    #expect(model.canRequestVerification && !model.canVerifyUpdate)
+    #expect(model.adapterStateText == "Verification needed")
+    #expect(!FileManager.default.fileExists(atPath: folder.appendingPathComponent("USBBackups").path))
 }

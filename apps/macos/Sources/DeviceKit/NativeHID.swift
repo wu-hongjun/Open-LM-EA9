@@ -186,7 +186,8 @@ public final class DeviceService: @unchecked Sendable {
     public func pendingUpdate() throws -> PendingUpdate? { try UpdateStore(directory: stateDirectory).load() }
     public func appliedLens() throws -> AppliedLens? { try UpdateStore(directory: stateDirectory).loadApplied() }
 
-    public func apply(profile: LensProfile, variant: FirmwareVariant = .cameraDialAperture, device: DeviceIdentity, idleAcknowledged: Bool,
+    /// Full application upload with personalized lens fields, not a settings write.
+    public func apply(profile: LensProfile, variant: FirmwareVariant = .lensProfiles, device: DeviceIdentity, idleAcknowledged: Bool,
                       preserveInstalledFirmware: Bool = false,
                       cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
         guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
@@ -194,7 +195,7 @@ public final class DeviceService: @unchecked Sendable {
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: false,
                                 preserving: preserveInstalledFirmware ? variant : nil,
-                                fixedSource: variant == .cameraDialAperture ? .cameraDial : variant == .wideCameraAperture ? .wideAperture : .stockSpeed, progress: progress)
+                                fixedSource: variant == .lensProfiles ? .lensProfiles : variant == .cameraDialAperture ? .cameraDial : variant == .wideCameraAperture ? .wideAperture : .stockSpeed, progress: progress)
     }
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
@@ -229,7 +230,7 @@ public final class DeviceService: @unchecked Sendable {
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: true, progress: progress)
     }
-    private enum FixedUploadSource { case stockSpeed, cameraDial, wideAperture }
+    private enum FixedUploadSource { case stockSpeed, cameraDial, wideAperture, lensProfiles }
 
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
@@ -249,6 +250,7 @@ public final class DeviceService: @unchecked Sendable {
             let backup = try VerifiedBackup(url: backupURL, device: device, allowRecoveryVersion: recovering)
             try backup.synchronizeRecoveryEvidence()
             switch fixedSource {
+            case .lensProfiles: try ApplicationImage.requireLensProfileSource(backup)
             case .stockSpeed: try ApplicationImage.requireUpstreamStockSpeedSource(backup)
             case .cameraDial: try ApplicationImage.requireCameraDialApertureSource(backup)
             case .wideAperture: try ApplicationImage.requireWideCameraApertureSource(backup)

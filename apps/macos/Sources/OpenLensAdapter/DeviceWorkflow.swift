@@ -34,6 +34,7 @@ import DeviceKit
         if waitingForVerification { return "Verify the uploaded firmware" }
         if isArchivedFirmware { return "Archived firmware detected" }
         if currentFirmwareVariant == .cameraDialAperture { return "Your adapter is ready" }
+        if currentFirmwareVariant == .lensProfiles { return "Your lens profile is ready" }
         if currentFirmwareVariant == .wideCameraAperture { return "Wide aperture candidate installed" }
         if currentFirmwareVariant == .upstreamStockSpeed { return "Ready for the 4.5 baseline" }
         return "Read your adapter once"

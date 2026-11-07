@@ -73,7 +73,7 @@ struct DeviceToolsView: View {
             }
             Divider()
             Text("4.6.0 · Wider aperture range").font(.callout.weight(.medium))
-            Text("Reported f/1.2–f/22, starting at f/2. Prepared offline; camera validation is pending.")
+            Text("Biotar image · reported f/1.2–f/22, starting at f/2. Camera checks remain incomplete.")
                 .font(.caption).foregroundStyle(Palette.muted)
             if model.currentFirmwareVariant == .wideCameraAperture {
                 Text("Installed").font(.caption).foregroundStyle(Palette.muted)

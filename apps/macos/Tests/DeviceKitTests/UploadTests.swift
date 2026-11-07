@@ -9,6 +9,7 @@ private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfil
 private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
     if variant == .cameraDialAperture { return try ApplicationImage.cameraDialAperture() }
     if variant == .upstreamStockSpeed { return try ApplicationImage.upstreamStockSpeed() }
+    if variant == .lensProfiles { return try ApplicationImage.personalized(profile(), variant: variant) }
     return try ApplicationImage.wideCameraAperture()
 }
 @Test func cameraDialApertureUsesBiotarBootProfileAndRequiresExactBaseline() throws {
@@ -328,11 +329,13 @@ func profileChangeChecksFreshFirmwareInsteadOfCachedVersion(variant: FirmwareVar
     loader.flash.replaceSubrange(ApplicationImage.base..<variant.applicationEnd, with: image.data)
     let current = try fixture(loader, directory, "supported", id: 61)
     try ApplicationImage.requirePreservedFirmware(variant, in: current)
+    try ApplicationImage.requireLensProfileSource(current)
     let other = try #require(FirmwareVariant.allCases.first { $0 != variant })
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(other, in: current) }
     loader.flash[0x6000] ^= 1 // A version string cannot admit altered code.
     let altered = try fixture(loader, directory, "altered-code", id: 62)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: altered) }
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireLensProfileSource(altered) }
     loader.flash[0x6000] ^= 1; loader.flash[variant.supportsLensProfileChanges ? variant.profileAddress + 12 : variant.applicationEnd - 12] ^= 1
     let damaged = try fixture(loader, directory, "damaged-profile", id: 63)
     #expect(throws: DeviceError.self) { try ApplicationImage.requirePreservedFirmware(variant, in: damaged) }

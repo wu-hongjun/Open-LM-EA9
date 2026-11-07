@@ -27,6 +27,8 @@ make firmware
 python3 scripts/build-firmware.py --output artifacts/private/my-45-build
 # Separate wider-range candidate:
 python3 scripts/build-firmware.py --wide-aperture --output artifacts/private/my-46-build
+# Separate offline 4.7 profile-personalization template:
+python3 scripts/build-firmware.py --lens-profile-template --output artifacts/private/my-47-template
 # Editable custom recipe, with an unpublished version:
 python3 scripts/build-firmware.py --config firmware/configurations/contax-50-f14.example.json \
   --output artifacts/private/my-custom-firmware

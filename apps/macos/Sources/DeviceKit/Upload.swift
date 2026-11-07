@@ -120,7 +120,6 @@ struct UpdateStore: Sendable {
         }
         if let variant = FirmwareVariant.from(version: record.version) {
             guard record.image.count == variant.applicationBytes,
-                  record.image.prefix(variant.profileOffset) == (try ApplicationImage.template(variant)).prefix(variant.profileOffset),
                   try ApplicationImage.setting(in: record.image, variant: variant) == record.setting else {
                 throw DeviceError.failure("Update journal contains an unrecognized application.")
             }
@@ -168,6 +167,13 @@ struct UpdateStore: Sendable {
         _ = try value.setting.encoded()
         guard recognizedFirmwareVersion(value.firmwareVersion), value.device.qualifiedDescriptor, !value.device.serial.isEmpty,
               value.imageSHA256.count == 64 else { throw DeviceError.failure("Invalid applied-lens history.") }
+        if let variant = FirmwareVariant.allCases.first(where: { $0.versionString == value.firmwareVersion }) {
+            let expected = variant == .lensProfiles ? try LensProfileImage.image(for: value.setting) : try ApplicationImage.template(variant)
+            guard digest(expected) == value.imageSHA256,
+                  try ApplicationImage.setting(in: expected, variant: variant) == value.setting else {
+                throw DeviceError.failure("Saved lens history does not match its verified image.")
+            }
+        }
         return value
     }
     private func saveJSON<T: Encodable>(_ value: T, to url: URL) throws {

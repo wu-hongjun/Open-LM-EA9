@@ -31,7 +31,13 @@ The native app has three layers:
 The USB cap still enters the vendor loader; this project does not claim a
 running-application USB management service. Camera-selected aperture is volatile
 and inaccessible to the app after power-off. Profile edits stay local until a
-separate compiled image exists. Older journals use read-only code pins rather
+separate image exists. The offline 4.7 prototype personalizes a pinned template's
+focal/startup words, name and CRC-protected record; full-image reconstruction
+validates every readback byte. That fallback remains a complete application
+rewrite, explicitly labeled in the UI. Lightweight profile selection instead
+needs a bank, wear-leveled settings and a qualified transport, as described in
+[the persistence design](lens-profile-persistence.md).
+Older journals use read-only code pins rather
 than bundling retired executable firmware.
 
 The display/product name is OpenLensAdapter. Storage identity, bundle identifier,

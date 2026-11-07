@@ -22,19 +22,23 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--build', type=Path)
     p.add_argument('--output', type=Path)
+    p.add_argument('--profile-template', action='store_true', help='Build and test the 4.7 personalization template.')
     a = p.parse_args()
     from datetime import datetime
     stamp = datetime.now().strftime('%Y%m%d-%H%M%S')
     if a.build is None:
         a.build = ROOT / 'artifacts/private' / ('firmware-test-build-' + stamp)
-        subprocess.run(['python3', str(ROOT / 'scripts/build-firmware.py'), '--output', str(a.build)], check=True)
+        command = ['python3', str(ROOT / 'scripts/build-firmware.py'), '--output', str(a.build)]
+        if a.profile_template: command.append('--lens-profile-template')
+        subprocess.run(command, check=True)
     if a.output is None:
         a.output = ROOT / 'artifacts/private' / ('firmware-tests-' + stamp)
     build, out = a.build.resolve(), a.output.resolve()
     assert out.is_relative_to(ROOT / 'artifacts/private')
     manifest = json.loads((build / 'manifest.json').read_text())
-    wide = manifest['loaderVersion'] == [4,6,0]
-    image_name = 'biotar-wide-aperture.bin' if wide else 'biotar-camera-aperture.bin'
+    profiled = manifest['loaderVersion'] == [4,7,0]
+    wide = profiled or manifest['loaderVersion'] == [4,6,0]
+    image_name = 'lens-profile-template.bin' if profiled else 'biotar-wide-aperture.bin' if wide else 'biotar-camera-aperture.bin'
     assert sha(build / image_name) == manifest['imageSHA256']
     for name, digest in manifest['sources'].items():
         assert sha(build / 'src' / name) == digest, name
@@ -157,6 +161,10 @@ void em_uart_send(const uint8_t *buf, uint16_t len)
     result = {'status': 'passed-offline-camera-aperture-tests', 'candidateSHA256': manifest['imageSHA256'],
               'productionAndControls': results, 'hardwareReportsSent': 0,
               'scope': 'Synthetic frames, supplied UART/CS/time and simulated motor; camera dial, exposure and autofocus remain hardware checks.'}
+    if profiled:
+        subprocess.run(['python3', str(ROOT/'scripts/test-lens-profile-template.py'),
+                        '--build', str(build), '--output', str(out/'selected-profile-runtime')], check=True)
+        result['allEightRuntimeProfilesAndStartupFailureControl'] = True
     (out / 'results.json').write_text(json.dumps(result, indent=2)+'\n')
     print('Broad protocol, servo, focus mapping and focus distance tests passed.')
 

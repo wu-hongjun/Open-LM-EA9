@@ -130,7 +130,7 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var preparedLensIssue: String? {
         guard let profile = preparedLens else { return nil }
-        do { _ = try AdapterLensSetting(profile: profile); return nil }
+        do { _ = try FirmwareImageBuilder.prepare(profile: profile, variant: .lensProfiles); return nil }
         catch { return error.localizedDescription }
     }
     func editLens(_ profile: LensProfile) {
@@ -305,9 +305,18 @@ enum AppTab: Hashable { case device, lensLibrary }
     var waitingForVerification: Bool { pendingUpdate?.needsVerification == true }
     var preparedMatchesApplied: Bool {
         guard let preparedLens, let currentAppliedLens else { return false }
-        return (try? AdapterLensSetting(profile: preparedLens)) == currentAppliedLens.setting
+        guard let selected = try? AdapterLensSetting(profile: preparedLens) else { return false }
+        let installed = currentAppliedLens.setting
+        return selected.id == installed.id && selected.name == installed.name
+            && selected.focalMM10 == installed.focalMM10 && selected.maximumAV == installed.maximumAV
+            && selected.reportedAV == installed.reportedAV
     }
-    var canApplyLens: Bool { false } // Current releases compile their lens profile; library edits stay local.
+    var canApplyLens: Bool {
+        canRequestDeviceRead && updateStateError == nil && stockUploadQualified && !waitingForVerification
+            && !isDirty && loadError == nil && preparedLens != nil && preparedLensIssue == nil
+            && !preparedMatchesApplied
+            && (currentAppliedLens != nil || currentFirmwareObservation?.version == "1.8.0")
+    }
     var canVerifyUpdate: Bool {
         canReadDevice && pendingUpdateError == nil && waitingForVerification && pendingUpdate?.device.id != devices.first?.id
             && pendingUpdate?.device.serial == devices.first?.serial
@@ -349,13 +358,14 @@ enum AppTab: Hashable { case device, lensLibrary }
     var usesExperimentalAF: Bool { false }
     var canChangeFirmware: Bool { canReadDevice && updateStateError == nil && stockUploadQualified && !waitingForVerification && !isDirty }
     var canInstallBaseline: Bool {
-        canChangeFirmware && ["1.8.0", "4.4.0", "4.6.0"].contains(currentFirmwareObservation?.version ?? "")
+        canChangeFirmware && ["1.8.0", "4.4.0", "4.6.0", "4.7.0"].contains(currentFirmwareObservation?.version ?? "")
     }
-    var canInstallWideAperture: Bool { canChangeFirmware && currentFirmwareVariant == .cameraDialAperture }
+    var canInstallWideAperture: Bool { canChangeFirmware && [.cameraDialAperture, .lensProfiles].contains(currentFirmwareVariant) }
     var firmwareBehaviorNote: String {
         switch currentFirmwareVariant {
         case .cameraDialAperture: "Working 4.5 baseline · Sony dial f/2–f/16. Set the physical iris on the lens."
         case .wideCameraAperture: "Wide aperture candidate · Sony dial f/1.2–f/22. Camera validation is pending."
+        case .lensProfiles: "Selected lens metadata · Sony dial f/1.2–f/22. Physical iris stays manual."
         case .upstreamStockSpeed: "750 kbaud fallback · compiled 50mm f/1.8 camera metadata."
         case nil: "Read the adapter to identify its firmware and compiled lens."
         }
@@ -397,7 +407,8 @@ enum AppTab: Hashable { case device, lensLibrary }
             self.deviceMessage = self.appliedLens == nil ? "Stock firmware has no supported readable lens profile." : "Lens setting verified on the adapter."
         }
     }
-    private func runLensOperation(writing: Bool = false, _ operation: @escaping @MainActor (DeviceIdentity, CancellationToken) async throws -> Void) {
+    func runLensOperation(writing: Bool = false, _ operation: @escaping @MainActor (DeviceIdentity, CancellationToken) async throws -> Void) {
+        guard canReadDevice else { return }
         let device = devices[0], token = CancellationToken()
         cancellation = token; busy = true; progress = nil; isUploadingFirmware = writing
         Task { [self] in

@@ -29,13 +29,21 @@ protected data. Restoring stock uses that adapter's original verified backup.
 
 Current admission: 4.5 accepts pinned stock, 4.4 or 4.6; 4.6 accepts exact 4.5.
 4.4 fallback accepts pinned stock, 4.5 or 4.6. Every path checks source bytes,
-not just the version number. Earlier images have no installation API.
+not just the version number. The offline 4.7 prototype accepts qualified pinned
+stock, 4.4, 4.5, 4.6 or canonical personalized 4.7 sources. Its entire resulting
+image must reconstruct exactly from the pinned template plus profile, including
+all live fields and the profile record. Direct 4.7 → 4.5/4.6 rollback is admitted.
+It still uses START plus all 320 pages; it is not a parameter-only operation.
+Earlier images have no installation API.
 
 ```sh
 dist/ea9ctl prepare-camera-aperture NEW.bin  # Offline only
 dist/ea9ctl prepare-wide-aperture NEW.bin    # Offline only
+dist/ea9ctl prepare-lens PROFILE_ID NEW.bin  # Offline personalized 4.7 image
 # Hardware commands are owner-coordinated:
 dist/ea9ctl apply-wide-aperture --idle
+# Explicit whole-image update, not parameter-only switching:
+dist/ea9ctl apply-lens-firmware PROFILE_ID --idle
 # Physically unplug/reconnect; keep updater/app closed:
 dist/ea9ctl verify --idle
 ```

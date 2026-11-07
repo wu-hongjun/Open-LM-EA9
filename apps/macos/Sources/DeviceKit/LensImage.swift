@@ -3,33 +3,34 @@ import LensCore
 
 /// Installable images. Retired experiments have read-only compatibility pins.
 public enum FirmwareVariant: String, CaseIterable, Sendable {
-    case upstreamStockSpeed, cameraDialAperture, wideCameraAperture
+    case upstreamStockSpeed, cameraDialAperture, wideCameraAperture, lensProfiles
     var version: [UInt8] {
-        switch self { case .upstreamStockSpeed: [4,4,0]; case .cameraDialAperture: [4,5,0]; case .wideCameraAperture: [4,6,0] }
+        switch self { case .upstreamStockSpeed: [4,4,0]; case .cameraDialAperture: [4,5,0]; case .wideCameraAperture: [4,6,0]; case .lensProfiles: [4,7,0] }
     }
     public var versionString: String { version.map(String.init).joined(separator: ".") }
     var resource: String {
-        switch self { case .upstreamStockSpeed: "ea9-upstream-stock-speed"; case .cameraDialAperture: "ea9-biotar-camera-aperture"; case .wideCameraAperture: "ea9-biotar-wide-aperture" }
+        switch self { case .upstreamStockSpeed: "ea9-upstream-stock-speed"; case .cameraDialAperture: "ea9-biotar-camera-aperture"; case .wideCameraAperture: "ea9-biotar-wide-aperture"; case .lensProfiles: "ea9-lens-profile-template" }
     }
     public var compiledLens: AdapterLensSetting { ApplicationImage.fixedUpstreamSetting(self) }
     public var imageSHA256: String { sha256 }
     var sha256: String {
-        switch self { case .upstreamStockSpeed: TrustedUpstreamStockSpeed.sha256; case .cameraDialAperture: TrustedCameraDialAperture.sha256; case .wideCameraAperture: TrustedWideCameraAperture.sha256 }
+        switch self { case .upstreamStockSpeed: TrustedUpstreamStockSpeed.sha256; case .cameraDialAperture: TrustedCameraDialAperture.sha256; case .wideCameraAperture: TrustedWideCameraAperture.sha256; case .lensProfiles: LensProfileImage.sha256 }
     }
     public var apertureRangeLabel: String {
-        switch self { case .upstreamStockSpeed: "f/1.8"; case .cameraDialAperture: "f/2–f/16"; case .wideCameraAperture: "f/1.2–f/22" }
+        switch self { case .upstreamStockSpeed: "f/1.8"; case .cameraDialAperture: "f/2–f/16"; case .wideCameraAperture, .lensProfiles: "f/1.2–f/22" }
     }
     public var enablesAutofocus: Bool { true }
-    public var supportsLensProfileChanges: Bool { false }
-    var profileAddress: Int { 0xa000 }
-    var profileOffset: Int { 0x5000 }
+    /// Full-image personalization, not a settings-only USB capability.
+    public var supportsLensProfileChanges: Bool { self == .lensProfiles }
+    var profileAddress: Int { ApplicationImage.base + profileOffset }
+    var profileOffset: Int { self == .lensProfiles ? LensProfileImage.recordOffset : 0x5000 }
     var applicationBytes: Int { 0x5000 }
     var applicationEnd: Int { 0xa000 }
     static func from(version: [UInt8]) -> Self? { allCases.first { $0.version == version } }
 }
 
 public enum FirmwareImageBuilder {
-    public static func prepare(profile: LensProfile, variant: FirmwareVariant = .cameraDialAperture) throws -> Data { try ApplicationImage.personalized(profile, variant: variant).data }
+    public static func prepare(profile: LensProfile, variant: FirmwareVariant = .lensProfiles) throws -> Data { try ApplicationImage.personalized(profile, variant: variant).data }
     public static func prepareUpstreamStockSpeed() throws -> Data { try ApplicationImage.upstreamStockSpeed().data }
     public static func prepareCameraDialAperture() throws -> Data { try ApplicationImage.cameraDialAperture().data }
     public static func prepareWideCameraAperture() throws -> Data { try ApplicationImage.wideCameraAperture().data }
@@ -161,6 +162,10 @@ struct ApplicationImage: Sendable {
         return image
     }
     static func personalized(_ profile: LensProfile, variant: FirmwareVariant = .cameraDialAperture) throws -> Self {
+        if variant == .lensProfiles {
+            let setting = try AdapterLensSetting(profile: profile)
+            return Self(data: try LensProfileImage.image(for: setting), version: variant.version, setting: setting)
+        }
         let fixed = fixedUpstreamSetting(variant), selected = try AdapterLensSetting(profile: profile)
         guard selected == fixed else {
             throw DeviceError.failure("This release is compiled for \(fixed.name). Library edits stay on this Mac; changing firmware lens metadata requires another build.")
@@ -176,20 +181,29 @@ struct ApplicationImage: Sendable {
     static func requireCameraDialApertureSource(_ backup: VerifiedBackup) throws {
         if backup.result.manifest.reportedFirmwareVersion == "1.8.0" {
             _ = try stockRestoration(backup)
-        } else if backup.result.manifest.reportedFirmwareVersion == "4.6.0" {
-            try requirePreservedFirmware(.wideCameraAperture, in: backup)
+        } else if ["4.6.0", "4.7.0"].contains(backup.result.manifest.reportedFirmwareVersion) {
+            try requirePreservedFirmware(backup.result.manifest.reportedFirmwareVersion == "4.7.0" ? .lensProfiles : .wideCameraAperture, in: backup)
         } else {
             try requirePreservedFirmware(.upstreamStockSpeed, in: backup)
         }
     }
     static func requireWideCameraApertureSource(_ backup: VerifiedBackup) throws {
-        try requirePreservedFirmware(.cameraDialAperture, in: backup)
+        try requirePreservedFirmware(backup.result.manifest.reportedFirmwareVersion == "4.7.0" ? .lensProfiles : .cameraDialAperture, in: backup)
+    }
+    static func requireLensProfileSource(_ backup: VerifiedBackup) throws {
+        if backup.result.manifest.reportedFirmwareVersion == "1.8.0" { _ = try stockRestoration(backup); return }
+        guard let variant = try installedVariant(backup.flash) else {
+            throw DeviceError.failure("Read a supported, unmodified application before switching lens profiles.")
+        }
+        try requirePreservedFirmware(variant, in: backup)
     }
     static func requireUpstreamStockSpeedSource(_ backup: VerifiedBackup) throws {
         if backup.result.manifest.reportedFirmwareVersion == "1.8.0" {
             _ = try stockRestoration(backup)
         } else if backup.result.manifest.reportedFirmwareVersion == "4.5.0" {
             try requirePreservedFirmware(.cameraDialAperture, in: backup)
+        } else if backup.result.manifest.reportedFirmwareVersion == "4.7.0" {
+            try requirePreservedFirmware(.lensProfiles, in: backup)
         } else {
             try requirePreservedFirmware(.wideCameraAperture, in: backup)
         }
@@ -205,6 +219,9 @@ struct ApplicationImage: Sendable {
     static func installedVariant(_ flash: Data) throws -> FirmwareVariant? {
         guard flash.count == 0x20000 else { throw DeviceError.failure("Invalid full-flash read.") }
         guard let variant = FirmwareVariant.from(version: Array(flash[0x4000..<0x4003])) else { return nil }
+        if variant == .lensProfiles {
+            return (try? LensProfileImage.setting(in: Data(flash[base..<variant.applicationEnd]))) != nil ? variant : nil
+        }
         return flash[base..<variant.applicationEnd] == (try template(variant)) ? variant : nil
     }
     fileprivate static func fixedUpstreamSetting(_ variant: FirmwareVariant) -> AdapterLensSetting {
@@ -217,11 +234,13 @@ struct ApplicationImage: Sendable {
                                   focalMM10: 580, maximumAV: 4608, reportedAV: 4608, revision: 1)
     }
     static func setting(in image: Data, variant: FirmwareVariant) throws -> AdapterLensSetting? {
+        if variant == .lensProfiles { return try LensProfileImage.setting(in: image) }
         guard image == (try template(variant)) else { throw DeviceError.failure("Unrecognized application bytes.") }
         return fixedUpstreamSetting(variant)
     }
     static func installedSetting(_ flash: Data) throws -> AdapterLensSetting? {
         guard let variant = try installedVariant(flash) else { return nil }
+        if variant == .lensProfiles { return try LensProfileImage.setting(in: Data(flash[base..<variant.applicationEnd])) }
         return fixedUpstreamSetting(variant)
     }
 }

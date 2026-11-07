@@ -21,11 +21,18 @@ This was not a controlled Biotar comparison; the full dial/capture check is
 incomplete, and 4.5.0 remains the working baseline.
 [Installation record](docs/evidence/biotar-46-install-2026-11-07.md).
 
-The native app opens on Device: connection, verified firmware and compiled
-lens information. Lens Library is the secondary tab. USB tools provide guarded
-backup, installation, reconnect verification and original stock recovery.
-Library edits stay local; these releases compile their lens profile into the
-image. The physical iris is always shown as unknown.
+The native app opens on Device: connection, last verified firmware and the
+profile on the adapter. The Lens card has a dropdown and reference photo, keeps
+the local choice separate from installed data, and offers an explicit firmware
+update fallback. Read and reconnect verification are on the home screen.
+Lens Library is secondary; backups and recovery remain in USB tools.
+[App workflow](docs/app-lens-card-2026-11-07.md).
+
+**4.7.0 is an offline personalization prototype**, not a parameter-only USB
+service. Dropdown selection never flashes; an explicit update still rewrites
+the application. The preferred design is a profile bank plus small, wear-leveled
+settings. [Endurance and transport design](docs/lens-profile-persistence.md).
+The physical iris is always shown as unknown.
 
 ## Project layout
 

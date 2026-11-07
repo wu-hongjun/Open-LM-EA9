@@ -1,0 +1,21 @@
+{
+  "retrievedOn": "2026-11-07",
+  "sources": [
+    {
+      "title": "SAM D21/DA1 Family Data Sheet DS40001882",
+      "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf",
+      "use": "NVM endurance is erase/write cycling under specified conditions; not whole-device update count"
+    },
+    {
+      "title": "Official LM-EA9 User Manual",
+      "url": "https://techartpro.com/wp-content/uploads/2023/01/User-Manual-LM-EA9.pdf",
+      "use": "Camera-aperture selections can command focal metadata and slower focus mode"
+    },
+    {
+      "title": "Pinned-loader contract and erase footprint",
+      "url": "https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-metadata-milestone.md",
+      "use": "256-byte read/modify/erase/write per 64-byte chunk; START metadata and state-machine boundaries"
+    }
+  ],
+  "hardwareAccess": false
+}
