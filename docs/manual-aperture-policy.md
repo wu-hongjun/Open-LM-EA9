@@ -1,5 +1,29 @@
 # Manual aperture reporting on LM-EA9
 
+## Current request: Sony-dial reporting for the Biotar
+
+On November 6 the owner confirmed the current lens is a Zeiss Jena Biotar
+58mm f/2 and chose live Sony-dial selection over Mac/USB preselection.
+[Candidate 4.5.0](../firmware/candidates/4.5.0/README.md) implements that
+reporting policy as an offline experiment based on the working 4.4.0 C
+baseline. It declares f/2–f/16, boots at f/2, and stages valid `0x1B`/`0x03`
+aperture operands for coherent foreground publication. Camera qualification
+is pending. This new policy supersedes the earlier fixed-report product
+choice for this experiment; the historical decisions and failed trials
+below remain evidence.
+
+The camera dial changes the declared f-number, and the owner separately
+sets the physical ring. No iris sensor or actuator is added. The app keeps
+**Actual aperture: Unknown** and identifies the compiled f/2 as **startup**
+metadata. A USB power cycle cannot preserve or read the prior volatile
+camera selection. Automatic exposure modes may also issue aperture
+commands; the firmware cannot distinguish those from a manual dial request.
+Initial qualification should use A/M, with matched ring settings and saved
+exposure comparisons. Offline protocol acceptance alone does not prove
+correct metering, EXIF, stop-down AF or camera-dial acceptance.
+
+## Earlier fixed-report investigation
+
 Research and owner feedback, October 11, 2026. The owner reports that original
 stock 1.8 hunts much less than AF 2.3, but allows camera aperture changes without
 physically stopping down the Contax Zeiss lens. They requested an unknown

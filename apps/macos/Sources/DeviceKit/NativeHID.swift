@@ -193,10 +193,17 @@ public final class DeviceService: @unchecked Sendable {
         let image = try ApplicationImage.personalized(profile, variant: variant)
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: false,
-                                preserving: preserveInstalledFirmware ? variant : nil, progress: progress)
+                                preserving: preserveInstalledFirmware ? variant : nil,
+                                fixedSource: variant == .cameraDialAperture ? .cameraDial : nil, progress: progress)
     }
     public func stockUploadQualified(for device: DeviceIdentity) throws -> Bool {
         try UpdateStore(directory: stateDirectory).qualified(for: device)
+    }
+    public func applyCameraDialAperture(device: DeviceIdentity, idleAcknowledged: Bool,
+                                        cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
+        guard try stockUploadQualified(for: device) else { throw DeviceError.failure("Prepare and verify the adapter’s stock upload path before installing custom firmware.") }
+        return try await upload(image: ApplicationImage.cameraDialAperture(), device: device, idleAcknowledged: idleAcknowledged,
+                                cancellation: cancellation, recovering: false, fixedSource: .cameraDial, progress: progress)
     }
     public func applyUpstreamStockSpeed(device: DeviceIdentity, idleAcknowledged: Bool,
                                         cancellation: CancellationToken, progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> PendingUpdate {
@@ -228,7 +235,7 @@ public final class DeviceService: @unchecked Sendable {
         return try await upload(image: image, device: device, idleAcknowledged: idleAcknowledged,
                                 cancellation: cancellation, recovering: true, progress: progress)
     }
-    private enum FixedUploadSource { case stock, stockOrNovemberTrial, stockSpeed }
+    private enum FixedUploadSource { case stock, stockOrNovemberTrial, stockSpeed, cameraDial }
 
     private func upload(image candidate: ApplicationImage?, device: DeviceIdentity, idleAcknowledged: Bool,
                         cancellation: CancellationToken, recovering: Bool,
@@ -251,6 +258,7 @@ public final class DeviceService: @unchecked Sendable {
             case .stock: _ = try ApplicationImage.stockRestoration(backup)
             case .stockOrNovemberTrial: try ApplicationImage.requireStartupProbeSource(backup)
             case .stockSpeed: try ApplicationImage.requireUpstreamStockSpeedSource(backup)
+            case .cameraDial: try ApplicationImage.requireCameraDialApertureSource(backup)
             case nil: break
             }
             if let variant {

@@ -347,6 +347,8 @@ enum AppTab: Hashable { case device, lensLibrary }
         case "3.1.0": return "Upstream 3.1 is held after missing aperture and shutter-release failure. Shutdown worked. Do not repeat camera testing."
         case "3.7.0": return "Targeted trace 3.7 is held after the camera froze following one photo. Keep the camera off and preserve a read-only backup for log review. Do not retry this image."
         case "4.1.0": return "Crash diagnostic 4.1 is held after a reported one-minute shutter delay and freeze before a photo saved. Shutdown reportedly worked. Do not retry this image; preserve a read-only backup for log review."
+        case "4.5.0": return "Biotar 58 mm aperture-reporting trial. The Sony dial selects the reported f/2–f/16 value; match it with the lens ring. Reporting resets to f/2 at startup. Camera validation is pending."
+        case "4.4.0": return "Upstream 750 kbaud comparison. The owner reports autofocus in stills and video and successful stop-down use; the reported aperture stays at f/1.8."
         case "4.2.0": return "November upstream trial. It reports the upstream 50 mm f/1.8 defaults; A7C II behavior still needs a camera test."
         case "4.0.0": return "AF 4.0 is held after a hard camera crash following two reported photos and a required power cycle. Do not retry this image; preserve a read-only backup for log review."
         case "3.9.0": return "Homing diagnostic 3.9 is held after two reported photos followed by blocked further capture. Shutdown was normal. Do not retry this image; preserve a read-only backup for log review."

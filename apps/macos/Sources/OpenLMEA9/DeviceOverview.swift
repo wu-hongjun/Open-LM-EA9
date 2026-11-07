@@ -80,7 +80,7 @@ struct DeviceView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     if let applied = model.currentAppliedLens {
                         Text(applied.setting.name).font(.system(size: 23, weight: .medium, design: .serif)).lineLimit(2)
-                        Text("\(applied.setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(applied.setting.apertureLabel)")
+                        Text(model.cameraMetadataSummary(applied.setting))
                             .font(.system(size: 13)).foregroundStyle(Palette.muted)
                         Label("Actual aperture: \(applied.setting.actualApertureLabel) · set on lens", systemImage: "camera.aperture")
                             .font(.system(size: 13)).foregroundStyle(Palette.muted)
@@ -124,7 +124,7 @@ struct DeviceView: View {
                         }
                         VStack(alignment: .leading, spacing: 3) {
                             if let setting = try? AdapterLensSetting(profile: profile) {
-                                Text("\(setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(setting.apertureLabel)").font(.callout)
+                                Text(model.preparedMatchesApplied ? model.cameraMetadataSummary(setting) : "\(setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(setting.apertureLabel)").font(.callout)
                             } else { Text(profile.focalSummary).font(.callout) }
                             Text(model.preparedMatchesApplied ? "Matches the verified adapter setting" : "Selected on this Mac")
                                 .font(.caption).foregroundStyle(Palette.muted)

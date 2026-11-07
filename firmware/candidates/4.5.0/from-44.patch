@@ -1,0 +1,126 @@
+--- a/src/emount.h
++++ b/src/emount.h
+@@ -286 +286 @@
+-#define EM_FOCAL_MM10 500u
++#define EM_FOCAL_MM10 580u
+@@ -305,51 +305,6 @@
+-/* THE APERTURE this adapter declares -- maximum, minimum, and the one it is at
+- * right now.  Three constants because the protocol carries three fields; one
+- * number because an LM-EA9 has no iris.  It carries a manual Leica M lens whose
+- * aperture ring it cannot read and cannot move, so the honest report is a fixed
+- * aperture: wide open, permanently, and no range for the body to drive.
+- *
+- * ALL THREE ARE APERTURE VALUES -- the u16 `256 * AV + 4096` scale that
+- * message 0x05 payload[0..1] and message 0x28 payload[9..10] carry directly
+- * (aperture_value.md).  Read one straight off:
+- *
+- *     AV = (value - 4096) / 256        F = 2^(AV / 2)
+- *     0x11C0 = 4544 -> AV = 1.75 -> F = 2^0.875 = f/1.834
+- *
+- * The high byte alone is legible: 0x11 = 17, and 17 - 0x10 = 1 = AV's whole
+- * part, so the whole stops read off the top byte and the low byte is the
+- * fraction of a stop.  f/1.4 is 0x1100, f/2.0 is 0x1200, f/2.8 is 0x1300.
+- *
+- * 0x11C0 is chosen rather than a rounder number because it lands EXACTLY on
+- * the coarser descriptor grid below -- descriptor 0x16, which converts back
+- * to 4544 with no rounding -- so the two encodings agree to the bit.
+- *
+- * The OTHER encoding, the Canon-convention descriptor of message 0x05
+- * pl[44..59], is derived from these by EM_AV_DESC (emount_packets.c) rather
+- * than written out separately -- one number per fact, so the two encodings cannot
+- * disagree.  It is the coarser of the two at 1/8 stop, so a value that is not
+- * a multiple of 32 above 4096 rounds when it goes there.
+- *
+- * THE MINIMUM IS THE MAXIMUM.  An adapter with no iris has no range, and the
+- * stock's f/90 is a fiction: a body may command anywhere in that range and the
+- * transmission is f/1.8 regardless.
+- *
+- * Restoring f/90 was TRIED and changed nothing: the camera still re-metered
+- * after every exposure, and start-up hung as well (NOTES.md 89).  So the
+- * fiction buys nothing here, and the honest single point is what stands.
+- *
+- * WHY f/1.8 AND NOT f/2.0.  It used to be f/2.0, which was the stock's own
+- * boot value and therefore the smallest possible deviation.  What moved it is
+- * EM_SLOT_B_TYPE1: that row encodes an f-number through the protocol constant
+- * `value[0] x F` ~ 0.0998, and the row this build sends is a real f/1.8 row.
+- * A lens whose optical row says f/1.8 and whose descriptor says f/2.0 is
+- * describing two different lenses to the same body, which is precisely the
+- * class of inconsistency this file exists to remove.  Change one of these and
+- * the other has to move with it.
+- *
+- * Four bytes of the descriptor block now differ from a stock LM-EA9 --
+- * pl[44], pl[46], pl[51] take descriptor 0x16 instead of 0x18, and pl[52] is
+- * the maximum instead of the stock's f/90.  The test enumerates exactly those
+- * four and checks every other byte against a stock literal. */
+-#define EM_APERTURE_MAX  0x11C0u        /* f/1.8 -- 0x05 pl[44], pl[51]; 0x08 pl[0..1] */
+-#define EM_APERTURE_MIN  0x11C0u        /* f/1.8 -- 0x05 pl[52]; 0x08 pl[2..3]          */
+-#define EM_APERTURE_NOW  0x11C0u        /* f/1.8 -- 0x05 pl[0..3], 0x1B, 0x28 pl[9..10] */
++/* Camera-side aperture range for the Biotar. The user sets the iris
++ * on the lens and selects the matching reported value on the body.
++ * Commands are staged and published from foreground protocol code. */
++#define EM_APERTURE_MAX  0x1200u
++#define EM_APERTURE_MIN  0x1800u
++#define EM_APERTURE_NOW  0x1200u
+--- a/src/emount.c
++++ b/src/emount.c
+@@ -48,0 +49 @@
++#include "reported_aperture.h"
+@@ -93,2 +94,2 @@
+-/* The current aperture, 256 x AV + 4096: message 0x05 payload[0..1] (fixed,
+- * in the template -- there is no iris) and message 0x28 payload[9..10], which
++/* Current reported aperture, 256 x AV + 4096: message 0x05
++ * payload[0..1] and message 0x28 payload[9..10], which
+@@ -880,0 +882,3 @@
++	if (!em_shutdown_acked || (rx[3] == EM_CLASS_INIT && rx[5] == EM_ID_SESSION)) {
++		reported_aperture_offer(rx, n);
++	}
+@@ -959,11 +963,2 @@
+-	/* Message 0x1B, the aperture command: COUNTED, NOT OBEYED.
+-	 *
+-	 * Init-class, so it arrives here rather than on the per-frame path, and
+-	 * it carries an aperture in payload[0..1].  This adapter has no iris, so
+-	 * there is nothing to obey; the reply echoes the requester's own bytes
+-	 * back through the stored fixups.
+-	 *
+-	 * Counted because an a9 II sends exactly one per session, inside the
+-	 * burst of init-class requests that follows a shutter press
+-	 * (0x0a 0x0b 0x1b 0x28 0x19 0x19 0x28 0x0b 0x0a), and a body that ever
+-	 * drove the channel harder would show up here. */
++	/* Aperture requests are validated and staged by reported_aperture. */
++
+@@ -1055,9 +1050,2 @@
+-	/* MESSAGE 0x03's APERTURE REQUEST.
+-	 *
+-	 * 0x03 is body state and this device acts on none of it, but pl[5..6]
+-	 * is the aperture the body is asking for (msg_0x03.md) -- and an
+-	 * adapter with one fixed aperture wants to know if that is ever
+-	 * something other than the one it has.  Recorded, not obeyed, exactly
+-	 * as message 0x1B's is.
+-	 *
+-	 * 6 header + 7 payload bytes needs 6 + 7 + 3 = 16. */
++	/* Retain the body-request telemetry. The reporting module validates
++	 * the complete frame before staging this operand for foreground use. */
+@@ -1574,0 +1563 @@
++	reported_aperture_init();
+@@ -1821,0 +1811 @@
++	reported_aperture_commit();
+--- a/src/emount_packets.c
++++ b/src/emount_packets.c
+@@ -277,10 +277,7 @@
+-	/* +0x00 */ 0xf0, 0x4a, 0x00, 0x02, 0x00, 0x3f, 0x00, 0x54,
+-	/* +0x08 */ 0x45, 0x43, 0x48, 0x41, 0x52, 0x54, 0x20, 0x4c,
+-	/* +0x10 */ 0x4d, 0x2d, 0x45, 0x41, 0x39, 0x00, 0x00, 0x00,
+-	/* +0x18 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-	/* +0x20 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-	/* +0x28 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-	/* +0x30 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-	/* +0x38 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+-	/* +0x40 */ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb5,
+-	/* +0x48 */ 0x04, 0x55,
++	0xf0, 0x4a, 0x00, 0x02, 0x00, 0x3f, 0x00, 0x5a, 0x65, 0x69, 0x73, 0x73,
++	0x20, 0x4a, 0x65, 0x6e, 0x61, 0x20, 0x42, 0x69, 0x6f, 0x74, 0x61, 0x72,
++	0x20, 0x35, 0x38, 0x6d, 0x6d, 0x20, 0x66, 0x2f, 0x32, 0x00, 0x00, 0x00,
++	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++	0x00, 0x55,

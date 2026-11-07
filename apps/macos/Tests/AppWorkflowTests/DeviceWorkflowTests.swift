@@ -16,6 +16,31 @@ private actor DiscoveryFixture {
     func reconnect(_ id: UInt64) -> Bool { blocked }
 }
 
+@Test @MainActor func cameraDialBuildShowsStartupMetadataWithoutClaimingLiveIrisReadings() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let fixture = DiscoveryFixture(); await fixture.set([71])
+    let model = AppModel(directory: folder, inventory: { await fixture.inventory() }, reconnect: { await fixture.reconnect($0) })
+    await model.refreshDevices(silent: true)
+    let device = try #require(model.devices.first)
+    let image = try ApplicationImage.cameraDialAperture(), setting = try #require(image.setting)
+    let store = UpdateStore(directory: folder)
+    try store.saveApplied(AppliedLens(device: device, setting: setting, firmwareVersion: "4.5.0",
+        imageSHA256: digest(image.data), verifiedAt: Date()))
+    try store.saveQualification(device: device, transactionID: UUID())
+    try FirmwareObservationStore(directory: folder).save(FirmwareObservation(device: device, version: "4.5.0"))
+    model.chooseDeviceLens("zeiss-jena-biotar-55-f2")
+    await model.refreshDevices(silent: true); model.idleAcknowledged = true
+    #expect(model.preparedMatchesApplied && !model.canApplyLens)
+    #expect(model.workflowTitle == "Biotar 58mm camera aperture")
+    #expect(model.workflowDetail.contains("startup f/2") && model.workflowDetail.contains("physical lens ring"))
+    #expect(model.firmwareBehaviorNote.contains("Sony dial") && model.firmwareBehaviorNote.contains("pending"))
+    #expect(model.cameraMetadataSummary(setting).contains("startup f/2"))
+    #expect(model.currentAppliedLens?.setting.actualAperture == nil)
+    model.chooseDeviceLens("contax-zeiss-50-f1-4")
+    #expect(!model.canApplyLens && model.currentAppliedLens?.setting == setting)
+}
+
 @Test @MainActor func corruptFirmwareHistoryHidesOldLensUntilRepaired() async throws {
     let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: folder) }

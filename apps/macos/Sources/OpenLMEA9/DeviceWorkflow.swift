@@ -69,6 +69,12 @@ enum DeviceLensAction {
         case .tools: showDeviceTools = true
         }
     }
+    func cameraMetadataSummary(_ setting: AdapterLensSetting) -> String {
+        if currentAppliedLens?.firmwareVersion == "4.5.0" {
+            return "\(setting.focalLengthMM.formatted()) mm · startup f/\(setting.apertureLabel) · Sony dial f/2–f/16"
+        }
+        return "\(setting.focalLengthMM.formatted()) mm · camera metadata: fixed f/\(setting.apertureLabel)"
+    }
     var workflowTitle: String {
         if busy { return isUploadingFirmware ? "Updating your adapter" : "Reading your adapter" }
         if discoveryError { return "Check the USB connection" }
@@ -97,6 +103,7 @@ enum DeviceLensAction {
         if primaryLensAction == .read { return "Read the saved lens settings" }
         if !stockUploadQualified { return "Set up this adapter once" }
         if preparedLens == nil { return "Choose your lens" }
+        if currentAppliedLens?.firmwareVersion == "4.5.0" { return "Biotar 58mm camera aperture" }
         if variantForLensChanges?.supportsLensProfileChanges == false { return "Fixed 50mm upstream baseline" }
         if preparedMatchesApplied { return "Your lens profile is up to date" }
         if !idleAcknowledged { return "Confirm the USB connection" }
@@ -128,6 +135,7 @@ enum DeviceLensAction {
         if primaryLensAction == .read { return "Read the adapter once to identify its installed firmware and lens setting. Profile changes will preserve that firmware." }
         if !stockUploadQualified { return "A verified backup and stock upload check prepare this adapter for profile changes." }
         if preparedLens == nil { return "Choose a profile from the dropdown. The saved adapter setting stays visible above." }
+        if currentAppliedLens?.firmwareVersion == "4.5.0" { return "The Sony dial selects reported f/2–f/16; match the physical lens ring. USB shows the startup f/2 setting, not the live camera selection. Lens library edits stay local. Camera validation is pending." }
         if variantForLensChanges?.supportsLensProfileChanges == false { return "This build uses fixed settings for \(currentAppliedLens?.setting.name ?? "the upstream profile"). Library edits stay local; changing the adapter setting requires another firmware build." }
         if preparedMatchesApplied { return "The selected profile matches the last USB-verified setting. You can disconnect and use it on your camera." }
         if !idleAcknowledged { return "Close TECHART Update, reconnect the cap, then confirm the checkbox below." }

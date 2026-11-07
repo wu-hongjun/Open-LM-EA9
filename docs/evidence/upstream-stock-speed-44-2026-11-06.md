@@ -36,6 +36,14 @@ This is a qualitative observation. The shooting mode, iris setting,
 saved-file details, shutter speed, ISO, shutdown and camera firmware
 version were not supplied.
 
+The owner subsequently identified the currently attached lens as a **Zeiss
+Jena Biotar 58mm f/2** and requested live reported-aperture selection with the
+Sony camera dial. The 4.4.0 image still advertises its compiled 50mm f/1.8
+defaults. This lens clarification does not retroactively identify the lens
+used in every earlier trial. The separately prepared
+[4.5.0 candidate](../../firmware/candidates/4.5.0/README.md) targets the Biotar;
+its camera behavior remains untested.
+
 The November 4.2.0 trial failed on this body. The only behavioral change
 in 4.4.0 is that the `0x0C` reply declines the speed offer and skips the
 switch to 1.5 Mbaud. The upstream lens ID `0xC540`, advertised speed,

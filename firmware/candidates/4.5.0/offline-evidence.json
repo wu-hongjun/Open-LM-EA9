@@ -1,0 +1,54 @@
+{
+  "preparedAtUTC": "2026-11-07T05:00:08Z",
+  "status": "offline-prepared-camera-validation-pending",
+  "imageSHA256": "8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35",
+  "independentCleanBuildsMatch": true,
+  "packagedPrepareMatches": true,
+  "swiftNamedTestCounts": {
+    "lensCore": 7,
+    "deviceKit": 39,
+    "appWorkflow": 12
+  },
+  "appVersion": "0.25.0",
+  "appBuild": 36,
+  "packagedSignaturesVerified": true,
+  "priorCandidateRecoveryResourceAndPinFilesPreserved": 179,
+  "testInputsSHA256": {
+    "scripts/test-camera-aperture.py": "7802d9d9a499077853f3e2bd67406daf3d4c9e832e1085daa0572d9659e953fe",
+    "firmware/camera-aperture/test_camera_aperture.c": "99932c8ef8c331a0be10e6d686af959426b5d5d252ab629338d616919b6b2d33"
+  },
+  "firmwareTests": {
+    "status": "passed-offline-camera-aperture-tests",
+    "candidateSHA256": "8fba0303581fd684ae279a73aab7be136508f5d90b6fc975c5e4406a210c9f35",
+    "productionAndControls": [
+      {
+        "case": "production",
+        "exitCode": 0,
+        "expected": "passes",
+        "failedAssertion": null
+      },
+      {
+        "case": "missing-input-hook",
+        "exitCode": 2,
+        "expected": "rejected",
+        "failedAssertion": "sent_n == start + 1 && u16(sent[start] + 6) == 5120"
+      },
+      {
+        "case": "publish-from-irq",
+        "exitCode": 2,
+        "expected": "rejected",
+        "failedAssertion": "u16(em_msg_05 + 6) == value && u16(em_msg_05 + 8) == value"
+      }
+    ],
+    "hardwareReportsSent": 0,
+    "scope": "Synthetic frames, supplied UART/CS/time and simulated motor; camera dial, exposure and autofocus remain hardware checks."
+  },
+  "adapterAccessPerformed": false,
+  "uploadPerformed": false,
+  "cameraQualified": false,
+  "limits": [
+    "Synthetic UART, CS, clock, motor and interrupt-mask model.",
+    "Sony dial acceptance, saved exposure/EXIF, AF and shutdown require camera testing.",
+    "Optical tables are inherited and uncalibrated for the Biotar."
+  ]
+}

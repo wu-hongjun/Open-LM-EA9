@@ -8,9 +8,43 @@ private func profile(_ id: String = "contax-zeiss-50-f1-4") throws -> LensProfil
 }
 private func trialAwareImage(_ variant: FirmwareVariant) throws -> ApplicationImage {
     if variant == .startupProbe { return try ApplicationImage.startupProbe() }
+    if variant == .cameraDialAperture { return try ApplicationImage.cameraDialAperture() }
     if variant == .upstreamStockSpeed { return try ApplicationImage.upstreamStockSpeed() }
     if variant == .upstreamNovemberTrial { return try ApplicationImage.upstreamNovemberTrial() }
     return try ApplicationImage.personalized(profile(), variant: variant)
+}
+@Test func cameraDialApertureUsesBiotarBootProfileAndRequiresExactBaseline() throws {
+    let variant = FirmwareVariant.cameraDialAperture
+    let image = try ApplicationImage.cameraDialAperture()
+    let setting = try #require(image.setting)
+    #expect(image.version == [4,5,0] && image.data.count == 20480)
+    #expect(image.data == (try FirmwareImageBuilder.prepareCameraDialAperture()))
+    #expect(setting.id == "zeiss-jena-biotar-55-f2" && setting.focalMM10 == 580)
+    #expect(setting.maximumAV == 4608 && setting.reportedAV == 4608 && setting.actualAperture == nil)
+    #expect(!variant.supportsLensProfileChanges && variant.enablesAutofocus)
+    #expect(throws: DeviceError.self) { try ApplicationImage.personalized(profile(), variant: variant) }
+    let biotar = try profile("zeiss-jena-biotar-55-f2")
+    #expect(try ApplicationImage.personalized(biotar, variant: variant).data == image.data)
+
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let loader = Loader(), baseline = try ApplicationImage.upstreamStockSpeed()
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: baseline.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: baseline.data)
+    try ApplicationImage.requireCameraDialApertureSource(fixture(loader, directory, "baseline", id: 11))
+    loader.flash[0x9fff] ^= 1
+    let changedBaseline = try fixture(loader, directory, "altered-baseline", id: 12)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireCameraDialApertureSource(changedBaseline) }
+    loader.flash.replaceSubrange(0x4000..<0x4003, with: image.version)
+    loader.flash.replaceSubrange(0x5000..<0xa000, with: image.data)
+    let candidate = try fixture(loader, directory, "candidate", id: 13)
+    try ApplicationImage.requireUpstreamStockSpeedSource(candidate) // Explicit rollback to 4.4.
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireCameraDialApertureSource(candidate) }
+    loader.flash[0x9fff] ^= 1
+    let changedCandidate = try fixture(loader, directory, "altered-candidate", id: 14)
+    #expect(throws: DeviceError.self) { try ApplicationImage.requireUpstreamStockSpeedSource(changedCandidate) }
+    #expect(loader.reports == 0 && !loader.armed)
 }
 @Test func novemberTrialUsesPinnedUpstreamDefaults() throws {
     let variant = FirmwareVariant.upstreamNovemberTrial
