@@ -1,5 +1,9 @@
 # 4.8 metadata migration, installer and app switching
 
+The first owner-authorized hardware upload is recorded
+[separately](evidence/biotar-48-install-2026-11-07.md). The software/audit milestone
+below was completed offline; its validation does not substitute for hardware checks.
+
 The native app now supports explicitly acknowledged experimental 4.8 installation,
 metadata-only lens selection and verified pre-bank rollback. This milestone was
 completed offline: no adapter discovery/opening, HID reports, flashing, motor

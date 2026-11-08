@@ -13,7 +13,7 @@ data were verified after USB reconnect. The Sony dial selects a reported
 f/2–f/16; the physical iris is controlled by the lens ring.
 [Camera and installation record](docs/evidence/biotar-45-install-2026-11-07.md).
 
-**4.6.0 is installed and byte-verified** with the requested reported f/1.2–f/22
+**4.6.0 was installed and byte-verified** with the requested reported f/1.2–f/22
 range, starting at f/2. It retains the Biotar's nominal 58mm/f/2 profile and the
 working motor/handshake implementation. After initially reporting more hunting,
 the owner reported improvement and disclosed a heavier 35mm Distagon substitution.
@@ -39,8 +39,10 @@ preserves existing unit data and retains original metadata for rollback. A switc
 sends one metadata report, with no application pages. Initial installation and
 the first switch require explicit experimental acknowledgment; normal switching
 requires a verified same-unit transport proof. Hardware/camera qualification is
-pending, and no 4.8 firmware has been flashed for this work.
+pending. The first 4.8 Biotar upload has completed; physical reconnect and strict
+verification are still required before further writes or camera use.
 [Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
+[Current installation record](docs/evidence/biotar-48-install-2026-11-07.md).
 
 ## Project layout
 
