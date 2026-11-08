@@ -6,13 +6,19 @@ enum LensInspection {
     static func publish(_ backup: VerifiedBackup, to store: UpdateStore) throws -> AppliedLens? {
         let result = backup.result, version = result.manifest.reportedFirmwareVersion
         try store.archiveAppliedBeforeInspection()
+        try BankStore(directory: store.directory).archiveObservationBeforeInspection()
         try FirmwareObservationStore(directory: store.directory).save(FirmwareObservation(
             device: result.manifest.device, version: version, readAt: result.manifest.createdAt))
+        if version == ProfileBank.version {
+            _ = try BankStore(directory: store.directory).publish(backup)
+            return nil
+        }
         if version == "1.8.0" {
             guard digest(Data(backup.flash[ApplicationImage.base..<(ApplicationImage.base + 20172)]))
                     == "f4d616d2ae685775efff0eedbbbaec81d5c922a2f463bb630df83c41be13f564" else {
                 throw DeviceError.failure("The reported stock version does not match the supported stock application. The backup was preserved; no lens setting was verified.")
             }
+            _ = try BankStore(directory: store.directory).publish(backup)
             return nil
         }
         guard let variant = try ApplicationImage.installedVariant(backup.flash),
@@ -24,6 +30,7 @@ enum LensInspection {
                                   imageSHA256: digest(Data(backup.flash[ApplicationImage.base..<variant.applicationEnd])),
                                   verifiedAt: result.manifest.createdAt)
         try store.saveApplied(applied)
+        _ = try BankStore(directory: store.directory).publish(backup)
         return applied
     }
 }

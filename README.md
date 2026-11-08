@@ -23,8 +23,8 @@ incomplete, and 4.5.0 remains the working baseline.
 
 The native app opens on Device: connection, last verified firmware and the
 profile on the adapter. The Lens card has a dropdown and reference photo, keeps
-the local choice separate from installed data, and offers an explicit firmware
-update fallback. Read and reconnect verification are on the home screen.
+the local choice separate from stored data, installs the bank once, and then
+switches profiles through metadata. Read and reconnect verification are on the home screen.
 Lens Library is secondary; backups and recovery remain in USB tools.
 [App workflow](docs/app-lens-card-2026-11-07.md).
 
@@ -34,10 +34,13 @@ the application. The preferred design is a profile bank plus small, wear-leveled
 settings. [Endurance and transport design](docs/lens-profile-persistence.md).
 The physical iris is always shown as unknown.
 
-**4.8.0 implements the bank and a 16-row settings journal offline.** Its sparse
-package preserves existing unit data; it is not accepted by the updater. The
-metadata-only USB route remains disabled pending field-ownership, migration and
-hardware qualification. [Design and test evidence](docs/profile-bank-2026-11-07.md).
+**4.8.0 now has an experimental installer and app profile switching.** Migration
+preserves existing unit data and retains original metadata for rollback. A switch
+sends one metadata report, with no application pages. Initial installation and
+the first switch require explicit experimental acknowledgment; normal switching
+requires a verified same-unit transport proof. Hardware/camera qualification is
+pending, and no 4.8 firmware has been flashed for this work.
+[Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
 
 ## Project layout
 

@@ -32,7 +32,7 @@ root, bundle = map(Path, sys.argv[1:])
 source = root / 'apps/macos/Sources/DeviceKit/Resources'
 expected = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source.glob('*.bin')}
 actual = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in bundle.rglob('*.bin')}
-assert len(expected) == 4 and actual == expected, 'Packaged firmware differs from the active resource set.'
+assert len(expected) == 8 and actual == expected, 'Packaged firmware differs from the active resource set.'
 PY
 # Publish a signed new inode, preserving any running CLI's mapped executable.
 cp "$ea9_bin/ea9ctl" "$ea9_root/dist/.ea9ctl-next"

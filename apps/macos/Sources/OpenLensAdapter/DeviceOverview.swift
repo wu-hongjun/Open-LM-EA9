@@ -87,13 +87,13 @@ struct DeviceView: View {
             }
             Spacer(minLength: 0)
             HStack {
-                Button(model.preparedMatchesApplied ? "Applied" : "Update lens firmware…", action: model.applyPreparedLens)
-                    .buttonStyle(.borderedProminent).disabled(!model.canApplyLens)
+                Button(model.bankActionLabel, action: model.performPreparedBankAction)
+                    .buttonStyle(.borderedProminent).disabled(!model.canUseBankAction)
                 if let profile = model.deviceLensPreview {
                     Button("Edit…") { model.editLens(profile) }.buttonStyle(.bordered).disabled(model.busy || model.isDirty)
                 }
             }.controlSize(.large)
-            Text(model.lensActionHint).font(.caption).foregroundStyle(Palette.muted)
+            Text(model.bankActionHint).font(.caption).foregroundStyle(Palette.muted)
                 .fixedSize(horizontal: false, vertical: true)
         }.padding(24).frame(maxWidth: .infinity, alignment: .leading).frame(minHeight: 540).modifier(Surface())
     }

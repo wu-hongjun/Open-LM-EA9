@@ -35,7 +35,7 @@ struct DeviceToolsView: View {
                             Button("Read version", action: model.readFirmware).disabled(!model.canReadDevice)
                         }
                         if model.waitingForVerification {
-                            Button("Verify uploaded firmware", action: model.verifyLensUpdate).buttonStyle(.borderedProminent).disabled(!model.canVerifyUpdate)
+                            Button("Verify changes", action: model.verifyLensUpdate).buttonStyle(.borderedProminent).disabled(!model.canRequestVerification)
                         }
                     }.padding(20).modifier(Surface())
                     DisclosureGroup("Firmware updates") { firmwareSection.padding(.top, 12) }.padding(20).modifier(Surface())
@@ -52,6 +52,7 @@ struct DeviceToolsView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Restoring stock 1.8.0 requires this adapter’s original verified backup.").font(.caption).foregroundStyle(Palette.muted)
                             Button("Restore original stock…", action: model.chooseStockRestore).disabled(!model.canReadDevice)
+                            Button("Restore pre-bank firmware…", action: model.rollbackBank).disabled(!model.canRollbackBank)
                             if !model.stockUploadQualified {
                                 Button("Verify stock upload path…", action: model.prepareAdapter).disabled(!model.canReadDevice || model.waitingForVerification || model.updateStateError != nil)
                             }
@@ -63,6 +64,10 @@ struct DeviceToolsView: View {
     }
     private var firmwareSection: some View {
         VStack(alignment: .leading, spacing: 13) {
+            Text("4.8.0 · Lens bank").font(.callout.weight(.medium))
+            Text("One installation, then metadata-only profile switching. Hardware qualification is pending.").font(.caption).foregroundStyle(Palette.muted)
+            Button(model.bankActionLabel,action: model.performPreparedBankAction).disabled(!model.canUseBankAction)
+            Divider()
             Text("4.5.0 · Working baseline").font(.callout.weight(.medium))
             Text("\(FirmwareVariant.cameraDialAperture.compiledLens.name) · \(FirmwareVariant.cameraDialAperture.apertureRangeLabel)").font(.caption).foregroundStyle(Palette.muted)
             if model.currentFirmwareVariant == .cameraDialAperture {
@@ -80,6 +85,9 @@ struct DeviceToolsView: View {
             } else {
                 Button("Install 4.6.0 candidate…", action: model.installWideAperture).disabled(!model.canInstallWideAperture)
             }
+            Divider()
+            Button("Legacy per-lens firmware update…",action: model.applyPreparedLens).disabled(!model.canApplyLens)
+            Text("4.7 fallback rewrites the application per lens. It does not switch bank settings.").font(.caption).foregroundStyle(Palette.muted)
         }
     }
 }

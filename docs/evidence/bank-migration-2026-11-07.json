@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "clientDate": "2026-11-07",
+  "clientTimezone": "America/New_York",
+  "recordedAtUTC": "2026-11-08T02:14:07.343390+00:00",
+  "baseCommit": "47452cd7143a67c886df5f8be12b8a38499871dd",
+  "hardwareAccess": false,
+  "canonicalBankStateCreated": false,
+  "firmwareChanged": false,
+  "firmwareVersion": "4.8.0",
+  "appVersion": "0.29.0",
+  "appBuild": 40,
+  "makeTestPassed": true,
+  "nativeTests": {
+    "library": 7,
+    "device": 55,
+    "app": 12,
+    "total": 74
+  },
+  "metadataOwnershipAudit": {
+    "hardwareAccess": false,
+    "bootSHA256": "8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895",
+    "commandPairs": 65536,
+    "counts": {
+      "START": 1,
+      "CHECK": 1,
+      "READ": 1,
+      "ignored": 65533
+    },
+    "interpretedMetadata": "CHECK copies only 0x4000..0x400f; normal START has a fixed destination and does not interpret the old suffix",
+    "rawRead": "READ may expose any address; this is opaque byte transport, not a settings-field interpretation",
+    "startupBranches": [
+      {
+        "cap": false,
+        "outcome": "app vectors at 0x5000",
+        "metadataReads": 0
+      },
+      {
+        "cap": true,
+        "outcome": "USB receive loop",
+        "metadataReads": 0
+      }
+    ],
+    "negativeControl": "CHECK copy length expanded to 58; suffix read detected",
+    "loaderLockCheck": {
+      "entry": "0x1080",
+      "cases": 6,
+      "index": "address >> 14; host also checks actual 8 KiB regions"
+    },
+    "pointerAudit": [
+      {
+        "pc": "0x12c",
+        "use": "initialize .data; first word points to metadata 0x4000"
+      },
+      {
+        "pc": "0x25a2",
+        "use": "upload pointer at RAM base+4"
+      },
+      {
+        "pc": "0x263a",
+        "use": "metadata pointer at RAM base+0, fixed 64-byte write"
+      },
+      {
+        "pc": "0x266a",
+        "use": "metadata pointer, fixed 16-byte CHECK copy"
+      },
+      {
+        "pc": "0x26d4",
+        "use": "USB registration node at RAM base+8, not the metadata pointer"
+      }
+    ],
+    "ownershipDecision": "Transfer bytes 0x4020..0x4039 to the pinned 4.8 application only during explicit full migration; preserve prefix 0x4003..0x401f and retain the entire original metadata in a unit-bound rollback backup.",
+    "limits": [
+      "specific boot hash only",
+      "USB/HAL initialization stubbed",
+      "no formal whole-program alias proof",
+      "no analog flash or USB-reset qualification",
+      "no claim the vendor suffix was blank or unused by its old application"
+    ]
+  },
+  "productionPathFailingControls": {
+    "hardwareAccess": false,
+    "controls": [
+      {
+        "control": "erase-gap",
+        "test": "bankInstallerMergesOpaqueGapSeedsSelectionAndPreservesRollbackMetadata",
+        "rejected": true
+      },
+      {
+        "control": "page-after-start",
+        "test": "metadataSwitchSendsOneReportVerifiesPendingAndCancelsWithoutReflash",
+        "rejected": true
+      },
+      {
+        "control": "ignore-protected-flash",
+        "test": "strictVerificationRejectsEveryRegionTamperingAuxChangesAndSameConnection",
+        "rejected": true
+      }
+    ]
+  },
+  "failingControlPlanMatchesDeliveredSource": true,
+  "nativeToCompiledARM": {
+    "hardwareAccess": false,
+    "nativeVectorsSHA256": "a42da870d224e9a855f6a2a18bf54e97a389e36e518103b40e812d00eea4b611",
+    "initialMigration": "native seed/mailbox applied 50mm f/1.4 with zero NVM commands",
+    "selection": "native metadata request applied 35mm f/1.4 and produced the exact native-decoder canonical journal record",
+    "replay": "unchanged request emitted zero NVM commands",
+    "scope": "Actual compiled 4.8 startup and NVM code, synthetic CPU/register/page-buffer model; no camera or real flash qualification"
+  },
+  "originalRecoveryTestsPassed": 7,
+  "references": {
+    "schema_version": 1,
+    "checked_files": 3164,
+    "scope": "Pinned public references; private vendor material and local caches excluded",
+    "failure_count": 0,
+    "failures": []
+  },
+  "preservation": {
+    "canonicalProfileBackupKeyFilesChecked": 308,
+    "canonicalChanged": 0,
+    "publishedReleaseRecoveryFilesChecked": 26,
+    "publishedChanged": 0,
+    "firmwareSourceFilesUnchanged": 49,
+    "bankResourcesMatchPublishedSegments": true,
+    "canonicalBankStateCreated": false,
+    "appVersion": "0.29.0",
+    "appBuild": "40",
+    "hardwareAccess": false
+  },
+  "appBuildAndStrictCodesignPassed": true,
+  "offlineCLI": "bank-plan refused missing verified read evidence before any inventory/report path",
+  "uiReview": {
+    "mode": "isolated offline previews, USB disabled",
+    "bankCardScreenshotReviewed": true,
+    "dropdownSelectionConfirmed": true,
+    "pendingCameraAXLabelsConfirmed": true,
+    "previewAppsClosed": true
+  },
+  "sourceSHA256": {
+    "apps/macos/Sources/DeviceKit/AdapterStorage.swift": "d07f0e5c63f994fc6e2a3e2e64dac7348c0389d365d7daa165f068badde018be",
+    "apps/macos/Sources/DeviceKit/ArchivedFirmware.swift": "24aead623c380c4c87afa71848976c44c5c4c0c2270ecaaecc41080f99d4f232",
+    "apps/macos/Sources/DeviceKit/Backup.swift": "2ab1fe9b4478fbdbc735c71dc457ce039984b281e12a593f67f556434e5bf624",
+    "apps/macos/Sources/DeviceKit/BankCoordinator.swift": "731d5ac0934582faba181516f925faf6ddef62a515436c3f144814f514386b59",
+    "apps/macos/Sources/DeviceKit/BankPlan.swift": "7f4c945f34c9e4d1fbe6d845b6f2d7f90d72a78facfb89c4d82b298ed7751148",
+    "apps/macos/Sources/DeviceKit/BankService.swift": "32571f34eccab92c507f81f7f58f4113b0e01ec64df4f107b6bfc6477c0cd549",
+    "apps/macos/Sources/DeviceKit/BankStore.swift": "a75c00a60bc0f83bb1df45b8fe8e2b86e301e0dbb8f5045b243e9ba9d719a808",
+    "apps/macos/Sources/DeviceKit/FirmwareObservation.swift": "8fd38e6d2583e43ab17465218142820cbff1838036bba143075939ad5a4b7f71",
+    "apps/macos/Sources/DeviceKit/LensImage.swift": "fe6376c1c3f7180802ed26780eeaebc8c40ae59ce6d463ea813750f14b868add",
+    "apps/macos/Sources/DeviceKit/LensInspection.swift": "c8dc0fc3eddb723aeee1a5ee613da47db6946654dcd11dad9ab8ba989b57333a",
+    "apps/macos/Sources/DeviceKit/LensProfileImage.swift": "81f9257facfe16e2a5c99983971a51ff53e758c9bdebd690c9d3a7e79c9aef35",
+    "apps/macos/Sources/DeviceKit/NativeHID.swift": "4209a21d3272a562d61fa79f01e250b7d1b385573be56eaf7438d7ef1a057d5e",
+    "apps/macos/Sources/DeviceKit/ProfileBank.swift": "03e730bbe2b27269a5f04faa1b18409992afb51d55fb697f24a8800574ac426b",
+    "apps/macos/Sources/DeviceKit/StockRestoreResolution.swift": "85e309cbebfbabadd3953bbfda7690efc4e61f80785f4c5a4410d44739613536",
+    "apps/macos/Sources/DeviceKit/TrustedCameraDialAperture.swift": "08beb155407f60b4952ed60c7570142224acf20fb945ba4576d01aca80d5c265",
+    "apps/macos/Sources/DeviceKit/TrustedUpstreamStockSpeed.swift": "fe0f4b4cb3196a052cb0e0a11ffcb6b2efbed8dead3f8d7d1dd0b55eb7e3f8e8",
+    "apps/macos/Sources/DeviceKit/TrustedWideCameraAperture.swift": "4286d595b190b3d4c0137f7161eae65dac137c2208fb18ab97e1f5c1aaf4389e",
+    "apps/macos/Sources/DeviceKit/USBConnectionSafety.swift": "0bd9ce9fc82da6d19666d4036d4ed200f0bf5944f709667c57f3a6bb109787f9",
+    "apps/macos/Sources/DeviceKit/Upload.swift": "73a39e7ad1baeb8e18ecfba3a44163c9c2c082692a3c7c481f8b07a2475e2eea",
+    "apps/macos/Sources/EA9CLI/BankCLI.swift": "7b6c9745262b5a2733e16186b610691d7861e61dea85792a9ae4bfec5b915c74",
+    "apps/macos/Sources/EA9CLI/main.swift": "f776041af887c0e70273a423b9dbd80a7bf2675eaa6ec8272a84a7d205221d22",
+    "apps/macos/Sources/LensCore/LensLibrary.swift": "5b70532b7b4a066e7b6b60ee70105ea26acf1b88ba818748d68a74686c810de8",
+    "apps/macos/Sources/LensCore/PreparedLensStore.swift": "43e61d97dcc7b051b856270ca13e6f2bb4661a9a486af655d7cd8e9ddf6f7949",
+    "apps/macos/Sources/OpenLensAdapter/AppModel.swift": "b1cbce6ae719ececba2781f2c0d292b1051a22f0432824b6f9ea8548154b9158",
+    "apps/macos/Sources/OpenLensAdapter/AppPreview.swift": "b5d665a0ea59346a1bfffbe6bd817cdd8f4795cedf931477f95a865737e9c5e4",
+    "apps/macos/Sources/OpenLensAdapter/BankWorkflow.swift": "d93ab1b8d0bd71e8748e0b8373be9f2af88ad91efefb066aa5acc55347b19694",
+    "apps/macos/Sources/OpenLensAdapter/DeviceOverview.swift": "d16faa22f1f6d31f56b62827650ae7a441b906628a5dd5c6caf7272b57d99975",
+    "apps/macos/Sources/OpenLensAdapter/DeviceToolsView.swift": "5139e471aea54375822b261bfbaa664d39fad3fd3d7303cfd05018415413f8a8",
+    "apps/macos/Sources/OpenLensAdapter/DeviceWorkflow.swift": "c99c7d4539776a30ff3ea9fe054f899c4150f7c64938ae27c41d095d06b7355f",
+    "apps/macos/Sources/OpenLensAdapter/LensCardWorkflow.swift": "001bea5f955191f2993568e87f2f41a383551fc840438d30b6ef173582d0e6f6",
+    "apps/macos/Sources/OpenLensAdapter/LensGallery.swift": "f21218c535e6d06ba044428f3d86176ff3552e249138e6aecdb1ec7080f5eaeb",
+    "apps/macos/Sources/OpenLensAdapter/OpenLensAdapterApp.swift": "1aea49f34aed90ceb4785289b6b218691b11126da980bccf4dc507a79d87e051",
+    "apps/macos/Sources/OpenLensAdapter/VisualDesign.swift": "84e8e4191227b8caae745bb0aeca4a7259eb351a166a42841a5cc09557bc9684",
+    "apps/macos/Tests/AppWorkflowTests/BankWorkflowTests.swift": "4eaa3e90941a71c57d2dc4b1840aecfef776e4c81bd88eff260b1f2181e01fea",
+    "apps/macos/Tests/AppWorkflowTests/DeviceWorkflowTests.swift": "eb545ba2b5b4675c0f770b617e67cbae6ca9cdf15cef298b789dbe72cb59fa72",
+    "apps/macos/Tests/DeviceKitTests/AdapterStorageTests.swift": "706ce1bd48cfaffd830a352289e89c49a9d319ab46d931ec7dcedda95b4f5a04",
+    "apps/macos/Tests/DeviceKitTests/BackupTests.swift": "38a2d55bfa9bc4d804f888e4e1830654ce37657aa6c0b754c58ce7c82e079a24",
+    "apps/macos/Tests/DeviceKitTests/BankMigrationTests.swift": "2b7703f1fbb8529655e281b8f08c0944484935aa43d7b39814d4004c87de24db",
+    "apps/macos/Tests/DeviceKitTests/FirmwareObservationTests.swift": "561432743de81fa28b93e5072cf857a4082d41daf255b1daa278aee4dc45da23",
+    "apps/macos/Tests/DeviceKitTests/LensProfileImageTests.swift": "926ad9eea65b44e5499b5097ba9837476c8acd75a4f999e9727e5cf9c2338798",
+    "apps/macos/Tests/DeviceKitTests/USBConnectionSafetyTests.swift": "d6b353ac7987f4f4ae4a27de184ae91db99126579fed1e68e483e859d988e883",
+    "apps/macos/Tests/DeviceKitTests/UploadTests.swift": "cb48aebcb1ce2a1b9dd6da92f6d2b069e786fca4a10dede6c624d26e2984647f",
+    "apps/macos/Tests/LensCoreTests/LensLibraryTests.swift": "60fa9281e7a210183d4c428b27303061f36fd484eceb1b845d1f5a67a60f5093",
+    "apps/macos/Tests/LensCoreTests/PreparedLensTests.swift": "c18801abd4b7b186f4d8614de49ee207f7da30171d56db21f92b9ccc55c8ccd8",
+    "scripts/audit-bank-metadata.py": "5047f5fef35ae34e92639cc3000a1fe7a8a79277bf4388d3ea839c22efe8e3e1",
+    "scripts/test-bank-failing-controls.py": "8f650637abc7ff9a5d445c4e7e855987c244d610fd29118256a13035a2ea33d4",
+    "scripts/test-bank-migration-arm.py": "571b8ca6e1c68572cc0596940d0cb0795c86784713b64819943caeb696150f37",
+    "scripts/build-macos-app.sh": "833b0c166336c964f55f1fd58f7c0c7b21328c37a0afa98e3c5e581ad58e3b2a"
+  },
+  "hardwareQualification": {
+    "installation": false,
+    "metadataOnlyUSB": false,
+    "camera": false,
+    "firstInstall": "requires explicit experimental acknowledgment and existing same-unit stock upload qualification",
+    "firstSelection": "requires experimental acknowledgment; normal switching gated by reconstructed completed selection proof"
+  },
+  "remainingLimits": [
+    "Real physical reset / zero-page START / ambiguous ACK behavior requires coordinated hardware test.",
+    "CPU/register/page-buffer and power-cut models do not establish analog flash or camera stability.",
+    "Initial installation rewrites the preserved gap physically; it is not power-loss atomic.",
+    "Interrupted first installation remains pending; original stock restoration is the supported fallback.",
+    "Full before/after backups still dominate USB read latency; fixed metadata-row wear remains.",
+    "Custom bank packages require separate version/pin/admission review."
+  ]
+}

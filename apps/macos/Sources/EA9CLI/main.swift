@@ -34,6 +34,7 @@ import LensCore
                 print("Prepared selected-lens image: \(data.count) bytes. No USB access.")
                 return
             }
+            if args.first?.hasPrefix("bank-") == true { try await BankCLI.run(args,state: state); return }
             let simple = ["verify","inspect","qualify-stock","apply-camera-aperture","apply-wide-aperture","apply-upstream-stock-speed"]
             let fileCommands = ["backup","restore-stock","resolve-stock-after-camera","apply-lens-firmware"]
             guard args == ["inventory"] || (args.count == 2 && simple.contains(args[0]) && args[1] == "--idle") ||

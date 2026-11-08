@@ -46,6 +46,18 @@ import DeviceKit
             }
             let model = AppModel(directory: directory, preview: true,
                 inventory: { mode == "disconnected" ? [] : [device] }, reconnect: { _ in mode == "reconnect" })
+            if mode.hasPrefix("bank") {
+                let bank = try ProfileBank(),pending = mode == "bank-pending"
+                let committed = try JSONSerialization.jsonObject(with: JSONEncoder().encode(bank.profiles[6]))
+                let configured = try JSONSerialization.jsonObject(with: JSONEncoder().encode(bank.profiles[pending ? 1 : 6]))
+                let state: [String: Any] = ["committed": committed,"configured": configured,"pendingCameraBoot": pending,
+                    "setting": ["slot": 6,"sequence": 1,"generation": 1,"row": 0],
+                    "request": ["slot": pending ? 1 : 6,"generation": pending ? 2 : 1]]
+                let fixture: [String: Any] = ["device": identity,"version": "4.8.0","state": state,
+                    "readAt": now,"backupURL": "file:///PREVIEW-BANK.ea9backup"]
+                model.previewBankObservation = try JSONDecoder().decode(BankObservation.self,from: JSONSerialization.data(withJSONObject: fixture))
+                model.chooseDeviceLens(distagon.id)
+            }
             if ["selected","verify","profile","disconnected"].contains(mode) { model.chooseDeviceLens(distagon.id) }
             return model
         } catch { fatalError("Cannot create offline preview fixture: \(error)") }

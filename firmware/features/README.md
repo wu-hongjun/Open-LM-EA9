@@ -11,6 +11,7 @@ physical addresses live under targets/lm-ea9/profile-bank, not in the journal.
 Porting requires a qualified storage layout, hardware implementation, linker and
 transport; copying this target's addresses is not a safe generic default.
 
-The package and metadata mailbox remain offline experiments. The current app
-does not install them or transmit settings. See docs/profile-bank-2026-11-07.md
-from the repository root for design, tests and remaining qualification gates.
+The firmware remains unflashed for this work. The host now provides explicitly
+acknowledged experimental installation/selection, with normal switching gated
+by verified transport evidence. See docs/bank-migration-2026-11-07.md from the
+repository root for the current integration and remaining hardware gates.

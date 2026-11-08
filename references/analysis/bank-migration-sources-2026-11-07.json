@@ -1,0 +1,23 @@
+{
+  "retrievedOn": "2026-11-07",
+  "sources": [
+    {
+      "title": "Microchip SAM D21/DA1 Family Data Sheet, section 22.6.3",
+      "url": "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf",
+      "use": "16 physical lock regions; 8 KiB regions for a 128 KiB device; host rejects locked writes without unlocking"
+    },
+    {
+      "title": "Pinned initial 4.8 package and storage design",
+      "url": "https://github.com/wu-hongjun/OpenLensAdapter/tree/47452cd7143a67c886df5f8be12b8a38499871dd/firmware/releases/4.8.0",
+      "use": "Immutable source/segment pins and declared mutable settings format"
+    },
+    {
+      "title": "Archived loader contract",
+      "url": "https://github.com/wu-hongjun/OpenLensAdapter/blob/9a6905cc99eb6ad62b7885a42a3eddf3d5f3071e/docs/usb-metadata-milestone.md",
+      "use": "START metadata/armed-state contract; checked again by executing pinned original instructions"
+    }
+  ],
+  "privateInput": "Same-unit boot prefix, SHA-256 8b6cb0bca7572748ddc1ba85bcb58ef261b8799898603e9b86a0ba4cb038c895; raw factory metadata is omitted",
+  "auditScope": "All command pairs, fixed metadata destinations/copy lengths, both startup branches and original lock helper; USB/HAL initialization stubbed; no whole-program alias proof",
+  "hardwareAccess": false
+}

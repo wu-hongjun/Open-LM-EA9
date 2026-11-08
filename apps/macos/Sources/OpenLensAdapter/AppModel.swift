@@ -66,6 +66,10 @@ enum AppTab: Hashable { case device, lensLibrary }
     @Published var firmwareObservation: FirmwareObservation?
     @Published var pendingUpdate: PendingUpdate?
     @Published var appliedLens: AppliedLens?
+    @Published var bankObservation: BankObservation?
+    @Published var previewBankObservation: BankObservation?
+    @Published var pendingBank: BankTransaction?
+    @Published var bankTransportQualified = false
     @Published var stockUploadQualified = false
     @Published var updateStateError: String?
     @Published var pendingUpdateError: String?
@@ -103,6 +107,8 @@ enum AppTab: Hashable { case device, lensLibrary }
         firmwareObservation = try? firmwareStore.load()
         pendingUpdate = try? deviceService.pendingUpdate()
         appliedLens = try? deviceService.appliedLens()
+        bankObservation = try? deviceService.bankObservation()
+        pendingBank = try? deviceService.pendingBankTransaction()
         do { library = try store.loadOrSeed() }
         catch {
             library = (try? LensLibrary.seeds()) ?? LensLibrary(profiles: [])
@@ -130,7 +136,11 @@ enum AppTab: Hashable { case device, lensLibrary }
     }
     var preparedLensIssue: String? {
         guard let profile = preparedLens else { return nil }
-        do { _ = try FirmwareImageBuilder.prepare(profile: profile, variant: .lensProfiles); return nil }
+        do {
+            if currentBankState != nil { _ = try ProfileBank().slot(for: profile) }
+            else { _ = try FirmwareImageBuilder.prepare(profile: profile, variant: .lensProfiles) }
+            return nil
+        }
         catch { return error.localizedDescription }
     }
     func editLens(_ profile: LensProfile) {
@@ -287,6 +297,10 @@ enum AppTab: Hashable { case device, lensLibrary }
         catch { pendingUpdate = nil; pendingUpdateError = error.localizedDescription; errors.append("Update journal: \(error.localizedDescription)") }
         do { appliedLens = try deviceService.appliedLens() }
         catch { appliedLens = nil; errors.append("Lens history: \(error.localizedDescription)") }
+        do { bankObservation = try deviceService.bankObservation(); pendingBank = try deviceService.pendingBankTransaction() }
+        catch { bankObservation = nil; pendingBank = nil; errors.append("Bank history: \(error.localizedDescription)") }
+        do { bankTransportQualified = if let device { try deviceService.bankTransportQualified(for: device) } else { false } }
+        catch { bankTransportQualified = false; errors.append("Bank transport proof: \(error.localizedDescription)") }
         do { stockUploadQualified = if let device { try deviceService.stockUploadQualified(for: device) } else { false } }
         catch { stockUploadQualified = false; errors.append("Upload qualification: \(error.localizedDescription)") }
         updateStateError = errors.isEmpty ? nil : errors.joined(separator: "\n") + "\nThe files were preserved. After reconnecting, USB tools can restore stock from a verified backup."
@@ -302,7 +316,7 @@ enum AppTab: Hashable { case device, lensLibrary }
            observation.version != appliedLens.firmwareVersion { return nil }
         return appliedLens
     }
-    var waitingForVerification: Bool { pendingUpdate?.needsVerification == true }
+    var waitingForVerification: Bool { pendingUpdate?.needsVerification == true || pendingBank?.needsVerification == true }
     var preparedMatchesApplied: Bool {
         guard let preparedLens, let currentAppliedLens else { return false }
         guard let selected = try? AdapterLensSetting(profile: preparedLens) else { return false }
@@ -318,7 +332,7 @@ enum AppTab: Hashable { case device, lensLibrary }
             && (currentAppliedLens != nil || currentFirmwareObservation?.version == "1.8.0")
     }
     var canVerifyUpdate: Bool {
-        canReadDevice && pendingUpdateError == nil && waitingForVerification && pendingUpdate?.device.id != devices.first?.id
+        canReadDevice && pendingUpdateError == nil && pendingUpdate?.needsVerification == true && pendingUpdate?.device.id != devices.first?.id
             && pendingUpdate?.device.serial == devices.first?.serial
     }
     func prepareAdapter() {
@@ -390,6 +404,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         }
     }
     func verifyLensUpdate() {
+        if pendingUpdate?.needsVerification != true,pendingBank?.needsVerification == true { verifyBankChange(); return }
         guard canVerifyUpdate else { return }
         runLensOperation { device, token in
             self.appliedLens = try await self.deviceService.verifyUpdate(device: device, idleAcknowledged: self.idleAcknowledged,
@@ -404,7 +419,7 @@ enum AppTab: Hashable { case device, lensLibrary }
         runLensOperation { device, token in
             self.appliedLens = try await self.deviceService.readLens(device: device, idleAcknowledged: self.idleAcknowledged,
                     cancellation: token, progress: { update in Task { @MainActor in self.progress = update } })
-            self.deviceMessage = self.appliedLens == nil ? "Stock firmware has no supported readable lens profile." : "Lens setting verified on the adapter."
+            self.deviceMessage = "Adapter firmware and stored lens information read and verified."
         }
     }
     func runLensOperation(writing: Bool = false, _ operation: @escaping @MainActor (DeviceIdentity, CancellationToken) async throws -> Void) {

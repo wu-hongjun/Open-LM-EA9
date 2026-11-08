@@ -1,5 +1,17 @@
 # Verification
 
+The bank migration suite adds production Swift transaction/recovery tests and
+three isolated failing controls. Native-generated wire/journal bytes are also
+fed into unchanged compiled 4.8 ARM startup code. The loader audit covers all
+65,536 command pairs and both PA23 startup branches with a suffix-read control.
+These are offline models; see [scope and evidence](bank-migration-2026-11-07.md).
+
+    python3 scripts/test-bank-failing-controls.py --output artifacts/private/NEW-controls
+    tools/rea-analysis/venv/bin/python scripts/audit-bank-metadata.py --output artifacts/private/NEW-audit
+    # Export synthetic native vectors during a normal test run:
+    OPENLENSADAPTER_BANK_VECTORS=/absolute/path/artifacts/private/NEW-vectors.json scripts/swift-local.sh test
+    tools/rea-analysis/venv/bin/python scripts/test-bank-migration-arm.py --build BANK_BUILD --native-vectors PRIVATE_VECTORS --output artifacts/private/NEW-arm
+
 `make test` builds and exercises the actual firmware C with supplied host UART,
 CS/time and motor simulation, then runs the native Swift tests. It never opens
 or enumerates the adapter.

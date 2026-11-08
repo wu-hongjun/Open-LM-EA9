@@ -5,7 +5,7 @@ import DeviceKit
 
 @MainActor extension AppModel {
     var deviceLensSelectionID: String? {
-        let id = preparedLensID ?? currentAppliedLens?.setting.id
+        let id = preparedLensID ?? currentBankState?.configured.id ?? currentAppliedLens?.setting.id
         return library.profiles.contains { $0.id == id } ? id : nil
     }
     var deviceLensPreview: LensProfile? { library.profiles.first { $0.id == deviceLensSelectionID } }
@@ -14,18 +14,20 @@ import DeviceKit
     }
     var canRequestVerification: Bool {
         canRequestDeviceRead && updateStateError == nil && waitingForVerification
-            && pendingUpdate?.device.id != devices.first?.id
-            && pendingUpdate?.device.serial == devices.first?.serial
+            && activePendingDevice?.id != devices.first?.id
+            && activePendingDevice?.serial == devices.first?.serial
     }
     /// A cached observation is explicitly dated; it never substitutes for readback.
     var adapterFirmwareText: String {
         if waitingForVerification && pendingBelongsToConnectedAdapter {
+            if pendingUpdate?.needsVerification != true { return pendingBank?.operation == .rollback ? "Restoring pre-bank firmware" : ProfileBank.version }
             return pendingUpdate?.version.map(String.init).joined(separator: ".") ?? "Awaiting verification"
         }
-        return currentAppliedLens?.firmwareVersion ?? currentFirmwareObservation?.version ?? "Not read"
+        return currentBankObservation?.version ?? currentAppliedLens?.firmwareVersion ?? currentFirmwareObservation?.version ?? "Not read"
     }
     var installedProfileText: String {
         if waitingForVerification && pendingBelongsToConnectedAdapter { return "Awaiting verification" }
+        if let state = currentBankState { return state.configured.name + (state.pendingCameraBoot ? " · pending camera startup" : "") }
         if currentAppliedLens == nil && currentFirmwareObservation?.version == "1.8.0" {
             return "Stock lens settings are not decoded"
         }
@@ -33,6 +35,8 @@ import DeviceKit
     }
     var selectedLensState: String {
         guard let preview = deviceLensPreview else { return "Choose a lens" }
+        if let state = currentBankState,bankSelectionMatches { return state.pendingCameraBoot ? "Queued for camera" : "Configured · last read" }
+        if pendingBank?.needsVerification == true { return "Reconnect and verify" }
         if let pendingUpdate, waitingForVerification, pendingUpdate.setting?.id == preview.id {
             return "Uploaded · verification needed"
         }
@@ -65,6 +69,7 @@ import DeviceKit
         if updateStateError != nil { return "History needs attention" }
         if reconnectRequired { return "Reconnect required" }
         if waitingForVerification { return pendingBelongsToConnectedAdapter ? "Verification needed" : "Another update is pending" }
+        if let state = currentBankState { return state.pendingCameraBoot ? "Profile queued" : "Bank identified" }
         if currentAppliedLens == nil && currentFirmwareObservation?.version == "1.8.0" { return "Profile unavailable" }
         return currentAppliedLens != nil ? "Profile identified" : "Read needed"
     }

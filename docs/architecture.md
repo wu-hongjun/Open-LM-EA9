@@ -1,5 +1,12 @@
 # System design
 
+The current [bank host integration](bank-migration-2026-11-07.md) separates
+ProfileBank (pinned codecs/state), BankPlan (pure migration/selection/rollback),
+BankStore (durable reconstructed evidence), BankCoordinator (injected transport)
+and BankService (existing native session/lock/reconnect safety). BankWorkflow
+provides the card UI; firmware source and published 4.8 segments are unchanged.
+Historical preparation details below predate that integration.
+
 The firmware remains C on the SAMD21E17A, using upstream protocol and motor
 control with the proven 750 kbaud fallback. The macOS app remains SwiftUI/AppKit
 and Swift IOHID. A Rust rewrite is deferred while building on the working base.

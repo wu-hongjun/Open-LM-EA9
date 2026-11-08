@@ -1,5 +1,11 @@
 # Development
 
+The macOS 0.29 bank integration adds an experimental migration/selection flow for
+unchanged firmware 4.8. The first install/switch is explicitly acknowledged and
+normal switches require verified transport evidence. It has not been exercised
+on hardware. See [the workflow and CLI commands](bank-migration-2026-11-07.md).
+The older offline-only preparation descriptions below record the earlier stage.
+
 The firmware is C; the native companion is SwiftUI/AppKit with Swift IOHID.
 Use macOS 14+ with Xcode command-line tools and Python 3.9+.
 

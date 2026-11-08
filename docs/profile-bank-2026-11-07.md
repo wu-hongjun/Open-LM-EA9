@@ -1,5 +1,9 @@
 # Profile bank and persistent selection — offline milestone
 
+This is the initial preparation-stage record. The subsequent
+[metadata audit, installer and app integration](bank-migration-2026-11-07.md)
+add experimental host operations without changing these firmware segments.
+
 The experimental 4.8.0 package implements a bank and a 16-row wear-leveled
 selection journal on top of the pinned working C source and 4.6 aperture range.
 It has not been uploaded, camera-tested or admitted to the native updater.

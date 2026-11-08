@@ -1,5 +1,28 @@
 # USB cap protocol and workflow
 
+## 4.8 bank transactions
+
+The [metadata audit and migration workflow](bank-migration-2026-11-07.md) adds
+a separate transaction journal, source admission and concrete approval digest.
+Initial installation sends 61,440 bytes through 0x14000, merging 0xa000–0x10000
+from a fresh same-unit backup. It transfers metadata 0x4020–0x4039 explicitly,
+preserving the rest and retaining original values for rollback. New region
+0x10000–0x14000 must be blank; required physical/loader lock bits must be unlocked.
+
+An in-bank lens switch sends one START, zero pages and no follow-up reports.
+Full same-unit/new-connection verification checks every other flash byte, plus
+protected auxiliary data and geometry/lock state. The first switch is an
+experimental test; normal app switching requires its completed transport proof.
+Cap verification labels a new request pending camera startup until a later Read
+confirms journal consumption. It does not claim that USB reconnect runs the app.
+
+Verified pre-bank rollback restores 0x5000–0x20000 and original 58-byte metadata
+from the installation backup. Interrupted installation remains pending; original
+stock recovery is still available. No 4.8 hardware operation was executed for
+this offline milestone, and camera/physical reset behavior is not qualified.
+
+## Retained loader and legacy image paths
+
 The update cap uses the retained vendor loader through HID. Native `DeviceKit`
 implements the inspected descriptor and bootloader checks; the application's
 USB path is not a separate firmware management service.

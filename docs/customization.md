@@ -1,5 +1,19 @@
 # Customizing OpenLensAdapter
 
+The [4.8 host workflow](bank-migration-2026-11-07.md) uses a pinned bank. Ordinary
+switches change only a slot request, never reflash or rewrite the bank. Local
+notes/revision changes are ignored when matching optical fields; changing name,
+focal length, nominal aperture or startup report needs a separate bank build.
+The unknown zoom position is never inferred.
+
+Use build-profile-bank.py with a copied inventory and an unpublished version
+for a custom bank. Current native admission deliberately supports the published
+4.8 package only. A new package needs reviewed ProfileBank resource pins/layout,
+BankPlan/version admission, packaging and tests before exposing installation.
+Run the native-to-ARM byte contract, transaction/fault controls and coordinated
+hardware qualification. Do not overwrite 4.8 segments or reuse its transport
+proof for changed loader/protocol behavior.
+
 The repository separates three choices: the lens you report, firmware behavior,
 and the hardware that runs it. LM-EA9 is the only implemented hardware target.
 Working 4.5.0 remains the reference for the owner's A7C II/Biotar combination.

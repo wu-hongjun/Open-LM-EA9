@@ -61,9 +61,9 @@ private let reportCallback: IOHIDReportCallback = { context, result, _, type, id
     inbox.reply = Data(bytes: bytes, count: 64)
 }
 
-private final class NativeTransport: ReadOnlyTransport, UploadTransport {
+final class NativeTransport: ReadOnlyTransport, UploadTransport {
     let device: IOHIDDevice
-    let inbox = ReportInbox()
+    private let inbox = ReportInbox()
     let runLoop: CFRunLoop
     let cancellation: CancellationToken
     var attemptedReport = false
@@ -124,7 +124,7 @@ public final class DeviceService: @unchecked Sendable {
     private let worker = DispatchQueue(label: "org.openlensadapter.usb", qos: .userInitiated)
     private let lock = NSLock()
     private var busy = false
-    private let stateDirectory: URL
+    let stateDirectory: URL
     let safety: USBConnectionSafety
     public init(stateDirectory: URL) {
         self.stateDirectory = stateDirectory
@@ -241,7 +241,9 @@ public final class DeviceService: @unchecked Sendable {
         if !recovering, let pending = try store.load(), pending.needsVerification {
             throw DeviceError.failure("The previous upload needs a reconnect and verification before another lens change.")
         }
+        if !recovering { try BankStore(directory: stateDirectory).requireNoPending() }
         return try await withIdleDevice(device: device, idleAcknowledged: idleAcknowledged, cancellation: cancellation) { transport in
+            if !recovering { try BankStore(directory: self.stateDirectory).requireNoPending() }
             guard !device.serial.isEmpty else { throw DeviceError.failure("A USB serial is required to bind this update and its backup to the same adapter.") }
             let folder = store.directory.appendingPathComponent("USBBackups", isDirectory: true)
             try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
@@ -306,6 +308,7 @@ public final class DeviceService: @unchecked Sendable {
                 if FileManager.default.fileExists(atPath: store.appliedFile.path) { try FileManager.default.removeItem(at: store.appliedFile) }
                 if pending.version == [1,8,0] {
                     try store.saveQualification(device: device, transactionID: pending.transactionID)
+                    try BankStore(directory: self.stateDirectory).archiveAfterStockRecovery(device: device)
                 }
             }
             pending.verifiedAt = Date(); try store.save(pending)
@@ -315,8 +318,10 @@ public final class DeviceService: @unchecked Sendable {
     public func readLens(device: DeviceIdentity, idleAcknowledged: Bool, cancellation: CancellationToken,
                          progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> AppliedLens? {
         if let pending = try pendingUpdate(), pending.needsVerification { throw DeviceError.failure("Reconnect and verify the pending upload first.") }
+        try BankStore(directory: stateDirectory).requireNoPending()
         let store = UpdateStore(directory: stateDirectory)
         return try await withIdleDevice(device: device, idleAcknowledged: idleAcknowledged, cancellation: cancellation) { transport in
+            try BankStore(directory: self.stateDirectory).requireNoPending()
             let folder = store.directory.appendingPathComponent("USBBackups", isDirectory: true)
             try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
             let url = folder.appendingPathComponent("inspect-\(UUID().uuidString).ea9backup")
@@ -356,7 +361,7 @@ public final class DeviceService: @unchecked Sendable {
         }
     }
 
-    private func withIdleDevice<T: Sendable>(device: DeviceIdentity, idleAcknowledged: Bool,
+    func withIdleDevice<T: Sendable>(device: DeviceIdentity, idleAcknowledged: Bool,
         cancellation: CancellationToken, operation: @escaping @Sendable (NativeTransport) throws -> T) async throws -> T {
         guard idleAcknowledged else { throw DeviceError.failure("Close the official updater and physically reconnect the USB cap first.") }
         try reserve()

@@ -1,5 +1,10 @@
 # Lens switching and flash endurance
 
+The later [4.8 migration milestone](bank-migration-2026-11-07.md) implements the
+explicit mailbox ownership transfer, gap-preserving installer, rollback and app
+selection flow. Experimental hardware tests remain owner-coordinated. The
+discussion below records the original problem and design boundaries.
+
 The owner asked whether switching lenses reflashes the application and whether
 flash endurance should change the design. Yes: the existing USB image-update
 path and the offline 4.7 personalization prototype rewrite the application for
