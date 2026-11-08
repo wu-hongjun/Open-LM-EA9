@@ -39,8 +39,10 @@ preserves existing unit data and retains original metadata for rollback. A switc
 sends one metadata report, with no application pages. Initial installation and
 the first switch require explicit experimental acknowledgment; normal switching
 requires a verified same-unit transport proof. Hardware/camera qualification is
-pending. The first 4.8 Biotar upload has completed; physical reconnect and strict
-verification are still required before further writes or camera use.
+pending. The first 4.8 Biotar installation passed physical reconnect and strict
+byte/protected-data verification on November 8. The first metadata-only 50mm
+switch was acknowledged and awaits its own physical reconnect and invariance
+verification; keep the adapter off the camera until that completes.
 [Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
 [Current installation record](docs/evidence/biotar-48-install-2026-11-07.md).
 

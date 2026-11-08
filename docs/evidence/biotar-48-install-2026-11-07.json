@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "clientDate": "2026-11-07",
   "firmwareVersion": "4.8.0",
-  "status": "uploaded-awaiting-owner-reconnect",
+  "status": "installation-verified-first-switch-awaiting-reconnect",
   "softwareCommit": "017ee9f42ebb1e50c489882cef107c40d3c6a3bc",
   "lens": {
     "id": "zeiss-jena-biotar-55-f2",
@@ -71,9 +71,30 @@
     ],
     "settingsSeedPersonalized": true
   },
-  "installationVerified": false,
+  "installationVerified": true,
   "metadataTransportQualified": false,
-  "firstMetadataSwitch": "not started",
+  "firstMetadataSwitch": {
+    "status": "acknowledged-awaiting-physical-reconnect",
+    "profileID": "contax-zeiss-50-f1-4",
+    "name": "Contax Zeiss 50mm f/1.4",
+    "requestedSlot": 2,
+    "requestedGeneration": 2,
+    "committedBefore": {
+      "slot": 6,
+      "sequence": 1,
+      "generation": 1
+    },
+    "startedAtUTC": "2026-11-08T16:20:45.836073+00:00",
+    "acknowledgedAtUTC": "2026-11-08T16:20:45.865555+00:00",
+    "freshTwoPassBackupMatchesVerifiedInstallation": true,
+    "startReportsAcknowledged": 1,
+    "applicationPagesSent": 0,
+    "applicationBytesSent": 0,
+    "postStartReportsSent": false,
+    "commandExitCode": 0,
+    "readbackVerified": false,
+    "cameraApplicationVerified": false
+  },
   "cameraStartup": "untested",
   "cameraAF": "untested",
   "cameraCapture": "untested",
@@ -85,6 +106,34 @@
     "preBankRecoveryBackupSaved": true,
     "originalStockRecoveryUnchanged": true
   },
-  "nextAction": "Owner physical unplug/reconnect through USB cap, apps closed; then strict same-unit full readback verification before any further write or camera use.",
-  "privateEvidence": "Raw backups, transaction records, approval digest and unit identifiers stay private."
+  "nextAction": "Owner physical unplug/reconnect through USB cap, both apps closed; strict metadata-only full-flash invariance verification, then a separate return-to-Biotar switch and reconnect check before camera use.",
+  "privateEvidence": "Raw backups, transaction records, approval digest and unit identifiers stay private.",
+  "installationVerificationClientDate": "2026-11-08",
+  "installationVerification": {
+    "verifiedAtUTC": "2026-11-08T16:18:27.622475+00:00",
+    "ownerConfirmedPhysicalReconnect": true,
+    "sameUnitNewConnection": true,
+    "twoPassFlashMatched": true,
+    "applicationBytesChecked": 61440,
+    "allMainFlashBytesComparedExceptScratch": true,
+    "ignoredLoaderScratchRange": [
+      16442,
+      16448
+    ],
+    "fixedCodeAndBankPinsMatch": true,
+    "initialJournal": {
+      "slot": 6,
+      "sequence": 1,
+      "generation": 1
+    },
+    "mailbox": {
+      "slot": 6,
+      "generation": 1
+    },
+    "pendingCameraApplication": false,
+    "protectedDataUnchanged": true,
+    "opaqueGapBytesUnchanged": 24576,
+    "remainingUpperFlashUnchanged": true,
+    "geometryAndLocksUnchanged": true
+  }
 }
