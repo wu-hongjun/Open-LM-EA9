@@ -3,7 +3,8 @@
 The Biotar installation passed full byte verification on November 8. On
 November 9 the 50mm request read back as planned, and the journal contained
 its committed setting. The strict USB-only check rejected that journal change.
-The adapter remains on the cap while the readback is reviewed.
+The owner reconnected again through the cap. The fresh read matched the reviewed
+backup byte for byte and closed the pending 50mm transaction.
 
 The owner authorized installation with the adapter on its USB cap and TECHART
 Update/OpenLensAdapter closed. One adapter was detected. The fresh full read
@@ -42,15 +43,19 @@ records, gap, upper flash, protected auxiliary data, geometry and locks all
 matched the before backup. The read establishes that the request was consumed
 before verification. The source of the application startup remains unconfirmed.
 
-The strict verifier preserves both backups and leaves the transaction pending.
-The reviewed selection path requires another physical reconnect and a fresh
-two-pass backup that exactly matches the reviewed flash and expected journal
-transition. It keeps a separate resolution record and leaves the strict result
-failed. Transport qualification still requires a strict USB-only readback.
-The return-to-Biotar write follows the read-only review and has its own reconnect
-check before camera use. Each START arms the loader, including a metadata-only START.
+After another owner-confirmed physical reconnect, the read-only review obtained
+two matching reads from the same unit on a third connection. Every flash byte
+matched the reviewed backup. The review also checked the expected journal
+transition, protected auxiliary data, geometry and locks. The durable resolution
+records the committed 50mm setting and retains the failed strict result and all
+backups. Routine transport qualification still requires a strict USB-only pass.
 
-Camera startup, autofocus, capture, exposure, journal consumption and shutdown
-on 4.8 remain untested. Raw dumps, approval tokens, identifiers and keys remain
+The experimental return to Biotar passed its fresh preflight and sent one
+acknowledged START with zero application pages. The requested setting is Biotar
+slot 6 at generation 3. The return awaits physical reconnect and verification
+before camera use. Each START arms the loader.
+
+Camera startup, autofocus, capture, exposure and shutdown on 4.8 remain
+untested. Raw dumps, approval tokens, identifiers and keys remain
 private. [Machine-readable record](biotar-48-install-2026-11-07.json) ·
 [Migration and qualification procedure](../bank-migration-2026-11-07.md).

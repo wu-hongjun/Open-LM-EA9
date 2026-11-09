@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "clientDate": "2026-11-07",
   "firmwareVersion": "4.8.0",
-  "status": "installation-verified-first-switch-review-required",
+  "status": "biotar-return-awaiting-physical-reconnect",
   "softwareCommit": "017ee9f42ebb1e50c489882cef107c40d3c6a3bc",
   "lens": {
     "id": "zeiss-jena-biotar-55-f2",
@@ -74,7 +74,7 @@
   "installationVerified": true,
   "metadataTransportQualified": false,
   "firstMetadataSwitch": {
-    "status": "mailbox-confirmed-strict-readback-rejected",
+    "status": "consumed-setting-confirmed-by-reviewed-readback",
     "profileID": "contax-zeiss-50-f1-4",
     "name": "Contax Zeiss 50mm f/1.4",
     "requestedSlot": 2,
@@ -162,7 +162,7 @@
     "preBankRecoveryBackupSaved": true,
     "originalStockRecoveryUnchanged": true
   },
-  "nextAction": "Physically reconnect the cap after the failed read. Reconfirm the exact consumed setting using the read-only review path before preparing any return-to-Biotar write.",
+  "nextAction": "Physically reconnect through the cap with both apps closed. Verify the Biotar request and protected data before camera use.",
   "privateEvidence": "Raw backups, transaction records, approval digest and unit identifiers stay private.",
   "installationVerificationClientDate": "2026-11-08",
   "installationVerification": {
@@ -193,11 +193,44 @@
     "geometryAndLocksUnchanged": true
   },
   "reviewedResolution": {
-    "status": "awaiting-fresh-physical-reconnect",
+    "status": "resolved-from-identical-fresh-read",
     "policy": "reviewed-consumed-bank-selection-v1",
-    "nativeTestsPassed": 75,
-    "releaseBuildAndSigningPassed": true,
+    "resolvedAtUTC": "2026-11-09T19:09:37.523438+00:00",
+    "freshBackupAtUTC": "2026-11-09T19:09:37Z",
+    "ownerConfirmedPhysicalReconnect": true,
+    "sameUnitThirdConnection": true,
+    "fullFlashIdenticalToReviewedBackup": true,
+    "committed": {
+      "generation": 2,
+      "row": 1,
+      "sequence": 2,
+      "slot": 2
+    },
+    "strictVerificationPassed": false,
     "strictTransportProofIssued": false,
-    "usbWritesDuringReview": 0
+    "usbWritesDuringReview": 0,
+    "nativeTestsPassed": 75,
+    "releaseBuildAndSigningPassed": true
+  },
+  "returnToBiotar": {
+    "status": "acknowledged-awaiting-physical-reconnect",
+    "profileID": "zeiss-jena-biotar-55-f2",
+    "name": "Zeiss Jena Biotar 58mm f/2",
+    "requestedSlot": 6,
+    "requestedGeneration": 3,
+    "committedBefore": {
+      "sequence": 2,
+      "generation": 2,
+      "slot": 2,
+      "row": 1
+    },
+    "startedAtUTC": "2026-11-09T19:11:48.164448+00:00",
+    "acknowledgedAtUTC": "2026-11-09T19:11:48.198724+00:00",
+    "freshTwoPassBackupMatchesReviewedResolution": true,
+    "startReportsAcknowledged": 1,
+    "applicationPagesSent": 0,
+    "postStartReportsSent": false,
+    "commandExitCode": 0,
+    "readbackVerified": false
   }
 }

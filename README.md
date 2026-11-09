@@ -41,8 +41,9 @@ the first switch require explicit experimental acknowledgment; normal switching
 requires a verified same-unit transport proof. Hardware/camera qualification is
 pending. The first 4.8 Biotar installation passed physical reconnect and strict
 byte/protected-data verification on November 8. The 50mm switch read back the
-requested mailbox and its committed journal entry. The strict USB-only check
-requires an unchanged journal, so the selection is awaiting a separate review.
+requested mailbox and its committed journal entry. A separate read-only review
+confirmed that transition. The Biotar return was acknowledged and awaits its
+own reconnect verification.
 [Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
 [Current installation record](docs/evidence/biotar-48-install-2026-11-07.md).
 
