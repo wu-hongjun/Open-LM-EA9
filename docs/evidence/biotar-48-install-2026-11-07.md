@@ -6,6 +6,10 @@ its committed setting. The strict USB-only check rejected that journal change.
 The owner reconnected again through the cap. The fresh read matched the reviewed
 backup byte for byte and closed the pending 50mm transaction.
 
+The subsequent return to Biotar passed strict USB-only verification. This
+adapter has a transport proof for the pinned 4.8 package. The Biotar request
+is queued for the next application startup.
+
 The owner authorized installation with the adapter on its USB cap and TECHART
 Update/OpenLensAdapter closed. One adapter was detected. The fresh full read
 matched pinned 4.6.0 and Biotar 58mm f/2 metadata. A second immediate two-pass
@@ -52,10 +56,16 @@ backups. Routine transport qualification still requires a strict USB-only pass.
 
 The experimental return to Biotar passed its fresh preflight and sent one
 acknowledged START with zero application pages. The requested setting is Biotar
-slot 6 at generation 3. The return awaits physical reconnect and verification
-before camera use. Each START arms the loader.
+slot 6 at generation 3. After the owner physically reconnected again, two full
+reads confirmed the expected six changed mailbox bytes. Every other main-flash
+byte matched the preflight backup, including the six loader scratch bytes. The
+protected auxiliary data, geometry and locks matched as well. The journal still
+contains the committed 50mm entry at sequence 2 and generation 2. This verified
+queued state is the strict transport proof that the app uses for routine profile
+switching on this adapter.
 
 Camera startup, autofocus, capture, exposure and shutdown on 4.8 remain
-untested. Raw dumps, approval tokens, identifiers and keys remain
+untested. Application of Biotar generation 3 awaits the next camera power-on.
+Raw dumps, approval tokens, identifiers and keys remain
 private. [Machine-readable record](biotar-48-install-2026-11-07.json) ·
 [Migration and qualification procedure](../bank-migration-2026-11-07.md).

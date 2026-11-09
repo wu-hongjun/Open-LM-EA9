@@ -42,8 +42,9 @@ requires a verified same-unit transport proof. Hardware/camera qualification is
 pending. The first 4.8 Biotar installation passed physical reconnect and strict
 byte/protected-data verification on November 8. The 50mm switch read back the
 requested mailbox and its committed journal entry. A separate read-only review
-confirmed that transition. The Biotar return was acknowledged and awaits its
-own reconnect verification.
+confirmed that transition. The return to Biotar passed strict USB-only
+verification, qualifying metadata switching on this adapter. Biotar is queued
+for the next camera power-on.
 [Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
 [Current installation record](docs/evidence/biotar-48-install-2026-11-07.md).
 

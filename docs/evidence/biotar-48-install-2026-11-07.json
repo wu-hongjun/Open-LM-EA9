@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "clientDate": "2026-11-07",
   "firmwareVersion": "4.8.0",
-  "status": "biotar-return-awaiting-physical-reconnect",
+  "status": "biotar-return-strictly-verified-pending-camera-startup",
   "softwareCommit": "017ee9f42ebb1e50c489882cef107c40d3c6a3bc",
   "lens": {
     "id": "zeiss-jena-biotar-55-f2",
@@ -72,7 +72,7 @@
     "settingsSeedPersonalized": true
   },
   "installationVerified": true,
-  "metadataTransportQualified": false,
+  "metadataTransportQualified": true,
   "firstMetadataSwitch": {
     "status": "consumed-setting-confirmed-by-reviewed-readback",
     "profileID": "contax-zeiss-50-f1-4",
@@ -162,7 +162,7 @@
     "preBankRecoveryBackupSaved": true,
     "originalStockRecoveryUnchanged": true
   },
-  "nextAction": "Physically reconnect through the cap with both apps closed. Verify the Biotar request and protected data before camera use.",
+  "nextAction": "Biotar generation 3 is queued for application startup. Camera operation and consumption of generation 3 await observation.",
   "privateEvidence": "Raw backups, transaction records, approval digest and unit identifiers stay private.",
   "installationVerificationClientDate": "2026-11-08",
   "installationVerification": {
@@ -213,7 +213,7 @@
     "releaseBuildAndSigningPassed": true
   },
   "returnToBiotar": {
-    "status": "acknowledged-awaiting-physical-reconnect",
+    "status": "strictly-verified-biotar-queued-for-startup",
     "profileID": "zeiss-jena-biotar-55-f2",
     "name": "Zeiss Jena Biotar 58mm f/2",
     "requestedSlot": 6,
@@ -231,6 +231,33 @@
     "applicationPagesSent": 0,
     "postStartReportsSent": false,
     "commandExitCode": 0,
-    "readbackVerified": false
-  }
+    "readbackVerified": true,
+    "verification": {
+      "status": "strictly-verified-biotar-queued-for-startup",
+      "verifiedAtUTC": "2026-11-09T20:06:15.152393+00:00",
+      "ownerConfirmedPhysicalReconnect": true,
+      "sameUnitNewConnection": true,
+      "twoPassFlashMatched": true,
+      "strictVerificationPassed": true,
+      "mailbox": {
+        "slot": 6,
+        "generation": 3
+      },
+      "committedJournal": {
+        "sequence": 2,
+        "generation": 2,
+        "slot": 2,
+        "row": 1
+      },
+      "pendingCameraApplication": true,
+      "mailboxBytesChanged": 6,
+      "loaderScratchBytesChanged": 0,
+      "allOtherMainFlashBytesMatched": true,
+      "protectedAuxiliaryDataMatched": true,
+      "geometryAndLocksMatched": true,
+      "strictTransportProofIssued": true,
+      "cameraApplicationVerified": false
+    }
+  },
+  "metadataTransportQualificationScope": "Same adapter and pinned 4.8 package. The return-to-Biotar USB-only check issued the proof. The first 50mm result remains a reviewed consumed selection."
 }
