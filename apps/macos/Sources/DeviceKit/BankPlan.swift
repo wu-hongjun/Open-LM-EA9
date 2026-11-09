@@ -127,10 +127,44 @@ struct BankPlan: Sendable {
         if journal { mask |= 1 << 9 }
         guard u16(nvm,32) & mask == mask else { throw DeviceError.failure("A required flash region is locked. No unlock or migration was attempted.") }
     }
-    func verify(_ current: VerifiedBackup, original: VerifiedBackup) throws {
+    private var expectedFlash: Data {
         var expected = before
         expected.replaceSubrange(0x4000..<0x403a,with: metadata)
         expected.replaceSubrange(0x5000..<(0x5000+image.count),with: image)
+        return expected
+    }
+    func verify(_ current: VerifiedBackup, original: VerifiedBackup) throws {
+        try verifyFlash(current,original: original,expected: expectedFlash)
+        if operation != .rollback { _ = try ProfileBank().inspect(flash: current.flash) }
+        else { try Self.requireLegacySource(current) }
+    }
+    /// Reconstruct the exact result of one application-side journal commit.
+    /// Only the separate reviewed resolution can use this comparison.
+    func verifyConsumedSelection(_ current: VerifiedBackup, original: VerifiedBackup) throws -> BankSetting {
+        guard operation == .select,requiresWrite,image.isEmpty else {
+            throw DeviceError.failure("Only a metadata-only selection can have a reviewed journal commit.")
+        }
+        try requireSnapshot(original)
+        let bank = try ProfileBank()
+        let previous = try bank.inspect(flash: before).setting
+        let request = try bank.decodeMailbox(metadata)
+        guard request.generation > previous.generation,previous.sequence < UInt32.max else {
+            throw DeviceError.failure("The selection cannot advance the journal.")
+        }
+        let committed = BankSetting(slot: request.slot,sequence: previous.sequence+1,
+                                    generation: request.generation,row: (previous.row+1)%16)
+        let start = ProfileBank.journalRange.lowerBound + committed.row*256
+        let page = try bank.setting(slot: committed.slot,sequence: committed.sequence,generation: committed.generation)
+        var expected = expectedFlash
+        expected.replaceSubrange(start..<(start+256),with: page+Data(repeating: 255,count: 192))
+        try verifyFlash(current,original: original,expected: expected)
+        let state = try bank.inspect(flash: current.flash)
+        guard state.setting == committed,state.request == request,!state.pendingCameraBoot else {
+            throw DeviceError.failure("The observed journal does not contain the exact consumed selection.")
+        }
+        return committed
+    }
+    private func verifyFlash(_ current: VerifiedBackup,original: VerifiedBackup,expected: Data) throws {
         let actual = current.flash
         guard actual.count == expected.count, actual.prefix(0x403a) == expected.prefix(0x403a),
               actual[0x4040..<0x20000] == expected[0x4040..<0x20000],
@@ -138,8 +172,6 @@ struct BankPlan: Sendable {
             throw DeviceError.failure("Bank transaction readback differs from the complete plan. Preserve both backups; do not use the camera.")
         }
         try Self.requireAuxiliaryInvariant(current,original)
-        if operation != .rollback { _ = try ProfileBank().inspect(flash: actual) }
-        else { try Self.requireLegacySource(current) }
     }
     private static func requireAuxiliaryInvariant(_ a: VerifiedBackup,_ b: VerifiedBackup) throws {
         for name in ["device-id.bin","user-row.bin","calibration.bin"] {

@@ -133,6 +133,15 @@ struct BankStore: Sendable {
         if record.operation == .install { try write(record,to: installationFile) }
         if record.operation == .select { try write(record,to: qualificationFile) }
     }
+    func closeReviewedSelection(_ resolution: BankSelectionResolution) throws {
+        guard let active = try load(),active.id == resolution.pending.id,active.needsVerification else {
+            throw DeviceError.failure("The pending selection changed during review.")
+        }
+        let receipt = directory.appendingPathComponent("BankResolutions/\(active.id).json")
+        try write(resolution,to: receipt)
+        try FileManager.default.removeItem(at: pendingFile)
+        try DurableFile.synchronizeDirectories(from: directory)
+    }
     func archiveAfterStockRecovery(device: DeviceIdentity) throws {
         guard let pending = try load(),pending.needsVerification else { return }
         guard pending.device.serial == device.serial else { throw DeviceError.failure("A different adapter's bank transaction remains pending.") }

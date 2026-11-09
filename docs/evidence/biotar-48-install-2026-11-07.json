@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "clientDate": "2026-11-07",
   "firmwareVersion": "4.8.0",
-  "status": "installation-verified-first-switch-awaiting-reconnect",
+  "status": "installation-verified-first-switch-review-required",
   "softwareCommit": "017ee9f42ebb1e50c489882cef107c40d3c6a3bc",
   "lens": {
     "id": "zeiss-jena-biotar-55-f2",
@@ -74,7 +74,7 @@
   "installationVerified": true,
   "metadataTransportQualified": false,
   "firstMetadataSwitch": {
-    "status": "acknowledged-awaiting-physical-reconnect",
+    "status": "mailbox-confirmed-strict-readback-rejected",
     "profileID": "contax-zeiss-50-f1-4",
     "name": "Contax Zeiss 50mm f/1.4",
     "requestedSlot": 2,
@@ -93,7 +93,63 @@
     "postStartReportsSent": false,
     "commandExitCode": 0,
     "readbackVerified": false,
-    "cameraApplicationVerified": false
+    "cameraApplicationVerified": false,
+    "readbackClientDate": "2026-11-09",
+    "readback": {
+      "readbackAtUTC": "2026-11-09T18:48:21Z",
+      "ownerConfirmedPhysicalReconnect": true,
+      "sameUnitNewConnection": true,
+      "firmwareVersion": "4.8.0",
+      "twoPassFlashMatched": true,
+      "changesFromBefore": {
+        "boot": 0,
+        "metadataPrefix": 0,
+        "mailbox": 6,
+        "scratch": 0,
+        "metadataRowRemainder": 0,
+        "savedRecords": 0,
+        "baseApplication": 0,
+        "gap": 0,
+        "extension": 0,
+        "bank": 0,
+        "journal": 64,
+        "upperFlash": 0
+      },
+      "metadataMatchesPlan": true,
+      "metadataMatchesBefore": false,
+      "mailboxBefore": {
+        "slot": 6,
+        "generation": 1
+      },
+      "mailboxAfter": {
+        "slot": 2,
+        "generation": 2
+      },
+      "journalBefore": {
+        "sequence": 1,
+        "generation": 1,
+        "slot": 6,
+        "row": 0
+      },
+      "protectedAuxMatches": {
+        "device-id.bin": true,
+        "user-row.bin": true,
+        "calibration.bin": true
+      },
+      "geometryAndLocksMatch": true,
+      "journalAfter": {
+        "slot": 2,
+        "sequence": 2,
+        "generation": 2,
+        "row": 1
+      },
+      "exactCanonicalNextRow": true,
+      "previousJournalRowPreserved": true,
+      "strictVerificationPassed": false,
+      "failureReason": "Journal advanced to the exact consumed request before the cap-only readback.",
+      "interveningCameraUse": "unconfirmed",
+      "sourceOfJournalCommit": "unconfirmed"
+    }
   },
   "cameraStartup": "untested",
   "cameraAF": "untested",
@@ -106,7 +162,7 @@
     "preBankRecoveryBackupSaved": true,
     "originalStockRecoveryUnchanged": true
   },
-  "nextAction": "Owner physical unplug/reconnect through USB cap, both apps closed; strict metadata-only full-flash invariance verification, then a separate return-to-Biotar switch and reconnect check before camera use.",
+  "nextAction": "Physically reconnect the cap after the failed read. Reconfirm the exact consumed setting using the read-only review path before preparing any return-to-Biotar write.",
   "privateEvidence": "Raw backups, transaction records, approval digest and unit identifiers stay private.",
   "installationVerificationClientDate": "2026-11-08",
   "installationVerification": {
@@ -135,5 +191,13 @@
     "opaqueGapBytesUnchanged": 24576,
     "remainingUpperFlashUnchanged": true,
     "geometryAndLocksUnchanged": true
+  },
+  "reviewedResolution": {
+    "status": "awaiting-fresh-physical-reconnect",
+    "policy": "reviewed-consumed-bank-selection-v1",
+    "nativeTestsPassed": 75,
+    "releaseBuildAndSigningPassed": true,
+    "strictTransportProofIssued": false,
+    "usbWritesDuringReview": 0
   }
 }

@@ -107,6 +107,16 @@ must match. A metadata-only switch must leave the whole application, bank,
 journal and upper flash unchanged. Camera use before verification can legitimately
 consume the request and invalidate this strict cap-only comparison.
 
+The first 50mm selection readback contained the exact consumed journal record.
+Use the separate reviewed path only after inspecting the failed readback and
+physically reconnecting again. It compares a fresh two-pass backup with the
+reviewed backup and reconstructs the entire expected flash, including one
+canonical journal row advance. It also checks the protected auxiliary bytes,
+geometry and locks. It archives the original pending intent and writes a durable
+resolution. Strict verification and transport qualification remain separate.
+
+    dist/ea9ctl bank-resolve-consumed REVIEWED.ea9backup --idle
+
 Schema-1 bank transactions are separate from legacy uploads. Plans, snapshots
 and completed proofs are reconstructed on load. Slot/digest/schema/timestamp and
 original-connection mismatches fail closed. Forged verified flags and legacy

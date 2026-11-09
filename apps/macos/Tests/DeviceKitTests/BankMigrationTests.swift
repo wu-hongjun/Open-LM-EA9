@@ -220,6 +220,48 @@ private struct BankFixture {
     #expect(f.loader.readsWhileArmed == 0)
 }
 
+@Test func reviewedBankCommitPreservesStrictFailureAndRequiresExactJournalAndFreshRead() throws {
+    let f = try BankFixture(); defer { f.remove() }; _ = try f.install()
+    let before = try f.snapshot("before-review",501)
+    let plan = try BankPlan.select(before,profile: bankLens("contax-zeiss-50-f1-4"))
+    let pending = try f.send(plan,before)
+    f.loader.reconnect()
+    let bank = try ProfileBank()
+    let request = try bank.decodeMailbox(plan.metadata)
+    let row = 0x13100
+    f.loader.flash.replaceSubrange(row..<(row+64),with: try bank.setting(slot: request.slot,sequence: 2,generation: 2))
+    let exact = f.loader.flash
+    let reviewed = try f.snapshot("reviewed-consumed",502)
+    #expect(throws: DeviceError.self) { _ = try BankCoordinator.verify(record: pending,current: reviewed,store: f.store) }
+    #expect(throws: DeviceError.self) { _ = try BankSelectionResolution.assess(pending: pending,store: f.store,reviewed: reviewed,fresh: reviewed) }
+    for offset in [0x4020,0x4040,0x5000,0x13000,row+64,0x14000] {
+        f.loader.flash = exact; f.loader.flash[offset] ^= 1
+        let changed = try f.snapshot("changed-\(offset)",503)
+        #expect(throws: DeviceError.self) { _ = try BankSelectionResolution.assess(pending: pending,store: f.store,reviewed: reviewed,fresh: changed) }
+        #expect(throws: DeviceError.self) { _ = try plan.verifyConsumedSelection(changed,original: before) }
+    }
+    f.loader.flash = exact
+    f.loader.flash.replaceSubrange(row..<(row+64),with: try bank.setting(slot: 1,sequence: 2,generation: 2))
+    let wrong = try f.snapshot("valid-wrong-slot",503)
+    #expect(throws: DeviceError.self) { _ = try plan.verifyConsumedSelection(wrong,original: before) }
+    f.loader.flash = exact
+    f.loader.userChange = true
+    let changedAux = try f.snapshot("changed-review-aux",503)
+    #expect(throws: DeviceError.self) { _ = try BankSelectionResolution.assess(pending: pending,store: f.store,reviewed: reviewed,fresh: changedAux) }
+    f.loader.userChange = false
+    let fresh = try f.snapshot("fresh-consumed",503)
+    let result = try BankSelectionResolution.assess(pending: pending,store: f.store,reviewed: reviewed,fresh: fresh)
+    #expect(result.committed == BankSetting(slot: request.slot,sequence: 2,generation: 2,row: 1))
+    #expect(!result.strictVerificationPassed)
+    try f.store.closeReviewedSelection(result)
+    #expect(try f.store.load() == nil)
+    #expect(try f.store.qualified(device: bankDevice(503)) == false)
+    let receipt = f.folder.appendingPathComponent("BankResolutions/\(pending.id).json")
+    #expect(FileManager.default.fileExists(atPath: receipt.path))
+    #expect(FileManager.default.fileExists(atPath: f.folder.appendingPathComponent("BankHistory/\(pending.id).json").path))
+    #expect(f.loader.starts == 0 && f.loader.pages == 0)
+}
+
 @Test func bankHistoryTamperingCannotQualifyOrResumeAWrite() throws {
     let f = try BankFixture(); defer { f.remove() }
     let before = try f.snapshot("before"),plan = try BankPlan.install(before,profile: bankLens())

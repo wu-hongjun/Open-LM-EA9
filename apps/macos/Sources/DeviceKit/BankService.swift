@@ -58,6 +58,36 @@ extension DeviceService {
             return try BankCoordinator.verify(record: locked,current: backup,store: store)
         }
     }
+    /// Close a reviewed selection after one exact journal commit and a second
+    /// identical readback on a new connection. This path sends only reads.
+    public func resolveConsumedBankSelection(reviewedBackupURL: URL,device: DeviceIdentity,idleAcknowledged: Bool,
+        cancellation: CancellationToken,progress: @escaping @Sendable (BackupProgress) -> Void) async throws -> BankObservation {
+        let store = BankStore(directory: stateDirectory)
+        guard let pending = try store.load(),pending.operation == .select,pending.needsVerification,pending.sentAt != nil,
+              pending.device.serial == device.serial else {
+            throw DeviceError.failure("No acknowledged selection is pending for this adapter.")
+        }
+        let reviewed = try VerifiedBackup(url: reviewedBackupURL,device: device)
+        guard Set([pending.device.id,reviewed.result.manifest.device.id,device.id]).count == 3 else {
+            throw DeviceError.failure("Physically reconnect the cap after the reviewed readback.")
+        }
+        let original = try VerifiedBackup(url: pending.beforeURL,device: device)
+        _ = try store.plan(for: pending).verifyConsumedSelection(reviewed,original: original)
+        return try await withIdleDevice(device: device,idleAcknowledged: idleAcknowledged,cancellation: cancellation) { transport in
+            guard try UpdateStore(directory: self.stateDirectory).load()?.needsVerification != true,
+                  let locked = try store.load(),locked.id == pending.id,locked.needsVerification else {
+                throw DeviceError.failure("The pending transaction changed. Review it again.")
+            }
+            let fresh = try self.bankBackup(transport: transport,device: device,prefix: "reviewed-bank",cancellation: cancellation,progress: progress)
+            let resolution = try BankSelectionResolution.assess(pending: locked,store: store,reviewed: reviewed,fresh: fresh)
+            try reviewed.synchronizeRecoveryEvidence()
+            try fresh.synchronizeRecoveryEvidence()
+            _ = try LensInspection.publish(fresh,to: UpdateStore(directory: store.directory))
+            try store.closeReviewedSelection(resolution)
+            guard let observation = try store.latestRead() else { throw DeviceError.failure("Missing reviewed bank observation.") }
+            return observation
+        }
+    }
     private func bankBackup(transport: NativeTransport,device: DeviceIdentity,prefix: String,cancellation: CancellationToken,
                             progress: @Sendable (BackupProgress) -> Void) throws -> VerifiedBackup {
         let folder = stateDirectory.appendingPathComponent("USBBackups",isDirectory: true)

@@ -40,9 +40,9 @@ sends one metadata report, with no application pages. Initial installation and
 the first switch require explicit experimental acknowledgment; normal switching
 requires a verified same-unit transport proof. Hardware/camera qualification is
 pending. The first 4.8 Biotar installation passed physical reconnect and strict
-byte/protected-data verification on November 8. The first metadata-only 50mm
-switch was acknowledged and awaits its own physical reconnect and invariance
-verification; keep the adapter off the camera until that completes.
+byte/protected-data verification on November 8. The 50mm switch read back the
+requested mailbox and its committed journal entry. The strict USB-only check
+requires an unchanged journal, so the selection is awaiting a separate review.
 [Migration, app workflow and evidence](docs/bank-migration-2026-11-07.md).
 [Current installation record](docs/evidence/biotar-48-install-2026-11-07.md).
 

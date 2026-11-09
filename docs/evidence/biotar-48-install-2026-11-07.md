@@ -1,9 +1,9 @@
 # Biotar 58mm f/2 — first 4.8 installation
 
-Status: installation byte-verified on November 8 after the owner's physical
-reconnect. The first experimental 50mm metadata-only switch was acknowledged;
-it now awaits a separate physical reconnect and strict invariance check.
-Keep the adapter off the camera; the metadata-only transport is not qualified yet.
+The Biotar installation passed full byte verification on November 8. On
+November 9 the 50mm request read back as planned, and the journal contained
+its committed setting. The strict USB-only check rejected that journal change.
+The adapter remains on the cap while the readback is reviewed.
 
 The owner authorized installation with the adapter on its USB cap and TECHART
 Update/OpenLensAdapter closed. One adapter was detected. The fresh full read
@@ -31,16 +31,24 @@ were checked and remain unchanged.
 The owner selected Contax Zeiss 50mm f/1.4 for the first metadata-only experiment.
 Its fresh two-pass preflight backup matched the verified installation exactly.
 The native selection engine sent one acknowledged START, zero application pages
-and no follow-up reports. The requested mailbox is slot 2, generation 2; the
-last committed journal remains Biotar slot 6, sequence/generation 1 until camera
-boot consumes a request. This is an acknowledged write, not verified readback
-or camera application. A durable unverified selection record is retained.
+and no follow-up reports. The request selected slot 2 at generation 2, from
+Biotar slot 6 at sequence and generation 1.
 
-Next: physically unplug/reconnect through the cap with both apps closed, then
-verify that the complete application, bank, journal, upper flash and protected
-data are unchanged and only the planned mailbox/scratch bytes differ. After
-that passes, switch back to Biotar and repeat reconnect/verification before
-camera use. Each START arms the loader, including a metadata-only START.
+After the owner confirmed physical reconnect, two matching reads found six
+changed mailbox bytes and 64 changed journal bytes. The mailbox exactly matches
+the request. Journal row 1 is the canonical record for slot 2, sequence 2,
+generation 2. The prior journal row, loader scratch, firmware, bank, saved
+records, gap, upper flash, protected auxiliary data, geometry and locks all
+matched the before backup. The read establishes that the request was consumed
+before verification. The source of the application startup remains unconfirmed.
+
+The strict verifier preserves both backups and leaves the transaction pending.
+The reviewed selection path requires another physical reconnect and a fresh
+two-pass backup that exactly matches the reviewed flash and expected journal
+transition. It keeps a separate resolution record and leaves the strict result
+failed. Transport qualification still requires a strict USB-only readback.
+The return-to-Biotar write follows the read-only review and has its own reconnect
+check before camera use. Each START arms the loader, including a metadata-only START.
 
 Camera startup, autofocus, capture, exposure, journal consumption and shutdown
 on 4.8 remain untested. Raw dumps, approval tokens, identifiers and keys remain
