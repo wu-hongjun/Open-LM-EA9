@@ -40,3 +40,6 @@ After strict verification, follow the loaded then bare procedure in the
 read-only two-pass backup after normal shutdown and a physical reconnect. The
 decoded raw trace and backup stay private. Use the pre-test verified backup as
 the baseline for checking all bytes outside the diagnostic trace range.
+
+The first owner-coordinated upload and its verification state are in the
+[November 9 hardware record](evidence/motion-481-install-2026-11-09.md).
