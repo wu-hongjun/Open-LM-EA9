@@ -14,6 +14,11 @@ sequential payload was 53,248 bytes
 from `0x5000` to `0x12000`, with the preserved gap included. No reports followed
 the last page.
 
-Full byte and protected-data verification is pending a physical reconnect on
-the same unit. Camera testing and log collection follow verification. Raw
-flash, traces, identifiers and approval digests remain private.
+After the owner confirmed a physical reconnect, two matching full reads
+verified 4.8.1 at 00:21 EST on November 10 (05:21 UTC). Both code segments
+matched their published pins. The Biotar remained committed, and the mailbox,
+journal, bank, preserved gap, upper flash and protected auxiliary data matched
+the preflight. Flash geometry and lock bits matched. Both trace slots were
+empty. The Biotar camera test is next, followed by its trace read and the
+bare-adapter comparison. Raw flash, traces, identifiers and approval digests
+remain private.
