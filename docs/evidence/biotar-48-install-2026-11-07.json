@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "clientDate": "2026-11-07",
   "firmwareVersion": "4.8.0",
-  "status": "biotar-return-strictly-verified-pending-camera-startup",
+  "status": "biotar-return-consumed-and-confirmed-after-camera-use",
   "softwareCommit": "017ee9f42ebb1e50c489882cef107c40d3c6a3bc",
   "lens": {
     "id": "zeiss-jena-biotar-55-f2",
@@ -259,5 +259,22 @@
       "cameraApplicationVerified": false
     }
   },
-  "metadataTransportQualificationScope": "Same adapter and pinned 4.8 package. The return-to-Biotar USB-only check issued the proof. The first 50mm result remains a reviewed consumed selection."
+  "metadataTransportQualificationScope": "Same adapter and pinned 4.8 package. The return-to-Biotar USB-only check issued the proof. The first 50mm result remains a reviewed consumed selection.",
+  "biotarCameraFollowUp": {
+    "clientDate": "2026-11-09",
+    "readAtUTC": "2026-11-09T21:20:14Z",
+    "sameUnitNewConnection": true,
+    "twoPassFlashMatched": true,
+    "committed": {"sequence": 3, "generation": 3, "slot": 6, "row": 2},
+    "journalBytesChanged": 64,
+    "bytesChangedOutsideJournal": 0,
+    "codeAndBankPinsMatched": true,
+    "protectedAuxiliaryDataMatched": true,
+    "geometryAndLocksMatched": true,
+    "ownerObservations": {
+      "manualFocusAtInfinityStopF2": "distant target stayed soft",
+      "autofocus": "hunted without locking; motor jitter observed"
+    },
+    "mechanicalRetractionMeasured": false
+  }
 }

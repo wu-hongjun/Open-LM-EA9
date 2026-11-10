@@ -64,8 +64,18 @@ contains the committed 50mm entry at sequence 2 and generation 2. This verified
 queued state is the strict transport proof that the app uses for routine profile
 switching on this adapter.
 
-Camera startup, autofocus, capture, exposure and shutdown on 4.8 remain
-untested. Application of Biotar generation 3 awaits the next camera power-on.
-Raw dumps, approval tokens, identifiers and keys remain
-private. [Machine-readable record](biotar-48-install-2026-11-07.json) ·
+## November 9 camera follow-up
+
+After camera use, a new connection and two matching full reads confirmed
+Biotar slot 6 at sequence 3 and generation 3. The expected 64-byte journal
+entry was the only main-flash change from the queued snapshot. Code and bank
+pins, protected auxiliary data, geometry and locks matched.
+
+The owner confirmed the Biotar at f/2 stayed soft at its infinity stop in MF.
+At the same distant target, AF hunted without locking and the motor jittered.
+The production 4.8 build has no saved motor trace. The mechanical end position
+and cause of the jitter are open. See the [4.8.1 motion diagnostic](../../firmware/releases/4.8.1/).
+
+Raw dumps, approval tokens, identifiers and keys remain private.
+[Machine-readable record](biotar-48-install-2026-11-07.json) ·
 [Migration and qualification procedure](../bank-migration-2026-11-07.md).

@@ -76,3 +76,8 @@ then improvement, and disclosed use of a heavier 35mm Distagon. Neither a
 same-lens regression nor a mass-related cause is established. Actual settings
 and remaining dial/capture/shutdown observations are pending.
 [Installation record](evidence/biotar-46-install-2026-11-07.md).
+
+The separate [4.8.1 motion diagnostic](../firmware/releases/4.8.1/) records raw
+homing and AF command/motion pairs. Its compiled ARM test runs against synthetic
+peripherals and verifies the two-slot storage and trace decoder. The normal
+firmware build and macOS tests do not require Unicorn.
