@@ -68,6 +68,9 @@ import LensCore
                     try await service.readLens(device: device, idleAcknowledged: true, cancellation: token, progress: progress)
                 if let applied {
                     print("Firmware: \(applied.firmwareVersion)\nLens: \(applied.setting.name)\nStartup report: \(applied.setting.focalLengthMM) mm · f/\(applied.setting.apertureLabel)\nSHA-256: \(applied.imageSHA256)")
+                } else if args[0] == "inspect",let bank = try service.bankObservation(),let state = bank.state {
+                    print("Firmware: \(bank.version)\nLens: \(state.committed.name)" +
+                          (state.pendingCameraBoot ? "\nQueued: \(state.configured.name)" : ""))
                 } else { print("Read complete; no supported custom lens setting.") }
             case "backup":
                 let result = try await service.backup(device: device, to: URL(fileURLWithPath: args[1]), idleAcknowledged: true, cancellation: token, progress: progress)

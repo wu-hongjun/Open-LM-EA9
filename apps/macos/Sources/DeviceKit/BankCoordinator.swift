@@ -12,6 +12,7 @@ enum BankCoordinator {
             guard let profile else { throw DeviceError.failure("Choose a bank lens.") }
             return try .select(before,profile: profile)
         case .rollback: return try .rollback(before,installationSource: store.installationSource(device: before.result.manifest.device))
+        case .motionDiagnostic: return try .motionDiagnostic(before)
         }
     }
     static func send(plan: BankPlan,approvedDigest: String,before: VerifiedBackup,store: BankStore,

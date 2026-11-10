@@ -71,16 +71,14 @@ It can read a full 128 KiB `flash.bin` from the same backup.
 
 ## Installation boundary and planned test
 
-**Offline build only. The current app and CLI do not admit this package.**
+The dedicated CLI installer accepts only the pinned diagnostic package.
 The two pinned segments replace application code at `0x5000–0xa000` and the
 extension at `0x10000–0x12000`. The package omits the live bank, journal,
-metadata and trace slots. A separate installer must admit the exact installed
-4.8.0 code and bank, confirm the trace range is blank and unlocked, preserve the
-live Biotar selection and all existing unit bytes, then verify the full write
-and protected data on a fresh USB connection. The sequential loader may
-physically rewrite preserved gap rows while sending their original bytes.
-The saved November 9 readback showed the entire trace region erased and
-unlocked. A new install still needs a fresh preflight.
+metadata and trace slots. The installer admits exact 4.8.0 code and bank with a
+committed profile, verifies blank and unlocked trace storage, and preserves the
+live selection and all existing unit data. The sequential loader rewrites the
+preserved gap with its original bytes. See the
+[installer and reconnect verification](../../../docs/motion-diagnostic-install.md).
 
 For the first slot, use the Biotar with the same converter and the camera
 supported in a fixed orientation. With the physical iris at f/2 and lens ring

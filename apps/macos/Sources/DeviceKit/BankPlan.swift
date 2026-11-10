@@ -1,7 +1,10 @@
 import Foundation
 import LensCore
 
-public enum BankOperation: String, Codable, Sendable { case install, select, rollback }
+public enum BankOperation: String, Codable, Sendable {
+    case install, select, rollback
+    case motionDiagnostic = "motion-diagnostic"
+}
 public struct BankPreview: Sendable {
     public let operation: BankOperation
     public let profile: AdapterLensSetting?
@@ -75,6 +78,24 @@ struct BankPlan: Sendable {
     static func select(_ snapshot: VerifiedBackup, profile: LensProfile) throws -> Self {
         try select(snapshot,slot: ProfileBank().slot(for: profile))
     }
+    static func motionDiagnostic(_ snapshot: VerifiedBackup) throws -> Self {
+        let state = try ProfileBank().inspect(flash: snapshot.flash)
+        guard snapshot.result.manifest.reportedFirmwareVersion == ProfileBank.version, !state.pendingCameraBoot else {
+            throw DeviceError.failure("The diagnostic requires exact 4.8.0 and a committed profile with no pending request.")
+        }
+        guard snapshot.flash[MotionDiagnostic.traceRange].allSatisfy({ $0 == 255 }) else {
+            throw DeviceError.failure("The proposed motion trace region contains data. No storage will be claimed.")
+        }
+        try requireWritable(snapshot, applicationBytes: MotionDiagnostic.applicationRange.count,
+                            journal: false, trace: true)
+        let package = try MotionDiagnostic()
+        let image = package.application + Data(snapshot.flash[0xa000..<0x10000]) + package.extensionCode
+        var metadata = Data(snapshot.flash[0x4000..<0x403a])
+        metadata.replaceSubrange(0..<3, with: MotionDiagnostic.version)
+        return Self(operation: .motionDiagnostic, image: image, metadata: metadata, before: snapshot.flash,
+                    selected: state.committed, requiresWrite: true, auxiliaryBinding: try binding(snapshot),
+                    sourceDevice: snapshot.result.manifest.device)
+    }
     static func select(_ snapshot: VerifiedBackup, slot: Int) throws -> Self {
         let bank = try ProfileBank(),state = try bank.inspect(flash: snapshot.flash)
         guard bank.profiles.indices.contains(slot) else { throw DeviceError.failure("Unknown bank slot.") }
@@ -115,7 +136,7 @@ struct BankPlan: Sendable {
         guard before == snapshot.flash,sourceDevice == snapshot.result.manifest.device,
               auxiliaryBinding == (try Self.binding(snapshot)) else { throw DeviceError.failure("Plan and fresh recovery snapshot differ.") }
     }
-    private static func requireWritable(_ snapshot: VerifiedBackup,applicationBytes: Int,journal: Bool) throws {
+    private static func requireWritable(_ snapshot: VerifiedBackup,applicationBytes: Int,journal: Bool,trace: Bool = false) throws {
         let nvm = try Data(contentsOf: snapshot.result.url.appendingPathComponent("nvm-status.bin"))
         var mask: UInt16 = (1 << 2) | (1 << 1) // metadata: actual 8 KiB region and pinned loader's 16 KiB check
         if applicationBytes > 0 {
@@ -125,6 +146,7 @@ struct BankPlan: Sendable {
             }
         }
         if journal { mask |= 1 << 9 }
+        if trace { mask |= UInt16(1) << (MotionDiagnostic.traceRange.lowerBound/8192) }
         guard u16(nvm,32) & mask == mask else { throw DeviceError.failure("A required flash region is locked. No unlock or migration was attempted.") }
     }
     private var expectedFlash: Data {
@@ -135,8 +157,11 @@ struct BankPlan: Sendable {
     }
     func verify(_ current: VerifiedBackup, original: VerifiedBackup) throws {
         try verifyFlash(current,original: original,expected: expectedFlash)
-        if operation != .rollback { _ = try ProfileBank().inspect(flash: current.flash) }
-        else { try Self.requireLegacySource(current) }
+        switch operation {
+        case .motionDiagnostic: _ = try MotionDiagnostic().inspect(flash: current.flash)
+        case .rollback: try Self.requireLegacySource(current)
+        case .install, .select: _ = try ProfileBank().inspect(flash: current.flash)
+        }
     }
     /// Reconstruct the exact result of one application-side journal commit.
     /// Only the separate reviewed resolution can use this comparison.

@@ -21,7 +21,8 @@ import DeviceKit
     var adapterConnected: Bool { devices.count == 1 && devices.first?.qualifiedDescriptor == true && !discoveryError }
     var isArchivedFirmware: Bool {
         guard let version = currentFirmwareObservation?.version else { return false }
-        return version != "1.8.0" && version != ProfileBank.version && !FirmwareVariant.allCases.contains { $0.versionString == version }
+        return version != "1.8.0" && version != ProfileBank.version && version != ProfileBank.motionDiagnosticVersion &&
+            !FirmwareVariant.allCases.contains { $0.versionString == version }
     }
     var workflowTitle: String {
         if busy { return isUploadingFirmware ? "Updating your adapter" : "Reading your adapter" }
@@ -33,6 +34,7 @@ import DeviceKit
         if waitingForVerification && !pendingBelongsToConnectedAdapter { return "Another adapter has an unfinished update" }
         if reconnectRequired || (waitingForVerification && activePendingDevice?.id == devices.first?.id) { return "Reconnect the USB cap" }
         if waitingForVerification { return pendingUpdate?.needsVerification == true ? "Verify the uploaded firmware" : "Verify profile settings" }
+        if motionDiagnosticInstalled { return "Motion diagnostic installed" }
         if let state = currentBankState { return state.pendingCameraBoot ? "Profile saved for next camera startup" : "Your lens bank is ready" }
         if isArchivedFirmware { return "Archived firmware detected" }
         if currentFirmwareVariant == .cameraDialAperture { return "Your adapter is ready" }

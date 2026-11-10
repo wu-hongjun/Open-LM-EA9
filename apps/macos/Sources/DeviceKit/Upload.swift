@@ -7,7 +7,10 @@ enum UploadReport {
     func encoded() throws -> Data {
         switch self {
         case .start(let metadata, let version):
-            guard metadata.count == 58, version == [1,8,0] || version == [4,8,0] || FirmwareVariant.from(version: version) != nil else { throw DeviceError.failure("Invalid START metadata.") }
+            guard metadata.count == 58, version == [1,8,0] || version == [4,8,0] ||
+                  version == MotionDiagnostic.version || FirmwareVariant.from(version: version) != nil else {
+                throw DeviceError.failure("Invalid START metadata.")
+            }
             var data = Data([0x95,0x27,0x68,0x18,1,1]); data.append(metadata)
             data.replaceSubrange(6..<9, with: version)
             return data
@@ -111,7 +114,9 @@ struct UpdateStore: Sendable {
         let data = try Data(contentsOf: file)
         guard data.count <= 262144 else { throw DeviceError.failure("Update journal exceeds its size limit.") }
         let record = try JSONDecoder().decode(PendingUpdate.self, from: data)
-        guard record.version != [4,8,0] else { throw DeviceError.failure("Bank transactions require their separate reconstructed journal.") }
+        guard record.version != [4,8,0], record.version != MotionDiagnostic.version else {
+            throw DeviceError.failure("Bank transactions require their separate reconstructed journal.")
+        }
         guard record.image.count > 0, record.image.count % 256 == 0, record.image.count <= 0x1b000,
               digest(record.image) == record.imageSHA256, record.device.qualifiedDescriptor,
               !record.device.serial.isEmpty, record.expectedMetadata.count == 58,
@@ -166,7 +171,8 @@ struct UpdateStore: Sendable {
         guard data.count <= 16384 else { throw DeviceError.failure("Applied-lens history is too large.") }
         let value = try JSONDecoder().decode(AppliedLens.self, from: data)
         _ = try value.setting.encoded()
-        guard recognizedFirmwareVersion(value.firmwareVersion),value.firmwareVersion != ProfileBank.version, value.device.qualifiedDescriptor, !value.device.serial.isEmpty,
+        guard recognizedFirmwareVersion(value.firmwareVersion),value.firmwareVersion != ProfileBank.version,
+              value.firmwareVersion != ProfileBank.motionDiagnosticVersion,value.device.qualifiedDescriptor, !value.device.serial.isEmpty,
               value.imageSHA256.count == 64 else { throw DeviceError.failure("Invalid applied-lens history.") }
         if let variant = FirmwareVariant.allCases.first(where: { $0.versionString == value.firmwareVersion }) {
             let expected = variant == .lensProfiles ? try LensProfileImage.image(for: value.setting) : try ApplicationImage.template(variant)

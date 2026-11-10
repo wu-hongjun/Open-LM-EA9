@@ -9,7 +9,7 @@ enum LensInspection {
         try BankStore(directory: store.directory).archiveObservationBeforeInspection()
         try FirmwareObservationStore(directory: store.directory).save(FirmwareObservation(
             device: result.manifest.device, version: version, readAt: result.manifest.createdAt))
-        if version == ProfileBank.version {
+        if version == ProfileBank.version || version == ProfileBank.motionDiagnosticVersion {
             _ = try BankStore(directory: store.directory).publish(backup)
             return nil
         }

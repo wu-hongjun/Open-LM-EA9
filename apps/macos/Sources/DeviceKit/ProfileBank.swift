@@ -4,6 +4,7 @@ import LensCore
 /// Immutable 4.8 code/bank. The journal and loader metadata have separate formats.
 public struct ProfileBank: Sendable {
     public static let version = "4.8.0"
+    public static let motionDiagnosticVersion = "4.8.1"
     public static let applicationRange = 0x5000..<0x14000
     public static let journalRange = 0x13000..<0x14000
     static let pins = [
@@ -97,6 +98,9 @@ public struct ProfileBank: Sendable {
     public func inspect(flash: Data) throws -> ProfileBankState {
         try requireCode(in: flash)
         guard flash[0x4000..<0x4003] == Data([4,8,0]) else { throw DeviceError.failure("Bank code and loader version disagree.") }
+        return try inspectSettings(flash: flash)
+    }
+    func inspectSettings(flash: Data) throws -> ProfileBankState {
         let setting = try decodeJournal(Data(flash[Self.journalRange]))
         let request = try decodeMailbox(Data(flash[0x4000..<0x403a]))
         guard request.generation >= setting.generation,

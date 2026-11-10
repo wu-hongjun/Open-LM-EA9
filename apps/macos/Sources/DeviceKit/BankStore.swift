@@ -62,6 +62,12 @@ struct BankStore: Sendable {
         case .rollback:
             guard record.slot == nil,let url = record.installationSourceURL else { throw DeviceError.failure("Invalid rollback record.") }
             plan = try .rollback(before,installationSource: VerifiedBackup(url: url,device: record.device,expectedBootHash: expectedBootHash))
+        case .motionDiagnostic:
+            plan = try .motionDiagnostic(before)
+            guard record.installationSourceURL == nil, let slot = record.slot,
+                  try ProfileBank().profiles.firstIndex(where: { $0 == plan.selected }) == slot else {
+                throw DeviceError.failure("Invalid motion diagnostic record.")
+            }
         }
         guard plan.preview.approvalDigest == record.approvalDigest else { throw DeviceError.failure("Bank transaction plan no longer matches its durable record.") }
         return plan
@@ -95,6 +101,7 @@ struct BankStore: Sendable {
         let version = backup.result.manifest.reportedFirmwareVersion
         let state: ProfileBankState?
         if version == ProfileBank.version { state = try ProfileBank().inspect(flash: backup.flash) }
+        else if version == ProfileBank.motionDiagnosticVersion { state = try MotionDiagnostic().inspect(flash: backup.flash) }
         else { try BankPlan.requireLegacySource(backup); state = nil }
         return BankObservation(device: backup.result.manifest.device,version: version,state: state,
                                readAt: backup.result.manifest.createdAt,backupURL: backup.result.url)

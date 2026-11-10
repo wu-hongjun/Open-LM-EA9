@@ -13,7 +13,7 @@ private final class BankLoader: ReadOnlyTransport,UploadTransport {
     var flash = Data(repeating: 255,count: 0x20000)
     var armed = false,pointer = 0x5000,starts = 0,pages = 0,readsWhileArmed = 0
     var failAt: Int?,cancelAt: Int?,token: CancellationToken?
-    var userChange = false,lockChange = false,journalLocked = false
+    var userChange = false,lockChange = false,journalLocked = false,traceLocked = false
     init() throws {
         flash.replaceSubrange(0x5000..<0xa000,with: try ApplicationImage.wideCameraAperture().data)
         for i in 0..<58 { flash[0x4000+i] = UInt8((i*17+9)%251) }
@@ -43,7 +43,10 @@ private final class BankLoader: ReadOnlyTransport,UploadTransport {
         case .snapshot(let region):
             var data = Data(repeating: 0,count: 64)
             if region == .deviceID { data.replaceSubrange(0..<4,with: [0x0b,3,1,0x10]) }
-            if region == .nvm { data.replaceSubrange(8..<12,with: [0,8,3,0]); data[32] = lockChange ? 0 : 255; data[33] = journalLocked ? 253 : 255 }
+            if region == .nvm {
+                data.replaceSubrange(8..<12,with: [0,8,3,0]); data[32] = lockChange ? 0 : 255
+                data[33] = 255 ^ (journalLocked ? 2 : 0) ^ (traceLocked ? 4 : 0)
+            }
             if region == .userRow { data[0] = userChange ? 1 : 7 }
             return data
         }
@@ -97,6 +100,58 @@ private struct BankFixture {
     #expect(try f.store.installationSource(device: bankDevice(501)).flash == before.flash)
     #expect(try f.store.latestRead()?.state == read.state)
     #expect(throws: DeviceError.self) { _ = try BankPlan.install(current,profile: bankLens()) }
+}
+
+@Test func motionDiagnosticPreservesTheLiveBankAndVerifiesCompleteReadback() throws {
+    let f = try BankFixture(); defer { f.remove() }; _ = try f.install()
+    let bank = try ProfileBank(),slot = try bank.slot(for: bankLens())
+    f.loader.flash.replaceSubrange(0x4020..<0x403a, with: try bank.mailbox(slot: slot, generation: 3))
+    f.loader.flash.replaceSubrange(0x13200..<0x13240, with: try bank.setting(slot: slot, sequence: 3, generation: 3))
+    f.loader.flash[0x16010] = 0x72
+    let before = try f.snapshot("motion-before", 501)
+    let plan = try BankCoordinator.plan(operation: .motionDiagnostic, profile: nil, before: before, store: f.store)
+    #expect(plan.version == [4,8,1] && plan.image.count == 0xd000 && plan.preview.profile?.id == "zeiss-jena-biotar-55-f2")
+    #expect(plan.metadata.dropFirst(3) == before.flash[0x4003..<0x403a])
+    #expect(plan.image[(0xa000-0x5000)..<(0x10000-0x5000)] == before.flash[0xa000..<0x10000])
+    let pending = try f.send(plan, before)
+    #expect(pending.operation == .motionDiagnostic && pending.slot == slot)
+    #expect(f.loader.starts == 1 && f.loader.pages == 832 && f.loader.pointer == 0x12000 && f.loader.readsWhileArmed == 0)
+    #expect(f.loader.flash[0x12000..<0x20000] == before.flash[0x12000..<0x20000])
+    f.loader.reconnect()
+    #expect(throws: DeviceError.self) { try BankCoordinator.verify(record: pending, current: f.snapshot("same-motion", 501), store: f.store) }
+    f.loader.flash[0x14000] = 0x55
+    #expect(throws: DeviceError.self) { try BankCoordinator.verify(record: pending, current: f.snapshot("dirty-readback", 502), store: f.store) }
+    f.loader.flash[0x14000] = 0xff
+    f.loader.userChange = true
+    #expect(throws: DeviceError.self) { try BankCoordinator.verify(record: pending, current: f.snapshot("aux-motion", 502), store: f.store) }
+    f.loader.userChange = false
+    let current = try f.snapshot("motion-verified", 502)
+    let verified = try BankCoordinator.verify(record: pending, current: current, store: f.store)
+    #expect(verified.version == "4.8.1" && verified.state?.setting.generation == 3)
+    #expect(verified.state?.committed.id == "zeiss-jena-biotar-55-f2" && verified.state?.pendingCameraBoot == false)
+    #expect(try f.store.load()?.needsVerification == false)
+    #expect(try f.store.latestRead()?.state == verified.state)
+    #expect(try f.store.installationSource(device: bankDevice(502)).result.manifest.reportedFirmwareVersion == "4.6.0")
+    #expect(throws: DeviceError.self) { _ = try BankPlan.motionDiagnostic(current) }
+    #expect(throws: DeviceError.self) { _ = try BankPlan.select(current, slot: 0) }
+}
+
+@Test func motionDiagnosticRejectsForeignTraceLockedTracePendingSelectionAndModifiedSource() throws {
+    let f = try BankFixture(); defer { f.remove() }; _ = try f.install()
+    let bank = try ProfileBank()
+    f.loader.flash[0x15fff] = 0x00
+    #expect(throws: DeviceError.self) { _ = try BankPlan.motionDiagnostic(f.snapshot("trace-occupied", 501)) }
+    f.loader.flash[0x15fff] = 0xff
+    f.loader.traceLocked = true
+    #expect(throws: DeviceError.self) { _ = try BankPlan.motionDiagnostic(f.snapshot("trace-locked", 501)) }
+    f.loader.traceLocked = false
+    let originalRequest = Data(f.loader.flash[0x4020..<0x403a])
+    f.loader.flash.replaceSubrange(0x4020..<0x403a, with: try bank.mailbox(slot: 0, generation: 2))
+    #expect(throws: DeviceError.self) { _ = try BankPlan.motionDiagnostic(f.snapshot("motion-pending", 501)) }
+    f.loader.flash.replaceSubrange(0x4020..<0x403a, with: originalRequest)
+    f.loader.flash[0x10002] ^= 1
+    #expect(throws: DeviceError.self) { _ = try BankPlan.motionDiagnostic(f.snapshot("source-modified", 501)) }
+    #expect(f.loader.starts == 0 && f.loader.pages == 0)
 }
 
 @Test func metadataSwitchSendsOneReportVerifiesPendingAndCancelsWithoutReflash() throws {

@@ -20,7 +20,13 @@ import DeviceKit
     /// A cached observation is explicitly dated; it never substitutes for readback.
     var adapterFirmwareText: String {
         if waitingForVerification && pendingBelongsToConnectedAdapter {
-            if pendingUpdate?.needsVerification != true { return pendingBank?.operation == .rollback ? "Restoring pre-bank firmware" : ProfileBank.version }
+            if pendingUpdate?.needsVerification != true {
+                switch pendingBank?.operation {
+                case .rollback: return "Restoring pre-bank firmware"
+                case .motionDiagnostic: return ProfileBank.motionDiagnosticVersion
+                default: return ProfileBank.version
+                }
+            }
             return pendingUpdate?.version.map(String.init).joined(separator: ".") ?? "Awaiting verification"
         }
         return currentBankObservation?.version ?? currentAppliedLens?.firmwareVersion ?? currentFirmwareObservation?.version ?? "Not read"

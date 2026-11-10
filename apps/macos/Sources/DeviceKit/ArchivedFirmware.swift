@@ -54,5 +54,6 @@ enum ArchivedFirmware {
 }
 
 func recognizedFirmwareVersion(_ version: String) -> Bool {
-    version == "1.8.0" || version == ProfileBank.version || FirmwareVariant.allCases.contains { $0.versionString == version } || ArchivedFirmware.entries[version] != nil
+    version == "1.8.0" || version == ProfileBank.version || version == ProfileBank.motionDiagnosticVersion ||
+        FirmwareVariant.allCases.contains { $0.versionString == version } || ArchivedFirmware.entries[version] != nil
 }

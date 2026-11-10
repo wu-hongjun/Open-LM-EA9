@@ -13,6 +13,7 @@ import LensCore
         return bankObservation
     }
     var currentBankState: ProfileBankState? { currentBankObservation?.state }
+    var motionDiagnosticInstalled: Bool { currentBankObservation?.version == ProfileBank.motionDiagnosticVersion }
     var activePendingDevice: DeviceIdentity? {
         if pendingUpdate?.needsVerification == true { return pendingUpdate?.device }
         return pendingBank?.needsVerification == true ? pendingBank?.device : nil
@@ -23,7 +24,7 @@ import LensCore
         return slot == state.request.slot
     }
     var canUseBankAction: Bool {
-        guard canRequestDeviceRead,updateStateError == nil,loadError == nil,!waitingForVerification,
+        guard canRequestDeviceRead,updateStateError == nil,loadError == nil,!waitingForVerification,!motionDiagnosticInstalled,
               stockUploadQualified,!isDirty,let profile = deviceLensPreview,
               (try? ProfileBank().slot(for: profile)) != nil,
               currentBankObservation?.device.id == devices.first?.id else { return false }
@@ -31,6 +32,7 @@ import LensCore
     }
     var bankActionLabel: String {
         if waitingForVerification { return "Reconnect and verify" }
+        if motionDiagnosticInstalled { return "Motion diagnostic" }
         guard let state = currentBankState else { return "Install lens bank…" }
         if bankSelectionMatches { return state.pendingCameraBoot ? "Waiting for camera" : "Configured" }
         return bankTransportQualified ? "Switch profile…" : "Test profile switch…"
@@ -38,6 +40,7 @@ import LensCore
     var bankActionHint: String {
         if busy || waitingForVerification || reconnectRequired { return workflowDetail }
         guard adapterConnected else { return "Connect the adapter through its USB cap." }
+        if motionDiagnosticInstalled { return "Read the motion trace through the CLI after the camera test." }
         if let state = currentBankState {
             if let issue = preparedLensIssue { return issue }
             if currentBankObservation?.device.id != devices.first?.id { return "Read the adapter to refresh its stored selection." }
@@ -58,7 +61,7 @@ import LensCore
         guard canUseBankAction,let profile = deviceLensPreview else { return }
         performBankChange(currentBankState == nil ? .install : .select,profile: profile)
     }
-    var canRollbackBank: Bool { canRequestDeviceRead && currentBankState != nil && !waitingForVerification && updateStateError == nil }
+    var canRollbackBank: Bool { canRequestDeviceRead && currentBankState != nil && !motionDiagnosticInstalled && !waitingForVerification && updateStateError == nil }
     func rollbackBank() { guard canRollbackBank else { return }; performBankChange(.rollback,profile: nil) }
     private func performBankChange(_ operation: BankOperation,profile: LensCore.LensProfile?) {
         guard canRequestDeviceRead,updateStateError == nil,!waitingForVerification,let target = devices.first else { return }
@@ -78,6 +81,7 @@ import LensCore
         case .rollback:
             alert.messageText = "Restore the pre-bank firmware?"
             alert.informativeText = "Restore this adapter’s saved pre-bank application, upper-flash contents and original metadata. The rollback writes \(preview.applicationBytes.formatted()) application bytes."
+        case .motionDiagnostic: return
         }
         alert.informativeText += "\n\nA fresh verified backup is checked against this plan before writing. Keep TECHART Update closed. Physically reconnect afterward, then verify before camera use."
         alert.addButton(withTitle: operation == .select ? (experimental ? "Run Test" : "Switch Profile") : operation == .install ? "Install Candidate" : "Restore")
